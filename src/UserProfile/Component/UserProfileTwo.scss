@@ -1,0 +1,87 @@
+@import "./../../Variable.scss";
+
+#update-name-overlay-div {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    background: rgba(255, 255, 255, 0.034);
+    backdrop-filter: blur(10px);
+    z-index: 2;
+    .fa {
+        margin-right: 8px;
+      }
+    .update-name-overlay-close{
+        width: 100%;
+        height: 50px;
+        padding: 1rem;
+        position: absolute;
+        top: 50px;
+        display: flex;
+        justify-content: end;
+    }
+
+    .update-name-ovelay-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 526px;
+        padding: 1rem;
+
+        .update-name-overlay-input-div {
+            width: 100%;
+            max-width: 280px;
+            display: flex;
+            flex-direction: column;
+
+            .update-overlay-img-div {
+                display: flex;
+                justify-content: center;
+                margin: 1rem 0;
+
+                .update-overlay-img {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                }
+            }
+        }
+    }
+}
+
+.profile-name-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid $light-text3;
+    // background: blue;
+
+    .profile-name-text {
+        text-transform: capitalize;
+        font-weight: 600;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .profile-Edit-btn {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: $light-text2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 1rem;
+        margin-top: 0.3rem;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+        .edit-pencil {
+            margin-left: 1px;
+            font-size: 19px;
+        }
+    }
+}

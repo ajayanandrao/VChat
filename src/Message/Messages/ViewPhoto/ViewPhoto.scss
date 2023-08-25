@@ -1,0 +1,75 @@
+.photo-div {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    // 	background-color: rgba(0, 0, 0, 0.63);
+    //   backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.034);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .photo-div-inner {
+        width: 400px;
+        height: 100%;
+        padding-top: 60px;
+        padding-bottom: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        .photo-option-div {
+            position: absolute;
+            top: 0;
+            color: #262626;
+            width: 100%;
+            display: flex;
+            padding: 1rem;
+            align-items: center;
+
+            .photo-delete-div {
+                flex: 1;
+                // background: red;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .photo-time {
+                    font-size: 14px;
+                }
+            }
+
+            .photo-close-div {
+                flex: 0.8;
+                // background: blue;
+                display: flex;
+                justify-content: end;
+            }
+        }
+
+        .photo-img-div {
+            width: 100%;
+            height: calc(100vh - 100px);
+
+            .photo-img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        // .photo {
+        //     width: 100%;
+        //     max-width: 567px;
+        //     height: 450px;
+        //     object-fit: contain;
+        //     object-position: center;
+        // }
+    }
+}

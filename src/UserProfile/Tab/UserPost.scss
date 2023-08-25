@@ -1,0 +1,340 @@
+@import "./../../Variable.scss";
+
+.feed-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+
+    .feed-div {
+        width: 100%;
+        flex-basis: 576px;
+        background: white;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        .feed-post-text {
+            color: black;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-bottom: 1rem;
+            line-height: 19px;
+            margin-top: 1rem;
+        }
+
+        .userPost-text {
+            display: flex;
+
+        }
+
+        .feed-profile-div {
+            display: flex;
+            align-items: center;
+            padding: 0rem 1rem;
+            padding-top: 0.5rem;
+
+            .feed-img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+            }
+
+            .feed-profile-name {
+                margin-left: 1rem;
+                color: black;
+            }
+
+            .feed-time {
+                margin-left: 1.5rem;
+                color: $light-text2;
+                font-size: 12px;
+            }
+
+        }
+
+        // Center
+
+        .feed-post-container {
+            max-width: 576px;
+            max-height: 600px;
+            // overflow: hidden;
+
+            .Feed-Post-img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+            }
+
+            .video-container {
+                position: relative;
+                max-width: 576px;
+                height: auto;
+
+                .post-video {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    object-position: center;
+                }
+
+                .play-button {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 18px;
+                    color: white;
+                    cursor: pointer;
+                    z-index: 0;
+                    font-size: 30px;
+
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                }
+
+            }
+
+        }
+
+        // Bottom 
+
+        .feed-bottom-container {
+            color: black;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .feed-bottom-mainu {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                .See-Like-div {
+                    color: black;
+                    position: relative;
+                    bottom: 15px;
+
+                    .userliked {
+                        position: absolute;
+                        bottom: 30px;
+                        width: 100px;
+                        color: white;
+                        background: linear-gradient(30deg, #286fea00, #1b49ef00);
+                        backdrop-filter: blur(15px);
+                        border-radius: 0.3rem;
+                        padding: 0.5rem;
+                        font-size: 11px;
+                        line-height: 14px;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+
+            .feed-bottom-icon {
+                font-size: 24px;
+                color: $light-text2;
+            }
+
+
+            .HeartAnimation {
+                // padding-top: 2em;
+                background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/66955/web_heart_animation.png');
+                background-repeat: no-repeat;
+                background-size: 2900%;
+                background-position: left;
+                height: 60px;
+                width: 60px;
+                // margin: 0 auto;
+                cursor: pointer;
+            }
+
+            .animate {
+                animation: heart-burst .8s steps(28) forwards;
+            }
+
+            @keyframes heart-burst {
+                0% {
+                    background-position: left
+                }
+
+                100% {
+                    background-position: right
+                }
+            }
+
+            .feed-like {
+                margin-left: 0.5rem;
+                font-family: 600;
+                color: black;
+
+                // display: flex;
+                .HeartAnimation {
+                    color: black;
+                }
+            }
+        }
+
+
+
+    }
+}
+
+
+.Feed-Comment-Div {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // position: relative;
+
+    .emoji {
+        position: absolute;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .feed-comment-div-one {
+        display: flex;
+        // width: 100%;
+        background: $light-text;
+        padding: 0.5rem;
+        border-radius: 30px;
+        align-items: center;
+        // justify-content: space-between;
+        // box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+        .Feed-Comment-Input {
+            border: none;
+            margin-left: 1rem;
+
+            &:focus {
+                border: none;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        .send-icon {
+            cursor: pointer;
+            font-size: 24px;
+            color: black;
+            margin-right: 1rem;
+        }
+    }
+}
+
+.userComment-div {
+
+    display: inline-flex;
+    flex-direction: column;
+    // margin-bottom: 0.2rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background: $light-text;
+    color: black;
+
+    .comment-div {
+        display: inline-flex;
+        // margin-bottom: 0.5rem;
+    }
+
+    .comments {
+        font-size: 14px;
+        // margin-top: 1rem;
+    }
+
+
+
+    .comment-img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        color: rgb(95, 95, 95);
+    }
+
+    .comment-name {
+        font-size: 14px;
+    }
+
+    .close-btn-comment {
+        flex: 1;
+        display: flex;
+        justify-content: end;
+    }
+}
+
+.UserComment-wrapper {
+    width: 50%;
+
+    .UserComment-div {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        background: $light-text;
+        border-radius: 0.5rem;
+        width: 30%;
+
+        .UserComment-Profile-div {
+            display: flex;
+            align-items: center;
+
+            .UserComment-Profile-img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            .UserComment-Profile-name {
+                color: black;
+                margin-left: 0.5rem;
+                font-size: 14px;
+            }
+        }
+
+        .UserCommet-Text-div {
+            color: black;
+            font-size: 14px;
+            display: inline-flex;
+        }
+    }
+}
+
+.hrr {
+    color: black;
+}
+
+
+
+// option
+
+// .Feed-Profile-Option-Container {
+//     flex: 1;
+//     display: flex;
+//     justify-content: end;
+//     color: black !important;
+
+//     .Feed-Option-btn-div {
+//         width: 30px;
+//         height: 30px;
+//         background: #0a1929f5;
+//         padding: 0;
+//         // background: $btn;
+//         border-radius: 50%;
+//         cursor: pointer;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         // border: 1px solid $border-div;
+//     }
+// }

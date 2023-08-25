@@ -1,0 +1,52 @@
+.view-Reply {
+    width: 100%;
+    // padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    // background: rgba(0, 128, 0, 0.041);
+    // backdrop-filter: blur(10px);
+    overflow: hidden;
+
+    .view-replay-sms {
+        flex: 1;
+        // background: blue;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+    }
+
+    .view-close-btn {
+        // background: red;
+
+    }
+}
+
+
+.imgSelected-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    // background: rgba(0, 128, 0, 0.041);
+    // backdrop-filter: blur(10px);
+    background: transparent;
+
+
+    .loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+    }
+
+    .imgSelected-img {
+        width: 100%;
+        max-width: 200px;
+        height: 150px;
+        object-fit: contain;
+        object-position: center;
+    }
+
+   
+}

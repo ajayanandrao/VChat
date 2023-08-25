@@ -1,0 +1,99 @@
+@import "./../Mixin_New.scss";
+@import "./../Variable.scss";
+
+.option-container {
+	position: fixed;
+	// display: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: $bg-light;
+	color: #262626;
+	font-family: Arial, Helvetica, sans-serif;
+	z-index: 9999;
+	background: rgba(255, 255, 255, 0.034);
+	backdrop-filter: blur(10px);
+	cursor: pointer;
+	// padding: 1rem;
+
+	.option-back-div {
+		width: 100%;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		padding: 0 1rem;
+	}
+
+
+	.option-inner-div {
+		padding: 1rem;
+
+		// background: blue;
+		.option-profile-div {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			// background: blue;
+
+			.option-profile-img {
+				width: 70px;
+				height: 70px;
+				border-radius: 50%;
+				object-fit: cover;
+				box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+				cursor: pointer;
+			}
+
+			.option-profile-text {
+				text-transform: capitalize;
+				margin: 1rem 0;
+				cursor: pointer;
+				font-size: 18px;
+				font-weight: 600;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			}
+		}
+
+		.option-mainu {
+			margin: 0.8rem 0;
+			display: flex;
+			align-items: center;
+
+			.option-mainu-icon {
+				font-size: 28px;
+				width: 56px;
+				cursor: pointer;
+				// background-color: red;
+				display: flex;
+				justify-content: center;
+				padding: 0.5rem;
+
+				.option-image-icon {
+					width: 50px;
+				}
+			}
+
+			.option-mainu-name {
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.spinning-image {
+	animation: spin 25s linear infinite;
+	/* Adjust animation duration as needed */
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}

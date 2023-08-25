@@ -1,0 +1,30 @@
+.message-input-wrapper-inner {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    // height: 50px;
+
+    .message-input {
+        flex: 1;
+        font-size: 16px;
+        padding-inline-start: 10px;
+        border: none;
+        outline: none;
+        border-radius: 40px;
+        height: 35px;
+        margin: 0 1rem;
+    }
+
+    .message-camera {
+        font-size: 24px;
+    }
+
+    .message-send-btn {
+        font-size: 30px;
+    }
+
+    .message-thumb {
+        font-size: 24px;
+        margin-left: 1rem;
+    }
+}

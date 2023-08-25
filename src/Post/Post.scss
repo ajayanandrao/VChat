@@ -1,0 +1,163 @@
+@import "./../Styles/Mixin_New.scss";
+@import "./../Styles/Variable";
+
+.post-contianer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    // background: blue;
+    
+
+    .post-div {
+        flex-basis: 576px;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        color: black;
+        // padding: 0.7rem 0.8rem;
+        padding-top: 1rem;
+        box-shadow: $border-input;
+        // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        overflow: hidden;
+        // border-radius: 0.5rem;
+        .post-padding {
+            padding: 0.1rem 0.8rem;
+        }
+
+        .post-profile-div {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+
+            .post-img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;
+                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+                // box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+                .post-img-dot {
+                    position: absolute;
+                    right: -4px;
+                    bottom: -1px;
+                    border: 2px solid #fff;
+                    width: 13px;
+                    height: 13px;
+                    border-radius: 50%;
+                    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+                    background-color: green;
+                }
+            }
+
+            .post-input {
+                flex: 0.9;
+                border: none;
+                background: $light-text;
+                height: 40px;
+                border-radius: 30px;
+                padding-inline-start: 1rem;
+                box-shadow: $border-input;
+
+                &:focus {
+                    box-shadow: none;
+                }
+            }
+
+            .post-send-text {
+                color: #2F97E2;
+                font-size: 18px;
+                font-weight: 600;
+                cursor: pointer;
+            }
+        }
+
+        .post-icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin-top: 1.2rem;
+
+            .post-icon-div {
+                display: flex;
+                align-items: center;
+                
+                .post-icon {
+                    width: 30px;
+                    height: 30px;
+                    object-fit: cover;
+                    object-position: center;
+                    font-size: 28px;
+                }
+
+                .post-icon-text {
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+
+        .Selected-imageOrVideo-container {
+            margin-top: 1.5rem;
+            max-width: 576px;
+            max-height: 400px;
+
+            .postImg {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            .video-container {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            .video {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+
+
+    }
+}
+
+.post-emoji {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+
+}
+
+// Video Player
+
+.video-container {
+    position: relative;
+
+    .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 18px;
+        color: white;
+        cursor: pointer;
+        z-index: 0;
+        font-size: 30px;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+}

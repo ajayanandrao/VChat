@@ -1,0 +1,138 @@
+.reel-video-container {
+    position: relative;
+    top: 0;
+    max-width: 576px;
+    height: calc(100vh - 1.5px);
+    z-index: 9999;
+    background: white;
+}
+
+.reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.reel-profile-div {
+    width: 100%;
+    display: flex;
+    padding: 0.5rem;
+    align-items: center;
+    position: absolute;
+    bottom: 0%;
+    left: 0;
+    right: 0;
+    transform: translate(-0%, -5%);
+    color: white;
+    // background: red;
+    cursor: pointer;
+    z-index: 0;
+
+    .reel-profile-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .reel-profile-name {
+        margin-left: 1rem;
+        font-size: 16px;
+    }
+}
+
+.reels-back-button {
+    position: absolute;
+    top: 4%;
+    left: 7%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    z-index: 0;
+    font-size: 30px;
+
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    z-index: 0;
+    font-size: 30px;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.reel-like-div {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 0;
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(10px);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.3rem;
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+    .reel-like-inner-div {
+        display: flex;
+        flex-direction: column;
+        line-height: 18px;
+        color: white;
+    }
+
+}
+
+.reel-side-mainu {
+    width: 30px;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    // background-color: goldenrod;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    color: white;
+    cursor: pointer;
+    z-index: 0;
+    font-size: 30px;
+
+    .reel-mainu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        // padding: 0.5rem;
+
+        .reel-mainu-icon-div {
+            margin: 0.5rem 0;
+            color: #ccc;
+
+            .like-count {
+                font-size: 16px;
+                width: 100%;
+                // background: red;
+                display: flex;
+                color: white;
+                justify-content: center;
+            }
+
+            .reel-mainu-icon {
+                font-size: 25px;
+            }
+        }
+    }
+}

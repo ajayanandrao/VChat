@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Avatar",
+    "subname": "The way of water",
+    "img": "https://media.socastsrm.com/wordpress/wp-content/blogs.dir/460/files/2022/12/banner-avatar2.jpg",
+    "trailer":"https://youtu.be/o5F8MOz_IDw"
+  },
+  {
+    "id": 2,
+    "name": "Black Panther",
+    "subname": "Wakanda Forever",
+    "img": "https://images.ottplay.com/images/detail-from-the-poster-for-black-panther-wakanda-forever-766.jpg",
+    "trailer":"https://youtu.be/_Z3QKkl1WyM"
+  },
+  {
+    "id": 3,
+    "name": "the marvels",
+    "subname": "",
+    "img": "https://i.ytimg.com/vi/iuk77TjvfmE/maxresdefault.jpg",
+    "trailer":"https://youtu.be/iuk77TjvfmE"
+  },
+  {
+    "id": 4,
+    "name": "Secret Invasion",
+    "subname": "",
+    "img": "https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_675,pg_1,q_80,w_1200/db625e16b9cd5cc69668d00eeec4a20f.jpg",
+    "trailer": "https://youtu.be/Tp_YZNqNBhw"
+  },
+  {
+    "id": 5,
+    "name": "Transformers",
+    "subname": "Rise of the Beasts ",
+    "img": "https://i.ytimg.com/vi/WWWDskI46Js/maxresdefault.jpg",
+    "trailer":"https://youtu.be/WWWDskI46Js"
+  }
+]

@@ -1,0 +1,10 @@
+.movie-banner-div {
+    margin: 0.5rem 0;
+
+    .movie-banner {
+        width: 100%;
+        max-width: 567px;
+        height: 200px;
+        object-fit: cover;
+    }
+}

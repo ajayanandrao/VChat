@@ -1,0 +1,29 @@
+
+==========================
+
+npm install gh-pages --save-dev
+
+git init
+
+git add .
+
+git status
+
+git commit -m "first commit"
+
+git branch -M main
+
+git remote add origin https://github.com/ajayanandrao/react-deploy.git
+
+git push -u origin main
+
+"homepage":"http//ajayanandrao.github.io/react-app"
+
+"predeploy":"npm run build"
+"deploy":"gh-pages -d build"
+
+
+
+npm run deploy
+
+===========================

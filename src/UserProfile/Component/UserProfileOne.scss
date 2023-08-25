@@ -1,0 +1,139 @@
+.loading-profile-cover-photo-div {
+	flex-basis: 576px;
+	height: 230px;
+	.placeholder-dimension {
+		width: 100%;
+		height: 230px;
+	}
+}
+
+.profile-cover-photo-div {
+	flex-basis: 576px;
+	height: 230px;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
+
+	.profile-cover-camera-btn-div {
+		position: absolute;
+		right: 20px;
+		top: 30px;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #0b243b46;
+		backdrop-filter: blur(15px);
+		padding: 0.3rem;
+		font-size: 14px;
+		box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+		.profile-cover-camera-btn {
+			color: white;
+			font-size: 16px;
+			margin-bottom: 2px;
+			margin-right: 1px;
+		}
+	}
+
+	.profile-pic-bg-div {
+		width: 100%;
+		height: 90%;
+		// background: red;
+		display: flex;
+		justify-content: center;
+		align-items: end;
+
+		.profile-pic-div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 80px;
+			height: 80px;
+			background-size: cover;
+			background-position: center;
+			border-radius: 50%;
+			box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+			position: relative;
+
+			.photo-edit-div {
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				border-radius: 50%;
+				width: 20px;
+				height: 20px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				.photo-camera {
+					color: white;
+				}
+			}
+		}
+	}
+}
+
+#Cover {
+	position: fixed;
+	display: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 2;
+	cursor: pointer;
+}
+
+#CoverCard {
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: white;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+
+	.Cover-card-bg {
+		width: 100%;
+		height: 450px;
+		padding: 1rem 0;
+		display: flex;
+		justify-content: center;
+
+		.cover-card-inner-div {
+			flex-basis: 400px;
+			display: flex;
+			flex-direction: column;
+
+			.cover-close-div {
+				width: 100%;
+				height: 30px;
+				// background: red;
+				display: flex;
+				justify-content: end;
+				padding: 0rem 1rem;
+				margin-bottom: 1rem;
+			}
+
+			.Cover-img {
+				width: 100%;
+				height: 250px;
+				object-fit: cover;
+				object-position: center;
+			}
+
+			.upload-btn-div {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				padding: 1rem 0;
+			}
+		}
+	}
+}

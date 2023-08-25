@@ -1,0 +1,235 @@
+.wedding-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid #ccc;
+}
+.back-btn-div{
+    width: 35px;
+    height: 35px;
+    // background: red;
+    backdrop-filter: blur(10px);
+    color: aqua;
+    border-radius: 50%;
+    position: fixed;
+    top: 74px;
+    left: 10px;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.wedding-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    outline: 1px solid #4caf50;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+
+    &:focus {
+        outline: 1px solid #4caf50;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+}
+
+.w-create-bio-btn {
+    position: fixed;
+    bottom: 160px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:linear-gradient(#3b82f6, #2563eb);
+    color: white;
+    
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.w-up-bio-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #0489b100;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    font-size: 20px;
+    bottom: 100px;
+    right: 15px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    color: #404040;
+    font-size: 600;
+}
+
+// 
+
+
+
+
+.add-wedding-container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: auto;
+    // background-color: ;
+    padding-bottom: 80px;
+
+    .toggle-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .toggle-button {
+        padding: 5px 10px;
+        background: linear-gradient(to left, #FE2E64, #FF0040);
+        background-color: #ccc;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        outline: none;
+        font-size: 16px;
+    }
+
+    .dropdown-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: linear-gradient(to left, #FE2E64, #FF0040);
+        // background-color: #ccc;
+        border: 1px solid white;
+        color: white;
+        border-radius: 4px;
+        padding: 8px;
+        list-style: none;
+        display: none;
+        z-index: 1;
+        margin-top: 0.3rem;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+
+    .dropdown-list.open {
+        display: inline-block;
+        max-height: 150px;
+        overflow-y: scroll;
+
+    }
+
+    .dropdown-item {
+        padding: 4px 8px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #ddd;
+        }
+    }
+
+    .chevron {
+        margin-left: 0.3rem;
+    }
+
+    .b-date-wedding-div {
+        display: flex;
+        padding: 1rem 0rem;
+        align-items: center;
+
+        .toggle-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .date-toggle-button {
+            padding: 3px 8px;
+            background-color: #ccc;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+            font-size: 16px;
+            margin: 0 0.5rem;
+        }
+
+        .date-dropdown-list {
+            margin-top: 0.3rem;
+            position: absolute;
+            top: 100%;
+            left: 0px;
+            background-color: #ccc;
+            border: 1px solid white;
+            border-radius: 4px;
+            padding: 8px;
+            list-style: none;
+            display: none;
+            z-index: 1;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        }
+
+        .date-dropdown-list.open {
+            display: flex;
+            flex-direction: column;
+            height: 200px;
+            overflow-y: scroll;
+
+        }
+
+        .date-dropdown-item {
+            padding: 4px 8px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #ddd;
+            }
+        }
+
+        .date-chevron {
+            margin-left: 0.1rem;
+        }
+    }
+
+    .religion-wedding-div {
+        display: flex;
+        justify-content: center;
+        margin: 1rem 0;
+    }
+
+
+    .wedding-photo-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin: 1rem 0;
+    }
+
+    .wedding-photo-div {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.5rem;
+        border: 1px solid #999;
+    }
+
+    .wedding-photo {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 0.5rem;
+    }
+
+    .wedding-add-photo {
+        font-size: 30px;
+        color: #999;
+    }
+}

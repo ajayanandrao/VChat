@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Hollywood",
+    "img": "https://i0.wp.com/www.wonderslist.com/wp-content/uploads/2018/12/Highest-Grossing-Hollywood-Movies.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Bollywood",
+    "img":"https://six.psbdigital.ca/wp-content/uploads/2020/02/Bollywood-women.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Web Series",
+    "img":"https://static.toiimg.com/photo/87533357.cms"
+  },
+  {
+    "id": 4,
+    "name": "Cartoons",
+    "img":"https://dnm.nflximg.net/api/v6/BvVbc2Wxr2w6QuoANoSpJKEIWjQ/AAAAQRrh5TH_ntm9CfPqCc84-J3OUcBfwPJMHo97cexNA1Mno_GrpMEnYke1axs4wo2xf3lpOaPGuIYil2AqsG4hAta82pL-iNv7t2VTR9GoOBsmGRRTI_eVICWNh-CT4YpOpdu4_QBEbFBXdSkpsZRKPJP3AIE.jpg?r=e71"
+  }
+]

@@ -1,0 +1,17 @@
+
+
+
+
+.imgSelected-close-div {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    position: absolute;
+    padding-right: 1rem;
+    position: absolute;
+    top: 15px;
+
+    .imgSelected-close-img {
+        font-size: 24px;
+    }
+}

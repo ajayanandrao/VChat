@@ -1,0 +1,76 @@
+.profile-cover-photo-div {
+    flex-basis: 576px;
+    height: 230px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+    .profile-cover-camera-btn-div-main {
+        position: absolute;
+        right: 20px;
+        top: 30px;
+        border-radius: 50%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background: #0b243b46;
+        backdrop-filter: blur(15px);
+        padding: 0.3rem;
+        font-size: 14px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+        .profile-cover-camera-btn {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 2px;
+            margin-right: 1px;
+        }
+    }
+
+    .profile-pic-bg-div {
+        width: 100%;
+        height: 90%;
+        // background: red;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+
+        .profile-pic-div {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        }
+    }
+
+}
+
+
+#ProfileOneImg {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+.ProfileOneImg-photo{
+    max-width: 300px;
+    max-height: 400px;
+}
+#ProfileOneImg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: black;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}

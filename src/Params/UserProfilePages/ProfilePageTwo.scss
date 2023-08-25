@@ -1,0 +1,52 @@
+@import "./../../Variable.scss";
+
+.profile-name-container-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid $light-text3;
+
+    .profile-name-text {
+        text-transform: capitalize;
+        font-weight: 600;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .profile-option-div {
+        display: flex;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        // background-color: red;
+
+        .profile-option-absolute {
+            position: absolute;
+            cursor: pointer;
+            top: 36px;
+            // left: 0;
+            right: -40px;
+            width: 150px;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+        }
+    }
+
+    .profile-Page-add-btn {
+        display: flex;
+        width: 260px;
+        justify-content: space-around;
+        margin: 0.7rem 0;
+    }
+}
+
+

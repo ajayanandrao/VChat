@@ -1,0 +1,106 @@
+.main-wrapper {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding-bottom: 100px;
+
+    .movie-desc-div {
+        padding: 0.4rem;
+        text-align: center;
+        .movie-desc-language {
+            font-size: 18px;
+            font-weight: 600;
+            color: #424242;
+
+            .language-one {
+                font-size: 16px;
+                color: #848484;
+            }
+
+        }
+    }
+}
+
+
+.hollywood-main-div {
+    width: 100%;
+
+    .hollywood-video-div {
+        position: relative;
+        width: 100%;
+        // height: 500px;
+
+        .trailer-video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .play-button-div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+
+            .play-btn-div {
+                background: rgba(0, 0, 0, 0.479);
+                width: 45px;
+                height: 45px;
+                display: flex;
+                border-radius: 50%;
+                justify-content: center;
+                align-items: center;
+                padding-left: 0.3rem;
+            }
+
+            .play-btn-icon {
+                font-size: 22px;
+                color: white;
+            }
+        }
+    }
+}
+
+.screenShot-grid-div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 0.3rem;
+
+    .screenShot-img {
+        width: 100%;
+        max-width: 200px;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+}
+
+.movie-back-btn {
+    position: absolute;
+    // z-index: 9999;
+    top: 10%;
+    padding: 0 0.3rem;
+    color: black;
+    font-size: 24px;
+    display: flex;
+
+    .back-arrow-div {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: rgba(255, 0, 0, 0);
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // border: 1px solid #00BFFF;
+
+        .movie-back-arrow-icon {
+            font-size: 19px;
+            color: #00FFFF;
+        }
+    }
+}

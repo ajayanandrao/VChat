@@ -1,0 +1,61 @@
+.photo-card {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.Background-Photo-div {
+    width: 200px;
+    height: 220px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0.5rem 1rem 0.5rem 0.5rem;
+    transition: 0.3s ease-in-out;
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+}
+
+
+.grid-parent-container {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+
+    }
+}
+
+.video-text {
+    display: flex;
+    margin: 2rem 1rem;
+    font-weight: 600;
+}
+
+
+.video-container {
+    // background: red;
+    display: flex;
+    justify-content: center;
+    max-width: 576px;
+    max-height: 600px;
+    overflow: hidden;
+
+    .UserVideo {
+        margin: 0.5rem 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        // border-radius: 0.5rem;
+    }
+}

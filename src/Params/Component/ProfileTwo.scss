@@ -1,0 +1,23 @@
+@import "./../../Variable.scss";
+
+.profile-name-container-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid $light-text3;
+
+    .profile-name-text {
+        text-transform: capitalize;
+        font-weight: 600;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .profile-add-btn {
+        display: flex;
+        width: 300px;
+        justify-content: space-evenly;
+        margin: 0.7rem 0;
+    }
+}
