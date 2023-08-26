@@ -37,13 +37,41 @@ function App() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const currentScrollPos = window.scrollY;
+  //     const scrollUp = prevScrollPos > currentScrollPos;
+
+  //     setPrevScrollPos(currentScrollPos);
+  //     setShowNavbar(scrollUp || currentScrollPos === 0);
+  //   };
+
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, [prevScrollPos]);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
       const scrollUp = prevScrollPos > currentScrollPos;
 
       setPrevScrollPos(currentScrollPos);
-      setShowNavbar(scrollUp || currentScrollPos === 0);
+
+      // Calculate scroll percentage
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercentage = (currentScrollPos / scrollHeight) * 100;
+
+      // Define thresholds for showing and hiding navbar
+      const hideThreshold = 0.5; // Hide navbar when scrolled down 10% or more
+      const showThreshold = 0.1; // Show navbar when scrolled up 1% or more
+
+      setShowNavbar(
+        (scrollUp && scrollPercentage > showThreshold) || // Show on scroll up
+        (!scrollUp && scrollPercentage < hideThreshold) || // Show on scroll down
+        currentScrollPos === 0 // Always show at the top
+      );
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -55,9 +83,16 @@ function App() {
   return (
     <>
       <Router basename='/VChat'>
-
-         <div className={`mobile-navbar ${showNavbar ? '' : 'hidden'}`}> <MobileNavebar /> </div>
-        
+        {/* <div className="mobile">
+          <div className={`mobile-navbar ${showNavbar ? '' : 'hidden'}`}>  </div>
+        </div> */}
+        <div className="mobile">
+          {showNavbar ?
+            <MobileNavebar />
+            :
+            ""
+          }
+        </div>
         <ScrollToTop />
         <Routes>
           <Route exact path="/" element={<Login />} />

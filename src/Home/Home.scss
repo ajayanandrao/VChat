@@ -12,6 +12,15 @@
     z-index: 9999;
 }
 
+.mobile {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 9999;
+}
+
 .mobile-navbar {
     position: fixed;
     top: 0;
