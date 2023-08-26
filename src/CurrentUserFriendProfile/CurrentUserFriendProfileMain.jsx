@@ -1,21 +1,33 @@
-import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
-import { db } from '../Firebase';
-import ProfilePageOne from './UserProfilePages/ProfilePageOne';
-import ProfilePageTwo from './UserProfilePages/ProfilePageTwo';
-import ProfilePageThree from './UserProfilePages/ProfilePageThree';
-import { CircularProgress } from '@mui/material';
+import "./CurrentUserFriendProfileMain.scss";
 
-import "./UserProfilePage.scss";
+import ProfilePageOne from './../Params/UserProfilePages/ProfilePageOne';
+
+import { CircularProgress } from '@mui/material';
+import ProfilePageTwo from '../Params/UserProfilePages/ProfilePageTwo';
+import ProfilePageThree from '../Params/UserProfilePages/ProfilePageThree';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../Firebase';
+import { useNavigate, useParams } from 'react-router-dom';
 import { HiOutlineArrowSmLeft } from 'react-icons/hi';
 
-const UsersProfilePage = () => {
+
+const LeftArro = () => {
+    const nav = useNavigate();
+    const goBack = () => {
+        nav(-1);
+    }
+    return (
+        <div className='back-btn-div' onClick={goBack}>
+            <HiOutlineArrowSmLeft fontSize={"25px"} />
+        </div>
+    )
+}
+
+const CurrentUserFriendProfileMain = () => {
+
     const { id, userId } = useParams(); // Assuming id is friend.userId and uid is friend.id
     const [user, setUser] = useState(null);
-
-
-
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -35,7 +47,6 @@ const UsersProfilePage = () => {
         fetchUser();
     }, [id]);
 
-
     if (!user) {
         return <>
             <div className='skeleton-center'>
@@ -45,15 +56,16 @@ const UsersProfilePage = () => {
     }
     return (
         <>
-            {/* <LeftArro /> */}
-            <div className="UserDetails-bg-container w3-animate-opacity">
+            <LeftArro />
+
+            <div className='current-user-friend-profile-main'>
                 <ProfilePageOne user={user} />
                 <ProfilePageTwo user={user} userId={userId} />
                 <ProfilePageThree user={user} />
-                <div className='height'></div>
+
             </div>
         </>
     )
 }
 
-export default UsersProfilePage;
+export default CurrentUserFriendProfileMain

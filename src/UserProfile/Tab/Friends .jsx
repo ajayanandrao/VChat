@@ -99,31 +99,38 @@ const Friends = ({ user }) => {
                 value={search}
                 className='friend-search' />
 
-            <div className="grid-parent-container">
+            <div className="Friend-grid-parent-container">
                 <div className='friend-container'>
-
-
-                    {api.map((item) => {
+                    {api.filter((value) => {
+                        if (search === "") {
+                            return value;
+                        } else if (
+                            value.name.toLowerCase().includes(search.toLowerCase())
+                        ) {
+                            return value;
+                        }
+                    }).map((item) => {
                         return (
                             <>
+                                {friendsList
 
-                                {friendsList.map((friend) => {
+                                    .map((friend) => {
 
-                                    if (item.uid === friend.uid) {
-                                        return (
-                                            <div key={friend.userId} >
+                                        if (item.uid === friend.uid) {
+                                            return (
+                                                <div key={friend.userId} >
 
-                                                <Link style={{ textDecoration: "none" }} to={`/users/${friend.userId}/${friend.id}/profile/`}>
-                                                    <div>
-                                                        <img src={item.PhotoUrl} className='friend-img' alt="" />
-                                                        <div className='friend-name'>{item.name}</div>
-                                                        {/* <button onClick={() => deleteFriend(friend.id, friend.uid)} className='btn btn-info'>Delete</button> */}
-                                                    </div>
-                                                </Link>
-                                            </div>
-                                        )
-                                    }
-                                })}
+                                                    <Link style={{ textDecoration: "none" }} to={`/users/${friend.userId}/${friend.id}/profile/`}>
+                                                        <div>
+                                                            <img src={item.PhotoUrl} className='friend-img' alt="" />
+                                                            <div className='friend-name'>{item.name}</div>
+                                                            {/* <button onClick={() => deleteFriend(friend.id, friend.uid)} className='btn btn-info'>Delete</button> */}
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            )
+                                        }
+                                    })}
 
 
                             </>

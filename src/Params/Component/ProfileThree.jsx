@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./ProfileThree.scss";
 import UserPhoto from '../ParamsTab/UserPhoto';
+import UserPostPage from "./../ParamsTab/UserPostPage";
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { db } from '../../Firebase';
+import UserFriendPage from '../ParamsTab/UserFriendPage';
 
 const ProfileThree = ({ user }) => {
 
@@ -19,10 +23,23 @@ const ProfileThree = ({ user }) => {
     }
 
 
+    const [api, setApiData] = useState([]);
+
+    const colRef = collection(db, 'AllPosts');
+    const q = query(colRef, orderBy('bytime', 'desc'));
+    useEffect(() => {
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+            setApiData(newApi);
+        });
+
+        return unsubscribe;
+    }, []);
+
+
     return (
         <>
             <div className="profileThree-container">
-
 
                 <div className="tab">
                     <button className="tablinks active" onClick={(event) => openCity(event, 'Post')}>Post</button>
@@ -34,8 +51,19 @@ const ProfileThree = ({ user }) => {
                 <div className='content-div'>
 
                     <div id="Post" className="tabcontent w3-animate-opacity" style={{ display: "block" }}>
-                        {/* <UserPostProps /> */}
-                        Profile Locked
+
+                        {api.map((item) => {
+                            if (user.uid === item.uid) {
+                                return (
+                                    <>
+                                        <UserPostPage post={item} />
+                                    </>
+                                )
+                            }
+                        })}
+
+
+                        {/* Profile Locked */}
                     </div>
 
                     <div id="About" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
@@ -44,8 +72,7 @@ const ProfileThree = ({ user }) => {
                     </div>
 
                     <div id="Friend" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
-                        {/* <Friends /> */}
-                        Profile Locked
+                        <UserFriendPage user={user} />
                     </div>
 
                     <div id="Photo" style={{ display: "none" }} className="tabcontent w3-animate-opacity">

@@ -128,7 +128,7 @@ const ProfilePhotos = ({ user }) => {
 
     return (
         <>
-            <div class="grid-parent-container">
+            <div class="photo-grid-parent-container">
                 <div className="grid-container" >
                     {newData}
                 </div>

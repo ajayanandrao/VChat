@@ -27,12 +27,37 @@ import ReelsProps from './Reals/ReelsProps';
 
 import Messages from './Message/Messages/Messages';
 import MobileNavebar from './MobileNavbar/MobileNavebar';
+import CurrentUserProfileMain from './CurrentUserProfile/CurrentUserProfileMain';
+import OtherUserProfileMain from './OtherUserProfile/OtherUserProfileMain';
+import CurrentUserFriendProfileMain from './CurrentUserFriendProfile/CurrentUserFriendProfileMain';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      const scrollUp = prevScrollPos > currentScrollPos;
+
+      setPrevScrollPos(currentScrollPos);
+      setShowNavbar(scrollUp || currentScrollPos === 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [prevScrollPos]);
+
   return (
     <>
       <Router basename='/VChat'>
-        <MobileNavebar />
+
+         <div className={`mobile-navbar ${showNavbar ? '' : 'hidden'}`}> <MobileNavebar /> </div>
+        
         <ScrollToTop />
         <Routes>
           <Route exact path="/" element={<Login />} />
@@ -47,7 +72,6 @@ function App() {
           <Route exact path="changePassword" element={<ChangePassword />} />
           <Route exact path="forgotPassword" element={<ForgotPassword />} />
 
-
           <Route path="option" element={<Option />} />
           <Route path="setting" element={<Setting />} />
           <Route path="policy" element={<Policy />} />
@@ -61,24 +85,13 @@ function App() {
           <Route path="WeddingList/:id" element={<WeddingListDetail />} />
 
           <Route path='users' element={<Users />} />
-          <Route path='users/:id' element={<UsersDetails />} />
+
+          <Route path='users/:id' element={<OtherUserProfileMain />} />
           <Route path='users/:id/message' element={<Messages />} />
-          <Route path='users/:id/:userId/profile' element={<UsersProfilePage />} />
 
-          <Route path='profile' element={<UserProfile />} />
-          {/* <Route path='demo' element={<Demo />} /> */}
-          {/* <Route path='movies' element={<Movies />} />
-          <Route path='movie/:id' element={<AddHollywood />} />
-          <Route path='requestMovie' element={<RequestMovie />} />
+          <Route path='users/:id/:userId/profile' element={<CurrentUserFriendProfileMain />} />
 
-          <Route path='hollywoodmovie/:id' element={<HollywoodMovies />} />
-          <Route path='bollywoodmovie/:id' element={<BollywoodMovies />} />
-          <Route path='cartoonMovie/:id' element={<CartoonMovies />} />
-          <Route path='latestMovie/:id' element={<LatestMovies />} />
-
-          <Route path='hollywood' element={<Hollywood />} />
-          <Route path='bollywood' element={<Bollywood />} />
-          <Route path='cartoon' element={<Cartoon />} /> */}
+          <Route path='profile' element={<CurrentUserProfileMain />} />
 
           <Route path='reels' element={<ReelsProps />} />/
           <Route path='notification' element={<NotificationProps />} />

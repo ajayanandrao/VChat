@@ -8,6 +8,7 @@ import { AuthContext } from '../../AuthContaxt';
 import { Link, useNavigate } from 'react-router-dom';
 
 const ProfilePageTwo = ({ user, userId }) => {
+
     const { currentUser } = useContext(AuthContext);
 
     const nav = useNavigate();
@@ -22,16 +23,6 @@ const ProfilePageTwo = ({ user, userId }) => {
         }
     }
 
-
-    const SendMessage = async (uid, name) => {
-
-        // Add receiver to sender's friends list
-        await addDoc(collection(db, `allFriends/${currentUser.uid}/Message`), {
-            userId: uid,
-            name: name,
-        })
-
-    };
 
     const deleteFriend = async () => {
         const CurrentFriendRef = collection(db, `allFriends/${currentUser.uid}/Friends`);
@@ -53,9 +44,18 @@ const ProfilePageTwo = ({ user, userId }) => {
             console.error('Error deleting friend:', error);
         }
 
+        const RequestRef = doc(db, 'NewFriendRequests',  currentUser.uid + user.uid);
+
+        try {
+            await deleteDoc(RequestRef);
+            console.log('Friend Request deleted successfully');
+        } catch (error) {
+            console.error('Error deleting friend request:', error);
+        }
+
         // ==========================================================
 
-        const friendsRef = collection(db, `allFriends/${user.uid}/Friends`);
+        const friendsRef = collection(db, `allFriends/${user && user.uid}/Friends`);
         const friendsQuery = query(friendsRef, where('userId', '==', currentUser.uid));
 
         try {
@@ -105,4 +105,3 @@ const ProfilePageTwo = ({ user, userId }) => {
 }
 
 export default ProfilePageTwo
-// onClick={() => SendMessage(user.uid, user.name)}

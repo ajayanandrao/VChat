@@ -62,8 +62,8 @@ const Option = () => {
 
                             <div className="option-mainu-icon">
                                 {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/setting-8979800-7374722.png?f=webp"} style={{ width: "55px" }} className='option-image-icon ' alt="" /> */}
-                                {/* <img src={setting} style={{ width: "55px" }} className='option-image-icon ' alt="" /> */}
-                                <i className="bi bi-gear-fill"></i>
+                                <img src={setting} style={{ width: "55px" }} className='option-image-icon ' alt="" />
+                                {/* <i className="bi bi-gear-fill"></i> */}
                                 {/* <i class="bi bi-gear-fill"></i> */}
                             </div>
                             <div className="option-mainu-name">
@@ -92,9 +92,9 @@ const Option = () => {
                     <Link to="/reels/">
                         <div className="option-mainu">
                             <div className="option-mainu-icon">
-                                <MdMovieFilter />
+                                {/* <MdMovieFilter /> */}
                                 {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/movie-reel-9237403-7588845.png?f=webp"} style={{ width: "35px" }} className='option-image-icon' alt="" /> */}
-                                {/* <img src={video} style={{ width: "40px" }} className='option-image-icon' alt="" /> */}
+                                <img src={video} style={{ width: "40px" }} className='option-image-icon' alt="" />
                                 {/* <i class="bi bi-camera-reels-fill"></i> */}
                             </div>
                             <div className="option-mainu-name" >
@@ -107,9 +107,9 @@ const Option = () => {
                         <div className="option-mainu-icon">
                             {/* <BsFillDoorClosedFill className="" style={{ fontSize: "35px" }} /> */}
                             {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/logout-8858045-7285381.png?f=webp"} style={{ width: "43px" }} alt="" /> */}
-                            {/* <img src={door} style={{ width: "43px" }} alt="" /> */}
+                            <img src={door} style={{ width: "43px" }} alt="" />
                             {/* <i className="bi bi-door-open-fill" onClick={LogOut}></i> */}
-                            <i class="bi bi-door-closed-fill"></i>
+                            {/* <i class="bi bi-door-closed-fill"></i> */}
                         </div>
                         <div className="option-mainu-name" onClick={LogOut}>
                             Log Out

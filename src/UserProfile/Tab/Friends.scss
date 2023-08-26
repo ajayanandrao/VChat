@@ -1,15 +1,14 @@
 @import "./../../Styles/Variable";
 
-.grid-parent-container {
+.Friend-grid-parent-container {
     display: inline-flex;
     justify-content: center;
     width: 100%;
-    // background-color: red;
     padding: 0 1rem;
     .friend-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        // gap: 1.5rem;
+        gap: 1.5rem;
     }
 
 
@@ -31,10 +30,10 @@
 }
 
 .friend-img {
-    width: 90px;
+    width: 95px;
     height: 95px;
     object-fit: cover;
-    border-radius: 25px;
+    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     // box-shadow: $border-input;
     // box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;

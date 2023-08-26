@@ -556,7 +556,7 @@ const UserPost = ({ post }) => {
                     }
 
                 </div>
-            </div >
+            </div>
 
 
         </>

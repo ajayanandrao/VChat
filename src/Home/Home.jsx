@@ -11,6 +11,7 @@ import { AiOutlineArrowUp } from "react-icons/ai";
 // import StoryForm from '../Story/StoryForm';
 import { CircularProgress } from '@mui/material';
 import Feed from '../Feed/Feed';
+import MobileNavebar from '../MobileNavbar/MobileNavebar';
 
 const Home = () => {
     const [api, setApiData] = useState([]);
@@ -96,6 +97,8 @@ const Home = () => {
         });
     };
 
+    
+
     return (
         <>
             {loading ? (
@@ -104,6 +107,9 @@ const Home = () => {
                 </div>
             ) : (
                 <>
+
+                    {/* <div className={`mobile-navbar ${showNavbar ? '' : 'hidden'}`}><MobileNavebar/></div> */}
+
                     <div className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
                         <AiOutlineArrowUp className='top-arrow' />
                     </div>

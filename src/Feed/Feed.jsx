@@ -482,7 +482,7 @@ const Feed = ({ post }) => {
 
 
 
-                                <Link to={`/users/${post.uid}/${post.id}/profile`}>
+                                <Link to={`/users/${post.uid}`}>
                                     <div className='feed-option-view ' id={`profileView-${post.id}`}>View Profiel</div>
                                 </Link>
 

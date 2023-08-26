@@ -78,7 +78,6 @@ const ProfileThree = ({ user }) => {
         <>
             <div className="profileThree-container">
 
-
                 <div className="tab">
                     <button className="tablinks active" onClick={(event) => openCity(event, 'Post')}>Post</button>
                     <button className="tablinks" onClick={(event) => openCity(event, 'About')}>About</button>
@@ -90,7 +89,6 @@ const ProfileThree = ({ user }) => {
 
                     <div id="Post" className="tabcontent w3-animate-opacity" style={{ display: "block" }}>
                         {loading ?
-
                             <>
                                 <div className='skeleton-center'>
                                     <CircularProgress className='circularprogress' /> <span className='loadinga'> Loading... </span>

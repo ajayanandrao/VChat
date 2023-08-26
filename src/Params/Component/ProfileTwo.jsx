@@ -6,6 +6,7 @@ import { AuthContext } from '../../AuthContaxt';
 
 const ProfileTwo = ({ user }) => {
     const { currentUser } = useContext(AuthContext);
+    const [dataFetched, setDataFetched] = useState(false);
 
     const sendFriendRequest = async (otherUserId, otherUserName, otherUserPhotoUrl) => {
         console.log(user.uid)
@@ -38,13 +39,14 @@ const ProfileTwo = ({ user }) => {
         const unsubscribe = onSnapshot(colRef, (snapshot) => {
             const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
             setApiData(newApi);
+
         });
 
         return unsubscribe;
     }, []);
 
 
-    const cancelFriendRequest = async ( senderId, otherUserId) => {
+    const cancelFriendRequest = async (senderId, otherUserId) => {
 
         console.log("recipientId :-", otherUserId);
         console.log("sender :-", senderId);
@@ -71,14 +73,24 @@ const ProfileTwo = ({ user }) => {
     useEffect(() => {
         const friendsRef = collection(db, `allFriends/${currentUser.uid}/Friends`);
         const unsubscribe = onSnapshot(friendsRef, (snapshot) => {
-            const newFriendsList = snapshot.docs.map((doc) => doc.data());
+            const newFriendsList = snapshot.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id  // Add the document ID to the friend's data
+            }));
             setFriendsList(newFriendsList);
+            setDataFetched(true);
+
         });
 
         return unsubscribe;
     }, []);
+
+    // { friendsList.map((item) => console.log(item.uid)) }
+
+    const [friendUserId, setFriendUserId] = useState(null);
     const isFriend = (userId) => {
-        return friendsList.some((friend) => friend.userId === userId);
+        // console.log(userId); // dont want that id this is Nikita's
+        return friendsList.some((friend) => friend.userId === userId); //this is a kiran id
     };
 
     const [check, setCheck] = useState([]);
@@ -98,13 +110,18 @@ const ProfileTwo = ({ user }) => {
         return userlist();
     }, []);
 
+
+
+
+
     return (
         <>
+
             <div className="profile-name-container-main">
                 <h3 className='profile-name-text'>{user.name}</h3>
                 <div className='profile-add-btn'>
                     {api.map((item) => {
-                        if (item.uid === currentUser.uid) {
+                        if (item.uid === user.uid) {
                             const friendRequest = check.find(
                                 (request) =>
                                     request.senderId === currentUser.uid &&
@@ -112,11 +129,13 @@ const ProfileTwo = ({ user }) => {
                                     request.status === 'pending'
                             );
 
-                            const isFriendRequestAccepted = friendsList.some(
-                                (friend) =>
-                                    friend.userId === currentUser.uid &&
-                                    friend.status === 'accepted'
-                            );
+                            const isFriendRequestAccepted = friendsList.find((friend) => {
+                                // console.log(friend.displayName + " :- " + friend.userId);
+                                // console.log("currentUser :- " + currentUser.uid);
+
+                                return friend.userId === currentUser.uid && friend.status === 'accepted';
+                            });
+
 
                             return (
                                 <div key={item.id}>
@@ -139,8 +158,9 @@ const ProfileTwo = ({ user }) => {
                                                 ) : isFriendRequestAccepted ? (
                                                     <div className="friend-request-accepted">Friend Request Accepted</div>
                                                 ) : isFriend(item.uid) ? (
-                                                    <div className="friend-request-accepted">Friend</div>
-                                                ) : (
+                                                    // <div className="friend-request-accepted">Friend</div>
+                                                    <button className='btn btn-info btn-sm'>Message</button>
+                                                ) : dataFetched ? (
                                                     <div
                                                         id={`add-${item.id}`}
                                                         className="btn-primary-custom"
@@ -154,7 +174,7 @@ const ProfileTwo = ({ user }) => {
                                                     >
                                                         Add a friend
                                                     </div>
-                                                )}
+                                                ) : null}
                                             </div>
                                         </div>
                                     </div>
@@ -162,7 +182,7 @@ const ProfileTwo = ({ user }) => {
                             );
                         }
                     })}
-                    <button className='btn btn-info btn-sm'>Message</button>
+
                 </div>
             </div>
         </>

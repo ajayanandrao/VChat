@@ -1,0 +1,16 @@
+{/* <Route path='demo' element={<Demo />} /> */}
+          {/* <Route path='movies' element={<Movies />} />
+          <Route path='movie/:id' element={<AddHollywood />} />
+          <Route path='requestMovie' element={<RequestMovie />} />
+
+          <Route path='hollywoodmovie/:id' element={<HollywoodMovies />} />
+          <Route path='bollywoodmovie/:id' element={<BollywoodMovies />} />
+          <Route path='cartoonMovie/:id' element={<CartoonMovies />} />
+          <Route path='latestMovie/:id' element={<LatestMovies />} />
+
+          <Route path='hollywood' element={<Hollywood />} />
+          <Route path='bollywood' element={<Bollywood />} />
+          <Route path='cartoon' element={<Cartoon />} /> */}
+           {/* <Route path='profile' element={<UserProfile />} /> */}
+             {/* <Route path='users/:id/:userId/profile' element={<UsersProfilePage />} /> */}
+              {/* <Route path='users/:id' element={<UsersDetails />} /> */}

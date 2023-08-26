@@ -4,6 +4,37 @@
     height: 100px;
 }
 
+.navbarHome {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.mobile-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    // background-color: #333;
+    /* Adjust this to your desired background color */
+    // color: white;
+    opacity: 1;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
+
+    .hidden {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        pointer-events: none;
+    }
+}
+
+
+
 #scrollTopBtn {
     width: 30px;
     height: 30px;

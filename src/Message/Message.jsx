@@ -132,10 +132,12 @@ const Message = () => {
 
 
     const acceptFriendRequest = async (requestId, senderId, receiverUid,
-        senderName, senderPhotoUrl, receiverName, receiverPhotoUrl) => {
+        senderName, senderPhotoUrl, receiverName, receiverPhotoUrl, mainid) => {
         try {
             const requestRef = doc(db, 'NewFriendRequests', requestId);
             const requestDoc = await getDoc(requestRef);
+
+
 
             if (requestDoc.exists()) {
                 await updateDoc(requestRef, { status: 'accepted' });
@@ -147,7 +149,8 @@ const Message = () => {
                     displayName: senderName,
                     photoUrl: senderPhotoUrl,
                     status: 'accepted',
-                    uid: senderId
+                    uid: senderId,
+                    requestID: mainid,
                 });
 
                 // Add receiver to sender's friends list
@@ -156,7 +159,8 @@ const Message = () => {
                     displayName: receiverName,
                     photoUrl: receiverPhotoUrl,
                     status: 'accepted',
-                    uid: receiverUid
+                    uid: receiverUid,
+                    requestID: mainid,
                 });
             } else {
                 console.error('Friend request not found.');
@@ -164,6 +168,10 @@ const Message = () => {
         } catch (error) {
             console.error('Error accepting friend request:', error);
         }
+
+        const RequestRef = doc(db, 'NewFriendRequests', requestId);
+        await deleteDoc(RequestRef);
+
     };
 
 
@@ -331,7 +339,7 @@ const Message = () => {
                                                                 <div className="btn-success-custom"
                                                                     onClick={() => acceptFriendRequest
                                                                         (item.id, item.senderId, item.receiverUid, item.senderName, item.senderPhotoUrl,
-                                                                            item.receiverName, item.receiverPhotoUrl)}>Accept</div>
+                                                                            item.receiverName, item.receiverPhotoUrl, item.mainid)}>Accept</div>
                                                                 <div className="btn-D-custom ms-4"
                                                                     onClick={() => DeleteRequest(item.id)}
                                                                 >Remove</div>

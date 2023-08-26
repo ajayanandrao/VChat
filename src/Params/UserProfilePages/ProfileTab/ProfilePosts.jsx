@@ -385,7 +385,7 @@ const ProfilePosts = ({ user, post }) => {
                         </div>
 
                         {/* Comment */}
-                        <div className="feed-bottom-mainu" FaShare>
+                        <div className="feed-bottom-mainu">
                             <BsFillChatDotsFill onClick={() => comment(post.id)} className='feed-bottom-icon' />
 
                             <span className='comment-counter ms-2' >{commentCount > 0 && commentCount}</span>
