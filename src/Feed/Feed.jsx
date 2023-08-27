@@ -543,7 +543,7 @@ const Feed = ({ post }) => {
                                         <BsFillHeartFill onClick={() => Heart(post.id)} className='feed-bottom-like-heart' color='#FF0040' />
 
                                         <div className="feed-bottom-like-count" onClick={() => showLike(post.id)}>
-                                            {like.length > 99 ? '99+' : like.length}
+                                            {like.length > 9 ? '9+' : like.length}
 
                                         </div>
                                     </div>
@@ -554,7 +554,7 @@ const Feed = ({ post }) => {
                                         <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart' />
                                         {like.length > 0 ?
                                             <div className="feed-bottom-like-count" onClick={() => showLike(post.id)}>
-                                                {like.length > 99 ? '99+' : like.length}
+                                                {like.length > 9 ? '9+' : like.length}
                                             </div>
                                             :
                                             ""

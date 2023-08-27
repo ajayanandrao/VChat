@@ -350,16 +350,17 @@
 
 	.feed-bottom-like-count {
 		position: absolute;
-		top: -10px;
-		right: -10px;
-		width: 30px;
-		height: 20px;
+		top: -3px;
+		right: 0px;
+		width: 17px;
+		height: 17px;
 		border-radius: 25px;
-		background-color: #DF013A;
+		// background-color: #DF013A;
+		background-color: $light-text2;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		font-size: 13px;
+		font-size: 9px;
 		color: white;
 		font-weight: 600;
 	}
