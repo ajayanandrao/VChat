@@ -10,6 +10,7 @@ import { Box, TextField } from '@mui/material';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import logo from "./../Image/img/logo192.png";
 import logoText from "./../Image/c2.png";
+import vlogo from "./../Image/img/logo192.png";
 
 
 const Login = () => {
@@ -131,8 +132,10 @@ const Login = () => {
 
                 <div className='login-form-container'>
                     <div className="login-form-container w3-animate-left w3-animate-opacity">
+                        <img src={vlogo}  width={"50px"} alt="" />
                         <h3 className='login-title'>
-                            <img width={"120px"} src={logoText} alt="" />
+                            Chat App
+                            {/* <img width={"120px"} src={logoText} alt="" /> */}
                         </h3>
 
 
@@ -158,7 +161,7 @@ const Login = () => {
                                 <button className="btn-success-outline my-4">Create New Account</button>
                             </Link>
                         </div>
-                        <div className='footer-bottom'>Copyright © Ajay Anandaro 2023. </div>
+                        <div className='footer-bottom'>Copyright © Vchat app 2023. </div>
                     </div>
                 </div>
 

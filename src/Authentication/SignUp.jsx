@@ -10,6 +10,7 @@ import logoText from "./../Image/c2.png";
 import g from "./../Image/google.png";
 import f from "./../Image/facebook.png";
 import i from "./../Image/instagram.png";
+import vlogo from "./../Image/img/logo192.png";
 
 const SignUp = () => {
 
@@ -164,7 +165,11 @@ const SignUp = () => {
     return (
         <>
             <div className="Signup-form-container signup-div w3-animate-right">
-                <h3 className='login-title'><img width={"120px"} src={logoText} alt="" /></h3>
+                <h3 className='login-title'>
+                    <img width={"35px"} style={{marginRight:"0.5rem"}} src={vlogo} alt="" />
+                    <img width={"120px"} src={logoText} alt="" />
+                    
+                    </h3>
 
                 <label htmlFor="photo" >
                     {img ? <img className="singup-img-form" src={img ? URL.createObjectURL(img) : null} alt="" /> :

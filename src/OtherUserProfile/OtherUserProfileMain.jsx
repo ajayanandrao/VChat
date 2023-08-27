@@ -9,19 +9,8 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useNavigate, useParams } from 'react-router-dom';
 import "./OtherUserProfileMain.scss";
-import { HiOutlineArrowSmLeft } from 'react-icons/hi';
+import LeftArro from '../LeftArro';
 
-const LeftArro = () => {
-    const nav = useNavigate();
-    const goBack = () => {
-        nav(-1);
-    }
-    return (
-        <div className='back-btn-div' onClick={goBack}>
-            <HiOutlineArrowSmLeft fontSize={"25px"} />
-        </div>
-    )
-}
 
 const OtherUserProfileMain = () => {
     const { id } = useParams();
@@ -48,7 +37,7 @@ const OtherUserProfileMain = () => {
     if (!user) {
         return <>
             <div className='skeleton-center'>
-                <CircularProgress className='circularprogress' /> <span className='loadinga'> Loading... </span>
+                <CircularProgress className='circularprogress' />
             </div >
         </>;
     }

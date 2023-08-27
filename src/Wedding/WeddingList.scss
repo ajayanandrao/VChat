@@ -1,3 +1,5 @@
+@import "./../Styles/Variable";
+
 .weddinglist-search-div {
     width: 100%;
     height: 50px;
@@ -14,7 +16,7 @@
         border-radius: 50px;
         border: none;
         padding-inline-start: 10px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        box-shadow: $border-input;
 
         &:focus {
             border: none;
@@ -28,9 +30,7 @@
     max-width: 567px;
     height: 300px;
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-
+    box-shadow: $border-input;
 
     .weddingList-sender-div {
         width: 100%;

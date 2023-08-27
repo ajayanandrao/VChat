@@ -11,6 +11,7 @@ import { CgClose } from "react-icons/cg"
 import { AiFillHeart } from 'react-icons/ai';
 import { IoMdSend } from 'react-icons/io';
 import { AuthContext } from '../AuthContaxt';
+import { BiSend, BiSolidSend } from 'react-icons/bi';
 
 const NotificationPara = () => {
     const { currentUser } = useContext(AuthContext);
@@ -154,7 +155,7 @@ const NotificationPara = () => {
     if (!api) {
         return <>
             <div className='skeleton-center'>
-                <CircularProgress className='circularprogress' /> <span className='loadinga'> Loading... </span>
+                <CircularProgress className='circularprogress' />
             </div >
         </>;
     }
@@ -211,23 +212,29 @@ const NotificationPara = () => {
                 </div >
 
                 <div className="view-tab-make-comment-div">
-                    <input
-                        type="text"
-                        placeholder='Comment'
-                        value={newComment}
-                        onChange={(e) => setNewComment(e.target.value)}
-                        className='view-tab-make-comment-input'
-                    // onKeyDown={(e) => {
-                    //     if (e.key === 'Enter') {
-                    //         e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)
-                    //         if (getComment.trim() !== '') {
-                    //             HandleComment(e, post.id);
-                    //         }
-                    //     }
-                    // }}
-                    />
-                    <div>
-                        <IoMdSend className='view-tab-make-comment-icon' onClick={() => { HandleComment(); openCity('comment') }} />
+                    <div className="view-tab-make-comment-inner-div">
+                        <input
+                            type="text"
+                            placeholder='write a Comment'
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                            className='view-tab-make-comment-input'
+                        // onKeyDown={(e) => {
+                        //     if (e.key === 'Enter') {
+                        //         e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)
+                        //         if (getComment.trim() !== '') {
+                        //             HandleComment(e, post.id);
+                        //         }
+                        //     }
+                        // }}
+                        />
+                        <div >
+                            {newComment ?
+                                <BiSolidSend className='view-tab-make-comment-icon' color='#0080FF' onClick={() => { HandleComment(); openCity('comment') }} />
+                                :
+                                <BiSend className='view-tab-make-comment-icon' onClick={() => { HandleComment(); openCity('comment') }} />
+                            }
+                        </div>
                     </div>
 
                 </div>
@@ -250,14 +257,22 @@ const NotificationPara = () => {
                     {comment && comment.map((item) => {
                         return (
                             <div key={item.id}>
-                                <div className='noti-pro-container mb-4'>
-                                    <div className='noti-pro-div'>
-                                        <img src={item.photoURL} className='noti-pro-img' alt="" />
-                                        <span style={{ textTransform: "capitalize", fontWeight: "600" }}>{item.displayName}</span>
+                                <div className="notification-container">
+                                    <div>
+                                        <img src={item.photoURL} className='notification-comment-profile-image' alt="" />
+                                    </div>
 
-                                        <div className='view-noti-post-time'>
-                                            <CommentTimeAgoComponent timestamp={item.commentTime && item.commentTime.toDate()} />
+                                    <div className="notification-comment-profile-group">
+                                        <div className="notification-comment-profile-group-name">
+                                            <span style={{ textTransform: "capitalize", fontWeight: "600" }}>{item.displayName}</span>
+                                            <div className='view-noti-post-time'>
+                                                <CommentTimeAgoComponent timestamp={item.commentTime && item.commentTime.toDate()} />
+                                            </div>
                                         </div>
+                                        <span className='comment-api' >{item.comment}</span>
+
+                                    </div>
+                                    <div className='view-comment-delte-container'>
                                         {currentUser && currentUser.uid == item.uid ?
                                             <div className="view-comment-delete-div">
                                                 <CgClose onClick={() => deleteComment(item.id)} />
@@ -266,7 +281,7 @@ const NotificationPara = () => {
                                             ""
                                         }
                                     </div>
-                                    <span style={{ paddingLeft: "50px" }}>{item.comment}</span>
+
                                 </div>
                             </div>
                         )

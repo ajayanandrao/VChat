@@ -1,3 +1,5 @@
+@import "./../Styles/Variable";
+
 .wedding-container {
     width: 100%;
     display: flex;
@@ -6,22 +8,7 @@
     height: 60px;
     border-bottom: 1px solid #ccc;
 }
-.back-btn-div{
-    width: 35px;
-    height: 35px;
-    // background: red;
-    backdrop-filter: blur(10px);
-    color: aqua;
-    border-radius: 50%;
-    position: fixed;
-    top: 74px;
-    left: 10px;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
+
 .wedding-input {
     width: 100%;
     padding: 0.5rem;
@@ -33,7 +20,8 @@
     &:focus {
         outline: 1px solid #4caf50;
         border: none;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        box-shadow: $border-input;
+        // box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     }
 }
 
@@ -47,9 +35,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background:linear-gradient(#3b82f6, #2563eb);
+    background: linear-gradient(#3b82f6, #2563eb);
     color: white;
-    
+
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 

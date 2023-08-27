@@ -103,7 +103,7 @@ const Home = () => {
         <>
             {loading ? (
                 <div className='skeleton-center'>
-                    <CircularProgress className='circularprogress' /> <span className='loadinga'> Loading... </span>
+                    <CircularProgress className='circularprogress' /> 
                 </div>
             ) : (
                 <>

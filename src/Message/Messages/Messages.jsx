@@ -9,6 +9,7 @@ import { FaThumbsUp } from 'react-icons/fa';
 import { BsFillCameraFill } from 'react-icons/bs';
 import { AuthContext } from '../../AuthContaxt';
 import { IoMdClose } from "react-icons/io"
+import { BiSend, BiSolidSend } from "react-icons/bi"
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 } from 'uuid';
 
@@ -491,7 +492,7 @@ const Messages = () => {
     if (!user) {
         return <>
             <div className='skeleton-center'>
-                <CircularProgress className='circularprogress' /> <span className='loadinga'> Loading... </span>
+                <CircularProgress className='circularprogress' />
             </div >
         </>;
     }
@@ -1060,7 +1061,34 @@ const Messages = () => {
                         />
 
                         <div>
-                            <MdSend
+                            {messageInput ?
+
+                                <BiSolidSend
+                                    className="message-bottom-send-btn"
+                                    color='#0080FF'
+                                    onClick={() => {
+                                        if (selectedMessageId) {
+                                            sendReply(selectedMessageId);
+
+                                        } else {
+                                            sendMessage(user.uid, user.name, user.userPhoto);
+                                        }
+                                    }}
+                                />
+                                :
+                                <BiSend
+                                    className="message-bottom-send-btn"
+                                    onClick={() => {
+                                        if (selectedMessageId) {
+                                            sendReply(selectedMessageId);
+
+                                        } else {
+                                            sendMessage(user.uid, user.name, user.userPhoto);
+                                        }
+                                    }}
+                                />
+                            }
+                            {/* <MdSend
                                 className="message-bottom-send-btn"
                                 onClick={() => {
                                     if (selectedMessageId) {
@@ -1070,7 +1098,7 @@ const Messages = () => {
                                         sendMessage(user.uid, user.name, user.userPhoto);
                                     }
                                 }}
-                            />
+                            /> */}
                         </div>
 
                         <div className='message-bottom-thumb-div'>

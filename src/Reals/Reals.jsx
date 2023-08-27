@@ -251,7 +251,7 @@ const Reals = () => {
         <>
 
             {loading ? <div className='skeleton-center'>
-                <CircularProgress className='circularprogress' /> <span className='loadinga'> Loading... </span>
+                <CircularProgress className='circularprogress' />
             </div > :
                 <div className="reel-position-div">
                     <div className="reel-scroll-div">

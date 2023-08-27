@@ -119,18 +119,16 @@ const MobileNavebar = () => {
         </div>
       </div>
 
-      <div
+      {/* <div
         className="mobile-nav-bottom-container "
         style={{ display: "none" }}
         id="navIdB"
       >
         <Link to={"home/"}>
-          {/* <img src={home} width={"30px"} alt="" /> */}
           <AiFillHome className='mobile-nav-bottom-icon' />
         </Link>
         <Link to="notification">
           <div>
-            {/* <img src={heart} style={{width:"28px"}} alt="" /> */}
             <AiFillHeart className="mobile-nav-bottom-icon" />
           </div>
         </Link>
@@ -138,13 +136,11 @@ const MobileNavebar = () => {
         <Link to="message/">
           <div>
             <i className="bi bi-messenger"></i>
-            {/* <img src={sms} style={{width:"28px"}} alt="" /> */}
           </div>
         </Link>
 
         <Link to="reels">
           <div>
-            {/* <img src={video} className="mobile-nav-icons" alt="" /> */}
             <MdMovieFilter className="mobile-nav-bottom-icon" />
           </div>
         </Link>
@@ -157,8 +153,7 @@ const MobileNavebar = () => {
             />
           </div>
         </Link>
-        {/* <AiFillHeart className='mobile-nav-bottom-icon' /> */}
-      </div>
+      </div> */}
     </>
   );
 };

@@ -17,6 +17,7 @@ import photo from "./../Image/img/photo.png";
 import { LinearProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { BiSend, BiSolidSend } from 'react-icons/bi';
 
 const Feed = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
@@ -609,7 +610,7 @@ const Feed = ({ post }) => {
                         <div className='feed-right-commnet-div'>
                             <input
                                 type="text"
-                                placeholder='Comment'
+                                placeholder='write a Comment'
                                 value={getComment}
                                 onChange={(e) => setComment(e.target.value)}
                                 className='feed-right-comment-input'
@@ -623,7 +624,13 @@ const Feed = ({ post }) => {
                                 }}
                             />
                             <div>
-                                <IoMdSend className='feed-right-comment-icon' onClick={(e) => HandleComment(e, post.id)} />
+                                {getComment != "" ?
+
+                                    <BiSolidSend className='feed-right-comment-icon' color='#0080FF' onClick={(e) => HandleComment(e, post.id)} />
+                                    :
+                                    <BiSend className='feed-right-comment-icon' color='#84878a' onClick={(e) => HandleComment(e, post.id)} />
+
+                                }
                             </div>
                         </div>
                     }

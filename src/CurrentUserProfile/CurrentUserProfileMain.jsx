@@ -11,21 +11,9 @@ import UserProfileThree from "./../UserProfile/Component/UserProfileThree";
 import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { AuthContext } from '../AuthContaxt';
-import { useNavigate } from 'react-router-dom';
-import { HiOutlineArrowSmLeft } from 'react-icons/hi';
+import LeftArro from '../LeftArro';
 
 
-const LeftArro = () => {
-    const nav = useNavigate();
-    const goBack = () => {
-        nav(-1);
-    }
-    return (
-        <div className='back-btn-div' onClick={goBack}>
-            <HiOutlineArrowSmLeft fontSize={"25px"} />
-        </div>
-    )
-}
 
 const CurrentUserProfileMain = () => {
 

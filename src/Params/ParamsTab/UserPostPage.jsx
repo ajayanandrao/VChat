@@ -8,6 +8,7 @@ import ReactTimeago from 'react-timeago';
 import { db } from '../../Firebase';
 import { AuthContext } from '../../AuthContaxt';
 import { IoMdSend } from 'react-icons/io';
+import { BiSend, BiSolidSend } from 'react-icons/bi';
 
 const UserPostPage = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
@@ -318,7 +319,13 @@ const UserPostPage = ({ post }) => {
                                 }}
                             />
                             <div>
-                                <IoMdSend className='feed-right-comment-icon' onClick={(e) => HandleComment(e, post.id)} />
+                                {getComment != "" ?
+
+                                    <BiSolidSend className='feed-right-comment-icon' color='#0080FF' onClick={(e) => HandleComment(e, post.id)} />
+                                    :
+                                    <BiSend className='feed-right-comment-icon' color='#84878a' onClick={(e) => HandleComment(e, post.id)} />
+
+                                }
                             </div>
                         </div>
                     }

@@ -9,19 +9,9 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 } from 'uuid';
 import { HiOutlineArrowSmLeft } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
+import LeftArro from '../LeftArro';
 
-const LeftArro = () => {
 
-    const nav = useNavigate();
-    const goBack = () => {
-        nav(-1);
-    }
-    return (
-        <div className='back-btn-div' onClick={goBack}>
-            <HiOutlineArrowSmLeft fontSize={"25px"} />
-        </div>
-    )
-}
 
 const Wedding = () => {
     const { currentUser } = useContext(AuthContext);

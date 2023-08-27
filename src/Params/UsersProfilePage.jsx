@@ -39,7 +39,7 @@ const UsersProfilePage = () => {
     if (!user) {
         return <>
             <div className='skeleton-center'>
-                <CircularProgress className='circularprogress' /> <span className='loadinga'> Loading... </span>
+                <CircularProgress className='circularprogress' />
             </div>
         </>;
     }

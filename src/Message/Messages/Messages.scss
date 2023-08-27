@@ -20,7 +20,7 @@
         // background: red;
         box-sizing: border-box;
         overflow-y: scroll;
-        padding: 1rem 0.5rem;
+        padding: 0 0.5rem;
     }
 }
 
@@ -137,20 +137,29 @@
 
 .message-center-container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column-reverse;
+    /* Reverse the order of messages */
+    align-items: flex-end;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    // background: blue;
+    padding-top: 1rem ;
+    padding-bottom: 2.3rem;
 
     .message-item {
         display: flex;
         align-items: flex-end;
-        margin-bottom: 12px;
+        margin-top: 10px;
+        /* Use margin-top instead of margin-bottom */
         position: relative;
 
         &.sender {
             justify-content: flex-end;
 
             .message-content {
-                background: #ede9fe;
+                // background: #ede9fe;
+                background: #f0f2f5;
                 color: #18181b;
 
             }
@@ -175,7 +184,6 @@
             border-radius: 20px;
             max-width: 100%;
 
-            // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
             &.message-sender {
                 // background-color: #1877f2;
                 color: #fff;

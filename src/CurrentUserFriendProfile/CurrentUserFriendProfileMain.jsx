@@ -8,21 +8,11 @@ import ProfilePageTwo from '../Params/UserProfilePages/ProfilePageTwo';
 import ProfilePageThree from '../Params/UserProfilePages/ProfilePageThree';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
-import { useNavigate, useParams } from 'react-router-dom';
-import { HiOutlineArrowSmLeft } from 'react-icons/hi';
+import {useParams } from 'react-router-dom';
+import LeftArro from '../LeftArro';
 
 
-const LeftArro = () => {
-    const nav = useNavigate();
-    const goBack = () => {
-        nav(-1);
-    }
-    return (
-        <div className='back-btn-div' onClick={goBack}>
-            <HiOutlineArrowSmLeft fontSize={"25px"} />
-        </div>
-    )
-}
+
 
 const CurrentUserFriendProfileMain = () => {
 
@@ -50,7 +40,7 @@ const CurrentUserFriendProfileMain = () => {
     if (!user) {
         return <>
             <div className='skeleton-center'>
-                <CircularProgress className='circularprogress' /> <span className='loadinga'> Loading... </span>
+                <CircularProgress className='circularprogress' />
             </div>
         </>;
     }

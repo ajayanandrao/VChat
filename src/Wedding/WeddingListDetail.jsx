@@ -4,11 +4,13 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { db } from '../Firebase';
 import "./WeddingListDetail.scss";
-import { HiOutlineArrowSmLeft } from 'react-icons/hi'
+import LeftArro from '../LeftArro';
+import { motion } from 'framer-motion';
 
 const WeddingListDetail = () => {
     const { id } = useParams();
     const [data, Data] = useState(null);
+    const [photo, setPhoto] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -36,30 +38,49 @@ const WeddingListDetail = () => {
     if (!data) {
         return <>
             <div className='skeleton-center'>
-                <CircularProgress className='circularprogress' /> <span className='loadinga'> Loading... </span>
+                <CircularProgress className='circularprogress' />
             </div >
         </>;
     }
 
 
+    const HandleViewPhoto = () => {
+        setPhoto(!photo);
+    };
+
+
     return (
         <>
-            <div style={{ padding: "1rem", position: "fixed", top: "50px" }}>
-                <div className="btn-close-div" onClick={goBack}>
-                    <HiOutlineArrowSmLeft />
-                </div>
-            </div>
-            <div className="weddinglistD-photo-div">
-                <div>
-                    <img src={data.photoOne} className='weddinglistD-photo' alt="" />
-                </div>
-                <h2 style={{ textTransform: "capitalize" }}>{data.first} {data.middel} {data.last}</h2>
-                <div className='d-flex' style={{ fontSize: "18px", fontWeight: "600" }}>
-                    {data.date}
-                    <span className='mx-1'>{data.month}</span>
-                    {data.years}
-                </div>
+            <LeftArro />
 
+            {photo &&
+                <div className='max-photo-view' onClick={HandleViewPhoto}>
+                    <img src={data.photoOne} className='max-weddinglistD-photo' alt="" />
+                </div>
+            }
+            <div className="weddinglistD-photo-div" style={{ backgroundImage: `url(${data.photoOne})` }}>
+                <div className="blur-div">
+                    <motion.div
+                        transition={{ duration: 1.5 }}
+                        initial={{ opacity: 0, y: -60 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        onClick={HandleViewPhoto}>
+                        <img src={data.photoOne} className='weddinglistD-photo' alt="" />
+                    </motion.div>
+
+                    <motion.div
+                        transition={{ duration: 1.5 }}
+                        initial={{ opacity: 0, y: 60 }}
+                        animate={{ opacity: 1, y: 0 }}
+                    >
+                        <h2 style={{ textTransform: "capitalize" }}>{data.first} {data.middel} {data.last}</h2>
+                        <div className='d-flex' style={{ fontSize: "18px", fontWeight: "600" }}>
+                            {data.date}
+                            <span className='mx-1'>{data.month}</span>
+                            {data.years}
+                        </div>
+                    </motion.div>
+                </div>
             </div>
             <div className='weddinglist-mainu-wapper'>
 

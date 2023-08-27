@@ -31,6 +31,8 @@ import CurrentUserProfileMain from './CurrentUserProfile/CurrentUserProfileMain'
 import OtherUserProfileMain from './OtherUserProfile/OtherUserProfileMain';
 import CurrentUserFriendProfileMain from './CurrentUserFriendProfile/CurrentUserFriendProfileMain';
 import { useEffect, useState } from 'react';
+import MobileNavbarBottom from './MobileNavbar/MobileNavbarBottom';
+import { auth } from './Firebase';
 
 function App() {
 
@@ -80,58 +82,90 @@ function App() {
     };
   }, [prevScrollPos]);
 
+
+  const [loading, setLoading] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Simulating an asynchronous operation with setTimeout
+        setTimeout(() => {
+          setLoading(true);
+        });
+      } else {
+        setTimeout(() => {
+          setLoading(false);
+        });
+      }
+    });
+
+    return () => {
+      unsubscribe(); // Cleanup the subscription when the component unmounts
+    };
+  }, []);
+
   return (
     <>
       <Router basename='/VChat'>
         {/* <div className="mobile">
           <div className={`mobile-navbar ${showNavbar ? '' : 'hidden'}`}>  </div>
         </div> */}
-        <div className="mobile">
-          {showNavbar ?
-            <MobileNavebar />
-            :
-            ""
-          }
-        </div>
-        <ScrollToTop />
+
+        {loading ?
+          (<> <div className="mobile">
+            {showNavbar ?
+              <MobileNavebar />
+              :
+              ""
+            }
+          </div>
+            <MobileNavbarBottom />
+            <ScrollToTop /> </>)
+          :
+          ""
+        }
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route path="signUp" element={<SignUp />} />
 
-          <Route path="home" element={<Home />} />
-          <Route path="post" element={<Post />} />
+          {loading ?
 
-          <Route path='notification' element={<NotificationProps />} />
-          <Route path='notification/:id' element={<NotificationPara />} />
+            (<> <Route path="home" element={<Home />} />
+              <Route path="post" element={<Post />} />
 
-          <Route exact path="changePassword" element={<ChangePassword />} />
-          <Route exact path="forgotPassword" element={<ForgotPassword />} />
+              <Route path='notification' element={<NotificationProps />} />
+              <Route path='notification/:id' element={<NotificationPara />} />
 
-          <Route path="option" element={<Option />} />
-          <Route path="setting" element={<Setting />} />
-          <Route path="policy" element={<Policy />} />
-          <Route path="search" element={<SearchUser />} />
-          <Route path="message" element={<Message />} />
-          <Route path="find_friend" element={<PeopleProps />} />
+              <Route exact path="changePassword" element={<ChangePassword />} />
+              <Route exact path="forgotPassword" element={<ForgotPassword />} />
 
-          <Route path="Wedding" element={<WeddingMain />} />
-          <Route path="WeddingList" element={<WeddingList />} />
-          <Route path="AddWedding" element={<Wedding />} />
-          <Route path="WeddingList/:id" element={<WeddingListDetail />} />
+              <Route path="option" element={<Option />} />
+              <Route path="setting" element={<Setting />} />
+              <Route path="policy" element={<Policy />} />
+              <Route path="search" element={<SearchUser />} />
+              <Route path="message" element={<Message />} />
+              <Route path="find_friend" element={<PeopleProps />} />
 
-          <Route path='users' element={<Users />} />
+              <Route path="Wedding" element={<WeddingMain />} />
+              <Route path="WeddingList" element={<WeddingList />} />
+              <Route path="AddWedding" element={<Wedding />} />
+              <Route path="WeddingList/:id" element={<WeddingListDetail />} />
 
-          <Route path='users/:id' element={<OtherUserProfileMain />} />
-          <Route path='users/:id/message' element={<Messages />} />
+              <Route path='users' element={<Users />} />
 
-          <Route path='users/:id/:userId/profile' element={<CurrentUserFriendProfileMain />} />
+              <Route path='users/:id' element={<OtherUserProfileMain />} />
+              <Route path='users/:id/message' element={<Messages />} />
 
-          <Route path='profile' element={<CurrentUserProfileMain />} />
+              <Route path='users/:id/:userId/profile' element={<CurrentUserFriendProfileMain />} />
 
-          <Route path='reels' element={<ReelsProps />} />/
-          <Route path='notification' element={<NotificationProps />} />
-          <Route path='notification/:id' element={<NotificationPara />} />
+              <Route path='profile' element={<CurrentUserProfileMain />} />
 
+              <Route path='reels' element={<ReelsProps />} /> /
+              <Route path='notification' element={<NotificationProps />} />
+              <Route path='notification/:id' element={<NotificationPara />} /></>)
+            :
+            null
+          }
         </Routes>
       </Router>
     </>

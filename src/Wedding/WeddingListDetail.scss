@@ -1,15 +1,47 @@
+@import "./../Styles/Variable";
+
+.max-photo-view {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    backdrop-filter: blur(15px);
+
+    .max-weddinglistD-photo {
+        width: 100%;
+        height: 100%;
+        // max-height: 500px;
+        object-fit: contain;
+        object-position: center;
+    }
+}
+
+
 .weddinglistD-photo-div {
     width: 100%;
-    height: 350px;
+    height: 500px;
     display: flex;
     justify-content: center;
     background-size: cover;
     background-repeat: no-repeat;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 30px 0;
+    // margin: 30px 0;
+
+    .blur-div {
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .btn-close-div {
@@ -22,14 +54,16 @@
     justify-content: center;
     align-items: center;
     font-size: 18px;
+
 }
 
 .weddinglistD-photo {
     width: 210px;
-    height: 300px;
+    height: 350px;
     object-fit: cover;
     object-position: center;
     border-radius: 0.5rem;
+    box-shadow: $border-input;
 }
 
 .weddinglistD-name-div {

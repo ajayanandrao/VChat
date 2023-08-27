@@ -63,9 +63,10 @@
                 border-radius: 30px;
                 padding-inline-start: 1rem;
                 box-shadow: $border-input;
-
+                outline: none;
                 &:focus {
                     box-shadow: none;
+                    box-shadow: $border-input;
                 }
             }
 
