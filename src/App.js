@@ -33,6 +33,7 @@ import CurrentUserFriendProfileMain from './CurrentUserFriendProfile/CurrentUser
 import { useEffect, useState } from 'react';
 import MobileNavbarBottom from './MobileNavbar/MobileNavbarBottom';
 import { auth } from './Firebase';
+import BottomNav from './MobileNavbar/BottomNav';
 
 function App() {
 
@@ -119,7 +120,8 @@ function App() {
               ""
             }
           </div>
-            <MobileNavbarBottom />
+            {/* <MobileNavbarBottom /> */}
+            <BottomNav />
             <ScrollToTop /> </>)
           :
           ""

@@ -246,10 +246,34 @@ const Message = () => {
                         <div className="Message-user-List">
 
                             <div className="tab-block">
-                                <button className="w3-bar-item w3-button" onClick={() => openCity('Message')}>Message</button>
-                                <button className="w3-bar-item w3-button" onClick={() => openCity('Online')}>Online</button>
+                                <button className="w3-bar-item w3-button" onClick={() => openCity('Message')}>
+                                    Message
+                                </button>
 
-                                <button className="w3-bar-item w3-button" onClick={() => openCity('Request')}>Request</button >
+                                <button className="w3-bar-item w3-button" onClick={() => openCity('Online')}>
+                                    Online
+                                </button>
+
+
+                                <div className='request-tab-relative-div'>
+                                    <button className="w3-bar-item w3-button" onClick={() => openCity('Request')}>
+
+                                        <div className='request-tab-absolute-div'>
+                                            {friendRequests.map((item) => {
+                                                if (item.receiverUid == currentUser.uid) {
+                                                    return (
+                                                        <>
+                                                            <div className="request-animated-circle">
+                                                            </div>
+                                                        </>
+                                                    )
+                                                }
+                                            })}
+                                        </div>
+                                        Request
+
+                                    </button >
+                                </div>
 
                             </div >
 
@@ -288,7 +312,7 @@ const Message = () => {
 
                             <div id="Online" className=" w3-animate-bottom city" style={{ display: "none" }}>
 
-                                {onlineUsers.length >= 0 ? (
+                                {onlineUsers.length > 0 ? (
                                     onlineUsers.map((online) => {
                                         const isFriendOnline = friendsList.some((friend) => friend.userId === online.uid);
                                         if (isFriendOnline) {
@@ -318,6 +342,8 @@ const Message = () => {
 
                             </div>
 
+
+
                             <div id="Request" className=" w3-animate-right city" style={{ display: "none" }}>
 
                                 {friendRequests.length === 0 ? (
@@ -335,7 +361,7 @@ const Message = () => {
                                                         <div className='request-inne-container'>
                                                             <div className='request-name'>{item.senderName}</div>
 
-                                                            <div className="request-btn-div"    >
+                                                            <div className="request-btn-div d-flex">
                                                                 <div className="btn-success-custom"
                                                                     onClick={() => acceptFriendRequest
                                                                         (item.id, item.senderId, item.receiverUid, item.senderName, item.senderPhotoUrl,

@@ -68,7 +68,7 @@ const ProfileFriends = ({ user }) => {
                                                 return (
                                                     <div key={friend.userId} >
 
-                                                        <Link style={{ textDecoration: "none" }} to={`/users/${friend.userId}/${friend.id}/profile/`}>
+                                                        <Link style={{ textDecoration: "none" }} to={`/users/${friend.userId}`}>
                                                             <div>
                                                                 <img src={item.PhotoUrl} className='friend-img' alt="" />
                                                                 <div className='friend-name'>{item.name}</div>

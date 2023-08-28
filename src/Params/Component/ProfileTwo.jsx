@@ -3,6 +3,7 @@ import "./ProfileTwo.scss";
 import { addDoc, collection, deleteDoc, getDocs, onSnapshot, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../../Firebase';
 import { AuthContext } from '../../AuthContaxt';
+import { Link } from 'react-router-dom';
 
 const ProfileTwo = ({ user }) => {
     const { currentUser } = useContext(AuthContext);
@@ -159,7 +160,9 @@ const ProfileTwo = ({ user }) => {
                                                     <div className="friend-request-accepted">Friend Request Accepted</div>
                                                 ) : isFriend(item.uid) ? (
                                                     // <div className="friend-request-accepted">Friend</div>
-                                                    <button className='btn btn-info btn-sm'>Message</button>
+                                                    <Link to={`/users/${item.uid}/message`}>
+                                                        <button className='btn btn-info btn-sm'>Message</button>
+                                                    </Link>
                                                 ) : dataFetched ? (
                                                     <div
                                                         id={`add-${item.id}`}

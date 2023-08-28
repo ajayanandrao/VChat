@@ -44,7 +44,7 @@ const ProfilePageTwo = ({ user, userId }) => {
             console.error('Error deleting friend:', error);
         }
 
-        const RequestRef = doc(db, 'NewFriendRequests',  currentUser.uid + user.uid);
+        const RequestRef = doc(db, 'NewFriendRequests', currentUser.uid + user.uid);
 
         try {
             await deleteDoc(RequestRef);

@@ -126,7 +126,8 @@ const Feed = ({ post }) => {
                 id: post.id,
                 img: post.img,
                 photoUrl: currentUser.photoURL,
-                lik: "like",
+                like: "like",
+                isUnRead: true
             });
 
             // element.style.color = '#FF0040';

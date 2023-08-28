@@ -6,6 +6,8 @@ import { MdClose } from 'react-icons/md';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { db } from '../../Firebase';
 import { collection, doc, getDocs, onSnapshot, query, updateDoc, where, writeBatch } from 'firebase/firestore';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 const ProfileTwo = ({ user }) => {
@@ -35,18 +37,15 @@ const ProfileTwo = ({ user }) => {
         setUserDataId(uidArray);
     }, [api]);
 
-    // api.forEach((userData) => {
-    //     console.log(userData.uid)
-    //     setUserDataId(userData.uid)
-    // });
-    // }, [api]);
-
 
     const [overlay, setOverlay] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [newDisplayName, setNewDisplayName] = useState('');
+
 
     const handleDisplayNameUpdate = async () => {
         setNewDisplayName('');
+        setLoading(true);
         if (newDisplayName && currentUser) {
             try {
                 const auth = getAuth(); // Get the authentication instance
@@ -84,9 +83,12 @@ const ProfileTwo = ({ user }) => {
                 await batch.commit(); // Corrected method name
 
                 setNewDisplayName('');
+                setLoading(false);
             } catch (error) {
                 // Handle error here
                 console.error("Error updating display name:", error);
+                console.log(error.message);
+                setLoading(false);
             }
         }
         setOverlay(false);
@@ -120,9 +122,16 @@ const ProfileTwo = ({ user }) => {
                                 onChange={(e) => setNewDisplayName(e.target.value)}
                                 onKeyDown={handleKeyDown} // Call handleKeyDown on key down
                             />
+
+
                             <div className="btn-success-custom" onClick={handleDisplayNameUpdate}>
-                                Save
+                                {loading ? (<>
+                                    <div class="spinner-border" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </>) : "Save"}
                             </div>
+
                         </div>
                     </div>
                 </div>

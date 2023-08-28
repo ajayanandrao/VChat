@@ -1,6 +1,8 @@
 @import "./../Mixin_New.scss";
 @import "./../Variable.scss";
 
+
+
 // .Message-container {
 //     position: fixed;
 //     // display: none;
@@ -293,8 +295,7 @@
 
             .request-container {
                 display: flex;
-                align-items: center;
-
+                // align-items: center;
                 .request-img {
                     width: 40px;
                     height: 40px;
@@ -333,6 +334,45 @@
                 display: flex;
                 justify-content: space-between;
                 margin-bottom: 1rem;
+                position: relative;
+
+                .request-tab-relative-div {
+                    // background-color: blue;
+
+                    position: relative;
+
+                    .request-tab-absolute-div {
+                        position: absolute;
+                        top: 0;
+                        left: -3px;
+
+                        .request-animated-circle {
+                            width: 22px;
+                            height: 22px;
+                            border-radius: 50%;
+                            animation: growRequet 1s infinite;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        @keyframes growRequet {
+                            0% {
+                                transform: scale(0.5);
+                                background-color: #FF0040;
+                            }
+
+                            50% {
+                                transform: scale(0.8);
+                            }
+
+                            100% {
+                                transform: scale(0.5);
+
+                            }
+                        }
+                    }
+                }
 
                 .w3-button {
                     background: none;

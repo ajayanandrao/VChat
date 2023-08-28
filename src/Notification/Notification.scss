@@ -59,6 +59,47 @@
             box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
         }
     }
+
+
+    // Request notifications ==============
+
+
+    .request-notifiacation-profile-div {
+        display: flex;
+        // align-items: center;
+        background-color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+
+        .btn-success-custom,
+        .btn-D-custom {
+            box-shadow: none !important;
+        }
+
+        .request-notification-image {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+
+
+        }
+
+        .request-notification-inner-div {
+            margin-left: 1rem;
+
+            .request-notifiaction-name {
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+
+
+        }
+
+    }
+
 }
 
 .noti-wrapper {

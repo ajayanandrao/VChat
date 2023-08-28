@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, serverTimestamp, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where, writeBatch } from 'firebase/firestore';
 import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { auth, db, storage } from '../../Firebase';
@@ -6,7 +6,7 @@ import { CircularProgress } from '@mui/material';
 import "./Messages.scss";
 import { MdClose, MdDelete, MdOutlineReply, MdSend } from 'react-icons/md';
 import { FaThumbsUp } from 'react-icons/fa';
-import { BsFillCameraFill } from 'react-icons/bs';
+import { BsFillCameraFill, BsThreeDots } from 'react-icons/bs';
 import { AuthContext } from '../../AuthContaxt';
 import { IoMdClose } from "react-icons/io"
 import { BiSend, BiSolidSend } from "react-icons/bi"
@@ -338,7 +338,148 @@ const Messages = () => {
         await deleteDoc(messageRef);
     };
 
+    // const deleteMessage = async (messageId) => {
+    //     try {
+    //         const messageRef = doc(db, 'messages', messageId);
 
+    //         // Mark the message as deleted by the sender
+    //         await updateDoc(messageRef, { isDeletedBySender: true, deletedBySender: currentUser.uid });
+
+    //         console.log("Message deleted successfully!");
+    //     } catch (error) {
+    //         console.error("Error deleting message:", error);
+    //     }
+    // };
+
+    const deleteFromMessageList = async () => {
+        const CurrentFriendRef = collection(db, `allFriends/${currentUser && currentUser.uid}/Message`);
+        const Query = query(CurrentFriendRef, where('userId', '==', user && user.uid));
+        // console.log(user);
+        // console.log(userId);
+        console.log(user.uid);
+        console.log(currentUser.uid);
+        try {
+            const querySnapshot = await getDocs(Query);
+
+            querySnapshot.forEach(async (doc) => {
+                // console.log('Found user ID:', doc.data().userId);
+
+                try {
+                    await deleteDoc(doc.ref); // Use doc.ref to get the document reference
+                    console.log('Current User Message Deleted.');
+                } catch (deleteError) {
+                    console.error('Error deleting friend:', deleteError);
+                }
+                if (querySnapshot.size === 0) {
+                    console.log('Friend not found');
+                }
+
+            });
+        } catch (error) {
+            console.error('Error getting documents:', error);
+        }
+
+        // ==========================================================
+
+        const friendsRef = collection(db, `allFriends/${user && user.uid}/Message`);
+        const friendsQuery = query(friendsRef, where('userId', '==', currentUser.uid));
+
+        try {
+            const querySnapshot = await getDocs(friendsQuery);
+
+            querySnapshot.forEach(async (doc) => {
+                // console.log('Found user ID:', doc.data().userId);
+
+                try {
+                    await deleteDoc(doc.ref); // Use doc.ref to get the document reference
+                    console.log('User Message Deleted.');
+                } catch (deleteError) {
+                    console.error('Error deleting friend:', deleteError);
+                }
+                if (querySnapshot.size === 0) {
+                    console.log('Friend not found');
+                }
+
+            });
+        } catch (error) {
+            console.error('Error getting documents:', error);
+        }
+    };
+
+    const deleteMessagesForUser = async (userId) => {
+        try {
+            const messagesRef = collection(db, 'messages');
+            const userMessagesQuery = query(messagesRef,
+                where('sender', 'in', [currentUser.uid, user.uid]),
+                where('recipient', 'in', [currentUser.uid, user.uid]));
+            const userMessagesSnapshot = await getDocs(userMessagesQuery);
+
+            const batch = writeBatch(db);
+
+            userMessagesSnapshot.forEach((messageDoc) => {
+                batch.delete(messageDoc.ref);
+            });
+
+            await batch.commit();
+            console.log("User's messages deleted successfully!");
+        } catch (error) {
+            console.error("Error deleting user's messages:", error);
+        }
+
+
+
+    };
+
+    const deleteMessagesForCurrentUser = async (userId) => {
+        try {
+            const messagesRef = collection(db, 'messages');
+            const userMessagesQuery = query(
+                messagesRef,
+                where('sender', 'in', [currentUser.uid, user.uid]),
+                where('recipient', 'in', [currentUser.uid, user.uid])
+            );
+            const userMessagesSnapshot = await getDocs(userMessagesQuery);
+
+            const batch = writeBatch(db);
+
+            userMessagesSnapshot.forEach((messageDoc) => {
+                const messageRef = doc(db, 'messages', messageDoc.id);
+                batch.update(messageRef, {
+                    isDeletedBySender: true,
+                    deletedBySender: currentUser.uid
+                });
+            });
+
+            await batch.commit();
+            console.log("User's messages marked as deleted by sender!");
+        } catch (error) {
+            console.error("Error marking user's messages as deleted by sender:", error);
+        }
+    };
+
+
+    const [showMessageOption, setShowMessageOption] = useState(false);
+    const HandleShowMessageOption = () => {
+        setShowMessageOption(!showMessageOption);
+    }
+
+    const [areYouSure, setAreYouSure] = useState(false);
+    const HandleAreyouSure = () => {
+        setAreYouSure(!areYouSure);
+    }
+    const [areYouSureForCurrentUser, setAreYouSureForCurrentUser] = useState(false);
+    const HandleAreyouSureForCurrentUser = () => {
+        setAreYouSureForCurrentUser(!areYouSureForCurrentUser);
+    }
+
+
+
+    // Usage example:
+    // Call this function when you want to delete all messages for a specific user
+    // deleteMessagesForUser(userId);
+
+
+    // Render the UI component
 
     const sendReply = async (messageId) => {
         const selectedMessage = messages.find((message) => message.id === messageId);
@@ -475,7 +616,6 @@ const Messages = () => {
         setDeleteMediaId(null);
     };
 
-
     const [viewReplyImgState, setViewReplyImgState] = useState(false);
     const [replyImgid, setReplyImgid] = useState("");
     const [viewReplyImgUrl, setViewReplyImgUrl] = useState(null);
@@ -503,7 +643,39 @@ const Messages = () => {
 
 
 
+                {/* Delete Message Permantly ------------------------------------- */}
+
+                {areYouSure &&
+                    <div className="are-you-sure-div">
+                        <div className="are-you-sure-inner-div">
+                            <p>Are you sure?</p>
+                            <p>This will Delete messagess permanently for avery one</p>
+                            <div className="are-you-sure-btn-div">
+                                <button className='btn-D-custom' onClick={() => { deleteMessagesForUser(); deleteFromMessageList(); HandleAreyouSure(); HandleShowMessageOption(); }}>Delete</button>
+                                <button className='btn-info-custom'
+                                    onClick={() => { HandleAreyouSure(); HandleShowMessageOption(); }}
+                                    style={{ background: "#FAFAFA", color: "#0080FF" }}>Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                {areYouSureForCurrentUser &&
+                    <div className="are-you-sure-div">
+                        <div className="are-you-sure-inner-div">
+                            <p>Are you sure?</p>
+                            <p>This will gonna Clear your message Box</p>
+                            <div className="are-you-sure-btn-div">
+                                <button className='btn-D-custom' onClick={() => { deleteMessagesForCurrentUser(); HandleAreyouSureForCurrentUser(); HandleShowMessageOption(); }}>Delete</button>
+                                <button className='btn-info-custom'
+                                    onClick={() => { HandleAreyouSureForCurrentUser(); HandleShowMessageOption(); }}
+                                    style={{ background: "#FAFAFA", color: "#0080FF" }}>Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
                 {/* Media View ------------------------------------- */}
+
 
                 {/* Message Photo View ------------------------------------- */}
 
@@ -667,6 +839,30 @@ const Messages = () => {
                     <div className="message-profile-div">
                         <img className='message-profile-img' src={user.userPhoto} alt="" />
                         <span className='message-profile-name'>{user.name}</span>
+                        {/* <button className='btn btn-sm btn-danger ms-3' onClick={deleteMessagesForUser}>Clear Chat</button> */}
+                    </div>
+                    <div>
+                        {showMessageOption ?
+                            <div className="top-message-option-btn"
+                                style={{ background: "#f0f2f5", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+                                onClick={HandleShowMessageOption}>
+                                <BsThreeDots />
+                            </div>
+                            :
+                            <div className="top-message-option-btn" onClick={HandleShowMessageOption}>
+                                <BsThreeDots />
+                            </div>
+
+                        }
+                        {showMessageOption ?
+                            <div className="show-message-option">
+                                <p onClick={HandleAreyouSure}>Delete all Chat</p>
+                                <p onClick={HandleAreyouSureForCurrentUser}>Delete message from you</p>
+                            </div>
+                            :
+                            null
+                        }
+
                     </div>
                 </div>
                 {/* Center div ------------------------------------- */}
@@ -681,6 +877,9 @@ const Messages = () => {
                             {/* width 100% for message layout */}
 
                             {messages.map((message, index) => {
+                                const isSender = message.sender === currentUser.uid;
+                                const isDeletedBySender = message.isDeletedBySender || false;
+                                const deletedBySenderUid = message.deletedBySender === currentUser.uid;
                                 if (
                                     (message.sender === currentUser.uid && message.recipient === user.uid) ||
                                     (message.sender === user.uid && message.recipient === currentUser.uid)
@@ -696,7 +895,6 @@ const Messages = () => {
                                         <>
                                             <div
                                                 key={message.id}
-
                                                 className={`message-item ${messageClass}`}
                                             >
                                                 {isSender && hoveredMessageId === message.id && (
@@ -714,122 +912,265 @@ const Messages = () => {
 
                                                 <div
                                                     className={`message-bubble ${isSender ? 'message-sender' : 'message-recipient'} ${hasImage || hasVideo || hasImageLike ? 'has-image' : '' /* Add 'has-image' class when message has an image */
-                                                        }`}
-                                                >
-                                                    {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" /> </div>}
+                                                        }`}>
 
-                                                    <div>
-                                                        {hasImageLike ?
-                                                            ""
-                                                            :
-                                                            <>
-                                                                {isSender && hoveredMessageId === message.id && (
-                                                                    <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}</div>
-                                                                )}
-                                                            </>
-                                                        }
 
-                                                        {/* {message.reply && <div className="message-reply">{message.reply}</div>} */}
 
-                                                        {message.reply && (
-                                                            <div className="message-reply">
-                                                                {(message.reply.startsWith("Reply to: ") || message.reply.includes("Reply to video: ")) ? (
-                                                                    <>
-                                                                        <div style={{
-                                                                            display: "flex",
-                                                                            justifyContent: "center",
-                                                                            width: "100%", borderRadius: "0.5rem"
-                                                                        }}
-                                                                            onClick={() => HandleShowReplyVdieo(message.id, message.reply, message.timestamp)}
-                                                                        >
-                                                                            {message.reply.includes("Reply to video: ") && (
+                                                    {isDeletedBySender ?
 
-                                                                                <div className="message-video-container">
+                                                        (<>
+                                                            {deletedBySenderUid ?
+                                                                (
+                                                                    null
 
-                                                                                    <video ref={videoRef} className="video messageVideo">
-                                                                                        <source src={message.reply.split("Reply to video: ")[1]} />
-                                                                                    </video>
-                                                                                    <div className="message-play-button">
-                                                                                        <div className="message-play-btn-div">
-                                                                                            <i className="bi bi-play-fill message-play-btn"></i>
+                                                                )
+                                                                :
+
+                                                                (<>
+                                                                    (<>
+
+                                                                        {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" /> </div>}
+
+                                                                        <div>
+                                                                            {hasImageLike ?
+                                                                                ""
+                                                                                :
+                                                                                <>
+                                                                                    {isSender && hoveredMessageId === message.id && (
+                                                                                        <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}</div>
+                                                                                    )}
+                                                                                </>
+                                                                            }
+
+                                                                            {/* {message.reply && <div className="message-reply">{message.reply}</div>} */}
+
+                                                                            {message.reply && (
+                                                                                <div className="message-reply">
+                                                                                    {(message.reply.startsWith("Reply to: ") || message.reply.includes("Reply to video: ")) ? (
+                                                                                        <>
+                                                                                            <div style={{
+                                                                                                display: "flex",
+                                                                                                justifyContent: "center",
+                                                                                                width: "100%", borderRadius: "0.5rem"
+                                                                                            }}
+                                                                                                onClick={() => HandleShowReplyVdieo(message.id, message.reply, message.timestamp)}
+                                                                                            >
+                                                                                                {message.reply.includes("Reply to video: ") && (
+
+                                                                                                    <div className="message-video-container">
+
+                                                                                                        <video ref={videoRef} className="video messageVideo">
+                                                                                                            <source src={message.reply.split("Reply to video: ")[1]} />
+                                                                                                        </video>
+                                                                                                        <div className="message-play-button">
+                                                                                                            <div className="message-play-btn-div">
+                                                                                                                <i className="bi bi-play-fill message-play-btn"></i>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                )}
+
+                                                                                                {message.reply.includes("Reply to: ") && (
+                                                                                                    <img src={message.reply.split("Reply to: ")[1]}
+                                                                                                        alt="Replied Image"
+                                                                                                        style={{
+                                                                                                            width: "100px", height: "150px", objectFit: "cover",
+                                                                                                            objectPosition: "center",
+                                                                                                            borderRadius: "0.5rem"
+                                                                                                        }}
+                                                                                                        className="replied-image"
+                                                                                                    />
+                                                                                                )}
+                                                                                            </div>
+                                                                                        </>
+                                                                                    ) : (
+                                                                                        <div style={{ display: "inline-flex", lineHeight: "0px" }}>
+                                                                                            <p >{message.reply}</p>
                                                                                         </div>
-                                                                                    </div>
+                                                                                    )}
                                                                                 </div>
                                                                             )}
 
-                                                                            {message.reply.includes("Reply to: ") && (
-                                                                                <img src={message.reply.split("Reply to: ")[1]}
-                                                                                    alt="Replied Image"
-                                                                                    style={{
-                                                                                        width: "100px", height: "150px", objectFit: "cover",
-                                                                                        objectPosition: "center",
-                                                                                        borderRadius: "0.5rem"
-                                                                                    }}
-                                                                                    className="replied-image"
-                                                                                />
+
+
+                                                                            {!isSender && hoveredMessageId === message.id && (
+                                                                                <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}</div>
                                                                             )}
+
+
+                                                                            {hasImage &&
+                                                                                <div
+                                                                                    onMouseEnter={() => showReplyButton(message.id)}
+                                                                                    onMouseLeave={hideReplyButton}>
+                                                                                    <img onClick={() => ViewMessageImg(message.id, message.imageUrl, message && message.timestamp)} src={message.imageUrl}
+                                                                                        className='messageImg' alt="Message" />
+                                                                                </div>
+                                                                            }
+
+                                                                            {hasVideo &&
+                                                                                <div onClick={() => handleVewVideo(message.id, message.videoUrl, message && message.timestamp)}
+                                                                                    onMouseEnter={() => showReplyButton(message.id)}
+                                                                                    onMouseLeave={hideReplyButton}
+                                                                                >
+                                                                                    <div className="message-video-container" >
+
+                                                                                        <video ref={videoRef} className="video messageVideo">
+                                                                                            <source src={message.videoUrl} />
+                                                                                        </video>
+                                                                                        <div className="message-play-button">
+                                                                                            <div className="message-play-btn-div">
+                                                                                                <i className="bi bi-play-fill message-play-btn"></i>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            }
+
+                                                                            {hasImageLike &&
+                                                                                <div className='messageImgLike-div' onMouseEnter={() => showReplyButton(message.id)}
+                                                                                    onMouseLeave={hideReplyButton}>
+                                                                                    <img src={message.imageUrlLike}
+                                                                                        className='messageImgLike' alt="Message" />
+                                                                                </div>
+                                                                            }
+
+
+
+                                                                            {message.message && <div className="message-content"
+                                                                                onMouseEnter={() => showReplyButton(message.id)}
+                                                                                onMouseLeave={hideReplyButton}
+                                                                            >{message.message}</div>}
+
+
                                                                         </div>
+                                                                    </>)
+                                                                </>)
+                                                            }
+
+                                                        </>)
+
+                                                        :
+
+                                                        (<>
+
+                                                            {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" /> </div>}
+
+                                                            <div>
+                                                                {hasImageLike ?
+                                                                    ""
+                                                                    :
+                                                                    <>
+                                                                        {isSender && hoveredMessageId === message.id && (
+                                                                            <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}</div>
+                                                                        )}
                                                                     </>
-                                                                ) : (
-                                                                    <div style={{ display: "inline-flex", lineHeight: "0px" }}>
-                                                                        <p >{message.reply}</p>
+                                                                }
+
+                                                                {/* {message.reply && <div className="message-reply">{message.reply}</div>} */}
+
+                                                                {message.reply && (
+                                                                    <div className="message-reply">
+                                                                        {(message.reply.startsWith("Reply to: ") || message.reply.includes("Reply to video: ")) ? (
+                                                                            <>
+                                                                                <div style={{
+                                                                                    display: "flex",
+                                                                                    justifyContent: "center",
+                                                                                    width: "100%", borderRadius: "0.5rem"
+                                                                                }}
+                                                                                    onClick={() => HandleShowReplyVdieo(message.id, message.reply, message.timestamp)}
+                                                                                >
+                                                                                    {message.reply.includes("Reply to video: ") && (
+
+                                                                                        <div className="message-video-container">
+
+                                                                                            <video ref={videoRef} className="video messageVideo">
+                                                                                                <source src={message.reply.split("Reply to video: ")[1]} />
+                                                                                            </video>
+                                                                                            <div className="message-play-button">
+                                                                                                <div className="message-play-btn-div">
+                                                                                                    <i className="bi bi-play-fill message-play-btn"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    )}
+
+                                                                                    {message.reply.includes("Reply to: ") && (
+                                                                                        <img src={message.reply.split("Reply to: ")[1]}
+                                                                                            alt="Replied Image"
+                                                                                            style={{
+                                                                                                width: "100px", height: "150px", objectFit: "cover",
+                                                                                                objectPosition: "center",
+                                                                                                borderRadius: "0.5rem"
+                                                                                            }}
+                                                                                            className="replied-image"
+                                                                                        />
+                                                                                    )}
+                                                                                </div>
+                                                                            </>
+                                                                        ) : (
+                                                                            <div style={{ display: "inline-flex", lineHeight: "0px" }}>
+                                                                                <p >{message.reply}</p>
+                                                                            </div>
+                                                                        )}
                                                                     </div>
                                                                 )}
-                                                            </div>
-                                                        )}
 
 
 
-                                                        {!isSender && hoveredMessageId === message.id && (
-                                                            <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}</div>
-                                                        )}
+                                                                {!isSender && hoveredMessageId === message.id && (
+                                                                    <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}</div>
+                                                                )}
 
 
-                                                        {hasImage &&
-                                                            <div
-                                                                onMouseEnter={() => showReplyButton(message.id)}
-                                                                onMouseLeave={hideReplyButton}>
-                                                                <img onClick={() => ViewMessageImg(message.id, message.imageUrl, message && message.timestamp)} src={message.imageUrl}
-                                                                    className='messageImg' alt="Message" />
-                                                            </div>
-                                                        }
+                                                                {hasImage &&
+                                                                    <div
+                                                                        onMouseEnter={() => showReplyButton(message.id)}
+                                                                        onMouseLeave={hideReplyButton}>
+                                                                        <img onClick={() => ViewMessageImg(message.id, message.imageUrl, message && message.timestamp)} src={message.imageUrl}
+                                                                            className='messageImg' alt="Message" />
+                                                                    </div>
+                                                                }
 
-                                                        {hasVideo &&
-                                                            <div onClick={() => handleVewVideo(message.id, message.videoUrl, message && message.timestamp)}
-                                                                onMouseEnter={() => showReplyButton(message.id)}
-                                                                onMouseLeave={hideReplyButton}
-                                                            >
-                                                                <div className="message-video-container" >
+                                                                {hasVideo &&
+                                                                    <div onClick={() => handleVewVideo(message.id, message.videoUrl, message && message.timestamp)}
+                                                                        onMouseEnter={() => showReplyButton(message.id)}
+                                                                        onMouseLeave={hideReplyButton}
+                                                                    >
+                                                                        <div className="message-video-container" >
 
-                                                                    <video ref={videoRef} className="video messageVideo">
-                                                                        <source src={message.videoUrl} />
-                                                                    </video>
-                                                                    <div className="message-play-button">
-                                                                        <div className="message-play-btn-div">
-                                                                            <i className="bi bi-play-fill message-play-btn"></i>
+                                                                            <video ref={videoRef} className="video messageVideo">
+                                                                                <source src={message.videoUrl} />
+                                                                            </video>
+                                                                            <div className="message-play-button">
+                                                                                <div className="message-play-btn-div">
+                                                                                    <i className="bi bi-play-fill message-play-btn"></i>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                }
+
+                                                                {hasImageLike &&
+                                                                    <div className='messageImgLike-div' onMouseEnter={() => showReplyButton(message.id)}
+                                                                        onMouseLeave={hideReplyButton}>
+                                                                        <img src={message.imageUrlLike}
+                                                                            className='messageImgLike' alt="Message" />
+                                                                    </div>
+                                                                }
+
+
+
+                                                                {message.message && <div className="message-content"
+                                                                    onMouseEnter={() => showReplyButton(message.id)}
+                                                                    onMouseLeave={hideReplyButton}
+                                                                >{message.message}</div>}
+
+
                                                             </div>
-                                                        }
-
-                                                        {hasImageLike &&
-                                                            <div className='messageImgLike-div' onMouseEnter={() => showReplyButton(message.id)}
-                                                                onMouseLeave={hideReplyButton}>
-                                                                <img src={message.imageUrlLike}
-                                                                    className='messageImgLike' alt="Message" />
-                                                            </div>
-                                                        }
+                                                        </>)
+                                                    }
 
 
-
-                                                        {message.message && <div className="message-content"
-                                                            onMouseEnter={() => showReplyButton(message.id)}
-                                                            onMouseLeave={hideReplyButton}
-                                                        >{message.message}</div>}
-
-
-                                                    </div>
                                                 </div>
 
                                                 {!isSender && hoveredMessageId === message.id && (
