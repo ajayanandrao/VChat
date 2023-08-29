@@ -64,15 +64,46 @@ const People = ({ userP }) => {
                 timestamp: serverTimestamp(),
             });
 
-            // Retrieve the unique ID and update the document with it
-            await updateDoc(newFriendRequestDocRef, { mainid: newFriendRequestDocRef.id });
+            // Retrieve the unique ID and update the friend request document with it
+            const newFriendRequestId = newFriendRequestDocRef.id;
+            await updateDoc(newFriendRequestDocRef, { mainid: newFriendRequestId });
 
-            // document.getElementById(`add-${id}`).style.display = 'none';
+            // Create a notification document with the same mainid
+            await setDoc(doc(db, "Notification", newFriendRequestId), {
+                senderId: currentUser.uid,
+                senderName: currentUser.displayName,
+                photoUrl: currentUser.photoURL,
+
+                receiverPhotoUrl: otherUserPhotoUrl,
+                postSenderUid: otherUserId,
+                receiverName: otherUserName,
+                status: 'pending',
+                timestamp: serverTimestamp(),
+                isUnRead: true,
+                mainid: newFriendRequestId,
+            });
+
             console.log('Friend request sent successfully!', id);
         } catch (error) {
             console.error('Error sending friend request:', error);
         }
     };
+
+
+    const [notification, setNotification] = useState([]);
+    useEffect(() => {
+        const notificationRef = collection(db, 'Notification');
+        const unsubscribe = onSnapshot(notificationRef, (snapshot) => {
+            const notificationList = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setNotification(notificationList.map((doc) => doc.id));
+        });
+
+        return unsubscribe;
+    }, []);
+
 
 
     const cancelFriendRequest = async (id, senderId, otherUserId) => {
@@ -84,19 +115,39 @@ const People = ({ userP }) => {
             const friendRequestsRef = collection(db, 'NewFriendRequests');
             const querySnapshot = await getDocs(friendRequestsRef);
 
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach(async (doc) => {
                 const request = doc.data();
                 if (request.senderId === senderId && request.receiverUid === otherUserId && request.status === 'pending') {
                     deleteDoc(doc.ref);
                     console.log('Friend request canceled.');
+
+
+                    const notificationRef = collection(db, 'Notification');
+                    const notificationQuerySnapshot = await getDocs(notificationRef);
+                    notificationQuerySnapshot.forEach(async (notificationDoc) => {
+                        const notificationData = notificationDoc.data();
+                        if (notificationData.senderId === senderId &&
+                            notificationData.postSenderUid === otherUserId
+                            && (notificationData.status === 'pending' || notificationData.status === 'accepted')) {
+                            await deleteDoc(notificationDoc.ref);
+                            console.log('Notification deleted.');
+                        }
+                    });
                 }
             });
+
+            //delete Notification 
+            const notificationRef = collection(db, 'Notification');
+
+
         } catch (error) {
             console.error('Error canceling friend request:', error);
         }
     };
 
     const [check, setCheck] = useState([]);
+
+
 
     useEffect(() => {
 

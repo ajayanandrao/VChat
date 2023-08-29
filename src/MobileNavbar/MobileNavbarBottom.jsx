@@ -75,6 +75,7 @@ const MobileNavbarBottom = ({ post }) => {
         if (current.postSenderUid === currentUser.uid && current.timestamp > latest.timestamp) {
             return current;
         }
+
         return latest;
     }, { timestamp: 0 });
 

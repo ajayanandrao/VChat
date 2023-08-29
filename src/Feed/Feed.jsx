@@ -132,27 +132,21 @@ const Feed = ({ post }) => {
                 img: post.img,
                 photoUrl: currentUser.photoURL
             });
-            await setDoc(doc(db, "AllPosts", post.id, "Notification", currentUser.uid), {
-                userId: currentUser.uid,
-                name: currentUser.displayName,
-                time: serverTimestamp(),
-                id: post.id,
-                img: post.img,
-                photoUrl: currentUser.photoURL,
-                like: "like",
-                isUnRead: true
-            });
+
+
             await setDoc(doc(db, "Notification", post.id), {
                 userId: currentUser.uid,
                 name: currentUser.displayName,
                 timestamp: serverTimestamp(),
                 id: post.id,
-                img: post.img,
                 photoUrl: currentUser.photoURL,
                 like: "like",
                 isUnRead: true,
                 postSenderUid: uid,
+                img: post.img,
+                imgName: post.name
             });
+
 
             // element.style.color = '#FF0040';
         }
@@ -237,7 +231,7 @@ const Feed = ({ post }) => {
         }
     };
 
-    const HandleComment = async (e, id) => {
+    const HandleComment = async (e, id, uid) => {
         e.preventDefault();
         if (!getComment) {
             return;
@@ -263,6 +257,20 @@ const Feed = ({ post }) => {
             photoUrl: currentUser.photoURL,
             uid: currentUser.uid,
             time: serverTimestamp(),
+        });
+
+
+        await setDoc(doc(db, "Notification", post.id), {
+            userId: currentUser.uid,
+            name: currentUser.displayName,
+            timestamp: serverTimestamp(),
+            id: post.id,
+            photoUrl: currentUser.photoURL,
+            comment: getComment,
+            isUnRead: true,
+            postSenderUid: uid,
+            img: post.img,
+            imgName: post.name
         });
 
         // Clearing the comment input field after adding the comment and notification
@@ -643,7 +651,7 @@ const Feed = ({ post }) => {
                                     if (e.key === 'Enter') {
                                         e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)
                                         if (getComment.trim() !== '') {
-                                            HandleComment(e, post.id);
+                                            HandleComment(e, post.id, post.uid);
                                         }
                                     }
                                 }}
@@ -651,9 +659,9 @@ const Feed = ({ post }) => {
                             <div>
                                 {getComment != "" ?
 
-                                    <BiSolidSend className='feed-right-comment-icon' color='#0080FF' onClick={(e) => HandleComment(e, post.id)} />
+                                    <BiSolidSend className='feed-right-comment-icon' color='#0080FF' onClick={(e) =>  HandleComment(e, post.id, post.uid)} />
                                     :
-                                    <BiSend className='feed-right-comment-icon' color='#84878a' onClick={(e) => HandleComment(e, post.id)} />
+                                    <BiSend className='feed-right-comment-icon' color='#84878a' onClick={(e) =>  HandleComment(e, post.id, post.uid)} />
 
                                 }
                             </div>

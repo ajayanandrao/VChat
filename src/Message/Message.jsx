@@ -125,9 +125,23 @@ const Message = () => {
     }, []);
 
 
-    const DeleteRequest = async (id) => {
+    const DeleteRequest = async (id, senderId, receiverUid) => {
         const RequestRef = doc(db, 'NewFriendRequests', id);
         await deleteDoc(RequestRef);
+
+        const notificationRef = collection(db, 'Notification');
+        const notificationQuerySnapshot = await getDocs(notificationRef);
+        notificationQuerySnapshot.forEach(async (notificationDoc) => {
+            const notificationData = notificationDoc.data();
+            if (notificationData.senderId === senderId &&
+                notificationData.postSenderUid === receiverUid
+                && (notificationData.status === 'pending' || notificationData.status === 'accepted')) {
+                await deleteDoc(notificationDoc.ref);
+                console.log('Notification deleted.');
+            }
+        });
+
+
     };
 
 
@@ -137,31 +151,46 @@ const Message = () => {
             const requestRef = doc(db, 'NewFriendRequests', requestId);
             const requestDoc = await getDoc(requestRef);
 
-
-
             if (requestDoc.exists()) {
-                await updateDoc(requestRef, { status: 'accepted' });
-                console.log('Friend request accepted!');
+                // await updateDoc(requestRef, { status: 'accepted' });
+                // console.log('Friend request accepted!');
 
                 // Add sender to receiver's friends list
-                await addDoc(collection(db, `allFriends/${receiverUid}/Friends`), {
-                    userId: senderId,
-                    displayName: senderName,
-                    photoUrl: senderPhotoUrl,
-                    status: 'accepted',
-                    uid: senderId,
-                    requestID: mainid,
-                });
+                // await addDoc(collection(db, `allFriends/${receiverUid}/Friends`), {
+                //     userId: senderId,
+                //     displayName: senderName,
+                //     photoUrl: senderPhotoUrl,
+                //     status: 'accepted',
+                //     uid: senderId,
+                //     requestID: mainid,
+                // });
 
                 // Add receiver to sender's friends list
-                await addDoc(collection(db, `allFriends/${senderId}/Friends`), {
-                    userId: receiverUid,
-                    displayName: receiverName,
-                    photoUrl: receiverPhotoUrl,
-                    status: 'accepted',
-                    uid: receiverUid,
-                    requestID: mainid,
+                // await addDoc(collection(db, `allFriends/${senderId}/Friends`), {
+                //     userId: receiverUid,
+                //     displayName: receiverName,
+                //     photoUrl: receiverPhotoUrl,
+                //     status: 'accepted',
+                //     uid: receiverUid,
+                //     requestID: mainid,
+                // });
+
+
+                const notificationRef = collection(db, 'Notification');
+                const notificationQuerySnapshot = await getDocs(notificationRef);
+                notificationQuerySnapshot.forEach(async (notificationDoc) => {
+                    const notificationData = notificationDoc.data();
+                    if (notificationData.senderId === senderId &&
+                        notificationData.postSenderUid === receiverUid
+                        && (notificationData.status === 'pending' || notificationData.status === 'accepted')) {
+                        await deleteDoc(notificationDoc.ref);
+                        console.log('Notification deleted.');
+                    }
                 });
+
+
+
+
             } else {
                 console.error('Friend request not found.');
             }
@@ -368,7 +397,7 @@ const Message = () => {
                                                                         (item.id, item.senderId, item.receiverUid, item.senderName, item.senderPhotoUrl,
                                                                             item.receiverName, item.receiverPhotoUrl, item.mainid)}>Accept</div>
                                                                 <div className="btn-D-custom box-shadow-none ms-4"
-                                                                    onClick={() => DeleteRequest(item.id)}
+                                                                    onClick={() => DeleteRequest(item.id, item.senderId, item.receiverUid)}
                                                                 >Remove</div>
                                                             </div>
 

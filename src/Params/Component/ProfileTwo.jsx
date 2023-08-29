@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./ProfileTwo.scss";
-import { addDoc, collection, deleteDoc, getDocs, onSnapshot, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../Firebase';
 import { AuthContext } from '../../AuthContaxt';
 import { Link } from 'react-router-dom';
@@ -23,9 +23,24 @@ const ProfileTwo = ({ user }) => {
                 status: 'pending',
                 timestamp: serverTimestamp(),
             });
-
             // Retrieve the unique ID and update the document with it
-            await updateDoc(newFriendRequestDocRef, { mainid: newFriendRequestDocRef.id });
+            const newFriendRequestId = newFriendRequestDocRef.id;
+            await updateDoc(newFriendRequestDocRef, { mainid: newFriendRequestId });
+
+
+            await setDoc(doc(db, "Notification", newFriendRequestId), {
+                senderId: currentUser.uid,
+                senderName: currentUser.displayName,
+                photoUrl: currentUser.photoURL,
+
+                receiverPhotoUrl: otherUserPhotoUrl,
+                postSenderUid: otherUserId,
+                receiverName: otherUserName,
+                status: 'pending',
+                timestamp: serverTimestamp(),
+                isUnRead: true,
+                mainid: newFriendRequestId,
+            });
 
             // document.getElementById(`add-${id}`).style.display = 'none';
             console.log('Friend request sent successfully!',);
@@ -47,7 +62,7 @@ const ProfileTwo = ({ user }) => {
     }, []);
 
 
-    const cancelFriendRequest = async (senderId, otherUserId) => {
+    const cancelFriendRequest = async (senderId, otherUserId, uid) => {
 
         console.log("recipientId :-", otherUserId);
         console.log("sender :-", senderId);
@@ -56,11 +71,22 @@ const ProfileTwo = ({ user }) => {
             const friendRequestsRef = collection(db, 'NewFriendRequests');
             const querySnapshot = await getDocs(friendRequestsRef);
 
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach(async (doc) => {
                 const request = doc.data();
                 if (request.senderId === currentUser.uid && request.receiverUid === user.uid && request.status === 'pending') {
                     deleteDoc(doc.ref);
+                    // console.log('Friend request canceled.');
                     console.log('Friend request canceled.');
+
+                    const notificationRef = collection(db, 'Notification');
+                    const notificationQuerySnapshot = await getDocs(notificationRef);
+                    notificationQuerySnapshot.forEach(async (notificationDoc) => {
+                        const notificationData = notificationDoc.data();
+                        if (notificationData.senderId === currentUser.uid && notificationData.postSenderUid === senderId && (notificationData.status === 'pending' || notificationData.status === 'accepted')) {
+                            await deleteDoc(notificationDoc.ref);
+                            console.log('Notification deleted.');
+                        }
+                    });
                 }
             });
         } catch (error) {
@@ -151,6 +177,7 @@ const ProfileTwo = ({ user }) => {
                                                             cancelFriendRequest(
                                                                 item.uid,
                                                                 currentUser.uid,
+                                                                item.uid
                                                             )
                                                         }
                                                     >
