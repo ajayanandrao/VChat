@@ -14,7 +14,7 @@ import v from "./../Image/img/vl.png";
 import home from "./../Image/home2.png";
 import heart from "./../Image/h3.png";
 import video from "./../Image/v3.png";
-import sms from "./../Image/sms1.png";
+import p from "./../Image/img/3x.png";
 
 const MobileNavebar = () => {
   const { currentUser } = useContext(AuthContext);
@@ -99,6 +99,7 @@ const MobileNavebar = () => {
             <Link to="find_friend/" className="link">
               <div>
                 <BsFillPeopleFill className="mobile-nav-icon" />
+                {/* <img src={p} width={"18px"} alt="" /> */}
               </div>
             </Link>
           </span>

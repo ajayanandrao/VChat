@@ -37,7 +37,7 @@ const Notification = ({ post, postLike }) => {
 
         return unsubscribe;
     }, [post.id]);
-    
+
 
     const [isComment, setIsComment] = useState([]);
 
@@ -162,6 +162,7 @@ const Notification = ({ post, postLike }) => {
         <>
             <div className="notification">
                 <div>
+
                     {isLiked.map((item) => {
                         return (
                             <Link to={`/notification/${post.id}`}>

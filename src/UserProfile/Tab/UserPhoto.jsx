@@ -86,7 +86,7 @@ const UserPhoto = () => {
             return (
                 <div key={post.id}>
 
-                    {/* <div id={`ViewImg${post.id}`} style={{ display: "none" }}
+                    <div id={`ViewImg${post.id}`} style={{ display: "none" }}
                         className='ViewImg' >
 
                         <div className="viewImg-relative">
@@ -111,7 +111,7 @@ const UserPhoto = () => {
                                 <img src={post.img} className='viewimg' alt="" />
                             </div>
                         </div>
-                    </div> */}
+                    </div>
 
                     {post.img && isImage(post.name) &&
                         (

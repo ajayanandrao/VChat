@@ -5,8 +5,9 @@ import { MdMovieFilter } from "react-icons/md";
 import { AuthContext } from "../AuthContaxt";
 
 import "./MobileNavbarBottom.scss";
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { addDoc, collection, doc, onSnapshot, orderBy, query, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
+import PostComponentProps from '../Notification/PostComponentProps';
 
 const MobileNavbarBottom = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
@@ -22,6 +23,21 @@ const MobileNavbarBottom = ({ post }) => {
                     newbooks.push({ ...doc.data(), id: doc.id })
                 });
                 setFriendRequests(newbooks);
+            })
+        };
+        return userlist();
+    }, []);
+    const [notification, setNotification] = useState([]);
+
+    useEffect(() => {
+        const colRef = collection(db, 'Notification')
+        const userlist = () => {
+            onSnapshot(colRef, (snapshot) => {
+                let newbooks = []
+                snapshot.docs.forEach((doc) => {
+                    newbooks.push({ ...doc.data(), id: doc.id })
+                });
+                setNotification(newbooks);
             })
         };
         return userlist();
@@ -47,6 +63,38 @@ const MobileNavbarBottom = ({ post }) => {
     //     return unsubscribe;
     // }, [post.id]);
 
+    const latestFriendRequest = friendRequests.reduce((latest, current) => {
+        if (current.receiverUid === currentUser.uid && current.timestamp > latest.timestamp) {
+            return current;
+        }
+        return latest;
+    }, { timestamp: 0 });
+
+
+    const latestFriendNotification = notification.reduce((latest, current) => {
+        if (current.postSenderUid === currentUser.uid && current.timestamp > latest.timestamp) {
+            return current;
+        }
+        return latest;
+    }, { timestamp: 0 });
+
+
+    const [showLatestRequest, setShowLatestRequest] = useState(latestFriendRequest.timestamp > 0);
+
+    useEffect(() => {
+        setShowLatestRequest(latestFriendRequest.timestamp > 0);
+    }, [latestFriendRequest]);
+
+
+    const handleCircleClick = () => {
+        setShowLatestRequest(false);
+    };
+    const handleNotificationClick = async () => {
+        await updateDoc(doc(db, "Notification", latestFriendNotification.id), {
+            isUnRead: false,
+        });
+
+    };
 
     return (
         <>
@@ -54,33 +102,38 @@ const MobileNavbarBottom = ({ post }) => {
                 <Link to={"home/"}>
                     <AiFillHome className='mobile-nav-bottom-icon' />
                 </Link>
+                {/* <PostComponentProps /> */}
 
-                <Link to="notification">
+                <Link to="notification" onClick={handleNotificationClick}>
                     <div className='mobile-nav-bottom-icon-div'>
                         <AiFillHeart className="mobile-nav-bottom-icon" />
                         <div className='mobile-nav-bottom-notification'>
-                                
+
+                            {latestFriendNotification.timestamp > 0 && (
+                                <div className="animated-circle" >
+                                    {latestFriendNotification.isUnRead == true ?
+                                        <AiFillHeart className="mobile-nav-bottom-icon" color='#FF0040' />
+                                        :
+                                        null}
+                                </div>
+                            )}
                         </div>
+
                     </div>
                 </Link>
 
-                <Link to="message/">
+                <Link to="message/" onClick={handleCircleClick} >
                     <div className='mobile-nav-bottom-icon-div'>
                         <i className="bi bi-messenger"></i>
 
                         <div className='message-mobile-nav-bottom-notification' >
                             {friendRequests.length > 0 ?
                                 (<>
-                                    {friendRequests.map((item) => {
-                                        if (item.receiverUid == currentUser.uid) {
-                                            return (
-                                                <>
-                                                    <div className="message-animated-circle">
-                                                    </div>
-                                                </>
-                                            )
-                                        }
-                                    })}
+                                    {showLatestRequest && latestFriendRequest.timestamp > 0 && (
+                                        <div className="message-animated-circle" key={latestFriendRequest.id} onClick={handleCircleClick}>
+                                            <img src={latestFriendRequest.senderPhotoUrl} className="request-notification-img" alt="" />
+                                        </div>
+                                    )}
                                 </>)
                                 :
                                 null

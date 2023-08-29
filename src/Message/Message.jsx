@@ -229,7 +229,12 @@ const Message = () => {
         setUniqueUserIds(uniqueIds);
     }, [messages]);
 
-
+    const latestFriendRequest = friendRequests.reduce((latest, current) => {
+        if (current.receiverUid === currentUser.uid && current.timestamp > latest.timestamp) {
+            return current;
+        }
+        return latest;
+    }, { timestamp: 0 });
 
     return (
         <>
@@ -259,16 +264,12 @@ const Message = () => {
                                     <button className="w3-bar-item w3-button" onClick={() => openCity('Request')}>
 
                                         <div className='request-tab-absolute-div'>
-                                            {friendRequests.map((item) => {
-                                                if (item.receiverUid == currentUser.uid) {
-                                                    return (
-                                                        <>
-                                                            <div className="request-animated-circle">
-                                                            </div>
-                                                        </>
-                                                    )
-                                                }
-                                            })}
+
+                                            {latestFriendRequest.timestamp > 0 && (
+                                                <div className="message-animated-circle" key={latestFriendRequest.id}>
+                                                    <div className="request-animated-circle"></div>
+                                                </div>
+                                            )}
                                         </div>
                                         Request
 
@@ -362,11 +363,11 @@ const Message = () => {
                                                             <div className='request-name'>{item.senderName}</div>
 
                                                             <div className="request-btn-div d-flex">
-                                                                <div className="btn-success-custom"
+                                                                <div className="btn-success-custom box-shadow-none"
                                                                     onClick={() => acceptFriendRequest
                                                                         (item.id, item.senderId, item.receiverUid, item.senderName, item.senderPhotoUrl,
                                                                             item.receiverName, item.receiverPhotoUrl, item.mainid)}>Accept</div>
-                                                                <div className="btn-D-custom ms-4"
+                                                                <div className="btn-D-custom box-shadow-none ms-4"
                                                                     onClick={() => DeleteRequest(item.id)}
                                                                 >Remove</div>
                                                             </div>

@@ -3,7 +3,7 @@ import "./Feed.scss"
 import { BsFillChatDotsFill, BsFillHeartFill, BsThreeDotsVertical } from "react-icons/bs"
 import { FaPlay, FaShare } from "react-icons/fa"
 import ReactTimeago from 'react-timeago';
-import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
 import { db, storage } from '../Firebase';
 import { AuthContext } from '../AuthContaxt';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
@@ -100,7 +100,7 @@ const Feed = ({ post }) => {
         setLiked(like.findIndex((like) => like.id === currentUser?.uid) !== -1);
     }, [like, currentUser.uid]);
 
-    const Heart = async (id) => {
+    const Heart = async (id, uid) => {
         handleClick();
         const element = document.getElementById(`myheart-${id}`)
 
@@ -108,6 +108,19 @@ const Feed = ({ post }) => {
             await deleteDoc(doc(db, "AllPosts", post.id, "likes", currentUser.uid));
 
             await deleteDoc(doc(db, "AllPosts", post.id, "Notification", currentUser.uid));
+
+            const userMessagesQuery = query(
+                collection(db, "Notification"),
+                where('id', '==', id),
+                where('userId', '==', currentUser.uid)
+            );
+
+            const userMessagesSnapshot = await getDocs(userMessagesQuery);
+
+            if (!userMessagesSnapshot.empty) {
+                const docToDelete = userMessagesSnapshot.docs[0];
+                await deleteDoc(doc(db, "Notification", docToDelete.id));
+            }
 
 
         } else {
@@ -128,6 +141,17 @@ const Feed = ({ post }) => {
                 photoUrl: currentUser.photoURL,
                 like: "like",
                 isUnRead: true
+            });
+            await setDoc(doc(db, "Notification", post.id), {
+                userId: currentUser.uid,
+                name: currentUser.displayName,
+                timestamp: serverTimestamp(),
+                id: post.id,
+                img: post.img,
+                photoUrl: currentUser.photoURL,
+                like: "like",
+                isUnRead: true,
+                postSenderUid: uid,
             });
 
             // element.style.color = '#FF0040';
@@ -541,7 +565,7 @@ const Feed = ({ post }) => {
                             {liked ? (
                                 <>
                                     <div className="feed-bottom-like-div" onClick={handleCloseRightComment}>
-                                        <BsFillHeartFill onClick={() => Heart(post.id)} className='feed-bottom-like-heart' color='#FF0040' />
+                                        <BsFillHeartFill onClick={() => Heart(post.id, post.uid)} className='feed-bottom-like-heart' color='#FF0040' />
 
                                         <div className="feed-bottom-like-count" onClick={() => showLike(post.id)}>
                                             {like.length > 9 ? '9+' : like.length}
@@ -552,7 +576,7 @@ const Feed = ({ post }) => {
                             ) : (
                                 <>
                                     <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
-                                        <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart' />
+                                        <AiOutlineHeart onClick={() => { Heart(post.id, post.uid); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart' />
                                         {like.length > 0 ?
                                             <div className="feed-bottom-like-count" onClick={() => showLike(post.id)}>
                                                 {like.length > 9 ? '9+' : like.length}
