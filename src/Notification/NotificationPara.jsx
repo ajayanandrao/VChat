@@ -149,8 +149,20 @@ const NotificationPara = () => {
         return <ReactTimeago date={timestamp} />;
     }
     function CommentTimeAgoComponent({ timestamp }) {
-        return <ReactTimeago date={timestamp} />;
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - new Date(timestamp)) / 1000);
+
+        if (diffInSeconds < 60) {
+            return "just now";
+        } else if (diffInSeconds < 3600) {
+            const minutes = Math.floor(diffInSeconds / 60);
+            return `${minutes} min ago`;
+        } else {
+            const hours = Math.floor(diffInSeconds / 3600);
+            return `${hours} h ago`;
+        }
     }
+
 
     if (!api) {
         return <>
@@ -265,11 +277,12 @@ const NotificationPara = () => {
                                     <div className="notification-comment-profile-group">
                                         <div className="notification-comment-profile-group-name">
                                             <span style={{ textTransform: "capitalize", fontWeight: "600" }}>{item.displayName}</span>
-                                            <div className='view-noti-post-time'>
-                                                <CommentTimeAgoComponent timestamp={item.commentTime && item.commentTime.toDate()} />
-                                            </div>
+
                                         </div>
                                         <span className='comment-api' >{item.comment}</span>
+                                        <div className='view-noti-post-time'>
+                                            <CommentTimeAgoComponent timestamp={item.commentTime && item.commentTime.toDate()} />
+                                        </div>
 
                                     </div>
                                     <div className='view-comment-delte-container'>

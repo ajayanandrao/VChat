@@ -80,7 +80,21 @@ const ProfileTwo = ({ user }) => {
                     batch.update(postRef, { displayName: newDisplayName });
                 });
 
+
+                // 
+                // const userNotiQuery = query(postsRef, where('userId', '==', currentUser.uid));
+                // const userNotiSnapshot = await getDocs(userPostsQuery);
+
+                // const noti = writeBatch(db);
+                // userNotiSnapshot.forEach((postDoc) => {
+                //     const postRef = doc(db, 'Notification', postDoc.id);
+                //     console.log(postRef);
+                //     noti.update(postRef, { name: userNotiQuery });
+                // });
+
+
                 await batch.commit(); // Corrected method name
+                // await noti.commit(); // Corrected method name
 
                 setNewDisplayName('');
                 setLoading(false);
@@ -120,7 +134,7 @@ const ProfileTwo = ({ user }) => {
                                 className='login-input-new'
                                 value={newDisplayName}
                                 onChange={(e) => setNewDisplayName(e.target.value)}
-                                onKeyDown={handleKeyDown} // Call handleKeyDown on key down
+                                onKeyDown={handleKeyDown}
                             />
 
 
