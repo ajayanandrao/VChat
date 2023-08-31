@@ -398,9 +398,12 @@ const Feed = ({ post }) => {
 
     };
 
-    const deletePost = async id => {
+    const deletePost = async (id) => {
         const colRef = doc(db, 'AllPosts', id)
         deleteDoc(colRef)
+        const notiRef = doc(db, 'Notification', id);
+        deleteDoc(notiRef)
+        console.log("post delted successfully")
     }
 
     function feedOff(id) {
@@ -659,9 +662,9 @@ const Feed = ({ post }) => {
                             <div>
                                 {getComment != "" ?
 
-                                    <BiSolidSend className='feed-right-comment-icon' color='#0080FF' onClick={(e) =>  HandleComment(e, post.id, post.uid)} />
+                                    <BiSolidSend className='feed-right-comment-icon' color='#0080FF' onClick={(e) => HandleComment(e, post.id, post.uid)} />
                                     :
-                                    <BiSend className='feed-right-comment-icon' color='#84878a' onClick={(e) =>  HandleComment(e, post.id, post.uid)} />
+                                    <BiSend className='feed-right-comment-icon' color='#84878a' onClick={(e) => HandleComment(e, post.id, post.uid)} />
 
                                 }
                             </div>
