@@ -22,7 +22,7 @@
         position: relative;
         padding: 0.5rem;
         font-size: 30px;
-        color: #BDBDBD;
+        color: #262626;
 
 
 
@@ -31,15 +31,12 @@
             top: 0;
             width: 40px;
             height: 40px;
-            // background: linear-gradient(180deg, #00cfff, #fa008e);
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 80%;
-            // box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-            box-shadow: rgba(255, 255, 255, 0.16) 0px 1px 4px;
-
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
 
         .c-heart {
@@ -71,6 +68,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
 
         .c-sms {
@@ -86,6 +84,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
 
         .c-profile {
@@ -107,6 +106,7 @@
                 border-radius: 50%;
                 object-fit: cover;
                 object-position: center;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             }
         }
 
@@ -117,7 +117,7 @@
 .v {
     width: 24px;
     height: 24px;
-    object-fit:contain;
+    object-fit: contain;
 
 }
 
@@ -143,8 +143,8 @@
     }
 
     .intro-banner-vdo-play-btn {
-        height: 35px;
-        width: 35px;
+        height: 25px;
+        width: 25px;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -157,13 +157,13 @@
 
     .intro-banner-vdo-play-btn .ripple {
         position: absolute;
-        width: 70px;
-        height: 70px;
-        z-index: -1;
+        width: 60px;
+        height: 60px;
+        z-index: -2;
         left: 50%;
         top: 50%;
         opacity: 0;
-        margin: -35px 0 0 -35px;
+        margin: -30px 0 0 -30px;
         border-radius: 100px;
         -webkit-animation: ripple 1.8s infinite;
         animation: ripple 1.8s infinite
@@ -197,12 +197,12 @@
         }
     }
 
-    .intro-banner-vdo-play-btn .ripple:nth-child(2) {
-        animation-delay: .3s;
-        -webkit-animation-delay: .3s
-    }
+    // .intro-banner-vdo-play-btn .ripple:nth-child(2) {
+    //     animation-delay: .3s;
+    //     -webkit-animation-delay: .3s
+    // }
 
-    .intro-banner-vdo-play-btn .ripple:nth-child(3) {
+    .intro-banner-vdo-play-btn .ripple:nth-child(1) {
         animation-delay: .6s;
         -webkit-animation-delay: .6s
     }
