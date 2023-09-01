@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/VChat/static/css/main.363ca510.css",
-    "main.js": "/VChat/static/js/main.aca61c15.js",
+    "main.css": "/VChat/static/css/main.741b4d63.css",
+    "main.js": "/VChat/static/js/main.9f6a27f8.js",
     "static/js/787.8d308a81.chunk.js": "/VChat/static/js/787.8d308a81.chunk.js",
     "static/media/m.png": "/VChat/static/media/m.a0fb2654f7cf88a5e131.png",
     "static/media/v.png": "/VChat/static/media/v.19e7ac76e0bc91db3e28.png",
@@ -25,12 +25,12 @@
     "static/media/h3.png": "/VChat/static/media/h3.fe043c66763d8d3deee7.png",
     "static/media/home2.png": "/VChat/static/media/home2.a43422e21b389e11fa6f.png",
     "index.html": "/VChat/index.html",
-    "main.363ca510.css.map": "/VChat/static/css/main.363ca510.css.map",
-    "main.aca61c15.js.map": "/VChat/static/js/main.aca61c15.js.map",
+    "main.741b4d63.css.map": "/VChat/static/css/main.741b4d63.css.map",
+    "main.9f6a27f8.js.map": "/VChat/static/js/main.9f6a27f8.js.map",
     "787.8d308a81.chunk.js.map": "/VChat/static/js/787.8d308a81.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.363ca510.css",
-    "static/js/main.aca61c15.js"
+    "static/css/main.741b4d63.css",
+    "static/js/main.9f6a27f8.js"
   ]
 }
