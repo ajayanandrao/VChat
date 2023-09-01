@@ -12,6 +12,7 @@ import { AiOutlineArrowUp } from "react-icons/ai";
 import { CircularProgress } from '@mui/material';
 import Feed from '../Feed/Feed';
 import MobileNavebar from '../MobileNavbar/MobileNavebar';
+import Navbar from '../Navbar/Navbar';
 
 const Home = () => {
     const [api, setApiData] = useState([]);
@@ -97,13 +98,16 @@ const Home = () => {
         });
     };
 
-    
+
+
+
 
     return (
         <>
+            <Navbar />
             {loading ? (
                 <div className='skeleton-center'>
-                    <CircularProgress className='circularprogress' /> 
+                    <CircularProgress className='circularprogress' />
                 </div>
             ) : (
                 <>

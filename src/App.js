@@ -34,6 +34,7 @@ import { useEffect, useState } from 'react';
 import MobileNavbarBottom from './MobileNavbar/MobileNavbarBottom';
 import { auth } from './Firebase';
 import BottomNav from './MobileNavbar/BottomNav';
+import Navbar from './Navbar/Navbar';
 
 function App() {
 
@@ -115,13 +116,17 @@ function App() {
         {loading ?
           (<> <div className="mobile">
             {showNavbar ?
-              <MobileNavebar />
+              // <Navbar />
+              // <MobileNavbarBottom />
+              <>
+              </>
               :
               ""
             }
           </div>
             {/* <MobileNavbarBottom /> */}
-            <BottomNav />
+            {/* <BottomNav /> */}
+            <Navbar />
             <ScrollToTop /> </>)
           :
           ""
@@ -134,6 +139,8 @@ function App() {
 
             (<> <Route path="home" element={<Home />} />
               <Route path="post" element={<Post />} />
+
+              <Route path="navbar" element={<Navbar />} />
 
               <Route path='notification' element={<NotificationProps />} />
               <Route path='notification/:id' element={<NotificationPara />} />
