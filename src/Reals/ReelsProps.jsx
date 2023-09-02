@@ -35,9 +35,10 @@ const ReelsProps = () => {
     });
 
     return (
-        <>
+        <div style={{textAlign:"center"}}>
+            {/* <h2>Working on it</h2> */}
             <Reals />
-        </>
+        </div>
     )
 }
 

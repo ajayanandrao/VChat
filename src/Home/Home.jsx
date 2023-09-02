@@ -104,7 +104,7 @@ const Home = () => {
 
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             {loading ? (
                 <div className='skeleton-center'>
                     <CircularProgress className='circularprogress' />
