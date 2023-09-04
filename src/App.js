@@ -122,8 +122,8 @@ function App() {
             }
           </div>
             {/* <MobileNavbarBottom /> */}
-            <BottomNav />
-            {/* <Navbar/> */}
+            {/* <BottomNav /> */}
+            <Navbar/>
             <ScrollToTop /> </>)
           :
           ""

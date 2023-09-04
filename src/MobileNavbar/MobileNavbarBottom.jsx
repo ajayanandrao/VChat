@@ -5,6 +5,7 @@ import { MdMovieFilter } from "react-icons/md";
 import { AuthContext } from "../AuthContaxt";
 
 import "./MobileNavbarBottom.scss";
+
 import { addDoc, collection, doc, onSnapshot, orderBy, query, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import PostComponentProps from '../Notification/PostComponentProps';

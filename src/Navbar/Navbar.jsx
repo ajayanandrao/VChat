@@ -130,9 +130,9 @@ const Navbar = () => {
 
 
     return (
-        <div>
+        <div className='navbar-main-container'>
 
-            <div className='boll' onClick={() => { handleBoll() }} >
+            <div className='navbar-mainu-button' onClick={() => { handleBoll() }} >
                 <div class="intro-banner-vdo-play-btn pinkBg" target="_blank" onClick={handleBoll}>
                     <span class="ripple pinkBg" onClick={handleBoll}></span>
                     <span class="ripple pinkBg" onClick={handleBoll}></span>
@@ -141,107 +141,136 @@ const Navbar = () => {
             </div>
 
 
-            <div className="sideNavbar">
-                <div className="circle-div">
-                    {view ?
+            <div className="circle-div">
+
+                {view ?
+                    <Link
+                        to={"/reels"} className="navbar-mainu-link-btn c-video c-reel" onClick={handleBoll}>
+                        <div
+                            className="">
+                            <motion.div style={{
+                                width: "40px", height: "40px", borderRadius: "50%", display: "flex",
+                                justifyContent: "center", alignItems: "center"
+                            }}
+                                transition={{ duration: 0.3, delay: 0 }}
+                                initial={{ scale: 0.6, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                className='link-btn-shadow'
+                            >
+                                <MdMovieFilter />
+                            </motion.div>
+                        </div>
+                    </Link>
+                    :
+                    null
+                }
 
 
-                        <motion.div
-                            transition={{ duration: 0.3, delay: 0.2 }}
-                            initial={{ scale: 0.6, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            className="c-home">
-                            <Link to={"/home/"} className="c-home" style={{ boxShadow: "none", backdropFilter: "none" }}>
-                                <AiFillHome />
-                            </Link>
-                        </motion.div>
-
-                        :
-                        null
-                    }
-                    {view ?
-                        <motion.div
-                            transition={{ duration: 0.3, delay: 0.1 }}
-                            initial={{ scale: 0.6, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            className="c-heart">
-                            <Link to={"/notification/"} className="c-home" style={{ boxShadow: "none", backdropFilter: "none" }}>
-                                <AiFillHeart />
-                            </Link>
+                {view ?
+                    <Link
+                        to={"/notification/"} className="navbar-mainu-link-btn c-heart " onClick={() => { handleNotificationClick(); handleBoll(); }}>
+                        <div
+                            className="">
                             {latestFriendNotification.timestamp > 0 && (
-                                <div className="animated-circle" >
+                                <div className="" >
                                     {latestFriendNotification.isUnRead == true ?
-                                        <Link to={"/notification/"} onClick={handleNotificationClick} >
-                                            <AiFillHeart className="mobile-nav-bottom-icon" color='#FF0040' />
-                                        </Link>
+                                        <motion.div style={{
+                                            width: "40px", height: "40px", borderRadius: "50%", display: "flex",
+                                            justifyContent: "center", alignItems: "center"
+                                        }}
+                                            transition={{ duration: 0.3, delay: 0.1 }}
+                                            initial={{ scale: 0.6, opacity: 0 }}
+                                            animate={{ scale: 1, opacity: 1 }}
+                                            className='link-btn-shadow' >
+                                            <AiFillHeart className="" color='#FF0040' onClick={() => { handleNotificationClick(); handleBoll(); }} />
+                                        </motion.div>
                                         :
-                                        null}
+                                        <AiFillHeart />}
                                 </div>
                             )}
-                        </motion.div>
-                        :
-                        null
-                    }
+                        </div>
+                    </Link>
+                    :
+                    null
+                }
 
-                    {view ?
-                        <motion.div
-                            transition={{ duration: 0.3, delay: 0 }}
-                            initial={{ scale: 0.6, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            className="c-video">
-                            <Link to={"/reels"} className="c-home" style={{ boxShadow: "none", backdropFilter: "none" }}>
-                                <MdMovieFilter />
-                            </Link>
-
-                        </motion.div>
-                        :
-                        null
-                    }
-
-                    {view ?
+                {view ?
+                    <Link to={"/home/"} className="navbar-mainu-link-btn c-home" onClick={() => { handleBoll(); }}>
                         <motion.div
                             transition={{ duration: 0.3, delay: 0.3 }}
                             initial={{ scale: 0.6, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                            className="c-sms">
-                            <Link to={"/message/"} onClick={handleCircleClick} className="c-home" style={{ boxShadow: "none", backdropFilter: "none" }}>
-                                <RiMessengerFill />
-                            </Link>
-                            <div className='message-mobile-nav-bottom-notification' >
-                                {friendRequests.length > 0 ?
-                                    (<>
-                                        {showLatestRequest && latestFriendRequest.timestamp > 0 && (
-                                            <div className="message-animated-circle" key={latestFriendRequest.id} >
-                                                <Link to={"/message/"} onClick={handleCircleClick} className="c-home" style={{ boxShadow: "none", backdropFilter: "none" }}>
-                                                    <img src={latestFriendRequest.senderPhotoUrl} className="request-notification-img" alt="" />
-                                                </Link>
-                                            </div>
-                                        )}
-                                    </>)
-                                    :
-                                    null
-                                }
-                            </div>
+                            className="link-btn-shadow">
+                            <motion.div style={{
+                                width: "40px", height: "40px", borderRadius: "50%", display: "flex",
+                                justifyContent: "center", alignItems: "center"
+                            }}
+                                transition={{ duration: 0.3, delay: 0.2 }}
+                                initial={{ scale: 0.6, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                            >
+                                <AiFillHome />
+                            </motion.div>
                         </motion.div>
-                        :
-                        null
-                    }
 
-                    {view ?
-                        <motion.div
-                            transition={{ duration: 0.3, delay: 0.4 }}
-                            initial={{ scale: 0.6, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            className="c-profile">
-                            <Link to={"/profile/"} className="c-home" style={{ boxShadow: "none", backdropFilter: "none" }}>
+                    </Link>
+                    :
+                    null
+                }
+
+                {view ?
+                    <Link to={"/message/"} onClick={() => { { handleCircleClick(); handleBoll(); } }} className="navbar-mainu-link-btn c-chat" >
+                        <div className="link-btn-shadow">
+                            <motion.div style={{
+                                width: "40px", height: "40px", borderRadius: "50%", display: "flex",
+                                justifyContent: "center", alignItems: "center"
+                            }}
+                                transition={{ duration: 0.3, delay: 0.2 }}
+                                initial={{ scale: 0.6, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                            >
+                                <RiMessengerFill style={{ position: "absolute", fontSize: "24px" }} />
+                                <Link to={"/profile/"} >
+                                    <div className='link-btn-shadow'  >
+                                        {friendRequests.length > 0 ?
+                                            (<>
+                                                {showLatestRequest && latestFriendRequest.timestamp > 0 && (
+                                                    <div className="message-animated-circle link-btn-shadow" key={latestFriendRequest.id} >
+                                                        <img src={latestFriendRequest.senderPhotoUrl}
+                                                            className="request-notification-img" alt="" />
+                                                    </div>
+                                                )}
+                                            </>)
+                                            :
+                                            <RiMessengerFill />
+                                        }
+                                    </div>
+                                </Link>
+
+                            </motion.div>
+                        </div>
+                    </Link>
+                    :
+                    null
+                }
+
+
+                {
+                    view ?
+                        <Link to={"/profile/"} className="navbar-mainu-link-btn c-profile-img-position" onClick={handleBoll}>
+                            <motion.div
+                                transition={{ duration: 0.3, delay: 0.5 }}
+                                initial={{ scale: 0.6, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                className="link-btn-shadow" onClick={handleBoll}>
                                 <img src={currentUser && currentUser.photoURL} className='c-profile-img' alt="" />
-                            </Link>
-                        </motion.div>
+                            </motion.div>
+                        </Link>
                         :
                         null
-                    }
-                </div>
-            </div>
+                }
+            </div >
+
 
         </div >
     )
