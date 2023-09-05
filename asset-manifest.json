@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/VChat/static/css/main.a36fc9c8.css",
-    "main.js": "/VChat/static/js/main.a52635bc.js",
+    "main.css": "/VChat/static/css/main.3cf62f02.css",
+    "main.js": "/VChat/static/js/main.f115ebfa.js",
     "static/js/787.8d308a81.chunk.js": "/VChat/static/js/787.8d308a81.chunk.js",
+    "static/media/sms1.png": "/VChat/static/media/sms1.8b5a8caaaad7a6b63c9e.png",
     "static/media/video5.png": "/VChat/static/media/video5.b9b123758858f9e836f6.png",
     "static/media/vl.png": "/VChat/static/media/vl.b9d816834a2726e6b81e.png",
     "static/media/200.png": "/VChat/static/media/200.6630fa2532637ce39dbd.png",
-    "static/media/sms.png": "/VChat/static/media/sms.c26950f1809dfd1d9e7c.png",
     "static/media/reel.png": "/VChat/static/media/reel.94f58db4e43a7cd68216.png",
     "static/media/3x.png": "/VChat/static/media/3x.2938084619c87c761c40.png",
     "static/media/7374722.png": "/VChat/static/media/7374722.2c5abb74746c218bc2a5.png",
-    "static/media/loc.png": "/VChat/static/media/loc.a6a61b79a02946204757.png",
     "static/media/call.png": "/VChat/static/media/call.543fbddaab0784413822.png",
     "static/media/7285381.png": "/VChat/static/media/7285381.df81ca1e76ce4ed79e48.png",
     "static/media/brif2.png": "/VChat/static/media/brif2.6ade31f5cf6b8517eac8.png",
@@ -22,12 +21,12 @@
     "static/media/h3.png": "/VChat/static/media/h3.fe043c66763d8d3deee7.png",
     "static/media/home2.png": "/VChat/static/media/home2.a43422e21b389e11fa6f.png",
     "index.html": "/VChat/index.html",
-    "main.a36fc9c8.css.map": "/VChat/static/css/main.a36fc9c8.css.map",
-    "main.a52635bc.js.map": "/VChat/static/js/main.a52635bc.js.map",
+    "main.3cf62f02.css.map": "/VChat/static/css/main.3cf62f02.css.map",
+    "main.f115ebfa.js.map": "/VChat/static/js/main.f115ebfa.js.map",
     "787.8d308a81.chunk.js.map": "/VChat/static/js/787.8d308a81.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a36fc9c8.css",
-    "static/js/main.a52635bc.js"
+    "static/css/main.3cf62f02.css",
+    "static/js/main.f115ebfa.js"
   ]
 }
