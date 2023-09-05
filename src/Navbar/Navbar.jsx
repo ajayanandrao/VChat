@@ -230,7 +230,7 @@ const Navbar = () => {
                                 animate={{ scale: 1, opacity: 1 }}
                             >
                                 <RiMessengerFill style={{ position: "absolute", fontSize: "24px" }} />
-                                <Link to={"/profile/"} >
+                                <Link to={"/message/"} >
                                     <div className='link-btn-shadow'  >
                                         {friendRequests.length > 0 ?
                                             (<>

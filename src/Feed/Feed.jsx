@@ -18,6 +18,7 @@ import { LinearProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BiSend, BiSolidSend } from 'react-icons/bi';
+import sms from "./../Image/img/sms.png";
 
 const Feed = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
@@ -621,7 +622,11 @@ const Feed = ({ post }) => {
                         <div className="feed-bottom-mainu">
 
                             <div className="feed-bottom-like-div">
-                                <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' />
+                                {rightComment ?
+                                    <img src={sms} style={{ width: "26px" }}  onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
+                                    :
+                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' />
+                                }
                                 {commentCount ?
                                     <Link to={`/notification/${post.id}`}>
                                         <div className="feed-bottom-like-count" onClick={handleCloseRightComment}>

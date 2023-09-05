@@ -7,7 +7,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { auth, db } from "../Firebase";
 import { AuthContext } from "../AuthContaxt";
-import { BsFillPeopleFill } from "react-icons/bs";
+import { BsFillMoonStarsFill, BsFillPeopleFill, BsFillSunFill, BsMoonStarsFill } from "react-icons/bs";
 import { collection, onSnapshot } from "firebase/firestore";
 import { MdMovieFilter } from "react-icons/md";
 import v from "./../Image/img/vl.png";
@@ -18,13 +18,13 @@ import p from "./../Image/img/3x.png";
 
 const MobileNavebar = () => {
   const { currentUser } = useContext(AuthContext);
-
+  const [dayTheme, setDayTheme] = useState(false);
   const handleScrollToTop = () => {
     window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
+      top: 0,
+      behavior: 'smooth',
     });
-};
+  };
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged((user) => {
@@ -80,6 +80,11 @@ const MobileNavebar = () => {
     };
   }, []);
 
+
+  const darkTheme = () => {
+    setDayTheme(!dayTheme);
+  };
+
   return (
     <>
       <div
@@ -111,6 +116,15 @@ const MobileNavebar = () => {
               </div>
             </Link>
           </span>
+
+          <div onClick={() => darkTheme()} className="mobile-nav-mainu">
+            {dayTheme ?
+
+              <BsMoonStarsFill className="mobile-nav-icon" onClick={darkTheme} />
+              :
+              <BsFillSunFill className="mobile-nav-icon" onClick={darkTheme} />
+            }
+          </div>
 
           <span className="mobile-nav-mainu">
             <Link to="option/" className="link">
