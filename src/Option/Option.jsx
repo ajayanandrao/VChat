@@ -44,47 +44,38 @@ const Option = () => {
 
     return (
         <>
-            <motion.div
-                transition={{ duration: 1 }}
-                initial={{ x: 100 }}
-                animate={{ x: 0 }}
-                className="option-container w3-animate-opacity">
+            <div
+
+                className="option-container dark:bg-darkDiv w3-animate-opacity" >
 
                 <div className="option-back-div">
-                    <i onClick={goBack} className="bi bi-arrow-left "></i>
+                    <i onClick={goBack} className="bi bi-arrow-left dark:text-darkIcon "></i>
                 </div>
 
                 <div className="option-inner-div">
 
                     <div className="option-profile-div">
-                        <motion.img
-                            transition={{ duration: 1.5, delay: 0.5 }}
-                            initial={{ opacity: 0, y: -30 }}
-                            animate={{ opacity: 1, y: 0 }}
+                        <img
+
                             src={currentUser && currentUser.photoURL} className='option-profile-img' alt="" />
 
-                        <motion.span
-                            transition={{ duration: 0.7, delay: 0.7 }}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className='option-profile-text'>{currentUser && currentUser.displayName}</motion.span>
+                        <span
+
+                            className='option-profile-text'>{currentUser && currentUser.displayName}</span>
                     </div>
 
-                    <motion.div
-                        transition={{ duration: 0.7, delay: 0.7 }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                    <div
+
                     >
                         <Link to="/setting/">
                             <div className="option-mainu">
 
                                 <div className="option-mainu-icon">
-                                    {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/setting-8979800-7374722.png?f=webp"} style={{ width: "55px" }} className='option-image-icon ' alt="" /> */}
+
                                     <img src={setting} style={{ width: "55px" }} className='option-image-icon ' alt="" />
-                                    {/* <i className="bi bi-gear-fill"></i> */}
-                                    {/* <i class="bi bi-gear-fill"></i> */}
+
                                 </div>
-                                <div className="option-mainu-name">
+                                <div className="option-mainu-name dark:text-darkProfileName">
                                     Setting
                                 </div>
 
@@ -95,14 +86,11 @@ const Option = () => {
                         <Link to="/Wedding/">
                             <div className="option-mainu">
                                 <div className="option-mainu-icon">
-                                    {/* <GiLovers /> */}
-                                    {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/heart-3260437-2725130.png?f=webp"}
-                                    style={{ width: "55px", }}
-                                    className='option-image-icon' alt="" /> */}
+
                                     <img src={love} style={{ width: "55px" }} className='option-image-icon' alt="" />
 
                                 </div>
-                                <div className="option-mainu-name" >
+                                <div className="option-mainu-name dark:text-darkProfileName" >
                                     Matrimony Arrange
                                 </div>
                             </div>
@@ -110,12 +98,11 @@ const Option = () => {
                         <Link to="/reels/">
                             <div className="option-mainu">
                                 <div className="option-mainu-icon">
-                                    {/* <MdMovieFilter /> */}
-                                    {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/movie-reel-9237403-7588845.png?f=webp"} style={{ width: "35px" }} className='option-image-icon' alt="" /> */}
+
                                     <img src={video} style={{ width: "40px" }} className='option-image-icon' alt="" />
-                                    {/* <i class="bi bi-camera-reels-fill"></i> */}
+
                                 </div>
-                                <div className="option-mainu-name" >
+                                <div className="option-mainu-name dark:text-darkProfileName" >
                                     Reals
                                 </div>
                             </div>
@@ -123,21 +110,19 @@ const Option = () => {
 
                         <div className="option-mainu">
                             <div className="option-mainu-icon">
-                                {/* <BsFillDoorClosedFill className="" style={{ fontSize: "35px" }} /> */}
-                                {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/logout-8858045-7285381.png?f=webp"} style={{ width: "43px" }} alt="" /> */}
+
                                 <img src={door} style={{ width: "43px" }} alt="" />
-                                {/* <i className="bi bi-door-open-fill" onClick={LogOut}></i> */}
-                                {/* <i class="bi bi-door-closed-fill"></i> */}
+
                             </div>
-                            <div className="option-mainu-name" onClick={LogOut}>
+                            <div className="option-mainu-name dark:text-darkProfileName" onClick={LogOut}>
                                 Log Out
                             </div>
                         </div>
 
 
-                    </motion.div>
+                    </div>
                 </div>
-            </motion.div>
+            </div>
         </>
     )
 }

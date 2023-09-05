@@ -235,7 +235,7 @@ const Wedding = () => {
 
     return (
         <>
-            <div className='add-wedding-container'>
+            <div className='add-wedding-container dark:bg-darkDiv'>
 
                 <div style={{
                     backgroundSize: "cover", width: "100%",
@@ -248,7 +248,8 @@ const Wedding = () => {
 
 
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(0, 0, 0, 0.30)", width: "100%", height: "100%" }}>
-                        <h2 style={{ color: "white", textAlign: "center", marginTop: "30px" }}>Matrimony Profile <div id='l'></div> </h2>
+                        <h2 style={{ color: "white", textAlign: "center", marginTop: "30px" }} className='text-3xl'>
+                            Matrimony Profile <div id='l'></div> </h2>
                     </div>
                 </div>
 
@@ -321,25 +322,26 @@ const Wedding = () => {
                         </div>
                     </div>
 
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='First Name' onChange={(e) => setFirst(e.target.value)} value={first} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='Middel Name' onChange={(e) => setMiddel(e.target.value)} value={middel} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='Last Name' onChange={(e) => setLast(e.target.value)} value={last} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='Mobile Number' onChange={(e) => setMobile(e.target.value)} value={mobile} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='Work or Job' onChange={(e) => setWork(e.target.value)} value={Work} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='Height' onChange={(e) => setHeight(e.target.value)} value={height} />
 
-                    <div className='b-date-wedding-div'>
 
-                        <span >Date of Birth :-</span>
+                    <div className='b-date-wedding-div mb-2'>
 
-                        <div className="toggle-dropdown">
-                            <button className="date-toggle-button" onClick={toggleDropdownDay}>
+                        <span className='dark:text-darkPostText text-2xl me-4'>D/B :-</span>
+
+                        <div className="toggle-dropdown ">
+                            <button className="date-toggle-button " onClick={toggleDropdownDay}>
                                 {isDay ? (
                                     <>
                                         {itemDay ? itemDay : "Day"}
@@ -352,11 +354,11 @@ const Wedding = () => {
                             </button>
 
                             {isDay && (
-                                <div className="date-dropdown-list open">
+                                <div className="date-dropdown-list open bg-border dark:bg-dark dark:text-darkProfileName">
                                     {days.map((day) => (
                                         <span
                                             key={day}
-                                            className="date-dropdown-item"
+                                            className="date-dropdown-item "
                                             onClick={() => handleItemDayClick(day.toString())}
                                         >
                                             {day}
@@ -380,7 +382,7 @@ const Wedding = () => {
                                 )}
                             </button>
                             {isMonth && (
-                                <ul className="date-dropdown-list open">
+                                <ul className="date-dropdown-list open bg-border dark:bg-dark dark:text-darkProfileName">
                                     {months.map((month) => (
                                         <li
                                             key={month}
@@ -407,7 +409,7 @@ const Wedding = () => {
                                 )}
                             </button>
                             {isYear && (
-                                <ul className="date-dropdown-list open">
+                                <ul className="date-dropdown-list open bg-border dark:bg-dark dark:text-darkProfileName">
                                     {years.map((year) => (
                                         <li
                                             key={year}
@@ -424,24 +426,24 @@ const Wedding = () => {
 
                     </div>
 
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='Qualification' onChange={(e) => setQualification(e.target.value)} value={qualification} />
 
                     {/* <input type="text" className='wedding-input'
                         placeholder='Salary' onChange={(e) => setSalary(e.target.value)} value={salary} /> */}
 
 
-                    <h4>Address</h4>
-                    <input type="text" className='wedding-input'
+                    <h4 className='text-2xl mb-3 dark:text-darkPostText'>Address</h4>
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='Landmark' onChange={(e) => setLandmark(e.target.value)} value={landmark} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='Village' onChange={(e) => setVillage(e.target.value)} value={village} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='District' onChange={(e) => setDistric(e.target.value)} value={distric} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input dark:bg-darkInput dark:text-darkPostText'
                         placeholder='State' onChange={(e) => setState(e.target.value)} value={state} />
 
-                    <h3>Photo</h3>
+                    <h3 className='text-2xl dark:text-darkPostText'>Photo</h3>
 
                     <div className='wedding-photo-container'>
                         {photo ?
@@ -459,40 +461,12 @@ const Wedding = () => {
                         }
                         <input type="file" id='photo' style={{ display: "none" }} onChange={(e) => setPhoto(e.target.files[0])} />
 
-                        {/* {photoOne ?
-                            <label htmlFor="photoOne">
-                                <div>
-                                    <img src={URL.createObjectURL(photoOne)} className='wedding-photo' alt="" />
-                                </div>
-                            </label>
-                            :
-                            <label htmlFor="photoOne">
-                                <div className='wedding-photo-div'>
-                                    <i className="bi bi-image-fill wedding-add-photo"></i>
-                                </div>
-                            </label>
-                        }
-                        <input type="file" id='photoOne' style={{ display: "none" }} onChange={(e) => setPhotoOne(e.target.files[0])} />
-
-                        {photoTwo ?
-                            <label htmlFor="photoTwo">
-                                <div >
-                                    <img src={URL.createObjectURL(photoTwo)} className='wedding-photo' alt="" />
-                                </div>
-                            </label>
-                            :
-                            <label htmlFor="photoTwo">
-                                <div className='wedding-photo-div'>
-                                    <i className="bi bi-image-fill wedding-add-photo"></i>
-                                </div>
-                            </label>
-                        } */}
                         <input type="file" id='photoTwo' style={{ display: "none" }} onChange={(e) => setPhotoTwo(e.target.files[0])} />
 
 
                     </div>
 
-                    <div className="btn  btn-success my-4 w-100" style={{ fontSize: "18px" }} onClick={Save}>Save</div>
+                    <div className="btn  btn-success my-4 w-100" style={{ fontSize: "18px", position:"relative", zIndex:"9999" }} onClick={Save}>Save</div>
                 </div>
             </div >
         </>

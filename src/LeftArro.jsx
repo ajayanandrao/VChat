@@ -61,7 +61,7 @@ const LeftArro = () => {
     }
 
     return (
-        <div className='back-btn-di' style={style} onClick={goBack}>
+        <div className='back-btn-div' style={style} onClick={goBack}>
             <HiOutlineArrowSmLeft fontSize={"25px"} />
         </div>
     );

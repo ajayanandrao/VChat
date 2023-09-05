@@ -40,21 +40,7 @@ function App() {
 
   const [showNavbar, setShowNavbar] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const currentScrollPos = window.scrollY;
-  //     const scrollUp = prevScrollPos > currentScrollPos;
-
-  //     setPrevScrollPos(currentScrollPos);
-  //     setShowNavbar(scrollUp || currentScrollPos === 0);
-  //   };
-
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, [prevScrollPos]);
+  const [buttonPosition, setButtonPosition] = useState(0); // New state for button position
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,14 +54,17 @@ function App() {
       const scrollPercentage = (currentScrollPos / scrollHeight) * 100;
 
       // Define thresholds for showing and hiding navbar
-      const hideThreshold = 0.5; // Hide navbar when scrolled down 10% or more
-      const showThreshold = 0.1; // Show navbar when scrolled up 1% or more
+      const hideThreshold = 0.5;
+      const showThreshold = 0.1;
 
       setShowNavbar(
-        (scrollUp && scrollPercentage > showThreshold) || // Show on scroll up
-        (!scrollUp && scrollPercentage < hideThreshold) || // Show on scroll down
-        currentScrollPos === 0 // Always show at the top
+        (scrollUp && scrollPercentage > showThreshold) ||
+        (!scrollUp && scrollPercentage < hideThreshold) ||
+        currentScrollPos === 0
       );
+
+      // Adjust button position based on scrolling direction
+      setButtonPosition(scrollUp ? 0 : -80);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -83,6 +72,15 @@ function App() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [prevScrollPos]);
+
+
+  const style = {
+    position: "sticky",
+    top: `${0 + buttonPosition}px`, // Adjusted position
+    zIndex: "9999",
+    cursor: "pointer",
+    transition: "top 0.5s ease-in-out" // Smooth animation
+  }
 
 
   const [loading, setLoading] = useState(null);
@@ -114,21 +112,17 @@ function App() {
         </div> */}
 
         {loading ?
-          (<> <div className="mobile">
-            {showNavbar ?
+          (<>
+            <div className="mobile" style={style}>
               <MobileNavebar />
-              :
-              ""
-            }
-          </div>
-            {/* <MobileNavbarBottom /> */}
-            {/* <BottomNav /> */}
-            <Navbar/>
+            </div>
+
+            <Navbar />
             <ScrollToTop /> </>)
           :
           ""
         }
-        <Routes>
+        <Routes >
           <Route exact path="/" element={<Login />} />
           <Route path="signUp" element={<SignUp />} />
 
@@ -143,6 +137,7 @@ function App() {
               <Route exact path="changePassword" element={<ChangePassword />} />
               <Route exact path="forgotPassword" element={<ForgotPassword />} />
 
+              {/* <Route path="option" element={<Option />} /> */}
               <Route path="option" element={<Option />} />
               <Route path="setting" element={<Setting />} />
               <Route path="policy" element={<Policy />} />

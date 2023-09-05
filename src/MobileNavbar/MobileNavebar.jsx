@@ -30,10 +30,10 @@ const MobileNavebar = () => {
     const unsub = auth.onAuthStateChanged((user) => {
       if (user) {
         document.getElementById("navId").style.display = "flex";
-        document.getElementById("navIdB").style.display = "flex";
+        // document.getElementById("navIdB").style.display = "flex";
       } else {
         document.getElementById("navId").style.display = "none";
-        document.getElementById("navIdB").style.display = "none";
+        // document.getElementById("navIdB").style.display = "none";
       }
     });
     return unsub;
@@ -57,8 +57,8 @@ const MobileNavebar = () => {
         setLoading(true);
         setTimeout(() => {
           const x = document.getElementById("navId");
-          const y = document.getElementById("navIdB");
-          if (x.style.display || y.style.display == "none") {
+          // const y = document.getElementById("navIdB");
+          if (x.style.display == "none") {
             x.style.display = "flex";
             setLoading(false);
           }
@@ -66,7 +66,7 @@ const MobileNavebar = () => {
       } else {
         setTimeout(() => {
           const x = document.getElementById("navId");
-          const y = document.getElementById("navIdB");
+          // const y = document.getElementById("navIdB");
           if (x.style.display || x.style.display == "flex") {
             x.style.display = "none";
             setLoading(false);
@@ -80,18 +80,33 @@ const MobileNavebar = () => {
     };
   }, []);
 
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+    else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme])
 
   const darkTheme = () => {
     setDayTheme(!dayTheme);
+    setTheme(theme === 'dark' ? "light" : "dark");
   };
 
+
+  
   return (
     <>
       <div
-        className="mobile-nav-container"
+        className="  dark:bg-darkDiv mobile-nav-container"
         style={{ display: "none" }}
         id="navId"
+
       >
+
         <Link to="home/" onClick={handleScrollToTop} style={{ textDecoration: "none" }}>
           {" "}
           <div className="mobile-nav-title">
@@ -103,7 +118,7 @@ const MobileNavebar = () => {
           <span className="mobile-nav-mainu">
             <Link to="find_friend/" className="link">
               <div>
-                <BsFillPeopleFill className="mobile-nav-icon" />
+                <BsFillPeopleFill className="mobile-nav-icon dark:text-darkIcon" />
                 {/* <img src={p} width={"18px"} alt="" /> */}
               </div>
             </Link>
@@ -112,7 +127,7 @@ const MobileNavebar = () => {
           <span className="mobile-nav-mainu">
             <Link to="search/" className="link">
               <div>
-                <RiSearchLine className="mobile-nav-icon" />
+                <RiSearchLine className="mobile-nav-icon dark:text-darkIcon" />
               </div>
             </Link>
           </span>
@@ -120,15 +135,15 @@ const MobileNavebar = () => {
           <div onClick={() => darkTheme()} className="mobile-nav-mainu">
             {dayTheme ?
 
-              <BsMoonStarsFill className="mobile-nav-icon" onClick={darkTheme} />
+              <BsFillSunFill className="mobile-nav-icon dark:text-darkIcon" onClick={darkTheme} />
               :
-              <BsFillSunFill className="mobile-nav-icon" onClick={darkTheme} />
+              <BsMoonStarsFill className="mobile-nav-icon text-red" onClick={darkTheme} />
             }
           </div>
 
           <span className="mobile-nav-mainu">
             <Link to="option/" className="link">
-              <RxHamburgerMenu className="mobile-nav-icon" />
+              <RxHamburgerMenu className="mobile-nav-icon dark:text-darkIcon" />
             </Link>
           </span>
         </div>

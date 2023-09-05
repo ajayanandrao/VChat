@@ -30,7 +30,7 @@ const CurrentUserProfileMain = () => {
     }, []);
 
     return (
-        <div className='current-user-profile-main'>
+        <div className='current-user-profile-main dark:bg-dark'>
             <LeftArro />
 
             {api.map((item) => {

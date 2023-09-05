@@ -20,7 +20,7 @@ const WeddingMain = () => {
 
 
     return (
-        <>
+        <div className='wedding-Main-div bg-lightOption dark:bg-dark'>
             <LeftArro />
             <WeddingList />
             <Link to={"/AddWedding/"}>
@@ -28,10 +28,10 @@ const WeddingMain = () => {
                     <FaPlus style={{ fontSize: "18px" }} />
                 </div>
             </Link>
-            <div className='w-up-bio-btn' onClick={handleScrollToTop}>
+            <div className='w-up-bio-btn dark:text-darkIcon' onClick={handleScrollToTop}>
                 <BiUpArrowAlt />
             </div>
-        </>
+        </div>
     )
 }
 

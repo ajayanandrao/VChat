@@ -24,9 +24,6 @@
         .feed-Edit-card {
             width: 100%;
 
-
-
-
             .feed-edit-inner-div {
                 margin: 0 auto;
                 max-width: 400px;
@@ -49,13 +46,14 @@
                     width: 95%;
                     margin: 0 auto;
                     // height: 250px;
-                    background: #f0f2f5;
+                    // background: #f0f2f5;
                     display: flex;
                     justify-content: start;
                     flex-direction: column;
                     align-items: center;
                     // padding: 1rem 0;
                     border-radius: 1rem;
+                    transition: 0.8s ease-in-out;
 
                     .feed-main-innner {
                         display: flex;
@@ -101,7 +99,7 @@
                         .feed-ed-photo-text {
                             font-size: 16px;
                             font-weight: 700;
-                            color: rgba(0, 0, 0, 0.685);
+                            // color: rgba(0, 0, 0, 0.685);
                         }
                     }
 

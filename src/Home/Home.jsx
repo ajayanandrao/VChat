@@ -13,6 +13,7 @@ import { CircularProgress } from '@mui/material';
 import Feed from '../Feed/Feed';
 import MobileNavebar from '../MobileNavbar/MobileNavebar';
 import Navbar from '../Navbar/Navbar';
+import { motion, useAnimation } from 'framer-motion';
 
 const Home = () => {
     const [api, setApiData] = useState([]);
@@ -103,7 +104,7 @@ const Home = () => {
 
 
     return (
-        <>
+        <div className='home-main-container dark:bg-dark'>
             {/* <Navbar /> */}
             {loading ? (
                 <div className='skeleton-center'>
@@ -114,9 +115,13 @@ const Home = () => {
 
                     {/* <div className={`mobile-navbar ${showNavbar ? '' : 'hidden'}`}><MobileNavebar/></div> */}
 
-                    <div className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
+                    <motion.div
+                        transition={{ duration: 0.3, delay: 0.8 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
                         <AiOutlineArrowUp className='top-arrow' />
-                    </div>
+                    </motion.div>
                     {/* <StoryForm /> */}
                     <Post />
 
@@ -127,7 +132,7 @@ const Home = () => {
             )}
 
 
-        </>
+        </div>
     )
 }
 

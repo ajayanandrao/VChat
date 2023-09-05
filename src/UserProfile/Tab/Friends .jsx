@@ -91,13 +91,13 @@ const Friends = ({ user }) => {
     return (
         <>
 
-            <h2>Friends</h2>
+            <h2 className='text-2xl dark:text-darkPostText mb-4'>Friends</h2>
 
             <input type="text"
                 placeholder='Serch friends'
                 onChange={(e) => setSearch(e.target.value)}
                 value={search}
-                className='friend-search' />
+                className='friend-search dark:bg-darkDiv dark:text-darkPostText' />
 
             <div className="Friend-grid-parent-container">
                 <div className='friend-container'>
@@ -123,7 +123,7 @@ const Friends = ({ user }) => {
                                                     <Link style={{ textDecoration: "none" }} to={`/users/${friend.userId}/${friend.id}/profile/`}>
                                                         <div>
                                                             <img src={item.PhotoUrl} className='friend-img' alt="" />
-                                                            <div className='friend-name'>{item.name}</div>
+                                                            <div className='friend-name dark:text-darkPostText'>{item.name}</div>
                                                             {/* <button onClick={() => deleteFriend(friend.id, friend.uid)} className='btn btn-info'>Delete</button> */}
                                                         </div>
                                                     </Link>

@@ -152,29 +152,28 @@ const Message = () => {
             const requestDoc = await getDoc(requestRef);
 
             if (requestDoc.exists()) {
-                // await updateDoc(requestRef, { status: 'accepted' });
-                // console.log('Friend request accepted!');
+                await updateDoc(requestRef, { status: 'accepted' });
+                console.log('Friend request accepted!');
 
                 // Add sender to receiver's friends list
-                // await addDoc(collection(db, `allFriends/${receiverUid}/Friends`), {
-                //     userId: senderId,
-                //     displayName: senderName,
-                //     photoUrl: senderPhotoUrl,
-                //     status: 'accepted',
-                //     uid: senderId,
-                //     requestID: mainid,
-                // });
+                await addDoc(collection(db, `allFriends/${receiverUid}/Friends`), {
+                    userId: senderId,
+                    displayName: senderName,
+                    photoUrl: senderPhotoUrl,
+                    status: 'accepted',
+                    uid: senderId,
+                    requestID: mainid,
+                });
 
                 // Add receiver to sender's friends list
-                // await addDoc(collection(db, `allFriends/${senderId}/Friends`), {
-                //     userId: receiverUid,
-                //     displayName: receiverName,
-                //     photoUrl: receiverPhotoUrl,
-                //     status: 'accepted',
-                //     uid: receiverUid,
-                //     requestID: mainid,
-                // });
-
+                await addDoc(collection(db, `allFriends/${senderId}/Friends`), {
+                    userId: receiverUid,
+                    displayName: receiverName,
+                    photoUrl: receiverPhotoUrl,
+                    status: 'accepted',
+                    uid: receiverUid,
+                    requestID: mainid,
+                });
 
                 const notificationRef = collection(db, 'Notification');
                 const notificationQuerySnapshot = await getDocs(notificationRef);
@@ -187,9 +186,6 @@ const Message = () => {
                         console.log('Notification deleted.');
                     }
                 });
-
-
-
 
             } else {
                 console.error('Friend request not found.');
@@ -267,12 +263,13 @@ const Message = () => {
 
     return (
         <>
-            <div className="message-wrapper">
-                <div className="message-wrapper-inner">
-                    <div className="wrapper-container">
-                        <div className="Message-back-div">
-                            <i onClick={goBack} className="bi bi-arrow-left "></i>
-                            <input type="text" className='Message-User-input'
+            <div className="message-wrapper ">
+                <div className="message-wrapper-inner dark:bg-dark">
+
+                    <div className="wrapper-container bg-white_0 dark:bg-dark">
+                        <div className="Message-back-div bg-white_0 dark:bg-dark">
+                            <i onClick={goBack} className="bi bi-arrow-left dark:text-darkIcon"></i>
+                            <input type="text" className='Message-User-input dark:bg-darkInput dark:text-darkPostText'
                                 onChange={(e) => setSearch(e.target.value)}
                                 value={search} placeholder='Message-User' />
                         </div>
@@ -280,16 +277,16 @@ const Message = () => {
                         <div className="Message-user-List">
 
                             <div className="tab-block">
-                                <button className="w3-bar-item w3-button" onClick={() => openCity('Message')}>
+                                <button className="w3-bar-item w3-button dark:text-darkPostText" onClick={() => openCity('Message')}>
                                     Message
                                 </button>
 
-                                <button className="w3-bar-item w3-button" onClick={() => openCity('Online')}>
+                                <button className="w3-bar-item w3-button  dark:text-darkPostText" onClick={() => openCity('Online')}>
                                     Online
                                 </button>
 
 
-                                <div className='request-tab-relative-div'>
+                                <div className='request-tab-relative-div  dark:text-darkPostText'>
                                     <button className="w3-bar-item w3-button" onClick={() => openCity('Request')}>
 
                                         <div className='request-tab-absolute-div'>
@@ -319,9 +316,9 @@ const Message = () => {
                                                     return (
                                                         <div key={userId}>
                                                             <div className='message-profile-div-one'>
-                                                                <Link style={{ textDecoration: "none" }} to={`/users/${user.userId}/message`}>
+                                                                <Link style={{ textDecoration: "none", display: "flex", alignItems: "center" }} to={`/users/${user.userId}/message`}>
                                                                     <img src={item.PhotoUrl} className='message-user-img' alt='' />
-                                                                    <span className='message-user-name'>{item.name}</span>
+                                                                    <span className='message-user-name dark:text-darkProfileName'>{item.name}</span>
                                                                 </Link>
                                                             </div>
                                                             {userMessages.map((message, index) => (
@@ -334,10 +331,6 @@ const Message = () => {
                                         </>
                                     )
                                 })}
-
-
-
-
                             </div>
 
                             <div id="Online" className=" w3-animate-bottom city" style={{ display: "none" }}>
@@ -358,7 +351,7 @@ const Message = () => {
                                                                 <Avatar alt="Remy Sharp" className='avt' src={online.photoUrl} />
                                                             </StyledBadge>
                                                         </span>
-                                                        <span className="online-user-name">{online.presenceName}</span>
+                                                        <span className="online-user-name dark:text-darkProfileName">{online.presenceName}</span>
                                                     </Link>
                                                 </div>
                                             );
@@ -389,13 +382,13 @@ const Message = () => {
                                                         </div>
 
                                                         <div className='request-inne-container'>
-                                                            <div className='request-name'>{item.senderName}</div>
+                                                            <div className='request-name  dark:text-darkProfileName'>{item.senderName}</div>
 
                                                             <div className="request-btn-div d-flex">
                                                                 <div className="btn-success-custom box-shadow-none"
-                                                                    onClick={() => acceptFriendRequest
-                                                                        (item.id, item.senderId, item.receiverUid, item.senderName, item.senderPhotoUrl,
-                                                                            item.receiverName, item.receiverPhotoUrl, item.mainid)}>Accept</div>
+                                                                    onClick={() => acceptFriendRequest(item.id, item.senderId, item.receiverUid, item.senderName, item.senderPhotoUrl,
+                                                                        item.receiverName, item.receiverPhotoUrl, item.mainid)}>Accept</div>
+
                                                                 <div className="btn-D-custom box-shadow-none ms-4"
                                                                     onClick={() => DeleteRequest(item.id, item.senderId, item.receiverUid)}
                                                                 >Remove</div>

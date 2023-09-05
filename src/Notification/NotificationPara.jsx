@@ -173,19 +173,19 @@ const NotificationPara = () => {
     }
 
     return (
-        <div className='view-container'>
+        <div className='view-container dark:bg-darkDiv'>
             <div className='view-noti-profile-div'>
                 <img src={api.photoURL} className='View-noti-profile-img' alt="" />
-                <div className='view-noti-profile-name'>{api.displayName}</div>
-                <div className='view-noti-post-time'>
+                <div className='view-noti-profile-name dark:text-darkProfileName'>{api.displayName}</div>
+                <div className='view-noti-post-time dark:text-darkTime'>
                     <TimeAgoComponent timestamp={api.bytime && api.bytime.toDate()} />
                 </div>
-                <div className="view-noti-post-close">
+                <div className="view-noti-post-close dark:text-darkIcon">
                     <CgClose onClick={goBack} />
                 </div>
             </div>
 
-            <div className='view-profile-postText'>{api.postText}</div>
+            <div className='view-profile-postText dark:text-darkPostText'>{api.postText}</div>
 
             <div className="view-img-wrapper">
                 {api.img && (api.name.includes('.jpg') || api.name.includes('.png')) ? (
@@ -211,13 +211,13 @@ const NotificationPara = () => {
                 <div className="view-tab-block">
                     <div className="w3-bar-item d-flex align-items-center" onClick={() => openCity('like')}>
                         <AiFillHeart style={{ color: "#FF0040", fontSize: "35px" }} />
-                        <div className="view-tab-like-count ms-2">
+                        <div className="view-tab-like-count ms-2 dark:text-darkProfileName">
                             {isLiked.length}
                         </div>
                     </div>
                     <div className="w3-bar-item d-flex align-items-center" onClick={() => openCity('comment')}>
                         <BsFillChatDotsFill style={{ color: "#6366f1", fontSize: "30px" }} />
-                        <div className="view-tab-like-count ms-2">
+                        <div className="view-tab-like-count ms-2 dark:text-darkProfileName">
                             {comment.length}
                         </div>
                     </div>
@@ -257,7 +257,7 @@ const NotificationPara = () => {
                             <div key={like.id}>
                                 <div className='noti-pro-div mb-3'>
                                     <img src={like.photoUrl} className='noti-pro-img' alt="" />
-                                    <span style={{ textTransform: "capitalize" }}>{like.name}</span>
+                                    <span style={{ textTransform: "capitalize" }} className='dark:text-darkProfileName'>{like.name}</span>
                                 </div>
                             </div>
                         )
@@ -274,13 +274,12 @@ const NotificationPara = () => {
                                         <img src={item.photoURL} className='notification-comment-profile-image' alt="" />
                                     </div>
 
-                                    <div className="notification-comment-profile-group">
-                                        <div className="notification-comment-profile-group-name">
-                                            <span style={{ textTransform: "capitalize", fontWeight: "600" }}>{item.displayName}</span>
-
+                                    <div className="notification-comment-profile-group bg-white_0 dark:bg-dark">
+                                        <div className="notification-comment-profile-group-name dark:text-darkProfileName">
+                                            <span style={{ textTransform: "capitalize", fontWeight: "600" }} className='' >{item.displayName}</span>
                                         </div>
-                                        <span className='comment-api' >{item.comment}</span>
-                                        <div className='view-noti-post-time'>
+                                        <span className='comment-api dark:text-darkPostText' >{item.comment}</span>
+                                        <div className='view-noti-post-time dark:text-darkTime'>
                                             <CommentTimeAgoComponent timestamp={item.commentTime && item.commentTime.toDate()} />
                                         </div>
 

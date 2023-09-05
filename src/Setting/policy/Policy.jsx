@@ -11,14 +11,14 @@ const Policy = () => {
     }
 
     return (
-        <div className='policy-container'>
+        <div className='policy-container bg-lightOption dark:bg-darkDiv'>
             <div className="setting-back-div">
-                <i onClick={goBack} className="bi bi-arrow-left setting-back"></i>
+                <i onClick={goBack} className="bi bi-arrow-left setting-back  dark:text-darkIcon"></i>
             </div>
 
             <div className='policy-box-sizing'>
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-white_0 text-black_0 dark:bg-dark dark:text-darkPostText ">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot' />
@@ -58,7 +58,7 @@ const Policy = () => {
                 </div>
 
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-white_0 text-black_0 dark:bg-dark dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot' />
@@ -98,7 +98,7 @@ const Policy = () => {
                 </div>
 
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-white_0 text-black_0 dark:bg-dark dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot' />
@@ -128,7 +128,7 @@ const Policy = () => {
 
                 </div>
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-white_0 text-black_0 dark:bg-dark dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot' />
@@ -159,7 +159,7 @@ const Policy = () => {
                 </div>
 
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-white_0 text-black_0 dark:bg-dark dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot' />
@@ -180,7 +180,7 @@ const Policy = () => {
 
                 </div>
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-white_0 text-black_0 dark:bg-dark dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot' />
@@ -198,7 +198,7 @@ const Policy = () => {
                             Violating VChat App policies may result in warnings, temporary account suspension, or permanent banning, depending on the severity of the violation.
                         </div>
                     </div>
-                    
+
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
                             <RxDotFilled className='policy-dot-sm' />

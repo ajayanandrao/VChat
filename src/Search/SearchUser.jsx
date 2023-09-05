@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./SearchUser.scss";
+import "./../People/People.scss";
 import { MdDarkMode } from "react-icons/md"
 import { Link, useNavigate } from 'react-router-dom';
 import { db } from "./../Firebase";
@@ -28,22 +29,23 @@ const SearchUser = () => {
 
 
     return (
-        <>
-            <div className='search-wrapper'>
-                <div className="search-container-inner">
+        <div className=''>
+            <div className='people-wrapper dark:bg-darkDiv'>
 
-                    <div className="Search-container">
+                <div className="people-wrapper-inner  ">
 
-                        <i onClick={goBack} className="bi bi-arrow-left "></i>
+                    <div className="People-back-div">
+
+                        <i onClick={goBack} className="bi bi-arrow-left dark:text-darkIcon "></i>
                         <input type="text"
-                            className='Seatch-User-input'
+                            className='People-User-input dark:bg-darkInput dark:text-darkPostText'
                             onChange={(e) => setSearch(e.target.value)}
                             value={search}
                             placeholder='Search friends' />
 
                     </div>
 
-                    <div className="Search-user-List">
+                    <div className="People-user-List">
                         {
                             api
                                 .filter((value) => {
@@ -60,15 +62,17 @@ const SearchUser = () => {
                                     if (item.uid !== currentUser.uid) {
                                         return (
                                             <div key={item.id}>
-                                                <div className="Search-user-profile-div">
-                                                    <img
-                                                        src={item.PhotoUrl}
-                                                        className="Search-user-profile-img"
-                                                        alt=""
-                                                    />
-                                                    <Link to={`/users/${item.uid}`}>
-                                                        <div className="Search-user-profile-name">{item.name}</div>
-                                                    </Link>
+                                                <div className="people-container">
+                                                    <div>
+                                                        <img src={item.PhotoUrl} className="people-img" alt="" />
+                                                    </div>
+
+                                                    <div className="people-name-div">
+
+                                                        <Link to={`/users/${item.uid}`}>
+                                                            <div className="people-name dark:text-darkProfileName">{item.name}</div>
+                                                        </Link>
+                                                    </div>
                                                 </div>
                                             </div>
                                         );
@@ -83,7 +87,7 @@ const SearchUser = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

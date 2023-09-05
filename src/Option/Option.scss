@@ -10,11 +10,10 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: $bg-light;
 	color: #262626;
 	font-family: Arial, Helvetica, sans-serif;
 	z-index: 9999;
-	background: rgba(255, 255, 255, 0.034);
+	// background: rgba(255, 255, 255, 0.034);
 	backdrop-filter: blur(10px);
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 	cursor: pointer;

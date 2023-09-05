@@ -64,7 +64,7 @@ const NotificationProps = () => {
     }
 
     return (
-        <div className='New-Notification-Container'>
+        <div className='New-Notification-Container dark:bg-dark'>
             {
                 notificationData.map((item) => {
                     // if (currentUser && currentUser.uid === item.uid) {
@@ -74,12 +74,12 @@ const NotificationProps = () => {
                                 <Link to={`/message/`}>
                                     <div className="n-container">
 
-                                        <div className="n-profile-div">
+                                        <div className="n-profile-div dark:bg-darkDiv">
                                             <img src={item.photoUrl} alt="" className='n-profile-img' />
                                             <div className='n-name-and-time-div'>
-                                                <div className="n-profile-name">{item.name || item.senderName}</div>
+                                                <div className="n-profile-name dark:text-darkProfileName">{item.name || item.senderName}</div>
 
-                                                <div style={{ display: "flex", alignItems: "center" }}>
+                                                <div style={{ display: "flex", alignItems: "center" }}className='dark:text-darkTime'>
                                                     <TimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
                                                     <div className='ms-3' style={{ fontWeight: "600", color: "#088A85" }} >{item.senderName ? "Friend Request" : null}</div>
 
@@ -146,12 +146,12 @@ const NotificationProps = () => {
                                 <Link to={`/notification/${item.id}`}>
                                     <div className="n-container">
 
-                                        <div className="n-profile-div">
+                                        <div className="n-profile-div dark:bg-darkDiv">
                                             <img src={item.photoUrl} alt="" className='n-profile-img' />
                                             <div className='n-name-and-time-div'>
-                                                <div className="n-profile-name">{item.name || item.senderName}</div>
+                                                <div className="n-profile-name dark:text-darkProfileName">{item.name || item.senderName}</div>
 
-                                                <div style={{ display: "flex", alignItems: "center" }}>
+                                                <div style={{ display: "flex", alignItems: "center" }} className='dark:text-darkTime'>
                                                     <TimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
                                                     <div className='ms-3' style={{ fontWeight: "600", color: "#088A85" }} >{item.senderName ? "Friend Request" : null}</div>
 
