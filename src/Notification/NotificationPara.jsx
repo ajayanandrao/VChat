@@ -173,20 +173,20 @@ const NotificationPara = () => {
     }
 
     return (
-        <div className='view-container bg-white_0 dark:bg-dark'>
+        <div className='view-container bg-light_0 dark:bg-dark'>
 
             <div className='view-noti-profile-div'>
                 <img src={api.photoURL} className='View-noti-profile-img' alt="" />
-                <div className='view-noti-profile-name dark:text-darkProfileName'>{api.displayName}</div>
-                <div className='view-noti-post-time dark:text-darkPostTime'>
+                <div className='view-noti-profile-name text-lightProfileName dark:text-darkProfileName'>{api.displayName}</div>
+                <div className='view-noti-post-time text-lightPostTime dark:text-darkPostTime'>
                     <TimeAgoComponent timestamp={api.bytime && api.bytime.toDate()} />
                 </div>
-                <div className="view-noti-post-close dark:text-darkPostText">
+                <div className="view-noti-post-close text-lightPostText dark:text-darkPostText">
                     <CgClose onClick={goBack} />
                 </div>
             </div>
 
-            <div className='view-profile-postText dark:text-darkPostText'>{api.postText}</div>
+            <div className='view-profile-postText text-lightPostText dark:text-darkPostText'>{api.postText}</div>
 
             <div className="view-img-wrapper">
                 {api.img && (api.name.includes('.jpg') || api.name.includes('.png')) ? (
@@ -208,30 +208,32 @@ const NotificationPara = () => {
                 ) : null}
             </div>
 
-            
-                <div className="view-tab-block">
-                    <div className="w3-bar-item d-flex align-items-center" onClick={() => openCity('like')}>
-                        <AiFillHeart style={{ color: "#FF0040", fontSize: "35px" }} />
-                        <div className="view-tab-like-count dark:text-darkPostText ms-2">
-                            {isLiked.length}
-                        </div>
+
+            <div className="view-tab-block">
+                <div className="w3-bar-item d-flex align-items-center" onClick={() => openCity('like')}>
+                    <AiFillHeart style={{ color: "#FF0040", fontSize: "35px" }} />
+                    <div className="view-tab-like-count text-lightPostText dark:text-darkPostText ms-2">
+                        {isLiked.length}
                     </div>
-                    <div className="w3-bar-item d-flex align-items-center" onClick={() => openCity('comment')}>
-                        <BsFillChatDotsFill style={{ color: "#6366f1", fontSize: "30px" }} />
-                        <div className="view-tab-like-count dark:text-darkPostText ms-2">
-                            {comment.length}
-                        </div>
+                </div>
+                <div className="w3-bar-item d-flex align-items-center" onClick={() => openCity('comment')}>
+                    <BsFillChatDotsFill style={{ color: "#6366f1", fontSize: "30px" }} />
+                    <div className="view-tab-like-count text-lightPostText dark:text-darkPostText ms-2">
+                        {comment.length}
                     </div>
-                </div >
-                <div className='' style={{ width: "100%", height: "100%", boxSizing: "border-box", overflowY: "scroll" }}>
+                </div>
+            </div >
+
+
+            <div className='' style={{ width: "100%", height: "100%", boxSizing: "border-box", overflowY: "scroll" }}>
                 <div className="view-tab-make-comment-div">
-                    <div className="view-tab-make-comment-inner-div dark:bg-darkDiv">
+                    <div className="view-tab-make-comment-inner-div bg-lightInput dark:bg-darkDiv">
                         <input
                             type="text"
                             placeholder='write a Comment'
                             value={newComment}
                             onChange={(e) => setNewComment(e.target.value)}
-                            className='view-tab-make-comment-input dark:text-darkProfileName'
+                            className='view-tab-make-comment-input text-lightProfileName  dark:text-darkProfileName'
                         // onKeyDown={(e) => {
                         //     if (e.key === 'Enter') {
                         //         e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)
@@ -258,7 +260,7 @@ const NotificationPara = () => {
                             <div key={like.id}>
                                 <div className='noti-pro-div mb-3'>
                                     <img src={like.photoUrl} className='noti-pro-img' alt="" />
-                                    <span style={{ textTransform: "capitalize" }} className='dark:text-darkProfileName'>{like.name}</span>
+                                    <span style={{ textTransform: "capitalize" }} className='text-lightPostText dark:text-darkProfileName'>{like.name}</span>
                                 </div>
                             </div>
                         )
@@ -276,20 +278,20 @@ const NotificationPara = () => {
                                     </div>
 
                                     <div className="notification-comment-profile-group">
-                                        <div className='dark:bg-darkDiv' style={{ padding: "5px 10px", borderRadius: "10px" }} >
+                                        <div className='bg-lightDiv dark:bg-darkDiv' style={{ padding: "5px 10px", borderRadius: "10px" }} >
                                             <div className="notification-comment-profile-group-name">
-                                                <span style={{ textTransform: "capitalize", fontWeight: "600" }} className='dark:text-darkProfileName'>
+                                                <span style={{ textTransform: "capitalize", fontWeight: "600" }} className='text-lightProfileName dark:text-darkProfileName'>
                                                     {item.displayName}</span>
                                             </div>
-                                            <span className='comment-api dark:text-darkPostText' >{item.comment}</span>
+                                            <span className='comment-api text-lightPostText dark:text-darkPostText' >{item.comment}</span>
                                         </div>
-                                        <div className='view-noti-post-time dark:text-darkPostTime'>
+                                        <div className='view-noti-post-time text-lightPostTime dark:text-darkPostTime'>
                                             <CommentTimeAgoComponent timestamp={item.commentTime && item.commentTime.toDate()} />
                                         </div>
                                     </div>
                                     <div className='view-comment-delte-container'>
                                         {currentUser && currentUser.uid == item.uid ?
-                                            <div className="view-comment-delete-div dark:text-darkPostText">
+                                            <div className="view-comment-delete-div text-lightPostText dark:text-darkPostText">
                                                 <CgClose onClick={() => deleteComment(item.id)} />
                                             </div>
                                             :

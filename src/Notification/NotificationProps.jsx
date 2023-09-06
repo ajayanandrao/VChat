@@ -69,10 +69,10 @@ const NotificationProps = () => {
     }
 
     return (
-        <div className='New-Notification-Container dark:bg-dark'>
+        <div className='New-Notification-Container bg-light_0 dark:bg-dark'>
 
-            <div className="notification-back-div bg-black_0 dark:bg-dark ">
-                <i onClick={goBack} className="bi bi-arrow-left dark:text-darkPostIcon "></i>
+            <div className="notification-back-div bg-light_0 dark:bg-dark ">
+                <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon "></i>
             </div>
 
             <div style={{ boxSizing: "border-box", overflowY: "scroll", width: "100%", height: "100%", paddingLeft: "1rem", paddingRight: "1rem", paddingTop: "1rem", paddingBottom: "60px" }}>
@@ -86,12 +86,12 @@ const NotificationProps = () => {
                                         <Link to={`/message/`}>
                                             <div className="n-container ">
 
-                                                <div className="n-profile-div dark:bg-darkDiv">
+                                                <div className="n-profile-div bg-lightDiv dark:bg-darkDiv">
                                                     <img src={item.photoUrl} alt="" className='n-profile-img' />
                                                     <div className='n-name-and-time-div'>
-                                                        <div className="n-profile-name dark:text-darkProfileName">{item.name || item.senderName}</div>
+                                                        <div className="n-profile-name text-lightProfileName dark:text-darkProfileName">{item.name || item.senderName}</div>
 
-                                                        <div style={{ display: "flex", alignItems: "center" }}>
+                                                        <div style={{ display: "flex", alignItems: "center" }} className='text-lightPostTime dark:text-darkPostTime'>
                                                             <TimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
                                                             <div className='ms-3' style={{ fontWeight: "600", color: "#088A85" }} >{item.senderName ? "Friend Request" : null}</div>
 
@@ -124,6 +124,7 @@ const NotificationProps = () => {
                                                             null
                                                         }
                                                     </div>
+
                                                 </div>
 
                                                 <div className="n-media-div">
@@ -158,12 +159,12 @@ const NotificationProps = () => {
                                         <Link to={`/notification/${item.id}`}>
                                             <div className="n-container">
 
-                                                <div className="n-profile-div dark:bg-darkDiv">
+                                                <div className="n-profile-div bg-lightDiv dark:bg-darkDiv">
                                                     <img src={item.photoUrl} alt="" className='n-profile-img' />
                                                     <div className='n-name-and-time-div'>
-                                                        <div className="n-profile-name dark:text-darkProfileName ">{item.name || item.senderName}</div>
+                                                        <div className="n-profile-name text-lightProfileName dark:text-darkProfileName ">{item.name || item.senderName}</div>
 
-                                                        <div style={{ display: "flex", alignItems: "center" }} className="dark:text-darkPostTime">
+                                                        <div style={{ display: "flex", alignItems: "center" }} className="text-lightPostTime dark:text-darkPostTime">
                                                             <TimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
                                                             <div className='ms-3' style={{ fontWeight: "600", color: "#088A85" }} >{item.senderName ? "Friend Request" : null}</div>
 

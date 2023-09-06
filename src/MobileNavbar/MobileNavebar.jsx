@@ -100,7 +100,7 @@ const MobileNavebar = () => {
   return (
     <>
       <div
-        className="mobile-nav-container bg-white_0 dark:bg-dark"
+        className="mobile-nav-container bg-light_0 dark:bg-dark"
         style={{ display: "none" }}
         id="navId"
       >
@@ -115,7 +115,7 @@ const MobileNavebar = () => {
           <span className="mobile-nav-mainu">
             <Link to="find_friend/" className="link">
               <div>
-                <BsFillPeopleFill className="mobile-nav-icon dark:text-darkPostIcon" />
+                <BsFillPeopleFill className="mobile-nav-icon text-white_0 dark:text-darkPostIcon" />
                 {/* <img src={p} width={"18px"} alt="" /> */}
               </div>
             </Link>
@@ -124,7 +124,7 @@ const MobileNavebar = () => {
           <span className="mobile-nav-mainu">
             <Link to="search/" className="link">
               <div>
-                <RiSearchLine className="mobile-nav-icon dark:text-darkPostIcon" />
+                <RiSearchLine className="mobile-nav-icon text-white_0 dark:text-darkPostIcon" />
               </div>
             </Link>
           </span>
@@ -132,15 +132,15 @@ const MobileNavebar = () => {
           <div onClick={()=>darkTheme()} className="mobile-nav-mainu">
             {dayTheme ?
 
-              <BsFillSunFill className="mobile-nav-icon dark:text-darkPostIcon" />
+              <BsFillSunFill className="mobile-nav-icon  dark:text-darkPostIcon" />
               :
-              <BsMoonStarsFill className="mobile-nav-icon" />
+              <BsMoonStarsFill className="mobile-nav-icon text-white_0" />
             }
           </div>
 
           <span className="mobile-nav-mainu">
             <Link to="option/" className="link">
-              <RxHamburgerMenu className="mobile-nav-icon dark:text-darkPostIcon" />
+              <RxHamburgerMenu className="mobile-nav-icon text-white_0 dark:text-darkPostIcon" />
             </Link>
           </span>
         </div>

@@ -5,6 +5,7 @@
     justify-content: center;
     width: 100%;
     padding: 0 1rem;
+    padding-bottom: 50px;
     .friend-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -26,6 +27,7 @@
     max-width: 300px;
     border-radius: 40px;
     box-shadow: $border-input;
+    transition: 0.8s ease-in-out;
     // box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 

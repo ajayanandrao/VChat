@@ -30,7 +30,7 @@ const CurrentUserProfileMain = () => {
     }, []);
 
     return (
-        <div className='current-user-profile-main dark:bg-dark'>
+        <div className='current-user-profile-main bg-light_0 dark:bg-dark'>
             <div style={{ width: "100%", height: "100vh", boxSizing: "border-box", overflowY: "scroll" }}>
                 <LeftArro />
 

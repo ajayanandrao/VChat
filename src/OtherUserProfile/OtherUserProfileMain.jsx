@@ -36,14 +36,14 @@ const OtherUserProfileMain = () => {
 
     if (!user) {
         return <>
-            <div className='skeleton-center'>
+            <div className='skeleton-center bg-light_0 dark:bg-dark'>
                 <CircularProgress className='circularprogress' />
             </div >
         </>;
     }
 
     return (
-        <div className='other-user-profile-main dark:bg-dark'>
+        <div className='other-user-profile-main bg-light_0 dark:bg-dark'>
             <LeftArro />
             <div style={{ width: "100%", height: "100vh", boxSizing: "border-box", overflowY: "scroll" }}>
                 <ProfileOne user={user} />

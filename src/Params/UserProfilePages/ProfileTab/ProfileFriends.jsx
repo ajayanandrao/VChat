@@ -4,6 +4,7 @@ import { collection, getDocs, onSnapshot, query } from 'firebase/firestore';
 import { db } from '../../../Firebase';
 import { Link } from 'react-router-dom';
 
+
 const ProfileFriends = ({ user }) => {
 
     const { currentUser } = useContext(AuthContext);
@@ -38,13 +39,13 @@ const ProfileFriends = ({ user }) => {
 
     return (
         <div>
-            <h2 className='text-3xl dark:text-darkPostText mb-3'>Friends</h2>
+            <h2 className='text-3xl text-lightPostText dark:text-darkPostText mb-3'>Friends</h2>
 
             <input type="text"
                 placeholder='Serch friends '
                 onChange={(e) => setSearch(e.target.value)}
                 value={search}
-                className='friend-search dark:bg-darkDiv dark:text-darkPostText' />
+                className='friend-search bg-lightInput text-lightProfileName dark:bg-darkDiv dark:text-darkPostText' />
 
             <div className="Friend-grid-parent-container">
                 <div className='friend-container'>
@@ -71,7 +72,7 @@ const ProfileFriends = ({ user }) => {
                                                         <Link style={{ textDecoration: "none" }} to={`/users/${friend.userId}`}>
                                                             <div>
                                                                 <img src={item.PhotoUrl} className='friend-img' alt="" />
-                                                                <div className='friend-name dark:text-darkProfileName'>{item.name}</div>
+                                                                <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{item.name}</div>
                                                                 {/* <button onClick={() => deleteFriend(friend.id, friend.uid)} className='btn btn-info'>Delete</button> */}
                                                             </div>
                                                         </Link>

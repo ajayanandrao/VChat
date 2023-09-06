@@ -47,7 +47,6 @@ const LeftArro = () => {
         width: "35px",
         height: "35px",
         backdropFilter: "blur(10px)",
-        color: "aqua",
         position: "fixed",
         top: `${74 + buttonPosition}px`, // Adjusted position
         left: "10px",
@@ -61,7 +60,7 @@ const LeftArro = () => {
     }
 
     return (
-        <div className='back-btn-di' style={style} onClick={goBack}>
+        <div className='back-btn-di dark:text-aqua_0' style={style} onClick={goBack}>
             <HiOutlineArrowSmLeft fontSize={"25px"} />
         </div>
     );

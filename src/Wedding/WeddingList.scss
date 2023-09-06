@@ -1,15 +1,19 @@
 @import "./../Styles/Variable";
 
+.wedding-main-div{
+    transition: 0.8s ease-in-out;
+}
 .weddinglist-search-div {
     width: 100%;
     height: 50px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 0 1rem;
-    margin-top: 1rem;
+    padding: 1rem;
+    // margin-top: 1rem;
 
     .weddinglist-search {
+        margin-top: 1.5rem;
         width: 85%;
         max-width: 567px;
         height: 40px;
@@ -17,7 +21,7 @@
         border: none;
         padding-inline-start: 10px;
         box-shadow: $border-input;
-
+        transition: 0.8s ease-in-out;
         &:focus {
             border: none;
             outline: none;
@@ -29,9 +33,9 @@
     width: 100%;
     max-width: 567px;
     height: 300px;
-    background-color: white;
+    // background-color: white;
     box-shadow: $border-input;
-
+    transition: 0.8s ease-in-out;
     .weddingList-sender-div {
         width: 100%;
         padding: 1rem;

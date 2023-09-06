@@ -11,17 +11,17 @@ const Policy = () => {
     }
 
     return (
-        <div className='policy-container'>
-            <div className="setting-back-div">
-                <i onClick={goBack} className="bi bi-arrow-left setting-back"></i>
+        <div className='policy-container bg-light_0 dark:bg-dark'>
+            <div className="setting-back-div ">
+                <i onClick={goBack} className="bi bi-arrow-left text-lightPostIcon dark:text-darkPostIcon setting-back"></i>
             </div>
 
             <div className='policy-box-sizing'>
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
 
                     <div className="policy-containt-div">
-                        <RxDotFilled className='policy-dot' />
+                        <RxDotFilled className='policy-dot text-lightInput dark:text-dark' />
                         <div className="policy-containt-title">
                             User Behavior and Conduct
                         </div>
@@ -29,7 +29,7 @@ const Policy = () => {
 
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Respectful Communication
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -38,7 +38,7 @@ const Policy = () => {
                     </div>
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             No Discrimination
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -47,7 +47,7 @@ const Policy = () => {
                     </div>
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             User Safety
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -58,10 +58,10 @@ const Policy = () => {
                 </div>
 
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
 
                     <div className="policy-containt-div">
-                        <RxDotFilled className='policy-dot' />
+                        <RxDotFilled className='policy-dot text-lightInput dark:text-dark' />
                         <div className="policy-containt-title">
                             Content Sharing and Moderation
                         </div>
@@ -69,7 +69,7 @@ const Policy = () => {
 
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Appropriate Content
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -78,7 +78,7 @@ const Policy = () => {
                     </div>
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Copyright and Intellectual Property
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -87,7 +87,7 @@ const Policy = () => {
                     </div>
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Moderation
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -98,10 +98,10 @@ const Policy = () => {
                 </div>
 
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
 
                     <div className="policy-containt-div">
-                        <RxDotFilled className='policy-dot' />
+                        <RxDotFilled className='policy-dot text-lightInput dark:text-dark' />
                         <div className="policy-containt-title">
                             Privacy and Data Security
                         </div>
@@ -109,7 +109,7 @@ const Policy = () => {
 
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Data Privacy
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -118,7 +118,7 @@ const Policy = () => {
                     </div>
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Reporting
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -128,10 +128,10 @@ const Policy = () => {
 
                 </div>
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
 
                     <div className="policy-containt-div">
-                        <RxDotFilled className='policy-dot' />
+                        <RxDotFilled className='policy-dot text-lightInput dark:text-dark' />
                         <div className="policy-containt-title">
                             User Accounts and Access
                         </div>
@@ -139,7 +139,7 @@ const Policy = () => {
 
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Account Creation
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -148,7 +148,7 @@ const Policy = () => {
                     </div>
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Account Security
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -159,10 +159,10 @@ const Policy = () => {
                 </div>
 
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
 
                     <div className="policy-containt-div">
-                        <RxDotFilled className='policy-dot' />
+                        <RxDotFilled className='policy-dot text-lightInput dark:text-dark' />
                         <div className="policy-containt-title">
                             App Updates and Changes
                         </div>
@@ -170,7 +170,7 @@ const Policy = () => {
 
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Policy Updates
                         </div>
                         <div className="policy-subcontaint-detail">
@@ -180,10 +180,10 @@ const Policy = () => {
 
                 </div>
 
-                <div className="policy-containt-wrapper">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
 
                     <div className="policy-containt-div">
-                        <RxDotFilled className='policy-dot' />
+                        <RxDotFilled className='policy-dot text-lightInput dark:text-dark' />
                         <div className="policy-containt-title">
                             Consequences of Violation
                         </div>
@@ -191,17 +191,17 @@ const Policy = () => {
 
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Violations
                         </div>
                         <div className="policy-subcontaint-detail">
                             Violating VChat App policies may result in warnings, temporary account suspension, or permanent banning, depending on the severity of the violation.
                         </div>
                     </div>
-                    
+
                     <div className="policy-subcontaint-div">
                         <div className="policy-subcontaint-title">
-                            <RxDotFilled className='policy-dot-sm' />
+                            <RxDotFilled className='policy-dot-sm text-lightInput dark:text-dark' />
                             Appeals
                         </div>
                         <div className="policy-subcontaint-detail">

@@ -184,12 +184,12 @@ const People = ({ userP }) => {
     return (
         <>
 
-            <div className="people-wrapper bg-white_0 dark:bg-dark">
+            <div className="people-wrapper bg-light_0 dark:bg-dark">
                 <div className="people-wrapper-inner">
                     <div className="People-back-div">
-                        <i onClick={goBack} className="bi bi-arrow-left dark:text-darkPostIcon "></i>
+                        <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon "></i>
                         <input type="text"
-                            className='People-User-input dark:text-darkPostText'
+                            className='People-User-input text-lightProfileName dark:text-darkPostText'
                             onChange={(e) => setSearch(e.target.value)}
                             value={search}
                             placeholder='Search friends' />
@@ -233,7 +233,7 @@ const People = ({ userP }) => {
                                                         </div>
                                                     </Link>
                                                     <div className="people-name-div">
-                                                        <div className="people-name dark:text-darkProfileName mb-2">{item.name}</div>
+                                                        <div className="people-name text-lightProfileName dark:text-darkProfileName mb-2">{item.name}</div>
                                                         <div className="people-btn-div">
                                                             {friendRequest ? (
                                                                 <div

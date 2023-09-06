@@ -145,7 +145,7 @@ const Navbar = () => {
 
                     {view ?
                         <Link
-                            to={"/reels"} className="navbar-mainu-link-btn c-video c-reel dark:bg-dark dark:text-darkPostIcon" onClick={handleBoll}>
+                            to={"/reels"} className="navbar-mainu-link-btn c-video c-reel bg-light_0 text-lightPostText dark:bg-dark dark:text-darkPostIcon" onClick={handleBoll}>
                             <div
                                 className="">
                                 <motion.div style={{
@@ -168,7 +168,7 @@ const Navbar = () => {
 
                     {view ?
                         <Link
-                            to={"/notification/"} className="navbar-mainu-link-btn c-heart dark:bg-dark dark:text-darkPostIcon" onClick={() => { handleNotificationClick(); handleBoll(); }}>
+                            to={"/notification/"} className="navbar-mainu-link-btn c-heart bg-light_0 text-lightPostText dark:bg-dark dark:text-darkPostIcon" onClick={() => { handleNotificationClick(); handleBoll(); }}>
                             <div
                                 className="">
                                 {latestFriendNotification.timestamp > 0 && (
@@ -195,7 +195,7 @@ const Navbar = () => {
                     }
 
                     {view ?
-                        <Link to={"/home/"} className="navbar-mainu-link-btn c-home dark:bg-dark dark:text-darkPostIcon" onClick={() => { handleBoll(); }}>
+                        <Link to={"/home/"} className="navbar-mainu-link-btn c-home bg-light_0 text-lightPostText dark:bg-dark dark:text-darkPostIcon" onClick={() => { handleBoll(); }}>
                             <motion.div
                                 transition={{ duration: 0.3, delay: 0.3 }}
                                 initial={{ scale: 0.6, opacity: 0 }}
@@ -219,7 +219,7 @@ const Navbar = () => {
                     }
 
                     {view ?
-                        <Link to={"/message/"} onClick={() => { { handleCircleClick(); handleBoll(); } }} className="navbar-mainu-link-btn c-chat dark:bg-dark dark:text-darkPostIcon" >
+                        <Link to={"/message/"} onClick={() => { { handleCircleClick(); handleBoll(); } }} className="navbar-mainu-link-btn c-chat bg-light_0 text-lightPostText dark:bg-dark dark:text-darkPostIcon" >
                             <div className="link-btn-shadow">
                                 <motion.div style={{
                                     width: "40px", height: "40px", borderRadius: "50%", display: "flex",

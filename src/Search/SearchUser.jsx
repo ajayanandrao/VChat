@@ -29,14 +29,14 @@ const SearchUser = () => {
 
     return (
         <>
-            <div className='search-wrapper bg-white_0 dark:bg-dark'>
+            <div className='search-wrapper bg-light_0 dark:bg-dark'>
                 <div className="search-container-inner">
 
                     <div className="Search-container">
 
-                        <i onClick={goBack} className="bi bi-arrow-left dark:text-darkPostIcon"></i>
+                        <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon"></i>
                         <input type="text"
-                            className='Seatch-User-input dark:text-darkPostText'
+                            className='Seatch-User-input text-lightProfileName dark:text-darkPostText'
                             onChange={(e) => setSearch(e.target.value)}
                             value={search}
                             placeholder='Search friends ' />
@@ -67,7 +67,7 @@ const SearchUser = () => {
                                                         alt=""
                                                     />
                                                     <Link to={`/users/${item.uid}`}>
-                                                        <div className="Search-user-profile-name dark:text-darkProfileName">{item.name}</div>
+                                                        <div className="Search-user-profile-name text-lightProfileName dark:text-darkProfileName">{item.name}</div>
                                                     </Link>
                                                 </div>
                                             </div>

@@ -255,7 +255,7 @@ const Post = () => {
 	return (
 		<div>
 			<div className="post-contianer ">
-				<div className="post-div dark:bg-darkDiv">
+				<div className="post-div bg-lightDiv dark:bg-darkDiv">
 					<div className="post-padding">
 						<div className="post-profile-div">
 							<div>
@@ -271,7 +271,7 @@ const Post = () => {
 
 							<input
 								type="text"
-								className="post-input dark:bg-darkInput dark:text-darkProfileName"
+								className="post-input bg-light_0 text-lightProfileName dark:bg-darkInput dark:text-darkProfileName"
 								placeholder="What's on your mind ? "
 								onChange={(e) => setPostText(e.target.value)}
 								value={postText}
@@ -286,7 +286,7 @@ const Post = () => {
 							<label htmlFor="photo" onClick={Wrapp} style={{ cursor: 'pointer' }}>
 								<div className="post-icon-div">
 									<img src={photo} className="post-icon" alt="" />
-									<div className="post-icon-text dark:text-darkPostText">Photo/Video</div>
+									<div className="post-icon-text text-lightPostText dark:text-darkPostText">Photo/Video</div>
 								</div>
 								<input
 									type="file"
@@ -305,7 +305,7 @@ const Post = () => {
 										className="post-icon"
 										alt=""
 									/>
-									<div className="post-icon-text dark:text-darkPostText">Video</div>
+									<div className="post-icon-text text-lightPostText dark:text-darkPostText">Video</div>
 								</div>
 								<input
 									type="file"
@@ -318,7 +318,7 @@ const Post = () => {
 
 							<div className="post-icon-div" onClick={() => { Emoji(); ok(); }}>
 								<img src={smile} className="post-icon" alt="" />
-								<div className="post-icon-text dark:text-darkPostText">Emoji</div>
+								<div className="post-icon-text text-lightPostText dark:text-darkPostText">Emoji</div>
 							</div>
 						</div>
 

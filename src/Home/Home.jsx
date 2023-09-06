@@ -100,10 +100,10 @@ const Home = () => {
 
 
     return (
-        <div className='bg-white_0 dark:bg-dark'>
+        <div className='bg-light_0 dark:bg-dark' style={{ transition: "0.8s ease-in-out" }}>
             {/* <Navbar /> */}
             {loading ? (
-                <div className='skeleton-center'>
+                <div className='skeleton-center bg-light_0 dark:bg-dark'>
                     <CircularProgress className='circularprogress' />
                 </div>
             ) : (

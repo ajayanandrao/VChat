@@ -177,7 +177,7 @@ const UserPhoto = () => {
                 </div>
             </div>
 
-            <h3 className='video-text text-2xl dark:text-darkPostText'>Video</h3>
+            <h3 className='video-text text-2xl text-lightPostText dark:text-darkPostText'>Video</h3>
 
             {VideoData}
         </>

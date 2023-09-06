@@ -260,13 +260,13 @@ const Message = () => {
 
     return (
         <>
-            <div className="message-wrapper dark:bg-dark">
+            <div className="message-wrapper bg-light_0 dark:bg-dark">
                 <div className="message-wrapper-inner">
                     <div className="wrapper-container">
-                        
+
                         <div className="Message-back-div">
-                            <i onClick={goBack} className="bi bi-arrow-left dark:text-darkPostIcon"></i>
-                            <input type="text" className='Message-User-input dark:text-darkPostText'
+                            <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon"></i>
+                            <input type="text" className='Message-User-input  text-lightPostText dark:text-darkPostText'
                                 onChange={(e) => setSearch(e.target.value)}
                                 value={search} placeholder='Message-User' />
                         </div>
@@ -313,9 +313,9 @@ const Message = () => {
                                                     return (
                                                         <div key={userId}>
                                                             <div className='message-profile-div-one'>
-                                                                <Link style={{ textDecoration: "none", display:"flex", alignItems:"center" }} to={`/users/${user.userId}/message`}>
+                                                                <Link style={{ textDecoration: "none", display: "flex", alignItems: "center" }} to={`/users/${user.userId}/message`}>
                                                                     <img src={item.PhotoUrl} className='message-user-img' alt='' />
-                                                                    <span className='message-user-name dark:text-darkProfileName'>{item.name}</span>
+                                                                    <span className='message-user-name text-lightProfileName dark:text-darkProfileName'>{item.name}</span>
                                                                 </Link>
                                                             </div>
                                                             {userMessages.map((message, index) => (
@@ -352,7 +352,7 @@ const Message = () => {
                                                                 <Avatar alt="Remy Sharp" className='avt' src={online.photoUrl} />
                                                             </StyledBadge>
                                                         </span>
-                                                        <span className="online-user-name dark:text-darkProfileName">{online.presenceName}</span>
+                                                        <span className="online-user-name text-lightProfileName dark:text-darkProfileName">{online.presenceName}</span>
                                                     </Link>
                                                 </div>
                                             );
@@ -383,7 +383,7 @@ const Message = () => {
                                                         </div>
 
                                                         <div className='request-inne-container'>
-                                                            <div className='request-name dark:text-darkProfileName'>{item.senderName}</div>
+                                                            <div className='request-name text-lightProfileName dark:text-darkProfileName'>{item.senderName}</div>
 
                                                             <div className="request-btn-div d-flex">
                                                                 <div className="btn-success-custom box-shadow-none"

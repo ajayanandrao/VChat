@@ -48,10 +48,10 @@ const Option = () => {
                 transition={{ duration: 1 }}
                 initial={{ x: 100 }}
                 animate={{ x: 0 }}
-                className="option-container dark:bg-dark w3-animate-opacity">
+                className="option-container bg-light_0 dark:bg-dark w3-animate-opacity">
 
                 <div className="option-back-div">
-                    <i onClick={goBack} className="bi bi-arrow-left dark:text-darkPostIcon"></i>
+                    <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon"></i>
                 </div>
 
                 <div className="option-inner-div">
@@ -67,7 +67,7 @@ const Option = () => {
                             transition={{ duration: 0.7, delay: 0.7 }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className='option-profile-text dark:text-darkProfileName'>{currentUser && currentUser.displayName}</motion.span>
+                            className='option-profile-text text-lightProfileName dark:text-darkProfileName'>{currentUser && currentUser.displayName}</motion.span>
                     </div>
 
                     <motion.div
@@ -84,7 +84,7 @@ const Option = () => {
                                     {/* <i className="bi bi-gear-fill"></i> */}
                                     {/* <i class="bi bi-gear-fill"></i> */}
                                 </div>
-                                <div className="option-mainu-name dark:text-darkPostText">
+                                <div className="option-mainu-name text-lightPostText dark:text-darkPostText">
                                     Setting
                                 </div>
 
@@ -102,7 +102,7 @@ const Option = () => {
                                     <img src={love} style={{ width: "60px" }} className='option-image-icon' alt="" />
 
                                 </div>
-                                <div className="option-mainu-name dark:text-darkPostText" >
+                                <div className="option-mainu-name text-lightPostText dark:text-darkPostText" >
                                     Matrimony Arrange
                                 </div>
                             </div>
@@ -115,7 +115,7 @@ const Option = () => {
                                     <img src={video} style={{ width: "40px" }} className='option-image-icon' alt="" />
                                     {/* <i class="bi bi-camera-reels-fill"></i> */}
                                 </div>
-                                <div className="option-mainu-name dark:text-darkPostText" >
+                                <div className="option-mainu-name text-lightPostText dark:text-darkPostText" >
                                     Reals
                                 </div>
                             </div>
@@ -129,7 +129,7 @@ const Option = () => {
                                 {/* <i className="bi bi-door-open-fill" onClick={LogOut}></i> */}
                                 {/* <i class="bi bi-door-closed-fill"></i> */}
                             </div>
-                            <div className="option-mainu-name dark:text-darkPostText" onClick={LogOut}>
+                            <div className="option-mainu-name text-lightPostText dark:text-darkPostText" onClick={LogOut}>
                                 Log Out
                             </div>
                         </div>

@@ -57,17 +57,17 @@ const WeddingList = () => {
         setSearch(searchQuery);
     };
     return (
-        <div>
+        <div >
             {loading ?
-                <div className='skeleton-center'>
+                <div className='skeleton-center bg-light_0 dark:bg-dark'>
                     <CircularProgress className='circularprogress' />
                 </div >
                 :
 
-                <>
+                <div className=''>
                     <div className='weddinglist-search-div'>
                         <input type="text" placeholder='Search'
-                            className='weddinglist-search'
+                            className='weddinglist-search bg-lightDiv text-lightPostList dark:bg-darkDiv dark:text-darkPostText'
                             onChange={handleSearch}
                             value={search}
                         />
@@ -77,10 +77,10 @@ const WeddingList = () => {
                         return (
                             <div className='my-4' key={item.id}>
 
-                                <div className="weddingList-card-container">
+                                <div className="weddingList-card-container bg-lightDiv dark:bg-darkDiv">
                                     <div className="weddingList-sender-div">
                                         <img src={item.photoURL} className='weddingList-sender-photo' alt="" />
-                                        <span style={{ textTransform: "capitalize" }}>{item.displayName}</span>
+                                        <span style={{ textTransform: "capitalize" }} className='text-lightProfileName dark:text-darkProfileName'>{item.displayName}</span>
 
                                         {canDelete && (
                                             <div className='weddingList-delete-div' >
@@ -133,7 +133,7 @@ const WeddingList = () => {
                             </div>
                         )
                     })}
-                </>
+                </div>
             }
         </div>
     )

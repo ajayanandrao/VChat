@@ -37,7 +37,7 @@ const WeddingListDetail = () => {
 
     if (!data) {
         return <>
-            <div className='skeleton-center'>
+            <div className='skeleton-center bg-light_0 dark:bg-dark'>
                 <CircularProgress className='circularprogress' />
             </div >
         </>;
@@ -73,7 +73,7 @@ const WeddingListDetail = () => {
                         initial={{ opacity: 0, y: 60 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
-                        <h2 style={{ textTransform: "capitalize" }}>{data.first} {data.middel} {data.last}</h2>
+                        <h2 className='text-3xl ' style={{ textTransform: "capitalize" }}>{data.first} {data.middel} {data.last}</h2>
                         <div className='d-flex' style={{ fontSize: "18px", fontWeight: "600" }}>
                             {data.date}
                             <span className='mx-1'>{data.month}</span>

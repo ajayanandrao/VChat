@@ -61,9 +61,9 @@ const Setting = () => {
 
     return (
         <>
-            <div className="setting-container">
+            <div className="setting-container bg-light_0 dark:bg-dark">
                 <div className="setting-back-div">
-                    <i onClick={goBack} className="bi bi-arrow-left setting-back"></i>
+                    <i onClick={goBack} className="bi text-lightPostIcon dark:text-darkPostIcon bi-arrow-left setting-back"></i>
                 </div>
 
                 {/* <div className="setting-profile-div">
@@ -81,13 +81,13 @@ const Setting = () => {
                         Delete My Account
                     </div> */}
                     <Link to="/policy/">
-                        <div className='change-password' >
+                        <div className='change-password bg-lightDiv dark:bg-darkDiv dark:text-darkPostText text-lightPostText' >
                             VChat App Policy and Terms.
                         </div>
                     </Link>
 
                     <Link to="/changePassword/">
-                        <div className='change-password'>Change Profile Password</div>
+                        <div className='change-password bg-lightDiv dark:bg-darkDiv dark:text-darkPostText text-lightPostText'>Change Profile Password</div>
                     </Link>
                 </div>
 

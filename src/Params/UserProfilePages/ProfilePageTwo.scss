@@ -20,9 +20,11 @@
         align-items: center;
         position: relative;
         cursor: pointer;
+        transition: 0.8s ease-in-out;
         // background-color: red;
 
         .profile-option-absolute {
+            transition: 0.8s ease-in-out;
             position: absolute;
             cursor: pointer;
             top: 36px;

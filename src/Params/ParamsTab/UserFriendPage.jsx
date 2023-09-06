@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 
 const UserFriendPage = ({ user }) => {
 
+    const [search, setSearch] = useState("");
     const [friendsList, setFriendsList] = useState([]);
+
     useEffect(() => {
         const friendsRef = collection(db, `allFriends/${user && user.uid}/Friends`);
         const unsubscribe = onSnapshot(friendsRef, (friendsSnapshot) => {
@@ -44,9 +46,26 @@ const UserFriendPage = ({ user }) => {
             ) : (
 
                 <>
+
+                    <h2 className='text-3xl text-lightPostText dark:text-darkPostText mb-3'>Friends</h2>
+
+                    <input type="text"
+                        placeholder='Serch friends '
+                        onChange={(e) => setSearch(e.target.value)}
+                        value={search}
+                        className='friend-search bg-lightInput text-lightProfileName dark:bg-darkDiv dark:text-darkPostText' />
+
                     <div className="Friend-grid-parent-container">
                         <div className='friend-container'>
-                            {api.map((item) => {
+                            {api.filter((value) => {
+                                if (search === "") {
+                                    return value;
+                                } else if (
+                                    value.name.toLowerCase().includes(search.toLowerCase())
+                                ) {
+                                    return value;
+                                }
+                            }).map((item) => {
                                 return (
                                     <>
                                         {friendsList.map((friend) => {
@@ -58,7 +77,7 @@ const UserFriendPage = ({ user }) => {
 
                                                         <div>
                                                             <img src={item.PhotoUrl} className='friend-img' alt="" />
-                                                            <div className='friend-name dark:text-darkProfileName'>{item.name}</div>
+                                                            <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{item.name}</div>
                                                         </div>
 
                                                     </div>

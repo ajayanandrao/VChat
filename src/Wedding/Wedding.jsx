@@ -235,7 +235,7 @@ const Wedding = () => {
 
     return (
         <>
-            <div className='add-wedding-container'>
+            <div className='add-wedding-container bg-light_0 dark:bg-dark'>
 
                 <div style={{
                     backgroundSize: "cover", width: "100%",
@@ -321,17 +321,17 @@ const Wedding = () => {
                         </div>
                     </div>
 
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='First Name' onChange={(e) => setFirst(e.target.value)} value={first} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText '
                         placeholder='Middel Name' onChange={(e) => setMiddel(e.target.value)} value={middel} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Last Name' onChange={(e) => setLast(e.target.value)} value={last} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Mobile Number' onChange={(e) => setMobile(e.target.value)} value={mobile} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Work or Job' onChange={(e) => setWork(e.target.value)} value={Work} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Height' onChange={(e) => setHeight(e.target.value)} value={height} />
 
                     <div className='b-date-wedding-div'>
@@ -339,7 +339,7 @@ const Wedding = () => {
                         <span >Date of Birth :-</span>
 
                         <div className="toggle-dropdown">
-                            <button className="date-toggle-button" onClick={toggleDropdownDay}>
+                            <button className="date-toggle-button bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText" onClick={toggleDropdownDay}>
                                 {isDay ? (
                                     <>
                                         {itemDay ? itemDay : "Day"}
@@ -352,11 +352,11 @@ const Wedding = () => {
                             </button>
 
                             {isDay && (
-                                <div className="date-dropdown-list open">
+                                <div className="date-dropdown-list open bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
                                     {days.map((day) => (
                                         <span
                                             key={day}
-                                            className="date-dropdown-item"
+                                            className="date-dropdown-item " 
                                             onClick={() => handleItemDayClick(day.toString())}
                                         >
                                             {day}
@@ -367,7 +367,7 @@ const Wedding = () => {
 
                         </div>
 
-                        <div className="toggle-dropdown">
+                        <div className="toggle-dropdown bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
                             <button className="date-toggle-button" onClick={toggleDropdownMonth}>
                                 {isMonth ? (
                                     <>
@@ -380,7 +380,7 @@ const Wedding = () => {
                                 )}
                             </button>
                             {isMonth && (
-                                <ul className="date-dropdown-list open">
+                                <ul className="date-dropdown-list open bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
                                     {months.map((month) => (
                                         <li
                                             key={month}
@@ -394,7 +394,7 @@ const Wedding = () => {
                             )}
                         </div>
 
-                        <div className="toggle-dropdown">
+                        <div className="toggle-dropdown bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText ms-2">
                             <button className="date-toggle-button" onClick={toggleDropdownYear}>
                                 {isYear ? (
                                     <>
@@ -407,7 +407,7 @@ const Wedding = () => {
                                 )}
                             </button>
                             {isYear && (
-                                <ul className="date-dropdown-list open">
+                                <ul className="date-dropdown-list open bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
                                     {years.map((year) => (
                                         <li
                                             key={year}
@@ -424,21 +424,21 @@ const Wedding = () => {
 
                     </div>
 
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Qualification' onChange={(e) => setQualification(e.target.value)} value={qualification} />
 
-                    {/* <input type="text" className='wedding-input'
+                    {/* <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Salary' onChange={(e) => setSalary(e.target.value)} value={salary} /> */}
 
 
                     <h4>Address</h4>
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Landmark' onChange={(e) => setLandmark(e.target.value)} value={landmark} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Village' onChange={(e) => setVillage(e.target.value)} value={village} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='District' onChange={(e) => setDistric(e.target.value)} value={distric} />
-                    <input type="text" className='wedding-input'
+                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='State' onChange={(e) => setState(e.target.value)} value={state} />
 
                     <h3>Photo</h3>

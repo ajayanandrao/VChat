@@ -14,12 +14,14 @@
 		box-shadow: $border-input;
 		// box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 		border-radius: 5px;
+		transition: 0.8s ease-in-out;
 
 		.feed-post-text {
 			// color: black;
 			padding: 0.5rem 1rem;
 			line-height: 19px;
 			overflow: hidden;
+			transition: 0.8s ease-in-out;
 		}
 
 		.feed-profile-div {
@@ -42,12 +44,14 @@
 				margin-left: 1rem;
 				// color: black;
 				text-transform: capitalize !important;
+				transition: 0.8s ease-in-out;
 			}
 
 			.feed-time {
 				margin-left: 1.5rem;
 				// color: $light-text2;
 				font-size: 12px;
+				transition: 0.8s ease-in-out;
 			}
 
 			.feed-option-div {
@@ -66,6 +70,7 @@
 					z-index: 1;
 					box-shadow: $border-input;
 					font-size: 14px;
+					transition: 0.8s ease-in-out;
 					// background: linear-gradient(150deg, #00A0FF, #FF007A,);
 					// color: white;
 
@@ -87,6 +92,7 @@
 					// background: $light-text;
 					height: 30px;
 					box-shadow: $border-input;
+					transition: 0.8s ease-in-out;
 					// box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
 					// 	rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
 					// 	rgba(0, 0, 0, 0.07) 0px 16px 16px;
@@ -182,6 +188,7 @@
 			.feed-bottom-icon {
 				font-size: 24px;
 				// color: $light-text2;
+				transition: 0.8s ease-in-out;
 			}
 
 			.HeartAnimation {
@@ -241,6 +248,7 @@
 		height: 40px;
 		// background-color: $bg-light;
 		box-shadow: $border-input;
+		transition: 0.8s ease-in-out;
 
 		&:focus {
 			border: none;
@@ -253,6 +261,7 @@
 		margin-left: 1rem;
 		// color: $light-text2;
 		color: #2E2E2E;
+		transition: 0.8s ease-in-out;
 	}
 }
 
@@ -349,6 +358,7 @@
 	.feed-bottom-like-heart {
 		font-size: 24px;
 		// color: $light-text2;
+		transition: 0.8s ease-in-out;
 	}
 
 	.feed-bottom-like-count {
@@ -366,6 +376,7 @@
 		font-size: 9px;
 		// color: white;
 		font-weight: 600;
+		transition: 0.8s ease-in-out;
 	}
 }
 

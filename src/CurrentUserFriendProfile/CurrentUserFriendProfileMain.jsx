@@ -39,7 +39,7 @@ const CurrentUserFriendProfileMain = () => {
 
     if (!user) {
         return <>
-            <div className='skeleton-center'>
+            <div className='skeleton-center bg-light_0 dark:bg-dark'>
                 <CircularProgress className='circularprogress' />
             </div>
         </>;
@@ -48,7 +48,7 @@ const CurrentUserFriendProfileMain = () => {
         <>
             <LeftArro />
 
-            <div className='current-user-friend-profile-main dark:bg-dark'>
+            <div className='current-user-friend-profile-main bg-light_0 dark:bg-dark'>
                 <div style={{ width: "100%", height: "100vh" , boxSizing: "border-box", overflowY: "scroll" }}>
                     <ProfilePageOne user={user} />
                     <ProfilePageTwo user={user} userId={userId} />

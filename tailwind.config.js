@@ -7,6 +7,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+
+        light_0: "#0a1929",
+        lightDiv: "#0b243b",
+
+        lightProfile: "#404040",
+        lightProfileName: "#e5e5e5",
+
+        lightPostText: "#d4d4d4", /*300*/
+        lightPostTime: "#a3a3a3", /*400*/
+        lightPostIcon: "#737373",  /*400*/
+
+        lightInput: "#07121d",
+        lightOptionText: "#BDBDBD",
+
+
+        // -------------------------------------------------------------
+
         dark: "#171717",    /*900*/
         darkDiv: "#262626", /*800*/
 

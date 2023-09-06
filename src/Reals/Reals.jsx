@@ -250,7 +250,7 @@ const Reals = () => {
     return (
         <>
 
-            {loading ? <div className='skeleton-center'>
+            {loading ? <div className='skeleton-center bg-light_0 dark:bg-dark'>
                 <CircularProgress className='circularprogress' />
             </div > :
                 <div className="reel-position-div">
