@@ -58,7 +58,7 @@ const UserFriendPage = ({ user }) => {
 
                                                         <div>
                                                             <img src={item.PhotoUrl} className='friend-img' alt="" />
-                                                            <div className='friend-name'>{item.name}</div>
+                                                            <div className='friend-name dark:text-darkProfileName'>{item.name}</div>
                                                         </div>
 
                                                     </div>

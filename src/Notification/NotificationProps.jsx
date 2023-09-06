@@ -6,7 +6,7 @@ import { AuthContext } from '../AuthContaxt';
 import "./NewNotificationPage.scss";
 import { AiFillHeart } from 'react-icons/ai';
 import { FaComment, FaUserAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const NotificationProps = () => {
     const { currentUser } = useContext(AuthContext);
@@ -22,6 +22,11 @@ const NotificationProps = () => {
             setIsPlaying(false);
         }
     };
+
+    const nav = useNavigate();
+    const goBack = () => {
+        nav(-1);
+    }
 
 
     const [notificationData, setNotificationData] = useState([]);
@@ -65,163 +70,171 @@ const NotificationProps = () => {
 
     return (
         <div className='New-Notification-Container dark:bg-dark'>
-            {
-                notificationData.map((item) => {
-                    // if (currentUser && currentUser.uid === item.uid) {
-                    return (
-                        <div key={item.id}>
-                            {item.senderName ?
-                                <Link to={`/message/`}>
-                                    <div className="n-container">
 
-                                        <div className="n-profile-div dark:bg-darkDiv">
-                                            <img src={item.photoUrl} alt="" className='n-profile-img' />
-                                            <div className='n-name-and-time-div'>
-                                                <div className="n-profile-name dark:text-darkProfileName">{item.name || item.senderName}</div>
+            <div className="notification-back-div bg-black_0 dark:bg-dark ">
+                <i onClick={goBack} className="bi bi-arrow-left dark:text-darkPostIcon "></i>
+            </div>
 
-                                                <div style={{ display: "flex", alignItems: "center" }}className='dark:text-darkTime'>
-                                                    <TimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
-                                                    <div className='ms-3' style={{ fontWeight: "600", color: "#088A85" }} >{item.senderName ? "Friend Request" : null}</div>
+            <div style={{ boxSizing: "border-box", overflowY: "scroll", width: "100%", height: "100%", paddingLeft: "1rem", paddingRight: "1rem", paddingTop: "1rem", paddingBottom: "60px" }}>
+                {
+                    notificationData.map((item) => {
+                        console.log(item.postSenderUid)
+                        if (currentUser && currentUser.uid === item.postSenderUid) {
+                            return (
+                                <div key={item.id}>
+                                    {item.senderName ?
+                                        <Link to={`/message/`}>
+                                            <div className="n-container ">
+
+                                                <div className="n-profile-div dark:bg-darkDiv">
+                                                    <img src={item.photoUrl} alt="" className='n-profile-img' />
+                                                    <div className='n-name-and-time-div'>
+                                                        <div className="n-profile-name dark:text-darkProfileName">{item.name || item.senderName}</div>
+
+                                                        <div style={{ display: "flex", alignItems: "center" }}>
+                                                            <TimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
+                                                            <div className='ms-3' style={{ fontWeight: "600", color: "#088A85" }} >{item.senderName ? "Friend Request" : null}</div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="islike-div">
+                                                        {item.like ? (
+                                                            <>
+                                                                <AiFillHeart className="mobile-nav-bottom-icon" fontSize={"16px"} color='#FF0040' />
+                                                            </>
+                                                        )
+                                                            :
+                                                            null
+                                                        }
+                                                        {item.senderName ? (
+                                                            <>
+                                                                <FaUserAlt className="mobile-nav-bottom-icon" fontSize={"16px"} color='#088A85' />
+                                                            </>
+                                                        )
+                                                            :
+                                                            null
+                                                        }
+                                                        {item.comment ? (
+                                                            <>
+                                                                <FaComment className="mobile-nav-bottom-icon" fontSize={"16px"} color='#2E9AFE' />
+                                                            </>
+                                                        )
+                                                            :
+                                                            null
+                                                        }
+                                                    </div>
+                                                </div>
+
+                                                <div className="n-media-div">
+
+                                                    <div className="n-media-div">
+                                                        {item.img && (item.imgName.includes('.jpg') || item.imgName.includes('.png')) ? (
+                                                            <img width={"300px"} src={item.img} alt="Uploaded" className="n-media-img" />
+                                                        ) : item.img ? (
+                                                            <>
+                                                                <div className="video-container">
+                                                                    <video
+                                                                        ref={videoRef}
+                                                                        className="n-media-video"
+                                                                        preload="auto"
+                                                                        onClick={handleVideoBtnClick}
+                                                                    >
+                                                                        <source src={item.img} type="video/mp4" />
+                                                                    </video>
+                                                                </div>
+                                                            </>
+
+                                                        ) : null}
+
+                                                    </div>
+
 
                                                 </div>
                                             </div>
+                                            {/* <Notification post={item} postLike={item.likes} /> */}
+                                        </Link>
+                                        :
+                                        <Link to={`/notification/${item.id}`}>
+                                            <div className="n-container">
 
-                                            <div className="islike-div">
-                                                {item.like ? (
-                                                    <>
-                                                        <AiFillHeart className="mobile-nav-bottom-icon" fontSize={"16px"} color='#FF0040' />
-                                                    </>
-                                                )
-                                                    :
-                                                    null
-                                                }
-                                                {item.senderName ? (
-                                                    <>
-                                                        <FaUserAlt className="mobile-nav-bottom-icon" fontSize={"16px"} color='#088A85' />
-                                                    </>
-                                                )
-                                                    :
-                                                    null
-                                                }
-                                                {item.comment ? (
-                                                    <>
-                                                        <FaComment className="mobile-nav-bottom-icon" fontSize={"16px"} color='#2E9AFE' />
-                                                    </>
-                                                )
-                                                    :
-                                                    null
-                                                }
-                                            </div>
-                                        </div>
+                                                <div className="n-profile-div dark:bg-darkDiv">
+                                                    <img src={item.photoUrl} alt="" className='n-profile-img' />
+                                                    <div className='n-name-and-time-div'>
+                                                        <div className="n-profile-name dark:text-darkProfileName ">{item.name || item.senderName}</div>
 
-                                        <div className="n-media-div">
+                                                        <div style={{ display: "flex", alignItems: "center" }} className="dark:text-darkPostTime">
+                                                            <TimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
+                                                            <div className='ms-3' style={{ fontWeight: "600", color: "#088A85" }} >{item.senderName ? "Friend Request" : null}</div>
 
-                                            <div className="n-media-div">
-                                                {item.img && (item.imgName.includes('.jpg') || item.imgName.includes('.png')) ? (
-                                                    <img width={"300px"} src={item.img} alt="Uploaded" className="n-media-img" />
-                                                ) : item.img ? (
-                                                    <>
-                                                        <div className="video-container">
-                                                            <video
-                                                                ref={videoRef}
-                                                                className="n-media-video"
-                                                                preload="auto"
-                                                                onClick={handleVideoBtnClick}
-                                                            >
-                                                                <source src={item.img} type="video/mp4" />
-                                                            </video>
                                                         </div>
-                                                    </>
+                                                    </div>
 
-                                                ) : null}
+                                                    <div className="islike-div">
+                                                        {item.like ? (
+                                                            <>
+                                                                <AiFillHeart className="mobile-nav-bottom-icon" fontSize={"16px"} color='#FF0040' />
+                                                            </>
+                                                        )
+                                                            :
+                                                            null
+                                                        }
+                                                        {item.senderName ? (
+                                                            <>
+                                                                <FaUserAlt className="mobile-nav-bottom-icon" fontSize={"16px"} color='#088A85' />
+                                                            </>
+                                                        )
+                                                            :
+                                                            null
+                                                        }
+                                                        {item.comment ? (
+                                                            <>
+                                                                <FaComment className="mobile-nav-bottom-icon" fontSize={"16px"} color='#2E9AFE' />
+                                                            </>
+                                                        )
+                                                            :
+                                                            null
+                                                        }
+                                                    </div>
+                                                </div>
 
-                                            </div>
+                                                <div className="n-media-div">
 
+                                                    <div className="n-media-div">
+                                                        {item.img && (item.imgName.includes('.jpg') || item.imgName.includes('.png')) ? (
+                                                            <img width={"300px"} src={item.img} alt="Uploaded" className="n-media-img" />
+                                                        ) : item.img ? (
+                                                            <>
+                                                                <div className="video-container">
+                                                                    <video
+                                                                        ref={videoRef}
+                                                                        className="n-media-video"
+                                                                        preload="auto"
+                                                                        onClick={handleVideoBtnClick}
+                                                                    >
+                                                                        <source src={item.img} type="video/mp4" />
+                                                                    </video>
+                                                                </div>
+                                                            </>
 
-                                        </div>
-                                    </div>
-                                    {/* <Notification post={item} postLike={item.likes} /> */}
-                                </Link>
-                                :
-                                <Link to={`/notification/${item.id}`}>
-                                    <div className="n-container">
+                                                        ) : null}
 
-                                        <div className="n-profile-div dark:bg-darkDiv">
-                                            <img src={item.photoUrl} alt="" className='n-profile-img' />
-                                            <div className='n-name-and-time-div'>
-                                                <div className="n-profile-name dark:text-darkProfileName">{item.name || item.senderName}</div>
+                                                    </div>
 
-                                                <div style={{ display: "flex", alignItems: "center" }} className='dark:text-darkTime'>
-                                                    <TimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
-                                                    <div className='ms-3' style={{ fontWeight: "600", color: "#088A85" }} >{item.senderName ? "Friend Request" : null}</div>
 
                                                 </div>
                                             </div>
+                                            {/* <Notification post={item} postLike={item.likes} /> */}
+                                        </Link>
+                                    }
+                                </div>
 
-                                            <div className="islike-div">
-                                                {item.like ? (
-                                                    <>
-                                                        <AiFillHeart className="mobile-nav-bottom-icon" fontSize={"16px"} color='#FF0040' />
-                                                    </>
-                                                )
-                                                    :
-                                                    null
-                                                }
-                                                {item.senderName ? (
-                                                    <>
-                                                        <FaUserAlt className="mobile-nav-bottom-icon" fontSize={"16px"} color='#088A85' />
-                                                    </>
-                                                )
-                                                    :
-                                                    null
-                                                }
-                                                {item.comment ? (
-                                                    <>
-                                                        <FaComment className="mobile-nav-bottom-icon" fontSize={"16px"} color='#2E9AFE' />
-                                                    </>
-                                                )
-                                                    :
-                                                    null
-                                                }
-                                            </div>
-                                        </div>
-
-                                        <div className="n-media-div">
-
-                                            <div className="n-media-div">
-                                                {item.img && (item.imgName.includes('.jpg') || item.imgName.includes('.png')) ? (
-                                                    <img width={"300px"} src={item.img} alt="Uploaded" className="n-media-img" />
-                                                ) : item.img ? (
-                                                    <>
-                                                        <div className="video-container">
-                                                            <video
-                                                                ref={videoRef}
-                                                                className="n-media-video"
-                                                                preload="auto"
-                                                                onClick={handleVideoBtnClick}
-                                                            >
-                                                                <source src={item.img} type="video/mp4" />
-                                                            </video>
-                                                        </div>
-                                                    </>
-
-                                                ) : null}
-
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                    {/* <Notification post={item} postLike={item.likes} /> */}
-                                </Link>
-                            }
-                        </div>
-
-                    );
-                    // }
-                    return null;
-                })
-            }
+                            );
+                        }
+                        return null;
+                    })
+                }
+            </div>
         </div>
     )
 }

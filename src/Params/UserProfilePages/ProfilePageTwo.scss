@@ -12,6 +12,7 @@
         text-transform: capitalize;
         font-weight: 600;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 1rem 0;
     }
 
     .profile-option-div {
@@ -28,7 +29,7 @@
             // left: 0;
             right: -40px;
             width: 150px;
-            background: white;
+            // background: white;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -48,5 +49,3 @@
         margin: 0.7rem 0;
     }
 }
-
-

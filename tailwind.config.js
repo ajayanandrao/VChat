@@ -1,34 +1,32 @@
 /** @type {import('tailwindcss').Config} */
+
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
   theme: {
     extend: {
       colors: {
+        dark: "#171717",    /*900*/
+        darkDiv: "#262626", /*800*/
 
-        lightIcon: '#84878a',
-        lightTime: '#bcc0c4',
-        lightOption: '#f0f2f5',
-        light: "#FAFAFA",
+        darkProfile: "#404040",     /*700*/
+        darkProfileName: "#e5e5e5", /*200*/
 
-        border: "#ccc",
-        // ---------------------------------------------
+        darkPostText: "#d4d4d4", /*300*/
+        darkPostTime: "#a3a3a3", /*400*/
+        darkPostIcon: "#737373",  /*400*/
 
-        dark: '#3b3b3b',
-        darkDiv: '#262626',
+        darkInput: "#404040",
 
-        darkProfileName: '#e8e8e8',
-        darkTime: '#bcbcbc',
+        // Colors ####################################################
 
-        darkPostText: '#d6d6d6',
-        darkInput: '#3b3b3b',
-        darkIcon: "#bfbfbf",
-
-        // -------------------------------------------
-        white_0: '#fff',
-        black_0: '#000000',
+        black_0: "#fff",
+        white_0: "#fafafa",
+        aqua_0: "#06b6d4",
       },
     },
+
   },
   plugins: [],
 }

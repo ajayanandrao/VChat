@@ -42,10 +42,10 @@ const ProfileThree = ({ user }) => {
             <div className="profileThree-container">
 
                 <div className="tab">
-                    <button className="tablinks active" onClick={(event) => openCity(event, 'Post')}>Post</button>
-                    <button className="tablinks" onClick={(event) => openCity(event, 'About')}>About</button>
-                    <button className="tablinks" onClick={(event) => openCity(event, 'Friend')}>Friend</button>
-                    <button className="tablinks" onClick={(event) => openCity(event, 'Photo')}>Photos</button>
+                    <button className="tablinks active" onClick={(event) => openCity(event, 'Post')}> <div className='dark:text-darkPostText'> Post</div></button>
+                    <button className="tablinks" onClick={(event) => openCity(event, 'About')}><div className='dark:text-darkPostText'>About</div></button>
+                    <button className="tablinks" onClick={(event) => openCity(event, 'Friend')}><div className='dark:text-darkPostText'>Friend</div></button>
+                    <button className="tablinks" onClick={(event) => openCity(event, 'Photo')}><div className='dark:text-darkPostText'>Photos</div></button>
                 </div>
 
                 <div className='content-div'>

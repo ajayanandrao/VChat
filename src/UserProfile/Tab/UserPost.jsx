@@ -17,7 +17,7 @@ import photo from "./../../Image/img/photo.png";
 import { Link } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiSend, BiSolidSend } from "react-icons/bi";
-import sms from "./../../Image/img/sms1.png";
+import sms from "./../../Image/img/sms.png";
 
 const UserPost = ({ post }) => {
 
@@ -381,38 +381,38 @@ const UserPost = ({ post }) => {
                 </div>
             </div>
 
-            <div className="feed-container dark:bg-darkDiv">
+            <div className="feed-container">
 
-                <div className="feed-div">
+                <div className="feed-div dark:bg-darkDiv">
 
                     <div className="feed-profile-div">
                         <img src={post.photoURL} className='feed-img' alt="" />
 
-                        <div className="feed-profile-name text-black_0 dark:text-darkProfileName">
+                        <div className="feed-profile-name dark:text-darkProfileName">
                             {post.displayName}
                         </div>
 
-                        <div className="feed-time text-lightTime dark:text-darkTime">
+                        <div className="feed-time dark:text-darkPostTime">
                             <TimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} />
                         </div>
 
                         <div className='feed-option-div'>
-                            <div className="feed-option-btn bg-lightOption text-lightIcon dark:bg-darkIcon">
-                                <BsThreeDotsVertical className='feed-icon dark:text-darkDiv' onClick={() => OptionBtn(post.id)} />
+                            <div className="feed-option-btn dark:bg-darkInput">
+                                <BsThreeDotsVertical className='feed-icon dark:text-darkPostTime' onClick={() => OptionBtn(post.id)} />
                             </div>
-                            <div className="feed-option-mainu-div dark:bg-darkInput" id={`myDropdown-${post.id}`} style={{ display: "none" }}>
+                            <div className="feed-option-mainu-div dark:text-darkPostText dark:bg-darkInput" id={`myDropdown-${post.id}`} style={{ display: "none" }}>
 
-                                <div className='feed-option-edit dark:text-darkPostText' id={`edit-${post.id}`}
+                                <div className='feed-option-edit ' id={`edit-${post.id}`}
                                     onClick={() => feedOn(post.id)}>Edit</div>
 
-                                <div className='feed-option-delete dark:text-darkPostText'
+                                <div className='feed-option-delete '
                                     id={`del-${post.id}`}
                                     onClick={() => deletePost(post.id)} >Delete</div>
 
 
 
                                 <Link to={`/users/${post.uid}/${post.id}/profile`}>
-                                    <div className='feed-option-view dark:text-darkPostText' id={`profileView-${post.id}`}>View Profiel</div>
+                                    <div className='feed-option-view ' id={`profileView-${post.id}`}>View Profiel</div>
                                 </Link>
 
                             </div>
@@ -468,19 +468,24 @@ const UserPost = ({ post }) => {
                             {liked ? (
                                 <>
                                     <div className="feed-bottom-like-div" onClick={handleCloseRightComment}>
-                                        <BsFillHeartFill onClick={() => Heart(post.id)} className='feed-bottom-like-heart ' color='#FF0040' />
+                                        <BsFillHeartFill onClick={() => Heart(post.id)} className='feed-bottom-like-heart' color='#FF0040' />
 
-                                        <div className="feed-bottom-like-count" onClick={() => showLike(post.id)}>
+                                        <div className="feed-bottom-like-count
+                                        dark:bg-darkPostIcon dark:text-darkPostText
+                                        " onClick={() => showLike(post.id)}>
                                             {like.length > 99 ? '99+' : like.length}
+
                                         </div>
                                     </div>
                                 </>
                             ) : (
                                 <>
                                     <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
-                                        <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart dark:text-darkIcon' />
+                                        <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart dark:text-darkPostIcon' />
                                         {like.length > 0 ?
-                                            <div className="feed-bottom-like-count" onClick={() => showLike(post.id)}>
+                                            <div className="feed-bottom-like-count 
+                                            dark:bg-darkPostIcon dark:text-darkPostText
+                                            " onClick={() => showLike(post.id)}>
                                                 {like.length > 99 ? '99+' : like.length}
                                             </div>
                                             :
@@ -511,11 +516,11 @@ const UserPost = ({ post }) => {
                         {/* Comment  */}
                         <div className="feed-bottom-mainu">
 
-                            <div className="feed-bottom-like-div">
+                            <div className="feed-bottom-like-div dark:text-darkPostIcon">
                                 {rightComment ?
                                     <img src={sms} style={{ width: "26px" }} onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
                                     :
-                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-lightTime dark:text-darkIcon' />
+                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart  dark:text-darkPostIcon' />
                                 }
                                 {commentCount ?
                                     <Link to={`/notification/${post.id}`}>
@@ -531,7 +536,7 @@ const UserPost = ({ post }) => {
 
                         {/* Share */}
                         <div className="feed-bottom-mainu">
-                            <FaShare className='feed-bottom-icon dark:text-darkIcon' />
+                            <FaShare className='feed-bottom-icon dark:text-darkPostIcon' />
                         </div>
 
                     </div>
@@ -544,8 +549,7 @@ const UserPost = ({ post }) => {
                                 placeholder='write a Comment'
                                 value={getComment}
                                 onChange={(e) => setComment(e.target.value)}
-                                className='feed-right-comment-input bg-lightOption 
-                                text-black_0 dark:text-lightOption dark:bg-darkInput'
+                                className='feed-right-comment-input dark:bg-darkInput dark:text-darkProfileName'
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)

@@ -31,20 +31,21 @@ const CurrentUserProfileMain = () => {
 
     return (
         <div className='current-user-profile-main dark:bg-dark'>
-            <LeftArro />
+            <div style={{ width: "100%", height: "100vh", boxSizing: "border-box", overflowY: "scroll" }}>
+                <LeftArro />
 
-            {api.map((item) => {
-                if (currentUser.uid === item.uid) {
-                    return (
-                        <div key={item.id}>
-                            <UserProfileOne user={item} />
-                            <UserProfileTwo user={item} />
-                        </div>
-                    )
-                }
-            })}
-            <UserProfileThree />
-
+                {api.map((item) => {
+                    if (currentUser.uid === item.uid) {
+                        return (
+                            <div key={item.id}>
+                                <UserProfileOne user={item} />
+                                <UserProfileTwo user={item} />
+                            </div>
+                        )
+                    }
+                })}
+                <UserProfileThree />
+            </div>
         </div>
     )
 }

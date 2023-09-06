@@ -7,7 +7,6 @@ import { db } from '../../Firebase';
 import UserPhoto from '../Tab/UserPhoto';
 import Friends from '../Tab/Friends ';
 import { CircularProgress, LinearProgress } from '@mui/material';
-import About from '../Tab/About';
 
 const ProfileThree = ({ user }) => {
     const { currentUser } = useContext(AuthContext);
@@ -79,11 +78,11 @@ const ProfileThree = ({ user }) => {
         <>
             <div className="profileThree-container">
 
-                <div className="tab py-2 ">
-                    <button className="tablinks active " onClick={(event) => openCity(event, 'Post')}><div className='dark:text-darkPostText'>Post</div></button>
-                    <button className="tablinks " onClick={(event) => openCity(event, 'About')}> <div className='dark:text-darkPostText'>About</div></button>
-                    <button className="tablinks " onClick={(event) => openCity(event, 'Friend')}><div className='dark:text-darkPostText'>Friend</div></button>
-                    <button className="tablinks " onClick={(event) => openCity(event, 'Photo')}><div className='dark:text-darkPostText'>Photos</div></button>
+                <div className="tab">
+                    <button className="tablinks active" onClick={(event) => openCity(event, 'Post')}> <div className='dark:text-darkPostText'> Post</div></button>
+                    <button className="tablinks" onClick={(event) => openCity(event, 'About')}> <div className='dark:text-darkPostText'> About </div></button>
+                    <button className="tablinks" onClick={(event) => openCity(event, 'Friend')}> <div className='dark:text-darkPostText'> Friend </div></button>
+                    <button className="tablinks" onClick={(event) => openCity(event, 'Photo')}> <div className='dark:text-darkPostText'> Photos </div></button>
                 </div>
 
                 <div className='content-div'>
@@ -114,7 +113,7 @@ const ProfileThree = ({ user }) => {
 
                     <div id="About" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
                         {/* <About /> */}
-                        <About />
+                        Profile Locked
                     </div>
 
                     <div id="Friend" style={{ display: "none" }} className="tabcontent w3-animate-opacity">

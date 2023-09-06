@@ -9,6 +9,7 @@ import { db } from '../../Firebase';
 import { AuthContext } from '../../AuthContaxt';
 import { IoMdSend } from 'react-icons/io';
 import { BiSend, BiSolidSend } from 'react-icons/bi';
+import sms from "./../../Image/img/sms.png";
 
 const UserPostPage = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
@@ -170,23 +171,23 @@ const UserPostPage = ({ post }) => {
         <div>
             <div className="feed-container">
 
-                <div className="feed-div">
+                <div className="feed-div dark:bg-darkDiv">
 
                     <div className="feed-profile-div">
                         <img src={post.photoURL} className='feed-img' alt="" />
 
-                        <div className="feed-profile-name">
+                        <div className="feed-profile-name dark:text-darkProfileName">
                             {post.displayName}
                         </div>
 
-                        <div className="feed-time">
+                        <div className="feed-time dark:text-darkPostTime">
                             <TimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} />
                         </div>
 
                     </div>
 
                     {/* Feed Text */}
-                    <div className="feed-post-text d-flex" >
+                    <div className="feed-post-text d-flex dark:text-darkPostText" >
                         {post.postText}
                     </div>
 
@@ -233,9 +234,9 @@ const UserPostPage = ({ post }) => {
                             {liked ? (
                                 <>
                                     <div className="feed-bottom-like-div" onClick={handleCloseRightComment}>
-                                        <BsFillHeartFill onClick={() => Heart(post.id)} className='feed-bottom-like-heart' color='#FF0040' />
+                                        <BsFillHeartFill onClick={() => Heart(post.id)} className='feed-bottom-like-heart ' color='#FF0040' />
 
-                                        <div className="feed-bottom-like-count" onClick={() => showLike(post.id)}>
+                                        <div className="feed-bottom-like-count dark:bg-darkPostIcon dark:text-darkPostText" onClick={() => showLike(post.id)}>
                                             {like.length > 99 ? '99+' : like.length}
 
                                         </div>
@@ -244,9 +245,9 @@ const UserPostPage = ({ post }) => {
                             ) : (
                                 <>
                                     <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
-                                        <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart' />
+                                        <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart dark:text-darkPostIcon' />
                                         {like.length > 0 ?
-                                            <div className="feed-bottom-like-count" onClick={() => showLike(post.id)}>
+                                            <div className="feed-bottom-like-count dark:bg-darkPostIcon dark:text-darkPostText" onClick={() => showLike(post.id)}>
                                                 {like.length > 99 ? '99+' : like.length}
                                             </div>
                                             :
@@ -279,10 +280,14 @@ const UserPostPage = ({ post }) => {
                             <div className="feed-bottom-mainu">
 
                                 <div className="feed-bottom-like-div">
-                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' />
+                                    {rightComment ?
+                                        <img src={sms} style={{ width: "26px" }} onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
+                                        :
+                                        <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart dark:text-darkPostIcon' />
+                                    }
                                     {commentCount ?
                                         <Link to={`/notification/${post.id}`}>
-                                            <div className="feed-bottom-like-count" onClick={handleCloseRightComment}>
+                                            <div className="feed-bottom-like-count dark:bg-darkPostIcon dark:text-darkPostText" onClick={handleCloseRightComment}>
                                                 <div>{commentCount > 99 ? '99+' : commentCount}</div>
                                             </div>
                                         </Link>
@@ -295,7 +300,7 @@ const UserPostPage = ({ post }) => {
 
                         {/* Share */}
                         <div className="feed-bottom-mainu">
-                            <FaShare className='feed-bottom-icon' />
+                            <FaShare className='feed-bottom-icon dark:text-darkPostIcon' />
                         </div>
 
                     </div>
@@ -308,7 +313,7 @@ const UserPostPage = ({ post }) => {
                                 placeholder='Comment'
                                 value={getComment}
                                 onChange={(e) => setComment(e.target.value)}
-                                className='feed-right-comment-input'
+                                className='feed-right-comment-input dark:bg-darkInput dark:text-darkProfileName'
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)

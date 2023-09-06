@@ -2,12 +2,10 @@
 
 .view-container {
     width: 100%;
-    height: 100vh;
-    box-sizing: border-box;
-    overflow-y: scroll;
+    height:100vh;
     padding-bottom: 100px;
 
-    // background-color: white;
+    background-color: red;
 }
 
 .view-img-wrapper {
@@ -26,7 +24,7 @@
 
     .view-noti-post-time {
         font-size: 14px;
-        color: #999;
+        // color: #999;
         margin-left: 1rem;
     }
 
@@ -51,7 +49,7 @@
         align-items: center;
         // background-color: red;
         font-size: 24px;
-        color: #2E2E2E;
+        // color: #2E2E2E;
     }
 }
 
@@ -114,7 +112,7 @@
         display: flex;
         align-items: center;
         border-radius: 30px;
-        background-color: white;
+        // background-color: white;
         box-shadow: $border-input;
         padding-right: 0.5rem;
 
@@ -140,7 +138,7 @@
         font-size: 30px;
         margin-left: 1rem;
         // color: $light-text2;
-        color: #2E2E2E;
+        // color: #2E2E2E;
     }
 }
 
@@ -204,15 +202,15 @@
         justify-content: center;
         // background-color: white;
         margin: 0 1rem;
-        padding: 1rem;
+        // padding: 1rem;
         border-radius: 20px;
-        box-shadow: $border-input;
+        // box-shadow: $border-input;
 
         .view-noti-post-time {
             width: 100%;
             max-width: 180px;
             font-size: 12px;
-            color: #999;
+            // color: #999;
         }
 
         .notification-comment-profile-group-name {

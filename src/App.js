@@ -38,6 +38,21 @@ import Navbar from './Navbar/Navbar';
 
 function App() {
 
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const currentScrollPos = window.scrollY;
+  //     const scrollUp = prevScrollPos > currentScrollPos;
+
+  //     setPrevScrollPos(currentScrollPos);
+  //     setShowNavbar(scrollUp || currentScrollPos === 0);
+  //   };
+
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, [prevScrollPos]);
+
   const [showNavbar, setShowNavbar] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [buttonPosition, setButtonPosition] = useState(0); // New state for button position
@@ -74,15 +89,6 @@ function App() {
   }, [prevScrollPos]);
 
 
-  const style = {
-    position: "sticky",
-    top: `${0 + buttonPosition}px`, // Adjusted position
-    zIndex: "9999",
-    cursor: "pointer",
-    transition: "top 0.5s ease-in-out" // Smooth animation
-  }
-
-
   const [loading, setLoading] = useState(null);
 
   useEffect(() => {
@@ -104,6 +110,16 @@ function App() {
     };
   }, []);
 
+
+
+  const style = {
+    position: "sticky",
+    top: `${0 + buttonPosition}px`, // Adjusted position
+    zIndex: "9999",
+    cursor: "pointer",
+    transition: "top 0.5s ease-in-out" // Smooth animation
+  }
+
   return (
     <>
       <Router basename='/VChat'>
@@ -122,7 +138,7 @@ function App() {
           :
           ""
         }
-        <Routes >
+        <Routes>
           <Route exact path="/" element={<Login />} />
           <Route path="signUp" element={<SignUp />} />
 
@@ -137,7 +153,6 @@ function App() {
               <Route exact path="changePassword" element={<ChangePassword />} />
               <Route exact path="forgotPassword" element={<ForgotPassword />} />
 
-              {/* <Route path="option" element={<Option />} /> */}
               <Route path="option" element={<Option />} />
               <Route path="setting" element={<Setting />} />
               <Route path="policy" element={<Policy />} />

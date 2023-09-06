@@ -173,14 +173,15 @@ const NotificationPara = () => {
     }
 
     return (
-        <div className='view-container dark:bg-darkDiv'>
+        <div className='view-container bg-white_0 dark:bg-dark'>
+
             <div className='view-noti-profile-div'>
                 <img src={api.photoURL} className='View-noti-profile-img' alt="" />
                 <div className='view-noti-profile-name dark:text-darkProfileName'>{api.displayName}</div>
-                <div className='view-noti-post-time dark:text-darkTime'>
+                <div className='view-noti-post-time dark:text-darkPostTime'>
                     <TimeAgoComponent timestamp={api.bytime && api.bytime.toDate()} />
                 </div>
-                <div className="view-noti-post-close dark:text-darkIcon">
+                <div className="view-noti-post-close dark:text-darkPostText">
                     <CgClose onClick={goBack} />
                 </div>
             </div>
@@ -207,30 +208,30 @@ const NotificationPara = () => {
                 ) : null}
             </div>
 
-            <div >
+            
                 <div className="view-tab-block">
                     <div className="w3-bar-item d-flex align-items-center" onClick={() => openCity('like')}>
                         <AiFillHeart style={{ color: "#FF0040", fontSize: "35px" }} />
-                        <div className="view-tab-like-count ms-2 dark:text-darkProfileName">
+                        <div className="view-tab-like-count dark:text-darkPostText ms-2">
                             {isLiked.length}
                         </div>
                     </div>
                     <div className="w3-bar-item d-flex align-items-center" onClick={() => openCity('comment')}>
                         <BsFillChatDotsFill style={{ color: "#6366f1", fontSize: "30px" }} />
-                        <div className="view-tab-like-count ms-2 dark:text-darkProfileName">
+                        <div className="view-tab-like-count dark:text-darkPostText ms-2">
                             {comment.length}
                         </div>
                     </div>
                 </div >
-
+                <div className='' style={{ width: "100%", height: "100%", boxSizing: "border-box", overflowY: "scroll" }}>
                 <div className="view-tab-make-comment-div">
-                    <div className="view-tab-make-comment-inner-div">
+                    <div className="view-tab-make-comment-inner-div dark:bg-darkDiv">
                         <input
                             type="text"
                             placeholder='write a Comment'
                             value={newComment}
                             onChange={(e) => setNewComment(e.target.value)}
-                            className='view-tab-make-comment-input'
+                            className='view-tab-make-comment-input dark:text-darkProfileName'
                         // onKeyDown={(e) => {
                         //     if (e.key === 'Enter') {
                         //         e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)
@@ -242,9 +243,9 @@ const NotificationPara = () => {
                         />
                         <div >
                             {newComment ?
-                                <BiSolidSend className='view-tab-make-comment-icon' color='#0080FF' onClick={() => { HandleComment(); openCity('comment') }} />
+                                <BiSolidSend className='view-tab-make-comment-icon ' color='#0080FF' onClick={() => { HandleComment(); openCity('comment') }} />
                                 :
-                                <BiSend className='view-tab-make-comment-icon' onClick={() => { HandleComment(); openCity('comment') }} />
+                                <BiSend className='view-tab-make-comment-icon dark:text-darkPostIcon' onClick={() => { HandleComment(); openCity('comment') }} />
                             }
                         </div>
                     </div>
@@ -274,19 +275,21 @@ const NotificationPara = () => {
                                         <img src={item.photoURL} className='notification-comment-profile-image' alt="" />
                                     </div>
 
-                                    <div className="notification-comment-profile-group bg-white_0 dark:bg-dark">
-                                        <div className="notification-comment-profile-group-name dark:text-darkProfileName">
-                                            <span style={{ textTransform: "capitalize", fontWeight: "600" }} className='' >{item.displayName}</span>
+                                    <div className="notification-comment-profile-group">
+                                        <div className='dark:bg-darkDiv' style={{ padding: "5px 10px", borderRadius: "10px" }} >
+                                            <div className="notification-comment-profile-group-name">
+                                                <span style={{ textTransform: "capitalize", fontWeight: "600" }} className='dark:text-darkProfileName'>
+                                                    {item.displayName}</span>
+                                            </div>
+                                            <span className='comment-api dark:text-darkPostText' >{item.comment}</span>
                                         </div>
-                                        <span className='comment-api dark:text-darkPostText' >{item.comment}</span>
-                                        <div className='view-noti-post-time dark:text-darkTime'>
+                                        <div className='view-noti-post-time dark:text-darkPostTime'>
                                             <CommentTimeAgoComponent timestamp={item.commentTime && item.commentTime.toDate()} />
                                         </div>
-
                                     </div>
                                     <div className='view-comment-delte-container'>
                                         {currentUser && currentUser.uid == item.uid ?
-                                            <div className="view-comment-delete-div">
+                                            <div className="view-comment-delete-div dark:text-darkPostText">
                                                 <CgClose onClick={() => deleteComment(item.id)} />
                                             </div>
                                             :

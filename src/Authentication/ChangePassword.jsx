@@ -88,17 +88,15 @@ const ChangePassword = () => {
 
     return (
 
-        <div className='change-password-container dark:bg-darkDiv'>
+        <>
             <div className="option-back-div">
-                <i onClick={goBack} className="bi bi-arrow-left dark:text-darkIcon "></i>
+                <i onClick={goBack} className="bi bi-arrow-left "></i>
             </div>
 
-            <div className="change-password-container-inner ">
-                <h3 style={{ textAlign: "center", marginBottom: "50px" }}
-                    className='dark:text-darkProfileName text-black_0 text-3xl'
-                >Change Password</h3>
+            <div className="change-password-container">
+                <h3 style={{ textAlign: "center", marginBottom: "50px" }}>Change Password</h3>
                 <input
-                    className='login-input-new dark:bg-darkInput dark:text-darkPostText'
+                    className='login-input-new'
                     type="password"
                     placeholder="Current Password"
                     value={currentPassword}
@@ -110,13 +108,17 @@ const ChangePassword = () => {
                 }
 
                 <input
-                    className='login-input-new my-2 dark:bg-darkInput dark:text-darkPostText'
+                    className='login-input-new my-2'
                     type="password"
                     placeholder="New Password"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                 />
                 <button className="btn-primary-custom my-4" onClick={changePassword}>Change Password</button>
+                {/* 
+            {errorMessage &&
+                    <div className="error-message">{errorMessage}</div>
+            } */}
 
                 {showOverlay && (
                     <div className="changePasswordOverlay">
@@ -126,7 +128,7 @@ const ChangePassword = () => {
 
             </div>
 
-        </div>
+        </>
     );
 };
 

@@ -7,7 +7,7 @@
     width: 100%;
     height: 100vh;
     z-index: 9999;
-    // background-color: red;
+    // background-color: white;
     padding-top: 40px;
 
     .search-container-inner {
@@ -18,16 +18,16 @@
 
 
         .Search-container {
-            // background-color: red;
+            // background-color: white;
             padding: 1rem;
             position: absolute;
             top: 0;
             width: 100%;
             color: black;
-            height: 60px;
+            height: 50px;
             display: flex;
             align-items: center;
-            // border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
 
             .bi-arrow-left {
                 margin-right: 1rem;

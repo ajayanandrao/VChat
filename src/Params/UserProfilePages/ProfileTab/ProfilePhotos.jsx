@@ -134,7 +134,7 @@ const ProfilePhotos = ({ user }) => {
                 </div>
             </div>
 
-            <h3 className='video-text'>Video</h3>
+            <h3 className='video-text video-text text-2xl dark:text-darkPostText'>Video</h3>
 
             {VideoData}
         </>

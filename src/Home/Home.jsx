@@ -6,13 +6,9 @@ import { AuthContext } from '../AuthContaxt';
 import { db } from '../Firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import FlipMove from 'react-flip-move';
-import { Height } from '@mui/icons-material';
 import { AiOutlineArrowUp } from "react-icons/ai";
-// import StoryForm from '../Story/StoryForm';
 import { CircularProgress } from '@mui/material';
 import Feed from '../Feed/Feed';
-import MobileNavebar from '../MobileNavbar/MobileNavebar';
-import Navbar from '../Navbar/Navbar';
 import { motion, useAnimation } from 'framer-motion';
 
 const Home = () => {
@@ -104,7 +100,7 @@ const Home = () => {
 
 
     return (
-        <div className='home-main-container dark:bg-dark'>
+        <div className='bg-white_0 dark:bg-dark'>
             {/* <Navbar /> */}
             {loading ? (
                 <div className='skeleton-center'>
@@ -120,7 +116,7 @@ const Home = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
-                        <AiOutlineArrowUp className='top-arrow' />
+                        <AiOutlineArrowUp className='top-arrow text-black_0 dark:text-aqua_0' />
                     </motion.div>
                     {/* <StoryForm /> */}
                     <Post />

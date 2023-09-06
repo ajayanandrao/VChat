@@ -8,7 +8,7 @@ import ProfilePageTwo from '../Params/UserProfilePages/ProfilePageTwo';
 import ProfilePageThree from '../Params/UserProfilePages/ProfilePageThree';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
-import {useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import LeftArro from '../LeftArro';
 
 
@@ -48,11 +48,12 @@ const CurrentUserFriendProfileMain = () => {
         <>
             <LeftArro />
 
-            <div className='current-user-friend-profile-main'>
-                <ProfilePageOne user={user} />
-                <ProfilePageTwo user={user} userId={userId} />
-                <ProfilePageThree user={user} />
-
+            <div className='current-user-friend-profile-main dark:bg-dark'>
+                <div style={{ width: "100%", height: "100vh" , boxSizing: "border-box", overflowY: "scroll" }}>
+                    <ProfilePageOne user={user} />
+                    <ProfilePageTwo user={user} userId={userId} />
+                    <ProfilePageThree user={user} />
+                </div>
             </div>
         </>
     )

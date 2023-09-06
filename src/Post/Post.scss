@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     // background: blue;
-    transition: 0.8s ease-in-out;
+    
 
     .post-div {
         flex-basis: 576px;
@@ -19,7 +19,6 @@
         box-shadow: $border-input;
         // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         overflow: hidden;
-        transition: 0.8s ease-in-out;
         // border-radius: 0.5rem;
         .post-padding {
             padding: 0.1rem 0.8rem;
@@ -65,7 +64,6 @@
                 padding-inline-start: 1rem;
                 box-shadow: $border-input;
                 outline: none;
-                transition: 0.8s ease-in-out;
                 &:focus {
                     box-shadow: none;
                     box-shadow: $border-input;

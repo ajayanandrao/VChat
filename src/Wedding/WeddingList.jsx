@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { CgClose } from 'react-icons/cg'
 import mobile from "./../Image/img/png/call.png";
 import brif from "./../Image/img/png/brif2.png";
-import loc from "./../Image/img/png/loc2.png";
+import loc from "./../Image/img/png/loc.png";
 import { CircularProgress } from '@mui/material';
 
 const WeddingList = () => {
@@ -57,7 +57,7 @@ const WeddingList = () => {
         setSearch(searchQuery);
     };
     return (
-        <div className='dark:bg-dark'>
+        <div>
             {loading ?
                 <div className='skeleton-center'>
                     <CircularProgress className='circularprogress' />
@@ -65,9 +65,9 @@ const WeddingList = () => {
                 :
 
                 <>
-                    <div className='weddinglist-search-div  dark:bg-darkDiv'>
+                    <div className='weddinglist-search-div'>
                         <input type="text" placeholder='Search'
-                            className='weddinglist-search  dark:bg-darkInput dark:text-darkPostText'
+                            className='weddinglist-search'
                             onChange={handleSearch}
                             value={search}
                         />
@@ -75,13 +75,12 @@ const WeddingList = () => {
                     {filteredWeddingList.map((item) => {
                         const canDelete = currentUser && currentUser.uid === item.uid;
                         return (
-                            <div className='' key={item.id}>
+                            <div className='my-4' key={item.id}>
 
-                                <div className="weddingList-card-container bg-darkOption dark:bg-darkDiv">
-                                    <div className="weddingList-sender-div my-4">
+                                <div className="weddingList-card-container">
+                                    <div className="weddingList-sender-div">
                                         <img src={item.photoURL} className='weddingList-sender-photo' alt="" />
-                                        <span style={{ textTransform: "capitalize" }} className='dark:text-darkProfileName'>
-                                            {item.displayName}</span>
+                                        <span style={{ textTransform: "capitalize" }}>{item.displayName}</span>
 
                                         {canDelete && (
                                             <div className='weddingList-delete-div' >
@@ -95,13 +94,13 @@ const WeddingList = () => {
                                                 <img src={item.photoOne} className='weddingList-photo' alt="" />
 
                                                 <div className="weddingList-about-div">
-                                                    <div className='d-flex dark:text-darkProfileName' style={{ textTransform: "capitalize", fontSize: "24px", fontWeight: "600" }}>
+                                                    <div className='d-flex' style={{ textTransform: "capitalize", fontSize: "24px", fontWeight: "600" }}>
                                                         <div className='me-1'>{item.first}</div>
                                                         <div>{item.last}</div>
                                                     </div>
 
-                                                    <div className="weddingList-about-inner-div dark:text-darkPostText">
-                                                        <div className="weddingList-about-inner-item ">
+                                                    <div className="weddingList-about-inner-div">
+                                                        <div className="weddingList-about-inner-item">
                                                             <div style={{ display: "flex", justifyContent: "center", width: "40px" }}>
                                                                 <img src={mobile} width={"35px"} style={{ marginRight: "0.5rem" }} alt="" />
                                                                 {/* <FaMobile style={{ fontSize: "24px", color: " #0080FF", marginRight: "0.5rem" }} /> */}

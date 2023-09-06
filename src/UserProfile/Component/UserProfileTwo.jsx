@@ -151,9 +151,9 @@ const ProfileTwo = ({ user }) => {
                 </div>
             ) : ""}
             <div className="profile-name-container ">
-                <h3 className='profile-name-text text-black_0 dark:text-darkProfileName '>{currentUser && currentUser.displayName}</h3>
-                <div className="profile-Edit-btn">
-                    <HiPencil className='edit-pencil' onClick={() => setOverlay(!overlay)} />
+                <h3 className='profile-name-text text-3xl dark:text-darkProfileName'>{currentUser && currentUser.displayName}</h3>
+                <div className="profile-Edit-btn dark:bg-darkPostIcon">
+                    <HiPencil className='edit-pencil dark:text-darkDiv' onClick={() => setOverlay(!overlay)} />
                 </div>
             </div>
 

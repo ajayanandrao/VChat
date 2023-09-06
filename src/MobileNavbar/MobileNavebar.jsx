@@ -80,6 +80,7 @@ const MobileNavebar = () => {
     };
   }, []);
 
+
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
@@ -96,17 +97,13 @@ const MobileNavebar = () => {
     setTheme(theme === 'dark' ? "light" : "dark");
   };
 
-
-  
   return (
     <>
       <div
-        className="  dark:bg-darkDiv mobile-nav-container"
+        className="mobile-nav-container bg-white_0 dark:bg-dark"
         style={{ display: "none" }}
         id="navId"
-
       >
-
         <Link to="home/" onClick={handleScrollToTop} style={{ textDecoration: "none" }}>
           {" "}
           <div className="mobile-nav-title">
@@ -118,7 +115,7 @@ const MobileNavebar = () => {
           <span className="mobile-nav-mainu">
             <Link to="find_friend/" className="link">
               <div>
-                <BsFillPeopleFill className="mobile-nav-icon dark:text-darkIcon" />
+                <BsFillPeopleFill className="mobile-nav-icon dark:text-darkPostIcon" />
                 {/* <img src={p} width={"18px"} alt="" /> */}
               </div>
             </Link>
@@ -127,23 +124,23 @@ const MobileNavebar = () => {
           <span className="mobile-nav-mainu">
             <Link to="search/" className="link">
               <div>
-                <RiSearchLine className="mobile-nav-icon dark:text-darkIcon" />
+                <RiSearchLine className="mobile-nav-icon dark:text-darkPostIcon" />
               </div>
             </Link>
           </span>
 
-          <div onClick={() => darkTheme()} className="mobile-nav-mainu">
+          <div onClick={()=>darkTheme()} className="mobile-nav-mainu">
             {dayTheme ?
 
-              <BsFillSunFill className="mobile-nav-icon dark:text-darkIcon" onClick={darkTheme} />
+              <BsFillSunFill className="mobile-nav-icon dark:text-darkPostIcon" />
               :
-              <BsMoonStarsFill className="mobile-nav-icon text-red" onClick={darkTheme} />
+              <BsMoonStarsFill className="mobile-nav-icon" />
             }
           </div>
 
           <span className="mobile-nav-mainu">
             <Link to="option/" className="link">
-              <RxHamburgerMenu className="mobile-nav-icon dark:text-darkIcon" />
+              <RxHamburgerMenu className="mobile-nav-icon dark:text-darkPostIcon" />
             </Link>
           </span>
         </div>

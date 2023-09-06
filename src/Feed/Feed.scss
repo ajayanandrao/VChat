@@ -13,7 +13,7 @@
 		// background: white;
 		box-shadow: $border-input;
 		// box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-		transition: 0.8s ease-in-out;
+		border-radius: 5px;
 
 		.feed-post-text {
 			// color: black;
@@ -84,12 +84,12 @@
 					justify-content: center;
 					align-items: center;
 					width: 30px;
+					// background: $light-text;
 					height: 30px;
 					box-shadow: $border-input;
 					// box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
 					// 	rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
 					// 	rgba(0, 0, 0, 0.07) 0px 16px 16px;
-					// background: $light-text;
 					cursor: pointer;
 
 					.feed-icon {
@@ -359,7 +359,7 @@
 		height: 17px;
 		border-radius: 25px;
 		// background-color: #DF013A;
-		background-color: $light-text2;
+		// background-color: $light-text2;
 		display: flex;
 		justify-content: center;
 		align-items: center;

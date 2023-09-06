@@ -85,16 +85,16 @@ const ProfilePageTwo = ({ user, userId }) => {
         <>
 
             <div className="profile-name-container-main" >
-                <h3 className='profile-name-text'>{user.name}</h3>
+                <h3 className='profile-name-text text-3xl dark:text-darkProfileName'>{user.name}</h3>
                 <div className='profile-Page-add-btn'>
 
                     <Link to={`/users/${user.uid}/message`}>
                         <button className='btn btn-primary btn-sm'>Message</button>
                     </Link>
 
-                    <div className='profile-option-div' onClick={option}>
+                    <div className='profile-option-div dark:text-darkPostIcon' onClick={option}>
                         <FaUserEdit style={{ fontSize: "24px" }} />
-                        <div className="profile-option-absolute" id='option' style={{ display: "none" }} onClick={deleteFriend}>
+                        <div className="profile-option-absolute dark:text-darkPostText dark:bg-darkDiv" id='option' style={{ display: "none" }} onClick={deleteFriend}>
                             Unfriend
                         </div>
                     </div>
