@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import { auth, db } from "../Firebase";
 import { AuthContext } from "../AuthContaxt";
 import { BsFillMoonStarsFill, BsFillPeopleFill, BsFillSunFill, BsMoonStarsFill } from "react-icons/bs";
-import { collection, onSnapshot } from "firebase/firestore";
-import { MdMovieFilter } from "react-icons/md";
+import { addDoc, collection, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { MdColorLens, MdMovieFilter } from "react-icons/md";
 import v from "./../Image/img/vl.png";
 import home from "./../Image/home2.png";
 import heart from "./../Image/h3.png";
@@ -81,9 +81,23 @@ const MobileNavebar = () => {
   }, []);
 
 
-  const [theme, setTheme] = useState("light");
+
+  const themRef = collection(db, "Theme");
+  const [activeThem, setActiveTheme] = useState([]);
 
   useEffect(() => {
+    const unsub = onSnapshot(themRef, (snapshot) => {
+      setActiveTheme(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+    return unsub;
+  }, []);
+
+  const [theme, setTheme] = useState("light");
+  const [newTheme, setNewTheme] = useState(null);
+
+
+  useEffect(() => {
+
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
     }
@@ -92,10 +106,18 @@ const MobileNavebar = () => {
     }
   }, [theme])
 
-  const darkTheme = () => {
+  const darkTheme = async () => {
     setDayTheme(!dayTheme);
     setTheme(theme === 'dark' ? "light" : "dark");
+
+    const themeRef = doc(db, 'Theme', currentUser && currentUser.uid);
+    await setDoc(themeRef, {
+      uid: currentUser.uid,
+      theme: theme,
+    })
   };
+
+
 
   return (
     <>
@@ -115,7 +137,7 @@ const MobileNavebar = () => {
           <span className="mobile-nav-mainu">
             <Link to="find_friend/" className="link">
               <div>
-                <BsFillPeopleFill className="mobile-nav-icon text-white_0 dark:text-darkPostIcon" />
+                <BsFillPeopleFill className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
                 {/* <img src={p} width={"18px"} alt="" /> */}
               </div>
             </Link>
@@ -124,23 +146,27 @@ const MobileNavebar = () => {
           <span className="mobile-nav-mainu">
             <Link to="search/" className="link">
               <div>
-                <RiSearchLine className="mobile-nav-icon text-white_0 dark:text-darkPostIcon" />
+                <RiSearchLine className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
               </div>
             </Link>
           </span>
 
-          <div onClick={()=>darkTheme()} className="mobile-nav-mainu">
+          <div onClick={() => darkTheme()} className="mobile-nav-mainu">
             {dayTheme ?
 
               <BsFillSunFill className="mobile-nav-icon  dark:text-darkPostIcon" />
               :
-              <BsMoonStarsFill className="mobile-nav-icon text-white_0" />
+              <BsMoonStarsFill className="mobile-nav-icon text-lightPostIcon" />
             }
           </div>
 
+          {/* <div className="mobile-nav-mainu">
+            <MdColorLens className="mobile-nav-icon text-lightPostIcon" />
+          </div> */}
+
           <span className="mobile-nav-mainu">
             <Link to="option/" className="link">
-              <RxHamburgerMenu className="mobile-nav-icon text-white_0 dark:text-darkPostIcon" />
+              <RxHamburgerMenu className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
             </Link>
           </span>
         </div>

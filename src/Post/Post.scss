@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     // background: blue;
-    
+    padding: 0 0.2rem;
 
     .post-div {
         flex-basis: 576px;
@@ -16,11 +16,13 @@
         color: black;
         // padding: 0.7rem 0.8rem;
         padding-top: 1rem;
-        box-shadow: $border-input;
-        // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        // box-shadow: $border-input;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         overflow: hidden;
         // border-radius: 0.5rem;
+        border-radius: 10px;
         transition: 0.8s ease-in-out;
+
         .post-padding {
             padding: 0.1rem 0.8rem;
         }
@@ -64,11 +66,14 @@
                 border-radius: 30px;
                 padding-inline-start: 1rem;
                 box-shadow: $border-input;
+
                 outline: none;
                 transition: 0.8s ease-in-out;
+
                 &:focus {
                     box-shadow: none;
-                    box-shadow: $border-input;
+                    // box-shadow: $border-input;
+                    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
                 }
             }
 
@@ -89,7 +94,7 @@
             .post-icon-div {
                 display: flex;
                 align-items: center;
-                
+
                 .post-icon {
                     width: 30px;
                     height: 30px;

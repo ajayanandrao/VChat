@@ -6,14 +6,14 @@
 	display: flex;
 	justify-content: center;
 	margin: 1rem 0;
-
+	padding: 0 0.2rem;
 	.feed-div {
 		width: 100%;
 		flex-basis: 576px;
 		// background: white;
-		box-shadow: $border-input;
-		// box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-		border-radius: 5px;
+		// box-shadow: $border-input;
+		box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+		border-radius: 10px;
 		transition: 0.8s ease-in-out;
 
 		.feed-post-text {

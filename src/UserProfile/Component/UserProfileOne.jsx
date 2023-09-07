@@ -260,11 +260,19 @@ const ProfileOne = ({ user }) => {
         return unsub;
     }, []);
 
+    function onProfile() {
+        document.getElementById("ProfileOneImg").style.display = "block";
+    }
 
+    function offProfile() {
+        document.getElementById("ProfileOneImg").style.display = "none";
+    }
     return (
         <>
 
             <div>
+
+
 
                 {loadingCoverData ? (
 
@@ -275,71 +283,82 @@ const ProfileOne = ({ user }) => {
                 ) : (
 
                     <>
-                        {coverImg.map((item) => {
-                            if (item.uid === currentUser.uid) {
-                                return (
-                                    <div key={item.id}>
-                                        <div className="profile-cover-photo-div"
-                                            style={{ backgroundImage: `url(${item.CoverPhoto ? item.CoverPhoto : 'https://images.unsplash.com/photo-1549247796-5d8f09e9034b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1158&q=80'})` }}
-                                        >
-                                            <div className="profile-cover-camera-btn-div" onClick={on}>
-                                                <BsFillCameraFill className='profile-cover-camera-btn' />
-                                            </div>
+
+                        <div id="ProfileOneImg" onClick={offProfile} >
+                            <div id="ProfileOneImg-text">
+                                <img src={currentUser && currentUser.photoURL} className='ProfileOneImg-photo' alt="" />
+                            </div>
+                        </div>
+
+                        <div>
+                            {coverImg.map((item) => {
+                                if (item.uid === currentUser.uid) {
+                                    return (
+                                        <div key={item.id}>
+                                            <div className="profile-cover-photo-div"
+                                                style={{ backgroundImage: `url(${item.CoverPhoto ? item.CoverPhoto : 'https://images.unsplash.com/photo-1549247796-5d8f09e9034b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1158&q=80'})` }}
+                                            >
+                                                <div className="profile-cover-camera-btn-div" onClick={on}>
+                                                    <BsFillCameraFill className='profile-cover-camera-btn' />
+                                                </div>
 
 
-                                            <div id="Cover">
-                                                <div id="CoverCard">
+                                                <div id="Cover">
+                                                    <div id="CoverCard">
 
-                                                    <div className="Cover-card-bg">
-                                                        <div className="cover-card-inner-div">
-                                                            <div className='cover-close-div'>
-                                                                <IoMdClose onClick={off} style={{ fontSize: "24px" }} />
+                                                        <div className="Cover-card-bg">
+                                                            <div className="cover-card-inner-div">
+                                                                <div className='cover-close-div'>
+                                                                    <IoMdClose onClick={off} style={{ fontSize: "24px" }} />
+                                                                </div>
+
+                                                                {loading ? (<LinearProgress />) : ""}
+
+                                                                <label htmlFor="cover-img">
+                                                                    <img className='Cover-img' src={cover ? URL.createObjectURL(cover) : (imageUrl ? imageUrl : item.CoverPhoto)} alt="" />
+                                                                </label>
+
+                                                                <input type="file" id='cover-img' onChange={(e) => setCover(e.target.files[0])} style={{ display: "none" }} />
+
+                                                                <div className='upload-btn-div'>
+                                                                    <button className="btn-success-custom" onClick={CoverUpload}>Save</button>
+                                                                </div>
+
                                                             </div>
+                                                        </div>
 
-                                                            {loading ? (<LinearProgress />) : ""}
+                                                    </div>
+                                                </div>
 
-                                                            <label htmlFor="cover-img">
-                                                                <img className='Cover-img' src={cover ? URL.createObjectURL(cover) : (imageUrl ? imageUrl : item.CoverPhoto)} alt="" />
-                                                            </label>
 
-                                                            <input type="file" id='cover-img' onChange={(e) => setCover(e.target.files[0])} style={{ display: "none" }} />
+                                                <div className="profile-pic-bg-div">
 
-                                                            <div className='upload-btn-div'>
-                                                                <button className="btn-success-custom" onClick={CoverUpload}>Save</button>
-                                                            </div>
+                                                    <div className="profile-pic-div-inner">
+                                                        <div className="profile-pic-div" onClick={onProfile} style={{ backgroundImage: `url(${currentUser && currentUser.photoURL})` }}>
 
                                                         </div>
-                                                    </div>
+                                                        {loading ? (<CircularProgress style={{ fontSize: "16px" }} />) : ""}
 
-                                                </div>
-                                            </div>
+                                                        <div className="photo-edit-div" onClick={offProfile}>
+                                                            <label htmlFor="profile-img">
+                                                                <BsFillCameraFill className='photo-camera' />
+                                                            </label>
 
+                                                            <input type="button" id='profile-img' value="Select Image" style={{ display: "none" }} onClick={() => fileInput.current.click()} />
 
-                                            <div className="profile-pic-bg-div">
-
-                                                <div className="profile-pic-div" style={{ backgroundImage: `url(${currentUser && currentUser.photoURL})` }}>
-
-                                                    {loading ? (<CircularProgress style={{ fontSize: "16px" }} />) : ""}
-
-                                                    <div className="photo-edit-div">
-                                                        <label htmlFor="profile-img">
-                                                            <BsFillCameraFill className='photo-camera' />
-                                                        </label>
-
-                                                        <input type="button" id='profile-img' value="Select Image" style={{ display: "none" }} onClick={() => fileInput.current.click()} />
-
-                                                        <input type="file" ref={fileInput} style={{ display: 'none' }} onChange={handleImageUpload} accept="image/*" />
+                                                            <input type="file" ref={fileInput} style={{ display: 'none' }} onChange={handleImageUpload} accept="image/*" />
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                             </div>
+
 
                                         </div>
-
-
-                                    </div>
-                                )
-                            }
-                        })}
+                                    )
+                                }
+                            })}
+                        </div>
                     </>
 
                 )

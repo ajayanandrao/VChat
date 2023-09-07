@@ -28,7 +28,7 @@ const WeddingMain = () => {
                     <FaPlus style={{ fontSize: "18px" }} />
                 </div>
             </Link>
-            <div className='w-up-bio-btn dark:text-aqua_0' onClick={handleScrollToTop}>
+            <div className='w-up-bio-btn text-aqua_0 dark:text-aqua_0' style={{color:'#06b6d4'}} onClick={handleScrollToTop}>
                 <BiUpArrowAlt />
             </div>
         </div>

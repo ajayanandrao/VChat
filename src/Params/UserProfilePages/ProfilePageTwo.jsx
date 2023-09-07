@@ -85,7 +85,7 @@ const ProfilePageTwo = ({ user, userId }) => {
         <>
 
             <div className="profile-name-container-main" >
-                <h3 className='profile-name-text text-3xl text-lightProfileName dark:text-darkProfileName'>{user.name}</h3>
+                <h3 className='profile-name-text text-2xl text-lightProfileName dark:text-darkProfileName'>{user.name}</h3>
                 <div className='profile-Page-add-btn'>
 
                     <Link to={`/users/${user.uid}/message`}>

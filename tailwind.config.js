@@ -8,15 +8,29 @@ module.exports = {
     extend: {
       colors: {
 
-        light_0: "#0a1929",
-        lightDiv: "#0b243b",
+        // light_0: "#FE2E64",
+        // lightDiv: "#FA5882",
+
+        // lightProfile: "#404040",
+        // lightProfileName: "#f5f5f5",
+
+        // lightPostText: "#e5e5e5", /*300*/
+        // lightPostTime: "#F7819F", /*400*/
+        // lightPostIcon: "#FBEFF2",  /*400*/
+        // lightPostIconBottom: "#FBEFF2",  /*400*/
+
+        // lightInput: "#07121d",
+        // lightOptionText: "#BDBDBD",
+        light_0: "#0f263e",
+        lightDiv: "#143252",
 
         lightProfile: "#404040",
-        lightProfileName: "#e5e5e5",
+        lightProfileName: "#f5f5f5",
 
-        lightPostText: "#d4d4d4", /*300*/
+        lightPostText: "#e5e5e5", /*300*/
         lightPostTime: "#a3a3a3", /*400*/
-        lightPostIcon: "#737373",  /*400*/
+        lightPostIcon: "#FFFFFF",  /*400*/
+        lightPostIconBottom: "#0f263e",  /*400*/
 
         lightInput: "#07121d",
         lightOptionText: "#BDBDBD",
@@ -24,8 +38,8 @@ module.exports = {
 
         // -------------------------------------------------------------
 
-        dark: "#171717",    /*900*/
-        darkDiv: "#262626", /*800*/
+        dark: "#0a0a0a",    /*900*/
+        darkDiv: "#171717", /*800*/
 
         darkProfile: "#404040",     /*700*/
         darkProfileName: "#e5e5e5", /*200*/

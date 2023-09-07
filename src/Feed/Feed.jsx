@@ -492,7 +492,7 @@ const Feed = ({ post }) => {
 
             <div className="feed-container">
 
-                <div className="feed-div bg-[#0b243b] dark:bg-darkDiv">
+                <div className="feed-div bg-lightDiv dark:bg-darkDiv">
 
                     <div className="feed-profile-div">
                         <img src={post.photoURL} className='feed-img' alt="" />
@@ -589,7 +589,7 @@ const Feed = ({ post }) => {
                                 <>
                                     <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
                                         <AiOutlineHeart onClick={() => { Heart(post.id, post.uid); handleCloseRightComment(); }}
-                                            style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-light_0 dark:text-darkPostIcon' />
+                                            style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
                                         {like.length > 0 ?
                                             <div className="feed-bottom-like-count bg-light_0 text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText"
                                                 onClick={() => showLike(post.id)}>
@@ -627,7 +627,7 @@ const Feed = ({ post }) => {
                                 {rightComment ?
                                     <img src={sms} style={{ width: "26px" }} onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
                                     :
-                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-light_0 dark:text-darkPostIcon' />
+                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
                                 }
                                 {commentCount ?
                                     <Link to={`/notification/${post.id}`}>
@@ -643,7 +643,7 @@ const Feed = ({ post }) => {
 
                         {/* Share */}
                         <div className="feed-bottom-mainu">
-                            <FaShare className='feed-bottom-icon text-light_0 dark:text-darkPostIcon' />
+                            <FaShare className='feed-bottom-icon text-lightPostIconBottom dark:text-darkPostIcon' />
                         </div>
 
                     </div>
