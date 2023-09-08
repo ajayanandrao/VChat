@@ -114,7 +114,9 @@ const UserPhoto = () => {
                         </div>
                     </div>
 
-                    {post.img && isImage(post.name) &&
+                    <img src={post.image} alt="" />
+
+                    {post.img && isImage(post.name) ?
                         (
                             <div key={post.id} onClick={() => { ViewPhoto(post.id) }}
                                 className='photo-card'
@@ -122,6 +124,8 @@ const UserPhoto = () => {
 
                             </div >
                         )
+                        :
+                        null
                     }
                 </div>
             );
@@ -170,7 +174,7 @@ const UserPhoto = () => {
                     {post.img && isVideo(post.name) && (
                         <>
                             <div className='video-container'>
-                                <video className='UserVideo' 
+                                <video className='UserVideo'
                                     onClick={() => handleVideoShow(post.id, post.img, post.bytime)}  >
                                     <source src={post.img} type="video/mp4" />
                                 </video>
@@ -190,10 +194,21 @@ const UserPhoto = () => {
     };
 
 
+
+    const mediaRef = collection(db, 'CurrentUserMedia');
+    const [imageMedia, setImageMedia] = useState([]);
+
+    useEffect(() => {
+        const unsub = onSnapshot(mediaRef, (snapshot) => {
+            setImageMedia(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        });
+        return unsub;
+    }, []);
+
     return (
         <>
 
-            {videoShow ?
+            {/* {videoShow ?
                 <div className='current-Profile-video-Overlay'>
                     <div className="video-overlay-close">
                         <div className="video-overlay-time-div">
@@ -216,16 +231,29 @@ const UserPhoto = () => {
                 </div>
                 :
                 null
-            }
-            <div class="photo-grid-parent-container">
+            } */}
+            {/* <div class="photo-grid-parent-container">
                 <div className="grid-container" >
                     {newData}
                 </div>
-            </div>
+            </div> */}
+
+            {imageMedia.map((item) => {
+                return (
+                    <>
+                        <div className='video-container'>
+                            <video className='UserVideo'>
+                                <source src={item.video} type="video" />
+                            </video>
+                        </div>
+                        <img src={item.image} alt="" />
+                    </>
+                )
+            })}
 
             <h3 className='video-text text-2xl text-lightPostText dark:text-darkPostText'>Video</h3>
 
-            {VideoData}
+            {/* {VideoData} */}
         </>
 
     )

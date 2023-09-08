@@ -1,0 +1,131 @@
+.media-container {
+    padding: 0 1rem;
+    padding-bottom: 1rem;
+
+    .photo-grid-parent-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        // background-color: red;
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.2rem;
+        }
+    }
+
+    .media-img {
+        width: 100%;
+        max-width: 200px;
+        height: 100px;
+        border-radius: 5px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .mediaVideo-background {
+        position: relative;
+        width: 100%;
+        max-width: 200px;
+        height: 100px;
+        border-radius: 5px;
+        /* Adjust the height as needed */
+        overflow: hidden;
+    }
+
+    .mediaVideo-btn-div {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        .mediaVideo-btn {
+            background: rgb(0, 0, 0, 0.5);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+            .mediaVideo-icon {
+                margin-left: 1px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 18px;
+            }
+        }
+    }
+
+    .media-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+}
+
+
+
+
+.current-Profile-video-Overlay {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    // background: red;
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .video-overlay-close {
+        width: 100%;
+        display: flex;
+        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 0;
+        z-index: 1;
+
+
+        .video-overlay-time-div {
+            flex: 1;
+            // background: red;
+            display: flex;
+            justify-content: start;
+            // align-items: center;
+            padding: 1rem;
+        }
+
+        .video-overlay-close-div {
+            flex: 0.5;
+            // background: blue;
+            padding: 1rem;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+        }
+    }
+
+    .video-div {
+        width: 100%;
+        height: calc(100vh - 10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .UserVideo {
+            width: 100%;
+        }
+    }
+}

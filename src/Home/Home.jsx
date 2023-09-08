@@ -10,6 +10,7 @@ import { AiOutlineArrowUp } from "react-icons/ai";
 import { CircularProgress } from '@mui/material';
 import Feed from '../Feed/Feed';
 import { motion, useAnimation } from 'framer-motion';
+import UserMedia from '../UserProfile/Tab/UserMedia';
 
 const Home = () => {
     const [api, setApiData] = useState([]);
@@ -95,13 +96,8 @@ const Home = () => {
         });
     };
 
-
-
-
-
     return (
         <div className='bg-light_0 dark:bg-dark' style={{ transition: "0.8s ease-in-out" }}>
-            {/* <Navbar /> */}
             {loading ? (
                 <div className='skeleton-center bg-light_0 dark:bg-dark'>
                     <CircularProgress className='circularprogress' />
@@ -109,7 +105,6 @@ const Home = () => {
             ) : (
                 <>
 
-                    {/* <div className={`mobile-navbar ${showNavbar ? '' : 'hidden'}`}><MobileNavebar/></div> */}
 
                     <motion.div
                         transition={{ duration: 0.3, delay: 0.8 }}
@@ -118,7 +113,6 @@ const Home = () => {
                         className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
                         <AiOutlineArrowUp className='top-arrow text-black_0 dark:text-aqua_0' />
                     </motion.div>
-                    {/* <StoryForm /> */}
                     <Post />
 
 

@@ -8,6 +8,7 @@ import UserPhoto from '../Tab/UserPhoto';
 import Friends from '../Tab/Friends ';
 import { CircularProgress, LinearProgress } from '@mui/material';
 import About from '../Tab/About';
+import UserMedia from '../Tab/UserMedia';
 
 const ProfileThree = ({ user }) => {
     const { currentUser } = useContext(AuthContext);
@@ -123,8 +124,8 @@ const ProfileThree = ({ user }) => {
 
                     <div id="Photo" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
 
-                        <UserPhoto />
-
+                        {/* <UserPhoto /> */}
+                        <UserMedia />
                     </div>
                 </div>
             </div >

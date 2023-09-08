@@ -6,6 +6,7 @@ import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../../Firebase';
 import { AuthContext } from '../../AuthContaxt';
 import ProfileAbout from './ProfileTab/ProfileAbout';
+import UserMedia from './ProfileTab/UserMedia';
 
 const ProfilePageThree = ({ user }) => {
 
@@ -77,7 +78,7 @@ const ProfilePageThree = ({ user }) => {
 
                     <div id="About" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
 
-                        <ProfileAbout user={user}  />
+                        <ProfileAbout user={user} />
 
                     </div>
 
@@ -86,7 +87,7 @@ const ProfilePageThree = ({ user }) => {
                     </div>
 
                     <div id="Photo" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
-                        <ProfilePhotos user={user} />
+                        <UserMedia user={user} />
                     </div>
                 </div>
             </div>
