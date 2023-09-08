@@ -102,6 +102,12 @@ const SignUp = () => {
                                     email: email,
                                     password: password,
                                     PhotoUrl: downloadURL,
+
+                                    school: "",
+                                    college: "",
+                                    work: "",
+                                    from: "",
+                                    intro: "",
                                     // bytime: serverTimestamp(),
                                 });
 
@@ -166,10 +172,10 @@ const SignUp = () => {
         <>
             <div className="Signup-form-container signup-div w3-animate-right">
                 <h3 className='login-title'>
-                    <img width={"35px"} style={{marginRight:"0.5rem"}} src={vlogo} alt="" />
+                    <img width={"35px"} style={{ marginRight: "0.5rem" }} src={vlogo} alt="" />
                     <img width={"120px"} src={logoText} alt="" />
-                    
-                    </h3>
+
+                </h3>
 
                 <label htmlFor="photo" >
                     {img ? <img className="singup-img-form" src={img ? URL.createObjectURL(img) : null} alt="" /> :

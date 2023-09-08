@@ -5,6 +5,7 @@ import UserPostPage from "./../ParamsTab/UserPostPage";
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../../Firebase';
 import UserFriendPage from '../ParamsTab/UserFriendPage';
+import UserAboutPage from '../ParamsTab/UserAboutPage';
 
 const ProfileThree = ({ user }) => {
 
@@ -67,8 +68,7 @@ const ProfileThree = ({ user }) => {
                     </div>
 
                     <div id="About" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
-                        {/* <About /> */}
-                        Profile Locked
+                        <UserAboutPage user={user} />
                     </div>
 
                     <div id="Friend" style={{ display: "none" }} className="tabcontent w3-animate-opacity">

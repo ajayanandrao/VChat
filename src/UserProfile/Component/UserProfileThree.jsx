@@ -7,6 +7,7 @@ import { db } from '../../Firebase';
 import UserPhoto from '../Tab/UserPhoto';
 import Friends from '../Tab/Friends ';
 import { CircularProgress, LinearProgress } from '@mui/material';
+import About from '../Tab/About';
 
 const ProfileThree = ({ user }) => {
     const { currentUser } = useContext(AuthContext);
@@ -112,8 +113,7 @@ const ProfileThree = ({ user }) => {
                     </div>
 
                     <div id="About" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
-                        {/* <About /> */}
-                        Profile Locked
+                        <About />
                     </div>
 
                     <div id="Friend" style={{ display: "none" }} className="tabcontent w3-animate-opacity">

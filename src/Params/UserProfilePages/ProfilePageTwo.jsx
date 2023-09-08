@@ -1,8 +1,8 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./ProfilePageTwo.scss";
 import { FaUserEdit } from "react-icons/fa"
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, updateDoc, where } from 'firebase/firestore';
 import { db } from '../../Firebase';
 import { AuthContext } from '../../AuthContaxt';
 import { Link, useNavigate } from 'react-router-dom';
@@ -81,13 +81,32 @@ const ProfilePageTwo = ({ user, userId }) => {
     };
 
 
+    const [api, setApiData] = useState([]);
+    useEffect(() => {
+        const colRef = collection(db, 'users');
+        const unsubscribe = onSnapshot(colRef, (snapshot) => {
+            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+            setApiData(newApi);
+        });
+
+        return unsubscribe;
+    }, []);
+
     return (
         <>
 
             <div className="profile-name-container-main" >
                 <h3 className='profile-name-text text-2xl text-lightProfileName dark:text-darkProfileName'>{user.name}</h3>
+                {/* {api.map((item) => {
+                    if (user.uid === item.uid) {
+                        return (
+                            <div className='people-intro'>
+                                {item.intro}
+                            </div>
+                        )
+                    }
+                })} */}
                 <div className='profile-Page-add-btn'>
-
                     <Link to={`/users/${user.uid}/message`}>
                         <button className='btn btn-primary btn-sm'>Message</button>
                     </Link>
