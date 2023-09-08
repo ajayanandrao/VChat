@@ -639,9 +639,7 @@ const Messages = () => {
 
     return (
         <Fragment>
-            <div className="message-main-div">
-
-
+            <div className="message-main-div bg-light_0 dark:bg-dark">
 
                 {/* Delete Message Permantly ------------------------------------- */}
 
@@ -833,7 +831,7 @@ const Messages = () => {
 
                 {/* Profile  ------------------------------------- */}
 
-                <div className="message-top-bar">
+                <div className="message-top-bar bg-light_0">
                     <i onClick={goBack} className="bi bi-arrow-left message-back-arrow "></i>
 
                     <div className="message-profile-div">
@@ -843,19 +841,19 @@ const Messages = () => {
                     </div>
                     <div>
                         {showMessageOption ?
-                            <div className="top-message-option-btn"
+                            <div className="top-message-option-btn bg-lightPostIcon"
                                 style={{ background: "#f0f2f5", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
                                 onClick={HandleShowMessageOption}>
                                 <BsThreeDots />
                             </div>
                             :
-                            <div className="top-message-option-btn" onClick={HandleShowMessageOption}>
+                            <div className="top-message-option-btn bg-lightPostIcon" onClick={HandleShowMessageOption}>
                                 <BsThreeDots />
                             </div>
 
                         }
                         {showMessageOption ?
-                            <div className="show-message-option">
+                            <div className="show-message-option bg-lightDiv">
                                 <p onClick={HandleAreyouSure}>Delete all Chat</p>
                                 <p onClick={HandleAreyouSureForCurrentUser}>Delete message from you</p>
                             </div>
@@ -1036,7 +1034,7 @@ const Messages = () => {
 
 
 
-                                                                            {message.message && <div className="message-content"
+                                                                            {message.message && <div className="message-content bg-lightDiv"
                                                                                 onMouseEnter={() => showReplyButton(message.id)}
                                                                                 onMouseLeave={hideReplyButton}
                                                                             >{message.message}</div>}
@@ -1385,9 +1383,9 @@ const Messages = () => {
                     } */}
                     {/* message bottom bar --------------------------------------- */}
 
-                    <div className='message-bottom-inner-div'>
+                    <div className='message-bottom-inner-div bg-light_0'>
                         <label htmlFor="imgFiles" onClick={() => { setImg(null); setLoadingProgress(false); setIsPlaying(false); }}>
-                            <BsFillCameraFill className='message-bottom-camera' />
+                            <BsFillCameraFill className='message-bottom-camera text-lightPostIcon' />
                         </label>
                         <input id='imgFiles' style={{ display: "none" }} type="file" onChange={(e) => setImg(e.target.files[0])} />
 
@@ -1396,7 +1394,7 @@ const Messages = () => {
                             type="text"
                             onChange={(e) => setMessageInput(e.target.value)}
                             value={messageInput}
-                            className="message-bottom-input"
+                            className="message-bottom-input bg-lightInput "
                             placeholder="Message"
                             onKeyDown={handleKeyDown}
                         />
@@ -1405,7 +1403,7 @@ const Messages = () => {
                             {messageInput ?
 
                                 <BiSolidSend
-                                    className="message-bottom-send-btn"
+                                    className="message-bottom-send-btn text-lightPostIcon"
                                     color='#0080FF'
                                     onClick={() => {
                                         if (selectedMessageId) {
@@ -1418,7 +1416,7 @@ const Messages = () => {
                                 />
                                 :
                                 <BiSend
-                                    className="message-bottom-send-btn"
+                                    className="message-bottom-send-btn text-lightPostIcon"
                                     onClick={() => {
                                         if (selectedMessageId) {
                                             sendReply(selectedMessageId);
@@ -1443,7 +1441,7 @@ const Messages = () => {
                         </div>
 
                         <div className='message-bottom-thumb-div'>
-                            <FaThumbsUp className='message-bottom-thumb ' onClick={() => SendLike(user.uid, user.name, user.userPhoto)} />
+                            <FaThumbsUp className='message-bottom-thumb text-lightPostIcon' onClick={() => SendLike(user.uid, user.name, user.userPhoto)} />
                         </div>
                     </div>
                 </div>

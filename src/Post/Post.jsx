@@ -80,10 +80,12 @@ const Post = () => {
 		});
 	};
 
+	const [imageUrl, setImageUrl] = useState("");
+	const [videoUrl, setVideoUrl] = useState("");
+
 	const handleUpload = async () => {
 		setShowEmoji(false);
 		setPostText('');
-		setImg(null);
 
 		if (img || postText) {
 			let downloadURL = '';
@@ -114,6 +116,8 @@ const Post = () => {
 									await uploadTask;
 									downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 									saveData(downloadURL);
+									setImageUrl(downloadURL);
+
 									console.log('Image uploaded successfully');
 								} catch (error) {
 									console.log('Error uploading image:', error);
@@ -146,11 +150,18 @@ const Post = () => {
 							try {
 								await uploadTask;
 								downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+
+								setVideoUrl(downloadURL);
+
 								saveData(downloadURL);
+								// console.log(downloadURL);
+
+
 								console.log('Video uploaded successfully');
 							} catch (error) {
 								console.log('Error uploading video:', error);
 							}
+
 						}
 					);
 				}
@@ -160,7 +171,10 @@ const Post = () => {
 		} else {
 			console.log('No image or text entered');
 		}
+		setVideoUrl("");
+		setImg(null);
 	};
+	// console.log(videoUrl)
 
 	const saveData = async (downloadURL) => {
 		const allPostsColRef = collection(db, 'AllPosts');
@@ -180,6 +194,11 @@ const Post = () => {
 		await addDoc(userPostPhotoRef, {
 			name: img ? img.name : '',
 			img: img ? downloadURL : '', // Only use the downloadURL if a img was uploaded
+
+			// video: videoUrl, // Check if img is a video, if so, assign it to 'video'
+			image: imageUrl,
+			video: videoUrl,
+
 			uid: currentUser.uid,
 			photoURL: currentUser.photoURL,
 			displayName: currentUser.displayName,

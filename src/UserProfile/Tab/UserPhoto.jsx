@@ -7,6 +7,7 @@ import { FiMaximize } from "react-icons/fi"
 import { MdDelete } from "react-icons/md"
 import { IoMdClose } from "react-icons/io"
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineClose } from 'react-icons/ai'
 
 const UserPhoto = () => {
 
@@ -97,10 +98,10 @@ const UserPhoto = () => {
                                     <div className='viewimg-option-delete'>
 
                                         <div className="photo-time">{formatTimestamp(post.bytime)}</div>
-                                        <MdDelete style={{ fontSize: "26px" }} onClick={() => deletePhoto(post.id)} />
+                                        <MdDelete style={{ fontSize: "26px", color: "white" }} onClick={() => deletePhoto(post.id)} />
                                     </div>
                                     <div className='viewimg-option-close'>
-                                        <IoMdClose style={{ fontSize: "26px", color: "black" }} onClick={() => closeViewPhoto(post.id)} />
+                                        <AiOutlineClose style={{ fontSize: "20px" }} onClick={() => closeViewPhoto(post.id)} />
                                     </div>
 
 
@@ -136,8 +137,21 @@ const UserPhoto = () => {
 
     const [isPlaying, setIsPlaying] = useState(false);
     const videoRef = useRef([]);
-    const handleVideoBtnClick = (id) => {
-        const video = videoRef.current[id];
+
+    const [videoShow, setVideoShow] = useState(false);
+    const [videoUrl, setVideoUrl] = useState(null);
+    const [videoId, setVideoId] = useState(null);
+    const [time, setTime] = useState(null);
+
+    const handleVideoShow = (id, url, time) => {
+        setVideoShow(!videoShow);
+        setVideoId(id);
+        setVideoUrl(url);
+        setTime(time);
+    }
+
+    const handleVideoBtnClick = () => {
+        const video = videoRef.current[videoId];
         if (video.paused) {
             video.play();
             setIsPlaying(true);
@@ -152,11 +166,12 @@ const UserPhoto = () => {
         if (post.uid === currentUser.uid) {
             return (
                 <>
+
                     {post.img && isVideo(post.name) && (
                         <>
                             <div className='video-container'>
-                                <video className='UserVideo' ref={(el) => (videoRef.current[post.id] = el)}
-                                    onClick={() => handleVideoBtnClick(post.id)}  >
+                                <video className='UserVideo' 
+                                    onClick={() => handleVideoShow(post.id, post.img, post.bytime)}  >
                                     <source src={post.img} type="video/mp4" />
                                 </video>
                             </div>
@@ -168,9 +183,40 @@ const UserPhoto = () => {
         }
     });
 
+    const deleteVideo = async () => {
+        const colRef = doc(db, 'UserPostPhoto', videoId);
+        await deleteDoc(colRef);
+        handleVideoShow();
+    };
+
 
     return (
         <>
+
+            {videoShow ?
+                <div className='current-Profile-video-Overlay'>
+                    <div className="video-overlay-close">
+                        <div className="video-overlay-time-div">
+                            <div className="photo-time me-3">{formatTimestamp(time)}</div>
+                            <MdDelete style={{ fontSize: "26px" }} onClick={deleteVideo} />
+                        </div>
+                        <div className="video-overlay-close-div">
+                            <div onClick={handleVideoShow}>
+                                <AiOutlineClose style={{ fontSize: "20px" }} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className='video-div'>
+                        <div className='video-container' >
+                            <video className='UserVideo' ref={(el) => (videoRef.current[videoId] = el)} onClick={handleVideoBtnClick} >
+                                <source src={videoUrl} type="video/mp4" />
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                :
+                null
+            }
             <div class="photo-grid-parent-container">
                 <div className="grid-container" >
                     {newData}
