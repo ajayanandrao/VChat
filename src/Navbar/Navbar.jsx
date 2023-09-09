@@ -185,7 +185,9 @@ const Navbar = () => {
                                                 <AiFillHeart className="" color='#FF0040' onClick={() => { handleNotificationClick(); handleBoll(); }} />
                                             </motion.div>
                                             :
-                                            <AiFillHeart />}
+                                            <AiFillHeart className='text-lightProfileName dark:text-darkPostIcon'/>
+                                            
+                                            }
                                     </div>
                                 )}
                             </div>

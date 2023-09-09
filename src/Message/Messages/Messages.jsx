@@ -1275,79 +1275,81 @@ const Messages = () => {
                         initial={{ y: 100 }}
                         animate={{ y: 0 }}
                         className="message-emoji-grop-div" >
-                        <div className="message-emoji-group-one">
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/clapping-hands-4158690-3449620.png?f=webp")}>
-                                <img className="message-emoji" src={one} alt="" />
+                        <div>
+                            <div className="message-emoji-group-one">
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/clapping-hands-4158690-3449620.png?f=webp")}>
+                                    <img className="message-emoji" src={one} alt="" />
+                                </div>
+
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/crossed-finger-hand-gesture-4158665-3449644.png?f=webp"))}>
+                                    <img className="message-emoji" src={two} alt="" />
+                                </div>
+
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/good-hand-gesture-4158694-3449624.png?f=webp"))}>
+                                    <img className="message-emoji" src={three} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/handshake-4158680-3449627.png?f=webp"))}>
+                                    <img className="message-emoji" src={four} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/left-direction-finger-hand-gesture-4158679-3449643.png?f=webp"))}>
+                                    <img className="message-emoji" src={five} alt="" />
+                                </div>
                             </div>
 
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/crossed-finger-hand-gesture-4158665-3449644.png?f=webp"))}>
-                                <img className="message-emoji" src={two} alt="" />
+                            <div className="message-emoji-group-one">
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/love-hand-gesture-4158688-3449635.png?f=webp"))}>
+                                    <img className="message-emoji" src={six} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/ok-hand-gesture-4158672-3449636.png?f=webp"))}>
+                                    <img className="message-emoji" src={sevan} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/pointing-finger-4158681-3449628.png?f=webp"))}>
+                                    <img className="message-emoji" src={eate} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/pointing-finger-4158683-3449630.png?f=webp"))}>
+                                    <img className="message-emoji" src={nine} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/prayer-gesture-4158684-3449631.png?f=webp"))}>
+                                    <img className="message-emoji" src={ten} alt="" />
+                                </div>
                             </div>
 
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/good-hand-gesture-4158694-3449624.png?f=webp"))}>
-                                <img className="message-emoji" src={three} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/handshake-4158680-3449627.png?f=webp"))}>
-                                <img className="message-emoji" src={four} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/left-direction-finger-hand-gesture-4158679-3449643.png?f=webp"))}>
-                                <img className="message-emoji" src={five} alt="" />
-                            </div>
-                        </div>
-
-                        <div className="message-emoji-group-one">
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/love-hand-gesture-4158688-3449635.png?f=webp"))}>
-                                <img className="message-emoji" src={six} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/ok-hand-gesture-4158672-3449636.png?f=webp"))}>
-                                <img className="message-emoji" src={sevan} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/pointing-finger-4158681-3449628.png?f=webp"))}>
-                                <img className="message-emoji" src={eate} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/pointing-finger-4158683-3449630.png?f=webp"))}>
-                                <img className="message-emoji" src={nine} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/prayer-gesture-4158684-3449631.png?f=webp"))}>
-                                <img className="message-emoji" src={ten} alt="" />
-                            </div>
-                        </div>
-
-                        <div className="message-emoji-group-one">
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/heart-7589828-6182721.png?f=webp"))}>
-                                <img className="message-emoji" src={elevan} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/heartbroken-4849205-4043176.png?f=webp"))}>
-                                <img className="message-emoji" src={twel} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/hearts-4926904-4098519.png?f=webp"))}>
-                                <img className="message-emoji" src={thertyn} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/crying-face-with-open-eye-and-tears-9435642-7705099.png?f=webp"))}>
-                                <img className="message-emoji" src={fortyn} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/crying-9265573-7547602.png?f=webp"))}>
-                                <img className="message-emoji" src={fiftyn} alt="" />
-                            </div>
-                        </div>
-
-                        <div className="message-emoji-group-one">
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/love-emoji-5756744-4826128.png?f=webp"))}>
-                                <img className="message-emoji" src={sixtyn} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/loving-emoji-6462623-5372192.png?f=webp"))}>
-                                <img className="message-emoji" src={sevantyn} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/cake-5950602-4923213.png?f=webp"))}>
-                                <img className="message-emoji" src={eatyn} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/star-eyes-4783210-3986076.png?f=webp"))}>
-                                <img className="message-emoji" src={nintyn} alt="" />
-                            </div>
-                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/tongue-emoji-8832701-7148875.png?f=webp"))}>
-                                <img className="message-emoji" src={twenty} alt="" />
+                            <div className="message-emoji-group-one">
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/heart-7589828-6182721.png?f=webp"))}>
+                                    <img className="message-emoji" src={elevan} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/heartbroken-4849205-4043176.png?f=webp"))}>
+                                    <img className="message-emoji" src={twel} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/hearts-4926904-4098519.png?f=webp"))}>
+                                    <img className="message-emoji" src={thertyn} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/crying-face-with-open-eye-and-tears-9435642-7705099.png?f=webp"))}>
+                                    <img className="message-emoji" src={fortyn} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/crying-9265573-7547602.png?f=webp"))}>
+                                    <img className="message-emoji" src={fiftyn} alt="" />
+                                </div>
                             </div>
 
+                            <div className="message-emoji-group-one">
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/love-emoji-5756744-4826128.png?f=webp"))}>
+                                    <img className="message-emoji" src={sixtyn} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/loving-emoji-6462623-5372192.png?f=webp"))}>
+                                    <img className="message-emoji" src={sevantyn} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/cake-5950602-4923213.png?f=webp"))}>
+                                    <img className="message-emoji" src={eatyn} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/star-eyes-4783210-3986076.png?f=webp"))}>
+                                    <img className="message-emoji" src={nintyn} alt="" />
+                                </div>
+                                <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/tongue-emoji-8832701-7148875.png?f=webp"))}>
+                                    <img className="message-emoji" src={twenty} alt="" />
+                                </div>
+
+                            </div>
                         </div>
                     </motion.div>
                     :
@@ -1532,9 +1534,9 @@ const Messages = () => {
 
                         <div className='message-emoji-Btn-div text-lightPostText bg-lightDiv dark:bg-darkDiv' onClick={handleMessageEmoji}>
                             {messageEmoji ?
-                                <IoIosArrowDown style={{fontSize:"18px"}}/>
+                                <IoIosArrowDown style={{ fontSize: "18px" }} />
                                 :
-                                <IoIosArrowUp style={{fontSize:"18px"}}/>
+                                <IoIosArrowUp style={{ fontSize: "18px" }} />
                             }
                         </div>
 

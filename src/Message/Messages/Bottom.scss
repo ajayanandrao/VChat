@@ -87,7 +87,8 @@
     position: absolute;
     bottom: 0;
     z-index: 1;
-    display: block;
+    display: flex;
+    justify-content: center;
 
     .message-emoji-group-one {
         width: 100%;
