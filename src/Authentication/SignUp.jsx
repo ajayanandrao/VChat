@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./Signup.scss";
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, db, storage } from "./../Firebase";
-import { addDoc, collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, onSnapshot, serverTimestamp, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { BsFillCameraFill } from "react-icons/bs";
@@ -108,7 +108,7 @@ const SignUp = () => {
                                     work: "",
                                     from: "",
                                     intro: "",
-                                    // bytime: serverTimestamp(),
+                                    bytime: serverTimestamp(),
                                 });
 
                                 const PresenceRef = doc(db, "userPresece", res.user.uid);
@@ -119,7 +119,7 @@ const SignUp = () => {
                                     presenceName: name,
                                     email: email,
                                     photoUrl: downloadURL,
-                                    presenceTime: new Date()
+                                    presenceTime: new Date(),
                                 })
 
                                 const PresenceRefOnline = doc(db, "OnlyOnline", res.user.uid);
@@ -145,6 +145,7 @@ const SignUp = () => {
                                     name: name,
                                     userPhoto: downloadURL,
                                     uid: res.user.uid,
+                                    bytime: serverTimestamp(),
                                 });
 
                             });
