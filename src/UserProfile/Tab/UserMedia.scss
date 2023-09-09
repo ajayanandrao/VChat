@@ -82,9 +82,9 @@
     position: fixed;
     top: 0;
     left: 0;
-    // background: red;
+    background: rgba(0, 0, 0, 0.123);
     z-index: 9999;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     display: flex;
     justify-content: center;
     align-items: center;

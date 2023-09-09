@@ -140,12 +140,12 @@ const Login = () => {
 
 
                         <div className="form-inner-div">
-                            <input className="login-input-new mt-3" type="email"
+                            <input className="Auth-input-new mt-3" type="email"
                                 placeholder="Email"
                                 onChange={(e) => setEmail(e.target.value)}
                                 value={email}
                             />
-                            <input className="login-input-new my-3" type="password"
+                            <input className="Auth-input-new my-3" type="password"
                                 placeholder="Password"
                                 onChange={(e) => setPass(e.target.value)}
                                 value={password}

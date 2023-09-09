@@ -23,6 +23,7 @@
         justify-content: center;
         align-items: center;
         padding: 1rem;
+
         .are-you-sure-inner-div {
             width: 100%;
             max-width: 350px;
@@ -38,6 +39,7 @@
             padding: 1rem;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             text-align: center;
+
             p {
                 font-size: 17px;
                 font-weight: 600;
@@ -202,8 +204,8 @@
 
             .message-content {
                 // background: #ede9fe;
-                background: #f0f2f5;
-                color: #18181b;
+                // background: #f0f2f5;
+                // color: #18181b;
 
             }
 
@@ -237,12 +239,17 @@
                     // background-color: red;
 
                     .messageImgLike {
-                        width: 100%;
-                        max-width: 40px;
-                        height: 60px;
+                        // width: 100%;
+                        // max-width: 40px;
+                        height: 50px;
+                        width: 50px;
+                        object-fit: contain;
+                        object-fit: contain;
                         object-fit: cover;
                         object-position: center;
                         border-radius: 0.5rem;
+                        // background-color: red;
+                        display: inline-flex;
                     }
                 }
             }
@@ -258,9 +265,13 @@
                     // background-color: red;
 
                     .messageImgLike {
-                        width: 100%;
-                        max-width: 40px;
-                        height: 60px;
+                        // width: 100%;
+                        // max-width: 40px;
+                        height: 50px;
+                        width: 50px;
+                        object-fit: cover;
+                        // background-color: red;
+                        display: inline-flex;
                         object-fit: cover;
                         object-position: center;
                         border-radius: 0.5rem;
@@ -268,7 +279,7 @@
                 }
 
                 .message-content {
-                    background-color: #6366f1;
+                    // background-color: #6366f1;
                     border-radius: 20px;
                 }
 

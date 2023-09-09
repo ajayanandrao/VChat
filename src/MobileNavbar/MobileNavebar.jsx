@@ -14,7 +14,7 @@ import v from "./../Image/img/vl.png";
 import home from "./../Image/home2.png";
 import heart from "./../Image/h3.png";
 import video from "./../Image/v3.png";
-import p from "./../Image/img/3x.png";
+// import p from "./../Image/img/3x.png";
 
 const MobileNavebar = () => {
   const { currentUser } = useContext(AuthContext);

@@ -127,17 +127,18 @@
     color: red;
 }
 
-.login-input-new {
+.Auth-input-new {
     width: 100%;
     padding: 0.5rem;
     border: none;
-    outline: 1px solid #4caf50;
-    border-radius: 3px;
+    outline: 1px solid #22c55e;
+    border-radius: 30px;
     margin-bottom: 1rem;
-
+    color: black;
     &:focus {
-        outline: 1px solid #4caf50;
+        outline: 1px solid #22c55e;
         border: none;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        // box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     }
+    
 }

@@ -32,7 +32,13 @@ module.exports = {
         lightPostIcon: "#FFFFFF",  /*400*/
         lightPostIconBottom: "#0f263e",  /*400*/
 
-        lightInput: "#07121d",
+        sender: "#23394e",
+        reciver: "#546575",
+
+        darkSender: " #171717",
+        darkReciver: "#27272a",
+
+        lightInput: "#071726",
         lightOptionText: "#BDBDBD",
 
 

@@ -274,17 +274,17 @@ const Message = () => {
                         <div className="Message-user-List">
 
                             <div className="tab-block">
-                                <button className="w3-bar-item w3-button" onClick={() => openCity('Message')}>
+                                <button className="w3-bar-item w3-button text-lightPostText dark:text-darkPostText" onClick={() => openCity('Message')}>
                                     Message
                                 </button>
 
-                                <button className="w3-bar-item w3-button" onClick={() => openCity('Online')}>
+                                <button className="w3-bar-item w3-button text-lightPostText dark:text-darkPostText" onClick={() => openCity('Online')}>
                                     Online
                                 </button>
 
 
                                 <div className='request-tab-relative-div'>
-                                    <button className="w3-bar-item w3-button" onClick={() => openCity('Request')}>
+                                    <button className="w3-bar-item w3-button text-lightPostText dark:text-darkPostText" onClick={() => openCity('Request')}>
 
                                         <div className='request-tab-absolute-div'>
 

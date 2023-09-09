@@ -58,6 +58,8 @@
 
     .login-title {
         // margin-bottom: 40px;
+        display: flex;
+        align-items: center;
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
@@ -97,7 +99,6 @@
     }
 
 }
-
 
 
 .singup-footer-bottom {

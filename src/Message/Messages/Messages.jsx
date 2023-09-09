@@ -8,10 +8,24 @@ import { MdClose, MdDelete, MdOutlineReply, MdSend } from 'react-icons/md';
 import { FaThumbsUp } from 'react-icons/fa';
 import { BsFillCameraFill, BsThreeDots } from 'react-icons/bs';
 import { AuthContext } from '../../AuthContaxt';
-import { IoMdClose } from "react-icons/io"
+import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io"
 import { BiSend, BiSolidSend } from "react-icons/bi"
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 } from 'uuid';
+import { motion } from 'framer-motion';
+
+import eone from "./../../Image/img/emoji/beauty.webp"
+import etwo from "./../../Image/img/emoji/clap.webp"
+import ethree from "./../../Image/img/emoji/cross.webp"
+import efour from "./../../Image/img/emoji/heart.webp"
+import efive from "./../../Image/img/emoji/holdphon.webp"
+import esix from "./../../Image/img/emoji/leftside.webp"
+import esevan from "./../../Image/img/emoji/likeLeft.webp"
+import eeat from "./../../Image/img/emoji/likeright.webp"
+import enine from "./../../Image/img/emoji/pray.webp"
+import eten from "./../../Image/img/emoji/shakehand.webp"
+import eelevan from "./../../Image/img/emoji/upback.webp"
+import etweal from "./../../Image/img/emoji/upfront.webp"
 
 const Messages = () => {
     const { currentUser } = useContext(AuthContext);
@@ -518,6 +532,56 @@ const Messages = () => {
 
     };
 
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    const [one, setOne] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/clapping-hands-4158690-3449620.png?f=webp");
+    const [two, setTwo] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/crossed-finger-hand-gesture-4158665-3449644.png?f=webp");
+    const [three, setThree] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/good-hand-gesture-4158694-3449624.png?f=webp");
+    const [four, setFour] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/handshake-4158680-3449627.png?f=webp");
+    const [five, setFive] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/left-direction-finger-hand-gesture-4158679-3449643.png?f=webp");
+    const [six, setSix] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/love-hand-gesture-4158688-3449635.png?f=webp");
+    const [sevan, setSevan] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/ok-hand-gesture-4158672-3449636.png?f=webp");
+    const [eate, setEate] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/pointing-finger-4158681-3449628.png?f=webp");
+    const [nine, setNine] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/pointing-finger-4158683-3449630.png?f=webp");
+    const [ten, setTen] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/prayer-gesture-4158684-3449631.png?f=webp");
+
+    const [elevan, setElevan] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/heart-7589828-6182721.png?f=webp");
+    const [twel, setTwel] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/heartbroken-4849205-4043176.png?f=webp");
+    const [thertyn, setThertyn] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/hearts-4926904-4098519.png?f=webp");
+
+    const [fortyn, setFortyn] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/crying-face-with-open-eye-and-tears-9435642-7705099.png?f=webp");
+    const [fiftyn, setFiftyn] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/crying-9265573-7547602.png?f=webp");
+    const [sixtyn, setSixtyn] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/love-emoji-5756744-4826128.png?f=webp");
+    const [sevantyn, setSevantyn] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/loving-emoji-6462623-5372192.png?f=webp");
+    const [eatyn, setEatyn] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/cake-5950602-4923213.png?f=webp");
+    const [nintyn, setNintyn] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/star-eyes-4783210-3986076.png?f=webp");
+    const [twenty, setTwenty] = useState("https://cdn3d.iconscout.com/3d/premium/thumb/tongue-emoji-8832701-7148875.png?f=webp");
+
+
+    const [messageEmoji, setMessageEmoji] = useState(false);
+    const handleMessageEmoji = () => {
+        setMessageEmoji(!messageEmoji);
+    }
+
+    const handleSendMessageEmoji = async (uid, recipientImg, emojiState) => {
+        handleMessageEmoji();
+        if (senderId) {
+            const messagesRef = collection(db, 'messages');
+
+            await addDoc(messagesRef, {
+                sender: currentUser.uid, // Set the sender's ID
+                senderImg: currentUser.photoURL,
+
+                recipient: uid, // Set the recipient's ID
+                recipientImg: recipientImg,
+                imageUrlLike: emojiState,
+
+                timestamp: serverTimestamp(), // Set the timestamp (server-side)
+            });
+        }
+
+    }
+
     const SendLike = async (uid, name, recipientImg) => {
         if (senderId) {
             const messagesRef = collection(db, 'messages');
@@ -831,31 +895,31 @@ const Messages = () => {
 
                 {/* Profile  ------------------------------------- */}
 
-                <div className="message-top-bar bg-light_0">
-                    <i onClick={goBack} className="bi bi-arrow-left message-back-arrow "></i>
+                <div className="message-top-bar bg-lightDiv  dark:bg-darkDiv">
+                    <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostText message-back-arrow "></i>
 
                     <div className="message-profile-div">
                         <img className='message-profile-img' src={user.userPhoto} alt="" />
-                        <span className='message-profile-name'>{user.name}</span>
+                        <span className='message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
                         {/* <button className='btn btn-sm btn-danger ms-3' onClick={deleteMessagesForUser}>Clear Chat</button> */}
                     </div>
                     <div>
                         {showMessageOption ?
-                            <div className="top-message-option-btn bg-lightPostIcon"
-                                style={{ background: "#f0f2f5", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+                            <div className="top-message-option-btn bg-light_0 text-lightPostText dark:text-darkPostText dark:bg-darkPostIcon"
+                                style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
                                 onClick={HandleShowMessageOption}>
                                 <BsThreeDots />
                             </div>
                             :
-                            <div className="top-message-option-btn bg-lightPostIcon" onClick={HandleShowMessageOption}>
+                            <div className="top-message-option-btn bg-light_0 text-lightPostText dark:text-darkPostText dark:bg-darkPostIcon" onClick={HandleShowMessageOption}>
                                 <BsThreeDots />
                             </div>
 
                         }
                         {showMessageOption ?
-                            <div className="show-message-option bg-lightDiv">
-                                <p onClick={HandleAreyouSure}>Delete all Chat</p>
-                                <p onClick={HandleAreyouSureForCurrentUser}>Delete message from you</p>
+                            <div className="show-message-option bg-lightDiv dark:bg-darkInput">
+                                <p onClick={HandleAreyouSure} className='mb-3 text-lightProfileName dark:text-darkPostText'>Delete all Chat</p>
+                                <p onClick={HandleAreyouSureForCurrentUser} className='text-lightProfileName dark:text-darkPostText'>Delete message from you</p>
                             </div>
                             :
                             null
@@ -1034,7 +1098,7 @@ const Messages = () => {
 
 
 
-                                                                            {message.message && <div className="message-content bg-lightDiv"
+                                                                            {message.message && <div className="message-content"
                                                                                 onMouseEnter={() => showReplyButton(message.id)}
                                                                                 onMouseLeave={hideReplyButton}
                                                                             >{message.message}</div>}
@@ -1158,12 +1222,10 @@ const Messages = () => {
 
 
 
-                                                                {message.message && <div className="message-content"
+                                                                {message.message && <div className={`message-content ${!isSender ? 'text-lightProfileName bg-reciver dark:bg-darkReciver' : "bg-sender text-lightProfileName dark:bg-darkSender"} `}
                                                                     onMouseEnter={() => showReplyButton(message.id)}
                                                                     onMouseLeave={hideReplyButton}
                                                                 >{message.message}</div>}
-
-
                                                             </div>
                                                         </>)
                                                     }
@@ -1207,8 +1269,90 @@ const Messages = () => {
 
                 </div>
 
+                {messageEmoji ?
+                    <motion.div
+                        transition={{ duration: 1 }}
+                        initial={{ y: 100 }}
+                        animate={{ y: 0 }}
+                        className="message-emoji-grop-div" >
+                        <div className="message-emoji-group-one">
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/clapping-hands-4158690-3449620.png?f=webp")}>
+                                <img className="message-emoji" src={one} alt="" />
+                            </div>
 
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/crossed-finger-hand-gesture-4158665-3449644.png?f=webp"))}>
+                                <img className="message-emoji" src={two} alt="" />
+                            </div>
 
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/good-hand-gesture-4158694-3449624.png?f=webp"))}>
+                                <img className="message-emoji" src={three} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/handshake-4158680-3449627.png?f=webp"))}>
+                                <img className="message-emoji" src={four} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/left-direction-finger-hand-gesture-4158679-3449643.png?f=webp"))}>
+                                <img className="message-emoji" src={five} alt="" />
+                            </div>
+                        </div>
+
+                        <div className="message-emoji-group-one">
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/love-hand-gesture-4158688-3449635.png?f=webp"))}>
+                                <img className="message-emoji" src={six} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/ok-hand-gesture-4158672-3449636.png?f=webp"))}>
+                                <img className="message-emoji" src={sevan} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/pointing-finger-4158681-3449628.png?f=webp"))}>
+                                <img className="message-emoji" src={eate} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/pointing-finger-4158683-3449630.png?f=webp"))}>
+                                <img className="message-emoji" src={nine} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/prayer-gesture-4158684-3449631.png?f=webp"))}>
+                                <img className="message-emoji" src={ten} alt="" />
+                            </div>
+                        </div>
+
+                        <div className="message-emoji-group-one">
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/heart-7589828-6182721.png?f=webp"))}>
+                                <img className="message-emoji" src={elevan} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/heartbroken-4849205-4043176.png?f=webp"))}>
+                                <img className="message-emoji" src={twel} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/hearts-4926904-4098519.png?f=webp"))}>
+                                <img className="message-emoji" src={thertyn} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/crying-face-with-open-eye-and-tears-9435642-7705099.png?f=webp"))}>
+                                <img className="message-emoji" src={fortyn} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/crying-9265573-7547602.png?f=webp"))}>
+                                <img className="message-emoji" src={fiftyn} alt="" />
+                            </div>
+                        </div>
+
+                        <div className="message-emoji-group-one">
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/love-emoji-5756744-4826128.png?f=webp"))}>
+                                <img className="message-emoji" src={sixtyn} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/loving-emoji-6462623-5372192.png?f=webp"))}>
+                                <img className="message-emoji" src={sevantyn} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/cake-5950602-4923213.png?f=webp"))}>
+                                <img className="message-emoji" src={eatyn} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/star-eyes-4783210-3986076.png?f=webp"))}>
+                                <img className="message-emoji" src={nintyn} alt="" />
+                            </div>
+                            <div className="message-emoji-div bg-lightDiv dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/tongue-emoji-8832701-7148875.png?f=webp"))}>
+                                <img className="message-emoji" src={twenty} alt="" />
+                            </div>
+
+                        </div>
+                    </motion.div>
+                    :
+                    null
+                }
                 {/* message bottom bar --------------------------------------- */}
 
 
@@ -1383,9 +1527,19 @@ const Messages = () => {
                     } */}
                     {/* message bottom bar --------------------------------------- */}
 
-                    <div className='message-bottom-inner-div bg-light_0'>
+                    <div className='message-bottom-inner-div bg-lightDiv dark:bg-darkDiv'>
+
+
+                        <div className='message-emoji-Btn-div text-lightPostText bg-lightDiv dark:bg-darkDiv' onClick={handleMessageEmoji}>
+                            {messageEmoji ?
+                                <IoIosArrowDown style={{fontSize:"18px"}}/>
+                                :
+                                <IoIosArrowUp style={{fontSize:"18px"}}/>
+                            }
+                        </div>
+
                         <label htmlFor="imgFiles" onClick={() => { setImg(null); setLoadingProgress(false); setIsPlaying(false); }}>
-                            <BsFillCameraFill className='message-bottom-camera text-lightPostIcon' />
+                            <BsFillCameraFill className='message-bottom-camera text-lightPostIcon dark:text-darkPostIcon' />
                         </label>
                         <input id='imgFiles' style={{ display: "none" }} type="file" onChange={(e) => setImg(e.target.files[0])} />
 
@@ -1394,7 +1548,7 @@ const Messages = () => {
                             type="text"
                             onChange={(e) => setMessageInput(e.target.value)}
                             value={messageInput}
-                            className="message-bottom-input bg-lightInput "
+                            className="message-bottom-input bg-light_0 dark:bg-darkInput"
                             placeholder="Message"
                             onKeyDown={handleKeyDown}
                         />
@@ -1403,7 +1557,7 @@ const Messages = () => {
                             {messageInput ?
 
                                 <BiSolidSend
-                                    className="message-bottom-send-btn text-lightPostIcon"
+                                    className="message-bottom-send-btn text-lightPostIcon dark:text-darkPostIcon"
                                     color='#0080FF'
                                     onClick={() => {
                                         if (selectedMessageId) {
@@ -1416,7 +1570,7 @@ const Messages = () => {
                                 />
                                 :
                                 <BiSend
-                                    className="message-bottom-send-btn text-lightPostIcon"
+                                    className="message-bottom-send-btn text-lightPostIcon dark:text-darkPostIcon"
                                     onClick={() => {
                                         if (selectedMessageId) {
                                             sendReply(selectedMessageId);
@@ -1441,7 +1595,7 @@ const Messages = () => {
                         </div>
 
                         <div className='message-bottom-thumb-div'>
-                            <FaThumbsUp className='message-bottom-thumb text-lightPostIcon' onClick={() => SendLike(user.uid, user.name, user.userPhoto)} />
+                            <FaThumbsUp className='message-bottom-thumb text-lightPostIcon dark:text-darkPostIcon' onClick={() => SendLike(user.uid, user.name, user.userPhoto)} />
                         </div>
                     </div>
                 </div>

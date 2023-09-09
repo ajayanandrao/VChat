@@ -173,8 +173,9 @@ const SignUp = () => {
             <div className="Signup-form-container signup-div w3-animate-right">
                 <h3 className='login-title'>
                     <img width={"35px"} style={{ marginRight: "0.5rem" }} src={vlogo} alt="" />
-                    <img width={"120px"} src={logoText} alt="" />
-
+                    <div>
+                        <img width={"120px"} src={logoText} alt="" />
+                    </div>
                 </h3>
 
                 <label htmlFor="photo" >
@@ -186,17 +187,17 @@ const SignUp = () => {
                 </label>
 
                 <div className="form-inner-div">
-                    <input className="login-input-new mt-1" type="text"
+                    <input className="Auth-input-new mt-1" type="text"
                         placeholder="Name"
                         onChange={(e) => setName(e.target.value)}
                         value={name}
                     />
-                    <input className="login-input-new mt-1" type="email"
+                    <input className="Auth-input-new mt-1" type="email"
                         placeholder="Email"
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
                     />
-                    <input className="login-input-new my-1" type="password"
+                    <input className="Auth-input-new my-1" type="password"
                         placeholder="Password"
                         onChange={(e) => setPass(e.target.value)}
                         value={password}
@@ -218,7 +219,7 @@ const SignUp = () => {
                 </div>
             </div>
 
-            <div className='singup-footer-bottom'>Copyright © Ajay Anandaro 2023. </div>
+            <div className='singup-footer-bottom'>Copyright © Vchat App 2023. </div>
 
         </>
     )
