@@ -60,7 +60,7 @@ const LeftArro = () => {
     }
 
     return (
-        <div className='back-btn-di dark:text-aqua_0' style={style} onClick={goBack}>
+        <div className='back-btn-di text-aqua_0 dark:text-aqua_0' style={style} onClick={goBack}>
             <HiOutlineArrowSmLeft fontSize={"25px"} />
         </div>
     );
