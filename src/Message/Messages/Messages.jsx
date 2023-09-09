@@ -1548,7 +1548,7 @@ const Messages = () => {
                             type="text"
                             onChange={(e) => setMessageInput(e.target.value)}
                             value={messageInput}
-                            className="message-bottom-input bg-light_0 dark:bg-darkInput"
+                            className="message-bottom-input text-lightProfileName bg-light_0 dark:bg-darkInput"
                             placeholder="Message"
                             onKeyDown={handleKeyDown}
                         />

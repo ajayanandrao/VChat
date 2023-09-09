@@ -20,7 +20,7 @@ const WeddingMain = () => {
 
 
     return (
-        <div className='bg-light_0  dark:bg-dark wedding-main-div' style={{ width: "100%", height: "100vh", boxSizing: "border-box", overflowY: "scroll" }}>
+        <div className='bg-light_0 text-lightProfileName dark:bg-dark wedding-main-div' style={{ width: "100%", height: "100vh", boxSizing: "border-box", overflowY: "scroll" }}>
             <LeftArro />
             <WeddingList />
             <Link to={"/AddWedding/"}>

@@ -248,7 +248,7 @@ const Wedding = () => {
 
 
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(0, 0, 0, 0.30)", width: "100%", height: "100%" }}>
-                        <h2 style={{ color: "white", textAlign: "center", marginTop: "30px" }}>Matrimony Profile <div id='l'></div> </h2>
+                        <h2 style={{ color: "white", textAlign: "center", marginTop: "30px" }} className='text-3xl'>Matrimony Profile <div id='l'></div> </h2>
                     </div>
                 </div>
 
@@ -334,94 +334,93 @@ const Wedding = () => {
                     <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Height' onChange={(e) => setHeight(e.target.value)} value={height} />
 
-                    <div className='b-date-wedding-div'>
+                    <div className='b-date-wedding-div' >
 
-                        <span >Date of Birth :-</span>
+                        <span className='text-lightPostText dark:text-darkPostText mb-3'>Date of Birth :-</span>
+                        <div>
+                            <div className="toggle-dropdown">
+                                <button className="date-toggle-button bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText" onClick={toggleDropdownDay}>
+                                    {isDay ? (
+                                        <>
+                                            {itemDay ? itemDay : "Day"}
+                                        </>
+                                    ) : (
+                                        <>
+                                            {itemDay ? itemDay : "Day"}
+                                        </>
+                                    )}
+                                </button>
 
-                        <div className="toggle-dropdown">
-                            <button className="date-toggle-button bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText" onClick={toggleDropdownDay}>
-                                {isDay ? (
-                                    <>
-                                        {itemDay ? itemDay : "Day"}
-                                    </>
-                                ) : (
-                                    <>
-                                        {itemDay ? itemDay : "Day"}
-                                    </>
+                                {isDay && (
+                                    <div className="date-dropdown-list open bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
+                                        {days.map((day) => (
+                                            <span
+                                                key={day}
+                                                className="date-dropdown-item "
+                                                onClick={() => handleItemDayClick(day.toString())}
+                                            >
+                                                {day}
+                                            </span>
+                                        ))}
+                                    </div>
                                 )}
-                            </button>
 
-                            {isDay && (
-                                <div className="date-dropdown-list open bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
-                                    {days.map((day) => (
-                                        <span
-                                            key={day}
-                                            className="date-dropdown-item " 
-                                            onClick={() => handleItemDayClick(day.toString())}
-                                        >
-                                            {day}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
+                            </div>
 
-                        </div>
-
-                        <div className="toggle-dropdown bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
-                            <button className="date-toggle-button" onClick={toggleDropdownMonth}>
-                                {isMonth ? (
-                                    <>
-                                        {selectedMonth ? selectedMonth : "Month"}
-                                    </>
-                                ) : (
-                                    <>
-                                        {selectedMonth ? selectedMonth : "Month"}
-                                    </>
+                            <div className="toggle-dropdown bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
+                                <button className="date-toggle-button" onClick={toggleDropdownMonth}>
+                                    {isMonth ? (
+                                        <>
+                                            {selectedMonth ? selectedMonth : "Month"}
+                                        </>
+                                    ) : (
+                                        <>
+                                            {selectedMonth ? selectedMonth : "Month"}
+                                        </>
+                                    )}
+                                </button>
+                                {isMonth && (
+                                    <ul className="date-dropdown-list open bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
+                                        {months.map((month) => (
+                                            <li
+                                                key={month}
+                                                className="date-dropdown-item"
+                                                onClick={() => handleItemMonthClick(month)}
+                                            >
+                                                {month}
+                                            </li>
+                                        ))}
+                                    </ul>
                                 )}
-                            </button>
-                            {isMonth && (
-                                <ul className="date-dropdown-list open bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
-                                    {months.map((month) => (
-                                        <li
-                                            key={month}
-                                            className="date-dropdown-item"
-                                            onClick={() => handleItemMonthClick(month)}
-                                        >
-                                            {month}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
+                            </div>
 
-                        <div className="toggle-dropdown bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText ms-2">
-                            <button className="date-toggle-button" onClick={toggleDropdownYear}>
-                                {isYear ? (
-                                    <>
-                                        {selectedYear ? selectedYear : "Year"}
-                                    </>
-                                ) : (
-                                    <>
-                                        {selectedYear ? selectedYear : "Year"}
-                                    </>
+                            <div className="toggle-dropdown bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText ms-2">
+                                <button className="date-toggle-button" onClick={toggleDropdownYear}>
+                                    {isYear ? (
+                                        <>
+                                            {selectedYear ? selectedYear : "Year"}
+                                        </>
+                                    ) : (
+                                        <>
+                                            {selectedYear ? selectedYear : "Year"}
+                                        </>
+                                    )}
+                                </button>
+                                {isYear && (
+                                    <ul className="date-dropdown-list open bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
+                                        {years.map((year) => (
+                                            <li
+                                                key={year}
+                                                className="date-dropdown-item"
+                                                onClick={() => handleItemYearClick(year.toString())}
+                                            >
+                                                {year}
+                                            </li>
+                                        ))}
+                                    </ul>
                                 )}
-                            </button>
-                            {isYear && (
-                                <ul className="date-dropdown-list open bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText">
-                                    {years.map((year) => (
-                                        <li
-                                            key={year}
-                                            className="date-dropdown-item"
-                                            onClick={() => handleItemYearClick(year.toString())}
-                                        >
-                                            {year}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                            </div>
                         </div>
-
-
                     </div>
 
                     <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
@@ -431,7 +430,7 @@ const Wedding = () => {
                         placeholder='Salary' onChange={(e) => setSalary(e.target.value)} value={salary} /> */}
 
 
-                    <h4>Address</h4>
+                    <h4 className='text-lightPostText dark:text-darkPostText mb-3'>Address</h4>
                     <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Landmark' onChange={(e) => setLandmark(e.target.value)} value={landmark} />
                     <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
@@ -441,7 +440,7 @@ const Wedding = () => {
                     <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='State' onChange={(e) => setState(e.target.value)} value={state} />
 
-                    <h3>Photo</h3>
+                    <h3 className='text-lightPostText dark:text-darkPostText'>Photo</h3>
 
                     <div className='wedding-photo-container'>
                         {photo ?

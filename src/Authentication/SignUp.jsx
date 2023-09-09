@@ -213,7 +213,7 @@ const SignUp = () => {
                     </div>
 
                     <Link to="/" className='link'>
-                        <div className='create-new-a mt-3'> Already have an account ?</div>
+                        <div className='btn-success-outline create-new-a mt-3'> Already have an account ?</div>
                     </Link>
 
                 </div>
