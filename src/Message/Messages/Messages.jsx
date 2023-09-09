@@ -967,7 +967,7 @@ const Messages = () => {
                                                                 deleteMessage(message.id);
                                                             }}
                                                         >
-                                                            <i className="bi bi-x-circle-fill"></i>
+                                                            <i className="bi bi-x-circle-fill text-lightProfileName dark:text-darkProfileName"></i>
                                                         </div>
                                                     </div>
                                                 )}
@@ -1251,7 +1251,7 @@ const Messages = () => {
 
                                                             }}
                                                         >
-                                                            <MdOutlineReply />
+                                                            <MdOutlineReply className='text-lightProfileName dark:text-darkProfileName'/>
                                                         </div>
                                                     </div>
                                                 )}
