@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where, writeBatch } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where, writeBatch } from 'firebase/firestore';
 import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { auth, db, storage } from '../../Firebase';
@@ -344,6 +344,7 @@ const Messages = () => {
         } catch (error) {
             console.error("Error sending message:", error);
         }
+        handleLatestSms(uid, name, recipientImg);
     };
 
     const deleteMessage = async (messageId) => {
@@ -559,6 +560,9 @@ const Messages = () => {
 
 
     const [messageEmoji, setMessageEmoji] = useState(false);
+    const handleMessageEmojiF = () => {
+        setMessageEmoji(false);
+    }
     const handleMessageEmoji = () => {
         setMessageEmoji(!messageEmoji);
     }
@@ -691,6 +695,24 @@ const Messages = () => {
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
         return date.toLocaleString('en-US', options);
     }
+
+
+
+    const handleLatestSms = async (uid, name, photo) => {
+        const latestRef = collection(db, "NewMessage");
+
+        const data = {
+            reciverUid: uid,
+            reciverName: name,
+            reciverPhoto: photo,
+            senderUid: currentUser.uid,
+            senderName: currentUser.displayName,
+            timestamp: serverTimestamp(),
+        };
+        await addDoc(latestRef, data);
+
+    };
+
 
 
     if (!user) {
@@ -931,7 +953,7 @@ const Messages = () => {
 
 
 
-                <div className="message-center-div">
+                <div className="message-center-div" onClick={handleMessageEmojiF}>
 
                     <div className="message-center-container">
 
@@ -1251,7 +1273,7 @@ const Messages = () => {
 
                                                             }}
                                                         >
-                                                            <MdOutlineReply className='text-lightProfileName dark:text-darkProfileName'/>
+                                                            <MdOutlineReply className='text-lightProfileName dark:text-darkProfileName' />
                                                         </div>
                                                     </div>
                                                 )}

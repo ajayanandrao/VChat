@@ -224,7 +224,7 @@ const Message = () => {
                 );
 
                 const unsubscribe = onSnapshot(friendsQuery, (friendsSnapshot) => {
-                    const friendsData = friendsSnapshot.docs.map((doc) => doc.data());
+                    const friendsData = friendsSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
                     setMessages(friendsData);
                 });
 

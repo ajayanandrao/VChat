@@ -39,9 +39,11 @@ const MobileNavebar = () => {
     return unsub;
   }, []);
 
-  const dataRef = collection(db, "users");
   const [userPhoto, setUserPhoto] = useState(null);
+  
 
+  
+  const dataRef = collection(db, "users");
   useEffect(() => {
     const unsub = onSnapshot(dataRef, (snapshot) => {
       setUserPhoto(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));

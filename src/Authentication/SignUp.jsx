@@ -171,56 +171,56 @@ const SignUp = () => {
 
     return (
         <>
-            <div className="Signup-form-container signup-div w3-animate-right">
-                <h3 className='login-title'>
-                    <img width={"35px"} style={{ marginRight: "0.5rem" }} src={vlogo} alt="" />
-                    <div>
-                        <img width={"120px"} src={logoText} alt="" />
-                    </div>
-                </h3>
-
-                <label htmlFor="photo" >
-                    {img ? <img className="singup-img-form" src={img ? URL.createObjectURL(img) : null} alt="" /> :
-                        (
-                            <div className='signup-camera-icon-div'><BsFillCameraFill className='signup-camera-icon' /></div>)}
-
-                    <input type="file" className="photoinput" id="photo" onChange={(e) => setImg(e.target.files[0])} style={{ display: "none" }} />
-                </label>
-
-                <div className="form-inner-div">
-                    <input className="Auth-input-new mt-1" type="text"
-                        placeholder="Name"
-                        onChange={(e) => setName(e.target.value)}
-                        value={name}
-                    />
-                    <input className="Auth-input-new mt-1" type="email"
-                        placeholder="Email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        value={email}
-                    />
-                    <input className="Auth-input-new my-1" type="password"
-                        placeholder="Password"
-                        onChange={(e) => setPass(e.target.value)}
-                        value={password}
-                    />
-                    <button className="btn-primary-custom w-100 my-4"
-                        onClick={submit}>Sign Up</button>
-
-                    <div className='or'>or</div>
-                    <div className='link-icon-div'>
-                        <img className='link-icons' style={{ width: "30px" }} src={g} alt="" />
-                        <img style={{ width: "30px" }} src={f} alt="" />
-                        <img style={{ width: "30px" }} src={i} alt="" />
+            <div className="signUp-main-container">
+                <div className="signUp-wrapper">
+                    <div className="app-logo-div">
+                        <img src={vlogo} width={"50px"} alt="" />
+                        <h2 className='logo-name'>Chat App</h2>
                     </div>
 
-                    <Link to="/" className='link'>
-                        <div className='btn-success-outline create-new-a mt-3'> Already have an account ?</div>
-                    </Link>
+                    <label htmlFor="photo" className='signUp-camera' >
+                        {img ? <img className="singup-img-form" src={img ? URL.createObjectURL(img) : null} alt="" /> :
+                            (
+                                <div className='signup-camera-icon-div'><BsFillCameraFill className='signup-camera-icon' /></div>)}
 
+                        <input type="file" className="photoinput" id="photo" onChange={(e) => setImg(e.target.files[0])} style={{ display: "none" }} />
+                    </label>
+
+                    <div className="signUp-form-div">
+                        <input className="Auth-input-new mt-2" type="text"
+                            placeholder="Name"
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
+                        />
+                        <input className="Auth-input-new mt-2" type="email"
+                            placeholder="Email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                        />
+                        <input className="Auth-input-new my-2" type="password"
+                            placeholder="Password"
+                            onChange={(e) => setPass(e.target.value)}
+                            value={password}
+                        />
+
+                        <button className="btn-primary-custom w-100 my-4"
+                            onClick={submit}>Sign Up</button>
+
+                        <div className='or'>or</div>
+
+                        <Link to="/" className='link'>
+                            <div className='btn-success-outline create-new-a mt-3'> Already have an account ?</div>
+                        </Link>
+
+                    </div>
+                </div>
+
+                <div className="footer">
+                    copy right: VChat App 2023.
                 </div>
             </div>
 
-            <div className='singup-footer-bottom'>Copyright © Vchat App 2023. </div>
+
 
         </>
     )

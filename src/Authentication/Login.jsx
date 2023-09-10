@@ -118,28 +118,32 @@ const Login = () => {
         }
     };
 
+    if (!email == "") {
+        document.getElementById("error-alert").innerHTML = "";
+    }
+    if (!password == "") {
+        document.getElementById("error-alert").innerHTML = "";
+    }
+
     return (
         <>
 
             {loading ? (
                 <div className='login-wellcome-div'>
-
                     <div className='loaing-logo' style={{ backgroundImage: `url(${logo})` }} >
                     </div>
                 </div>
             ) : (
 
 
-                <div className='login-form-container'>
-                    <div className="login-form-container w3-animate-left w3-animate-opacity">
-                        <img src={vlogo}  width={"50px"} alt="" />
-                        <h3 className='login-title'>
-                            Chat App
-                            {/* <img width={"120px"} src={logoText} alt="" /> */}
-                        </h3>
+                <div className='login-main-container'>
+                    <div className="login-wrapper">
+                        <div className="app-logo-div">
+                            <img src={vlogo} width={"50px"} alt="" />
+                            <h2 className='logo-name'>Chat App</h2>
+                        </div>
 
-
-                        <div className="form-inner-div">
+                        <div className="login-form-div">
                             <input className="Auth-input-new mt-3" type="email"
                                 placeholder="Email"
                                 onChange={(e) => setEmail(e.target.value)}
@@ -151,21 +155,26 @@ const Login = () => {
                                 value={password}
                                 onKeyDown={handleKeyDown}
                             />
+
                             <div className="" id="error-alert" ></div>
 
                             <button className="btn-primary-custom w-100 my-4" onClick={login}>Login</button>
 
                             <Link to="/forgotPassword" className='forgot-text'>Forgotten password?</Link>
 
-                            <Link to="signUp/" className='link'>
+                            <Link to="signUp/" className='link' style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                                 <button className="btn-success-outline my-4">Create New Account</button>
                             </Link>
                         </div>
-                        <div className='footer-bottom'>Copyright © Vchat app 2023. </div>
+                    </div>
+                    <div className="footer">
+                        copy right: VChat App 2023.
                     </div>
                 </div>
 
             )}
+
+
 
         </>
     )
