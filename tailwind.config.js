@@ -21,8 +21,12 @@ module.exports = {
 
         // lightInput: "#07121d",
         // lightOptionText: "#BDBDBD",
-        light_0: "#0f263e",
-        lightDiv: "#143252",
+
+        // light_0: "#0f263e",
+        // lightDiv: "#143252",
+        
+        light_0: "#113a60",
+        lightDiv: "#081d30",
 
         lightProfile: "#404040",
         lightProfileName: "#f5f5f5",
@@ -30,10 +34,12 @@ module.exports = {
         lightPostText: "#e5e5e5", /*300*/
         lightPostTime: "#a3a3a3", /*400*/
         lightPostIcon: "#FFFFFF",  /*400*/
-        lightPostIconBottom: "#0f263e",  /*400*/
+        // lightPostIconBottom: "#0f263e",  /*400*/
+        lightPostIconBottom: "#113a60",  /*400*/
+        // lightPostIconBottom: "#DF013A",  /*400*/
 
-        sender: "#23394e",
-        reciver: "#546575",
+        sender: "#184f82",
+        reciver: "#0a2137",
 
         darkSender: " #171717",
         darkReciver: "#27272a",

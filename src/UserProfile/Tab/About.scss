@@ -116,11 +116,11 @@
             width: 100%;
             max-width: 300px;
             height: 40px;
-            border-radius: 5px;
+            border-radius: 30px;
 
             &:focus {
                 border: none;
-                outline: 1px solid #01A9DB;
+                outline: none;
             }
         }
 

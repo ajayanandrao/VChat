@@ -382,7 +382,7 @@ const ProfilePosts = ({ user, post }) => {
                                 ) : (
                                     <>
                                         <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
-                                            <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-light_0 dark:text-darkPostIcon' />
+                                            <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
                                             {like.length > 0 ?
                                                 <div className="feed-bottom-like-count bg-light_0 text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText" onClick={() => showLike(post.id)}>
                                                     {like.length > 99 ? '99+' : like.length}
@@ -420,7 +420,7 @@ const ProfilePosts = ({ user, post }) => {
                                         {rightComment ?
                                             <img src={sms} style={{ width: "26px" }} onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
                                             :
-                                            <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-light_0  dark:text-darkPostIcon' />
+                                            <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-lightPostIconBottom  dark:text-darkPostIcon' />
                                         }
 
                                         {commentCount ?
@@ -438,7 +438,7 @@ const ProfilePosts = ({ user, post }) => {
 
                             {/* Share */}
                             <div className="feed-bottom-mainu">
-                                <FaShare className='feed-bottom-icon text-light_0 dark:text-darkPostIcon' />
+                                <FaShare className='feed-bottom-icon text-lightPostIconBottom dark:text-darkPostIcon' />
                             </div>
 
                         </div>
@@ -451,7 +451,7 @@ const ProfilePosts = ({ user, post }) => {
                                     placeholder='Comment'
                                     value={getComment}
                                     onChange={(e) => setComment(e.target.value)}
-                                    className='feed-right-comment-input bg-light_0 text-lightProfileName dark:bg-darkInput dark:text-darkProfileName'
+                                    className='feed-right-comment-input bg-lightPostIconBottom text-lightProfileName dark:bg-darkInput dark:text-darkProfileName'
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter') {
                                             e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)

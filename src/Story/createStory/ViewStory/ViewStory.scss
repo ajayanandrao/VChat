@@ -1,0 +1,167 @@
+.view-main-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+
+    .view-Profile-bottom-div {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .view-input {
+            color: white;
+            outline: 1px solid white;
+            border-radius: 40px;
+            height: 35px;
+            border: none;
+            background: transparent;
+            padding-inline-start: 1rem;
+            font-size: 18px;
+
+            &:focus {
+                border: none;
+                outline: 1px solid white;
+            }
+        }
+
+        .view-send-icon {
+            font-size: 24px;
+            color: white;
+
+        }
+
+    }
+}
+
+.view-profile-div {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 1rem;
+
+    .view-profile-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .view-profile-name {
+        margin-left: 0.5rem;
+        font-size: 18px;
+        text-transform: capitalize;
+        color: white;
+    }
+
+    .view-profile-close-div {
+        // background: green;
+        flex: 1;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+
+        .view-close-btn {
+            font-size: 30px;
+            color: white;
+        }
+    }
+}
+
+.view-video-container {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+
+}
+
+.view-video {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.video-inner-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    position: absolute;
+    z-index: 1;
+    padding: 1rem;
+
+    .video-view-profile-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .video-view-profile-name {
+        margin-left: 0.5rem;
+        font-size: 18px;
+        text-transform: capitalize;
+        color: white;
+    }
+
+    .video-view-profile-close-div {
+        flex: 1;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+
+        .video-view-close-btn {
+            font-size: 30px;
+            color: white;
+        }
+    }
+
+    .video-view-Profile-bottom-div {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .video-view-input {
+            color: white;
+            outline: 1px solid white;
+            border-radius: 40px;
+            height: 35px;
+            border: none;
+            background: transparent;
+            padding-inline-start: 1rem;
+            font-size: 18px;
+
+            &:focus {
+                border: none;
+                outline: 1px solid white;
+            }
+        }
+
+        .video-view-send-icon {
+            font-size: 24px;
+            color: white;
+
+        }
+
+    }
+}

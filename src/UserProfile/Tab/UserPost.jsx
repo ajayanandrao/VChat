@@ -334,7 +334,7 @@ const UserPost = ({ post }) => {
                 className='feed-overlay-container' style={{ display: "none" }} >
                 <div className="feed-overlay-inner">
 
-                    <div className="feed-Edit-card">
+                    <div className="feed-Edit-card bg-light_0 dark:bg-dark">
                         <div className="feed-edit-inner-div">
                             <div className='feed-close-div' >
                                 <IoMdClose style={{ fontSize: "24px" }} onClick={() => feedOff(post.id)} />
@@ -346,7 +346,7 @@ const UserPost = ({ post }) => {
                                     <div>
                                         <input type="text"
                                             placeholder="What's on your mind"
-                                            className='feed-edit-input'
+                                            className='feed-edit-input bg-lightDiv dark:bg-darkInput'
                                             onChange={(e) => setEditInput(e.target.value)}
                                             value={editInput}
                                             id={`editInput-${post.id}`}
@@ -481,7 +481,7 @@ const UserPost = ({ post }) => {
                             ) : (
                                 <>
                                     <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
-                                        <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-light_0 dark:text-darkPostIcon' />
+                                        <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
                                         {like.length > 0 ?
                                             <div className="feed-bottom-like-count bg-light_0 text-lightPostText 
                                             dark:bg-darkPostIcon dark:text-darkPostText
@@ -520,7 +520,7 @@ const UserPost = ({ post }) => {
                                 {rightComment ?
                                     <img src={sms} style={{ width: "26px" }} onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
                                     :
-                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-light_0   dark:text-darkPostIcon' />
+                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-lightPostIconBottom   dark:text-darkPostIcon' />
                                 }
                                 {commentCount ?
                                     <Link to={`/notification/${post.id}`}>
@@ -536,7 +536,7 @@ const UserPost = ({ post }) => {
 
                         {/* Share */}
                         <div className="feed-bottom-mainu">
-                            <FaShare className='feed-bottom-icon text-light_0 dark:text-darkPostIcon' />
+                            <FaShare className='feed-bottom-icon text-lightPostIconBottom dark:text-darkPostIcon' />
                         </div>
 
                     </div>
@@ -549,7 +549,7 @@ const UserPost = ({ post }) => {
                                 placeholder='write a Comment'
                                 value={getComment}
                                 onChange={(e) => setComment(e.target.value)}
-                                className='feed-right-comment-input  bg-light_0 text-lightProfileName dark:bg-darkInput dark:text-darkProfileName'
+                                className='feed-right-comment-input  bg-lightPostIconBottom text-lightProfileName dark:bg-darkInput dark:text-darkProfileName'
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)

@@ -131,7 +131,7 @@ const ProfileTwo = ({ user }) => {
                             <input
                                 type="text"
                                 placeholder='Name'
-                                className='login-input-new'
+                                className='update-name-overlay-Input bg-lightDiv text-lightProfileName dark:bg-darkDiv dark:text-darkProfileName'
                                 value={newDisplayName}
                                 onChange={(e) => setNewDisplayName(e.target.value)}
                                 onKeyDown={handleKeyDown}

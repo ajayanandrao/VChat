@@ -97,10 +97,10 @@ const ChangePassword = () => {
                 <h3 className='text-3xl text-lightPostText dark:text-darkPostText' style={{ textAlign: "center", marginBottom: "50px" }}>Change Password</h3>
                 <input
                     className='Auth-input-new text-lightProfileName bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText '
-                type="password"
-                placeholder="Current Password"
-                value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
+                    type="password"
+                    placeholder="Current Password"
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
                 />
 
                 {errorMessage &&
@@ -114,7 +114,9 @@ const ChangePassword = () => {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                 />
-                <button className="btn-primary-custom my-4" onClick={changePassword}>Change Password</button>
+                <div>
+                    <button className="btn-primary-custom my-4" onClick={changePassword}>Change Password</button>
+                </div>
                 {/* 
             {errorMessage &&
                     <div className="error-message">{errorMessage}</div>

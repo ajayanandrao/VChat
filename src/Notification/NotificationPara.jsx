@@ -227,21 +227,13 @@ const NotificationPara = () => {
 
             <div className='' style={{ width: "100%", height: "100%", boxSizing: "border-box", overflowY: "scroll" }}>
                 <div className="view-tab-make-comment-div">
-                    <div className="view-tab-make-comment-inner-div bg-lightInput dark:bg-darkDiv">
+                    <div className="view-tab-make-comment-inner-div text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv">
                         <input
                             type="text"
                             placeholder='write a Comment'
                             value={newComment}
                             onChange={(e) => setNewComment(e.target.value)}
                             className='view-tab-make-comment-input text-lightProfileName  dark:text-darkProfileName'
-                        // onKeyDown={(e) => {
-                        //     if (e.key === 'Enter') {
-                        //         e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)
-                        //         if (getComment.trim() !== '') {
-                        //             HandleComment(e, post.id);
-                        //         }
-                        //     }
-                        // }}
                         />
                         <div >
                             {newComment ?

@@ -1,0 +1,107 @@
+.card-container {
+    display: flex;
+    width: 100%;
+    background: white;
+    padding: 0.5rem 0;
+
+    .c-card {
+        width: 140px;
+        height: 140px;
+        background: blue;
+        border-radius: 100%;
+        margin: 0.2rem;
+        border-radius: 0.5rem;
+
+
+    }
+
+    .story-div-border {
+        border-radius: 50%;
+        border: 2px solid #2CB5EC;
+    }
+
+    .story-div {
+        background-size: cover;
+        background-position: center;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        // background: blue;
+        margin: 0.2rem;
+
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        position: relative;
+
+        .story-profile-img {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+
+            border: 2px solid white;
+        }
+
+        .add-story-div {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.158);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-radius: 50%;
+
+            .add-plus {
+                position: absolute;
+                bottom: 0;
+                font-size: 24px;
+                color: white;
+            }
+        }
+
+    }
+}
+
+
+.story-video-container {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: 0 0.2rem;
+    .story-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .video-inner {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+
+        .story-profile-img {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+
+            border: 2px solid white;
+        }
+    }
+
+}
+

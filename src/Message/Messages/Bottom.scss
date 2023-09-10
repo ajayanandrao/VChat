@@ -84,35 +84,83 @@
     backdrop-filter: blur(10px);
     width: 100%;
     height: 350px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    z-index: 1;
+    // z-index: 1;
     display: flex;
     justify-content: center;
 
-    .message-emoji-group-one {
+    .message-emoji-grop-scroll {
         width: 100%;
-        padding: 0 1rem;
+        height: 100%;
         box-sizing: border-box;
-        overflow-x: auto;
-        display: flex;
+        overflow-y: scroll;
 
-        .message-emoji-div {
-            width: 60px;
-            height: 60px;
-            // background: blue;
-            backdrop-filter: blur(20px);
+        .message-emoji-group-one {
+            width: 100%;
+            padding: 0 1rem;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 3px;
 
-            .message-emoji {
-                width: 40px;
-                height: 40px;
-                object-fit: cover;
+            .message-emoji-div {
+                width: 60px;
+                height: 60px;
+                // background: blue;
+                backdrop-filter: blur(20px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 3px;
+
+                .message-emoji {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                }
             }
         }
     }
+}
 
+
+.emoji-container-main {
+    width: 100%;
+    height: 350px;
+    // background: red;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    bottom: 0;
+
+    .emoji-div-scroll {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        overflow-y: scroll;
+        padding-bottom: 80px;
+
+        .message-emoji-group-one {
+            width: 100%;
+            padding: 0 1rem;
+            display: flex;
+
+            .message-emoji-div {
+                width: 60px;
+                height: 60px;
+                // background: #184f82;
+                backdrop-filter: blur(20px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 3px;
+
+                .message-emoji {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .emoji {
+        }
+    }
 }

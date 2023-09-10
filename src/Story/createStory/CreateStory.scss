@@ -1,0 +1,151 @@
+.background-video {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+
+
+
+    .background-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+        color: white;
+
+
+        .select-file {
+            // width: 180px;
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(7px);
+
+        }
+    }
+}
+
+.video {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.story-mainu {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+
+    .btn-inline {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+}
+
+.story-add-input {
+    width: 200px;
+}
+
+.story-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.story-img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.comment-container {
+    // padding: 1rem;
+    height: auto;
+    margin-bottom: 100px;
+
+    .comment-profile-div {
+        display: flex;
+        align-items: center;
+
+        .comment-profile-img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+        }
+
+        .comment-profile-name {
+            margin-left: 0.5rem;
+        }
+    }
+
+    .comment {
+        margin-top: 0.3rem;
+        margin-left: 2.5rem;
+        text-transform: capitalize;
+
+        .comment-color {
+            color: white;
+            background-color: #3e4346;
+            padding: 0.5rem;
+            border-radius: 30px;
+        }
+    }
+}
+
+.comment-text {
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+    background: #654EDC;
+    text-transform: capitalize;
+    color: white;
+    font-weight: 600;
+
+    .like {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+}
+
+.timeago {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-right: 1rem;
+}
+
+.folder {
+    font-size: 40px;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.object {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
+}

@@ -97,7 +97,7 @@ const Friends = ({ user }) => {
                 placeholder='Serch friends'
                 onChange={(e) => setSearch(e.target.value)}
                 value={search}
-                className='friend-search bg-lightInput text-lightProfileName dark:bg-darkDiv dark:text-darkPostText' />
+                className='friend-search bg-lightDiv text-lightProfileName dark:bg-darkDiv dark:text-darkPostText' />
 
             <div className="Friend-grid-parent-container">
                 <div className='friend-container'>

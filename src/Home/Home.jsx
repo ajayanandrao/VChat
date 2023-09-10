@@ -11,6 +11,7 @@ import { CircularProgress } from '@mui/material';
 import Feed from '../Feed/Feed';
 import { motion, useAnimation } from 'framer-motion';
 import UserMedia from '../UserProfile/Tab/UserMedia';
+// import StoryForm from '../Story/StoryForm';
 
 const Home = () => {
     const [api, setApiData] = useState([]);
@@ -113,6 +114,8 @@ const Home = () => {
                         className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
                         <AiOutlineArrowUp className='top-arrow text-black_0 dark:text-aqua_0' />
                     </motion.div>
+
+                    {/* <StoryForm /> */}
                     <Post />
 
 

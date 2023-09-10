@@ -96,7 +96,7 @@ const About = () => {
                         <>
                             {aboutIntro ?
                                 (<div className="about-overlay-container">
-                                    <h1 className='text-3xl'>Your Intro</h1>
+                                    <h1 className='text-3xl text-lightPostText dark:text-darkPostText'>Your Intro</h1>
                                     <div className='about-form-div'>
                                         <input type="text" className='about-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText' placeholder='Write Your Intro' value={intro} onChange={(e) => setIntro(e.target.value)} />
 
@@ -113,7 +113,7 @@ const About = () => {
 
                             {aboutOverlay ?
                                 (<div className="about-overlay-container">
-                                    <h1 className='text-3xl'>Write Your Bio</h1>
+                                    <h1 className='text-3xl text-lightPostText dark:text-darkPostText'>Write Your Bio</h1>
                                     <div className='about-form-div'>
                                         <input type="text" className='about-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText' placeholder='School' value={school} onChange={(e) => setSchool(e.target.value)} />
 

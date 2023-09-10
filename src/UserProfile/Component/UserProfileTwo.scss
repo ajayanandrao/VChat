@@ -87,3 +87,17 @@
         }
     }
 }
+
+.update-name-overlay-Input{
+    height: 40px;
+    border-radius: 30px;
+    padding-inline-start: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    &:focus{
+        border: none;
+        outline: none;
+    }
+
+}
