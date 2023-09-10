@@ -171,7 +171,7 @@ const Navbar = () => {
                             to={"/notification/"} className="link-btn-shadow navbar-mainu-link-btn c-heart bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" onClick={() => { handleNotificationClick(); handleBoll(); }}>
                             <div
                                 className="">
-                                {latestFriendNotification.timestamp > 0 && (
+                                {latestFriendNotification.timestamp > 0 ? (
                                     <div className="" >
                                         {latestFriendNotification.isUnRead == true ?
                                             <motion.div style={{
@@ -185,11 +185,15 @@ const Navbar = () => {
                                                 <AiFillHeart className="" color='#FF0040' onClick={() => { handleNotificationClick(); handleBoll(); }} />
                                             </motion.div>
                                             :
-                                            <AiFillHeart className='text-lightProfileName dark:text-darkPostIcon'/>
-                                            
-                                            }
+
+                                            <AiFillHeart className='text-lightProfileName dark:text-darkPostIcon' />
+                                        }
                                     </div>
-                                )}
+                                )
+                                    :
+
+                                    <AiFillHeart className='text-lightProfileName dark:text-darkPostIcon' />
+                                }
                             </div>
                         </Link>
                         :
