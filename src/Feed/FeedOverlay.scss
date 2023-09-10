@@ -12,6 +12,7 @@
     height: 100vh;
     z-index: 9999;
 
+
     .feed-overlay-inner {
         position: absolute;
         top: 50%;
@@ -20,9 +21,13 @@
         transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
         width: 100%;
+        border-radius: 5px;
+        padding: 1rem 0.5rem;
 
         .feed-Edit-card {
             width: 100%;
+            border-radius: 10px;
+
             .feed-edit-inner-div {
                 margin: 0 auto;
                 max-width: 400px;
@@ -31,13 +36,13 @@
                 justify-content: end;
                 flex-direction: column;
 
-
-
                 .feed-close-div {
                     display: flex;
                     justify-content: end;
                     padding-right: 0.7rem;
                     margin-bottom: 0.5rem;
+                    // background: red;
+                    padding-top: 0.5rem;
                 }
 
                 .feed-main-card {
@@ -113,3 +118,5 @@
     top: 0;
     z-index: 9999;
 }
+
+// ---------

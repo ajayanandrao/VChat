@@ -443,7 +443,7 @@ const Feed = ({ post }) => {
                 className='feed-overlay-container ' style={{ display: "none" }} >
                 <div className="feed-overlay-inner">
 
-                    <div className="feed-Edit-card ">
+                    <div className="feed-Edit-card bg-light_0 dark:bg-dark">
                         <div className="feed-edit-inner-div">
                             <div className='feed-close-div' >
                                 <IoMdClose style={{ fontSize: "24px" }} onClick={() => feedOff(post.id)} />
@@ -455,7 +455,7 @@ const Feed = ({ post }) => {
                                     <div>
                                         <input type="text"
                                             placeholder="What's on your mind"
-                                            className='feed-edit-input dark:bg-darkInput'
+                                            className='feed-edit-input bg-lightDiv dark:bg-darkInput'
                                             onChange={(e) => setEditInput(e.target.value)}
                                             value={editInput}
                                             id={`editInput-${post.id}`}

@@ -103,12 +103,12 @@
   background: #0080FF;
   border: none;
   display: inline-block;
-  padding: 0.3rem 0.8rem;
+  padding: 0.3rem 0.6rem;
   border-radius: 5px;
   color: white;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   cursor: pointer;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
   text-align: center;
 
@@ -152,7 +152,6 @@
 }
 
 .btn-success-custom {
-
   background: #28a745;
   display: flex;
   text-align: center;
