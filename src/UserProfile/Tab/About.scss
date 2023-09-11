@@ -23,9 +23,12 @@
 
     .about-intro-div {
         display: flex;
-        justify-content: start;
+        justify-content: center;
         // background: red;
         padding: 1rem 0;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: capitalize;
     }
 
     .details-wrapper {

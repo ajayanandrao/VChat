@@ -124,8 +124,8 @@
 
 .emoji-container-main {
     width: 100%;
-    height: 350px;
-    // background: red;
+    height: 450px;
+    // background: blue;
     backdrop-filter: blur(10px);
     position: fixed;
     bottom: 0;
@@ -134,8 +134,14 @@
         width: 100%;
         height: 100%;
         box-sizing: border-box;
+        // background: red;
         overflow-y: scroll;
-        padding-bottom: 80px;
+        padding-bottom: 250px;
+        padding-top: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         .message-emoji-group-one {
             width: 100%;
@@ -145,7 +151,8 @@
             .message-emoji-div {
                 width: 60px;
                 height: 60px;
-                // background: #184f82;
+                // background: rgba(255, 255, 255, 0.404);
+                background: none !important;
                 backdrop-filter: blur(20px);
                 display: flex;
                 justify-content: center;
@@ -160,7 +167,6 @@
             }
         }
 
-        .emoji {
-        }
+        .emoji {}
     }
 }

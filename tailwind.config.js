@@ -24,18 +24,22 @@ module.exports = {
 
         // light_0: "#0f263e",
         // lightDiv: "#143252",
-        
-        light_0: "#113a60",
-        lightDiv: "#081d30",
+
+        light_0: " #F5F5F5",
+        lightDiv: "#FFFFFF",
 
         lightProfile: "#404040",
-        lightProfileName: "#f5f5f5",
+        lightProfileName: "#101010",
 
-        lightPostText: "#e5e5e5", /*300*/
-        lightPostTime: "#a3a3a3", /*400*/
-        lightPostIcon: "#FFFFFF",  /*400*/
+        lightPostText: "#181818", /*300*/
+        lightPostTime: "#696969", /*400*/
+        lightPostIcon: "#181818",  /*400*/
+
+        lightNavTop: "white",
+
+
         // lightPostIconBottom: "#0f263e",  /*400*/
-        lightPostIconBottom: "#113a60",  /*400*/
+        lightPostIconBottom: "#A9A9A9",  /*400*/
         // lightPostIconBottom: "#DF013A",  /*400*/
 
         sender: "#184f82",
@@ -60,6 +64,8 @@ module.exports = {
         darkPostTime: "#a3a3a3", /*400*/
         darkPostIcon: "#737373",  /*400*/
 
+        darkNavTop: "",
+
         darkInput: "#404040",
 
         // Colors ####################################################
@@ -67,6 +73,10 @@ module.exports = {
         black_0: "#fff",
         white_0: "#fafafa",
         aqua_0: "#06b6d4",
+      },
+      backgroundImage: {
+        'gradient-light': 'linear-gradient(150deg, #23accd, #d41583)', // Light mode gradient
+        'gradient-dark': 'linear-gradient(150deg, #171717, #171717 )',   // Dark mode gradient
       },
     },
 

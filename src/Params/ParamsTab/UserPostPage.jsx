@@ -236,7 +236,7 @@ const UserPostPage = ({ post }) => {
                                     <div className="feed-bottom-like-div" onClick={handleCloseRightComment}>
                                         <BsFillHeartFill onClick={() => Heart(post.id)} className='feed-bottom-like-heart ' color='#FF0040' />
 
-                                        <div className="feed-bottom-like-count bg-light_0 text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText" onClick={() => showLike(post.id)}>
+                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText" onClick={() => showLike(post.id)}>
                                             {like.length > 99 ? '99+' : like.length}
 
                                         </div>
@@ -247,7 +247,7 @@ const UserPostPage = ({ post }) => {
                                     <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
                                         <AiOutlineHeart onClick={() => { Heart(post.id); handleCloseRightComment(); }} style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
                                         {like.length > 0 ?
-                                            <div className="feed-bottom-like-count bg-light_0 text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText" onClick={() => showLike(post.id)}>
+                                            <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText" onClick={() => showLike(post.id)}>
                                                 {like.length > 99 ? '99+' : like.length}
                                             </div>
                                             :
@@ -287,7 +287,7 @@ const UserPostPage = ({ post }) => {
                                     }
                                     {commentCount ?
                                         <Link to={`/notification/${post.id}`}>
-                                            <div className="feed-bottom-like-count bg-light_0 text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText" onClick={handleCloseRightComment}>
+                                            <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText" onClick={handleCloseRightComment}>
                                                 <div>{commentCount > 99 ? '99+' : commentCount}</div>
                                             </div>
                                         </Link>

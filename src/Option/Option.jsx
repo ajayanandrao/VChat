@@ -5,12 +5,6 @@ import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../Firebase';
 import { signOut } from 'firebase/auth';
 import { AuthContext } from '../AuthContaxt';
-import { MdMovieFilter } from 'react-icons/md'
-
-import love from "./../Image/img/png/heartsm.png";
-import video from "./../Image/img/png/reel.png";
-import setting from "./../Image/img/png/7374722.png";
-import door from "./../Image/img/png/7285381.png";
 import { motion } from 'framer-motion';
 
 const Option = () => {
@@ -44,11 +38,8 @@ const Option = () => {
 
     return (
         <>
-            <motion.div
-                transition={{ duration: 1 }}
-                initial={{ x: 100 }}
-                animate={{ x: 0 }}
-                className="option-container bg-light_0 dark:bg-dark w3-animate-opacity">
+            <div
+                className="option-container bg-light_0 dark:bg-dark ">
 
                 <div className="option-back-div">
                     <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon"></i>
@@ -67,77 +58,76 @@ const Option = () => {
                             transition={{ duration: 0.7, delay: 0.7 }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className='option-profile-text text-lightProfileName dark:text-darkProfileName'>{currentUser && currentUser.displayName}</motion.span>
+                            className='option-profile-text text-lightProfileName dark:text-darkProfileName'>
+                            {currentUser && currentUser.displayName}</motion.span>
                     </div>
 
                     <motion.div
-                        transition={{ duration: 0.7, delay: 0.7 }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+
                     >
                         <Link to="/setting/">
-                            <div className="option-mainu">
-
+                            <motion.div
+                                transition={{ duration: 0.7, delay: 0.7 }}
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="option-mainu-div">
                                 <div className="option-mainu-icon">
-                                    {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/setting-8979800-7374722.png?f=webp"} style={{ width: "55px" }} className='option-image-icon ' alt="" /> */}
-                                    <img src={setting} style={{ width: "55px" }} className='option-image-icon ' alt="" />
-                                    {/* <i className="bi bi-gear-fill"></i> */}
-                                    {/* <i class="bi bi-gear-fill"></i> */}
+                                    <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/settings-4049810-3364114.png?f=webp"} style={{ width: "40px" }} className='option-image-icon ' alt="" />
                                 </div>
                                 <div className="option-mainu-name text-lightPostText dark:text-darkPostText">
                                     Setting
                                 </div>
-
-                            </div>
+                            </motion.div>
                         </Link>
 
 
                         <Link to="/Wedding/">
-                            <div className="option-mainu">
+                            <motion.div
+                                transition={{ duration: 0.9, delay: 0.9 }}
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="option-mainu-div">
                                 <div className="option-mainu-icon">
-                                    {/* <GiLovers /> */}
-                                    {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/heart-3260437-2725130.png?f=webp"}
-                                    style={{ width: "55px", }}
-                                    className='option-image-icon' alt="" /> */}
-                                    <img src={love} style={{ width: "60px" }} className='option-image-icon' alt="" />
-
+                                    <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/heart-4033153-3345796@0.png?f=webp"} style={{ width: "40px" }} className='option-image-icon' alt="" />
                                 </div>
                                 <div className="option-mainu-name text-lightPostText dark:text-darkPostText" >
                                     Matrimony Arrange
                                 </div>
-                            </div>
+                            </motion.div>
                         </Link>
+
                         <Link to="/reels/">
-                            <div className="option-mainu">
+                            <motion.div
+                                transition={{ duration: 1.1, delay: 1.1 }}
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="option-mainu-div">
                                 <div className="option-mainu-icon">
-                                    {/* <MdMovieFilter /> */}
-                                    {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/movie-reel-9237403-7588845.png?f=webp"} style={{ width: "35px" }} className='option-image-icon' alt="" /> */}
-                                    <img src={video} style={{ width: "40px" }} className='option-image-icon' alt="" />
-                                    {/* <i class="bi bi-camera-reels-fill"></i> */}
+                                    <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/cinema-reel-7642424-6185400.png?f=webp"} style={{ width: "45px" }} className='option-image-icon' alt="" />
                                 </div>
                                 <div className="option-mainu-name text-lightPostText dark:text-darkPostText" >
                                     Reals
                                 </div>
-                            </div>
+                            </motion.div>
                         </Link>
 
-                        <div className="option-mainu">
+                        <motion.div
+                            transition={{ duration: 1.3, delay: 1.3 }}
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="option-mainu-div">
                             <div className="option-mainu-icon">
-                                {/* <BsFillDoorClosedFill className="" style={{ fontSize: "35px" }} /> */}
-                                {/* <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/logout-8858045-7285381.png?f=webp"} style={{ width: "43px" }} alt="" /> */}
-                                <img src={door} style={{ width: "43px" }} alt="" />
-                                {/* <i className="bi bi-door-open-fill" onClick={LogOut}></i> */}
-                                {/* <i class="bi bi-door-closed-fill"></i> */}
+                                <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/logout-8858045-7285381.png?f=webp"} style={{ width: "45px" }} alt="" />
                             </div>
                             <div className="option-mainu-name text-lightPostText dark:text-darkPostText" onClick={LogOut}>
                                 Log Out
                             </div>
-                        </div>
+                        </motion.div>
 
 
                     </motion.div>
                 </div>
-            </motion.div>
+            </div>
         </>
     )
 }

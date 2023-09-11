@@ -96,7 +96,7 @@ const ChangePassword = () => {
             <div className="change-password-container">
                 <h3 className='text-3xl text-lightPostText dark:text-darkPostText' style={{ textAlign: "center", marginBottom: "50px" }}>Change Password</h3>
                 <input
-                    className='Auth-input-new text-lightProfileName bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText '
+                    className='AuthChange-input-new text-lightProfileName bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText '
                     type="password"
                     placeholder="Current Password"
                     value={currentPassword}
@@ -108,7 +108,7 @@ const ChangePassword = () => {
                 }
 
                 <input
-                    className='Auth-input-new text-lightProfileName my-2 bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    className='AuthChange-input-new text-lightProfileName my-2 bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                     type="password"
                     placeholder="New Password"
                     value={newPassword}

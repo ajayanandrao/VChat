@@ -443,19 +443,19 @@ const Feed = ({ post }) => {
                 className='feed-overlay-container ' style={{ display: "none" }} >
                 <div className="feed-overlay-inner">
 
-                    <div className="feed-Edit-card bg-light_0 dark:bg-dark">
+                    <div className="feed-Edit-card bg-light_0 dark:bg-darkDiv">
                         <div className="feed-edit-inner-div">
-                            <div className='feed-close-div' >
+                            <div className='feed-close-div text-lightProfileName dark:text-darkProfileName' >
                                 <IoMdClose style={{ fontSize: "24px" }} onClick={() => feedOff(post.id)} />
                             </div>
-                            <div className="feed-main-card dark:bg-darkDiv">
+                            <div className="feed-main-card ">
                                 {updating ? (<LinearProgress className='l-progress' />) : null}
 
                                 <div className='feed-main-innner'>
                                     <div>
                                         <input type="text"
                                             placeholder="What's on your mind"
-                                            className='feed-edit-input bg-lightDiv dark:bg-darkInput'
+                                            className='feed-edit-input bg-lightDiv text-lightProfileName dark:text-darkProfileName dark:bg-darkInput'
                                             onChange={(e) => setEditInput(e.target.value)}
                                             value={editInput}
                                             id={`editInput-${post.id}`}
@@ -465,7 +465,7 @@ const Feed = ({ post }) => {
 
                                     <label htmlFor="EditImg">
                                         <div className='feed-edit-photo-div'>
-                                            <img src={photo} s alt="" /><span className='feed-ed-photo-text dark:text-darkPostText'>Photo</span>
+                                            <img src={photo} s alt="" /><span className='feed-ed-photo-text text-lightPostText dark:text-darkPostText'>Photo</span>
                                         </div>
                                     </label>
 
@@ -579,7 +579,7 @@ const Feed = ({ post }) => {
                                     <div className="feed-bottom-like-div" onClick={handleCloseRightComment}>
                                         <BsFillHeartFill onClick={() => Heart(post.id, post.uid)} className='feed-bottom-like-heart' color='#FF0040' />
 
-                                        <div className="feed-bottom-like-count bg-light_0 text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText " onClick={() => showLike(post.id)}>
+                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText " onClick={() => showLike(post.id)}>
                                             {like.length > 9 ? '9+' : like.length}
 
                                         </div>
@@ -591,7 +591,7 @@ const Feed = ({ post }) => {
                                         <AiOutlineHeart onClick={() => { Heart(post.id, post.uid); handleCloseRightComment(); }}
                                             style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
                                         {like.length > 0 ?
-                                            <div className="feed-bottom-like-count bg-light_0 text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText"
+                                            <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText"
                                                 onClick={() => showLike(post.id)}>
                                                 {like.length > 9 ? '9+' : like.length}
                                             </div>
@@ -631,7 +631,7 @@ const Feed = ({ post }) => {
                                 }
                                 {commentCount ?
                                     <Link to={`/notification/${post.id}`}>
-                                        <div className="feed-bottom-like-count bg-light_0 text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText" onClick={handleCloseRightComment}>
+                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText" onClick={handleCloseRightComment}>
                                             <div>{commentCount > 99 ? '99+' : commentCount}</div>
                                         </div>
                                     </Link>

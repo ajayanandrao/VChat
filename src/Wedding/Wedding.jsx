@@ -321,17 +321,17 @@ const Wedding = () => {
                         </div>
                     </div>
 
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='First Name' onChange={(e) => setFirst(e.target.value)} value={first} />
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText '
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText '
                         placeholder='Middel Name' onChange={(e) => setMiddel(e.target.value)} value={middel} />
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Last Name' onChange={(e) => setLast(e.target.value)} value={last} />
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Mobile Number' onChange={(e) => setMobile(e.target.value)} value={mobile} />
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Work or Job' onChange={(e) => setWork(e.target.value)} value={Work} />
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Height' onChange={(e) => setHeight(e.target.value)} value={height} />
 
                     <div className='b-date-wedding-div' >
@@ -423,7 +423,7 @@ const Wedding = () => {
                         </div>
                     </div>
 
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Qualification' onChange={(e) => setQualification(e.target.value)} value={qualification} />
 
                     {/* <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
@@ -431,13 +431,13 @@ const Wedding = () => {
 
 
                     <h4 className='text-lightPostText dark:text-darkPostText mb-3'>Address</h4>
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Landmark' onChange={(e) => setLandmark(e.target.value)} value={landmark} />
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Village' onChange={(e) => setVillage(e.target.value)} value={village} />
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='District' onChange={(e) => setDistric(e.target.value)} value={distric} />
-                    <input type="text" className='wedding-input bg-lightInput dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
+                    <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='State' onChange={(e) => setState(e.target.value)} value={state} />
 
                     <h3 className='text-lightPostText dark:text-darkPostText'>Photo</h3>

@@ -37,6 +37,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			margin-bottom: 3rem;
 			// background: blue;
 
 			.option-profile-img {
@@ -58,29 +59,29 @@
 			}
 		}
 
-		.option-mainu {
-			margin: 0.8rem 0;
+		.option-mainu-div {
 			display: flex;
 			align-items: center;
+			// background: yellow;
+			height: 60px;
+			margin: 1rem 0;
 
 			.option-mainu-icon {
-				font-size: 28px;
-				width: 80px;
-				cursor: pointer;
-				// background-color: red;
+				// background: red;
+				width: 60px;
 				display: flex;
 				justify-content: center;
-				padding: 0.5rem;
-
-				.option-image-icon {
-					width: 50px;
-				}
+				align-items: center;
 			}
 
 			.option-mainu-name {
-				cursor: pointer;
+				// background: blue;
+				font-size: 18px;
+				font-weight: 600;
+				padding-left: 1rem;
 			}
 		}
+
 	}
 }
 

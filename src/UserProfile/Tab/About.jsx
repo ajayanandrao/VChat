@@ -124,8 +124,8 @@ const About = () => {
                                         <input type="text" className='about-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText' placeholder='From' value={from} onChange={(e) => setFrom(e.target.value)} />
 
                                         <div className="about-save-btn-div">
-                                            <button className='btn btn-success' onClick={() => handleSaveAbout(item.id)}>save</button>
-                                            <button className='btn btn-outline-primary' onClick={handleShowAboutOverlay}>Cancel</button>
+                                            <button className='btn-success-custom' onClick={() => handleSaveAbout(item.id)}>save</button>
+                                            <button className='btn-primary-custom' onClick={handleShowAboutOverlay}>Cancel</button>
                                         </div>
                                     </div>
                                 </div>
@@ -138,27 +138,27 @@ const About = () => {
                             <div className='About-main-container'>
 
                                 <div className='intro-wrapper'>
-                                    <h4 className='text-2xl'>Your Intro</h4>
+                                    <h4 className='text-2xl text-lightProfileName dark:text-darkProfileName'>Your Intro</h4>
                                     <div className="about-Edit-btn bg-lightDiv dark:bg-darkPostIcon" onClick={handleShowAboutIntroOverlay}>
                                         <HiPencil className='edit-pencil text-lightPostText dark:text-darkDiv' />
                                     </div>
                                 </div>
 
-                                <div className="about-intro-div">
+                                <div className="about-intro-div text-lightPostText dark:text-lightPostText">
                                     {item.intro}
                                 </div>
 
                                 <hr />
                                 <div className="details-wrapper">
                                     <div className="your-detail-div">
-                                        <h4 className='text-2xl'>Your details</h4>
-                                        <button className='edit-bio-btn' onClick={handleShowAboutOverlay}>Edit bio</button>
+                                        <h4 className='text-2xl text-lightProfileName dark:text-darkProfileName'>Your details</h4>
+                                        <button className='edit-bio-btn text-lightProfileName dark:text-darkProfileName' onClick={handleShowAboutOverlay}>Edit bio</button>
                                     </div>
 
                                     <div className="your-detail-container">
                                         <div className="detail-div-group">
                                             <div className="detail-item-one">
-                                                <samp className='d-item-name'>School </samp>
+                                                <samp className='d-item-name text-lightProfileName dark:text-darkProfileName'>School </samp>
                                                 {item.school ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'> {item.school}
                                                     </span>
@@ -167,7 +167,7 @@ const About = () => {
                                             </div>
 
                                             <div className="detail-item-one">
-                                                <samp className='d-item-name'>College </samp>
+                                                <samp className='d-item-name text-lightProfileName dark:text-darkProfileName'>College </samp>
                                                 {item.college ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'> {item.college}
                                                     </span>
@@ -177,7 +177,7 @@ const About = () => {
                                             </div>
 
                                             <div className="detail-item-one">
-                                                <samp className='d-item-name'>Work </samp>
+                                                <samp className='d-item-name text-lightProfileName dark:text-darkProfileName'>Work </samp>
                                                 {item.work ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'>
                                                         {item.work}
@@ -188,7 +188,7 @@ const About = () => {
                                             </div>
 
                                             <div className="detail-item-one">
-                                                <samp className='d-item-name'> From </samp>
+                                                <samp className='d-item-name text-lightProfileName dark:text-darkProfileName'> From </samp>
                                                 {item.from ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'> {item.from}
                                                     </span>
