@@ -37,6 +37,7 @@ import BottomNav from './MobileNavbar/BottomNav';
 import Navbar from './Navbar/Navbar';
 import Wellcome from './Home/Wellcome';
 import { collection, onSnapshot } from 'firebase/firestore';
+import Error404 from './Error404';
 
 function App() {
 
@@ -182,6 +183,7 @@ function App() {
         }
         <Routes>
           <Route exact path="/" element={<Login />} />
+          <Route exact path="*" element={<Error404 />} />
           <Route path="signUp" element={<SignUp />} />
 
           {loading ?

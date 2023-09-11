@@ -1,0 +1,37 @@
+.error-main-container {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .error-not-cound {
+        position: absolute;
+        top: 100px;
+        font-weight: 600;
+        color: #151515;
+    }
+
+    .error-back {
+        position: absolute;
+        top: 50px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        // background: red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #2EFEF7;
+        border-radius: 50%;
+        font-size: 26px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+}

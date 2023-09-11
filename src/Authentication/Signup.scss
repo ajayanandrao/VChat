@@ -167,13 +167,22 @@
         .signUp-camera {
             width: 100%;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             // background: red;
             margin: 1.5rem 0;
 
-            .signup-camera-icon {
-                font-size: 50px;
-                color: #999;
+            .signup-camera-icon-div {
+                width: 80px;
+                height: 80px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .signup-camera-icon {
+                    font-size: 40px;
+                    color: #202020;
+                }
             }
 
             .singup-img-form {

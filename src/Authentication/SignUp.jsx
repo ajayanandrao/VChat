@@ -10,6 +10,7 @@ import logoText from "./../Image/c2.png";
 import g from "./../Image/google.png";
 import f from "./../Image/facebook.png";
 import i from "./../Image/instagram.png";
+import user from "./../Image/user3.png";
 import vlogo from "./../Image/img/logo192.png";
 
 const SignUp = () => {
@@ -194,12 +195,12 @@ const SignUp = () => {
                         {img ? <img className="singup-img-form" src={img ? URL.createObjectURL(img) : null} alt="" /> :
                             (
                                 <div className='signup-camera-icon-div'>
-                                    {/* <BsFillCameraFill className='signup-camera-icon' /> */}
-                                    <img className='signup-camera-icon' width={"80px"}
-                                        src="https://cdn3d.iconscout.com/3d/premium/thumb/profile-account-8672662-6945124.png?f=webp" alt="" />
+                                    <BsFillCameraFill className='signup-camera-icon' />
                                 </div>)}
 
                         <input type="file" className="photoinput" id="photo" onChange={(e) => setImg(e.target.files[0])} style={{ display: "none" }} />
+                        <div style={{color:"#2E64FE"}}>{img ? "" : "Set Profile Photo"}</div>
+
                     </label>
 
                     <div className="signUp-form-div">
