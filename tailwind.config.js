@@ -8,22 +8,9 @@ module.exports = {
     extend: {
       colors: {
 
-        // light_0: "#FE2E64",
-        // lightDiv: "#FA5882",
-
-        // lightProfile: "#404040",
-        // lightProfileName: "#f5f5f5",
-
-        // lightPostText: "#e5e5e5", /*300*/
-        // lightPostTime: "#F7819F", /*400*/
-        // lightPostIcon: "#FBEFF2",  /*400*/
-        // lightPostIconBottom: "#FBEFF2",  /*400*/
-
-        // lightInput: "#07121d",
-        // lightOptionText: "#BDBDBD",
-
-        // light_0: "#0f263e",
-        // lightDiv: "#143252",
+        // Blue theme
+        blue_0: "#0000FF",  // Replace with your desired blue color
+        blueBackground: "#ADD8E6",
 
         light_0: " #F5F5F5",
         lightDiv: "#FFFFFF",

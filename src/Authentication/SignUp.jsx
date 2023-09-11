@@ -148,11 +148,23 @@ const SignUp = () => {
                                     bytime: serverTimestamp(),
                                 });
 
+                                // ---------------
+
+                                const WellcomeProfile = doc(db, "Wellcome", res.user.uid);
+
+                                await setDoc(WellcomeProfile, {
+                                    name: name,
+                                    userPhoto: downloadURL,
+                                    uid: res.user.uid,
+                                    bytime: serverTimestamp(),
+                                    seen: "WelcomFalse",
+                                });
+
                             });
                         }
                     );
 
-                    nav("/home");
+                    nav("/welcome");
 
                 } catch (err) {
                     alert(err.message);

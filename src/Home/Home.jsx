@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./Home.scss";
 import Post from '../Post/Post';
-import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
 import { db } from '../Firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -11,11 +11,22 @@ import { CircularProgress } from '@mui/material';
 import Feed from '../Feed/Feed';
 import { motion, useAnimation } from 'framer-motion';
 import UserMedia from '../UserProfile/Tab/UserMedia';
+import Wellcome from './Wellcome';
 // import StoryForm from '../Story/StoryForm';
 
 const Home = () => {
     const [api, setApiData] = useState([]);
     const { currentUser } = useContext(AuthContext);
+
+    const dataRef = collection(db, 'users');
+    const [userPhoto, setUserPhoto] = useState(null);
+
+    useEffect(() => {
+        const unsub = onSnapshot(dataRef, (snapshot) => {
+            setUserPhoto(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        });
+        return unsub;
+    }, []);
 
     const colRef = collection(db, 'AllPosts');
     const q = query(colRef, orderBy('bytime', 'desc'));
@@ -97,6 +108,31 @@ const Home = () => {
         });
     };
 
+    const [w, setW] = useState(false);
+    const welco = async () => {
+        setW(!w)
+    };
+
+
+
+    const [welcome, setWelcome] = useState([]);
+
+    const welcomeRef = collection(db, 'Wellcome');
+
+    useEffect(() => {
+        const unsub = () => {
+            onSnapshot(welcomeRef, (snapshot) => {
+                let newbooks = []
+                snapshot.docs.forEach((doc) => {
+                    newbooks.push({ ...doc.data(), id: doc.id })
+                });
+                setWelcome(newbooks);
+            })
+        };
+        return unsub();
+    }, []);
+
+
     return (
         <div className='bg-light_0 dark:bg-dark' style={{ transition: "0.8s ease-in-out" }}>
             {loading ? (
@@ -107,19 +143,35 @@ const Home = () => {
                 <>
 
 
-                    <motion.div
-                        transition={{ duration: 0.3, delay: 0.8 }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
-                        <AiOutlineArrowUp className='top-arrow text-black_0 dark:text-aqua_0' />
-                    </motion.div>
+                    {welcome.map((item) => {
+                        if (currentUser && currentUser.uid === item.id) {
+                            return (
+                                <div style={{ color: "black", fontSize: "18px" }}>
+                                    {item.seen === "WelcomFalse" ? <Wellcome currentUser={currentUser} welco={welco} /> :
 
-                    {/* <StoryForm /> */}
-                    <Post />
+                                        (
+                                            <>
+                                                <motion.div
+                                                    transition={{ duration: 0.3, delay: 0.8 }}
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
+                                                    <AiOutlineArrowUp className='top-arrow text-aqua_0 ' />
+                                                </motion.div>
+
+                                                <Post />
+
+                                                <FlipMove>{newData}</FlipMove>
+                                            </>
+                                        )
+
+                                    }
+                                </div>
+                            )
+                        }
+                    })}
 
 
-                    <FlipMove>{newData}</FlipMove>
                     <div className='height'></div>
                 </>
             )}

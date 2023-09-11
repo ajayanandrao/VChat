@@ -32,9 +32,11 @@ import OtherUserProfileMain from './OtherUserProfile/OtherUserProfileMain';
 import CurrentUserFriendProfileMain from './CurrentUserFriendProfile/CurrentUserFriendProfileMain';
 import { useEffect, useState } from 'react';
 import MobileNavbarBottom from './MobileNavbar/MobileNavbarBottom';
-import { auth } from './Firebase';
+import { auth, db } from './Firebase';
 import BottomNav from './MobileNavbar/BottomNav';
 import Navbar from './Navbar/Navbar';
+import Wellcome from './Home/Wellcome';
+import { collection, onSnapshot } from 'firebase/firestore';
 
 function App() {
 
@@ -120,6 +122,24 @@ function App() {
     transition: "top 0.5s ease-in-out" // Smooth animation
   }
 
+  const [welcome, setWelcome] = useState([]);
+
+  const welcomeRef = collection(db, 'Wellcome');
+
+  useEffect(() => {
+    const unsub = () => {
+      onSnapshot(welcomeRef, (snapshot) => {
+        let newbooks = []
+        snapshot.docs.forEach((doc) => {
+          newbooks.push({ ...doc.data(), id: doc.id })
+        });
+        setWelcome(newbooks);
+      })
+    };
+    return unsub();
+  }, []);
+
+
   return (
     <>
       <Router basename='/VChat'>
@@ -130,11 +150,33 @@ function App() {
         {loading ?
           (<>
             <div className="mobile" style={style}>
-              <MobileNavebar />
+              {welcome.map((item) => {
+                return (
+                  <>
+                    {item && item.seen === "WelcomFalse" ? null : <MobileNavebar />}
+                  </>
+                )
+              })}
+
             </div>
 
-            <Navbar />
-            <ScrollToTop /> </>)
+
+            {welcome.map((item) => {
+              return (
+                <>
+                  {item && item.seen === "WelcomFalse" ? null :
+
+                    (
+                      <>
+                        <Navbar />
+                        <ScrollToTop />
+                      </>
+                    )}
+                </>
+              )
+            })}
+
+          </>)
           :
           ""
         }
@@ -146,6 +188,8 @@ function App() {
 
             (<> <Route path="home" element={<Home />} />
               <Route path="post" element={<Post />} />
+
+              <Route path="welcome" element={<Wellcome />} />
 
               <Route path='notification' element={<NotificationProps />} />
               <Route path='notification/:id' element={<NotificationPara />} />

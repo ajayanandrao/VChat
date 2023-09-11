@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import SignUp from './SignUp'
 import { AuthContext } from '../AuthContaxt';
 import { auth, db } from '../Firebase';
-import { collection, doc, orderBy, query, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, doc, onSnapshot, orderBy, query, setDoc, updateDoc } from 'firebase/firestore';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Box, TextField } from '@mui/material';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -168,7 +168,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="footer">
-                    © 2023 Copyright: VChatApp.co.in
+                        © 2023 Copyright: VChatApp.co.in
                     </div>
                 </div>
 
