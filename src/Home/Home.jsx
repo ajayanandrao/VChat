@@ -134,50 +134,59 @@ const Home = () => {
 
 
     return (
-        <div className='bg-light_0 dark:bg-dark' style={{ transition: "0.8s ease-in-out" }}>
-            {loading ? (
-                <div className='skeleton-center bg-light_0 dark:bg-dark'>
-                    <CircularProgress className='circularprogress' />
-                </div>
-            ) : (
-                <>
+        <>
+
+            {welcome.map((item) => {
+                return (
+                    <div style={{ color: "black", fontSize: "18px" }}>
+                        {item.seen === "WelcomFalse" ? <Wellcome currentUser={currentUser} welco={welco} /> :
 
 
-                    {welcome.map((item) => {
-                        if (currentUser && currentUser.uid === item.id) {
-                            return (
-                                <div style={{ color: "black", fontSize: "18px" }}>
-                                    {item.seen === "WelcomFalse" ? <Wellcome currentUser={currentUser} welco={welco} /> :
 
-                                        (
-                                            <>
-                                                <motion.div
-                                                    transition={{ duration: 0.3, delay: 0.8 }}
-                                                    initial={{ opacity: 0 }}
-                                                    animate={{ opacity: 1 }}
-                                                    className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
-                                                    <AiOutlineArrowUp className='top-arrow text-aqua_0 ' />
-                                                </motion.div>
+                            (
 
-                                                <Post />
+                                <div className='bg-light_0 dark:bg-dark' style={{ transition: "0.8s ease-in-out" }}>
+                                    {loading ? (
+                                        <div className='skeleton-center bg-light_0 dark:bg-dark'>
+                                            <CircularProgress className='circularprogress' />
+                                        </div>
+                                    ) : (
+                                        <>
 
-                                                <FlipMove>{newData}</FlipMove>
-                                            </>
-                                        )
 
-                                    }
+
+
+                                            <motion.div
+                                                transition={{ duration: 0.3, delay: 0.8 }}
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
+                                                <AiOutlineArrowUp className='top-arrow text-aqua_0 ' />
+                                            </motion.div>
+                                            <Post />
+
+                                            <FlipMove>{newData}</FlipMove>
+                                            <div className='height'></div>
+                                        </>
+                                    )}
+
+
                                 </div>
+
                             )
+
+
                         }
-                    })}
+                    </div>
+                )
+            })}
 
 
-                    <div className='height'></div>
-                </>
-            )}
 
 
-        </div>
+
+
+        </>
     )
 }
 

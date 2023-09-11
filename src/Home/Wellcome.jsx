@@ -70,14 +70,14 @@ const Wellcome = () => {
                                                     <div className='welcome-user-profile-div' >
 
 
-                                                        <motion.div transition={{ duration: 1.5, delay: 3.8 }}
-                                                            initial={{ opacity: 0, y: -80 }}
+                                                        <motion.div transition={{ duration: 0.8, delay: 2.8 }}
+                                                            initial={{ opacity: 0, y: -60 }}
                                                             animate={{ opacity: 1, y: 0 }} >
                                                             <img className='welcome-user-img' src={item && item.userPhoto} alt="" />
                                                         </motion.div>
 
                                                         <motion.div
-                                                            transition={{ duration: 1.1, delay: 3.9 }}
+                                                            transition={{ duration: 0.8, delay: 3.8 }}
                                                             initial={{ opacity: 0, y: 50 }}
                                                             animate={{ opacity: 1, y: 0 }}
                                                             className='welcome-user-name text-3xl'>{item && item.name}</motion.div>
@@ -85,16 +85,25 @@ const Wellcome = () => {
 
                                                     </div>
 
-                                                    {showWelcome && (
-                                                        <motion.div
-                                                            transition={{ duration: 0.8, delay: 0.5 }}
-                                                            initial={{ opacity: 0, y: 50 }}
-                                                            animate={{ opacity: 1, y: 0 }}
-                                                            className='welcome-text text-4xl'
-                                                        >
-                                                            Welcome
-                                                        </motion.div>
-                                                    )}
+                                                    {item && item.userPhoto ?
+                                                        (
+                                                            <>
+                                                                {showWelcome && (
+                                                                    <motion.div
+                                                                        transition={{ duration: 0.8, delay: 0.5 }}
+                                                                        initial={{ opacity: 0, y: 50 }}
+                                                                        animate={{ opacity: 1, y: 0 }}
+                                                                        className='welcome-text text-4xl'
+                                                                    >
+                                                                        Welcome
+                                                                    </motion.div>
+                                                                )}
+
+                                                            </>
+                                                        )
+                                                        :
+                                                        null
+                                                    }
 
                                                     {item && item.userPhoto ?
                                                         <motion.div
