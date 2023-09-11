@@ -168,7 +168,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="footer">
-                        copy right: VChat App 2023.
+                    © 2023 Copyright: VChatApp.co.in
                     </div>
                 </div>
 

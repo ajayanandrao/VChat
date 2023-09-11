@@ -30,7 +30,7 @@ const ProfileAbout = ({ user }) => {
                                     <div className="your-detail-container" style={{ margin: "0" }}>
                                         <div className="detail-div-group">
                                             <div className="detail-item-one">
-                                                <samp className='d-item-name'>School </samp>
+                                                <samp className='d-item-name text-darkProfileName '>School </samp>
                                                 {item.school ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'> {item.school}
                                                     </span>
@@ -39,7 +39,7 @@ const ProfileAbout = ({ user }) => {
                                             </div>
 
                                             <div className="detail-item-one">
-                                                <samp className='d-item-name'>College </samp>
+                                                <samp className='d-item-name text-lightProfileName'>College </samp>
                                                 {item.college ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'> {item.college}
                                                     </span>
@@ -49,7 +49,7 @@ const ProfileAbout = ({ user }) => {
                                             </div>
 
                                             <div className="detail-item-one">
-                                                <samp className='d-item-name'>Work </samp>
+                                                <samp className='d-item-name text-lightProfileName'>Work </samp>
                                                 {item.work ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'>
                                                         {item.work}
@@ -60,7 +60,7 @@ const ProfileAbout = ({ user }) => {
                                             </div>
 
                                             <div className="detail-item-one">
-                                                <samp className='d-item-name'> From </samp>
+                                                <samp className='d-item-name text-lightProfileName'> From </samp>
                                                 {item.from ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'> {item.from}
                                                     </span>

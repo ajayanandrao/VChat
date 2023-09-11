@@ -181,7 +181,11 @@ const SignUp = () => {
                     <label htmlFor="photo" className='signUp-camera' >
                         {img ? <img className="singup-img-form" src={img ? URL.createObjectURL(img) : null} alt="" /> :
                             (
-                                <div className='signup-camera-icon-div'><BsFillCameraFill className='signup-camera-icon' /></div>)}
+                                <div className='signup-camera-icon-div'>
+                                    {/* <BsFillCameraFill className='signup-camera-icon' /> */}
+                                    <img className='signup-camera-icon' width={"80px"}
+                                        src="https://cdn3d.iconscout.com/3d/premium/thumb/profile-account-8672662-6945124.png?f=webp" alt="" />
+                                </div>)}
 
                         <input type="file" className="photoinput" id="photo" onChange={(e) => setImg(e.target.files[0])} style={{ display: "none" }} />
                     </label>
@@ -216,7 +220,7 @@ const SignUp = () => {
                 </div>
 
                 <div className="footer">
-                    copy right: VChat App 2023.
+                    © 2023 Copyright: VChatApp.co.in
                 </div>
             </div>
 

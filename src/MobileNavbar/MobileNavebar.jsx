@@ -40,9 +40,9 @@ const MobileNavebar = () => {
   }, []);
 
   const [userPhoto, setUserPhoto] = useState(null);
-  
 
-  
+
+
   const dataRef = collection(db, "users");
   useEffect(() => {
     const unsub = onSnapshot(dataRef, (snapshot) => {
@@ -97,7 +97,6 @@ const MobileNavebar = () => {
   const [theme, setTheme] = useState("light");
   const [newTheme, setNewTheme] = useState(null);
 
-
   useEffect(() => {
 
     if (theme === "dark") {
@@ -107,6 +106,7 @@ const MobileNavebar = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [theme])
+
 
   const darkTheme = async () => {
     setDayTheme(!dayTheme);
@@ -124,7 +124,7 @@ const MobileNavebar = () => {
   return (
     <>
       <div
-        className="mobile-nav-container bg-light_0 dark:bg-dark"
+        className="mobile-nav-container  bg-light_0 dark:bg-dark"
         style={{ display: "none" }}
         id="navId"
       >
@@ -161,6 +161,7 @@ const MobileNavebar = () => {
               <BsMoonStarsFill className="mobile-nav-icon text-lightPostIcon" />
             }
           </div>
+
 
           {/* <div className="mobile-nav-mainu">
             <MdColorLens className="mobile-nav-icon text-lightPostIcon" />
