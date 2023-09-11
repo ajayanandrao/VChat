@@ -38,6 +38,7 @@ import Navbar from './Navbar/Navbar';
 import Wellcome from './Home/Wellcome';
 import { collection, onSnapshot } from 'firebase/firestore';
 import Error404 from './Error404';
+import Install from './Setting/Install/Install';
 
 function App() {
 
@@ -192,6 +193,7 @@ function App() {
               <Route path="post" element={<Post />} />
 
               <Route path="welcome" element={<Wellcome />} />
+              <Route path="How_to_install_app" element={<Install />} />
 
               <Route path='notification' element={<NotificationProps />} />
               <Route path='notification/:id' element={<NotificationPara />} />
