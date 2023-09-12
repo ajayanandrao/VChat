@@ -80,6 +80,17 @@ const ProfileOne = ({ user }) => {
                                                     <div className="profile-cover-camera-btn-div-main">
                                                         <BsFillCameraFill className='profile-cover-camera-btn' />
                                                     </div>
+
+
+                                                    {item && item.VideoCover ?
+                                                        (<video className="Profile-Cover-Video " autoPlay muted loop>
+                                                            <source src={item && item.VideoCover} />
+                                                        </video>)
+
+                                                        :
+                                                        null
+                                                    }
+
                                                     <div className="profile-pic-bg-div">
                                                         <div className="profile-pic-div" style={{ backgroundImage: `url(${user && user.userPhoto})` }} onClick={on}></div>
                                                     </div>

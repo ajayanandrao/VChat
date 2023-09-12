@@ -3,14 +3,15 @@ import "./UserProfileOne.scss";
 import { useNavigate } from 'react-router-dom';
 import { BsFillCameraFill } from "react-icons/bs";
 import { AuthContext } from "./../../AuthContaxt";
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
 import { auth, db, storage } from '../../Firebase';
 import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, serverTimestamp, setDoc, updateDoc, where, writeBatch } from 'firebase/firestore';
 import { CircularProgress, LinearProgress } from '@mui/material';
 import { IoIosCloseCircle, IoMdClose } from 'react-icons/io';
 import imageCompression from 'image-compressor';
-
+import { v4, uuidv4 } from 'uuid';
+import { FaPlay } from 'react-icons/fa';
 
 const ProfileOne = ({ user }) => {
     const { currentUser } = useContext(AuthContext);
@@ -18,6 +19,20 @@ const ProfileOne = ({ user }) => {
     const goBack = () => {
         nav(-1);
     }
+
+    const [isPlaying, setIsPlaying] = useState(false);
+    const videoRef = useRef(null);
+
+    const handleClick = () => {
+        const video = videoRef.current;
+        if (video.paused) {
+            video.play();
+            setIsPlaying(true);
+        } else {
+            video.pause();
+            setIsPlaying(false);
+        }
+    };
 
     const fileInput = useRef(null);
 
@@ -147,6 +162,7 @@ const ProfileOne = ({ user }) => {
 
     function on() {
         document.getElementById("Cover").style.display = "block";
+        document.getElementById("video-size").innerHTML = '';
     }
 
     function off() {
@@ -155,6 +171,7 @@ const ProfileOne = ({ user }) => {
     }
     const [cover, setCover] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
+    const [videoUrl, setVideoUrl] = useState(null);
 
     // Inside the useEffect section of the ProfileOne component
     useEffect(() => {
@@ -166,6 +183,7 @@ const ProfileOne = ({ user }) => {
                 // Check if the browser supports WebP format
                 const supportsWebP = (new Image()).srcset.includes('webp');
                 setImageUrl(supportsWebP && data.webpImageUrl ? data.webpImageUrl : data.imageUrl);
+                setVideoUrl(data.VideoCover)
             }
         };
         fetchProfileData();
@@ -215,8 +233,12 @@ const ProfileOne = ({ user }) => {
         });
     };
 
+
+
+
     const CoverUpload = async () => {
-        setLoading(true);
+
+        let downloadURL = '';
 
         if (cover) {
             if (cover.type.startsWith('image/')) {
@@ -224,30 +246,85 @@ const ProfileOne = ({ user }) => {
                     const compressedImgBlob = await compressImage(cover, 800);
 
                     const imageRef = ref(storage, `images/${cover.name}`);
-                    uploadBytes(imageRef, compressedImgBlob)
-                        .then(async (snapshot) => {
-                            console.log("Uploaded image successfully");
-                            const url = await getDownloadURL(imageRef);
-                            setImageUrl(url);
+                    const uploadTask = uploadBytes(imageRef, compressedImgBlob);
 
-                            await setDoc(profileDataRef, {
-                                CoverPhoto: url
-                            }, { merge: true });
+                    uploadTask.then(async (snapshot) => {
+                        const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100);
+                        if (progress == 90) { off(); }
+                        console.log("Uploaded image successfully");
+                        const url = await getDownloadURL(imageRef);
+                        setImageUrl(url);
 
-                            console.log("Image URL added to Firestore");
-                        })
-                        .catch((error) => {
-                            console.error("Error uploading image", error);
-                        });
+                        await setDoc(profileDataRef, {
+                            // CoverName: url.name,
+                            CoverPhoto: url,
+                            VideoCover: "",
+                        }, { merge: true });
+
+                        console.log("Image URL added to Firestore");
+                    }).catch((error) => {
+                        console.error("Error uploading image", error);
+                    });
                 } catch (error) {
                     console.log("Error compressing Cover Image:", error);
                 }
+            } else if (cover.type.startsWith('video/')) {
+                // Check if the video size is greater than 2 MB (2 * 1024 * 1024 bytes)
+                if (cover.size > 2 * 1024 * 1024) {
+                    // Display an alert to the user
+                    off();
+                    alert('Video size should be less than 2 MB');
+                    document.getElementById("video-size").innerHTML = 'Cover Video size should be less than 2 MB';
+                    return
+                } else {
+                    const storageRef = ref(storage, 'PostVideos/' + v4());
+                    const uploadTask = uploadBytesResumable(storageRef, cover);
+
+                    uploadTask.on(
+                        'state_changed',
+                        (snapshot) => {
+                            const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100);
+                            if (progress < 100) {
+                                console.log(progress)
+                                document.getElementById('p1').innerHTML = progress;
+                            } else {
+                                document.getElementById('p1').style.display = 'none';
+                            }
+                            console.log('Loading:', progress);
+                        },
+                        (error) => {
+                            console.log('Error uploading video:', error);
+                        },
+                        async () => {
+                            try {
+                                await uploadTask;
+                                downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                                console.log(downloadURL);
+
+                                await setDoc(profileDataRef, {
+                                    CoverPhoto: "",
+                                    VideoCover: downloadURL,
+                                }, { merge: true });
+
+                                console.log('Video uploaded successfully');
+
+                                if (downloadURL) {
+                                    window.location.reload();
+                                }
+                            } catch (error) {
+                                console.log('Error uploading video:', error);
+                            }
+                        }
+                    );
+                }
             }
+
         }
 
-        setLoading(false);
         off();
     };
+
+
 
 
     const dataRef = collection(db, "users");
@@ -267,6 +344,9 @@ const ProfileOne = ({ user }) => {
     function offProfile() {
         document.getElementById("ProfileOneImg").style.display = "none";
     }
+
+
+
     return (
         <>
 
@@ -290,17 +370,34 @@ const ProfileOne = ({ user }) => {
                             </div>
                         </div>
 
+                        <div className='video-progress' id='p1'></div>
+
+
                         <div>
                             {coverImg.map((item) => {
                                 if (item.uid === currentUser.uid) {
+
                                     return (
                                         <div key={item.id}>
+
                                             <div className="profile-cover-photo-div"
                                                 style={{ backgroundImage: `url(${item.CoverPhoto ? item.CoverPhoto : 'https://images.unsplash.com/photo-1549247796-5d8f09e9034b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1158&q=80'})` }}
                                             >
+
+
                                                 <div className="profile-cover-camera-btn-div" onClick={on}>
                                                     <BsFillCameraFill className='profile-cover-camera-btn' />
                                                 </div>
+
+
+                                                {item && item.VideoCover ?
+                                                    (<video ref={videoRef} className="Profile-Cover-Video " autoPlay muted loop>
+                                                        <source src={item && item.VideoCover} />
+                                                    </video>)
+
+                                                    :
+                                                    null
+                                                }
 
 
                                                 <div id="Cover">
@@ -312,10 +409,65 @@ const ProfileOne = ({ user }) => {
                                                                     <IoMdClose onClick={off} style={{ fontSize: "24px" }} />
                                                                 </div>
 
-                                                                {loading ? (<LinearProgress />) : ""}
 
                                                                 <label htmlFor="cover-img">
-                                                                    <img className='Cover-img' src={cover ? URL.createObjectURL(cover) : (imageUrl ? imageUrl : item.CoverPhoto)} alt="" />
+
+                                                                    {cover ? null : (
+                                                                        <img className='Cover-img' src={cover ? URL.createObjectURL(cover) : ("https://images.unsplash.com/photo-1549247796-5d8f09e9034b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1158&q=80")} alt="" />
+                                                                    )}
+
+
+                                                                    {cover ?
+
+                                                                        (<>
+
+                                                                            {cover && cover.type.startsWith('video/') ?
+
+                                                                                (
+                                                                                    <>
+
+
+
+                                                                                        <div className="cover-object-video-div">
+                                                                                            <video ref={videoRef} className="cover-video-objet ">
+                                                                                                <source src={cover ? URL.createObjectURL(cover) : null} />
+                                                                                            </video>
+                                                                                        </div>
+
+                                                                                    </>
+                                                                                )
+                                                                                :
+
+                                                                                <img className='Cover-img' src={cover ? URL.createObjectURL(cover) : (imageUrl ? imageUrl : item.CoverPhoto)} alt="" />
+                                                                            }
+
+                                                                        </>)
+
+                                                                        :
+
+                                                                        (<>
+
+                                                                            {item.CoverPhoto ? (
+                                                                                <img className='Cover-img' src={cover ? URL.createObjectURL(cover) : (imageUrl ? imageUrl : item.CoverPhoto)} alt="" />
+                                                                            ) : null}
+
+
+
+                                                                            {item.VideoCover ? (
+                                                                                <div className="cover-object-video-div">
+                                                                                    <video ref={videoRef} className="cover-video-objet ">
+                                                                                        <source src={item && item.VideoCover} />
+                                                                                    </video>
+                                                                                </div>
+                                                                            ) : null}
+
+
+                                                                        </>)
+
+                                                                    }
+
+
+
                                                                 </label>
 
                                                                 <input type="file" id='cover-img' onChange={(e) => setCover(e.target.files[0])} style={{ display: "none" }} />
@@ -334,10 +486,13 @@ const ProfileOne = ({ user }) => {
                                                 <div className="profile-pic-bg-div">
 
                                                     <div className="profile-pic-div-inner">
-                                                        <div className="profile-pic-div" onClick={onProfile} style={{ backgroundImage: `url(${currentUser && currentUser.photoURL})` }}>
+                                                        <div>
+                                                            <div className="profile-pic-div" onClick={onProfile} style={{ backgroundImage: `url(${currentUser && currentUser.photoURL})` }}>
 
+                                                            </div>
                                                         </div>
-                                                        {loading ? (<CircularProgress style={{ fontSize: "16px" }} />) : ""}
+
+                                                        <div className='profile-pic-loading'>{loading ? (<CircularProgress style={{ fontSize: "16px" }} />) : ""}</div>
 
                                                         <div className="photo-edit-div" onClick={offProfile}>
                                                             <label htmlFor="profile-img">
@@ -353,7 +508,7 @@ const ProfileOne = ({ user }) => {
 
                                             </div>
 
-
+                                            <div id='video-size' style={{ color: "Red", textAlign: "center" }}></div>
                                         </div>
                                     )
                                 }
