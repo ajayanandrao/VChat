@@ -114,8 +114,23 @@ const ProfilePosts = ({ user, post }) => {
         }
     }
 
-    function TimeAgoComponent({ timestamp }) {
-        return <ReactTimeago date={timestamp} />;
+    // function TimeAgoComponent({ timestamp }) {
+    //     return <ReactTimeago date={timestamp} />;
+    // }
+
+    function PostTimeAgoComponent({ timestamp }) {
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - new Date(timestamp)) / 1000);
+
+        if (diffInSeconds < 60) {
+            return "just now";
+        } else if (diffInSeconds < 3600) {
+            const minutes = Math.floor(diffInSeconds / 60);
+            return `${minutes}min ago`;
+        } else {
+            const hours = Math.floor(diffInSeconds / 3600);
+            return `${hours}h ago`;
+        }
     }
 
     // Comment 
@@ -314,11 +329,12 @@ const ProfilePosts = ({ user, post }) => {
                             <img src={post.photoURL} className='feed-img' alt="" />
 
                             <div className="feed-profile-name text-lightProfileName dark:text-darkProfileName">
-                                {post.displayName}
+                                {post.displayName.length > 20 ? post.displayName.slice(0, 20) : post.displayName}
                             </div>
 
                             <div className="feed-time text-lightPostTime dark:text-darkPostTime">
-                                <TimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} />
+                                {/* <TimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} /> */}
+                                <PostTimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} />
                             </div>
 
                         </div>
