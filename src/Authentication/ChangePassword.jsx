@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
 import "./ChangePassword.scss";
+import LeftArro from '../LeftArro';
 
 const ChangePassword = () => {
 
@@ -89,12 +90,14 @@ const ChangePassword = () => {
     return (
 
         <div className='change-password-main-container bg-light_0 dark:bg-dark' >
-            <div className="option-back-div">
+            {/* <div className="option-back-div">
                 <i onClick={goBack} className="bi bi-arrow-left text-lightPostIcon dark:text-darkPostIcon"></i>
-            </div>
+            </div> */}
+
+            <LeftArro />
 
             <div className="change-password-container">
-                <h3 className='text-3xl text-lightPostText dark:text-darkPostText' style={{ textAlign: "center", marginBottom: "50px" }}>Change Password</h3>
+                <h3 className='text-3xl text-lightPostText dark:text-darkPostText mt-4' style={{ textAlign: "center", marginBottom: "50px" }}>Change Password</h3>
                 <input
                     className='AuthChange-input-new text-lightProfileName bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText '
                     type="password"
