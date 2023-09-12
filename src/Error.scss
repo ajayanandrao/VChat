@@ -21,17 +21,17 @@
 
     .error-back {
         position: absolute;
-        top: 50px;
+        top: 25px;
         left: 15px;
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         // background: red;
         display: flex;
         justify-content: center;
         align-items: center;
         color: #2EFEF7;
         border-radius: 50%;
-        font-size: 26px;
+        font-size: 18px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 }
