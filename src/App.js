@@ -30,7 +30,7 @@ import MobileNavebar from './MobileNavbar/MobileNavebar';
 import CurrentUserProfileMain from './CurrentUserProfile/CurrentUserProfileMain';
 import OtherUserProfileMain from './OtherUserProfile/OtherUserProfileMain';
 import CurrentUserFriendProfileMain from './CurrentUserFriendProfile/CurrentUserFriendProfileMain';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import MobileNavbarBottom from './MobileNavbar/MobileNavbarBottom';
 import { auth, db } from './Firebase';
 import BottomNav from './MobileNavbar/BottomNav';
@@ -39,6 +39,7 @@ import Wellcome from './Home/Wellcome';
 import { collection, onSnapshot } from 'firebase/firestore';
 import Error404 from './Error404';
 import Install from './Setting/Install/Install';
+import { AuthContext } from './AuthContaxt';
 
 function App() {
 
@@ -94,6 +95,8 @@ function App() {
 
 
   const [loading, setLoading] = useState(null);
+
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -153,11 +156,13 @@ function App() {
           (<>
             <div className="mobile" style={style}>
               {welcome.map((item) => {
-                return (
-                  <>
-                    {item && item.seen === "WelcomFalse" ? null : <MobileNavebar />}
-                  </>
-                )
+                if (currentUser && currentUser.uid === item.id) {
+                  return (
+                    <>
+                      {item && item.seen === "WelcomFalse" ? null : <MobileNavebar />}
+                    </>
+                  )
+                }
               })}
 
             </div>

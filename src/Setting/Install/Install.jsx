@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./Install.scss";
 import LeftArro from '../../LeftArro';
 import mone from "./../../Image/mobile4.png";
 import mtwo from "./../../Image/mobile2.png";
 import audio from "./../../Image/install.mp3";
+import { AuthContext } from '../../AuthContaxt';
 
 const Install = () => {
+
+    const { currentUser } = useContext(AuthContext);
 
     const [isPlaying, setIsPlaying] = useState(true);
     const audioURL = audio;
@@ -27,7 +30,7 @@ const Install = () => {
         <div className='bg-lightDiv dark:bg-darkDiv install-vchat-container'>
             <div>
                 <audio id="audio-element" src={audioURL} autoPlay={isPlaying}></audio>
-                
+
             </div>
 
             {isPlaying ? (
