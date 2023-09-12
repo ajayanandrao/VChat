@@ -30,7 +30,7 @@ const ProfileAbout = ({ user }) => {
                                     <div className="your-detail-container" style={{ margin: "0" }}>
                                         <div className="detail-div-group">
                                             <div className="detail-item-one">
-                                                <samp className='d-item-name text-darkProfileName '>School </samp>
+                                                <samp className='d-item-name text-lightProfileName '>School </samp>
                                                 {item.school ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'> {item.school}
                                                     </span>
