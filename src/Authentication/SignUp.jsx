@@ -60,8 +60,22 @@ const SignUp = () => {
         });
     };
 
+    if (password.length > 8) {
+        document.getElementById("errorPass").innerHTML = ""
+    }
+
     const submit = async (e) => {
         e.preventDefault();
+
+        if (password.length < 8) {
+            document.getElementById("errorPass").innerHTML = "Password should be 8 characters"
+            return
+        } else {
+            document.getElementById("errorPass").innerHTML = ""
+        }
+
+        setEmail("");
+        setPass("");
 
         if (img) {
             if (img.type.startsWith('image/')) {
@@ -169,6 +183,12 @@ const SignUp = () => {
 
                 } catch (err) {
                     alert(err.message);
+                    console.log(err.message);
+                    console.log(err.code);
+                    if (err.code == "auth/invalid-email") {
+                        document.getElementById("error").innerHTML = "Invalid email";
+                        return
+                    }
                 }
             }
 
@@ -176,8 +196,7 @@ const SignUp = () => {
 
         setImg(null);
         setName("");
-        setEmail("");
-        setPass("");
+
     };
 
 
@@ -199,7 +218,7 @@ const SignUp = () => {
                                 </div>)}
 
                         <input type="file" className="photoinput" id="photo" onChange={(e) => setImg(e.target.files[0])} style={{ display: "none" }} />
-                        <div style={{color:"#2E64FE"}}>{img ? "" : "Set Profile Photo"}</div>
+                        <div style={{ color: "#2E64FE" }}>{img ? "" : "Set Profile Photo"}</div>
 
                     </label>
 
@@ -214,11 +233,16 @@ const SignUp = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                         />
+
+                        {email ? null : <div id="error" style={{ color: "red" }}></div>}
+
                         <input className="Auth-input-new my-2" type="password"
                             placeholder="Password"
                             onChange={(e) => setPass(e.target.value)}
                             value={password}
                         />
+
+                        <div id="errorPass" style={{ color: "red" }}></div>
 
                         <button className="btn-primary-custom w-100 my-4"
                             onClick={submit}>Sign Up</button>
