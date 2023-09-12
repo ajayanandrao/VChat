@@ -297,7 +297,7 @@ const Post = () => {
 								/>
 							</label>
 
-							<label htmlFor="photo" onClick={Wrapp} style={{ cursor: 'pointer' }}>
+							{/* <label htmlFor="photo" onClick={Wrapp} style={{ cursor: 'pointer' }}>
 								<div className="post-icon-div">
 									<img
 										src={video}
@@ -314,7 +314,7 @@ const Post = () => {
 									onChange={(e) => setImg(e.target.files[0])}
 									style={{ display: 'none' }}
 								/>
-							</label>
+							</label> */}
 
 							<div className="post-icon-div" onClick={() => { Emoji(); ok(); }}>
 								<img src={smile} className="post-icon" alt="" />

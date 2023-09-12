@@ -155,37 +155,15 @@ function App() {
         {loading ?
           (<>
             <div className="mobile" style={style}>
-              {welcome.map((item) => {
-                if (currentUser && currentUser.uid === item.id) {
-                  return (
-                    <>
-                      {item && item.seen === "WelcomFalse" ? null : <MobileNavebar />}
-                    </>
-                  )
-                }
-              })}
+              <MobileNavebar />
 
             </div>
 
-
-            {welcome.map((item) => {
-              return (
-                <>
-                  {item && item.seen === "WelcomFalse" ? null :
-
-                    (
-                      <>
-                        <Navbar />
-                        <ScrollToTop />
-                      </>
-                    )}
-                </>
-              )
-            })}
-
+            <Navbar />
+            <ScrollToTop />
           </>)
           :
-          ""
+          null
         }
         <Routes>
           <Route exact path="/" element={<Login />} />
