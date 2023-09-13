@@ -430,7 +430,7 @@ const Messages = () => {
 
         setTimeout(() => {
             setDoc(typingRef, { isTyping: false });
-        }, 2000); // Adjust the timeout duration as needed
+        }, 5000); // Adjust the timeout duration as needed
     };
 
 
