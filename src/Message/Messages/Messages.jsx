@@ -232,9 +232,86 @@ const Messages = () => {
         });
     };
 
+    const [isTyping, setIsTyping] = useState(false);
+
+
+    // useEffect(() => {
+    //     let typingTimer;
+
+
+    //     // Event listener to detect typing
+    //     function handleTyping(e) {
+    //         setMessageInput(e.target.value); // Update the message input state
+    //         setIsTyping(true);
+
+
+    //         // Clear the timer if it's already running
+    //         clearTimeout(typingTimer);
+
+    //         // Set a timer to reset isTyping to false after 3 seconds of inactivity
+    //         typingTimer = setTimeout(() => {
+    //             setIsTyping(false);
+
+    //         }, 3000); // 3 seconds (adjust as needed)
+    //     }
+
+    //     // Attach the event listener to your input field
+    //     const inputField = document.getElementById('messageInput'); // Replace with your input field's id
+
+    //     // Check if the inputField exists before adding/removing the event listener
+    //     if (inputField) {
+    //         inputField.addEventListener('input', handleTyping);
+    //     } else {
+    //         console.error("Element with ID 'messageInput' not found.");
+    //     }
+
+    //     // Clean up the event listener when the component unmounts
+    //     return () => {
+    //         // Check if the inputField exists before removing the event listener
+    //         if (inputField) {
+    //             inputField.removeEventListener('input', handleTyping);
+    //         }
+    //     };
+    // }, []);
+
+    useEffect(() => {
+        if (user?.uid) {
+            const typingRef = doc(db, 'typingStatus', user.uid);
+
+            const unsubscribe = onSnapshot(typingRef, (doc) => {
+                const data = doc.data();
+                if (data && data.isTyping) {
+                    setIsTyping(true);
+                } else {
+                    setIsTyping(false);
+                }
+            });
+
+            return () => unsubscribe();
+        }
+    }, [user]);
+
+    const TypingRef = collection(db, 'typingStatus');
+
+    const [typingS, setTypingS] = useState([]);
+    useEffect(() => {
+        const unsub = () => {
+            onSnapshot(TypingRef, (snapshot) => {
+                let newbooks = []
+                snapshot.docs.forEach((doc) => {
+                    newbooks.push({ ...doc.data(), id: doc.id })
+                });
+                setTypingS(newbooks);
+            })
+        };
+        return unsub();
+    }, []);
+
+
+
+
+
     const sendMessage = async (uid, name, recipientImg) => {
-
-
         try {
             const messagesRef = collection(db, 'messages');
             const currentUser = auth.currentUser;
@@ -346,6 +423,16 @@ const Messages = () => {
         }
         handleLatestSms(uid, name, recipientImg);
     };
+
+    const handleTyping = () => {
+        const typingRef = doc(db, 'typingStatus', currentUser && currentUser.uid);
+        setDoc(typingRef, { isTyping: true });
+
+        setTimeout(() => {
+            setDoc(typingRef, { isTyping: false });
+        }, 2000); // Adjust the timeout duration as needed
+    };
+
 
     const deleteMessage = async (messageId) => {
         console.log(messageId);
@@ -1284,12 +1371,37 @@ const Messages = () => {
 
                                 return null;
                             })}
+
+                            {typingS.map((item) => {
+                                if (user.uid === item.id) {
+                                    return (
+                                        <div style={{ color: "black" }}>
+                                            {item.isTyping === true ? (
+                                                <div className="typing-indicator">
+                                                    <img className='typing-img' src={user && user.userPhoto} alt="" />
+                                                    Typing
+                                                    <div className=''>
+                                                        <div className="dot-1"></div>
+                                                        <div className="dot-2"></div>
+                                                        <div className="dot-3"></div>
+                                                    </div>
+                                                </div>
+                                            ) : null}
+                                        </div>
+                                    )
+                                }
+                            })}
+
                             <div ref={messageListRef} />
                         </div>
 
                     </div>
 
                 </div>
+
+
+
+
 
                 {/* Emoji  */}
 
@@ -1689,7 +1801,7 @@ const Messages = () => {
                             {messageEmoji ?
                                 <IoIosArrowDown className='text-aqua_0' style={{ fontSize: "18px" }} />
                                 :
-                                <IoIosArrowUp  className='text-aqua_0' style={{ fontSize: "18px" }} />
+                                <IoIosArrowUp className='text-aqua_0' style={{ fontSize: "18px" }} />
                             }
                         </div>
 
@@ -1705,7 +1817,8 @@ const Messages = () => {
                             value={messageInput}
                             className="message-bottom-input text-lightProfileName bg-light_0 dark:bg-darkInput"
                             placeholder="Message"
-                            onKeyDown={handleKeyDown}
+                            onKeyUp={handleTyping}
+                            id="messageInput" // Add an ID to your input field
                         />
 
                         <div>

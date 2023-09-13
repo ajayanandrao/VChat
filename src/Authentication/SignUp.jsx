@@ -210,17 +210,25 @@ const SignUp = () => {
                         <h2 className='logo-name'>Chat App</h2>
                     </div>
 
-                    <label htmlFor="photo" className='signUp-camera' >
-                        {img ? <img className="singup-img-form" src={img ? URL.createObjectURL(img) : null} alt="" /> :
+                    <div className='signUp-camera'>
+
+                        {img ?
+                            <label htmlFor="photo"  >
+                                <img className="singup-img-form" src={img ? URL.createObjectURL(img) : null} alt="" />
+                            </label>
+                            :
                             (
                                 <div className='signup-camera-icon-div'>
-                                    <BsFillCameraFill className='signup-camera-icon' />
+                                    <label htmlFor="photo"  >
+                                        <BsFillCameraFill className='signup-camera-icon' />
+                                    </label>
                                 </div>)}
 
                         <input type="file" className="photoinput" id="photo" onChange={(e) => setImg(e.target.files[0])} style={{ display: "none" }} />
                         <div style={{ color: "#2E64FE" }}>{img ? "" : "Set Profile Photo"}</div>
 
-                    </label>
+
+                    </div>
 
                     <div className="signUp-form-div">
                         <input className="Auth-input-new mt-2" type="text"
