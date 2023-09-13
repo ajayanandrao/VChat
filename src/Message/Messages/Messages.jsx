@@ -1392,6 +1392,18 @@ const Messages = () => {
                                 }
                             })}
 
+                            <div className="typing-indicator dark:text-darkProfileName text-lightProfileName ">
+                                <img className='typing-img' src={user && user.userPhoto} alt="" />
+
+                                <div className='typing-bg bg-[#1877f2] dark:bg-darkDiv dark:text-darkProfileName'>
+                                    <div className="dot-1 bg-light_0 dark:bg-darkProfileName"></div>
+                                    <div className="dot-2 bg-light_0 dark:bg-darkProfileName"></div>
+                                    <div className="dot-3 bg-light_0 dark:bg-darkProfileName"></div>
+                                    <div className="dot-4 bg-light_0 dark:bg-darkProfileName"></div>
+                                    <div className="dot-5 bg-light_0 dark:bg-darkProfileName"></div>
+                                </div>
+                            </div>
+
                             <div ref={messageListRef} />
                         </div>
 

@@ -10,7 +10,7 @@ const Error404 = () => {
         nav(-1);
     }
     return (
-        <div className='error-main-container'>
+        <div className='error-main-container bg-light_0 dark:bg-dark'>
             {/* <div className='error-back' onClick={goBack}><BsArrowLeft /></div>
             <div className='error-not-cound text-3xl mb-4'>Page Not Found</div>
             <img src="https://cdn3d.iconscout.com/3d/premium/thumb/no-search-result-5000896-4165671.png?f=webp" alt="" /> */}
