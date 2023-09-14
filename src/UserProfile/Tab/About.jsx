@@ -144,7 +144,7 @@ const About = () => {
                                     </div>
                                 </div>
 
-                                <div className="about-intro-div text-lightPostText dark:text-lightPostText">
+                                <div className="about-intro-div text-lightPostText dark:text-darkPostText">
                                     {item.intro}
                                 </div>
 

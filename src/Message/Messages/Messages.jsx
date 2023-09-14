@@ -7,6 +7,7 @@ import "./Messages.scss";
 import { MdClose, MdDelete, MdOutlineReply, MdSend } from 'react-icons/md';
 import { FaThumbsUp } from 'react-icons/fa';
 import { BsFillCameraFill, BsThreeDots } from 'react-icons/bs';
+import { AiOutlineLink } from 'react-icons/ai';
 import { AuthContext } from '../../AuthContaxt';
 import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io"
 import { BiSend, BiSolidFilePdf, BiSolidFileTxt, BiSolidSend } from "react-icons/bi"
@@ -1448,7 +1449,7 @@ const Messages = () => {
 
                                                                 {hasTxt && (
                                                                     <div >
-                                                                        <a className={`message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#0174DF]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.textFileUrl} download={message.txtName}>
+                                                                        <a className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#8258FA]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.textFileUrl} download={message.txtName}>
                                                                             <BiSolidFileTxt className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'text-lightProfileName dark:text-darkProfileName'} `} />
 
                                                                             <div className={`${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'dark:text-darkProfileName text-lightProfileName'}`}> {message.txtName} </div>
@@ -1458,7 +1459,7 @@ const Messages = () => {
 
                                                                 {hasPdf && (
                                                                     <div >
-                                                                        <a className={`message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#0174DF]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.pdfUrl} download={message.pdfName}>
+                                                                        <a className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#8258FA]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.pdfUrl} download={message.pdfName}>
                                                                             <BiSolidFilePdf className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'text-lightProfileName dark:text-darkProfileName'} `} />
                                                                             <div className={`${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'dark:text-darkProfileName text-lightProfileName'}`}> {message.pdfName} </div>
                                                                         </a>
@@ -1466,7 +1467,7 @@ const Messages = () => {
                                                                 )}
 
 
-                                                                {message.message && <div className={`message-content ${!isSender ? 'text-darkProfileName bg-[#0174DF]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
+                                                                {message.message && <div className={`message-content ${!isSender ? 'text-darkProfileName bg-[#8258FA]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
                                                                     onMouseEnter={() => showReplyButton(message.id)}
                                                                     onMouseLeave={hideReplyButton}
                                                                 >{message.message}</div>}
@@ -1945,7 +1946,7 @@ const Messages = () => {
                         </div>
 
                         <label htmlFor="imgFiles" onClick={() => { setImg(null); setLoadingProgress(false); setIsPlaying(false); }}>
-                            <BsFillCameraFill className='message-bottom-camera text-lightPostIcon dark:text-darkPostIcon' />
+                            <AiOutlineLink className='message-bottom-camera text-lightPostIcon dark:text-darkPostIcon' />
                         </label>
                         <input id='imgFiles' style={{ display: "none" }} type="file" onChange={(e) => setImg(e.target.files[0])} />
 

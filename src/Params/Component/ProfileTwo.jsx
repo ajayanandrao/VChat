@@ -143,16 +143,17 @@ const ProfileTwo = ({ user }) => {
 
             <div className="profile-name-container-main">
                 <h3 className='profile-name-text text-2xl text-lightProfileName dark:text-darkProfileName'>{user.name}</h3>
-
-                {/* {api.map((item) => {
+                {api.map((item) => {
                     if (user.uid === item.uid) {
                         return (
-                            <div className='people-intro'>
-                                {item.intro}
-                            </div>
+                            <>
+                                <div className="about-intro-div text-lightPostText dark:text-darkPostText">
+                                    {item.intro}
+                                </div>
+                            </>
                         )
                     }
-                })} */}
+                })}
 
                 <div className='profile-add-btn'>
                     {api.map((item) => {

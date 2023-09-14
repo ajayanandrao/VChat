@@ -97,6 +97,18 @@ const ProfilePageTwo = ({ user, userId }) => {
 
             <div className="profile-name-container-main" >
                 <h3 className='profile-name-text text-2xl text-lightProfileName dark:text-darkProfileName'>{user.name}</h3>
+                {api.map((item) => {
+                    if (user.uid === item.uid) {
+                        return (
+                            <>
+                                <div className="about-intro-div text-lightPostText dark:text-darkPostText">
+                                    {item.intro}
+                                </div>
+                            </>
+                        )
+                    }
+                })}
+
                 {/* {api.map((item) => {
                     if (user.uid === item.uid) {
                         return (
