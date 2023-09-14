@@ -141,8 +141,6 @@ const Home = () => {
                     <div style={{ color: "black", fontSize: "18px" }}>
                         {item.seen === "WelcomFalse" ? <Wellcome currentUser={currentUser} welco={welco} /> :
 
-
-
                             (
 
                                 <div className='bg-light_0 dark:bg-dark' style={{ transition: "0.8s ease-in-out" }}>

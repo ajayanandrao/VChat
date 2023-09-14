@@ -804,7 +804,7 @@ const Messages = () => {
 
     if (!user) {
         return <>
-            <div className='skeleton-center'>
+            <div className='skeleton-center bg-light_0 dark:bg-dark'>
                 <CircularProgress className='circularprogress' />
             </div >
         </>;
@@ -1020,13 +1020,13 @@ const Messages = () => {
                                 <BsThreeDots />
                             </div>
                             :
-                            <div className="top-message-option-btn bg-light_0 text-lightPostText dark:text-darkPostText dark:bg-darkPostIcon" onClick={HandleShowMessageOption}>
+                            <div className="top-message-option-btn bg-light_0 text-lightPostText dark:bg-darkPostIcon dark:bg-darkPostIcon" onClick={HandleShowMessageOption}>
                                 <BsThreeDots />
                             </div>
 
                         }
                         {showMessageOption ?
-                            <div className="show-message-option bg-lightDiv dark:bg-darkInput">
+                            <div className="show-message-option  bg-backgroundImage- dark:bg-darkInput">
                                 <p onClick={HandleAreyouSure} className='mb-3 text-lightProfileName dark:text-darkPostText'>Delete all Chat</p>
                                 <p onClick={HandleAreyouSureForCurrentUser} className='text-lightProfileName dark:text-darkPostText'>Delete message from you</p>
                             </div>
@@ -1377,13 +1377,15 @@ const Messages = () => {
                                     return (
                                         <div style={{ color: "black" }}>
                                             {item.isTyping === true ? (
-                                                <div className="typing-indicator">
+                                                <div className="typing-indicator dark:text-darkProfileName text-lightProfileName ">
                                                     <img className='typing-img' src={user && user.userPhoto} alt="" />
-                                                    Typing
-                                                    <div className=''>
-                                                        <div className="dot-1"></div>
-                                                        <div className="dot-2"></div>
-                                                        <div className="dot-3"></div>
+
+                                                    <div className='typing-bg bg-[#1877f2] dark:bg-darkDiv dark:text-darkProfileName'>
+                                                        <div className="dot-1 bg-light_0 dark:bg-darkProfileName"></div>
+                                                        <div className="dot-2 bg-light_0 dark:bg-darkProfileName"></div>
+                                                        <div className="dot-3 bg-light_0 dark:bg-darkProfileName"></div>
+                                                        <div className="dot-4 bg-light_0 dark:bg-darkProfileName"></div>
+                                                        <div className="dot-5 bg-light_0 dark:bg-darkProfileName"></div>
                                                     </div>
                                                 </div>
                                             ) : null}
@@ -1392,17 +1394,7 @@ const Messages = () => {
                                 }
                             })}
 
-                            <div className="typing-indicator dark:text-darkProfileName text-lightProfileName ">
-                                <img className='typing-img' src={user && user.userPhoto} alt="" />
 
-                                <div className='typing-bg bg-[#1877f2] dark:bg-darkDiv dark:text-darkProfileName'>
-                                    <div className="dot-1 bg-light_0 dark:bg-darkProfileName"></div>
-                                    <div className="dot-2 bg-light_0 dark:bg-darkProfileName"></div>
-                                    <div className="dot-3 bg-light_0 dark:bg-darkProfileName"></div>
-                                    <div className="dot-4 bg-light_0 dark:bg-darkProfileName"></div>
-                                    <div className="dot-5 bg-light_0 dark:bg-darkProfileName"></div>
-                                </div>
-                            </div>
 
                             <div ref={messageListRef} />
                         </div>

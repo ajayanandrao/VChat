@@ -63,7 +63,7 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-light': 'linear-gradient(150deg, #23accd, #d41583)', // Light mode gradient
-        'gradient-dark': 'linear-gradient(150deg, #171717, #171717 )',   // Dark mode gradient
+        'gradient-dark': 'linear-gradient(150deg, #fff, #171717 )',   // Dark mode gradient
       },
     },
 
