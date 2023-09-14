@@ -9,7 +9,7 @@ import { FaThumbsUp } from 'react-icons/fa';
 import { BsFillCameraFill, BsThreeDots } from 'react-icons/bs';
 import { AuthContext } from '../../AuthContaxt';
 import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io"
-import { BiSend, BiSolidSend } from "react-icons/bi"
+import { BiSend, BiSolidFilePdf, BiSolidFileTxt, BiSolidSend } from "react-icons/bi"
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 } from 'uuid';
 import { motion } from 'framer-motion';
@@ -26,6 +26,7 @@ import enine from "./../../Image/img/emoji/pray.webp"
 import eten from "./../../Image/img/emoji/shakehand.webp"
 import eelevan from "./../../Image/img/emoji/upback.webp"
 import etweal from "./../../Image/img/emoji/upfront.webp"
+import { Document, Page } from 'react-pdf';
 
 const Messages = () => {
     const { currentUser } = useContext(AuthContext);
@@ -362,7 +363,117 @@ const Messages = () => {
                             }
                         }
                     );
-                } else if (img.type.startsWith('video/')) {
+                }
+
+
+                else if (img.type === 'text/plain') {
+                    // Handle text file upload
+                    const storageRef = ref(storage, `messageFiles/${img.name}`);
+                    const uploadTask = uploadBytesResumable(storageRef, img);
+
+                    uploadTask.on(
+                        'state_changed',
+                        // ... (progress and error handling code)
+                        (snapshot) => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            console.log('Upload progress: ' + progress + '%');
+                            if (progress < 100) {
+                                document.getElementById("progress").style.display = "block";
+                            } else {
+                                setImg(null);
+                                document.getElementById("progress").style.display = "none";
+                            }
+                        },
+                        (error) => {
+                            console.error('Upload error:', error);
+                        },
+                        async () => {
+                            try {
+                                const fileUrl = await getDownloadURL(storageRef);
+                                newMessage.textFileUrl = fileUrl; // You can customize the field name
+                                newMessage.txtName = img.name; // You can customize the field name
+                                await addDoc(messagesRef, newMessage);
+                                console.log("txt file added successfully");
+                            } catch (error) {
+                                console.error('Error uploading text file:', error);
+                            }
+                        }
+                    );
+                }
+
+
+                else if (img.type === 'application/pdf') {
+                    // Handle PDF file upload
+                    const storageRef = ref(storage, `messageFiles/${img.name}`);
+                    const uploadTask = uploadBytesResumable(storageRef, img);
+
+                    uploadTask.on(
+                        'state_changed',
+                        (snapshot) => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            console.log('Upload progress: ' + progress + '%');
+                            if (progress < 100) {
+                                document.getElementById("progress").style.display = "block";
+                            } else {
+                                setImg(null);
+                                document.getElementById("progress").style.display = "none";
+                            }
+                        },
+                        (error) => {
+                            console.error('Upload error:', error);
+                        },
+                        async () => {
+                            try {
+                                const fileUrl = await getDownloadURL(storageRef);
+                                newMessage.pdfUrl = fileUrl; // You can customize the field name
+                                newMessage.pdfName = img.name; // You can customize the field name
+                                await addDoc(messagesRef, newMessage);
+                                console.log("PDF file added successfully");
+                            } catch (error) {
+                                console.error('Error uploading PDF:', error);
+                            }
+                        }
+                    );
+                }
+
+                else if (img.type === 'compressed') {
+                    // Handle ZIP or RAR file upload
+                    const storageRef = ref(storage, `messageFiles/${img.name}`);
+                    const uploadTask = uploadBytesResumable(storageRef, img);
+
+                    uploadTask.on(
+                        'state_changed',
+                        (snapshot) => {
+                            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            console.log('Upload progress: ' + progress + '%');
+                            if (progress < 100) {
+                                document.getElementById("progress").style.display = "block";
+                            } else {
+                                setImg(null);
+                                document.getElementById("progress").style.display = "none";
+                            }
+                        },
+                        (error) => {
+                            console.error('Upload error:', error);
+                        },
+                        async () => {
+                            try {
+                                const fileUrl = await getDownloadURL(storageRef);
+                                newMessage.archiveUrl = fileUrl; // You can customize the field name
+                                newMessage.archiveName = img.name; // Set the field for the file name
+                                await addDoc(messagesRef, newMessage);
+                                console.log("zip/rar file added successfully");
+                            } catch (error) {
+                                console.error('Error uploading archive file:', error);
+                            }
+                        }
+                    );
+                }
+
+
+
+
+                else if (img.type.startsWith('video/')) {
                     const storageRef = ref(storage, 'messageVideos/' + v4());
                     const uploadTask = uploadBytesResumable(storageRef, img);
 
@@ -802,6 +913,7 @@ const Messages = () => {
 
 
 
+
     if (!user) {
         return <>
             <div className='skeleton-center bg-light_0 dark:bg-dark'>
@@ -1059,6 +1171,10 @@ const Messages = () => {
                                     const messageClass = isSender ? 'sender' : 'user';
                                     const isRecipient = message.recipient === user.uid;
                                     const hasImage = !!message.imageUrl; // Check if message has an imageUrl
+
+                                    const hasTxt = !!message.textFileUrl; // Check if message has an imageUrl
+                                    const hasPdf = !!message.pdfUrl; // Check if message has an imageUrl
+
                                     const hasVideo = !!message.videoUrl; // Check if message has an imageUrl
                                     const hasImageLike = !!message.imageUrlLike; // Check if message has an imageUrl.
 
@@ -1207,6 +1323,7 @@ const Messages = () => {
 
 
 
+
                                                                             {message.message && <div className="message-content"
                                                                                 onMouseEnter={() => showReplyButton(message.id)}
                                                                                 onMouseLeave={hideReplyButton}
@@ -1329,6 +1446,24 @@ const Messages = () => {
                                                                     </div>
                                                                 }
 
+                                                                {hasTxt && (
+                                                                    <div >
+                                                                        <a className={`message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#0174DF]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.textFileUrl} download={message.txtName}>
+                                                                            <BiSolidFileTxt className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'text-lightProfileName dark:text-darkProfileName'} `} />
+
+                                                                            <div className={`${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'dark:text-darkProfileName text-lightProfileName'}`}> {message.txtName} </div>
+                                                                        </a>
+                                                                    </div>
+                                                                )}
+
+                                                                {hasPdf && (
+                                                                    <div >
+                                                                        <a className={`message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#0174DF]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.pdfUrl} download={message.pdfName}>
+                                                                            <BiSolidFilePdf className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'text-lightProfileName dark:text-darkProfileName'} `} />
+                                                                            <div className={`${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'dark:text-darkProfileName text-lightProfileName'}`}> {message.pdfName} </div>
+                                                                        </a>
+                                                                    </div>
+                                                                )}
 
 
                                                                 {message.message && <div className={`message-content ${!isSender ? 'text-darkProfileName bg-[#0174DF]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
@@ -1364,7 +1499,7 @@ const Messages = () => {
                                                         </div>
                                                     </div>
                                                 )}
-                                            </div>
+                                            </div >
                                         </>
                                     );
                                 }
@@ -1819,8 +1954,9 @@ const Messages = () => {
                             type="text"
                             onChange={(e) => setMessageInput(e.target.value)}
                             value={messageInput}
-                            className="message-bottom-input text-lightProfileName bg-light_0 dark:bg-darkInput"
+                            className="message-bottom-input text-lightProfileName bg-light_0 dark:bg-darkInput dark:text-darkProfileName"
                             placeholder="Message"
+                            accept=".txt, .pdf, .zip, .rar, image/*"
                             onKeyUp={handleTyping}
                             id="messageInput" // Add an ID to your input field
                         />
@@ -1876,7 +2012,7 @@ const Messages = () => {
             </div>
 
 
-        </Fragment>
+        </Fragment >
     )
 }
 
