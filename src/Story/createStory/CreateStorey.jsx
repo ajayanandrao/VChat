@@ -20,9 +20,12 @@ import { AuthContext } from './../../AuthContaxt';
 import ReactTimeago from 'react-timeago';
 import { FaPlay } from 'react-icons/fa';
 import v1 from "./../../Image/sv.mp4";
-import ReactPlayer from 'react-player';
+// import ReactPlayer from 'react-player';
 import "./CreateStory.scss"
 import { LinearProgress } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import { AiFillHeart } from 'react-icons/ai';
+import { BsFillChatFill } from 'react-icons/bs';
 
 function TimeAgoComponent({ timestamp, onDelete }) {
     useEffect(() => {
@@ -53,6 +56,11 @@ const CreateStorey = () => {
     const { currentUser } = useContext(AuthContext);
     const [stories, setStories] = useState([]);
     const [newStoryImage, setNewStoryImage] = useState(null);
+
+    const nav = useNavigate();
+    const goBack = () => {
+        nav(-1);
+    }
 
     const handleAddStory = async () => {
         if (!newStoryImage) {
@@ -222,9 +230,173 @@ const CreateStorey = () => {
     const filteredComments = comments.filter((item) => item.storyUid === currentUser.uid);
     const Like = like.filter((item) => currentUser.uid === item.storyUid);
 
+    const [storyUid, setStoryUid] = useState(null);
+
+
+
+    useEffect(() => {
+        const sub = () => {
+            const userStory = stories.find(item => item.uid === currentUser?.uid);
+            if (userStory) {
+                setStoryUid(userStory.uid);
+            }
+        };
+
+        sub(); // Call the function immediately
+
+        return () => {
+            // Clean up code here if necessary
+        };
+    }, [currentUser, stories]);
+
+    const [showLikes, setShowLikes] = useState(false);
+    const HandleShowLike = () => {
+        setShowLikes(!showLikes)
+        if (showComment === true) {
+            setShowComment(false);
+        }
+
+    }
+    // Comment
+
+    const [showComment, setShowComment] = useState(false);
+    const HandleShowComment = () => {
+        setShowComment(!showComment)
+        if (showLikes === true) {
+            setShowLikes(false);
+        }
+
+    }
+
     return (
         <>
             <LinearProgress id="p1" style={{ display: "none" }} />
+
+
+            {storyUid ?
+
+                (
+                    <>
+                        <div className='story-div'>
+                            {stories.map((story) => {
+
+                                if (story.uid === currentUser.uid) {
+                                    return (
+                                        <div key={story.id}>
+                                            {story.image && story.image.includes('.mp4') ? (
+                                                <div className="video-container">
+                                                    <video ref={videoRef} onClick={handleClick} className="video" id="video" autoPlay>
+                                                        <source src={story.image} type="video/mp4" />
+                                                    </video>
+                                                </div>
+                                            ) : (
+                                                <div className='story-img-div'>
+
+                                                    {showLikes ? (
+                                                        <div className="userLikes-div">
+                                                            <div>
+                                                                <div>
+                                                                    {like.map((like) => {
+                                                                        return (
+                                                                            <div className=''>
+                                                                                <div className="liked-user-profile">
+                                                                                    <div>
+                                                                                        <img className="liked-user-profile-img" src={like.photoURL} alt="" />
+                                                                                    </div>
+                                                                                    <div>{like.name}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                    })}
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                        :
+                                                        null}
+
+                                                    {showComment ? (
+                                                        <div className="userLikes-div">
+                                                            <div>
+                                                                <div>
+                                                                    {filteredComments.map((like) => {
+                                                                        return (
+                                                                            <div className='d-flex'>
+                                                                                <div className="commented-user-profile">
+                                                                                    <div>
+                                                                                        <img src={like.photoURL} className="liked-user-profile-img" alt="" />
+                                                                                    </div>
+                                                                                    <div>{like.comment}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                    })}
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                        :
+                                                        null}
+
+
+
+
+                                                    <img src={story.image} className='story-img' alt="Story" />
+
+                                                    <div className="story-like-div" onClick={() => HandleShowLike()}>
+                                                        <div className='mx-2' style={{ color: "white", fontSize: "14px" }} >
+                                                            {Like.length}
+                                                        </div>
+                                                        <AiFillHeart style={{ color: "red", fontSize: "24px" }} />
+                                                    </div>
+
+                                                    <div className="story-comment-div" onClick={() => HandleShowComment()}>
+                                                        <div className='mx-2' style={{ color: "white", fontSize: "14px" }} >
+                                                            {filteredComments.length}
+                                                        </div>
+                                                        <BsFillChatFill style={{ color: "#FFFFFF", fontSize: "24px" }} />
+                                                    </div>
+                                                    <div className="story-delete-div" onClick={() => HandleShowComment()}>
+                                                        <BsFillChatFill style={{ color: "#FFFFFF", fontSize: "24px" }} />
+                                                    </div>
+                                                </div>
+                                            )}
+
+
+
+                                        </div>
+                                    );
+                                }
+                            })}
+                        </div>
+
+                    </>
+                )
+                :
+                (<>
+                    <div className='story-mainu'>
+                        <input
+                            style={{ display: "none" }}
+                            className='my-2 story-add-input'
+                            id='Add-story'
+                            type="file"
+                            onChange={(e) => setNewStoryImage(e.target.files[0])}
+                            accept="image/*, video/*"
+                        />
+
+                        <div className='btn-inline'>
+                            <label htmlFor="Add-story">
+                                <div className='folder'>📂</div>
+                            </label>
+                            <button className=' btn-primary-custom' onClick={handleAddStory}>
+                                Add Story
+                            </button>
+
+                        </div>
+                    </div>
+                </>)}
 
             {newStoryImage && newStoryImage.type.startsWith('image/') && (
                 <img className="story-img" src={URL.createObjectURL(newStoryImage)} alt="" />
@@ -238,75 +410,11 @@ const CreateStorey = () => {
                 </div>
             )}
 
-            <div className='story-mainu'>
-                <input
-                    style={{ display: "none" }}
-                    className='my-2 story-add-input'
-                    id='Add-story'
-                    type="file"
-                    onChange={(e) => setNewStoryImage(e.target.files[0])}
-                    accept="image/*, video/*"
-                />
 
-                <div className='btn-inline'>
-                    <label htmlFor="Add-story">
-                        <div className='folder'>📂</div>
-                    </label>
-                    <button className=' btn-primary-custom' onClick={handleAddStory}>
-                        Add Story
-                    </button>
-                </div>
-            </div>
 
-            <div className='story-div'>
-                {stories.map((story) => {
-                    if (story.uid === currentUser.uid) {
-                        return (
-                            <div key={story.id}>
-                                {story.image && story.image.includes('.mp4') ? (
-                                    <div className="video-container">
-                                        <video ref={videoRef} onClick={handleClick} className="video" id="video" autoPlay>
-                                            <source src={story.image} type="video/mp4" />
-                                        </video>
-                                    </div>
-                                ) : (
-                                    <img src={story.image} className='story-img' alt="Story" />
-                                )}
 
-                                <div className='d-flex my-2'>
-                                    <button onClick={() => deleteStory(story.id)} className='mt-2 ms-3 btn-dengar-outline-custom'>Delete Story</button>
 
-                                    <div className='timeago'>
-                                        <TimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} onDelete={() => deleteStory(story.id)} />
-                                    </div>
-                                </div>
 
-                                <div className="comment-text">comments {filteredComments.length}
-                                    <div className="like">{Like.length} like </div>
-                                </div>
-                            </div>
-                        );
-                    }
-                })}
-            </div>
-
-            <div className='comment-container'>
-                {comments.map((item) => {
-                    if (item.storyUid === currentUser.uid) {
-                        return (
-                            <div style={{ marginBottom: "1rem", padding: "0 1rem" }}>
-                                <div className='comment-profile-div'>
-                                    <img src={item.photoURL} className='comment-profile-img' alt="" />
-                                    <div className='comment-profile-name'>{item.displayName}</div>
-                                </div>
-                                <div className="comment">
-                                    <span className='comment-color'>{item.comment}</span>
-                                </div>
-                            </div>
-                        );
-                    }
-                })}
-            </div>
         </>
     );
 };

@@ -12,6 +12,7 @@ import Feed from '../Feed/Feed';
 import { motion, useAnimation } from 'framer-motion';
 import UserMedia from '../UserProfile/Tab/UserMedia';
 import Wellcome from './Wellcome';
+import StoryForm from '../Story/StoryForm';
 // import StoryForm from '../Story/StoryForm';
 
 const Home = () => {
@@ -150,10 +151,6 @@ const Home = () => {
                                         </div>
                                     ) : (
                                         <>
-
-
-
-
                                             <motion.div
                                                 transition={{ duration: 0.3, delay: 0.8 }}
                                                 initial={{ opacity: 0 }}
@@ -161,13 +158,14 @@ const Home = () => {
                                                 className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
                                                 <AiOutlineArrowUp className='top-arrow text-aqua_0 ' />
                                             </motion.div>
+                                            <StoryForm />
                                             <Post />
+
 
                                             <FlipMove>{newData}</FlipMove>
                                             <div className='height'></div>
                                         </>
                                     )}
-
 
                                 </div>
 
@@ -178,10 +176,6 @@ const Home = () => {
                     </div>
                 )
             })}
-
-
-
-
 
 
         </>

@@ -149,7 +149,8 @@ const ViewStory = ({ post }) => {
                 await setDoc(likeRef, {
                     storyUid: user.uid,
                     userId: currentUser.uid,
-                    name: currentUser.displayName
+                    name: currentUser.displayName,
+                    photoURL: currentUser.photoURL,
                 });
             }
         }
@@ -195,12 +196,13 @@ const ViewStory = ({ post }) => {
     }
 
 
+
     if (!user) {
         return (
             <>
                 <div className="skeleton-center">
-                    <CircularProgress className="circularprogress" />{' '}
-                    <span className="loadinga"> Loading... </span>
+                    <CircularProgress className="circularprogress" />
+
                 </div>
             </>
         );
@@ -219,6 +221,21 @@ const ViewStory = ({ post }) => {
         }
     };
 
+    function PostTimeAgoComponent({ timestamp }) {
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - new Date(timestamp)) / 1000);
+
+        if (diffInSeconds < 60) {
+            return "just now";
+        } else if (diffInSeconds < 3600) {
+            const minutes = Math.floor(diffInSeconds / 60);
+            return `${minutes}min ago`;
+        } else {
+            const hours = Math.floor(diffInSeconds / 3600);
+            return `${hours}h ago`;
+        }
+    }
+
     return (
         <>
             {
@@ -234,7 +251,7 @@ const ViewStory = ({ post }) => {
                         return (
                             <div key={story.id} >
                                 {story.image && story.image.includes('.mp4') ? (
-                                    <div className="view-video-container">
+                                    <div className="view-video-container bg-light_0 dark:bg-dark text-darkProfileName dark:text-darkProfileName">
                                         <video ref={videoRef} onClick={handleClick} className="view-video" id="video" autoPlay  >
                                             <source src={story.image} type="video/mp4" />
                                         </video>
@@ -246,7 +263,10 @@ const ViewStory = ({ post }) => {
                                         />
                                         <div className='video-inner-container'>
                                             <img src={user.userPhoto} className="video-view-profile-img" alt="" />
-                                            <div className="video-view-profile-name">{user.name}</div>
+                                            <div className="video-view-profile-name">
+                                                <div className="mx-2">{user.name}</div>
+                                                <div className='' style={{ fontSize: "14px", color: "#696969" }}><PostTimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} /></div>
+                                            </div>
 
                                             <div className="video-view-profile-close-div">
                                                 <MdClose className="video-view-close-btn" onClick={goBack} />
@@ -291,7 +311,8 @@ const ViewStory = ({ post }) => {
 
                                         <div className="view-profile-div">
                                             <img src={user.userPhoto} className="view-profile-img" alt="" />
-                                            <div className="view-profile-name">{user.name}</div>
+                                            <div className="mx-2">{user.name}</div>
+                                            <div className='' style={{ fontSize: "14px", color: "#696969" }}><PostTimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} /></div>
 
                                             <div className="view-profile-close-div">
                                                 <MdClose className="view-close-btn" onClick={goBack} />
@@ -309,7 +330,7 @@ const ViewStory = ({ post }) => {
                                                     onClick={() => handleLike(story.id)}
                                                     className="view-send-icon "
                                                 /> */}
-                                                {liked ? < AiFillHeart className="view-send-icon " onClick={() => handleLike(story.id)} /> :
+                                                {liked ? < AiFillHeart className="view-send-icon " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
                                                     <AiOutlineHeart className="view-send-icon " onClick={() => handleLike(story.id)} />}
 
                                                 <AiOutlineSend className="view-send-icon"

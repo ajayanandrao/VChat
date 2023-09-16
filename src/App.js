@@ -40,6 +40,8 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import Error404 from './Error404';
 import Install from './Setting/Install/Install';
 import { AuthContext } from './AuthContaxt';
+import CreateStorey from './Story/createStory/CreateStorey';
+import ViewStoryProps from './Story/createStory/ViewStory/ViewStoryProps';
 
 function App() {
 
@@ -197,6 +199,9 @@ function App() {
               <Route path="WeddingList/:id" element={<WeddingListDetail />} />
 
               <Route path='users' element={<Users />} />
+              <Route path='createStory' element={<CreateStorey />} />
+              <Route path="users/:id/story" element={<ViewStoryProps />} />
+
 
               <Route path='users/:id' element={<OtherUserProfileMain />} />
               <Route path='users/:id/message' element={<Messages />} />

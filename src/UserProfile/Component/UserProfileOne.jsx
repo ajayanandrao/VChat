@@ -270,11 +270,11 @@ const ProfileOne = ({ user }) => {
                 }
             } else if (cover.type.startsWith('video/')) {
                 // Check if the video size is greater than 2 MB (2 * 1024 * 1024 bytes)
-                if (cover.size > 2 * 1024 * 1024) {
+                if (cover.size > 3 * 1024 * 1024) {
                     // Display an alert to the user
                     off();
-                    alert('Video size should be less than 2 MB');
-                    document.getElementById("video-size").innerHTML = 'Cover Video size should be less than 2 MB';
+                    // alert('Video size should be less than 3 MB');
+                    document.getElementById("video-size").innerHTML = 'Cover Video size should be less than 3 MB';
                     return
                 } else {
                     const storageRef = ref(storage, 'PostVideos/' + v4());

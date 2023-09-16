@@ -9,7 +9,7 @@ import { auth, db } from "../Firebase";
 import { AuthContext } from "../AuthContaxt";
 import { BsFillMoonStarsFill, BsFillPeopleFill, BsFillSunFill, BsMoonStarsFill } from "react-icons/bs";
 import { addDoc, collection, doc, onSnapshot, setDoc } from "firebase/firestore";
-import { MdColorLens, MdMovieFilter } from "react-icons/md";
+import { MdAddReaction, MdColorLens, MdMovieFilter } from "react-icons/md";
 import v from "./../Image/img/vl.png";
 import home from "./../Image/home2.png";
 import heart from "./../Image/h3.png";
@@ -40,9 +40,9 @@ const MobileNavebar = () => {
   }, []);
 
   const [userPhoto, setUserPhoto] = useState(null);
-  
 
-  
+
+
   const dataRef = collection(db, "users");
   useEffect(() => {
     const unsub = onSnapshot(dataRef, (snapshot) => {
@@ -81,7 +81,6 @@ const MobileNavebar = () => {
       unsubscribe(); // Cleanup the subscription when the component unmounts
     };
   }, []);
-
 
 
   const themRef = collection(db, "Theme");
@@ -136,6 +135,18 @@ const MobileNavebar = () => {
         </Link>
 
         <div className="mobile-item-div">
+
+
+
+          <span className="mobile-nav-mainu">
+            <Link to="createStory/" className="link">
+              <div>
+                <MdAddReaction className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
+                {/* <img src={currentUser.photoURL} className="top-navbar-story-profile-img" alt="" /> */}
+              </div>
+            </Link>
+          </span>
+
           <span className="mobile-nav-mainu">
             <Link to="find_friend/" className="link">
               <div>

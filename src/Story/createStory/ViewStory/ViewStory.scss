@@ -58,9 +58,9 @@
 
     .view-profile-name {
         margin-left: 0.5rem;
-        font-size: 18px;
+        font-size: 16px;
         text-transform: capitalize;
-        color: white;
+        color: black;
     }
 
     .view-profile-close-div {
@@ -72,7 +72,7 @@
 
         .view-close-btn {
             font-size: 30px;
-            color: white;
+            color: black;
         }
     }
 }
@@ -93,7 +93,7 @@
     position: absolute;
     object-fit: cover;
     width: 100%;
-    height: 100%;
+    height: 100vh;
 }
 
 .video-inner-container {
@@ -115,9 +115,11 @@
 
     .video-view-profile-name {
         margin-left: 0.5rem;
-        font-size: 18px;
+        font-size: 16px;
         text-transform: capitalize;
-        color: white;
+        display: flex;
+        color: black;
+
     }
 
     .video-view-profile-close-div {
@@ -128,7 +130,7 @@
 
         .video-view-close-btn {
             font-size: 30px;
-            color: white;
+            color: black;
         }
     }
 

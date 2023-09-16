@@ -65,6 +65,18 @@ module.exports = {
         'gradient-light': 'linear-gradient(150deg, #23accd, #d41583)', // Light mode gradient
         'gradient-dark': 'linear-gradient(150deg, #fff, #171717 )',   // Dark mode gradient
       },
+      animation: {
+        'blinkStatus': 'blinkStatus 2s infinite',
+      },
+      keyframes: {
+        'blinkStatus': {
+          '0%, 100%': {
+            opacity: 1,
+          },
+          '50%': { opacity: 0 },
+        },
+      },
+      
     },
 
   },

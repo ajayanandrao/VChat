@@ -21,7 +21,7 @@ const ViewStoryProps = () => {
 
     const { id } = useParams();
     const [user, setUser] = useState(null);
-    
+
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -54,7 +54,9 @@ const ViewStoryProps = () => {
     const Data = stories.map((item) => {
         if (item.uid === user.uid) {
             return (
-                <ViewStory post={item} />
+                <>
+                    <ViewStory post={item} />
+                </>
             )
         }
     })

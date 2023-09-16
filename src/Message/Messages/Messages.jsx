@@ -1,6 +1,6 @@
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where, writeBatch } from 'firebase/firestore';
 import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { auth, db, storage } from '../../Firebase';
 import { CircularProgress } from '@mui/material';
 import "./Messages.scss";
@@ -1121,9 +1121,11 @@ const Messages = () => {
                     <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostText message-back-arrow "></i>
 
                     <div className="message-profile-div">
-                        <img className='message-profile-img' src={user.userPhoto} alt="" />
-                        <span className='message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
-                        {/* <button className='btn btn-sm btn-danger ms-3' onClick={deleteMessagesForUser}>Clear Chat</button> */}
+                        <Link to={`/users/${user.uid}`} className='message-profile-div'>
+                            <img className='message-profile-img' src={user.userPhoto} alt="" />
+                            <span className='message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
+                            {/* <button className='btn btn-sm btn-danger ms-3' onClick={deleteMessagesForUser}>Clear Chat</button> */}
+                        </Link>
                     </div>
                     <div>
                         {showMessageOption ?
