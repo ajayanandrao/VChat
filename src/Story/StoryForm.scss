@@ -48,6 +48,7 @@
 
 
     .status-card-wrapper {
+        border-radius: 10px;
         width: 100%;
         display: inherit;
         box-sizing: border-box;
@@ -55,7 +56,8 @@
         scrollbar-width: none;
         -ms-overflow-style: none;
         scroll-behavior: smooth;
-        transition: 0.3s ease-in-out;
+        transition: 0.8s ease-in-out;
+        // background: red;
 
         .status-video-div {
             width: 120px;

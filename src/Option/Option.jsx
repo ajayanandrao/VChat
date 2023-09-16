@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import "./Option.scss";
 import { Link, useNavigate } from 'react-router-dom';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
@@ -6,11 +6,14 @@ import { auth, db } from '../Firebase';
 import { signOut } from 'firebase/auth';
 import { AuthContext } from '../AuthContaxt';
 import { motion } from 'framer-motion';
+import { CircularProgress, LinearProgress } from '@mui/material';
 
 const Option = () => {
     const { currentUser } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
 
     const LogOut = async () => {
+        setLoading(true);
         const PresenceRef = doc(db, "userPresece", currentUser.uid);
 
         await updateDoc(PresenceRef, {
@@ -22,6 +25,7 @@ const Option = () => {
 
         signOut(auth)
             .then(() => {
+                setLoading(false);
                 // Sign-out successful.
             })
             .catch((error) => {
@@ -120,7 +124,11 @@ const Option = () => {
                                 <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/logout-8858045-7285381.png?f=webp"} style={{ width: "45px" }} alt="" />
                             </div>
                             <div className="option-mainu-name text-lightPostText dark:text-darkPostText" onClick={LogOut}>
-                                Log Out
+                                {loading ? (
+                                    <>
+                                        <CircularProgress style={{ width: "25px", height: "25px", marginTop:"10px" }} />
+                                    </>
+                                ) : " Log Out"}
                             </div>
                         </motion.div>
 

@@ -4,7 +4,7 @@ import { db } from '../Firebase';
 
 import './Reals.scss';
 import { FaPlay, FaCommentAlt } from 'react-icons/fa';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineHeart } from 'react-icons/ai';
 import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsFillHeartFill } from 'react-icons/bs';
 import { AuthContext } from '../AuthContaxt';
 import { useNavigate } from 'react-router-dom';
@@ -171,7 +171,22 @@ const VideoItem = ({ post }) => {
                 })}
             </div>
 
-            <div className="reel-side-mainu" >
+            <div className="reel-icon-up-btn ">
+                <AiOutlineArrowUp className='' onClick={() => scrollToPreview(post.id)} />
+            </div>
+
+            <div className="reel-like-icon">
+                <div className='like-count ' onClick={() => ViewLikes(post.id)}>{isliked.length}</div>
+                {liked ? <BsFillHeartFill color='#FF0040' className='' onClick={() => HandleLike(post.id)} /> :
+                    < AiOutlineHeart className='' onClick={() => HandleLike(post.id)} />
+                }
+            </div>
+
+            <div className="reel-icon-down-btn ">
+                <AiOutlineArrowDown className='' onClick={() => scrollToNext(post.id)} />
+            </div>
+
+            {/* <div className="reel-side-mainu" >
                 <div className="reel-mainu">
 
                     <div className="reel-mainu-icon-div">
@@ -183,11 +198,11 @@ const VideoItem = ({ post }) => {
                     <div className="reel-mainu-icon-div">
                         <BsFillArrowUpCircleFill className='reel-mainu-icon' onClick={() => scrollToPreview(post.id)} />
                     </div>
-                    <div className="reel-mainu-icon-div">
+                    <div className="reel-mainu-icon-div ">
                         <BsFillArrowDownCircleFill className='reel-mainu-icon' onClick={() => scrollToNext(post.id)} />
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="reel-profile-div">
                 <img src={post.photoURL} className='reel-profile-img' alt="" />

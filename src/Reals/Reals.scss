@@ -5,6 +5,66 @@
     height: calc(100vh - 1.5px);
     z-index: 9999;
     background: white;
+
+    .reel-icon-up-btn {
+        width: 40px;
+        height: 40px;
+        // background: red;
+        backdrop-filter: blur(10px);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        top: 40%;
+        right: -3%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        color: aqua;
+    }
+
+    .reel-like-icon {
+        // width: 40px;
+        // height: 40px;
+        color: aqua;
+        position: absolute;
+        top: 25%;
+        right: -3%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        // background: red;
+        backdrop-filter: blur(10px);
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        padding: 0.5rem;
+
+        .like-count {
+            font-size: 16px;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .reel-icon-down-btn {
+        width: 40px;
+        height: 40px;
+        color: aqua;
+        position: absolute;
+        top: 60%;
+        right: -3%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        // background: red;
+        backdrop-filter: blur(10px);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
 }
 
 .reel-video {
@@ -93,46 +153,4 @@
         color: white;
     }
 
-}
-
-.reel-side-mainu {
-    width: 30px;
-    height: 100%;
-    display: flex;
-    justify-content: end;
-    // background-color: goldenrod;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(-50%, -50%);
-    color: white;
-    cursor: pointer;
-    z-index: 0;
-    font-size: 30px;
-
-    .reel-mainu {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        // padding: 0.5rem;
-
-        .reel-mainu-icon-div {
-            margin: 0.5rem 0;
-            color: #ccc;
-
-            .like-count {
-                font-size: 16px;
-                width: 100%;
-                // background: red;
-                display: flex;
-                color: white;
-                justify-content: center;
-            }
-
-            .reel-mainu-icon {
-                font-size: 25px;
-            }
-        }
-    }
 }

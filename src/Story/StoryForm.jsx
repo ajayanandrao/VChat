@@ -80,7 +80,7 @@ const StoryForm = () => {
             <div className="card-container">
 
 
-                <div className="status-card-wrapper ">
+                <div className="status-card-wrapper bg-lightDiv dark:bg-darkDiv">
                     {stories.map((story) => {
 
                         if (story.uid !== currentUser.uid) {
