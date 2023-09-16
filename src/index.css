@@ -19,6 +19,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none;
+  /* Hide the scrollbar on Firefox */
+  -ms-overflow-style: none;
 }
 
 html {
