@@ -1450,7 +1450,7 @@ const Messages = () => {
                                                                 }
 
                                                                 {hasTxt && (
-                                                                    <div >
+                                                                    <div   onMouseEnter={() => showReplyButton(message.id)}>
                                                                         <a className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#8258FA]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.textFileUrl} download={message.txtName}>
                                                                             <BiSolidFileTxt className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'text-lightProfileName dark:text-darkProfileName'} `} />
 
@@ -1460,7 +1460,7 @@ const Messages = () => {
                                                                 )}
 
                                                                 {hasPdf && (
-                                                                    <div >
+                                                                    <div   onMouseEnter={() => showReplyButton(message.id)}>
                                                                         <a className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#8258FA]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.pdfUrl} download={message.pdfName}>
                                                                             <BiSolidFilePdf className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'text-lightProfileName dark:text-darkProfileName'} `} />
                                                                             <div className={`${!isSender ? 'dark:text-darkProfileName text-darkProfileName' : 'dark:text-darkProfileName text-lightProfileName'}`}> {message.pdfName} </div>
