@@ -26,6 +26,7 @@ import { LinearProgress } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiFillHeart } from 'react-icons/ai';
 import { BsFillChatFill } from 'react-icons/bs';
+import { MdDelete } from 'react-icons/md';
 
 function TimeAgoComponent({ timestamp, onDelete }) {
     useEffect(() => {
@@ -358,8 +359,8 @@ const CreateStorey = () => {
                                                         </div>
                                                         <BsFillChatFill style={{ color: "#FFFFFF", fontSize: "24px" }} />
                                                     </div>
-                                                    <div className="story-delete-div" onClick={() => HandleShowComment()}>
-                                                        <BsFillChatFill style={{ color: "#FFFFFF", fontSize: "24px" }} />
+                                                    <div className="story-delete-div" onClick={() => deleteStory(story.id)}>
+                                                        <MdDelete style={{ color: "#FFFFFF", fontSize: "24px" }} />
                                                     </div>
                                                 </div>
                                             )}
