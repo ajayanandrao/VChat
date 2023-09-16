@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/VChat/static/css/main.397ee0bc.css",
+    "main.css": "/VChat/static/css/main.c49f5859.css",
     "main.js": "/VChat/static/js/main.935d8666.js",
     "static/js/787.7b63f85e.chunk.js": "/VChat/static/js/787.7b63f85e.chunk.js",
     "static/media/mobile4.png": "/VChat/static/media/mobile4.80d1c3aba934d273d041.png",
@@ -34,12 +34,12 @@
     "static/media/holdphon.webp": "/VChat/static/media/holdphon.8de16fd67eec4a28e21a.webp",
     "static/media/upback.webp": "/VChat/static/media/upback.50486ba3d550fa0ad94a.webp",
     "index.html": "/VChat/index.html",
-    "main.397ee0bc.css.map": "/VChat/static/css/main.397ee0bc.css.map",
+    "main.c49f5859.css.map": "/VChat/static/css/main.c49f5859.css.map",
     "main.935d8666.js.map": "/VChat/static/js/main.935d8666.js.map",
     "787.7b63f85e.chunk.js.map": "/VChat/static/js/787.7b63f85e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.397ee0bc.css",
+    "static/css/main.c49f5859.css",
     "static/js/main.935d8666.js"
   ]
 }
