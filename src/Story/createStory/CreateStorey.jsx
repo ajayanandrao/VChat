@@ -63,6 +63,33 @@ const CreateStorey = () => {
         nav(-1);
     }
 
+
+    const compressImage = async (imageFile, maxWidth) => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                const aspectRatio = img.width / img.height;
+                const newWidth = Math.min(maxWidth, img.width);
+                const newHeight = newWidth / aspectRatio;
+
+                canvas.width = newWidth;
+                canvas.height = newHeight;
+
+                ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+                canvas.toBlob(resolve, 'image/jpeg', 0.7); // Adjust the compression quality if needed
+            };
+
+            img.onerror = reject;
+
+            img.src = URL.createObjectURL(imageFile);
+        });
+    };
+
     const handleAddStory = async () => {
         if (!newStoryImage) {
             alert('Please select an image.');
@@ -79,9 +106,10 @@ const CreateStorey = () => {
 
             if (querySnapshot.size > 0) {
                 const docRef = querySnapshot.docs[0].ref;
-                const storageRef = ref(storage, `story_images/${newStoryImage.name}`);
+                const compressedImgBlob = await compressImage(newStoryImage, 800);
+                const storageRef = ref(storage, `story_images/${compressedImgBlob.name}`);
 
-                const uploadTask = uploadBytesResumable(storageRef, newStoryImage);
+                const uploadTask = uploadBytesResumable(storageRef, compressedImgBlob);
 
                 uploadTask.on('state_changed', (snapshot) => {
                     // Get the progress percentage
@@ -285,10 +313,79 @@ const CreateStorey = () => {
                                     return (
                                         <div key={story.id}>
                                             {story.image && story.image.includes('.mp4') ? (
-                                                <div className="video-container">
-                                                    <video ref={videoRef} onClick={handleClick} className="video" id="video" autoPlay>
+                                                <div className="story-video-container">
+
+                                                    {showLikes ? (
+                                                        <div className="userLikes-div">
+                                                            <div>
+                                                                <div>
+                                                                    {like.map((like) => {
+                                                                        return (
+                                                                            <div className=''>
+                                                                                <div className="liked-user-profile">
+                                                                                    <div>
+                                                                                        <img className="liked-user-profile-img" src={like.photoURL} alt="" />
+                                                                                    </div>
+                                                                                    <div>{like.name}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                    })}
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                        :
+                                                        null}
+
+                                                    {showComment ? (
+                                                        <div className="userLikes-div">
+                                                            <div>
+                                                                <div>
+                                                                    {filteredComments.map((comment) => {
+                                                                        return (
+                                                                            <div className='d-flex' key={comment.id}>
+                                                                                <div className="commented-user-profile">
+                                                                                    <div>
+                                                                                        <img src={comment.photoURL} className="liked-user-profile-img" alt="" />
+                                                                                    </div>
+                                                                                    <div>{comment.comment}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                    })}
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                        :
+                                                        null}
+
+                                                    <video ref={videoRef} onClick={handleClick} className="story-video" id="video" autoPlay>
                                                         <source src={story.image} type="video/mp4" />
                                                     </video>
+
+                                                    <div className="story-like-div" onClick={() => HandleShowLike()}>
+                                                        <div className='mx-2' style={{ color: "white", fontSize: "14px" }} >
+                                                            {Like.length}
+                                                        </div>
+                                                        <AiFillHeart style={{ color: "red", fontSize: "24px" }} />
+                                                    </div>
+
+                                                    <div className="story-comment-div" onClick={() => HandleShowComment()}>
+                                                        <div className='mx-2' style={{ color: "white", fontSize: "14px" }} >
+                                                            {filteredComments.length}
+                                                        </div>
+                                                        <BsFillChatFill style={{ color: "#FFFFFF", fontSize: "24px" }} />
+                                                    </div>
+                                                    <div className="story-delete-div" onClick={() => { deleteStory(story.id); goBack(); }}>
+                                                        <MdDelete style={{ color: "#FFFFFF", fontSize: "24px" }} />
+                                                    </div>
+
+
+
                                                 </div>
                                             ) : (
                                                 <div className='story-img-div'>
@@ -321,14 +418,14 @@ const CreateStorey = () => {
                                                         <div className="userLikes-div">
                                                             <div>
                                                                 <div>
-                                                                    {filteredComments.map((like) => {
+                                                                    {filteredComments.map((comment) => {
                                                                         return (
-                                                                            <div className='d-flex'>
+                                                                            <div className='d-flex' key={comment.id}>
                                                                                 <div className="commented-user-profile">
                                                                                     <div>
-                                                                                        <img src={like.photoURL} className="liked-user-profile-img" alt="" />
+                                                                                        <img src={comment.photoURL} className="liked-user-profile-img" alt="" />
                                                                                     </div>
-                                                                                    <div>{like.comment}</div>
+                                                                                    <div>{comment.comment}</div>
                                                                                 </div>
                                                                             </div>
                                                                         )
@@ -359,7 +456,7 @@ const CreateStorey = () => {
                                                         </div>
                                                         <BsFillChatFill style={{ color: "#FFFFFF", fontSize: "24px" }} />
                                                     </div>
-                                                    <div className="story-delete-div" onClick={() => deleteStory(story.id)}>
+                                                    <div className="story-delete-div" onClick={() => { deleteStory(story.id); goBack(); }}>
                                                         <MdDelete style={{ color: "#FFFFFF", fontSize: "24px" }} />
                                                     </div>
                                                 </div>

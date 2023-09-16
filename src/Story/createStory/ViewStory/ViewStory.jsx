@@ -237,7 +237,7 @@ const ViewStory = ({ post }) => {
     }
 
     return (
-        <>
+        <div className='viewstory-main-container bg-darkDiv'>
             {
                 storyLike.map((item) => (
                     <p key={item.id}>{item.name}</p>
@@ -348,7 +348,7 @@ const ViewStory = ({ post }) => {
 
             )
             }
-        </>
+        </div>
     );
 };
 
