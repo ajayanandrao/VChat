@@ -271,27 +271,23 @@ const ViewStory = ({ post }) => {
                                             <div className="video-view-profile-close-div">
                                                 <MdClose className="video-view-close-btn" onClick={goBack} />
                                             </div>
-
-                                            <div className="video-view-Profile-bottom-div">
-                                                <input type="text" placeholder="Replay to"
-                                                    className="video-view-input"
-                                                    onChange={(e) => setStoryComment(e.target.value)}
-                                                    value={storyComment}
-                                                />
-
-                                                {/* <AiFillHeart
-                                                    onClick={() => handleLike(story.id)}
-                                                    className="video-view-send-icon  "
-                                                /> */}
-                                                {liked ? < AiFillHeart className="video-view-send-icon  " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
-                                                    <AiOutlineHeart className="video-view-send-icon  " onClick={() => handleLike(story.id)} />}
+                                        </div>
+                                        
+                                        <div className="video-view-Profile-bottom-div">
+                                            <input type="text" placeholder="Replay to"
+                                                className="video-view-input"
+                                                onChange={(e) => setStoryComment(e.target.value)}
+                                                value={storyComment}
+                                            />
 
 
-                                                < AiOutlineSend className="video-view-send-icon"
-                                                    onClick={() => handleStoryComment(story.id)}
-                                                />
-                                            </div>
+                                            {liked ? < AiFillHeart className="video-view-send-icon  " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
+                                                <AiOutlineHeart className="video-view-send-icon  " onClick={() => handleLike(story.id)} />}
 
+
+                                            < AiOutlineSend className="video-view-send-icon"
+                                                onClick={() => handleStoryComment(story.id)}
+                                            />
                                         </div>
                                     </div>
                                 ) : (
@@ -304,7 +300,7 @@ const ViewStory = ({ post }) => {
                                     >
                                         <BorderLinearProgress
                                             variant="determinate"
-                                            value={progressRef.current} // Use the current progress value
+                                            value={progressRef.current}
                                             style={{ width: '100%', color: "red" }}
                                             className="view-countdown-progress"
                                         />
@@ -312,31 +308,28 @@ const ViewStory = ({ post }) => {
                                         <div className="view-profile-div">
                                             <img src={user.userPhoto} className="view-profile-img" alt="" />
                                             <div className="mx-2">{user.name}</div>
-                                            <div className='' style={{ fontSize: "14px", color: "#696969" }}><PostTimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} /></div>
+                                            <div className='' style={{ fontSize: "14px", color: "#696969" }}>
+                                                <PostTimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} /></div>
 
                                             <div className="view-profile-close-div">
                                                 <MdClose className="view-close-btn" onClick={goBack} />
                                             </div>
+                                        </div>
 
-                                            <div className="view-Profile-bottom-div">
-                                                <input type="text" placeholder="Replay to"
-                                                    className="view-input"
-                                                    onChange={(e) => setStoryComment(e.target.value)}
-                                                    value={storyComment}
-                                                />
+                                        <div className="view-Profile-bottom-div">
+                                            <input type="text" placeholder="Replay to"
+                                                className="view-input"
+                                                onChange={(e) => setStoryComment(e.target.value)}
+                                                value={storyComment}
+                                            />
 
 
-                                                {/* <AiFillHeart
-                                                    onClick={() => handleLike(story.id)}
-                                                    className="view-send-icon "
-                                                /> */}
-                                                {liked ? < AiFillHeart className="view-send-icon " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
-                                                    <AiOutlineHeart className="view-send-icon " onClick={() => handleLike(story.id)} />}
+                                            {liked ? < AiFillHeart className="view-send-icon " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
+                                                <AiOutlineHeart className="view-send-icon " onClick={() => handleLike(story.id)} />}
 
-                                                <AiOutlineSend className="view-send-icon"
-                                                    onClick={() => handleStoryComment(story.id)}
-                                                />
-                                            </div>
+                                            <AiOutlineSend className="view-send-icon"
+                                                onClick={() => handleStoryComment(story.id)}
+                                            />
                                         </div>
 
                                     </div>

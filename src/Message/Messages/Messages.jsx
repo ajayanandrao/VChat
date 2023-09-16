@@ -1141,7 +1141,7 @@ const Messages = () => {
 
                         }
                         {showMessageOption ?
-                            <div className="show-message-option  bg-backgroundImage- dark:bg-darkInput">
+                            <div className="show-message-option  bg-lightDiv dark:bg-darkInput">
                                 <p onClick={HandleAreyouSure} className='mb-3 text-lightProfileName dark:text-darkPostText'>Delete all Chat</p>
                                 <p onClick={HandleAreyouSureForCurrentUser} className='text-lightProfileName dark:text-darkPostText'>Delete message from you</p>
                             </div>

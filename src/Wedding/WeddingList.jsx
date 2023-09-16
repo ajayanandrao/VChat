@@ -94,7 +94,7 @@ const WeddingList = () => {
                                                 <img src={item.photoOne} className='weddingList-photo' alt="" />
 
                                                 <div className="weddingList-about-div">
-                                                    <div className='d-flex' style={{ textTransform: "capitalize", fontSize: "24px", fontWeight: "600" }}>
+                                                    <div className='d-flex text-lightProfileName dark:text-darkProfileName' style={{ textTransform: "capitalize", fontSize: "24px", fontWeight: "600" }}>
                                                         <div className='me-1'>{item.first}</div>
                                                         <div>{item.last}</div>
                                                     </div>
@@ -105,22 +105,22 @@ const WeddingList = () => {
                                                                 <img src={mobile} width={"35px"} style={{ marginRight: "0.5rem" }} alt="" />
                                                                 {/* <FaMobile style={{ fontSize: "24px", color: " #0080FF", marginRight: "0.5rem" }} /> */}
                                                             </div>
-                                                            <span> {item.mobile} </span>
+                                                            <span className='text-lightProfileName dark:text-darkProfileName'> {item.mobile} </span>
                                                         </div>
                                                         <div className="weddingList-about-inner-item">
                                                             <div style={{ display: "flex", justifyContent: "center", width: "40px" }}>
                                                                 <img src={brif} width={"33px"} style={{ marginLeft: "0.2rem", marginRight: "0.7rem" }} alt="" />
                                                                 {/* <MdWork style={{ fontSize: "24px", color: "#DF7401", marginRight: "0.5rem" }} /> */}
                                                             </div>
-                                                            <span > {item.work} </span>
+                                                            <span className='text-lightProfileName dark:text-darkProfileName'> {item.work} </span>
                                                         </div>
                                                         <div className="weddingList-about-inner-item">
                                                             <div style={{ display: "flex", justifyContent: "center", width: "40px" }}>
                                                                 <img src={loc} width={"25px"} style={{ marginRight: "0.5rem" }} alt="" />
                                                                 {/* <ImLocation style={{ fontSize: "24px", color: "#ccc", marginRight: "0.5rem" }} /> */}
                                                             </div>
-                                                            <span > {item.village} </span>
-                                                            <span className='ms-1'> {item.state} </span>
+                                                            <span className='text-lightProfileName dark:text-darkProfileName'> {item.village} </span>
+                                                            <span className='ms-1 text-lightProfileName dark:text-darkProfileName'> {item.state} </span>
                                                         </div>
                                                     </div>
 
