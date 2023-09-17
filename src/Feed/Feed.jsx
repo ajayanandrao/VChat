@@ -176,7 +176,7 @@ const Feed = ({ post }) => {
     function PostTimeAgoComponent({ timestamp }) {
         const now = new Date();
         const diffInSeconds = Math.floor((now - new Date(timestamp)) / 1000);
-    
+
         if (diffInSeconds < 60) {
             return "just now";
         } else if (diffInSeconds < 3600) {
@@ -190,7 +190,7 @@ const Feed = ({ post }) => {
             return `${days}d ago`;
         }
     }
-    
+
 
     // Comment 
 
@@ -453,6 +453,7 @@ const Feed = ({ post }) => {
 
         fetchFriends();
     }, [currentUser]);
+
 
 
     return (

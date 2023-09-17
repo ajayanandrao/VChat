@@ -80,91 +80,97 @@ const StoryForm = () => {
             <div className="card-container">
 
 
-                <div className="status-card-wrapper bg-lightDiv dark:bg-darkDiv">
-                    {stories.map((story) => {
+                {stories.length > 0 ?
+                    <div className="status-card-wrapper bg-lightDiv dark:bg-darkDiv">
 
-                        if (story.uid !== currentUser.uid) {
-                            return (
-                                <div key={story.id}>
+                        {stories.map((story) => {
 
-                                    {friendsList.map((item) => {
+                            if (story.uid !== currentUser.uid) {
+                                return (
+                                    <div key={story.id}>
 
-                                        if (story.uid === item.uid) {
-                                            return (
-                                                <>
-                                                    {!story.viewedBy || !story.viewedBy.includes(currentUser.uid) ? (
-                                                        <>
-                                                            <Link to={`/users/${story.uid}/story`} onClick={() => handleViewStory(story.id)}>
-                                                                <div>
-                                                                    {story.image && story.image.includes('.mp4') ? (
-                                                                        <div className="status-video-div">
-                                                                            <video className="status-video" id="video" loop muted >
-                                                                                <source src={story.image} type="video/mp4" />
-                                                                            </video>
-                                                                            <img className='story-profile-img' src={story.photoUrl} alt="" />
-                                                                            <div className='new-status-blink  animate-blinkStatus'></div>
-                                                                        </div>
-                                                                    ) : (
+                                        {friendsList.map((item) => {
 
-                                                                        <div className="status-card-div" style={{
-                                                                            backgroundImage:
-                                                                                `url(${story.image})`
-                                                                        }}>
-                                                                            <img className='story-profile-img' src={story.photoUrl} alt="" />
-                                                                            <div className='new-status-blink  animate-blinkStatus'></div>
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-
-
-                                                            </Link>
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            <Link to={`/users/${story.uid}/story`} onClick={() => handleViewStory(story.id)}>
-                                                                <div>
-                                                                    {story.image && story.image.includes('.mp4') ? (
-                                                                        <>
+                                            if (story.uid === item.uid) {
+                                                return (
+                                                    <>
+                                                        {!story.viewedBy || !story.viewedBy.includes(currentUser.uid) ? (
+                                                            <>
+                                                                <Link to={`/users/${story.uid}/story`} onClick={() => handleViewStory(story.id)}>
+                                                                    <div>
+                                                                        {story.image && story.image.includes('.mp4') ? (
                                                                             <div className="status-video-div">
                                                                                 <video className="status-video" id="video" loop muted >
                                                                                     <source src={story.image} type="video/mp4" />
                                                                                 </video>
-                                                                                <img className='story-profile-img' style={{ border: "2px solid white " }} src={story.photoUrl} alt="" />
+                                                                                <img className='story-profile-img' src={story.photoUrl} alt="" />
+                                                                                <div className='new-status-blink  animate-blinkStatus'></div>
                                                                             </div>
-                                                                        </>
+                                                                        ) : (
 
-                                                                    ) : (
-                                                                        <>
+                                                                            <div className="status-card-div" style={{
+                                                                                backgroundImage:
+                                                                                    `url(${story.image})`
+                                                                            }}>
+                                                                                <img className='story-profile-img' src={story.photoUrl} alt="" />
+                                                                                <div className='new-status-blink  animate-blinkStatus'></div>
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
 
 
-                                                                            <div className="status-card-wrapper">
-                                                                                <div className="status-card-div" style={{
-                                                                                    backgroundImage:
-                                                                                        `url(${story.image})`
-                                                                                }}>
+                                                                </Link>
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <Link to={`/users/${story.uid}/story`} onClick={() => handleViewStory(story.id)}>
+                                                                    <div>
+                                                                        {story.image && story.image.includes('.mp4') ? (
+                                                                            <>
+                                                                                <div className="status-video-div">
+                                                                                    <video className="status-video" id="video" loop muted >
+                                                                                        <source src={story.image} type="video/mp4" />
+                                                                                    </video>
                                                                                     <img className='story-profile-img' style={{ border: "2px solid white " }} src={story.photoUrl} alt="" />
                                                                                 </div>
-                                                                            </div>
+                                                                            </>
 
-                                                                        </>
-                                                                    )}
-                                                                </div>
-                                                            </Link>
-                                                        </>
-                                                    )}
-
-                                                </>
-                                            )
-                                        }
-
-                                    })}
+                                                                        ) : (
+                                                                            <>
 
 
-                                </div>
-                            )
-                        }
-                    })}
-                </div >
+                                                                                <div className="status-card-wrapper">
+                                                                                    <div className="status-card-div" style={{
+                                                                                        backgroundImage:
+                                                                                            `url(${story.image})`
+                                                                                    }}>
+                                                                                        <img className='story-profile-img' style={{ border: "2px solid white " }} src={story.photoUrl} alt="" />
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </>
+                                                                        )}
+                                                                    </div>
+                                                                </Link>
+                                                            </>
+                                                        )}
+
+                                                    </>
+                                                )
+                                            }
+
+                                        })}
+
+
+                                    </div>
+                                )
+                            }
+                        })}
+
+                    </div >
+                    :
+                    null
+                }
 
                 {/* <div className="c-card"></div> */}
             </div >

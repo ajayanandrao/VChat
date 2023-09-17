@@ -118,7 +118,10 @@ const MobileNavebar = () => {
     })
   };
 
-
+  const [isActive, setIsActive] = useState(false);
+  const toggleHeart = () => {
+    setIsActive(!isActive);
+  };
 
   return (
     <>
@@ -135,8 +138,6 @@ const MobileNavebar = () => {
         </Link>
 
         <div className="mobile-item-div">
-
-
 
           <span className="mobile-nav-mainu">
             <Link to="createStory/" className="link">
@@ -185,41 +186,6 @@ const MobileNavebar = () => {
         </div>
       </div>
 
-      {/* <div
-        className="mobile-nav-bottom-container "
-        style={{ display: "none" }}
-        id="navIdB"
-      >
-        <Link to={"home/"}>
-          <AiFillHome className='mobile-nav-bottom-icon' />
-        </Link>
-        <Link to="notification">
-          <div>
-            <AiFillHeart className="mobile-nav-bottom-icon" />
-          </div>
-        </Link>
-
-        <Link to="message/">
-          <div>
-            <i className="bi bi-messenger"></i>
-          </div>
-        </Link>
-
-        <Link to="reels">
-          <div>
-            <MdMovieFilter className="mobile-nav-bottom-icon" />
-          </div>
-        </Link>
-        <Link to={"profile/"}>
-          <div>
-            <img
-              src={currentUser && currentUser.photoURL}
-              alt=""
-              className="mobile-nav-bottom-photo"
-            />
-          </div>
-        </Link>
-      </div> */}
     </>
   );
 };

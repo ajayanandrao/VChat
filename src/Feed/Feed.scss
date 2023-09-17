@@ -7,6 +7,7 @@
 	justify-content: center;
 	margin: 1rem 0;
 	padding: 0 0.2rem;
+
 	.feed-div {
 		width: 100%;
 		flex-basis: 576px;
@@ -161,6 +162,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			position: relative;
 
 			.feed-bottom-mainu {
 				display: flex;
@@ -382,26 +384,3 @@
 		transition: 0.8s ease-in-out;
 	}
 }
-
-// option
-
-// .Feed-Profile-Option-Container {
-//     flex: 1;
-//     display: flex;
-//     justify-content: end;
-//     color: black !important;
-
-//     .Feed-Option-btn-div {
-//         width: 30px;
-//         height: 30px;
-//         background: #0a1929f5;
-//         padding: 0;
-//         // background: $btn;
-//         border-radius: 50%;
-//         cursor: pointer;
-//         display: flex;
-//         justify-content: center;
-//         align-items: center;
-//         // border: 1px solid $border-div;
-//     }
-// }

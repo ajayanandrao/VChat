@@ -95,7 +95,10 @@ const CreateStorey = () => {
             alert('Please select an image.');
             return;
         }
+
+        // Clear the newStoryImage state after checking it to prevent double submissions.
         setNewStoryImage(null);
+
         const storiesCollection = collection(db, 'stories');
         let downloadURL;
 
@@ -106,13 +109,14 @@ const CreateStorey = () => {
 
             if (querySnapshot.size > 0) {
                 const docRef = querySnapshot.docs[0].ref;
+
+                // Compress the image before uploading.
                 const compressedImgBlob = await compressImage(newStoryImage, 800);
-                const storageRef = ref(storage, `story_images/${compressedImgBlob.name}`);
+                const storageRef = ref(storage, `story_images/${newStoryImage.name}`);
 
                 const uploadTask = uploadBytesResumable(storageRef, compressedImgBlob);
 
                 uploadTask.on('state_changed', (snapshot) => {
-                    // Get the progress percentage
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     console.log(`Upload progress: ${progress}%`);
                 });
@@ -121,6 +125,7 @@ const CreateStorey = () => {
 
                 downloadURL = await getDownloadURL(storageRef);
 
+                // Update the existing document with the compressed image.
                 await updateDoc(docRef, {
                     image: downloadURL,
                     timestamp: serverTimestamp(),
@@ -131,9 +136,10 @@ const CreateStorey = () => {
                 const uploadTask = uploadBytesResumable(storageRef, newStoryImage);
 
                 uploadTask.on('state_changed', (snapshot) => {
-                    // Get the progress percentage
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     console.log(`Upload progress: ${progress}%`);
+
+                    // Show/hide a progress indicator based on the progress percentage.
                     if (progress < 100) {
                         document.getElementById("p1").style.display = "block";
                     } else {
@@ -145,6 +151,7 @@ const CreateStorey = () => {
 
                 downloadURL = await getDownloadURL(storageRef);
 
+                // Add a new document to the collection with the original image.
                 await addDoc(storiesCollection, {
                     name: newStoryImage ? newStoryImage.name : '',
                     image: newStoryImage ? downloadURL : '',
@@ -155,13 +162,13 @@ const CreateStorey = () => {
                 });
             }
 
+            // Add the new story URL to the state.
             setStories([...stories, { image: downloadURL }]);
-            setNewStoryImage(null);
-
         } catch (error) {
             console.error('Error adding/updating story:', error);
         }
     };
+
 
     const deleteStory = async (storyId) => {
         try {
@@ -298,7 +305,7 @@ const CreateStorey = () => {
     }
 
     return (
-        <>
+        <div className='cteateStory-main-container bg-light_0 dark:bg-dark'>
             <LinearProgress id="p1" style={{ display: "none" }} />
 
 
@@ -513,7 +520,7 @@ const CreateStorey = () => {
 
 
 
-        </>
+        </div>
     );
 };
 
