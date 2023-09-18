@@ -1155,7 +1155,7 @@ const Messages = () => {
 
 
 
-                <div className="message-center-div bg-light_0 dark:bg-dark" onClick={handleMessageEmojiF}>
+                <div className="message-center-div bg-lightDiv dark:bg-dark" onClick={handleMessageEmojiF}>
 
                     <div className="message-center-container">
 
