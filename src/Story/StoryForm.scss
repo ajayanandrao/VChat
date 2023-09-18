@@ -57,6 +57,9 @@
         -ms-overflow-style: none;
         scroll-behavior: smooth;
         transition: 0.8s ease-in-out;
+        &::-webkit-scrollbar {
+            display: none;
+        }
         // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         // background: red;
 
