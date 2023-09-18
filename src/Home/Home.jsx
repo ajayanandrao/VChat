@@ -133,48 +133,67 @@ const Home = () => {
         return unsub();
     }, []);
 
+    const [friendsList, setFriendsList] = useState([]);
+    useEffect(() => {
+        const friendsRef = collection(db, `allFriends/${currentUser && currentUser.uid}/Friends`);
+        const unsubscribe = onSnapshot(friendsRef, (friendsSnapshot) => {
+            const friendsData = friendsSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setFriendsList(friendsData);
+        }, (error) => {
+            console.error('Error fetching friends:', error);
+        });
+
+        return () => unsubscribe();
+    }, [currentUser && currentUser]);
 
     return (
         <>
 
             {welcome.map((item) => {
-                return (
-                    <div style={{ color: "black", fontSize: "18px" }}>
-                        {item.seen === "WelcomFalse" ? <Wellcome currentUser={currentUser} welco={welco} /> :
 
-                            (
+                if (item.uid === currentUser.uid) {
+                    return (
+                        <div style={{ color: "black", fontSize: "18px" }}>
+                            {item.seen === "WelcomFalse" ? <Wellcome currentUser={currentUser} welco={welco} /> :
 
-                                <div className='bg-light_0 dark:bg-dark' style={{ transition: "0.8s ease-in-out" }}>
-                                    {loading ? (
-                                        <div className='skeleton-center bg-light_0 dark:bg-dark'>
-                                            <CircularProgress className='circularprogress' />
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <motion.div
-                                                transition={{ duration: 0.3, delay: 0.8 }}
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
-                                                <AiOutlineArrowUp className='top-arrow text-aqua_0 ' />
-                                            </motion.div>
-                                            <StoryForm />
-                                            <Post />
+                                (
+
+                                    <div className='bg-light_0 dark:bg-dark' style={{ transition: "0.8s ease-in-out" }}>
+                                        {loading ? (
+                                            <div className='skeleton-center bg-light_0 dark:bg-dark'>
+                                                <CircularProgress className='circularprogress' />
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <motion.div
+                                                    transition={{ duration: 0.3, delay: 0.8 }}
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    className='btn' onClick={handleScrollToTop} id='scrollTopBtn'>
+                                                    <AiOutlineArrowUp className='top-arrow text-aqua_0 ' />
+                                                </motion.div>
+
+                                                <StoryForm />
+
+                                                <Post />
+
+                                                <FlipMove>{newData}</FlipMove>
+                                                {/* <div className='height'></div> */}
+                                            </>
+                                        )}
+
+                                    </div>
+
+                                )
 
 
-                                            <FlipMove>{newData}</FlipMove>
-                                            <div className='height'></div>
-                                        </>
-                                    )}
-
-                                </div>
-
-                            )
-
-
-                        }
-                    </div>
-                )
+                            }
+                        </div>
+                    )
+                }
             })}
 
 

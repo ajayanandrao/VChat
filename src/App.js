@@ -175,7 +175,7 @@ function App() {
           {loading ?
 
             (<> <Route path="home" element={<Home />} />
-              <Route path="post" element={<Post />} />
+              {/* <Route path="post" element={<Post />} /> */}
 
               <Route path="welcome" element={<Wellcome />} />
               <Route path="How_to_install_app" element={<Install />} />

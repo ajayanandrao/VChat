@@ -79,8 +79,8 @@ const StoryForm = () => {
         <>
             <div className="card-container">
 
-
                 {stories.length > 0 ?
+
                     <div className="status-card-wrapper bg-lightDiv dark:bg-darkDiv">
 
                         {stories.map((story) => {
@@ -172,7 +172,6 @@ const StoryForm = () => {
                     null
                 }
 
-                {/* <div className="c-card"></div> */}
             </div >
         </>
     )

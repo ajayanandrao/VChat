@@ -2,6 +2,7 @@ import React from 'react'
 import "./policy.scss";
 import { useNavigate } from 'react-router-dom';
 import { RxDotFilled } from "react-icons/rx"
+import LeftArro from '../../LeftArro';
 
 const Policy = () => {
 
@@ -18,7 +19,7 @@ const Policy = () => {
 
             <div className='policy-box-sizing'>
 
-                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-darkDiv dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot text-[#696969] dark:text-dark' />
@@ -58,7 +59,7 @@ const Policy = () => {
                 </div>
 
 
-                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-darkDiv dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot text-[#696969] dark:text-dark' />
@@ -98,7 +99,7 @@ const Policy = () => {
                 </div>
 
 
-                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-darkDiv dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot text-[#696969] dark:text-dark' />
@@ -128,7 +129,7 @@ const Policy = () => {
 
                 </div>
 
-                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-darkDiv dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot text-[#696969] dark:text-dark' />
@@ -159,7 +160,7 @@ const Policy = () => {
                 </div>
 
 
-                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-darkDiv dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot text-[#696969] dark:text-dark' />
@@ -180,7 +181,7 @@ const Policy = () => {
 
                 </div>
 
-                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-lightPostText dark:darkPostText">
+                <div className="policy-containt-wrapper bg-lightDiv dark:bg-darkDiv text-darkDiv dark:text-darkPostText">
 
                     <div className="policy-containt-div">
                         <RxDotFilled className='policy-dot text-[#696969] dark:text-dark' />
