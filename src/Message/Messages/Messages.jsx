@@ -1551,41 +1551,48 @@ const Messages = () => {
                     <div className="emoji-container-main">
                         <div className="emoji-div-scroll">
                             <div className="emoji">
+
                                 <div className="message-emoji-group-one">
-                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/clapping-hands-4158690-3449620.png?f=webp")}>
-                                        <img className="message-emoji" src={one} alt="" />
+                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Face%20with%20Tears%20of%20Joy.png")}>
+                                        <img className="message-emoji" src={"https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Face%20with%20Tears%20of%20Joy.png"} alt="" />
                                     </div>
 
-                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/crossed-finger-hand-gesture-4158665-3449644.png?f=webp"))}>
-                                        <img className="message-emoji" src={two} alt="" />
+                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Grinning%20Face%20with%20Big%20Eyes.png"))}>
+                                    <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Grinning%20Face%20with%20Big%20Eyes.png"  className="message-emoji" alt="Face Blowing a Kiss" width="25" height="25" />
                                     </div>
 
-                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/good-hand-gesture-4158694-3449624.png?f=webp"))}>
-                                        <img className="message-emoji" src={three} alt="" />
+                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Grinning%20Face%20with%20Smiling%20Eyes.png"))}>
+                                        <img className="message-emoji" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Grinning%20Face%20with%20Smiling%20Eyes.png" alt="" />
                                     </div>
-                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/handshake-4158680-3449627.png?f=webp"))}>
-                                        <img className="message-emoji" src={four} alt="" />
+
+                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Grinning%20Face%20with%20Sweat.png"))}>
+                                        <img className="message-emoji" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Grinning%20Face%20with%20Sweat.png" alt="" />
                                     </div>
-                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/left-direction-finger-hand-gesture-4158679-3449643.png?f=webp"))}>
-                                        <img className="message-emoji" src={five} alt="" />
+
+                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Grinning%20Face.png"))}>
+                                        <img className="message-emoji" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Grinning%20Face.png" alt="" />
                                     </div>
                                 </div>
                             </div>
 
                             <div className="emoji">
                                 <div className="message-emoji-group-one">
-                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/love-hand-gesture-4158688-3449635.png?f=webp"))}>
-                                        <img className="message-emoji" src={six} alt="" />
+                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Grinning%20Squinting%20Face.png"))}>
+                                        <img className="message-emoji" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Grinning%20Squinting%20Face.png" alt="" />
                                     </div>
-                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/ok-hand-gesture-4158672-3449636.png?f=webp"))}>
-                                        <img className="message-emoji" src={sevan} alt="" />
+
+                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Rolling%20on%20the%20Floor%20Laughing.png"))}>
+                                        <img className="message-emoji" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Rolling%20on%20the%20Floor%20Laughing.png" alt="" />
                                     </div>
-                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/pointing-finger-4158681-3449628.png?f=webp"))}>
-                                        <img className="message-emoji" src={eate} alt="" />
+
+                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Zany%20Face.png"))}>
+                                        <img className="message-emoji" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Zany%20Face.png" alt="" />
                                     </div>
-                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/pointing-finger-4158683-3449630.png?f=webp"))}>
-                                        <img className="message-emoji" src={nine} alt="" />
+
+                                    <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Winking%20Face%20with%20Tongue.png"))}>
+                                        <img className="message-emoji" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Winking%20Face%20with%20Tongue.png" alt="" />
                                     </div>
+
                                     <div className="message-emoji-div  dark:bg-darkDiv" onClick={(() => handleSendMessageEmoji(user.uid, user.userPhoto, "https://cdn3d.iconscout.com/3d/premium/thumb/prayer-gesture-4158684-3449631.png?f=webp"))}>
                                         <img className="message-emoji" src={ten} alt="" />
                                     </div>
