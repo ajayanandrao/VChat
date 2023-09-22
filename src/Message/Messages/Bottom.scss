@@ -122,55 +122,6 @@
 }
 
 
-.emoji-container-main {
-    width: 100%;
-    height: 450px;
-    // background: blue;
-    backdrop-filter: blur(10px);
-    position: fixed;
-    bottom: 0;
-
-    .emoji-div-scroll {
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        // background: red;
-        overflow-y: scroll;
-        padding-bottom: 250px;
-        padding-top: 350px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        .message-emoji-group-one {
-            width: 100%;
-            padding: 0 1rem;
-            display: flex;
-
-            .message-emoji-div {
-                width: 60px;
-                height: 60px;
-                // background: rgba(255, 255, 255, 0.404);
-                background: none !important;
-                backdrop-filter: blur(20px);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 3px;
-
-                .message-emoji {
-                    width: 40px;
-                    height: 40px;
-                    object-fit: cover;
-                }
-            }
-        }
-
-        .emoji {}
-    }
-}
-
 
 .typing-indicator {
     display: inline-flex;
