@@ -51,6 +51,10 @@
         gap: 1rem;
         padding-bottom: 0.5rem;
 
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
         .message-emoji-div {
             background: transparent;
             display: flex;

@@ -1763,9 +1763,9 @@ const Messages = () => {
 
                         <div className='message-emoji-Btn-div text-lightPostText bg-lightDiv dark:bg-darkDiv' onClick={handleMessageEmoji}>
                             {messageEmoji ?
-                                <IoIosArrowDown className='text-aqua_0' style={{ fontSize: "18px" }} />
+                                <IoIosArrowDown className='message-emoji-btn text-aqua_0' style={{ fontSize: "18px" }} />
                                 :
-                                <IoIosArrowUp className='text-aqua_0' style={{ fontSize: "18px" }} />
+                                <IoIosArrowUp className='message-emoji-btn text-aqua_0' style={{ fontSize: "18px" }} />
                             }
                         </div>
 

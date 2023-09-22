@@ -64,17 +64,23 @@
     // =======================
 
     .message-emoji-Btn-div {
-        // background: yellow;
-        width: 30px;
-        height: 30px;
+        border: 1px solid #ccc;
+        // background: rgba(0, 0, 0, 0.082);
+        // backdrop-filter: blur(10px);
+        width: 40px;
+        height: 40px;
         position: absolute;
         display: flex;
         justify-content: center;
-        top: 0%;
+        top: 0;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: -1;
         border-radius: 50%;
+
+        .message-emoji-btn {
+            margin-top: 2px;
+        }
     }
 
 }
