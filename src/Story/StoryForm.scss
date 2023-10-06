@@ -1,3 +1,5 @@
+@import "./../Styles/Mixin_New.scss";
+
 .status-view-container {
     width: 100%;
     height: 100vh;
@@ -8,36 +10,36 @@
     left: 0;
     z-index: 9999;
 
-    .status-view-profile-div {
-        width: 100%;
-        background: 50px;
-        background: blue;
-        padding: 00.5rem 1rem;
-        display: flex;
-        align-items: center;
+    // .status-view-profile-div {
+    //     width: 100%;
+    //     background: 50px;
+    //     background: blue;
+    //     padding: 00.5rem 1rem;
+    //     display: flex;
+    //     align-items: center;
 
-        .status-view-profile-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgb(58, 58, 58);
-        }
+    //     .status-view-profile-img {
+    //         width: 40px;
+    //         height: 40px;
+    //         border-radius: 50%;
+    //         background: rgb(58, 58, 58);
+    //     }
 
-        .stauts-view-profile-name {
-            margin: 0 0.5rem;
-        }
+    //     .stauts-view-profile-name {
+    //         margin: 0 0.5rem;
+    //     }
 
-        .stauts-view-time {
-            margin: 0 0.5rem;
-            font-size: 14px;
-        }
+    //     .stauts-view-time {
+    //         margin: 0 0.5rem;
+    //         font-size: 14px;
+    //     }
 
-        .status-view-close-div {
-            flex: 1;
-            display: flex;
-            justify-content: end;
-        }
-    }
+    //     .status-view-close-div {
+    //         flex: 1;
+    //         display: flex;
+    //         justify-content: end;
+    //     }
+    // }
 }
 
 .card-container {
@@ -48,8 +50,10 @@
     // margin-bottom: 0.5rem;
 
     .status-card-wrapper {
-        border-radius: 10px;
+        border-radius: 5px;
         width: 100%;
+        max-width: 510px;
+        margin: 0 auto;
         display: inherit;
         box-sizing: border-box;
         overflow-x: scroll;
@@ -57,17 +61,22 @@
         -ms-overflow-style: none;
         scroll-behavior: smooth;
         transition: 0.8s ease-in-out;
+
         &::-webkit-scrollbar {
             display: none;
         }
-        // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        // background: red;
+
 
         .status-video-div {
-            width: 120px;
-            height: 70px;
+            width: 180px;
+            height: 110px;
             border-radius: 5px;
             position: relative;
+
+            @include respond-to(xs) {
+                width: 120px;
+                height: 70px;
+            }
 
             .status-video {
                 border-radius: 5px;
@@ -104,14 +113,16 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            width: 120px;
-            height: 70px;
+            width: 180px;
+            height: 110px;
             border-radius: 5px;
-            // background: red;
-            // border: 1px solid aqua;
             margin: 0 1px;
-            // animation: blinkStatus 2s infinite;
             position: relative;
+
+            @include respond-to(xs) {
+                width: 120px;
+                height: 70px;
+            }
 
             .new-status-blink {
                 width: 30px;
@@ -132,7 +143,6 @@
                 position: absolute;
                 top: 0;
                 right: 0;
-                // border: 2px solid white;
             }
         }
     }

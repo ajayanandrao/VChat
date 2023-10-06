@@ -1,31 +1,42 @@
 @import "./../../Styles/Variable";
+@import "./../../Styles/Mixin_New.scss";
 
 .message-bottom-bar {
     width: 100%;
-    // height: 50px;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-evenly;
-    backdrop-filter: blur(15px);
+    // backdrop-filter: blur(15px);
+    // color: white;
+    // background: red;
     position: fixed;
     bottom: 0;
     z-index: 2;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
     // padding: 1rem;
 
+
     .message-bottom-inner-div {
         width: 100%;
+        max-width: 700px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0.7rem 1rem;
         // background-color: #fafafa;
         // background-color: white;
+        border-radius: 30px;
+
+        @include respond-to(xs) {
+            border-radius: 0px;
+        }
     }
 
     .message-bottom-input {
         width: 100%;
+        max-width: 600px;
+
         height: 40px;
         // background-color: #f0f2f5;
         // max-width: 220px;
@@ -43,11 +54,13 @@
 
     .message-bottom-send-btn {
         font-size: 30px;
+        cursor: pointer;
         // color: #2E2E2E;
     }
 
     .message-bottom-camera {
         font-size: 30px;
+        cursor: pointer;
         // color: #2E2E2E;
     }
 
@@ -56,6 +69,7 @@
 
         .message-bottom-thumb {
             font-size: 24px;
+            cursor: pointer;
             // color: #2E2E2E;
         }
 
@@ -77,9 +91,11 @@
         transform: translate(-50%, -50%);
         z-index: -1;
         border-radius: 50%;
+        cursor: pointer;
 
         .message-emoji-btn {
             margin-top: 2px;
+            cursor: pointer;
         }
     }
 

@@ -20,7 +20,7 @@ const WeddingMain = () => {
 
 
     return (
-        <div className='bg-light_0 text-lightProfileName dark:bg-dark wedding-main-div' style={{ width: "100%", height: "100vh", boxSizing: "border-box", overflowY: "scroll" }}>
+        <div className='wedding-main-container bg-light_0 text-lightProfileName dark:bg-dark wedding-main-div' >
             <LeftArro />
             <WeddingList />
             <Link to={"/AddWedding/"}>
@@ -28,9 +28,9 @@ const WeddingMain = () => {
                     <FaPlus style={{ fontSize: "18px" }} />
                 </div>
             </Link>
-            <div className='w-up-bio-btn text-aqua_0 dark:text-aqua_0' style={{color:'#06b6d4'}} onClick={handleScrollToTop}>
+            {/* <div className='w-up-bio-btn text-aqua_0 dark:text-aqua_0' style={{color:'#06b6d4'}} onClick={handleScrollToTop}>
                 <BiUpArrowAlt />
-            </div>
+            </div> */}
         </div>
     )
 }

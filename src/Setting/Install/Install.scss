@@ -19,6 +19,11 @@
     align-items: center;
     justify-content: center;
     font-size: 18px;
+
+    .install-item-img{
+        width: 100%;
+        max-width: 300px;
+    }
 }
 
 .install-audio {

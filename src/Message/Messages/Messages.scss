@@ -1,5 +1,6 @@
 @import "./Top.scss";
 @import "./Bottom.scss";
+@import "./../../Styles/Mixin_New.scss";
 
 .message-main-div {
     width: 100%;
@@ -101,7 +102,7 @@
             border-radius: 10px;
             height: 150px;
             // background-color: white;
-            color: black;
+            // color: black;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -111,6 +112,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             padding: 0.5rem;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
     }
 
@@ -121,6 +123,12 @@
         position: absolute;
         top: 0;
         // background-color: red;
+        padding: 1rem;
+
+        .media-time {
+            font-size: 12px;
+            color: aqua;
+        }
 
         .media-delete-div {
             display: flex;
@@ -128,6 +136,8 @@
 
             .photo-delete {
                 margin-left: 0.5rem;
+                color: aqua;
+                cursor: pointer;
             }
         }
 
@@ -149,9 +159,9 @@
                 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
                 .media-close-icon {
-                    color: black;
+                    color: aqua;
                     font-size: 26px;
-
+                    cursor: pointer;
                 }
             }
         }
@@ -212,8 +222,17 @@
 
         &.sender {
             justify-content: flex-end;
+            // background: red;
 
             .message-content {
+                // background: blue;
+                width: 100%;
+                max-width: 600px;
+
+                @include respond-to(xs) {
+                    max-width: 290px;
+                }
+
                 // background: #ede9fe;
                 // background: #f0f2f5;
                 // color: #18181b;
@@ -222,6 +241,18 @@
 
             .delete-button {
                 display: none;
+            }
+
+            .message-reply {
+                width: 100%;
+                max-width: 600px;
+                display: flex;
+                flex: 1;
+                border: 1px solid #ccc;
+
+                @include respond-to(xs) {
+                    max-width: 290px;
+                }
             }
 
             &:hover {
@@ -270,6 +301,18 @@
                 display: flex;
                 color: white;
 
+                .message-reply {
+                    width: 100%;
+                    max-width: 600px;
+                    display: flex;
+                    flex: 1;
+                    border: 1px solid #ccc;
+
+                    @include respond-to(xs) {
+                        max-width: 290px;
+                    }
+                }
+
                 .messageImgLike-div {
                     width: auto;
                     display: inline-flex;
@@ -292,6 +335,12 @@
                 .message-content {
                     // background-color: #6366f1;
                     border-radius: 20px;
+                    width: 100%;
+                    max-width: 600px;
+
+                    @include respond-to(xs) {
+                        max-width: 260px;
+                    }
                 }
 
 
@@ -308,31 +357,37 @@
                 border-radius: 5px;
                 object-fit: cover;
                 object-position: center;
+                cursor: pointer;
             }
 
         }
 
-        .message-reply {
-            margin-top: 6px;
-            display: flex;
-            flex-direction: column;
+        // .message-reply {
+        //     margin-top: 6px;
+        //     display: flex;
+        //     flex-direction: column;
 
-            p {
-                margin: 4px 0;
-                font-size: 14px;
-                color: black;
-                margin-bottom: 0.5rem;
-            }
+        //     .replay-message-div {
+        //         width: 100%;
+        //         max-width: 600px;
+        //     }
 
-            .replied-image {
-                width: 100px;
-                height: 150px;
-                object-fit: cover;
-                border-radius: 8px;
-            }
+        //     p {
+        //         margin: 4px 0;
+        //         font-size: 14px;
+        //         // color: black;
+        //         margin-bottom: 0.5rem;
+        //     }
+
+        //     .replied-image {
+        //         width: 100px;
+        //         height: 150px;
+        //         object-fit: cover;
+        //         border-radius: 8px;
+        //     }
 
 
-        }
+        // }
 
         .last-conversation-time {
             font-size: 12px;
@@ -345,6 +400,40 @@
             border-radius: 20px;
             padding: 0.5rem 1rem;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .message-reply {
+            margin-top: 6px;
+            border-radius: 20px;
+            // padding: 0.5rem 1rem;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+
+            .replay-message-div {
+                width: 100%;
+                max-height: 100px;
+                overflow: hidden;
+                max-width: 600px;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+            }
+
+            p {
+                margin: 4px 0;
+                font-size: 14px;
+                // color: black;
+                margin-bottom: 0.5rem;
+            }
+
+            .replied-image {
+                width: 100px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+
+
         }
 
         .delete-button,
@@ -463,7 +552,7 @@
     height: 200px;
     // background-color: red;
     backdrop-filter: blur(10px);
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    // box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 
     .device-video-selected-div {
         position: relative;
@@ -508,6 +597,20 @@
         height: 100%;
         object-fit: contain;
         object-position: center;
+    }
+
+    .device-document-selected {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+        .device-document-icon {
+            font-size: 50px;
+            margin-bottom: 1rem;
+        }
     }
 }
 

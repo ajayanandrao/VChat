@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { db } from "./../Firebase";
 import { collection, onSnapshot } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
+import { FiSearch } from "react-icons/fi";
 
 const SearchUser = () => {
 
@@ -29,58 +30,58 @@ const SearchUser = () => {
 
     return (
         <>
-            <div className='search-wrapper bg-light_0 dark:bg-dark'>
-                <div className="search-container-inner">
 
-                    <div className="Search-container">
+            <div className="search-main-container bg-light_0 dark:bg-dark">
 
-                        <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon"></i>
-                        <input type="text"
-                            className='Seatch-User-input text-lightProfileName dark:text-darkPostText'
-                            onChange={(e) => setSearch(e.target.value)}
-                            value={search}
-                            placeholder='Search friends ' />
+                <div className="search-back-div bg-light_0 dark:bg-dark">
+                    <div className="leftDiv"></div>
+                    <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon"></i>
+                    <input type="text"
+                        className='Seatch-User-input text-lightProfileName bg-lightDiv dark:bg-darkDiv dark:text-darkPostText'
+                        onChange={(e) => setSearch(e.target.value)}
+                        value={search}
+                        placeholder='Search friends ' />
 
-                    </div>
+                </div>
 
-                    <div className="Search-user-List">
-                        {
-                            api
-                                .filter((value) => {
-                                    if (search === "") {
-                                        return value;
-                                    } else if (
-                                        value.name.toLowerCase().includes(search.toLowerCase())
-                                    ) {
-                                        return value;
-                                    }
-                                })
-                                .map((item) => {
+                <div className=''>
+                    {
+                        api
+                            .filter((value) => {
+                                if (search === "") {
+                                    return value;
+                                } else if (
+                                    value.name.toLowerCase().includes(search.toLowerCase())
+                                ) {
+                                    return value;
+                                }
+                            })
+                            .map((item) => {
 
-                                    if (item.uid !== currentUser.uid) {
-                                        return (
-                                            <div key={item.id}>
-                                                <div className="Search-user-profile-div">
+                                if (item.uid !== currentUser.uid) {
+                                    return (
+                                        <div key={item.id}>
+                                            <div className="Search-user-profile-div">
+                                                <div>
                                                     <img
                                                         src={item.PhotoUrl}
                                                         className="Search-user-profile-img"
                                                         alt=""
                                                     />
-                                                    <Link to={`/users/${item.uid}`}>
-                                                        <div className="Search-user-profile-name text-lightProfileName dark:text-darkProfileName">{item.name}</div>
-                                                    </Link>
                                                 </div>
+                                                <Link to={`/users/${item.uid}`}>
+                                                    <div className="Search-user-profile-name text-lightProfileName dark:text-darkProfileName">{item.name}</div>
+                                                </Link>
                                             </div>
-                                        );
-                                    }
 
 
-                                })
-                        }
-                    </div>
-                    <div className="Search-user-bottom">
+                                        </div>
+                                    );
+                                }
 
-                    </div>
+
+                            })
+                    }
                 </div>
             </div>
         </>

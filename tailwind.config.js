@@ -2,7 +2,7 @@
 
 
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/**/*.{html,css}"],
   darkMode: "class",
   theme: {
     extend: {
@@ -76,7 +76,13 @@ module.exports = {
           '50%': { opacity: 0 },
         },
       },
-      
+      extend: {
+        textColor: {
+          // Define text color variants for hover in dark mode
+          'dark-hover': 'pink', // Replace with your desired dark hover text color
+        },
+      },
+
     },
 
   },

@@ -38,6 +38,7 @@
 
             .bi-arrow-left {
                 margin-right: 1rem;
+                cursor: pointer;
             }
 
             .Message-User-input {
@@ -57,6 +58,44 @@
             display: flex;
             flex-direction: column;
             padding: 0 1rem;
+
+            .tablink-btn-wrapper {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 1rem;
+                padding: 1rem;
+
+                .tablink-btn-inner-wrapper {
+                    width: 100%;
+                    max-width: 600px;
+                    // background: blue;
+                    display: flex;
+                    justify-content: space-between;
+
+                }
+            }
+
+            .tablinks {
+                padding: 5px 8px;
+                cursor: pointer;
+                // color: white;
+                font-weight: 600;
+
+                &.active {
+                    display: block;
+                    background-color: #007bff;
+                    padding: 5px 8px;
+                    border-radius: 30px;
+                    color: #fff;
+                }
+            }
+
+            .message-tab-container {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+            }
 
             .message-profile-div-one {
                 display: flex;

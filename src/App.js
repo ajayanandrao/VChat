@@ -42,6 +42,8 @@ import Install from './Setting/Install/Install';
 import { AuthContext } from './AuthContaxt';
 import CreateStorey from './Story/createStory/CreateStorey';
 import ViewStoryProps from './Story/createStory/ViewStory/ViewStoryProps';
+import HomePage from './Home/HomePage';
+import Left from './Home/Left/Left';
 
 function App() {
 
@@ -159,6 +161,7 @@ function App() {
             <div className="mobile" style={style}>
               <MobileNavebar />
 
+              {/* <Left/> */}
             </div>
 
             <Navbar />
@@ -171,10 +174,14 @@ function App() {
           <Route exact path="/" element={<Login />} />
           <Route exact path="*" element={<Error404 />} />
           <Route path="signUp" element={<SignUp />} />
+          <Route exact path="forgotPassword" element={<ForgotPassword />} />
 
           {loading ?
 
-            (<> <Route path="home" element={<Home />} />
+            // (<> <Route path="home" element={<Home />} />
+            (<>
+              <Route path="home" element={<HomePage />} />
+              {/* <Route path="home" element={<Home />} />  */}
               {/* <Route path="post" element={<Post />} /> */}
 
               <Route path="welcome" element={<Wellcome />} />
@@ -184,7 +191,7 @@ function App() {
               <Route path='notification/:id' element={<NotificationPara />} />
 
               <Route exact path="changePassword" element={<ChangePassword />} />
-              <Route exact path="forgotPassword" element={<ForgotPassword />} />
+
 
               <Route path="option" element={<Option />} />
               <Route path="setting" element={<Setting />} />

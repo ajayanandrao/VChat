@@ -332,6 +332,7 @@ const Feed = ({ post }) => {
         setUpdating(true);
         const postRef = doc(db, 'AllPosts', id);
         if (!editInput) {
+            setUpdating(false);
             return
         }
         if (EditImg) {
@@ -466,7 +467,7 @@ const Feed = ({ post }) => {
                     <div className="feed-Edit-card bg-light_0 dark:bg-darkDiv">
                         <div className="feed-edit-inner-div">
                             <div className='feed-close-div text-lightProfileName dark:text-darkProfileName' >
-                                <IoMdClose style={{ fontSize: "24px" }} onClick={() => feedOff(post.id)} />
+                                <IoMdClose style={{ fontSize: "24px", cursor:"pointer" }} onClick={() => feedOff(post.id)} />
                             </div>
                             <div className="feed-main-card ">
                                 {updating ? (<LinearProgress className='l-progress' />) : null}
@@ -542,7 +543,7 @@ const Feed = ({ post }) => {
 
 
 
-                                <Link to={`/users/${post.uid}`}>
+                                <Link to={`/users/${post.uid}`} className='link'>
                                     <div className='feed-option-view ' id={`profileView-${post.id}`}>View Profiel</div>
                                 </Link>
 

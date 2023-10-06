@@ -1,3 +1,5 @@
+@import "./../Styles/Mixin_New.scss";
+
 .height {
     // background: red;
     width: 100%;
@@ -17,7 +19,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 50px;
+    // height: 50px;
     z-index: 9999;
     transition: opacity 0.3s ease-in-out;
 
@@ -59,16 +61,31 @@
 
     position: fixed;
     bottom: 100px;
-    right: 10px;
+    right: 31%;
     color: rgba(255, 255, 255, 0.596);
     transition: 0.3s ease-in-out;
     z-index: 2;
 
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
+    @include respond-to(md) {
+        right: 3%;
+    }
+
+    @include respond-to(sm) {
+        right: 2%;
+    }
+
+    @include respond-to(xs) {
+
+        right: 2%;
+    }
+
     .top-arrow {
         transition: 0.3s ease-in-out;
         font-size: 16px;
         // color: black;
     }
+
+
 }

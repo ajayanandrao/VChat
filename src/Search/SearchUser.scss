@@ -1,83 +1,78 @@
 @import "./../Mixin_New.scss";
 @import "./../Variable.scss";
 
-.search-wrapper {
+.search-back-div {
+    width: 100%;
+    height: 50px;
+    // background: red;
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid #585858;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+
+
+    .bi-arrow-left {
+        margin-right: 1rem;
+        cursor: pointer;
+
+        @include respond-to(lg) {
+            display: none;
+
+        }
+    }
+
+    .Seatch-User-input {
+        width: 100%;
+        max-width: 400px;
+        height: 35px;
+        padding: 0 10px;
+        border-radius: 30px;
+        border: none;
+    }
+}
+
+.search-main-container {
     position: fixed;
     top: 0;
+    left: 0;
+    z-index: 9999;
     width: 100%;
     height: 100vh;
-    z-index: 9999;
-    // background-color: white;
-    padding-top: 40px;
+    // background: blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+    overflow-y: scroll;
 
-    .search-container-inner {
-        box-sizing: border-box;
-        overflow-y: scroll;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .Search-user-profile-div {
         width: 100%;
-        height: 100%;
+        padding: 1rem;
+        // background: red;
+        margin: 0.5rem;
+        display: flex;
+        align-items: center;
 
-        &::-webkit-scrollbar {
-            display: none;
+        .Search-user-profile-img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+            margin-right: 1rem;
+            cursor: pointer;
         }
 
-        .Search-container {
-            // background-color: white;
-            padding: 1rem;
-            position: absolute;
-            top: 0;
-            width: 100%;
-            color: black;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #ccc;
-
-            .bi-arrow-left {
-                margin-right: 1rem;
-            }
-
-            .Seatch-User-input {
-                padding: 8px;
-                border: none;
-                outline: none;
-                border-radius: 2px;
-                transition: border-bottom-color 0.3s, box-shadow 0.3s;
-                background: none;
-                font-size: 17px;
-                padding-inline-start: 20px;
-
-                &:focus {
-                    // box-shadow: none;
-                }
-            }
+        .Search-user-profile-name {
+            cursor: pointer;
+            text-transform: capitalize;
         }
-
-        .Search-user-List {
-            padding: 1rem;
-            padding-bottom: 2rem;
-            color: black;
-            padding-top: 2rem;
-
-            .Search-user-profile-div {
-                display: flex;
-                align-items: center;
-                margin: 1rem 0;
-
-                .Search-user-profile-img {
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 20px, rgba(0, 0, 0, 0.062) 0px 10px 10px;
-                }
-
-                .Search-user-profile-name {
-                    margin-left: 1rem;
-                    font-weight: 600;
-                    text-transform: capitalize;
-                }
-            }
-        }
-
     }
 }

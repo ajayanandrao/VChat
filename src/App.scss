@@ -1,3 +1,5 @@
+@import "./Styles/Mixin_New.scss";
+
 #text {
   position: absolute;
   top: 50%;
@@ -16,12 +18,15 @@
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
 }
-.a{
+
+.a {
   color: white !important;
 }
+
 .skeleton-center {
   width: 100%;
-  height: calc(100vh - 40px);
+  height: 100vh;
+  // height: calc(100vh - 40px);
   // margin-top: 3rem;
   display: flex;
   justify-content: center;
@@ -227,6 +232,16 @@ Link {
   text-decoration: none;
   color: black;
   cursor: pointer;
+
+}
+
+.link {
+  &:hover {
+    color: inherit !important;
+    text-decoration: none !important;
+    cursor: pointer;
+  }
+
 }
 
 .bi-arrow-left {
@@ -240,4 +255,13 @@ Link {
   color: black;
   cursor: pointer;
   text-align: center;
+}
+
+.left-div {
+  width: 100%;
+  max-width: 100px;
+
+  @include respond-to(xs) {
+    display: none;
+  }
 }

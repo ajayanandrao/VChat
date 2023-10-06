@@ -1,10 +1,14 @@
+@import "./../Styles/Mixin_New.scss";
+
 .reel-video-container {
     position: relative;
     top: 0;
     max-width: 576px;
     height: calc(100vh - 1.5px);
     z-index: 9999;
-    background: white;
+    // background: white;
+    display: flex;
+    align-items: center;
 
     .reel-icon-up-btn {
         width: 40px;
@@ -21,6 +25,7 @@
         transform: translate(-50%, -50%);
         font-size: 24px;
         color: aqua;
+        cursor: pointer;
     }
 
     .reel-like-icon {
@@ -41,6 +46,7 @@
         align-items: center;
         border-radius: 20px;
         padding: 0.5rem;
+        cursor: pointer;
 
         .like-count {
             font-size: 16px;
@@ -64,14 +70,43 @@
         justify-content: center;
         align-items: center;
         border-radius: 50%;
+        cursor: pointer;
+    }
+
+    @include respond-to(xs) {
+        height: 100vh;
+    }
+
+    .reel-outer {
+        width: 100%;
+        height: 100%;
+
+        @include respond-to(md) {
+            height: auto;
+        }
+
+        @include respond-to(sm) {
+            height: auto;
+        }
+
+        @include respond-to(xs) {
+            height: auto;
+        }
     }
 }
 
 .reel-video {
     width: 100%;
+    max-width: 400px;
     height: 100%;
+    max-height: 800px;
     object-fit: cover;
     object-position: center;
+    border-radius: 10px;
+
+    @include respond-to(xs) {
+        height: 100vh;
+    }
 }
 
 .reel-profile-div {
@@ -80,7 +115,7 @@
     padding: 0.5rem;
     align-items: center;
     position: absolute;
-    bottom: 0%;
+    bottom: 0;
     left: 0;
     right: 0;
     transform: translate(-0%, -5%);
@@ -88,6 +123,14 @@
     // background: red;
     cursor: pointer;
     z-index: 0;
+
+    @include respond-to(xs) {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: translate(-0%, -5%);
+    }
+
 
     .reel-profile-img {
         width: 40px;
@@ -153,4 +196,13 @@
         color: white;
     }
 
+}
+
+.reel-position-div {
+    width: 100%;
+    // height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.8s ease-in-out;
 }

@@ -48,8 +48,10 @@ const CurrentUserFriendProfileMain = () => {
         <>
             <LeftArro />
 
+
             <div className='current-user-friend-profile-main bg-light_0 dark:bg-dark'>
-                <div style={{ width: "100%", height: "100vh" , boxSizing: "border-box", overflowY: "scroll" }}>
+                <div className="left-div"></div>
+                <div className='current-user-friend-inner-div'>
                     <ProfilePageOne user={user} />
                     <ProfilePageTwo user={user} userId={userId} />
                     <ProfilePageThree user={user} />

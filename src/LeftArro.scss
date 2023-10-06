@@ -1,0 +1,8 @@
+@import "./Styles/Mixin_New.scss";
+
+.media-qury {
+    display: none !important;
+    @include respond-to(xs) {
+        display: flex !important;
+    }
+}

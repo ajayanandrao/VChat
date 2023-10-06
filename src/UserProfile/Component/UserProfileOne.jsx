@@ -357,7 +357,9 @@ const ProfileOne = ({ user }) => {
                 {loadingCoverData ? (
 
                     <div className='placeholder-glow loading-profile-cover-photo-div'>
-                        <div className="placeholder placeholder-dimension"></div>
+                        <div className="placeholder placeholder-dimension bg-[white] dark:bg-darkPostIcon">
+                            <div className="placeholder-dimension-img bg-[white] dark:bg-darkDiv"></div>
+                        </div>
                     </div>
 
                 ) : (

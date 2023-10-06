@@ -10,7 +10,7 @@
 
 	.feed-div {
 		width: 100%;
-		flex-basis: 576px;
+		flex-basis: 510px;
 		// background: white;
 		// box-shadow: $border-input;
 		box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -80,11 +80,17 @@
 
 					.feed-option-edit {
 						margin-bottom: 0.8rem;
+						cursor: pointer;
 					}
 
 					.feed-option-view {
 						width: 80px;
+						cursor: pointer;
 					}
+				}
+
+				.feed-option-delete {
+					cursor: pointer;
 				}
 
 				.feed-option-btn {
@@ -267,6 +273,7 @@
 		// color: $light-text2;
 		color: #2E2E2E;
 		transition: 0.8s ease-in-out;
+		cursor: pointer;
 	}
 }
 

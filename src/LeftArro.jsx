@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { HiOutlineArrowSmLeft } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
+import "./LeftArro.scss";
 
 const LeftArro = () => {
     const nav = useNavigate();
@@ -60,7 +61,7 @@ const LeftArro = () => {
     }
 
     return (
-        <div className='back-btn-di text-aqua_0 dark:text-aqua_0' style={style} onClick={goBack}>
+        <div className='media-qury back-btn-di  text-aqua_0 dark:text-aqua_0' style={style} onClick={goBack}>
             <HiOutlineArrowSmLeft fontSize={"25px"} />
         </div>
     );

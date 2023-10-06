@@ -4,4 +4,17 @@
     box-sizing: border-box;
     padding-bottom: 100px;
     transition: 0.8s ease-in-out;
+    padding-bottom: 1rem;
+    display: flex;
+
+    .current-user-profile-container {
+        width: 100%;
+        height: 100vh;
+        box-sizing: border-box;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
 }

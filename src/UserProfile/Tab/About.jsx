@@ -98,7 +98,7 @@ const About = () => {
                                 (<div className="about-overlay-container">
                                     <h1 className='text-3xl text-lightPostText dark:text-darkPostText'>Your Intro</h1>
                                     <div className='about-form-div'>
-                                        <input type="text" className='about-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText' placeholder='Write Your Intro' value={intro} onChange={(e) => setIntro(e.target.value)} />
+                                        <input type="text" className='about-input bg-darkInput dark:bg-darkInput text-[white] dark:text-darkPostText' placeholder='Write Your Intro' value={intro} onChange={(e) => setIntro(e.target.value)} />
 
                                         <div className="about-save-btn-div">
                                             <button className='btn btn-success' onClick={() => handleIntro(item.id)}>save</button>
@@ -149,7 +149,7 @@ const About = () => {
                                 </div>
 
                                 <hr />
-                                <div className="details-wrapper">
+                                <div className="details-wrapper bg-lightDiv dark:bg-darkDiv">
                                     <div className="your-detail-div">
                                         <h4 className='text-2xl text-lightProfileName dark:text-darkProfileName'>Your details</h4>
                                         <button className='edit-bio-btn text-lightProfileName dark:text-darkProfileName' onClick={handleShowAboutOverlay}>Edit bio</button>
@@ -160,7 +160,7 @@ const About = () => {
                                             <div className="detail-item-one">
                                                 <samp className='d-item-name text-lightProfileName dark:text-darkProfileName'>School </samp>
                                                 {item.school ?
-                                                    <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'> {item.school}
+                                                    <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'> {item.school}
                                                     </span>
                                                     :
                                                     null}
@@ -169,7 +169,7 @@ const About = () => {
                                             <div className="detail-item-one">
                                                 <samp className='d-item-name text-lightProfileName dark:text-darkProfileName'>College </samp>
                                                 {item.college ?
-                                                    <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'> {item.college}
+                                                    <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'> {item.college}
                                                     </span>
                                                     :
                                                     null
@@ -179,7 +179,7 @@ const About = () => {
                                             <div className="detail-item-one">
                                                 <samp className='d-item-name text-lightProfileName dark:text-darkProfileName'>Work </samp>
                                                 {item.work ?
-                                                    <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'>
+                                                    <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'>
                                                         {item.work}
                                                     </span>
                                                     :
@@ -190,7 +190,7 @@ const About = () => {
                                             <div className="detail-item-one">
                                                 <samp className='d-item-name text-lightProfileName dark:text-darkProfileName'> From </samp>
                                                 {item.from ?
-                                                    <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-lightDiv dark:bg-darkDiv'> {item.from}
+                                                    <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'> {item.from}
                                                     </span>
                                                     :
                                                     null

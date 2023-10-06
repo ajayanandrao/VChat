@@ -1,3 +1,6 @@
+@import "./../Styles/Mixin_New.scss";
+
+
 .navbar-main-container {
     // background: red;
     width: 100%;
@@ -8,11 +11,13 @@
     display: flex;
     justify-content: center;
 
+
     .navbar-mainu-button {
         display: flex;
         justify-content: center;
         align-items: center;
         // background: blue;
+        cursor: pointer;
 
         .pinkBg {
             background-color: #ff00ae !important;
@@ -87,6 +92,11 @@
     }
 
     // ------------------------------------------------
+    .link {
+        &:hover {
+            color: none;
+        }
+    }
 
     .circle-div {
         // background: blue;
@@ -110,6 +120,7 @@
             // background: blue;
             font-size: 24px;
             // padding-bottom: 6px;
+            cursor: pointer;
         }
 
         .c-video {
@@ -166,7 +177,8 @@
                 border-radius: 50%;
             }
         }
-        .link-btn-shadow{
+
+        .link-btn-shadow {
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             border-radius: 50%;
             display: flex;

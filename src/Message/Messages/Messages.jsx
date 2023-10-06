@@ -38,7 +38,7 @@ const Messages = () => {
 
     const [selectedMessageId, setSelectedMessageId] = useState("");
 
-    const [hoveredMessageId, setHoveredMessageId] = useState('');
+
     const [img, setImg] = useState(null);
 
 
@@ -195,9 +195,16 @@ const Messages = () => {
         setViewReplyImgLikeUrl(null);
     }
 
-
+    const [hoveredMessageId, setHoveredMessageId] = useState('');
     const showReplyButton = (messageId) => {
         setHoveredMessageId(messageId);
+    };
+    const [emojiHoveredMessageId, setEmojiHoveredMessageId] = useState('');
+    const showEmojiDelteBtn = (messageId) => {
+        setEmojiHoveredMessageId(messageId);
+    };
+    const hideEmojiDelteBtn = (messageId) => {
+        setEmojiHoveredMessageId('');
     };
 
     const hideReplyButton = () => {
@@ -552,7 +559,7 @@ const Messages = () => {
 
         setTimeout(() => {
             setDoc(typingRef, { isTyping: false });
-        }, 5000); // Adjust the timeout duration as needed
+        }, 2000); // Adjust the timeout duration as needed
     };
 
 
@@ -970,7 +977,7 @@ const Messages = () => {
 
                                 <div className='deleteMessagePhoto-div'>
                                     <div className="deleteMessagePhoto-div-inner bg-lightDiv text-lightPostText dark:text-darkPostText dark:bg-darkDiv">
-                                        <div>This will Delete the message for everyone.</div>
+                                        <div className='text-lightProfileName dark:text-darkProfileName'>This will Delete the message for everyone.</div>
                                         <div className='my-4'>
                                             <button className='btn btn-sm btn-danger mx-4' onClick={Delete_Photo_Video}>Delete</button>
                                             <button className='btn btn-sm btn-secondary mx-4' onClick={DeleteMedaiOverlay}>Cancle</button>
@@ -1186,7 +1193,7 @@ const Messages = () => {
                                                 key={message.id}
                                                 className={`message-item ${messageClass}`}
                                             >
-                                                {isSender && hoveredMessageId === message.id && (
+                                                {isSender && emojiHoveredMessageId === message.id && (
                                                     <div>
                                                         <div
                                                             className="delete-button"
@@ -1199,6 +1206,8 @@ const Messages = () => {
                                                     </div>
                                                 )}
 
+
+
                                                 <div
                                                     className={`message-bubble ${isSender ? 'message-sender' : 'message-recipient '} ${hasImage || hasVideo || hasImageLike ? 'has-image' : '' /* Add 'has-image' class when message has an image */
                                                         }`}>
@@ -1207,6 +1216,7 @@ const Messages = () => {
 
                                                     {isDeletedBySender ?
 
+                                                        // Reciver Container
                                                         (<>
                                                             {deletedBySenderUid ?
                                                                 (
@@ -1225,9 +1235,10 @@ const Messages = () => {
                                                                                 ""
                                                                                 :
                                                                                 <>
-                                                                                    {isSender && hoveredMessageId === message.id && (
-                                                                                        <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}</div>
-                                                                                    )}
+                                                                                    {/* {isSender && hoveredMessageId === message.id && (
+                                                                                        <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}
+                                                                                        </div>
+                                                                                    )} */}
                                                                                 </>
                                                                             }
 
@@ -1273,7 +1284,7 @@ const Messages = () => {
                                                                                             </div>
                                                                                         </>
                                                                                     ) : (
-                                                                                        <div style={{ display: "inline-flex", lineHeight: "0px" }}>
+                                                                                        <div className='' style={{ display: "inline-flex", lineHeight: "0px" }}>
                                                                                             <p >{message.reply}</p>
                                                                                         </div>
                                                                                     )}
@@ -1282,14 +1293,14 @@ const Messages = () => {
 
 
 
-                                                                            {!isSender && hoveredMessageId === message.id && (
+                                                                            {/* {!isSender && hoveredMessageId === message.id && (
                                                                                 <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}</div>
-                                                                            )}
+                                                                            )} */}
 
 
                                                                             {hasImage &&
                                                                                 <div
-                                                                                    onMouseEnter={() => showReplyButton(message.id)}
+                                                                                    onClick={() => showReplyButton(message.id)}
                                                                                     onMouseLeave={hideReplyButton}>
                                                                                     <img onClick={() => ViewMessageImg(message.id, message.imageUrl, message && message.timestamp)} src={message.imageUrl}
                                                                                         className='messageImg' alt="Message" />
@@ -1297,8 +1308,7 @@ const Messages = () => {
                                                                             }
 
                                                                             {hasVideo &&
-                                                                                <div onClick={() => handleVewVideo(message.id, message.videoUrl, message && message.timestamp)}
-                                                                                    onMouseEnter={() => showReplyButton(message.id)}
+                                                                                <div onClick={() => { handleVewVideo(message.id, message.videoUrl, message && message.timestamp); showReplyButton(message.id); }}
                                                                                     onMouseLeave={hideReplyButton}
                                                                                 >
                                                                                     <div className="message-video-container" >
@@ -1316,7 +1326,7 @@ const Messages = () => {
                                                                             }
 
                                                                             {hasImageLike &&
-                                                                                <div className='messageImgLike-div' onMouseEnter={() => showReplyButton(message.id)}
+                                                                                <div className='messageImgLike-div' onClick={() => showReplyButton(message.id)}
                                                                                     onMouseLeave={hideReplyButton}>
                                                                                     <img src={message.imageUrlLike}
                                                                                         className='messageImgLike' alt="Message" />
@@ -1325,9 +1335,8 @@ const Messages = () => {
 
 
 
-
                                                                             {message.message && <div className="message-content"
-                                                                                onMouseEnter={() => showReplyButton(message.id)}
+                                                                                onClick={() => showReplyButton(message.id)}
                                                                                 onMouseLeave={hideReplyButton}
                                                                             >{message.message}</div>}
 
@@ -1341,20 +1350,13 @@ const Messages = () => {
 
                                                         :
 
+                                                        // Sender Container
                                                         (<>
 
                                                             {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" /> </div>}
 
                                                             <div>
-                                                                {hasImageLike ?
-                                                                    ""
-                                                                    :
-                                                                    <>
-                                                                        {isSender && hoveredMessageId === message.id && (
-                                                                            <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}</div>
-                                                                        )}
-                                                                    </>
-                                                                }
+
 
                                                                 {/* {message.reply && <div className="message-reply">{message.reply}</div>} */}
 
@@ -1398,8 +1400,8 @@ const Messages = () => {
                                                                                 </div>
                                                                             </>
                                                                         ) : (
-                                                                            <div style={{ display: "inline-flex", lineHeight: "0px" }}>
-                                                                                <p >{message.reply}</p>
+                                                                            <div className='text-lightPostText dark:bg-darkDiv dark:text-light_0 replay-message-div' style={{ display: "inline-flex" }}>
+                                                                                <div className='dark:text-light_0' >{message.reply}</div>
                                                                             </div>
                                                                         )}
                                                                     </div>
@@ -1407,23 +1409,24 @@ const Messages = () => {
 
 
 
-                                                                {!isSender && hoveredMessageId === message.id && (
+                                                                {/* {!isSender && hoveredMessageId === message.id && (
                                                                     <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}</div>
-                                                                )}
+                                                                )} */}
 
 
                                                                 {hasImage &&
                                                                     <div
-                                                                        onMouseEnter={() => showReplyButton(message.id)}
-                                                                        onMouseLeave={hideReplyButton}>
+                                                                        onClick={() => showReplyButton(message.id)}
+                                                                        onMouseLeave={hideReplyButton}
+
+                                                                    >
                                                                         <img onClick={() => ViewMessageImg(message.id, message.imageUrl, message && message.timestamp)} src={message.imageUrl}
                                                                             className='messageImg' alt="Message" />
                                                                     </div>
                                                                 }
 
                                                                 {hasVideo &&
-                                                                    <div onClick={() => handleVewVideo(message.id, message.videoUrl, message && message.timestamp)}
-                                                                        onMouseEnter={() => showReplyButton(message.id)}
+                                                                    <div onClick={() => { handleVewVideo(message.id, message.videoUrl, message && message.timestamp); showReplyButton(message.id); }}
                                                                         onMouseLeave={hideReplyButton}
                                                                     >
                                                                         <div className="message-video-container" >
@@ -1441,37 +1444,96 @@ const Messages = () => {
                                                                 }
 
                                                                 {hasImageLike &&
-                                                                    <div className='messageImgLike-div' onMouseEnter={() => showReplyButton(message.id)}
-                                                                        onMouseLeave={hideReplyButton}>
+                                                                    <div className='messageImgLike-div' onClick={() => showEmojiDelteBtn(message.id)}
+                                                                        onMouseLeave={hideEmojiDelteBtn}>
                                                                         <img src={message.imageUrlLike}
                                                                             className='messageImgLike' alt="Message" />
                                                                     </div>
                                                                 }
 
                                                                 {hasTxt && (
-                                                                    <div onMouseEnter={() => showReplyButton(message.id)}>
-                                                                        <a className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.textFileUrl} download={message.txtName}>
-                                                                            <BiSolidFileTxt className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-[white]' : 'text-lightProfileName dark:text-darkProfileName'} `} />
-
-                                                                            <div className={`${!isSender ? 'dark:text-darkProfileName text-[white]' : 'dark:text-darkProfileName text-lightProfileName'}`}> {message.txtName} </div>
+                                                                    <div onMouseEnter={() => showEmojiDelteBtn(message.id)} onMouseLeave={() => showEmojiDelteBtn(message.id)}>
+                                                                        <a className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#6453ac] dark:bg-darkReciver dark:text-darkProfileName' : "bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.textFileUrl} download={message.txtName}>
+                                                                            <BiSolidFileTxt className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-[white]' : 'text-lightProfileName dark:text-darkProfileName'}`} />
+                                                                            <div className={`${!isSender ? 'dark:text-darkProfileName text-[white]' : 'dark:text-darkProfileName text-lightProfileName'}`}>{message.txtName}</div>
                                                                         </a>
                                                                     </div>
                                                                 )}
+
 
                                                                 {hasPdf && (
-                                                                    <div onMouseEnter={() => showReplyButton(message.id)}>
-                                                                        <a className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.pdfUrl} download={message.pdfName}>
-                                                                            <BiSolidFilePdf className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-[white] ' : 'text-lightProfileName dark:text-darkProfileName'} `} />
-                                                                            <div className={`${!isSender ? 'dark:text-darkProfileName text-[white]' : 'dark:text-darkProfileName text-lightProfileName'}`}> {message.pdfName} </div>
+                                                                    <div onMouseEnter={() => showEmojiDelteBtn(message.id)} onMouseLeave={() => showEmojiDelteBtn(message.id)}>
+                                                                        <a className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#6453ac] dark:bg-darkReciver dark:text-darkProfileName' : "bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.pdfUrl} download={message.pdfName}>
+                                                                            <BiSolidFilePdf className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-[white]' : 'text-lightProfileName dark:text-darkProfileName'}`} />
+                                                                            <div className={`${!isSender ? 'dark:text-darkProfileName text-[white]' : 'dark:text-darkProfileName text-lightProfileName'}`}>{message.pdfName}</div>
                                                                         </a>
                                                                     </div>
                                                                 )}
+
 
 
                                                                 {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
-                                                                    onMouseEnter={() => showReplyButton(message.id)}
+                                                                    onClick={() => showReplyButton(message.id)}
                                                                     onMouseLeave={hideReplyButton}
-                                                                >{message.message}</div>}
+                                                                >
+                                                                    {message.message}
+
+                                                                    <br />
+                                                                    {hoveredMessageId === message.id ?
+                                                                        <div className='mt-2 d-flex align-items-center'>
+                                                                            {isSender && hoveredMessageId === message.id && (
+                                                                                <div className="dark:text-darkPostTime" style={{ fontSize: "12px" }}>{formatTimestamp(message && message.timestamp)}
+                                                                                </div>
+                                                                            )}
+
+                                                                            {!isSender && hoveredMessageId === message.id && (
+                                                                                <div className="dark:text-darkPostTime" style={{ fontSize: "12px" }}>{formatTimestamp(message && message.timestamp)}</div>
+                                                                            )}
+
+
+                                                                            <div>
+                                                                                {isSender && hoveredMessageId === message.id && (
+                                                                                    <div>
+                                                                                        <div
+                                                                                            className="delete-butto"
+                                                                                            onClick={() => {
+                                                                                                deleteMessage(message.id);
+                                                                                            }}
+                                                                                        >
+                                                                                            <MdDelete style={{ fontSize: "24px", marginLeft: "10px" }} />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                )}
+                                                                            </div>
+
+                                                                            <>
+                                                                                {!isSender && hoveredMessageId === message.id && (
+                                                                                    <div>
+                                                                                        <div
+                                                                                            className="reply-button"
+                                                                                            onClick={() => {
+                                                                                                setSelectedMessageId(message.id);
+                                                                                                setViewMessageInput(message.message);
+                                                                                                setViewMessageImg(message.imageUrl);
+                                                                                                setViewReplyImgLikeUrl(message.imageUrlLike);
+                                                                                                setViewReplyVideoUrl(message.videoUrl);
+
+                                                                                                setViewReplyImgUrl(message.imageUrl);
+
+
+                                                                                            }}
+                                                                                        >
+                                                                                            <MdOutlineReply className='text-lightProfileName dark:text-darkProfileName' style={{ fontSize: "24px", marginLeft: "10px" }} />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                )}
+                                                                            </>
+
+                                                                        </div>
+                                                                        :
+                                                                        null
+                                                                    }
+                                                                </div>}
                                                             </div>
                                                         </>)
                                                     }
@@ -1479,13 +1541,11 @@ const Messages = () => {
 
                                                 </div>
 
-                                                {!isSender && hoveredMessageId === message.id && (
+                                                {/* {!isSender && hoveredMessageId === message.id && (
                                                     <div>
                                                         <div
                                                             className="reply-button"
                                                             onClick={() => {
-
-
                                                                 setSelectedMessageId(message.id);
                                                                 setViewMessageInput(message.message);
                                                                 setViewMessageImg(message.imageUrl);
@@ -1500,7 +1560,7 @@ const Messages = () => {
                                                             <MdOutlineReply className='text-lightProfileName dark:text-darkProfileName' />
                                                         </div>
                                                     </div>
-                                                )}
+                                                )} */}
                                             </div >
                                         </>
                                     );
@@ -1521,8 +1581,8 @@ const Messages = () => {
                                                         <div className="dot-1 bg-light_0 dark:bg-darkProfileName"></div>
                                                         <div className="dot-2 bg-light_0 dark:bg-darkProfileName"></div>
                                                         <div className="dot-3 bg-light_0 dark:bg-darkProfileName"></div>
-                                                        <div className="dot-4 bg-light_0 dark:bg-darkProfileName"></div>
-                                                        <div className="dot-5 bg-light_0 dark:bg-darkProfileName"></div>
+                                                        {/* <div className="dot-4 bg-light_0 dark:bg-darkProfileName"></div>
+                                                        <div className="dot-5 bg-light_0 dark:bg-darkProfileName"></div> */}
                                                     </div>
                                                 </div>
                                             ) : null}
@@ -1548,7 +1608,7 @@ const Messages = () => {
                         transition={{ duration: 0.7 }}
                         initial={{ opacity: 0, y: 150 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="emoji-container-main">
+                        className="emoji-container-main" onClick={handleMessageEmoji}>
 
 
                         <div className='emoji-history-div'>
@@ -1557,14 +1617,13 @@ const Messages = () => {
                                     return (
                                         <div key={index} className='emoji-history-item'>
                                             <div className='emoji-history-icon-div'>
-                                                <img src={hist.imageUrlLike} className='emoji-history-icon' alt=""  onClick={() => handleSendMessageEmoji(user.uid, user.userPhoto, hist.imageUrlLike)}/>
+                                                <img src={hist.imageUrlLike} className='emoji-history-icon' alt="" onClick={() => handleSendMessageEmoji(user.uid, user.userPhoto, hist.imageUrlLike)} />
                                             </div>
                                         </div>
                                     )
                                 }
                             })}
                         </div>
-
 
 
                         <div className="emoji-div-scroll">
@@ -1587,7 +1646,7 @@ const Messages = () => {
                 {/* message bottom bar --------------------------------------- */}
 
 
-                <div className="message-bottom-bar">
+                <div className="message-bottom-bar bg-light_0 dark:bg-darkDiv dark:text-darkPostText">
 
                     {/* bottom messege Selected for reply --------------------------------- */}
 
@@ -1602,7 +1661,7 @@ const Messages = () => {
                             <div className="close-device-file-seleced-div"
                                 onClick={() => { setViewMessageInput(null) }}
                             >
-                                <MdClose style={{ fontSize: "20px" }} />
+                                <MdClose style={{ fontSize: "20px", cursor: "pointer" }} />
                             </div>
                         </div>
                         :
@@ -1642,11 +1701,23 @@ const Messages = () => {
                                     </div>
 
 
-                                ) : img ? (
-                                    <img src={URL.createObjectURL(img)} className="device-img-selected" alt="" />
-                                ) : (
-                                    ""
-                                )}
+                                ) : img && img.type.startsWith("image") ? (
+                                    <>
+                                        <img src={URL.createObjectURL(img)} className="device-img-selected" alt="" />
+                                    </>
+                                ) : img && img.type.startsWith("application/pdf") ?
+                                    (<div className='device-document-selected'>
+                                        <BiSolidFilePdf className='device-document-icon' />
+                                        <div>
+                                            {img.name}
+                                        </div>
+                                    </div>) : img.type === "text/plain" ? (
+                                        <div className='device-document-selected'>
+                                            <BiSolidFileTxt className='device-document-icon' />
+                                            <div>{img.name}</div>
+                                        </div>
+                                    ) : null}
+
                             </div>
 
                             <div className="close-device-file-seleced-div"
@@ -1658,6 +1729,9 @@ const Messages = () => {
                         :
                         null
                     }
+
+
+
                     {/* End --------------------------------- */}
 
 
@@ -1667,6 +1741,30 @@ const Messages = () => {
 
 
                     {/* bottom photo Selected for Messages Reply --------------------------------- */}
+
+                    {viewReplyImgUrl ?
+
+                        <div className='device-file-select-container'>
+                            <div className="device-file-selected-div">
+                                {
+                                    viewReplyImgUrl && typeof viewReplyImgUrl === 'string' ? (
+                                        <img src={viewReplyImgUrl} className="device-img-selected" alt="" />
+                                    ) : (
+                                        ""
+                                    )
+                                }
+
+                            </div>
+
+                            <div className="close-device-file-seleced-div"
+                                onClick={() => { setViewReplyImgUrl(null) }}
+                            >
+                                <MdClose style={{ fontSize: "20px" }} />
+                            </div>
+                        </div>
+                        :
+                        null
+                    }
 
                     {viewReplyImgUrl ?
 
@@ -1735,7 +1833,7 @@ const Messages = () => {
 
 
 
-                    {/* {MessagePhoto ?
+                    {MessagePhoto ?
 
                         <div className='device-file-select-container'>
                             <div className="device-file-selected-div">
@@ -1755,7 +1853,7 @@ const Messages = () => {
                         </div>
                         :
                         null
-                    } */}
+                    }
                     {/* message bottom bar --------------------------------------- */}
 
                     <div className='message-bottom-inner-div bg-lightDiv dark:bg-darkDiv'>

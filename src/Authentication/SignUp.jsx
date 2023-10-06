@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "./Signup.scss";
+import "./NewSignup.scss";
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, db, storage } from "./../Firebase";
 import { addDoc, collection, doc, onSnapshot, serverTimestamp, setDoc } from 'firebase/firestore';
@@ -203,15 +203,17 @@ const SignUp = () => {
 
     return (
         <>
-            <div className="signUp-main-container">
-                <div className="signUp-wrapper">
-                    <div className="app-logo-div">
-                        <img src={vlogo} width={"50px"} alt="" />
-                        <h2 className='logo-name'>Chat App</h2>
+            <div className="signup-container">
+                <div className="signup-div">
+
+                    <div className="brand-wrapper">
+                        <div>
+                            <img src={vlogo} width={"50px"} alt="" />
+                        </div>
+                        <div className='brand-name'>  Chat App </div>
                     </div>
 
                     <div className='signUp-camera'>
-
                         {img ?
                             <label htmlFor="photo"  >
                                 <img className="singup-img-form" src={img ? URL.createObjectURL(img) : null} alt="" />
@@ -225,26 +227,21 @@ const SignUp = () => {
                                 </div>)}
 
                         <input type="file" className="photoinput" id="photo" onChange={(e) => setImg(e.target.files[0])} style={{ display: "none" }} />
-                        <div style={{ color: "#2E64FE" }}>{img ? "" : "Set Profile Photo"}</div>
-
-
+                        <div className='set-profile-photo-name'>{img ? "" : "Set Profile Photo"}</div>
                     </div>
 
-                    <div className="signUp-form-div">
-                        <input className="Auth-input-new mt-2" type="text"
+                    <div className="signup-form-wrapper">
+                        <input className="signup-inputs mt-1" type="text"
                             placeholder="Name"
                             onChange={(e) => setName(e.target.value)}
                             value={name}
                         />
-                        <input className="Auth-input-new mt-2" type="email"
+                        <input className="signup-inputs mt-1" type="email"
                             placeholder="Email"
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                         />
-
-                        {email ? null : <div id="error" style={{ color: "red" }}></div>}
-
-                        <input className="Auth-input-new my-2" type="password"
+                        <input className="signup-inputs my-1" type="password"
                             placeholder="Password"
                             onChange={(e) => setPass(e.target.value)}
                             value={password}
@@ -252,25 +249,17 @@ const SignUp = () => {
 
                         <div id="errorPass" style={{ color: "red" }}></div>
 
-                        <button className="btn-primary-custom w-100 my-4"
-                            onClick={submit}>Sign Up</button>
+                        <button className="btn btn-primary w-100  my-3"
+                            style={{ borderRadius: "30px", fontSize: "18px", padding: "4px 10px" }} onClick={submit} >Sign Up</button>
 
-                        <div className='or'>or</div>
 
-                        <Link to="/" className='link'>
-                            <div className='btn-success-outline create-new-a mt-3'> Already have an account ?</div>
+                        <Link to="/" className='link mt-4'>
+                            <button className="btn btn-link w-100" style={{ borderRadius: "30px" }}>Already have an account ?</button>
                         </Link>
 
                     </div>
                 </div>
-
-                <div className="footer">
-                    © 2023 Copyright: VChatApp.co.in
-                </div>
             </div>
-
-
-
         </>
     )
 }

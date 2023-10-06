@@ -52,74 +52,78 @@ const WeddingListDetail = () => {
     return (
         <>
             <LeftArro />
+            <div className='weddingListDetail-main-container'>
+                {photo &&
+                    <div className='max-photo-view' onClick={HandleViewPhoto}>
+                        <img src={data.photoOne} className='max-weddinglistD-photo' alt="" />
+                    </div>
+                }
+                <div className="weddinglistD-photo-div" style={{ backgroundImage: `url(${data.photoOne})` }}>
+                    <div className="blur-div">
+                        <motion.div
+                            transition={{ duration: 1.5 }}
+                            initial={{ opacity: 0, y: -60 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            onClick={HandleViewPhoto}>
+                            <img src={data.photoOne} className='weddinglistD-photo' alt="" />
+                        </motion.div>
 
-            {photo &&
-                <div className='max-photo-view' onClick={HandleViewPhoto}>
-                    <img src={data.photoOne} className='max-weddinglistD-photo' alt="" />
+                        <motion.div
+                            transition={{ duration: 1.5 }}
+                            initial={{ opacity: 0, y: 60 }}
+                            animate={{ opacity: 1, y: 0 }}
+                        >
+                            <h2 className='text-3xl ' style={{ textTransform: "capitalize", color: "white" }}>{data.first} {data.middel} {data.last}</h2>
+                            <div className='d-flex' style={{ fontSize: "18px", fontWeight: "600", color: "white" }}>
+                                {data.date}
+                                <span className='mx-1'>{data.month}</span>
+                                {data.years}
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
-            }
-            <div className="weddinglistD-photo-div" style={{ backgroundImage: `url(${data.photoOne})` }}>
-                <div className="blur-div">
-                    <motion.div
-                        transition={{ duration: 1.5 }}
-                        initial={{ opacity: 0, y: -60 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        onClick={HandleViewPhoto}>
-                        <img src={data.photoOne} className='weddinglistD-photo' alt="" />
-                    </motion.div>
 
-                    <motion.div
-                        transition={{ duration: 1.5 }}
-                        initial={{ opacity: 0, y: 60 }}
-                        animate={{ opacity: 1, y: 0 }}
-                    >
-                        <h2 className='text-3xl ' style={{ textTransform: "capitalize" }}>{data.first} {data.middel} {data.last}</h2>
-                        <div className='d-flex' style={{ fontSize: "18px", fontWeight: "600" }}>
-                            {data.date}
-                            <span className='mx-1'>{data.month}</span>
-                            {data.years}
+                <div className='weddinglist-mainu-wapper'>
+
+                    <div className='weddinglist-inner-wrapper'>
+                        <div className='weddinglist-mainu-item'>
+                            <div className='weddinglist-mainu-item-name'>Religion :- </div>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.region}</span>
                         </div>
-                    </motion.div>
-                </div>
-            </div>
-            <div className='weddinglist-mainu-wapper'>
+                        <div className='weddinglist-mainu-item'>
+                            <div className='weddinglist-mainu-item-name'>Work :- </div>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.work}</span>
+                        </div>
+                        <div className='weddinglist-mainu-item'>
+                            <div className='weddinglist-mainu-item-name'>Qualification :- </div>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.qualification}</span>
+                        </div>
+                        <div className='weddinglist-mainu-item'>
+                            <div className='weddinglist-mainu-item-name'>Mobile :- </div>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.mobile}</span>
+                        </div>
+                        <div className='weddinglist-mainu-item'>
+                            <div className='weddinglist-mainu-item-name'>Height :- </div>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.height}</span>
+                        </div>
+                        <div className='weddinglist-mainu-item'>
+                            <div className='weddinglist-mainu-item-name'>Landmark :- </div>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.landmark}</span>
+                        </div>
+                        <div className='weddinglist-mainu-item'>
+                            <div className='weddinglist-mainu-item-name'>Village :- </div>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.village}</span>
+                        </div>
+                        <div className='weddinglist-mainu-item'>
+                            <div className='weddinglist-mainu-item-name'>District :- </div>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.distric}</span>
+                        </div>
 
-                <div className='weddinglist-mainu-item'>
-                    <div className='weddinglist-mainu-item-name'>Religion :- </div>
-                    <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.region}</span>
-                </div>
-                <div className='weddinglist-mainu-item'>
-                    <div className='weddinglist-mainu-item-name'>Work :- </div>
-                    <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.work}</span>
-                </div>
-                <div className='weddinglist-mainu-item'>
-                    <div className='weddinglist-mainu-item-name'>Qualification :- </div>
-                    <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.qualification}</span>
-                </div>
-                <div className='weddinglist-mainu-item'>
-                    <div className='weddinglist-mainu-item-name'>Mobile :- </div>
-                    <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.mobile}</span>
-                </div>
-                <div className='weddinglist-mainu-item'>
-                    <div className='weddinglist-mainu-item-name'>Height :- </div>
-                    <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.height}</span>
-                </div>
-                <div className='weddinglist-mainu-item'>
-                    <div className='weddinglist-mainu-item-name'>Landmark :- </div>
-                    <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.landmark}</span>
-                </div>
-                <div className='weddinglist-mainu-item'>
-                    <div className='weddinglist-mainu-item-name'>Village :- </div>
-                    <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.village}</span>
-                </div>
-                <div className='weddinglist-mainu-item'>
-                    <div className='weddinglist-mainu-item-name'>District :- </div>
-                    <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.distric}</span>
-                </div>
-
-                <div className='weddinglist-mainu-item'>
-                    <div className='weddinglist-mainu-item-name'>State :- </div>
-                    <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.state}</span>
+                        <div className='weddinglist-mainu-item'>
+                            <div className='weddinglist-mainu-item-name'>State :- </div>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.state}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

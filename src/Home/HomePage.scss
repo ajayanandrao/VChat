@@ -1,0 +1,369 @@
+@import "./../Styles/Mixin_New.scss";
+
+.Feed-Placeholder-card {
+    width: 100%;
+    max-width: 510px;
+    height: 300px;
+    // background: red;
+    border-radius: 10px;
+    margin: 1rem 0;
+    margin-bottom: 0.1rem;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    @include respond-to(xs) {
+        height: 250px;
+    }
+
+    .Feed-Placeholder-card-profile {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 1rem;
+    }
+
+    .Feed-Placeholder-card-profile-name {
+        width: 100px;
+        height: 10px;
+        border-radius: 30px;
+        margin-bottom: 1rem;
+    }
+
+    .Feed-Placeholder-card-profile-name-two {
+        width: 60px;
+        height: 10px;
+        border-radius: 30px;
+    }
+}
+
+// ----
+
+.right-Placeholder-card {
+    width: 100%;
+    max-width: 150px;
+    height: 160px;
+    // background: red;
+    border-radius: 5px;
+    margin: 1rem 0;
+    margin-bottom: 0.1rem;
+    padding: 1rem;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    @include respond-to(xs) {
+        height: 250px;
+    }
+
+
+    .right-Placeholder-card-name {
+        width: 90px;
+        height: 6px;
+        border-radius: 30px;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .right-Placeholder-card-name-two {
+        width: 50px;
+        height: 6px;
+        border-radius: 30px;
+        position: absolute;
+        top: 87%;
+        left: 50%;
+        transform: translate(-90%, -50%);
+    }
+}
+
+
+.homepage-main-container {
+    width: 100%;
+    height: 100%;
+    // height: 100vh;
+    // box-sizing: border-box;
+    // overflow-y: scroll;
+    color: white;
+    display: flex;
+    transition: 0.8s ease-in-out;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .left-side {
+        width: 100%;
+        max-width: 110px;
+
+        @include respond-to(xs) {
+            display: none;
+        }
+    }
+
+    .left-search-icon {
+        display: none !important;
+
+        @include respond-to(md) {
+            display: flex !important;
+        }
+
+        @include respond-to(sm) {
+            display: flex !important;
+        }
+
+        @include respond-to(xs) {
+            display: flex !important;
+        }
+    }
+
+
+    .left {
+        width: 100%;
+        max-width: 100px;
+        height: 100vh;
+        // background: yellow;
+        padding: 1rem;
+        position: fixed;
+        top: 0;
+        left: 10px;
+        z-index: 9999;
+
+        @include respond-to(xs) {
+            display: none;
+        }
+
+        .logov-left-navbar {
+            width: 35px;
+            height: 35px;
+            object-fit: cover;
+            margin: 0 auto;
+        }
+
+
+
+        .story-left {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            font-size: 30px;
+            // margin: 1rem 0;
+            margin: 50px 0;
+            cursor: pointer;
+
+            .left-nav-icon {
+                font-size: 24px;
+            }
+        }
+    }
+
+    .center {
+        width: 100%;
+        // max-width: 250px;
+        flex: 1;
+        // background: green;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .center-div {
+            width: 100%;
+            max-width: 510px;
+            // background: black;
+            // height: 300px;
+            border-radius: 10px;
+        }
+    }
+
+    .right-side {
+        width: 100%;
+        max-width: 310px;
+        // background: red;
+        display: flex;
+        justify-content: center;
+
+
+        @include respond-to(md) {
+            display: none;
+        }
+
+        @include respond-to(sm) {
+            display: none;
+        }
+
+        @include respond-to(xs) {
+            display: none;
+        }
+    }
+
+    .right {
+        width: 100%;
+        height: 100%;
+        max-width: 300px;
+        right: 15px;
+        // background: blue;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        position: fixed;
+        top: 0;
+        overflow-y: scroll;
+        box-sizing: border-box;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        @include respond-to(md) {
+            display: none;
+        }
+
+        @include respond-to(sm) {
+            display: none;
+        }
+
+        @include respond-to(xs) {
+            display: none;
+        }
+
+        .left-icon-transection {
+            transition: 0.8s ease-in-out;
+        }
+
+        .right-Seatch-User-input-div {
+            width: 100%;
+            // height: 80px;
+            // background: red;
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+            transition: 0.8s ease-in-out;
+
+            .right-Seatch-User-input {
+                width: 100%;
+                height: 35px;
+                border-radius: 30px;
+                padding: 0 10px;
+                // margin-bottom: 1rem;
+                border: none;
+                outline: none;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                transition: 0.8s ease-in-out;
+
+            }
+        }
+
+
+        #scrollTopBtn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0b243b00;
+            backdrop-filter: blur(10px);
+            border-radius: 100%;
+            padding: 0px;
+
+            position: fixed;
+            bottom: 100px;
+            right: 10px;
+            color: rgba(255, 255, 255, 0.596);
+            transition: 0.3s ease-in-out;
+            z-index: 2;
+
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+            .top-arrow {
+                transition: 0.3s ease-in-out;
+                font-size: 16px;
+                // color: black;
+            }
+        }
+
+        .right-user-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .add-friend-button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 4px 8px;
+            /* Adjust padding to make it smaller */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            /* Adjust font size to make it smaller */
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover Effect */
+        .add-friend-button:hover {
+            background-color: #0056b3;
+        }
+
+        .cancel-friend-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 4px 8px;
+            /* Adjust padding to make it smaller */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            /* Adjust font size to make it smaller */
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover Effect */
+        .cancel-friend-button:hover {
+            background-color: #d81226;
+        }
+
+        .right-profile-card-div {
+            width: 100%;
+            max-width: 150px;
+            // background: red;
+            height: 100%;
+            max-height: 180px;
+            // margin-bottom: 1rem;
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 1rem;
+            transition: 0.8s ease-in-out;
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+            .right-profile-card-img {
+                width: 100%;
+                height: 100px;
+                object-fit: cover;
+                object-position: center;
+                cursor: pointer;
+            }
+
+            .right-profile-card-name {
+                text-transform: capitalize;
+                display: flex;
+                align-items: center;
+                padding: 0.5rem;
+                justify-content: space-between;
+                line-height: 14px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+        }
+
+
+    }
+}

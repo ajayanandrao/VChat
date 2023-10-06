@@ -151,71 +151,55 @@ const VideoItem = ({ post }) => {
 
     return (
         <div className="reel-video-container" id={`section2-${post.id}`}>
-            <video ref={videoRef} className="reel-video" onClick={() => handleVideoBtnClick(post.id)}>
-                <source src={post.img} type="video/mp4" />
-            </video>
+            <div style={{ position: "relative", }} className="reel-outer">
+                <video ref={videoRef} className="reel-video" onClick={() => handleVideoBtnClick(post.id)}>
+                    <source src={post.img} type="video/mp4" />
+                </video>
 
-            <div className="reels-back-button">
-                <i onClick={goBack} className="bi bi-arrow-left "></i>
-            </div>
-
-            <div className="reel-like-div" style={{ fontSize: "12px", display: "none" }} id={`viewLike-${post.id}`}>
-                {isliked.map((item) => {
-                    return (
-                        <>
-                            <div className='reel-like-inner-div'>
-                                {item.name}
-                            </div>
-                        </>
-                    )
-                })}
-            </div>
-
-            <div className="reel-icon-up-btn ">
-                <AiOutlineArrowUp className='' onClick={() => scrollToPreview(post.id)} />
-            </div>
-
-            <div className="reel-like-icon">
-                <div className='like-count ' onClick={() => ViewLikes(post.id)}>{isliked.length}</div>
-                {liked ? <BsFillHeartFill color='#FF0040' className='' onClick={() => HandleLike(post.id)} /> :
-                    < AiOutlineHeart className='' onClick={() => HandleLike(post.id)} />
-                }
-            </div>
-
-            <div className="reel-icon-down-btn ">
-                <AiOutlineArrowDown className='' onClick={() => scrollToNext(post.id)} />
-            </div>
-
-            {/* <div className="reel-side-mainu" >
-                <div className="reel-mainu">
-
-                    <div className="reel-mainu-icon-div">
-                        <div className='like-count' onClick={() => ViewLikes(post.id)}>{isliked.length}</div>
-                        {liked ? <BsFillHeartFill color='#FF0040' className='reel-mainu-icon' onClick={() => HandleLike(post.id)} /> :
-                            < AiOutlineHeart className='reel-mainu-icon' onClick={() => HandleLike(post.id)} />
-                        }
-                    </div>
-                    <div className="reel-mainu-icon-div">
-                        <BsFillArrowUpCircleFill className='reel-mainu-icon' onClick={() => scrollToPreview(post.id)} />
-                    </div>
-                    <div className="reel-mainu-icon-div ">
-                        <BsFillArrowDownCircleFill className='reel-mainu-icon' onClick={() => scrollToNext(post.id)} />
-                    </div>
+                <div className="reels-back-button">
+                    <i onClick={goBack} className="bi bi-arrow-left "></i>
                 </div>
-            </div> */}
 
-            <div className="reel-profile-div">
-                <img src={post.photoURL} className='reel-profile-img' alt="" />
-                <span className='reel-profile-name'>{post.displayName}</span>
+                <div className="reel-like-div" style={{ fontSize: "12px", display: "none" }} id={`viewLike-${post.id}`}>
+                    {isliked.map((item) => {
+                        return (
+                            <>
+                                <div className='reel-like-inner-div'>
+                                    {item.name}
+                                </div>
+                            </>
+                        )
+                    })}
+                </div>
+
+                <div className="reel-icon-up-btn ">
+                    <AiOutlineArrowUp className='' onClick={() => scrollToPreview(post.id)} />
+                </div>
+
+                <div className="reel-like-icon">
+                    <div className='like-count ' onClick={() => ViewLikes(post.id)}>{isliked.length}</div>
+                    {liked ? <BsFillHeartFill color='#FF0040' className='' onClick={() => HandleLike(post.id)} /> :
+                        < AiOutlineHeart className='' onClick={() => HandleLike(post.id)} />
+                    }
+                </div>
+
+                <div className="reel-icon-down-btn ">
+                    <AiOutlineArrowDown className='' onClick={() => scrollToNext(post.id)} />
+                </div>
+
+
+                <div className="reel-profile-div">
+                    <img src={post.photoURL} className='reel-profile-img' alt="" />
+                    <span className='reel-profile-name'>{post.displayName}</span>
+                </div>
+                {!isPlaying && (
+                    <a className="intro-banner-vdo-play-btn pinkBg" onClick={() => handleVideoBtnClick(post.id)} target="_blank">
+                        <div className="play-button">
+                            <FaPlay className="play-button" />
+                        </div>
+                    </a>
+                )}
             </div>
-            {!isPlaying && (
-                <a className="intro-banner-vdo-play-btn pinkBg" onClick={() => handleVideoBtnClick(post.id)} target="_blank">
-                    <div className="play-button">
-                        <FaPlay className="play-button" />
-                    </div>
-                </a>
-            )}
-
         </div>
     );
 };
@@ -268,7 +252,7 @@ const Reals = () => {
             {loading ? <div className='skeleton-center bg-light_0 dark:bg-dark'>
                 <CircularProgress className='circularprogress' />
             </div > :
-                <div className="reel-position-div">
+                <div className="reel-position-div dark:bg-dark bg-light_0">
                     <div className="reel-scroll-div">
                         {VideoData}
                     </div>

@@ -97,7 +97,7 @@ const ChangePassword = () => {
             <LeftArro />
 
             <div className="change-password-container">
-                <h3 className='text-3xl text-lightPostText dark:text-darkPostText mt-4' style={{ textAlign: "center", marginBottom: "50px" }}>Change Password</h3>
+                <h3 className='text-3xl text-lightPostText  dark:text-darkPostText mt-4' style={{ textAlign: "center", marginBottom: "50px" }}>Change Password</h3>
                 <input
                     className='AuthChange-input-new text-lightProfileName bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText '
                     type="password"

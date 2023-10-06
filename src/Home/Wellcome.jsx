@@ -80,7 +80,14 @@ const Wellcome = () => {
                                                             transition={{ duration: 0.8, delay: 3.8 }}
                                                             initial={{ opacity: 0, y: 50 }}
                                                             animate={{ opacity: 1, y: 0 }}
-                                                            className='welcome-user-name text-3xl'>{item && item.name}</motion.div>
+                                                            style={{ fontSize: "18px", marginTop: "1rem" }}>Welcome</motion.div>
+
+                                                        <motion.div
+                                                            transition={{ duration: 0.8, delay: 3.8 }}
+                                                            initial={{ opacity: 0, y: 50 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            className='welcome-user-name text-3xl'>
+                                                            {item && item.name}</motion.div>
 
 
                                                     </div>
@@ -123,12 +130,14 @@ const Wellcome = () => {
                                                                     className='v-andro' alt="" />
                                                                 <div style={{ fontSize: "18px" }}>Android</div>
                                                             </div>
+
                                                         </motion.div>
                                                         :
                                                         null
                                                     }
 
                                                 </div>
+
                                                 {item && item.userPhoto ?
                                                     <motion.div
                                                         transition={{ duration: 1.5, delay: 5 }}

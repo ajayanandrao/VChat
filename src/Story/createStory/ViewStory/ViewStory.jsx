@@ -9,7 +9,7 @@ import { MdClose } from 'react-icons/md';
 import { AiFillHeart, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
 import { styled } from '@mui/material/styles';
 import { v4, uuidv4 } from "uuid";
-
+import { BiSolidSend } from "react-icons/bi"
 
 const ViewStory = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
@@ -237,110 +237,122 @@ const ViewStory = ({ post }) => {
     }
 
     return (
-        <div className='viewstory-main-container bg-darkDiv'>
-            {
+        <div className='viewstory-main-container bg-light_0 dark:bg-dark'>
+            {/* {
                 storyLike.map((item) => (
                     <p key={item.id}>{item.name}</p>
                 ))
-            }
+            } */}
 
             {showContainer && (
+                <div className="story-view-main-container">
 
-                stories.map((story) => {
-                    if (user.uid === story.uid) {
-                        return (
-                            <div key={story.id} >
-                                {story.image && story.image.includes('.mp4') ? (
-                                    <div className="view-video-container bg-light_0 dark:bg-dark text-darkProfileName dark:text-darkProfileName">
-                                        <video ref={videoRef} onClick={handleClick} className="view-video" id="video" autoPlay  >
-                                            <source src={story.image} type="video/mp4" />
-                                        </video>
-                                        <BorderLinearProgress
-                                            variant="determinate"
-                                            value={progressRef.current} // Use the current progress value
-                                            style={{ width: '100%', color: "red" }}
-                                            className="view-countdown-progress"
-                                        />
-                                        <div className='video-inner-container'>
-                                            <img src={user.userPhoto} className="video-view-profile-img" alt="" />
-                                            <div className="video-view-profile-name">
-                                                <div className="mx-2">{user.name}</div>
-                                                <div className='' style={{ fontSize: "14px", color: "#696969" }}><PostTimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} /></div>
+
+                    {stories.map((story) => {
+                        if (user.uid === story.uid) {
+                            return (
+                                <div key={story.id} >
+                                    {story.image && story.image.includes('.mp4') ? (
+                                        <div className="view-video-container bg-light_0 dark: bg-dark">
+                                            <video ref={videoRef} onClick={handleClick} className="view-video" id="video" autoPlay  >
+                                                <source src={story.image} type="video/mp4" />
+                                            </video>
+                                            <BorderLinearProgress
+                                                variant="determinate"
+                                                value={progressRef.current} // Use the current progress value
+                                                style={{ width: '100%', color: "red" }}
+                                                className="view-countdown-progress"
+                                            />
+                                            <div className='video-inner-container'>
+                                                <img src={user.userPhoto} className="video-view-profile-img" alt="" />
+                                                <div className="video-view-profile-name">
+                                                    <div className="mx-2">{user.name}</div>
+                                                    <div className='' style={{ fontSize: "14px", color: "#696969" }}><PostTimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} /></div>
+                                                </div>
+
+                                                <div className="video-view-profile-close-div">
+                                                    <MdClose className="video-view-close-btn" onClick={goBack} />
+                                                </div>
                                             </div>
 
-                                            <div className="video-view-profile-close-div">
-                                                <MdClose className="video-view-close-btn" onClick={goBack} />
+                                            <div className="video-view-Profile-bottom-div">
+                                                <input type="text" placeholder="Replay to"
+                                                    className="video-view-input"
+                                                    onChange={(e) => setStoryComment(e.target.value)}
+                                                    value={storyComment}
+                                                />
+
+
+                                                {liked ? < AiFillHeart className="video-view-send-icon mx-3  " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
+                                                    <AiOutlineHeart className="video-view-send-icon mx-3 " onClick={() => handleLike(story.id)} />}
+
+
+                                                {storyComment ?
+                                                    < BiSolidSend color='#0080FF' className="video-view-send-icon"
+                                                        onClick={() => handleStoryComment(story.id)}
+                                                    />
+                                                    :
+                                                    < AiOutlineSend className="video-view-send-icon"
+                                                        onClick={() => handleStoryComment(story.id)}
+                                                    />
+                                                }
+
+
                                             </div>
                                         </div>
-                                        
-                                        <div className="video-view-Profile-bottom-div">
-                                            <input type="text" placeholder="Replay to"
-                                                className="video-view-input"
-                                                onChange={(e) => setStoryComment(e.target.value)}
-                                                value={storyComment}
+                                    ) : (
+
+                                        <div
+                                            className="view-main-container"
+                                            style={{
+                                                backgroundImage: `url(${story.image})`,
+                                            }}
+                                        >
+                                            <BorderLinearProgress
+                                                variant="determinate"
+                                                value={progressRef.current}
+                                                style={{ width: '100%', color: "red" }}
+                                                className="view-countdown-progress"
                                             />
 
+                                            <div className="view-profile-div">
+                                                <img src={user.userPhoto} className="view-profile-img" alt="" />
+                                                <div className="view-profile-name mx-2">{user.name}</div>
+                                                <div className='' style={{ fontSize: "14px", color: "#696969" }}>
+                                                    <PostTimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} /></div>
 
-                                            {liked ? < AiFillHeart className="video-view-send-icon  " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
-                                                <AiOutlineHeart className="video-view-send-icon  " onClick={() => handleLike(story.id)} />}
-
-
-                                            < AiOutlineSend className="video-view-send-icon"
-                                                onClick={() => handleStoryComment(story.id)}
-                                            />
-                                        </div>
-                                    </div>
-                                ) : (
-
-                                    <div
-                                        className="view-main-container"
-                                        style={{
-                                            backgroundImage: `url(${story.image})`,
-                                        }}
-                                    >
-                                        <BorderLinearProgress
-                                            variant="determinate"
-                                            value={progressRef.current}
-                                            style={{ width: '100%', color: "red" }}
-                                            className="view-countdown-progress"
-                                        />
-
-                                        <div className="view-profile-div">
-                                            <img src={user.userPhoto} className="view-profile-img" alt="" />
-                                            <div className="mx-2">{user.name}</div>
-                                            <div className='' style={{ fontSize: "14px", color: "#696969" }}>
-                                                <PostTimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} /></div>
-
-                                            <div className="view-profile-close-div">
-                                                <MdClose className="view-close-btn" onClick={goBack} />
+                                                <div className="view-profile-close-div">
+                                                    <MdClose className="view-close-btn" onClick={goBack} />
+                                                </div>
                                             </div>
+
+                                            <div className="view-Profile-bottom-div">
+                                                <input type="text" placeholder="Replay to"
+                                                    className="view-input"
+                                                    onChange={(e) => setStoryComment(e.target.value)}
+                                                    value={storyComment}
+                                                />
+
+
+                                                {liked ? < AiFillHeart className="view-send-icon " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
+                                                    <AiOutlineHeart className="view-send-icon " onClick={() => handleLike(story.id)} />}
+
+                                                <AiOutlineSend className="view-send-icon"
+                                                    onClick={() => handleStoryComment(story.id)}
+                                                />
+                                            </div>
+
                                         </div>
+                                    )}
+                                </div>
+                            )
+                        }
+                    })}
 
-                                        <div className="view-Profile-bottom-div">
-                                            <input type="text" placeholder="Replay to"
-                                                className="view-input"
-                                                onChange={(e) => setStoryComment(e.target.value)}
-                                                value={storyComment}
-                                            />
+                </div>
+            )}
 
 
-                                            {liked ? < AiFillHeart className="view-send-icon " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
-                                                <AiOutlineHeart className="view-send-icon " onClick={() => handleLike(story.id)} />}
-
-                                            <AiOutlineSend className="view-send-icon"
-                                                onClick={() => handleStoryComment(story.id)}
-                                            />
-                                        </div>
-
-                                    </div>
-                                )}
-                            </div>
-                        )
-                    }
-                })
-
-            )
-            }
         </div>
     );
 };

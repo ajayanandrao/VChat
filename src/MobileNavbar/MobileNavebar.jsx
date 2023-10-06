@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { auth, db } from "../Firebase";
 import { AuthContext } from "../AuthContaxt";
 import { BsFillMoonStarsFill, BsFillPeopleFill, BsFillSunFill, BsMoonStarsFill } from "react-icons/bs";
-import { addDoc, collection, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
 import { MdAddReaction, MdColorLens, MdMovieFilter } from "react-icons/md";
 import v from "./../Image/img/vl.png";
 import home from "./../Image/home2.png";
@@ -97,26 +97,43 @@ const MobileNavebar = () => {
   const [newTheme, setNewTheme] = useState(null);
 
 
-  useEffect(() => {
 
+
+  useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
-    }
-    else {
+    } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [theme])
+  }, [theme]);
 
   const darkTheme = async () => {
     setDayTheme(!dayTheme);
     setTheme(theme === 'dark' ? "light" : "dark");
-
-    const themeRef = doc(db, 'Theme', currentUser && currentUser.uid);
-    await setDoc(themeRef, {
-      uid: currentUser.uid,
-      theme: theme,
-    })
   };
+
+  const toggleTheme = async () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+
+    // Update the theme preference in Firestore
+    const userPreferencesRef = doc(db, 'UserPreferences', currentUser.uid);
+    await setDoc(userPreferencesRef, { theme: newTheme });
+  };
+
+  useEffect(() => {
+    const userPreferencesRef = doc(db, 'UserPreferences', currentUser.uid);
+    getDoc(userPreferencesRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          const userTheme = docSnap.data().theme;
+          setTheme(userTheme);
+        }
+      })
+      .catch((error) => {
+        console.error('Error retrieving user theme preference:', error);
+      });
+  }, [currentUser.uid]);
 
   const [isActive, setIsActive] = useState(false);
   const toggleHeart = () => {
@@ -130,10 +147,10 @@ const MobileNavebar = () => {
         style={{ display: "none" }}
         id="navId"
       >
-        <Link to="home/" onClick={handleScrollToTop} style={{ textDecoration: "none" }}>
+        <Link to="home/" className="mobile-nav-title" onClick={handleScrollToTop} style={{ textDecoration: "none" }}>
           {" "}
           <div className="mobile-nav-title">
-            <img src={v} className="logo" alt="" />
+            <img src={v} className="nav-logo" alt="" />
           </div>
         </Link>
 
@@ -165,8 +182,8 @@ const MobileNavebar = () => {
             </Link>
           </span>
 
-          <div onClick={() => darkTheme()} className="mobile-nav-mainu">
-            {dayTheme ?
+          <div onClick={() => { darkTheme(); toggleTheme(); }} className="mobile-nav-mainu">
+            {theme ?
 
               <BsFillSunFill className="mobile-nav-icon  dark:text-darkPostIcon" />
               :
@@ -174,9 +191,6 @@ const MobileNavebar = () => {
             }
           </div>
 
-          {/* <div className="mobile-nav-mainu">
-            <MdColorLens className="mobile-nav-icon text-lightPostIcon" />
-          </div> */}
 
           <span className="mobile-nav-mainu">
             <Link to="option/" className="link">

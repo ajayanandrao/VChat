@@ -20,19 +20,47 @@
 	cursor: pointer;
 	// padding: 1rem;
 
+
 	.option-back-div {
 		width: 100%;
 		height: 50px;
-		display: flex;
+		display: none;
 		align-items: center;
 		padding: 0 1rem;
+
+		@include respond-to(md) {
+			display: flex;
+		}
+
+		@include respond-to(sm) {
+			display: flex;
+		}
+
+		@include respond-to(xs) {
+			display: flex;
+		}
 	}
 
 
 	.option-inner-div {
 		padding: 1rem;
-
+		margin-top: 50px;
 		// background: blue;
+
+		@include respond-to(xs) {
+			margin-top: 0;
+		}
+
+		.option-item-wrapper {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+
+			@include respond-to(xs) {
+				justify-content: start;
+			}
+		}
+
 		.option-profile-div {
 			display: flex;
 			flex-direction: column;

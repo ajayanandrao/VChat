@@ -74,12 +74,7 @@ const Setting = () => {
                 </div> */}
 
                 <div className="setting-containt">
-                    {/* <div>Change Email Address</div> */}
 
-
-                    {/* <div className='change-password my-2' onClick={deleteAccount}>
-                        Delete My Account
-                    </div> */}
                     <Link to="/How_to_install_app/">
                         <div className='change-password bg-lightDiv dark:bg-darkDiv dark:text-darkPostText text-lightPostText' >
                             How To install VChat App in your Phone

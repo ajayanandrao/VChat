@@ -309,6 +309,22 @@ const CreateStorey = () => {
             <LinearProgress id="p1" style={{ display: "none" }} />
 
 
+            <div className='d-flex justify-content-center'>
+                {newStoryImage && newStoryImage.type.startsWith('image/') && (
+                    <>
+                        <img className="story-img-object" src={URL.createObjectURL(newStoryImage)} alt="" />
+                    </>
+                )}
+
+                {newStoryImage && newStoryImage.type.startsWith('video/') && (
+                    <div className="story-img-object">
+                        <video ref={videoRef} onClick={handleClick} className="story-video-object ">
+                            <source src={URL.createObjectURL(newStoryImage)} type={newStoryImage.type} />
+                        </video>
+                    </div>
+                )}
+            </div>
+
             {storyUid ?
 
                 (
@@ -395,76 +411,78 @@ const CreateStorey = () => {
 
                                                 </div>
                                             ) : (
-                                                <div className='story-img-div'>
+                                                <div className='story-img-div-wrapper'>
+                                                    <div className='story-img-div'>
 
-                                                    {showLikes ? (
-                                                        <div className="userLikes-div">
-                                                            <div>
+                                                        {showLikes ? (
+                                                            <div className="userLikes-div">
                                                                 <div>
-                                                                    {like.map((like) => {
-                                                                        return (
-                                                                            <div className=''>
-                                                                                <div className="liked-user-profile">
-                                                                                    <div>
-                                                                                        <img className="liked-user-profile-img" src={like.photoURL} alt="" />
+                                                                    <div>
+                                                                        {like.map((like) => {
+                                                                            return (
+                                                                                <div className=''>
+                                                                                    <div className="liked-user-profile">
+                                                                                        <div>
+                                                                                            <img className="liked-user-profile-img" src={like.photoURL} alt="" />
+                                                                                        </div>
+                                                                                        <div>{like.name}</div>
                                                                                     </div>
-                                                                                    <div>{like.name}</div>
                                                                                 </div>
-                                                                            </div>
-                                                                        )
-                                                                    })}
+                                                                            )
+                                                                        })}
+                                                                    </div>
+
                                                                 </div>
-
                                                             </div>
-                                                        </div>
-                                                    )
-                                                        :
-                                                        null}
+                                                        )
+                                                            :
+                                                            null}
 
-                                                    {showComment ? (
-                                                        <div className="userLikes-div">
-                                                            <div>
+                                                        {showComment ? (
+                                                            <div className="userLikes-div">
                                                                 <div>
-                                                                    {filteredComments.map((comment) => {
-                                                                        return (
-                                                                            <div className='d-flex' key={comment.id}>
-                                                                                <div className="commented-user-profile">
-                                                                                    <div>
-                                                                                        <img src={comment.photoURL} className="liked-user-profile-img" alt="" />
+                                                                    <div>
+                                                                        {filteredComments.map((comment) => {
+                                                                            return (
+                                                                                <div className='d-flex' key={comment.id}>
+                                                                                    <div className="commented-user-profile">
+                                                                                        <div>
+                                                                                            <img src={comment.photoURL} className="liked-user-profile-img" alt="" />
+                                                                                        </div>
+                                                                                        <div>{comment.comment}</div>
                                                                                     </div>
-                                                                                    <div>{comment.comment}</div>
                                                                                 </div>
-                                                                            </div>
-                                                                        )
-                                                                    })}
+                                                                            )
+                                                                        })}
+                                                                    </div>
+
                                                                 </div>
-
                                                             </div>
+                                                        )
+                                                            :
+                                                            null}
+
+
+
+
+                                                        <img src={story.image} className='story-img' alt="Story" />
+
+                                                        <div className="story-like-div" onClick={() => HandleShowLike()}>
+                                                            <div className='mx-2' style={{ color: "white", fontSize: "14px" }} >
+                                                                {Like.length}
+                                                            </div>
+                                                            <AiFillHeart style={{ color: "red", fontSize: "24px" }} />
                                                         </div>
-                                                    )
-                                                        :
-                                                        null}
 
-
-
-
-                                                    <img src={story.image} className='story-img' alt="Story" />
-
-                                                    <div className="story-like-div" onClick={() => HandleShowLike()}>
-                                                        <div className='mx-2' style={{ color: "white", fontSize: "14px" }} >
-                                                            {Like.length}
+                                                        <div className="story-comment-div" onClick={() => HandleShowComment()}>
+                                                            <div className='mx-2' style={{ color: "white", fontSize: "14px" }} >
+                                                                {filteredComments.length}
+                                                            </div>
+                                                            <BsFillChatFill style={{ color: "#FFFFFF", fontSize: "24px" }} />
                                                         </div>
-                                                        <AiFillHeart style={{ color: "red", fontSize: "24px" }} />
-                                                    </div>
-
-                                                    <div className="story-comment-div" onClick={() => HandleShowComment()}>
-                                                        <div className='mx-2' style={{ color: "white", fontSize: "14px" }} >
-                                                            {filteredComments.length}
+                                                        <div className="story-delete-div" onClick={() => { deleteStory(story.id); goBack(); }}>
+                                                            <MdDelete style={{ color: "#FFFFFF", fontSize: "24px" }} />
                                                         </div>
-                                                        <BsFillChatFill style={{ color: "#FFFFFF", fontSize: "24px" }} />
-                                                    </div>
-                                                    <div className="story-delete-div" onClick={() => { deleteStory(story.id); goBack(); }}>
-                                                        <MdDelete style={{ color: "#FFFFFF", fontSize: "24px" }} />
                                                     </div>
                                                 </div>
                                             )}
@@ -502,23 +520,6 @@ const CreateStorey = () => {
                         </div>
                     </div>
                 </>)}
-
-            {newStoryImage && newStoryImage.type.startsWith('image/') && (
-                <img className="story-img" src={URL.createObjectURL(newStoryImage)} alt="" />
-            )}
-
-            {newStoryImage && newStoryImage.type.startsWith('video/') && (
-                <div className="story-img">
-                    <video ref={videoRef} onClick={handleClick} className="video ">
-                        <source src={URL.createObjectURL(newStoryImage)} type={newStoryImage.type} />
-                    </video>
-                </div>
-            )}
-
-
-
-
-
 
         </div>
     );

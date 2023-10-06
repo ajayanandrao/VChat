@@ -46,9 +46,9 @@ const Install = () => {
             <div className='install-app-main-container'>
 
                 <div className='install-item-one mb-3 text-lightProfileName dark:text-darkProfileName'>first of all, You need to log in to your Account.</div>
-                <img src={mone} alt="" />
+                <img src={mone} alt="" className='install-item-img' />
                 <div className='install-item-one my-3 text-lightProfileName dark:text-darkProfileName'>And then click the Option button at the top right corner. find "Install app" option and click on it.</div>
-                <img src={mtwo} alt="" />
+                <img src={mtwo} alt="" className='install-item-img'/>
                 <div className='install-item-one my-4 text-lightProfileName dark:text-darkProfileName'>VChat App will install in a couple of seconds.</div>
 
 

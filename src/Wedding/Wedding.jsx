@@ -237,22 +237,19 @@ const Wedding = () => {
         <>
             <div className='add-wedding-container bg-light_0 dark:bg-dark'>
 
-                <div style={{
-                    backgroundSize: "cover", width: "100%",
-                    height: "200px", display: "flex", justifyContent: "center",
-                    alignItems: "center",
-                    backgroundImage: `url("https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg")`
-                }}>
+                <div>
+                    <div className='add-wedding-cover-img' style={{
+                        backgroundImage: `url("https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg")`
+                    }}>
 
-                    <LeftArro />
+                        <LeftArro />
 
-
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(0, 0, 0, 0.30)", width: "100%", height: "100%" }}>
-                        <h2 style={{ color: "white", textAlign: "center", marginTop: "30px" }} className='text-3xl'>Matrimony Profile <div id='l'></div> </h2>
+                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(0, 0, 0, 0.30)", width: "100%", height: "100%" }}>
+                            <h2 style={{ color: "white", textAlign: "center", marginTop: "30px" }} className='text-3xl'>Matrimony Profile <div id='l'></div> </h2>
+                        </div>
                     </div>
                 </div>
-
-                <div style={{ padding: "0 1rem", width: "100%" }}>
+                <div className='wedding-form-div' style={{ padding: "0 1rem", width: "100%" }}>
                     <div className="religion-wedding-div">
                         <div className="toggle-dropdown me-3">
                             <button className="toggle-button" onClick={toggleDropdown}>

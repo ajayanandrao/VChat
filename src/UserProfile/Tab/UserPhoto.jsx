@@ -238,7 +238,7 @@ const UserPhoto = () => {
                 </div>
             </div> */}
 
-            {imageMedia.map((item) => {
+            {/* {imageMedia.map((item) => {
                 return (
                     <>
                         <div className='video-container'>
@@ -251,7 +251,7 @@ const UserPhoto = () => {
                 )
             })}
 
-            <h3 className='video-text text-2xl text-lightPostText dark:text-darkPostText'>Video</h3>
+            <h3 className='video-text text-2xl text-lightPostText dark:text-darkPostText'>Video</h3> */}
 
             {/* {VideoData} */}
         </>

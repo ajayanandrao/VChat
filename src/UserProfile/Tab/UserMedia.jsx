@@ -16,12 +16,19 @@ const UserMedia = () => {
     const mediaRef = collection(db, 'UserPostPhoto');
 
     useEffect(() => {
-        const unsub = onSnapshot(query(mediaRef, orderBy('bytime', 'desc')), (snapshot) => {
-            setImageMedia(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-            setIsLoading(false); // Set isLoading to false when data is fetched
-        });
+        const delay = setTimeout(() => {
+            const unsub = onSnapshot(query(mediaRef, orderBy('bytime', 'desc')), (snapshot) => {
+                setImageMedia(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+                setIsLoading(false); // Set isLoading to false when data is fetched
+            });
 
-        return unsub;
+            return () => {
+                // Cleanup the subscription when the component unmounts
+                unsub();
+            };
+        }, 1000);
+
+        return () => clearTimeout(delay);
     }, []);
 
     const formatTimestamp = (timestamp) => {
@@ -77,23 +84,25 @@ const UserMedia = () => {
     };
 
 
+    const currentUserApi = imageMedia.filter(item => item.uid === currentUser.uid);
+
     return (
         <>
             {ImageShow ?
                 <div className='current-Profile-video-Overlay'>
                     <div className="video-overlay-close">
-                        <div className="video-overlay-time-div">
+                        <div className="video-overlay-time-div text-lightProfileName dark:text-darkProfileName">
                             <div className="photo-time me-3">{formatTimestamp(time)}</div>
-                            <MdDelete style={{ fontSize: "26px" }} onClick={deleteImage} />
+                            <MdDelete style={{ fontSize: "26px", cursor: "pointer" }} onClick={deleteImage} />
                         </div>
-                        <div className="video-overlay-close-div">
+                        <div className="video-overlay-close-div text-lightProfileName dark:text-darkProfileName">
                             <div onClick={handleImageShow}>
-                                <AiOutlineClose style={{ fontSize: "20px" }} />
+                                <AiOutlineClose style={{ fontSize: "20px", cursor: "pointer" }} />
                             </div>
                         </div>
                     </div>
                     <div className='video-div'>
-                        <img src={imageUrl} alt="" />
+                        <img src={imageUrl} alt="" className='current-profile-img' />
                     </div>
                 </div>
                 :
@@ -114,11 +123,22 @@ const UserMedia = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='video-div'>
+                    <div className='video-div' onClick={handleVideoBtnClick}>
 
-                        <video className='UserVideo' autoPlay controls preload='auto' ref={(el) => (videoRef.current[videoId] = el)} onClick={handleVideoBtnClick} >
+                        <video className='UserVideo' autoPlay controls preload='auto' ref={(el) => (videoRef.current[videoId] = el)}  >
                             <source src={videoUrl} type="video/mp4" />
                         </video>
+
+                        {isPlaying ? (
+                            null
+                        )
+                            :
+                            (
+                                <div className='play-btn-current-profile-video' onClick={handleVideoBtnClick}>
+                                    <FaPlay className='play-btn-current-profile-video-btn' />
+                                </div>
+                            )
+                        }
 
                     </div>
                 </div>
@@ -129,44 +149,106 @@ const UserMedia = () => {
 
 
             {/*  */}
+            {/* {<div div style={{ textAlign: "center", color: "white" }} className='no-post-div text-4xl'>{currentUserApi[0].id}</div>} */}
 
-            <div className='media-container'>
-                <div class="photo-grid-parent-container">
-                    <div className="grid-container" >
-                        {imageMedia.map((post) => {
-                            if (currentUser.uid === post.uid)
-                                return (
-                                    (
-                                        <>
-                                            {
-                                                post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
-                                                    <img src={post.img} alt="Uploaded" className="media-img" onClick={() => handleImageShow(post.id, post.img, post.bytime)} />
-                                                ) : post.img ? (
-                                                    <>
-
-                                                        <div className="mediaVideo-background" onClick={() => handleVideoShow(post.id, post.img, post.bytime)}>
-                                                            <video className="media-video"  >
-                                                                <source src={post.img} type="video/mp4" />
-                                                            </video>
-                                                            <div className="mediaVideo-btn-div">
-                                                                <div className="mediaVideo-btn">
-                                                                    <FaPlay className='mediaVideo-icon' />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </>
-
-                                                ) : null
-                                            }
-                                        </>
-                                    )
-                                );
-                        })}
+            {/* {currentUserApi.map((item) => {
+                return (
+                    <div  style={{ textAlign: "center", color: "white" }} className='no-post-div text-4xl'>
+                        {item[1]}
                     </div>
-                </div>
+                )
+            })} */}
 
-            </div>
+            {
+                isLoading ? (<>
+                    <div className="media-loading-outer">
+                        <div className="media-grid-container-loading">
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                            <div className='placeholder-glow '>
+                                <div className="media-loading-div bg-lightPostIcon dark:bg-darkPostIcon placeholder"></div>
+                            </div>
+                        </div>
+                    </div>
+                </>)
+                    :
+
+
+
+                    (<>
+                        <div className='media-container'>
+                            <div class="photo-grid-parent-container">
+                                <div className="grid-container" >
+                                    {imageMedia.map((post) => {
+                                        if (currentUser.uid === post.uid)
+                                            return (
+                                                (
+                                                    <>
+                                                        {
+                                                            post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
+                                                                <img src={post.img} alt="Uploaded" className="media-img" onClick={() => handleImageShow(post.id, post.img, post.bytime)} />
+                                                            ) : post.img ? (
+                                                                <>
+
+                                                                    <div className="mediaVideo-background" onClick={() => handleVideoShow(post.id, post.img, post.bytime)}>
+                                                                        
+                                                                        <video className="media-video"  >
+                                                                            <source src={post.img} type="video/mp4" />
+                                                                        </video>
+                                                                        <div className="mediaVideo-btn-div">
+                                                                            <div className="mediaVideo-btn">
+                                                                                <FaPlay className='mediaVideo-icon' />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </>
+
+                                                            ) : null
+                                                        }
+                                                    </>
+                                                )
+                                            );
+                                    })}
+                                </div>
+                            </div>
+
+                        </div>
+                    </>)
+            }
+
+
         </>
     )
 }

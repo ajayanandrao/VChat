@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./ProfileThree.scss";
 import UserPhoto from '../ParamsTab/UserPhoto';
 import UserPostPage from "./../ParamsTab/UserPostPage";
@@ -7,9 +7,11 @@ import { db } from '../../Firebase';
 import UserFriendPage from '../ParamsTab/UserFriendPage';
 import UserAboutPage from '../ParamsTab/UserAboutPage';
 import UserMedia from '../ParamsTab/UserMedia';
+import { CircularProgress, LinearProgress } from '@mui/material';
+import { AuthContext } from '../../AuthContaxt';
 
 const ProfileThree = ({ user }) => {
-
+    const { currentUser } = useContext(AuthContext);
     function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -23,62 +25,195 @@ const ProfileThree = ({ user }) => {
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
-
-
+    const [loading, setLoading] = useState(true);
     const [api, setApiData] = useState([]);
 
     const colRef = collection(db, 'AllPosts');
     const q = query(colRef, orderBy('bytime', 'desc'));
     useEffect(() => {
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-            setApiData(newApi);
-        });
+        const delay = setTimeout(() => {
+            const unsubscribe = onSnapshot(q, (snapshot) => {
+                const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+                setApiData(newApi);
+                setLoading(false);
+            });
 
-        return unsubscribe;
+            return () => {
+                // Cleanup the subscription when the component unmounts
+                unsubscribe();
+            };
+        }, 1000);
+
+        return () => clearTimeout(delay);
     }, []);
 
+
+    const [activeTab, setActiveTab] = useState('Post');
+    const setActive = (tabName) => {
+        setActiveTab(tabName);
+    };
+
+    const currentUserApi = api.filter(item => item.uid === user.uid);
 
     return (
         <>
             <div className="profileThree-container">
 
-                <div className="tab">
-                    <button className="tablinks active" onClick={(event) => openCity(event, 'Post')}> <div className='text-lightPostText dark:text-darkPostText'> Post</div></button>
-                    <button className="tablinks" onClick={(event) => openCity(event, 'About')}><div className='text-lightPostText dark:text-darkPostText'>About</div></button>
-                    <button className="tablinks" onClick={(event) => openCity(event, 'Friend')}><div className='text-lightPostText dark:text-darkPostText'>Friend</div></button>
-                    <button className="tablinks" onClick={(event) => openCity(event, 'Photo')}><div className='text-lightPostText dark:text-darkPostText'>Photos</div></button>
+                <div className="tablink-btn-wrapper">
+                    <div className="tablink-btn-inner-wrapper">
+                        <div className={`tablinks text-lightProfileName dark:text-darkPostText ${activeTab === 'Post' ? 'active' : ''}`} onClick={() => setActive('Post')}> Post</div>
+                        <div className={`tablinks text-lightProfileName dark:text-darkPostText ${activeTab === 'About' ? 'active' : ''}`} onClick={() => setActive('About')}>About</div>
+                        <div className={`tablinks text-lightProfileName dark:text-darkPostText ${activeTab === 'Friend' ? 'active' : ''}`} onClick={() => setActive('Friend')}>Friend</div>
+                        <div className={`tablinks text-lightProfileName dark:text-darkPostText ${activeTab === 'Photo' ? 'active' : ''}`} onClick={() => setActive('Photo')}>Photos</div>
+                    </div>
                 </div>
 
-                <div className='content-div'>
+                <div className='content-div text-lightProfileName dark:text-darkProfileName'>
 
                     <div id="Post" className="tabcontent w3-animate-opacity" style={{ display: "block" }}>
 
-                        {api.map((item) => {
-                            if (user.uid === item.uid) {
-                                return (
+
+                        {activeTab === 'Post' ? (<>
+                            <div>
+                                {loading ?
                                     <>
-                                        <UserPostPage post={item} />
+                                        <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                            <div className='cla'>
+                                                <div className='placeholder-glow'>
+                                                    <div className="placeholder userProfilePost-loading-div bg-lightPostIcon dark:bg-darkPostIcon">
+                                                        <div className='userProfilePost-loading-wrapper'>
+                                                            <div className="userProfilePost-loading-div bg-lightPostIcon dark:bg-darkDiv"></div>
+
+                                                            <div>
+                                                                <div className="userProfilePost-loading-name bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                                <div className="userProfilePost-loading-name-two bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className='cla'>
+                                                <div className='placeholder-glow'>
+                                                    <div className="placeholder userProfilePost-loading-div bg-lightPostIcon dark:bg-darkPostIcon">
+                                                        <div className='userProfilePost-loading-wrapper'>
+                                                            <div className="userProfilePost-loading-div bg-lightPostIcon dark:bg-darkDiv"></div>
+
+                                                            <div>
+                                                                <div className="userProfilePost-loading-name bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                                <div className="userProfilePost-loading-name-two bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='cla'>
+                                                <div className='placeholder-glow'>
+                                                    <div className="placeholder userProfilePost-loading-div bg-lightPostIcon dark:bg-darkPostIcon">
+                                                        <div className='userProfilePost-loading-wrapper'>
+                                                            <div className="userProfilePost-loading-div bg-lightPostIcon dark:bg-darkDiv"></div>
+
+                                                            <div>
+                                                                <div className="userProfilePost-loading-name bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                                <div className="userProfilePost-loading-name-two bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='cla'>
+                                                <div className='placeholder-glow'>
+                                                    <div className="placeholder userProfilePost-loading-div bg-lightPostIcon dark:bg-darkPostIcon">
+                                                        <div className='userProfilePost-loading-wrapper'>
+                                                            <div className="userProfilePost-loading-div bg-lightPostIcon dark:bg-darkDiv"></div>
+
+                                                            <div>
+                                                                <div className="userProfilePost-loading-name bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                                <div className="userProfilePost-loading-name-two bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='cla'>
+                                                <div className='placeholder-glow'>
+                                                    <div className="placeholder userProfilePost-loading-div bg-lightPostIcon dark:bg-darkPostIcon">
+                                                        <div className='userProfilePost-loading-wrapper'>
+                                                            <div className="userProfilePost-loading-div bg-lightPostIcon dark:bg-darkDiv"></div>
+
+                                                            <div>
+                                                                <div className="userProfilePost-loading-name bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                                <div className="userProfilePost-loading-name-two bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='cla'>
+                                                <div className='placeholder-glow'>
+                                                    <div className="placeholder userProfilePost-loading-div bg-lightPostIcon dark:bg-darkPostIcon">
+                                                        <div className='userProfilePost-loading-wrapper'>
+                                                            <div className="userProfilePost-loading-div bg-lightPostIcon dark:bg-darkDiv"></div>
+
+                                                            <div>
+                                                                <div className="userProfilePost-loading-name bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                                <div className="userProfilePost-loading-name-two bg-lightPostIcon dark:bg-darkDiv"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
                                     </>
-                                )
-                            }
-                        })}
 
+                                    : ""}
 
-                        {/* Profile Locked */}
+                                {currentUserApi.length < 1 ? <div style={{ textAlign: "center" }} className='no-post-div text-4xl'>No posts</div> : ""}
+
+                                {
+                                    api.map((item) => {
+                                        if (user.uid === item.uid) {
+                                            return (
+                                                <div key={item.id}>
+                                                    <UserPostPage post={item} />
+                                                </div>
+                                            );
+                                        }
+                                        return null;
+                                    })
+                                }
+                            </div>
+                        </>) : ''}
+
                     </div>
 
-                    <div id="About" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
-                        <UserAboutPage user={user} />
-                    </div>
 
-                    <div id="Friend" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
-                        <UserFriendPage user={user} />
-                    </div>
+                    {activeTab === 'About' ? (<>
+                        <div>
+                            <UserAboutPage user={user} />
+                        </div>
+                    </>) : ''}
 
-                    <div id="Photo" style={{ display: "none" }} className="tabcontent w3-animate-opacity">
-                        <UserMedia user={user} />
-                    </div>
+                    {activeTab === 'Friend' ? (
+                        <>
+                            <div >
+                                <UserFriendPage user={user} />
+                            </div>
+                        </>
+                    ) : ''}
+
+
+
+                    {activeTab === 'Photo' ? (<>
+                        <div >
+                            <UserMedia user={user} />
+                        </div>
+
+                    </>) : ''}
+
+
                 </div>
             </div>
         </>

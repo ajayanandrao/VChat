@@ -1,3 +1,35 @@
+@import "./../../Styles/Mixin_New.scss";
+
+.loading-profile-cover-photo-div {
+    flex-basis: 576px;
+    height: 400px;
+    position: relative;
+
+    @include respond-to(xs) {
+        height: 230px;
+    }
+
+    .placeholder-dimension {
+        width: 100%;
+        height: 400px;
+
+        @include respond-to(xs) {
+            height: 230px;
+        }
+    }
+
+}
+
+.placeholder-dimension-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: absolute;
+    top: 78%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .profile-cover-photo-div {
     flex-basis: 576px;
     height: 230px;
@@ -62,10 +94,12 @@
     z-index: 2;
     cursor: pointer;
 }
-.ProfileOneImg-photo{
+
+.ProfileOneImg-photo {
     max-width: 300px;
     max-height: 400px;
 }
+
 #ProfileOneImg-text {
     position: absolute;
     top: 50%;

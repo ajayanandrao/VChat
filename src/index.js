@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <App />
+      <App className="dark:bg-dark bg-light_0" />
     </AuthContextProvider>
   </React.StrictMode>
 );

@@ -1,9 +1,42 @@
+@import "./../../Styles/Mixin_New.scss";
+
 .cteateStory-main-container {
     width: 100%;
+
     height: 100vh;
     box-sizing: border-box;
     overflow-y: scroll;
     transition: 0.8s ease-in-out;
+
+    @include respond-to(xs) {
+        height: calc(100vh - 50px);
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .story-img-object {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 10px;
+        height: 100%;
+        height: 400px;
+        object-fit: cover;
+        object-position: center;
+        margin-top: 1rem;
+    }
+
+    .story-video-object {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 10px;
+        height: 100%;
+        height: 400px;
+        object-fit: cover;
+        object-position: center;
+        margin-top: 1rem;
+    }
 }
 
 .background-video {
@@ -48,6 +81,9 @@
     padding: 1rem;
     display: flex;
     align-items: center;
+    // background: red;
+    height: 300px;
+
 
     .btn-inline {
         width: 100%;
@@ -87,6 +123,9 @@
             box-sizing: border-box;
             overflow-y: scroll;
 
+            &::-webkit-scrollbar {
+                display: none;
+            }
 
             .liked-user-profile {
 
@@ -188,127 +227,183 @@
         }
     }
 
-    .story-img-div {
+
+    .story-img-div-wrapper {
         width: 100%;
         height: calc(100vh - 50px);
-        object-fit: cover;
-        object-position: center;
-        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        .story-img {
+        .story-img-div {
             width: 100%;
+            max-width: 500px;
             height: 100%;
-            object-fit: cover;
-        }
+            max-height: 800px;
+            position: relative;
 
-        .story-like-div {
-            position: fixed;
-            bottom: 200px;
-            right: 10px;
-            z-index: 9999;
-            border-radius: 20px;
-            // border: 1px solid aqua;
-            background: rgba(0, 0, 0, 0.135);
-            backdrop-filter: blur(10px);
-            display: flex;
-            padding: 5px;
-            align-items: center;
-            justify-content: center;
-        }
+            @include respond-to(xl) {
+                max-width: 380px;
+                max-height: 550px;
+            }
 
-        .story-comment-div {
-            position: fixed;
-            bottom: 150px;
-            right: 10px;
-            z-index: 9999;
-            border-radius: 20px;
-            // border: 1px solid aqua;
-            background: rgba(0, 0, 0, 0.135);
-            backdrop-filter: blur(10px);
-            display: flex;
-            padding: 5px;
-            align-items: center;
-            justify-content: center;
-        }
+            @include respond-to(lg) {
+                max-width: 380px;
+                max-height: 550px;
+            }
 
-        .story-delete-div {
-            position: fixed;
-            bottom: 80px;
-            right: 10px;
-            z-index: 9999;
-            border-radius: 20px;
-            // border: 1px solid aqua;
-            background: rgba(0, 0, 0, 0.135);
-            backdrop-filter: blur(10px);
-            display: flex;
-            padding: 5px;
-            align-items: center;
-            justify-content: center;
-        }
+            @include respond-to(sm) {
+                max-width: 400px;
+                max-height: 650px;
+            }
 
-        .userLikes-div {
-            width: 100%;
-            height: 450px;
-            // background: red;
-
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 2;
-            padding: 1rem;
-            transform: translate(-50%, -50%);
-            box-sizing: border-box;
-            overflow-y: scroll;
+            .story-img {
+                width: 100%;
+                max-width: 500px;
+                height: 100%;
+                border-radius: 10px;
+                // max-height: 500px;
+                object-fit: cover;
+                object-position: center;
 
 
-            .liked-user-profile {
-
-                // height: 30px;
-                background: rgba(0, 0, 0, 0.135);
-                backdrop-filter: blur(10px);
-                border-radius: 30px;
-                color: white;
-                display: inline-flex;
-                align-items: center;
-                font-size: 14px;
-                padding-right: 1rem;
-                bottom: 0.5rem;
-
-
-                .liked-user-profile-img {
-                    width: 40px;
-                    height: 40px;
-                    object-fit: cover;
-                    object-position: center;
-                    border-radius: 50%;
-                    margin-right: 0.5rem;
+                @include respond-to(xs) {
+                    width: 100%;
+                    max-width: 100%;
+                    height: 100%;
+                    max-height: 100%;
                 }
             }
 
-            .commented-user-profile {
+            .story-like-div {
+                position: fixed;
+                top: 40%;
+                right: 10px;
+                z-index: 9999;
+                border-radius: 20px;
+                // border: 1px solid aqua;
                 background: rgba(0, 0, 0, 0.135);
                 backdrop-filter: blur(10px);
-                border-radius: 30px;
-                color: white;
-                display: inline-flex;
-                font-size: 14px;
-                padding-right: 1rem;
-                padding-top: 0.5rem;
-                padding-bottom: 0.5rem;
-                line-height: 18px;
-                margin-bottom: 0.5rem;
+                display: flex;
+                padding: 5px;
+                align-items: center;
+                justify-content: center;
 
-                .liked-user-profile-img {
-                    width: 40px;
-                    height: 40px;
-                    object-fit: cover;
-                    object-position: center;
-                    border-radius: 50%;
-                    margin-right: 0.5rem;
+                @include respond-to(xs) {
+                    top: 60%;
+                }
+
+            }
+
+            .story-comment-div {
+                position: fixed;
+                top: 50%;
+                right: 10px;
+                z-index: 9999;
+                border-radius: 20px;
+                // border: 1px solid aqua;
+                background: rgba(0, 0, 0, 0.135);
+                backdrop-filter: blur(10px);
+                display: flex;
+                padding: 5px;
+                align-items: center;
+                justify-content: center;
+
+                @include respond-to(xs) {
+                    top: 70%;
+                }
+
+            }
+
+            .story-delete-div {
+                position: fixed;
+                top: 60%;
+                right: 10px;
+                z-index: 9999;
+                border-radius: 20px;
+                // border: 1px solid aqua;
+                background: rgba(0, 0, 0, 0.135);
+                backdrop-filter: blur(10px);
+                display: flex;
+                padding: 5px;
+                align-items: center;
+                justify-content: center;
+
+                @include respond-to(xs) {
+                    top: 80%;
+                }
+
+            }
+
+            .userLikes-div {
+                width: 100%;
+                height: 450px;
+                // background: red;
+
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 2;
+                padding: 1rem;
+                transform: translate(-50%, -50%);
+                box-sizing: border-box;
+                overflow-y: scroll;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .liked-user-profile {
+
+                    // height: 30px;
+                    background: rgba(0, 0, 0, 0.135);
+                    backdrop-filter: blur(10px);
+                    border-radius: 30px;
+                    color: white;
+                    display: inline-flex;
+                    align-items: center;
+                    font-size: 14px;
+                    padding-right: 1rem;
+                    bottom: 0.5rem;
+
+
+                    .liked-user-profile-img {
+                        width: 40px;
+                        height: 40px;
+                        object-fit: cover;
+                        object-position: center;
+                        border-radius: 50%;
+                        margin-right: 0.5rem;
+                    }
+                }
+
+                .commented-user-profile {
+                    background: rgba(0, 0, 0, 0.135);
+                    backdrop-filter: blur(10px);
+                    border-radius: 30px;
+                    color: white;
+                    display: inline-flex;
+                    font-size: 14px;
+                    padding-right: 1rem;
+                    padding-top: 0.5rem;
+                    padding-bottom: 0.5rem;
+                    line-height: 18px;
+                    margin-bottom: 0.5rem;
+
+                    .liked-user-profile-img {
+                        width: 40px;
+                        height: 40px;
+                        object-fit: cover;
+                        object-position: center;
+                        border-radius: 50%;
+                        margin-right: 0.5rem;
+                    }
                 }
             }
         }
     }
+
+
 }
 
 
@@ -384,6 +479,7 @@
     font-size: 40px;
     margin-right: 1rem;
     margin-bottom: 0.5rem;
+    cursor: pointer;
 }
 
 .object {

@@ -145,7 +145,7 @@ const Navbar = () => {
 
                     {view ?
                         <Link
-                            to={"/reels"} className="navbar-mainu-link-btn c-video c-reel bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" onClick={handleBoll}>
+                            to={"/reels"} className=" navbar-mainu-link-btn c-video c-reel bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" onClick={handleBoll}>
                             <div
                                 className="">
                                 <motion.div style={{
@@ -168,7 +168,7 @@ const Navbar = () => {
 
                     {view ?
                         <Link
-                            to={"/notification/"} className="link-btn-shadow navbar-mainu-link-btn c-heart bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" onClick={() => { handleNotificationClick(); handleBoll(); }}>
+                            to={"/notification/"} className=" link-btn-shadow navbar-mainu-link-btn c-heart bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" onClick={() => { handleNotificationClick(); handleBoll(); }}>
                             <div
                                 className="">
                                 {latestFriendNotification.timestamp > 0 ? (
@@ -181,18 +181,18 @@ const Navbar = () => {
                                                 transition={{ duration: 0.3, delay: 0.1 }}
                                                 initial={{ scale: 0.6, opacity: 0 }}
                                                 animate={{ scale: 1, opacity: 1 }}
-                                                className='link-btn-shadow' >
+                                                className='link-btn-shadow ' >
                                                 <AiFillHeart className="" color='#FF0040' onClick={() => { handleNotificationClick(); handleBoll(); }} />
                                             </motion.div>
                                             :
 
-                                            <AiFillHeart className='text-lightProfileName dark:text-darkPostIcon' />
+                                            <AiFillHeart className=' text-lightProfileName dark:text-darkPostIcon' />
                                         }
                                     </div>
                                 )
                                     :
 
-                                    <AiFillHeart className='text-lightProfileName dark:text-darkPostIcon' />
+                                    <AiFillHeart className=' text-lightProfileName dark:text-darkPostIcon' />
                                 }
                             </div>
                         </Link>
@@ -201,7 +201,7 @@ const Navbar = () => {
                     }
 
                     {view ?
-                        <Link to={"/home/"} className="navbar-mainu-link-btn c-home bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" onClick={() => { handleBoll(); }}>
+                        <Link to={"/home/"} className="  navbar-mainu-link-btn c-home bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" onClick={() => { handleBoll(); }}>
                             <motion.div
                                 transition={{ duration: 0.3, delay: 0.3 }}
                                 initial={{ scale: 0.6, opacity: 0 }}
@@ -225,7 +225,7 @@ const Navbar = () => {
                     }
 
                     {view ?
-                        <Link to={"/message/"} onClick={() => { { handleCircleClick(); handleBoll(); } }} className="navbar-mainu-link-btn c-chat bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" >
+                        <Link to={"/message/"} onClick={() => { { handleCircleClick(); handleBoll(); } }} className=" navbar-mainu-link-btn c-chat bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" >
                             <div className="link-btn-shadow">
                                 <motion.div style={{
                                     width: "40px", height: "40px", borderRadius: "50%", display: "flex",
@@ -236,7 +236,7 @@ const Navbar = () => {
                                     animate={{ scale: 1, opacity: 1 }}
                                 >
                                     <RiMessengerFill style={{ position: "absolute", fontSize: "24px" }} />
-                                    <Link to={"/message/"} >
+                                    <Link to={"/message/"} className='link' >
                                         <div className=''  >
                                             {friendRequests.length > 0 ?
                                                 (<>
@@ -263,7 +263,7 @@ const Navbar = () => {
 
                     {
                         view ?
-                            <Link to={"/profile/"} className="navbar-mainu-link-btn c-profile-img-position" onClick={handleBoll}>
+                            <Link to={"/profile/"} className=" navbar-mainu-link-btn c-profile-img-position" onClick={handleBoll}>
                                 <motion.div
                                     transition={{ duration: 0.3, delay: 0.5 }}
                                     initial={{ scale: 0.6, opacity: 0 }}

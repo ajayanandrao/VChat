@@ -6,6 +6,7 @@ import { db } from "../Firebase";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { AuthContext } from "./../AuthContaxt";
 import { v4 } from 'uuid';
+import { FiSearch } from 'react-icons/fi';
 
 const People = ({ userP }) => {
 
@@ -188,6 +189,7 @@ const People = ({ userP }) => {
                 <div className="people-wrapper-inner">
                     <div className="People-back-div">
                         <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon "></i>
+                        <FiSearch className='text-lightPostText dark:text-darkPostIcon' fontSize={"24px"} />
                         <input type="text"
                             className='People-User-input text-lightProfileName dark:text-darkPostText'
                             onChange={(e) => setSearch(e.target.value)}

@@ -15,6 +15,7 @@ const ProfileOne = ({ user }) => {
 
     const [imageUrl, setImageUrl] = useState(null);
 
+
     useEffect(() => {
         const fetchProfileData = async () => {
             const docRef = doc(db, "UpdateProfile", currentUser?.uid ?? "default");
@@ -33,13 +34,21 @@ const ProfileOne = ({ user }) => {
 
     useEffect(() => {
         const colRef = collection(db, 'UpdateProfile');
-        const unsubscribe = onSnapshot(colRef, (snapshot) => {
-            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-            setCoverImg(newApi);
-            setLoadingCoverData(false);
-        });
+        const delay = setTimeout(() => {
+            const unsubscribe = onSnapshot(colRef, (snapshot) => {
+                const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+                setCoverImg(newApi);
+                setLoadingCoverData(false);
+            });
 
-        return unsubscribe;
+            return () => {
+                // Cleanup the subscription when the component unmounts
+                unsubscribe();
+            };
+        }, 1000);
+
+        // Clear the delay if the component unmounts before the delay completes
+        return () => clearTimeout(delay);
     }, []);
 
 
@@ -56,8 +65,11 @@ const ProfileOne = ({ user }) => {
             {loadingCoverData ? (
 
                 <div className='placeholder-glow loading-profile-cover-photo-div'>
-                    <div className="placeholder placeholder-dimension"></div>
-                </div>)
+                    <div className="placeholder placeholder-dimension bg-[white] dark:bg-darkPostIcon">
+                        <div className="placeholder-dimension-img bg-[white] dark:bg-darkDiv"></div>
+                    </div>
+                </div>
+            )
                 : (
 
                     <>

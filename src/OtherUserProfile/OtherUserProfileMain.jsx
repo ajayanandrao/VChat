@@ -45,7 +45,8 @@ const OtherUserProfileMain = () => {
     return (
         <div className='other-user-profile-main bg-light_0 dark:bg-dark'>
             <LeftArro />
-            <div style={{ width: "100%", height: "100vh", boxSizing: "border-box", overflowY: "scroll" }}>
+            <div className="left-div"></div>
+            <div className='other-user-friend-inner-div'>
                 <ProfileOne user={user} />
                 <ProfileTwo user={user} />
                 <ProfileThree user={user} />

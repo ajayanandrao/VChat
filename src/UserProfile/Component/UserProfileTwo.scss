@@ -8,10 +8,12 @@
     background: rgba(255, 255, 255, 0.034);
     backdrop-filter: blur(10px);
     z-index: 2;
+
     .fa {
         margin-right: 8px;
-      }
-    .update-name-overlay-close{
+    }
+
+    .update-name-overlay-close {
         width: 100%;
         height: 50px;
         padding: 1rem;
@@ -80,22 +82,26 @@
         margin-top: 0.3rem;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
         transition: 0.8s ease-in-out;
+        cursor: pointer;
+
         .edit-pencil {
             margin-left: 1px;
             font-size: 19px;
             transition: 0.8s ease-in-out;
+            cursor: pointer;
         }
     }
 }
 
-.update-name-overlay-Input{
+.update-name-overlay-Input {
     height: 40px;
     border-radius: 30px;
     padding-inline-start: 10px;
     display: flex;
     align-items: center;
     margin-bottom: 1.5rem;
-    &:focus{
+
+    &:focus {
         border: none;
         outline: none;
     }
