@@ -341,44 +341,44 @@ const HomePage = () => {
                         (<>
                             <div className='placeholder-glow'>
                                 <div className="right-Placeholder-card placeholder">
-                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-ligtDiv"></div>
-                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-ligtDiv"></div>
+                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-lightPostIcon"></div>
+                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-lightPostIcon"></div>
                                 </div>
                             </div>
                             <div className='placeholder-glow'>
                                 <div className="right-Placeholder-card placeholder">
-                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-ligtDiv"></div>
-                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-ligtDiv"></div>
+                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-lightPostIcon"></div>
+                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-lightPostIcon"></div>
                                 </div>
                             </div>
                             <div className='placeholder-glow'>
                                 <div className="right-Placeholder-card placeholder">
-                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-ligtDiv"></div>
-                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-ligtDiv"></div>
+                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-lightPostIcon"></div>
+                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-lightPostIcon"></div>
                                 </div>
                             </div>
                             <div className='placeholder-glow'>
                                 <div className="right-Placeholder-card placeholder">
-                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-ligtDiv"></div>
-                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-ligtDiv"></div>
+                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-lightPostIcon"></div>
+                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-lightPostIcon"></div>
                                 </div>
                             </div>
                             <div className='placeholder-glow'>
                                 <div className="right-Placeholder-card placeholder">
-                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-ligtDiv"></div>
-                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-ligtDiv"></div>
+                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-lightPostIcon"></div>
+                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-lightPostIcon"></div>
                                 </div>
                             </div>
                             <div className='placeholder-glow'>
                                 <div className="right-Placeholder-card placeholder">
-                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-ligtDiv"></div>
-                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-ligtDiv"></div>
+                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-lightPostIcon"></div>
+                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-lightPostIcon"></div>
                                 </div>
                             </div>
                             <div className='placeholder-glow'>
                                 <div className="right-Placeholder-card placeholder">
-                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-ligtDiv"></div>
-                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-ligtDiv"></div>
+                                    <div className="right-Placeholder-card-name dark:bg-darkDiv bg-lightPostIcon"></div>
+                                    <div className="right-Placeholder-card-name-two dark:bg-darkDiv bg-lightPostIcon"></div>
                                 </div>
                             </div>
                         </>) :
