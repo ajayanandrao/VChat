@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import './ViewStory.scss';
 import { AuthContext } from '../../../AuthContaxt';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { CircularProgress, LinearProgress } from '@mui/material';
 import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, query, serverTimestamp, setDoc, where } from 'firebase/firestore';
 import { db } from '../../../Firebase';
@@ -264,11 +264,15 @@ const ViewStory = ({ post }) => {
                                                 className="view-countdown-progress"
                                             />
                                             <div className='video-inner-container'>
-                                                <img src={user.userPhoto} className="video-view-profile-img" alt="" />
-                                                <div className="video-view-profile-name">
-                                                    <div className="mx-2">{user.name}</div>
-                                                    <div className='' style={{ fontSize: "14px", color: "#696969" }}><PostTimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} /></div>
-                                                </div>
+                                                <Link to={`/users/${post.uid}`} style={{ display: "flex", alignItems: "center" }}>
+                                                    <img src={user.userPhoto} className="video-view-profile-img" alt="" />
+                                                    <div className="video-view-profile-name">
+                                                        <div className="mx-2">{user.name}</div>
+                                                        <div className='' style={{ fontSize: "12px", color: "#696969" }}>
+                                                            <PostTimeAgoComponent timestamp={story.timestamp && story.timestamp.toDate()} />
+                                                        </div>
+                                                    </div>
+                                                </Link>
 
                                                 <div className="video-view-profile-close-div">
                                                     <MdClose className="video-view-close-btn" onClick={goBack} />
@@ -284,7 +288,7 @@ const ViewStory = ({ post }) => {
 
 
                                                 {liked ? < AiFillHeart className="video-view-send-icon mx-3  " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
-                                                    <AiOutlineHeart className="video-view-send-icon mx-3 " onClick={() => handleLike(story.id)} />}
+                                                    <AiOutlineHeart className="video-view-send-icon text-[white] mx-3 " onClick={() => handleLike(story.id)} />}
 
 
                                                 {storyComment ?
@@ -292,7 +296,7 @@ const ViewStory = ({ post }) => {
                                                         onClick={() => handleStoryComment(story.id)}
                                                     />
                                                     :
-                                                    < AiOutlineSend className="video-view-send-icon"
+                                                    < AiOutlineSend className="video-view-send-icon text-[white]"
                                                         onClick={() => handleStoryComment(story.id)}
                                                     />
                                                 }

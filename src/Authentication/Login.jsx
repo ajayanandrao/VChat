@@ -8,7 +8,7 @@ import { collection, doc, onSnapshot, orderBy, query, setDoc, updateDoc } from '
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Box, TextField } from '@mui/material';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import logo from "./../Image/img/logo192.png";
+// import logo from "./../Image/img/logo192.png";
 import logoText from "./../Image/c2.png";
 import vlogo from "./../Image/img/logo192.png";
 import { CircularProgress } from '@mui/material';
@@ -127,13 +127,25 @@ const Login = () => {
         document.getElementById("error-alert").innerHTML = "";
     }
 
+    const [showFooter, setShowFooter] = useState(false);
+
+    useEffect(() => {
+        // Use setTimeout to toggle the 'showFooter' state after 2 seconds
+        const timeoutId = setTimeout(() => {
+            setShowFooter(true);
+        }, 1500);
+
+        // Cleanup the timeout to prevent memory leaks when the component unmounts
+        return () => clearTimeout(timeoutId);
+    }, []);
+
     return (
         <>
 
             {loading ? (
                 <div className='login-wellcome-div'>
 
-                    <div className='loaing-logo' style={{ backgroundImage: `url(${logo})` }} >
+                    <div className='loaing-logo' style={{ backgroundImage: `url(${vlogo})` }} >
                     </div>
                 </div>
             ) : (
@@ -186,7 +198,11 @@ const Login = () => {
 
             )}
 
-            <div className='forgott-footer-bottom'>Copyright © VChat App 2023. </div>
+            {showFooter && (
+                <div className='forgott-footer-bottom'>
+                    Copyright © VChat App 2023.
+                </div>
+            )}
 
         </>
     )

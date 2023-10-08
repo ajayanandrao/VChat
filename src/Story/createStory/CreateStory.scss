@@ -107,7 +107,38 @@
 
     .story-video-container {
         width: 100%;
-        height: calc(100vh - 50px);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // background: red;
+
+        @include respond-to(xs) {
+            height: calc(100vh - 50px);
+        }
+
+        .story-video-div {
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+            max-height: 800px;
+            position: relative;
+
+            @include respond-to(xl) {
+                max-width: 380px;
+                max-height: 550px;
+            }
+
+            @include respond-to(lg) {
+                max-width: 380px;
+                max-height: 550px;
+            }
+
+            @include respond-to(sm) {
+                max-width: 400px;
+                max-height: 650px;
+            }
+        }
 
         .userLikes-div {
             width: 100%;
@@ -177,8 +208,21 @@
 
         .story-video {
             width: 100%;
+            max-width: 500px;
             height: 100%;
+            border-radius: 10px;
+            // max-height: 500px;
             object-fit: cover;
+            object-position: center;
+
+
+            @include respond-to(xs) {
+                width: 100%;
+                max-width: 100%;
+                height: 100%;
+                max-height: 100%;
+            }
+
         }
 
         .story-like-div {
@@ -230,10 +274,14 @@
 
     .story-img-div-wrapper {
         width: 100%;
-        height: calc(100vh - 50px);
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @include respond-to(xs) {
+            height: calc(100vh - 50px);
+        }
 
         .story-img-div {
             width: 100%;

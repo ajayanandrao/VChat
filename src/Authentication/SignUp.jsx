@@ -199,7 +199,17 @@ const SignUp = () => {
 
     };
 
+    const [showFooter, setShowFooter] = useState(false);
 
+    useEffect(() => {
+        // Use setTimeout to toggle the 'showFooter' state after 2 seconds
+        const timeoutId = setTimeout(() => {
+            setShowFooter(true);
+        }, 1500);
+
+        // Cleanup the timeout to prevent memory leaks when the component unmounts
+        return () => clearTimeout(timeoutId);
+    }, []);
 
     return (
         <>
@@ -259,6 +269,12 @@ const SignUp = () => {
 
                     </div>
                 </div>
+
+                {showFooter && (
+                    <div className='forgott-footer-bottom'>
+                        Copyright © VChat App 2023.
+                    </div>
+                )}
             </div>
         </>
     )

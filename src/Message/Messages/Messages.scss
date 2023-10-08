@@ -497,21 +497,26 @@
         transition: background-color 0.3s;
 
         &:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+            // background-color: rgba(0, 0, 0, 0.8);
         }
 
         .message-play-btn-div {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
+            display: inline-flex;
             justify-content: center;
             align-items: center;
-
+            position: relative;
+            padding-left: 5px;
+            padding-bottom: 2px;
             .message-play-btn {
-                color: #fff;
-                font-size: 24px;
+                color: #E6E6E6;
+                font-size: 50px;
+                &:hover {
+                    color: white;
+                }
             }
         }
 
@@ -617,6 +622,7 @@
 .messageImgLike-div {
     width: 100%;
     display: flex;
+    cursor: pointer;
 }
 
 .message-TxtFile-div {

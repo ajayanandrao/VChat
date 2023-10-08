@@ -748,7 +748,7 @@ const Messages = () => {
 
     // Render the UI component
 
-    const sendReply = async (messageId, uid, name, recipientImg ) => {
+    const sendReply = async (messageId, uid, name, recipientImg) => {
         const selectedMessage = messages.find((message) => message.id === messageId);
         setMessageInput("");
         // setViewMessageImg(null);
@@ -825,6 +825,25 @@ const Messages = () => {
 
 
 
+    const handleSendHistorayMessageEmoji = async (uid, recipientImg, emojiState) => {
+        handleMessageEmoji();
+        if (senderId) {
+            const messagesRef = collection(db, 'messages');
+            const HistoryMessagesRef = collection(db, 'HistoryMessages');
+
+            await addDoc(messagesRef, {
+                sender: currentUser.uid, // Set the sender's ID
+                senderImg: currentUser.photoURL,
+
+                recipient: uid, // Set the recipient's ID
+                recipientImg: recipientImg,
+                imageUrlLike: emojiState,
+
+                timestamp: serverTimestamp(), // Set the timestamp (server-side)
+            });
+        }
+
+    }
     const handleSendMessageEmoji = async (uid, recipientImg, emojiState) => {
         handleMessageEmoji();
         if (senderId) {
@@ -1238,7 +1257,7 @@ const Messages = () => {
 
                         }
                         {showMessageOption ?
-                            <div className="show-message-option  bg-lightDiv dark:bg-darkInput">
+                            <div className="show-message-option  bg-light_0 dark:bg-darkInput">
                                 <p onClick={HandleAreyouSure} className='mb-3 text-lightProfileName dark:text-darkPostText'>Delete all Chat</p>
                                 <p onClick={HandleAreyouSureForCurrentUser} className='text-lightProfileName dark:text-darkPostText'>Delete message from you</p>
                             </div>
@@ -1285,7 +1304,7 @@ const Messages = () => {
                                                 className={`message-item ${messageClass}`}
                                             >
 
-                                                {isSender && emojiHoveredMessageId === message.id && (
+                                                {/* {isSender && emojiHoveredMessageId === message.id && (
                                                     <div>
                                                         <div
                                                             className="delete-button"
@@ -1296,7 +1315,7 @@ const Messages = () => {
                                                             <i className="bi bi-x-circle-fill text-lightProfileName dark:text-darkProfileName"></i>
                                                         </div>
                                                     </div>
-                                                )}
+                                                )} */}
 
 
 
@@ -1536,6 +1555,18 @@ const Messages = () => {
                                                                 {hasImageLike &&
                                                                     <div className='messageImgLike-div' onClick={() => showEmojiDelteBtn(message.id)}
                                                                         onMouseLeave={hideEmojiDelteBtn}>
+                                                                        {isSender && emojiHoveredMessageId === message.id && (
+                                                                            <div>
+                                                                                <div
+                                                                                    className="delete-button"
+                                                                                    onClick={() => {
+                                                                                        deleteMessage(message.id);
+                                                                                    }}
+                                                                                >
+                                                                                    <i className="bi bi-x-circle-fill text-lightProfileName dark:text-darkProfileName"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        )}
                                                                         <img src={message.imageUrlLike}
                                                                             className='messageImgLike' alt="Message" />
                                                                     </div>
@@ -1707,7 +1738,7 @@ const Messages = () => {
                                     return (
                                         <div key={index} className='emoji-history-item'>
                                             <div className='emoji-history-icon-div'>
-                                                <img src={hist.imageUrlLike} className='emoji-history-icon' alt="" onClick={() => handleSendMessageEmoji(user.uid, user.userPhoto, hist.imageUrlLike)} />
+                                                <img src={hist.imageUrlLike} className='emoji-history-icon' alt="" onClick={() => handleSendHistorayMessageEmoji(user.uid, user.userPhoto, hist.imageUrlLike)} />
                                             </div>
                                         </div>
                                     )
