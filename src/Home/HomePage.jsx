@@ -194,6 +194,47 @@ const HomePage = () => {
         });
     };
 
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+        const fetchFriends = async () => {
+            try {
+                const friendsQuery = query(
+                    collection(db, `allFriends/${currentUser.uid}/Message`),
+                    orderBy('time', 'asc') // Reverse the order to show newest messages first
+                );
+
+                const unsubscribe = onSnapshot(friendsQuery, (friendsSnapshot) => {
+                    const friendsData = friendsSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+                    // Reverse the order of messages to show newest messages first
+                    setMessages(friendsData.reverse());
+                });
+
+                // Return the unsubscribe function to stop listening to updates when the component unmounts
+                return () => unsubscribe();
+            } catch (error) {
+                console.error('Error fetching friends:', error);
+            }
+        };
+
+        fetchFriends();
+    }, [currentUser]);
+
+    const HandleSmsSeen = (id) => {
+        const smsRef = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); // Include the document ID here
+
+        updateDoc(smsRef, {
+            status: "seen"
+        })
+            .then(() => {
+                console.log("Message marked as seen successfully.");
+            })
+            .catch((error) => {
+                console.error("Error marking message as seen:", error);
+            });
+    };
+
+
     return (
         <div className='homepage-main-container bg-light_0 dark:bg-dark'>
             <motion.div
@@ -248,6 +289,28 @@ const HomePage = () => {
 
             <div className="center">
                 <div className="center-div">
+
+                    <div className='sms-position-div'>
+                        {messages.slice(0, 1).map((sms) => {
+                            return (
+                                <div key={sms.id}>
+
+
+                                    <Link to={`/users/${sms.userId}/message`} className='link' onClick={() => HandleSmsSeen(sms.id)}>
+                                        {sms.status === "unseen" ? (<div className='sms-div' style={{ width: "80px", height: "80px" }}>
+                                            <div className=" sms-user-ring-div" style={{ width: "60px", height: "60px" }}>
+                                                {sms.status === "unseen" ? <div className="sms-user-ring " style={{ width: "60px", height: "60px" }}></div> : ""}
+                                                <img src={sms.photoUrl} className='sms-user-img' alt="" style={{ width: "50px", height: "50px" }} />
+                                            </div>
+                                        </div>) : null}
+                                    </Link>
+
+                                </div>
+                            );
+
+                        })}
+                    </div>
+
                     <StoryForm />
                     <Post />
 
@@ -256,10 +319,10 @@ const HomePage = () => {
                             <div className=' placeholder-glow '>
                                 <div className="Feed-Placeholder-card placeholder bg-[white] dark:bg-darkPostIcon">
                                     <div className='d-flex align-items-center'>
-                                        <div className='Feed-Placeholder-card-profile bg-[gray] dark:bg-darkDiv'></div>
+                                        <div className='Feed-Placeholder-card-profile bg-lightPostIcon dark:bg-darkDiv'></div>
                                         <div>
-                                            <div className='Feed-Placeholder-card-profile-name bg-[gray] dark:bg-darkDiv'></div>
-                                            <div className='Feed-Placeholder-card-profile-name-two bg-[gray] dark:bg-darkDiv'></div>
+                                            <div className='Feed-Placeholder-card-profile-name bg-lightPostIcon dark:bg-darkDiv'></div>
+                                            <div className='Feed-Placeholder-card-profile-name-two bg-lightPostIcon dark:bg-darkDiv'></div>
                                         </div>
                                     </div>
                                 </div>
@@ -267,10 +330,10 @@ const HomePage = () => {
                             <div className=' placeholder-glow '>
                                 <div className="Feed-Placeholder-card placeholder bg-[white] dark:bg-darkPostIcon">
                                     <div className='d-flex align-items-center'>
-                                        <div className='Feed-Placeholder-card-profile bg-[gray] dark:bg-darkDiv'></div>
+                                        <div className='Feed-Placeholder-card-profile bg-lightPostIcon dark:bg-darkDiv'></div>
                                         <div>
-                                            <div className='Feed-Placeholder-card-profile-name bg-[gray] dark:bg-darkDiv'></div>
-                                            <div className='Feed-Placeholder-card-profile-name-two bg-[gray] dark:bg-darkDiv'></div>
+                                            <div className='Feed-Placeholder-card-profile-name bg-lightPostIcon dark:bg-darkDiv'></div>
+                                            <div className='Feed-Placeholder-card-profile-name-two bg-lightPostIcon dark:bg-darkDiv'></div>
                                         </div>
                                     </div>
                                 </div>
@@ -278,10 +341,10 @@ const HomePage = () => {
                             <div className=' placeholder-glow '>
                                 <div className="Feed-Placeholder-card placeholder bg-[white] dark:bg-darkPostIcon">
                                     <div className='d-flex align-items-center'>
-                                        <div className='Feed-Placeholder-card-profile bg-[gray] dark:bg-darkDiv'></div>
+                                        <div className='Feed-Placeholder-card-profile bg-lightPostIcon dark:bg-darkDiv'></div>
                                         <div>
-                                            <div className='Feed-Placeholder-card-profile-name bg-[gray] dark:bg-darkDiv'></div>
-                                            <div className='Feed-Placeholder-card-profile-name-two bg-[gray] dark:bg-darkDiv'></div>
+                                            <div className='Feed-Placeholder-card-profile-name bg-lightPostIcon dark:bg-darkDiv'></div>
+                                            <div className='Feed-Placeholder-card-profile-name-two bg-lightPostIcon dark:bg-darkDiv'></div>
                                         </div>
                                     </div>
                                 </div>
@@ -289,10 +352,10 @@ const HomePage = () => {
                             <div className=' placeholder-glow '>
                                 <div className="Feed-Placeholder-card placeholder bg-[white] dark:bg-darkPostIcon">
                                     <div className='d-flex align-items-center'>
-                                        <div className='Feed-Placeholder-card-profile bg-[gray] dark:bg-darkDiv'></div>
+                                        <div className='Feed-Placeholder-card-profile bg-lightPostIcon dark:bg-darkDiv'></div>
                                         <div>
-                                            <div className='Feed-Placeholder-card-profile-name bg-[gray] dark:bg-darkDiv'></div>
-                                            <div className='Feed-Placeholder-card-profile-name-two bg-[gray] dark:bg-darkDiv'></div>
+                                            <div className='Feed-Placeholder-card-profile-name bg-lightPostIcon dark:bg-darkDiv'></div>
+                                            <div className='Feed-Placeholder-card-profile-name-two bg-lightPostIcon dark:bg-darkDiv'></div>
                                         </div>
                                     </div>
                                 </div>
@@ -300,10 +363,10 @@ const HomePage = () => {
                             <div className=' placeholder-glow '>
                                 <div className="Feed-Placeholder-card placeholder bg-[white] dark:bg-darkPostIcon">
                                     <div className='d-flex align-items-center'>
-                                        <div className='Feed-Placeholder-card-profile bg-[gray] dark:bg-darkDiv'></div>
+                                        <div className='Feed-Placeholder-card-profile bg-lightPostIcon dark:bg-darkDiv'></div>
                                         <div>
-                                            <div className='Feed-Placeholder-card-profile-name bg-[gray] dark:bg-darkDiv'></div>
-                                            <div className='Feed-Placeholder-card-profile-name-two bg-[gray] dark:bg-darkDiv'></div>
+                                            <div className='Feed-Placeholder-card-profile-name bg-lightPostIcon dark:bg-darkDiv'></div>
+                                            <div className='Feed-Placeholder-card-profile-name-two bg-lightPostIcon dark:bg-darkDiv'></div>
                                         </div>
                                     </div>
                                 </div>

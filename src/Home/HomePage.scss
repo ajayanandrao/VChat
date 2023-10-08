@@ -1,4 +1,5 @@
 @import "./../Styles/Mixin_New.scss";
+@import "./../Styles/Variable";
 
 .Feed-Placeholder-card {
     width: 100%;
@@ -249,7 +250,8 @@
                 // margin-bottom: 1rem;
                 border: none;
                 outline: none;
-                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                box-shadow: $border-input;
                 transition: 0.8s ease-in-out;
 
             }

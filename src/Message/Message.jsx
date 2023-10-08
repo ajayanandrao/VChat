@@ -4,7 +4,7 @@ import "./Message.scss";
 import { Link, useNavigate } from 'react-router-dom';
 // import Flickity from 'react-flickity-component';
 import natur from "./nature.json";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { styled, keyframes } from '@mui/system';
@@ -214,19 +214,20 @@ const Message = () => {
         fetchFriends();
     }, [currentUser]);
 
-
     const [messages, setMessages] = useState([]);
+
     useEffect(() => {
         const fetchFriends = async () => {
             try {
                 const friendsQuery = query(
                     collection(db, `allFriends/${currentUser.uid}/Message`),
-                    orderBy('time', 'asc')
+                    orderBy('time', 'asc') // Reverse the order to show newest messages first
                 );
 
                 const unsubscribe = onSnapshot(friendsQuery, (friendsSnapshot) => {
                     const friendsData = friendsSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-                    setMessages(friendsData);
+                    // Reverse the order of messages to show newest messages first
+                    setMessages(friendsData.reverse());
                 });
 
                 // Return the unsubscribe function to stop listening to updates when the component unmounts
@@ -265,6 +266,22 @@ const Message = () => {
         setActiveTab(tabName);
     };
 
+    // ========================================================
+
+    const HandleSmsSeen = (id) => {
+        const smsRef = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); // Include the document ID here
+
+        updateDoc(smsRef, {
+            status: "seen"
+        })
+            .then(() => {
+                console.log("Message marked as seen successfully.");
+            })
+            .catch((error) => {
+                console.error("Error marking message as seen:", error);
+            });
+    };
+
 
     return (
         <>
@@ -283,49 +300,80 @@ const Message = () => {
                                 <div className="tablink-btn-inner-wrapper">
                                     <div className={`tablinks text-lightProfileName dark:text-darkPostText  ${activeTab === 'Message' ? 'active' : ''}`} onClick={() => setActive('Message')}> Message</div>
                                     <div className={`tablinks text-lightProfileName dark:text-darkPostText ${activeTab === 'Online' ? 'active' : ''}`} onClick={() => setActive('Online')}>Online</div>
-                                    <div className={`tablinks text-lightProfileName dark:text-darkPostText ${activeTab === 'Request' ? 'active' : ''}`} onClick={() => setActive('Request')}>Request</div>
+                                    <div className={`tablinks text-lightProfileName dark:text-darkPostText ${activeTab === 'Request' ? 'active' : ''}`} onClick={() => setActive('Request')}>
+
+                                        {latestFriendRequest.timestamp > 0 && (
+                                                <div className="request-animated-circle-request me-2"></div>
+                                            // <div className="message-animated-circle" key={latestFriendRequest.id}>
+                                            // </div>
+                                        )}
+
+                                        Request
+
+
+                                    </div>
                                 </div>
                             </div>
 
 
                             {activeTab === 'Message' ? (<>
-                                <div className='message-tab-container'>
+                                <div className='message-tab-container text-lightProfileName dark:text-darkProfileName'>
 
+                                    {messages.map((sms) => {
 
+                                        return (
+                                            <div key={sms.id}>
+                                                <Link to={`/users/${sms.userId}/message`} className='link'>
+                                                    <div className='sms-div'>
+                                                        <div className=" sms-user-ring-div">
+                                                            {sms.status === "unseen" ? <div className="sms-user-ring"></div> : ""}
+                                                            <img src={sms.photoUrl} className='sms-user-img' alt="" />
 
-                                    {
-                                        api.map((item) => {
-                                            return (
-                                                <div key={item.id}>
-                                                    {uniqueUserIds.map((userId) => {
-                                                        const userMessages = messages.filter((message) => message.userId === userId);
-                                                        const user = userMessages[0]; // Assuming the first message represents the user's details
-                                                        if (item.uid === user.userId) {
-                                                            return (
-                                                                <div key={userId}>
+                                                        </div>
+                                                        <div className='sms-name' onClick={() => HandleSmsSeen(sms.id)}>{sms.name}</div>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        );
 
-                                                                    <div className='message-profile-div-one dark:text-darkProfileName'>
+                                    })}
 
-                                                                        <Link style={{ textDecoration: "none", display: "flex", alignItems: "center" }} to={`/users/${user.userId}/message`}>
-                                                                            <img src={item.PhotoUrl} className='message-user-img' alt='' />
-                                                                            <span className='message-user-name text-lightProfileName dark:text-darkProfileName'>{item.name}</span>
-                                                                        </Link>
-                                                                    </div>
-                                                                    {userMessages.map((message, index) => (
-                                                                        <div key={index}>{message.messageContent}</div>
+                                    {/* {api.map((item) => {
+                                        return (
+                                            <div key={item.id}>
+                                                {uniqueUserIds.map((userId) => {
 
-                                                                    ))}
-
-
+                                                    const userMessages = messages.filter((message) => message.userId === userId);
+                                                    const user = userMessages[0];
+                                                    if (item.uid === user.userId) {
+                                                        return (
+                                                            <div key={userId}>
+                                                                <div className='message-profile-div-one dark:text-darkProfileName'>
+                                                                    <Link style={{ textDecoration: "none", display: "flex", alignItems: "center" }} to={`/users/${user.userId}/message`}>
+                                                                        <img src={item.PhotoUrl} className='message-user-img' alt='' />
+                                                                        <span className='message-user-name text-lightProfileName dark:text-darkProfileName'>{item.name}</span>
+                                                                    </Link>
                                                                 </div>
-                                                            );
-                                                        }
-                                                    })}
-                                                </div>
-                                            );
+                                                            </div>
+                                                        );
+                                                    }
+                                                })}
 
-                                        })
-                                    }
+                                                {messages.map((sms) => {
+                                                    if (item.uid === sms.id) {
+                                                        return (
+                                                            <div key={sms.id}>{sms.name}</div>
+                                                        );
+                                                    }
+                                                    return null; // Provide a default case to avoid rendering undefined
+                                                })}
+
+
+                                            </div>
+                                        );
+                                    })} */}
+
+
                                 </div>
                             </>) : ''}
 

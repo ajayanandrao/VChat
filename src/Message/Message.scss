@@ -1,6 +1,230 @@
 @import "./../Mixin_New.scss";
 @import "./../Variable.scss";
 
+.sms-div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    // background: red;
+
+    .sms-user-ring-div {
+        width: 50px;
+        height: 50px;
+        // border-radius: 50%;
+        margin-right: 1rem;
+        position: relative;
+        // background: red;
+
+        .sms-user-ring {
+            width: 47px;
+            height: 47px;
+            // background: #00fc0093;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: glow 2s infinite;
+            border: 1px solid #00fc00;
+            cursor: pointer;
+
+            @include respond-to(sm) {
+                width: 47px !important;
+                height: 47px !important;
+            }
+            @include respond-to(xs) {
+                width: 42px !important;
+                height: 42px !important;
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 4px rgba(0, 255, 0, 0.7);
+                // opacity: 0;
+            }
+
+            50% {
+                box-shadow: 0 0 10px #01fc00;
+                // opacity: 0.7;
+            }
+
+            100% {
+                box-shadow: 0 0 4px rgba(0, 255, 0, 0.295);
+                // opacity: 0;
+            }
+        }
+
+        .sms-user-img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+
+            @include respond-to(sm) {
+                width: 40px !important;
+                height: 40px !important;
+            }
+            @include respond-to(xs) {
+                width: 40px !important;
+                height: 40px !important;
+            }
+        }
+    }
+
+    .sms-name {
+        margin-right: 40px;
+        cursor: pointer;
+        text-transform: capitalize;
+    }
+}
+
+.sms-position-div {
+    position: fixed;
+    top: 65%;
+    left: 66%;
+    transform: translate(0%, 0%);
+    z-index: 9999;
+    transition: 0.3s ease-in-out;
+    border-radius: 50%;
+
+    @include respond-to(md) {
+        top: 65%;
+        left: 91%;
+        transform: translate(0%, 0%);
+        z-index: 9999;
+    }
+
+    @include respond-to(sm) {
+        top: 65%;
+        left: 90%;
+        transform: translate(0%, 0%);
+        z-index: 9999;
+    }
+
+    @include respond-to(xs) {
+        top: 65%;
+        left: 84%;
+        transform: translate(0%, 0%);
+    }
+
+    .Home-sms-div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        // background: red;
+        width: 60px;
+        height: 60px;
+
+        .sms-user-ring-div {
+            width: 60px;
+            height: 60px;
+            // border-radius: 50%;
+            margin-right: 1rem;
+            position: relative;
+            // background: red;
+            cursor: pointer;
+
+            .sms-user-ring {
+
+                // background: #00fc0093;
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                animation: glow 2s infinite;
+                border: 1px solid #00fc00;
+            }
+
+            @keyframes glow {
+                0% {
+                    box-shadow: 0 0 4px rgba(0, 255, 0, 0.7);
+                    // opacity: 0;
+                }
+
+                50% {
+                    box-shadow: 0 0 10px #01fc00;
+                    // opacity: 0.7;
+                }
+
+                100% {
+                    box-shadow: 0 0 4px rgba(0, 255, 0, 0.295);
+                    // opacity: 0;
+                }
+            }
+
+            .sms-user-img {
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 50%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                @include respond-to(sm) {
+                    width: 40px;
+                    height: 40px;
+                }
+
+                @include respond-to(xs) {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+
+        .sms-name {
+            margin-right: 40px;
+            cursor: pointer;
+            text-transform: capitalize;
+        }
+    }
+}
+
+
+.request-animated-circle-request {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    animation: growRequet 1s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #00fc00;
+    background: #00fc00;
+}
+
+@keyframes growRequet {
+    0% {
+        // transform: scale(0.5);
+        // background-color: blue;
+        box-shadow: 0 0 4px rgba(0, 255, 0, 0.7);
+        opacity: 0.3;
+    }
+
+    50% {
+        // transform: scale(0.8);
+        box-shadow: 0 0 10px #01fc00;
+        opacity: 0.8;
+    }
+
+    100% {
+        // transform: scale(0.5);
+        box-shadow: 0 0 4px rgba(0, 255, 0, 0.295);
+        opacity: 0.3;
+    }
+}
+
 .message-wrapper {
     width: 100%;
     height: 100vh;
@@ -81,9 +305,12 @@
                 cursor: pointer;
                 // color: white;
                 font-weight: 600;
+                display: flex;
+                align-items: center;
 
                 &.active {
-                    display: block;
+                    display: flex;
+                    align-items: center;
                     background-color: #007bff;
                     padding: 5px 8px;
                     border-radius: 30px;
@@ -169,6 +396,14 @@
                 text-transform: capitalize;
             }
 
+            .online-user-div {
+                display: flex;
+                align-items: center;
+                // margin-top: 1rem;
+                // background: red;
+                margin-bottom: 25px;
+            }
+
             .tab-block {
                 display: flex;
                 justify-content: space-between;
@@ -185,31 +420,31 @@
                         top: 0;
                         left: -3px;
 
-                        .request-animated-circle {
-                            width: 22px;
-                            height: 22px;
-                            border-radius: 50%;
-                            animation: growRequet 1s infinite;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
+                        // .request-animated-circle {
+                        //     width: 22px;
+                        //     height: 22px;
+                        //     border-radius: 50%;
+                        //     animation: growRequet 1s infinite;
+                        //     display: flex;
+                        //     justify-content: center;
+                        //     align-items: center;
+                        // }
 
-                        @keyframes growRequet {
-                            0% {
-                                transform: scale(0.5);
-                                background-color: #FF0040;
-                            }
+                        // @keyframes growRequet {
+                        //     0% {
+                        //         transform: scale(0.5);
+                        //         background-color: #FF0040;
+                        //     }
 
-                            50% {
-                                transform: scale(0.8);
-                            }
+                        //     50% {
+                        //         transform: scale(0.8);
+                        //     }
 
-                            100% {
-                                transform: scale(0.5);
+                        //     100% {
+                        //         transform: scale(0.5);
 
-                            }
-                        }
+                        //     }
+                        // }
                     }
                 }
 
@@ -222,11 +457,7 @@
                 }
             }
 
-            .online-user-div {
-                display: flex;
-                align-items: center;
-                margin-top: 1rem;
-            }
+
 
         }
 
