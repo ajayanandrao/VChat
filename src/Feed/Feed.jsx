@@ -599,13 +599,13 @@ const Feed = ({ post }) => {
                                 <input
                                     type="text"
                                     placeholder="Edit your mind"
-                                    className='overlay-edit-input bg-light_0  dark:bg-darkInput '
+                                    className='overlay-edit-input bg-light_0 text-lightProfileName dark:bg-darkInput dark:text-darkProfileName '
                                     value={editedText}
                                     onChange={(e) => setEditedText(e.target.value)}
                                 />
                             </div>
                         </div>
-                        <IoMdClose className='feed-overlay-close-btn' onClick={() => feedOff(post.id)} />
+                        <IoMdClose className='feed-overlay-close-btn text-[black] dark:text-lightDiv' onClick={() => feedOff(post.id)} />
                     </div>
 
 
