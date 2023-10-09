@@ -468,8 +468,6 @@ const ProfileOne = ({ user }) => {
 
                                                                     }
 
-
-
                                                                 </label>
 
                                                                 <input type="file" id='cover-img' onChange={(e) => setCover(e.target.files[0])} style={{ display: "none" }} />

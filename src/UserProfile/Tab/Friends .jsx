@@ -169,7 +169,7 @@ const Friends = ({ user }) => {
                                                         <div key={friend.userId} >
 
                                                             <Link style={{ textDecoration: "none" }} to={`/users/${friend.userId}/${friend.id}/profile/`}>
-                                                                <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center", }}>
                                                                     <img src={item.PhotoUrl} className='friend-img' alt="" />
                                                                     <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{item.name}</div>
                                                                 </div>

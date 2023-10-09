@@ -120,9 +120,9 @@ const ProfileTwo = ({ user }) => {
         <>
             {overlay ? (
                 <div id='update-name-overlay-div'>
-                    <div className="update-name-overlay-close">
-                        <MdClose onClick={() => setOverlay(false)} style={{ fontSize: "24px" }} />
-                    </div>
+
+                    <MdClose className='update-name-overlay-close dark:text-[white] text-darkDiv' onClick={() => setOverlay(false)} />
+
                     <div className="update-name-ovelay-center">
                         <div className='update-name-overlay-input-div'>
                             <div className='update-overlay-img-div'>
@@ -138,7 +138,7 @@ const ProfileTwo = ({ user }) => {
                             />
 
 
-                            <div className="btn-success-custom" onClick={handleDisplayNameUpdate}>
+                            <div className="btn-success-custom" style={{ borderRadius: "30px" }} onClick={handleDisplayNameUpdate}>
                                 {loading ? (<>
                                     <div class="spinner-border" role="status">
                                         <span class="visually-hidden">Loading...</span>

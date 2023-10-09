@@ -680,193 +680,194 @@ const Feed = ({ post }) => {
                 <div className="feed-div bg-lightDiv dark:bg-darkDiv">
 
                     <div className="feed-profile-div">
-                        <Link to={`/users/${post.uid}`} className='link d-flex align-items-center'>
-                        <img src={post.photoURL} className='feed-img' alt="" />
+                        <Link to={`${currentUser.uid === post.uid ? `/profile/` : `/users/${post.uid}` }`} className='link d-flex align-items-center'>
+                            <img src={post.photoURL} className='feed-img' alt="" />
 
-                        <div className="feed-profile-name text-lightProfileName dark:text-darkProfileName">
-                            {post.displayName.length > 20 ? post.displayName.slice(0, 20) : post.displayName}
-                        </div>
-                    </Link>
-                    <div className="feed-time text-lightPostTime dark:text-darkPostTime">
-                        {/* <TimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} /> */}
-                        <PostTimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} />
-                    </div>
+                            <div className="feed-profile-name text-lightProfileName dark:text-darkProfileName">
+                                {post.displayName.length > 20 ? post.displayName.slice(0, 20) : post.displayName}
 
-                    <div className='feed-option-div'>
-                        <div className="feed-option-btn bg-light_0 dark:bg-darkInput">
-                            <BsThreeDotsVertical className='feed-icon text-lightOptionText dark:text-darkPostTime' onClick={() => OptionBtn(post.id)} />
-                        </div>
-                        <div className="feed-option-mainu-div dark:text-darkPostText text-lightPostText bg-light_0 dark:bg-darkInput" id={`myDropdown-${post.id}`} style={{ display: "none" }}>
-
-                            <div className='feed-option-edit ' id={`edit-${post.id}`}
-                                onClick={() => feedOn(post.id)}>Edit</div>
-
-                            <div className='feed-option-delete '
-                                id={`del-${post.id}`}
-                                onClick={() => deletePost(post.id)} >Delete</div>
-
-
-
-                            <Link to={`/users/${post.uid}`} className='link'>
-                                <div className='feed-option-view ' id={`profileView-${post.id}`}>View Profiel</div>
-                            </Link>
-
-                        </div>
-                    </div>
-                </div>
-
-                {/* Feed Text */}
-                <div className="feed-post-text text-lightPostText dark:text-darkPostText">
-                    {post.postText}
-                </div>
-
-                {/* Feed Photo */}
-                <div className="feed-post-container">
-
-                    {post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
-                        <img width={"300px"} src={post.img} alt="Uploaded" className="Feed-Post-img" />
-                    ) : post.img ? (
-                        <>
-                            <div className="video-container">
-                                <video
-                                    ref={videoRef}
-                                    className="post-video"
-                                    preload="auto"
-                                    onClick={handleVideoBtnClick}
-                                >
-                                    <source src={post.img} type="video/mp4" />
-                                </video>
-                                {!isPlaying && (
-                                    <a className="intro-banner-vdo-play-btn pinkBg" onClick={handleVideoBtnClick} target="_blank">
-                                        <div className="play-button">
-                                            <FaPlay className='play-button' />
-                                        </div>
-                                    </a>
-                                )}
                             </div>
+                        </Link>
+                        <div className="feed-time text-lightPostTime dark:text-darkPostTime">
+                            {/* <TimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} /> */}
+                            <PostTimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} />
+                        </div>
 
-
-                        </>
-
-                    ) : null}
-
-
-
-                </div>
-
-                {/* Feed Comment */}
-
-                <div className="feed-bottom-container">
-
-                    {/* Like */}
-                    <div className="feed-bottom-mainu">
-
-                        {liked ? (
-                            <>
-                                <div className="feed-bottom-like-div" onClick={handleCloseRightComment}>
-                                    <BsFillHeartFill onClick={() => Heart(post.id, post.uid)} className='feed-bottom-like-heart' color='#FF0040' />
-
-                                    <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText " onClick={() => showLike(post.id)}>
-                                        {like.length > 9 ? '9+' : like.length}
-
-                                    </div>
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
-                                    <AiOutlineHeart onClick={() => { Heart(post.id, post.uid); handleCloseRightComment(); }}
-                                        style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
-                                    {like.length > 0 ?
-                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText"
-                                            onClick={() => showLike(post.id)}>
-                                            {like.length > 9 ? '9+' : like.length}
-                                        </div>
-                                        :
-                                        ""
-                                    }
-                                </div>
-                            </>
-                        )}
-
-
-                        {showLikedName &&
-                            <div className='See-Like-div'>
-
-                                <div className='userliked' id={`isliked${post.id}`} >
-                                    {isliked.map((item) => {
-                                        return (
-                                            <div key={item.id}>
-                                                <div className='mx-1' style={{ fontSize: "11px" }}>{item.name}</div>
-                                            </div>
-                                        )
-
-                                    })}
-                                </div>
+                        <div className='feed-option-div'>
+                            <div className="feed-option-btn bg-light_0 dark:bg-darkInput">
+                                <BsThreeDotsVertical className='feed-icon text-lightOptionText dark:text-darkPostTime' onClick={() => OptionBtn(post.id)} />
                             </div>
-                        }
-                    </div>
+                            <div className="feed-option-mainu-div dark:text-darkPostText text-lightPostText bg-light_0 dark:bg-darkInput" id={`myDropdown-${post.id}`} style={{ display: "none" }}>
 
-                    {/* Comment  */}
-                    <div className="feed-bottom-mainu">
+                                <div className='feed-option-edit ' id={`edit-${post.id}`}
+                                    onClick={() => feedOn(post.id)}>Edit</div>
 
-                        <div className="feed-bottom-like-div">
-                            {rightComment ?
-                                <img src={sms} style={{ width: "26px" }} onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
-                                :
-                                <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
-                            }
-                            {commentCount ?
-                                <Link to={`/notification/${post.id}`}>
-                                    <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText" onClick={handleCloseRightComment}>
-                                        <div>{commentCount > 99 ? '99+' : commentCount}</div>
-                                    </div>
+                                <div className='feed-option-delete '
+                                    id={`del-${post.id}`}
+                                    onClick={() => deletePost(post.id)} >Delete</div>
+
+
+
+                                <Link to={`/users/${post.uid}`} className='link'>
+                                    <div className='feed-option-view ' id={`profileView-${post.id}`}>View Profiel</div>
                                 </Link>
-                                :
-                                null
-                            }
+
+                            </div>
                         </div>
                     </div>
 
-                    {/* Share */}
-                    <div className="feed-bottom-mainu">
-                        <FaShare className='feed-bottom-icon text-lightPostIconBottom dark:text-darkPostIcon' />
+                    {/* Feed Text */}
+                    <div className="feed-post-text text-lightPostText dark:text-darkPostText">
+                        {post.postText}
                     </div>
+
+                    {/* Feed Photo */}
+                    <div className="feed-post-container">
+
+                        {post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
+                            <img width={"300px"} src={post.img} alt="Uploaded" className="Feed-Post-img" />
+                        ) : post.img ? (
+                            <>
+                                <div className="video-container">
+                                    <video
+                                        ref={videoRef}
+                                        className="post-video"
+                                        preload="auto"
+                                        onClick={handleVideoBtnClick}
+                                    >
+                                        <source src={post.img} type="video/mp4" />
+                                    </video>
+                                    {!isPlaying && (
+                                        <a className="intro-banner-vdo-play-btn pinkBg" onClick={handleVideoBtnClick} target="_blank">
+                                            <div className="play-button">
+                                                <FaPlay className='play-button' />
+                                            </div>
+                                        </a>
+                                    )}
+                                </div>
+
+
+                            </>
+
+                        ) : null}
+
+
+
+                    </div>
+
+                    {/* Feed Comment */}
+
+                    <div className="feed-bottom-container">
+
+                        {/* Like */}
+                        <div className="feed-bottom-mainu">
+
+                            {liked ? (
+                                <>
+                                    <div className="feed-bottom-like-div" onClick={handleCloseRightComment}>
+                                        <BsFillHeartFill onClick={() => Heart(post.id, post.uid)} className='feed-bottom-like-heart' color='#FF0040' />
+
+                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText " onClick={() => showLike(post.id)}>
+                                            {like.length > 9 ? '9+' : like.length}
+
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
+                                        <AiOutlineHeart onClick={() => { Heart(post.id, post.uid); handleCloseRightComment(); }}
+                                            style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
+                                        {like.length > 0 ?
+                                            <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText"
+                                                onClick={() => showLike(post.id)}>
+                                                {like.length > 9 ? '9+' : like.length}
+                                            </div>
+                                            :
+                                            ""
+                                        }
+                                    </div>
+                                </>
+                            )}
+
+
+                            {showLikedName &&
+                                <div className='See-Like-div'>
+
+                                    <div className='userliked' id={`isliked${post.id}`} >
+                                        {isliked.map((item) => {
+                                            return (
+                                                <div key={item.id}>
+                                                    <div className='mx-1' style={{ fontSize: "11px" }}>{item.name}</div>
+                                                </div>
+                                            )
+
+                                        })}
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        {/* Comment  */}
+                        <div className="feed-bottom-mainu">
+
+                            <div className="feed-bottom-like-div">
+                                {rightComment ?
+                                    <img src={sms} style={{ width: "26px" }} onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
+                                    :
+                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
+                                }
+                                {commentCount ?
+                                    <Link to={`/notification/${post.id}`}>
+                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText" onClick={handleCloseRightComment}>
+                                            <div>{commentCount > 99 ? '99+' : commentCount}</div>
+                                        </div>
+                                    </Link>
+                                    :
+                                    null
+                                }
+                            </div>
+                        </div>
+
+                        {/* Share */}
+                        <div className="feed-bottom-mainu">
+                            <FaShare className='feed-bottom-icon text-lightPostIconBottom dark:text-darkPostIcon' />
+                        </div>
+
+                    </div>
+
+                    {rightComment &&
+
+                        <div className='feed-right-commnet-div'>
+                            <input
+                                type="text"
+                                placeholder='write a Comment'
+                                value={getComment}
+                                onChange={(e) => setComment(e.target.value)}
+                                className='feed-right-comment-input bg-light_0 text-lightProfileName dark:bg-darkInput dark:text-darkProfileName'
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)
+                                        if (getComment.trim() !== '') {
+                                            HandleComment(e, post.id, post.uid);
+                                        }
+                                    }
+                                }}
+                            />
+                            <div>
+                                {getComment != "" ?
+
+                                    <BiSolidSend className='feed-right-comment-icon' color='#0080FF' onClick={(e) => HandleComment(e, post.id, post.uid)} />
+                                    :
+                                    <BiSend className='feed-right-comment-icon' color='#84878a' onClick={(e) => HandleComment(e, post.id, post.uid)} />
+
+                                }
+                            </div>
+                        </div>
+                    }
 
                 </div>
-
-                {rightComment &&
-
-                    <div className='feed-right-commnet-div'>
-                        <input
-                            type="text"
-                            placeholder='write a Comment'
-                            value={getComment}
-                            onChange={(e) => setComment(e.target.value)}
-                            className='feed-right-comment-input bg-light_0 text-lightProfileName dark:bg-darkInput dark:text-darkProfileName'
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)
-                                    if (getComment.trim() !== '') {
-                                        HandleComment(e, post.id, post.uid);
-                                    }
-                                }
-                            }}
-                        />
-                        <div>
-                            {getComment != "" ?
-
-                                <BiSolidSend className='feed-right-comment-icon' color='#0080FF' onClick={(e) => HandleComment(e, post.id, post.uid)} />
-                                :
-                                <BiSend className='feed-right-comment-icon' color='#84878a' onClick={(e) => HandleComment(e, post.id, post.uid)} />
-
-                            }
-                        </div>
-                    </div>
-                }
-
-            </div>
-        </div >
+            </div >
 
 
         </>
