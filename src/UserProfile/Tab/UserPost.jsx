@@ -10,7 +10,7 @@ import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import englishStrings from 'react-timeago/lib/language-strings/en';
 import { IoMdClose, IoMdSend, IoMdShareAlt } from "react-icons/io";
 import TimeAgo from 'react-timeago';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 import Picker from '@emoji-mart/react';
 import { LinearProgress } from '@mui/material';
 import photo from "./../../Image/img/photo.png";
@@ -45,6 +45,17 @@ const UserPost = ({ post }) => {
         }
     };
 
+    const OverlayHandleVideoBtnClick = () => {
+        const video = videoRef.current;
+
+        if (video.paused) {
+            video.play();
+            setIsPlaying(true);
+        } else {
+            video.pause();
+            setIsPlaying(false);
+        }
+    };
 
     // Like Post 
 
@@ -241,34 +252,145 @@ const UserPost = ({ post }) => {
     const [EditImg, setEditImg] = useState(null);
     const [updating, setUpdating] = useState(false);
 
+    const compressImage = async (imageFile, maxWidth) => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                const aspectRatio = img.width / img.height;
+                const newWidth = Math.min(maxWidth, img.width);
+                const newHeight = newWidth / aspectRatio;
+
+                canvas.width = newWidth;
+                canvas.height = newHeight;
+
+                ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+                canvas.toBlob(resolve, 'image/jpeg', 0.7); // Adjust the compression quality if needed
+            };
+
+            img.onerror = reject;
+
+            img.src = URL.createObjectURL(imageFile);
+        });
+    };
+
+    const [overlayLoading, setOverlayLoading] = useState(null)
     const done = async (id) => {
         setUpdating(true);
         const postRef = doc(db, 'AllPosts', id);
-        if (!editInput) {
-            return
-        }
-        if (EditImg) {
-            // If a new image is provided, upload it to storage and update the document
-            const storageRef = ref(storage, `Post/${EditImg.name}`);
-            await uploadBytes(storageRef, EditImg);
 
-            const imageUrl = await getDownloadURL(storageRef);
 
-            await updateDoc(postRef, {
-                postText: editInput,
-                img: imageUrl
-            });
+        if (overlayFile) {
+            const storageRef = ref(storage, `Post/${overlayFile.name}`);
+
+            // Check if overlayFile is an image (e.g., JPEG, PNG)
+            if (overlayFile.type.startsWith('image/')) {
+                const compressedImgBlob = await compressImage(overlayFile, 800);
+                const uploadTask = uploadBytesResumable(storageRef, compressedImgBlob);
+
+                // Set up progress tracking for image upload
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log(`Image Upload Progress: ${progress}%`);
+                        setOverlayLoading(progress);
+                        if (progress > 0) {
+                            document.getElementById("overlayLoading").style.display = "block";
+                        }
+                        if (progress === 100) {
+                            document.getElementById("overlayLoading").style.display = "none";
+                        }
+                    },
+                    (error) => {
+                        // Handle errors here
+                        console.error('Error uploading image:', error);
+                    },
+                    () => {
+                        // Image upload completed successfully
+                        getDownloadURL(storageRef)
+                            .then((imageUrl) => {
+                                // Update the document with the download URL and name
+                                return updateDoc(postRef, {
+                                    name: overlayFile.name,
+                                    postText: editedText,
+                                    img: imageUrl
+                                });
+                            })
+                            .then(() => {
+                                // Reset input and update UI
+                                setEditInput("");
+                                setUpdating(false);
+                                document.getElementById(`FeedOverlay-${id}`).style.display = 'none';
+                                const x = document.getElementById(`myDropdown-${id}`);
+                                x.style.display = 'none';
+                            })
+                            .catch((error) => {
+                                console.error('Error updating document:', error);
+                            });
+                    }
+                );
+            } else if (overlayFile.type.startsWith('video/')) {
+                // If overlayFile is a video, upload it without compression
+                const uploadTask = uploadBytesResumable(storageRef, overlayFile);
+
+                // Set up progress tracking for video upload
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log(`Video Upload Progress: ${progress}%`);
+                        setOverlayLoading(progress);
+                        if (progress > 0) {
+                            document.getElementById("overlayLoading").style.display = "block";
+                        }
+                        if (progress === 100) {
+                            document.getElementById("overlayLoading").style.display = "none";
+                        }
+                    },
+                    (error) => {
+                        // Handle errors here
+                        console.error('Error uploading video:', error);
+                    },
+                    () => {
+                        // Video upload completed successfully
+                        getDownloadURL(storageRef)
+                            .then((videoUrl) => {
+                                // Update the document with the video URL and name
+                                return updateDoc(postRef, {
+                                    name: overlayFile.name,
+                                    postText: editedText,
+                                    img: videoUrl
+                                });
+                            })
+                            .then(() => {
+                                // Reset input and update UI
+                                setEditInput("");
+                                setUpdating(false);
+                                document.getElementById(`FeedOverlay-${id}`).style.display = 'none';
+                                const x = document.getElementById(`myDropdown-${id}`);
+                                x.style.display = 'none';
+                            })
+                            .catch((error) => {
+                                console.error('Error updating document:', error);
+                            });
+                    }
+                );
+            }
         } else {
-            // If no new image is provided, only update the name field
+            // If no new file is provided, only update the name field
             await updateDoc(postRef, {
-                postText: editInput
+                postText: editedText
             });
+            setEditInput("");
+            setUpdating(false);
+            setOverlayFile(null);
+            document.getElementById(`FeedOverlay-${id}`).style.display = 'none';
+            const x = document.getElementById(`myDropdown-${id}`);
+            x.style.display = 'none';
         }
-        setEditInput("");
-        setUpdating(false);
-        // document.getElementById(`overlay-${id}`).style.display = 'none';
-        document.getElementById(`FeedOverlay-${id}`).style.display = "none";
-        document.getElementById(`myDropdown-${id}`).style.display = "none";
     }
 
     // Emoji 
@@ -344,9 +466,99 @@ const UserPost = ({ post }) => {
         setShowLikedName(!showLikedName);
     }
 
+    const [editedText, setEditedText] = useState(post.postText);
+    const [overlayFile, setOverlayFile] = useState(null);
+
     return (
         <>
+
             <div id={`FeedOverlay-${post.id}`}
+                className='feed-overlay-container ' style={{ display: "none" }} >
+
+                <div className="feed-overlay-div bg-lightDiv dark:bg-darkDiv">
+                    <div className="feed-overlay-close-btn-div">
+                        <div className="feed-overlay-text-div">
+                            <div className='overlay-edit-postText'>
+                                <input
+                                    type="text"
+                                    placeholder="Edit your mind"
+                                    className='overlay-edit-input bg-light_0  dark:bg-darkInput '
+                                    value={editedText}
+                                    onChange={(e) => setEditedText(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <IoMdClose className='feed-overlay-close-btn' onClick={() => feedOff(post.id)} />
+                    </div>
+
+
+                    <div className="select-overlay-file-input">
+                        <input
+                            type="file"
+                            id="overlay-file-input" // Add the id attribute
+                            className="select-overlay-file-input"
+                            onChange={(e) => {
+                                setOverlayFile(e.target.files[0]);
+                            }}
+                        />
+                        <div className='overlay-post-btn' onClick={(e) => done(post.id)}>Post</div>
+                    </div>
+
+
+                    <div className='overlayMedia-div'>
+                        {overlayLoading && overlayLoading < 98 ?
+                            <div className="overlayLoading" id='overlayLoading'>
+                                <div className="overlayLoading-Count">
+                                    {Math.floor(overlayLoading)}%
+                                </div>
+                            </div>
+                            :
+                            null
+                        }
+
+                        {overlayFile ?
+                            (<>
+
+                                {overlayFile &&
+                                    overlayFile.type.startsWith('image/') && (
+                                        <img className="Feed-Post-img" src={URL.createObjectURL(overlayFile)} alt="" />
+                                    )}
+
+                                {overlayFile &&
+                                    overlayFile.type.startsWith('video/') && (
+                                        <video ref={videoRef} onClick={OverlayHandleVideoBtnClick} className="post-video ">
+                                            <source src={URL.createObjectURL(overlayFile)} type={overlayFile.type} />
+                                        </video>
+                                    )}
+
+                            </>)
+                            :
+                            (<>
+
+                                {post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
+                                    <img width={"300px"} src={post.img} alt="Uploaded" className="Feed-Post-img" />
+                                ) : post.img ? (
+                                    <>
+                                        <video
+                                            ref={videoRef}
+                                            className="post-video"
+                                            preload="auto"
+                                        >
+                                            <source src={post.img} type="video/mp4" />
+                                        </video>
+                                    </>
+
+                                ) : null}
+
+                            </>)
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+
+            {/* <div id={`FeedOverlay-${post.id}`}
                 className='feed-overlay-container' style={{ display: "none" }} >
                 <div className="feed-overlay-inner">
 
@@ -395,7 +607,7 @@ const UserPost = ({ post }) => {
                     </div>
 
                 </div>
-            </div>
+            </div> */}
 
             <div className="feed-container">
 

@@ -270,11 +270,11 @@ const SignUp = () => {
                     </div>
                 </div>
 
-                {showFooter && (
+                {/* {showFooter && (
                     <div className='forgott-footer-bottom'>
                         Copyright © VChat App 2023.
                     </div>
-                )}
+                )} */}
             </div>
         </>
     )

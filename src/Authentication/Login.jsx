@@ -84,26 +84,30 @@ const Login = () => {
                 const errorMessage = error.message;
                 console.log(errorCode);
                 if (errorCode == "auth/wrong-password") {
+                    setLoginLoading(false);
                     document.getElementById("error-alert").style.display = "flex";
                     document.getElementById("error-alert").innerHTML = "Wrong Password";
                 }
                 if (errorCode == "auth/missing-password") {
+                    setLoginLoading(false);
                     document.getElementById("error-alert").style.display = "flex";
                     document.getElementById("error-alert").innerHTML = "incorrect email and password";
                 }
                 if (errorCode == "auth/user-not-found") {
                     function alert() {
-
+                        setLoginLoading(false);
                         document.getElementById("error-alert").style.display = "flex";
                         document.getElementById("error-alert").innerHTML = "User not found";
                     }
                     alert();
                 }
                 if (errorCode == "auth/invalid-email") {
+                    setLoginLoading(false);
                     document.getElementById("error-alert").style.display = "flex";
                     document.getElementById("error-alert").innerHTML = "invalid email address";
                 }
                 if (errorCode == "auth/network-request-failed") {
+                    setLoginLoading(false);
                     document.getElementById("error-alert").style.display = "flex";
                     document.getElementById("error-alert").innerHTML = "Check your internet connection";
                 }
@@ -198,11 +202,11 @@ const Login = () => {
 
             )}
 
-            {showFooter && (
+            {/* {showFooter && (
                 <div className='forgott-footer-bottom'>
                     Copyright © VChat App 2023.
                 </div>
-            )}
+            )} */}
 
         </>
     )

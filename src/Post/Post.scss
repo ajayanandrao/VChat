@@ -64,7 +64,7 @@
 
             .post-input {
                 width: 100%;
-                
+
                 // flex: 0.1;
                 border: none;
                 // background: $light-text;post-send-text
@@ -100,6 +100,7 @@
             .post-icon-div {
                 display: flex;
                 align-items: center;
+                cursor: pointer;
 
                 .post-icon {
                     width: 30px;

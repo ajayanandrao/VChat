@@ -10,7 +10,7 @@ import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import englishStrings from 'react-timeago/lib/language-strings/en';
 import { IoMdClose, IoMdSend, IoMdShareAlt } from "react-icons/io";
 import TimeAgo from 'react-timeago';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 import Picker from '@emoji-mart/react';
 import "./FeedOverlay.scss";
 import photo from "./../Image/img/photo.png";
@@ -55,6 +55,17 @@ const Feed = ({ post }) => {
 
     const handleVideoBtnClick = () => {
         const video = videoRef.current;
+        if (video.paused) {
+            video.play();
+            setIsPlaying(true);
+        } else {
+            video.pause();
+            setIsPlaying(false);
+        }
+    };
+    const OverlayHandleVideoBtnClick = () => {
+        const video = videoRef.current;
+
         if (video.paused) {
             video.play();
             setIsPlaying(true);
@@ -328,37 +339,150 @@ const Feed = ({ post }) => {
 
     const [loading, setLoading] = useState(false);
 
+
+    const compressImage = async (imageFile, maxWidth) => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                const aspectRatio = img.width / img.height;
+                const newWidth = Math.min(maxWidth, img.width);
+                const newHeight = newWidth / aspectRatio;
+
+                canvas.width = newWidth;
+                canvas.height = newHeight;
+
+                ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+                canvas.toBlob(resolve, 'image/jpeg', 0.7); // Adjust the compression quality if needed
+            };
+
+            img.onerror = reject;
+
+            img.src = URL.createObjectURL(imageFile);
+        });
+    };
+
+    const [overlayLoading, setOverlayLoading] = useState(null)
     const done = async (id) => {
         setUpdating(true);
         const postRef = doc(db, 'AllPosts', id);
-        if (!editInput) {
-            setUpdating(false);
-            return
-        }
-        if (EditImg) {
-            // If a new image is provided, upload it to storage and update the document
-            const storageRef = ref(storage, `Post/${EditImg.name}`);
-            await uploadBytes(storageRef, EditImg);
 
-            const imageUrl = await getDownloadURL(storageRef);
 
-            await updateDoc(postRef, {
-                postText: editInput,
-                img: imageUrl
-            });
+        if (overlayFile) {
+            const storageRef = ref(storage, `Post/${overlayFile.name}`);
+
+            // Check if overlayFile is an image (e.g., JPEG, PNG)
+            if (overlayFile.type.startsWith('image/')) {
+                const compressedImgBlob = await compressImage(overlayFile, 800);
+                const uploadTask = uploadBytesResumable(storageRef, compressedImgBlob);
+
+                // Set up progress tracking for image upload
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log(`Image Upload Progress: ${progress}%`);
+                        setOverlayLoading(progress);
+                        if (progress > 0) {
+                            document.getElementById("overlayLoading").style.display = "block";
+                        }
+                        if (progress === 100) {
+                            document.getElementById("overlayLoading").style.display = "none";
+                        }
+                    },
+                    (error) => {
+                        // Handle errors here
+                        console.error('Error uploading image:', error);
+                    },
+                    () => {
+                        // Image upload completed successfully
+                        getDownloadURL(storageRef)
+                            .then((imageUrl) => {
+                                // Update the document with the download URL and name
+                                return updateDoc(postRef, {
+                                    name: overlayFile.name,
+                                    postText: editedText,
+                                    img: imageUrl
+                                });
+                            })
+                            .then(() => {
+                                // Reset input and update UI
+                                setEditInput("");
+                                setUpdating(false);
+                                document.getElementById(`FeedOverlay-${id}`).style.display = 'none';
+                                const x = document.getElementById(`myDropdown-${id}`);
+                                x.style.display = 'none';
+                            })
+                            .catch((error) => {
+                                console.error('Error updating document:', error);
+                            });
+                    }
+                );
+            } else if (overlayFile.type.startsWith('video/')) {
+                // If overlayFile is a video, upload it without compression
+                const uploadTask = uploadBytesResumable(storageRef, overlayFile);
+
+                // Set up progress tracking for video upload
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log(`Video Upload Progress: ${progress}%`);
+                        setOverlayLoading(progress);
+                        if (progress > 0) {
+                            document.getElementById("overlayLoading").style.display = "block";
+                        }
+                        if (progress === 100) {
+                            document.getElementById("overlayLoading").style.display = "none";
+                        }
+                    },
+                    (error) => {
+                        // Handle errors here
+                        console.error('Error uploading video:', error);
+                    },
+                    () => {
+                        // Video upload completed successfully
+                        getDownloadURL(storageRef)
+                            .then((videoUrl) => {
+                                // Update the document with the video URL and name
+                                return updateDoc(postRef, {
+                                    name: overlayFile.name,
+                                    postText: editedText,
+                                    img: videoUrl
+                                });
+                            })
+                            .then(() => {
+                                // Reset input and update UI
+                                setEditInput("");
+                                setUpdating(false);
+                                document.getElementById(`FeedOverlay-${id}`).style.display = 'none';
+                                const x = document.getElementById(`myDropdown-${id}`);
+                                x.style.display = 'none';
+                            })
+                            .catch((error) => {
+                                console.error('Error updating document:', error);
+                            });
+                    }
+                );
+            }
         } else {
-            // If no new image is provided, only update the name field
+            // If no new file is provided, only update the name field
             await updateDoc(postRef, {
-                postText: editInput
+                postText: editedText
             });
+            setEditInput("");
+            setUpdating(false);
+            setOverlayFile(null);
+            document.getElementById(`FeedOverlay-${id}`).style.display = 'none';
+            const x = document.getElementById(`myDropdown-${id}`);
+            x.style.display = 'none';
         }
-        setEditInput("");
-        setUpdating(false);
-        document.getElementById(`FeedOverlay-${id}`).style.display = 'none';
-        const x = document.getElementById(`myDropdown-${id}`);
-        x.style.display = 'none';
-
     }
+
+
+
 
     // Emoji 
 
@@ -428,11 +552,14 @@ const Feed = ({ post }) => {
     }
 
     function feedOff(id) {
+        setOverlayFile(null);
         document.getElementById(`FeedOverlay-${id}`).style.display = 'none';
         setEditImg(null);
         const x = document.getElementById(`myDropdown-${id}`);
         x.style.display = 'none';
         setEditInput("");
+        setEditedText(post.postText)
+
     }
 
     function feedOn(id) {
@@ -455,6 +582,8 @@ const Feed = ({ post }) => {
         fetchFriends();
     }, [currentUser]);
 
+    const [editedText, setEditedText] = useState(post.postText);
+    const [overlayFile, setOverlayFile] = useState(null);
 
 
     return (
@@ -462,53 +591,88 @@ const Feed = ({ post }) => {
 
             <div id={`FeedOverlay-${post.id}`}
                 className='feed-overlay-container ' style={{ display: "none" }} >
-                <div className="feed-overlay-inner">
 
-                    <div className="feed-Edit-card bg-light_0 dark:bg-darkDiv">
-                        <div className="feed-edit-inner-div">
-                            <div className='feed-close-div text-lightProfileName dark:text-darkProfileName' >
-                                <IoMdClose style={{ fontSize: "24px", cursor:"pointer" }} onClick={() => feedOff(post.id)} />
+                <div className="feed-overlay-div bg-lightDiv dark:bg-darkDiv">
+                    <div className="feed-overlay-close-btn-div">
+                        <div className="feed-overlay-text-div">
+                            <div className='overlay-edit-postText'>
+                                <input
+                                    type="text"
+                                    placeholder="Edit your mind"
+                                    className='overlay-edit-input bg-light_0  dark:bg-darkInput '
+                                    value={editedText}
+                                    onChange={(e) => setEditedText(e.target.value)}
+                                />
                             </div>
-                            <div className="feed-main-card ">
-                                {updating ? (<LinearProgress className='l-progress' />) : null}
-
-                                <div className='feed-main-innner'>
-                                    <div>
-                                        <input type="text"
-                                            placeholder="What's on your mind"
-                                            className='feed-edit-input bg-lightDiv text-lightProfileName dark:text-darkProfileName dark:bg-darkInput'
-                                            onChange={(e) => setEditInput(e.target.value)}
-                                            value={editInput}
-                                            id={`editInput-${post.id}`}
-                                        />
-                                    </div>
+                        </div>
+                        <IoMdClose className='feed-overlay-close-btn' onClick={() => feedOff(post.id)} />
+                    </div>
 
 
-                                    <label htmlFor="EditImg">
-                                        <div className='feed-edit-photo-div'>
-                                            <img src={photo} s alt="" /><span className='feed-ed-photo-text text-lightPostText dark:text-darkPostText'>Photo</span>
-                                        </div>
-                                    </label>
-
-                                    {EditImg && EditImg.type.startsWith('image/') && (
-                                        <img className="postImg" src={URL.createObjectURL(EditImg)} alt="" />
-                                    )}
-
-                                    <input type="file" id='EditImg'
-                                        onChange={(e) => setEditImg(e.target.files[0])}
-                                        style={{ display: "none" }} accept="image/*, video/*" />
+                    <div className="select-overlay-file-input">
+                        <input
+                            type="file"
+                            id="overlay-file-input" // Add the id attribute
+                            className="select-overlay-file-input"
+                            onChange={(e) => {
+                                setOverlayFile(e.target.files[0]);
+                            }}
+                        />
+                        <div className='overlay-post-btn' onClick={(e) => done(post.id)}>Post</div>
+                    </div>
 
 
-                                    <div className="btn-primary-custom mt-3"
-                                        onClick={(e) => done(post.id)}
-                                    >Update</div>
+                    <div className='overlayMedia-div'>
+                        {overlayLoading && overlayLoading < 98 ?
+                            <div className="overlayLoading" id='overlayLoading'>
+                                <div className="overlayLoading-Count">
+                                    {Math.floor(overlayLoading)}%
                                 </div>
                             </div>
+                            :
+                            null
+                        }
 
-                        </div>
+                        {overlayFile ?
+                            (<>
+
+                                {overlayFile &&
+                                    overlayFile.type.startsWith('image/') && (
+                                        <img className="Feed-Post-img" src={URL.createObjectURL(overlayFile)} alt="" />
+                                    )}
+
+                                {overlayFile &&
+                                    overlayFile.type.startsWith('video/') && (
+                                        <video ref={videoRef} onClick={OverlayHandleVideoBtnClick} className="post-video ">
+                                            <source src={URL.createObjectURL(overlayFile)} type={overlayFile.type} />
+                                        </video>
+                                    )}
+
+                            </>)
+                            :
+                            (<>
+
+                                {post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
+                                    <img width={"300px"} src={post.img} alt="Uploaded" className="Feed-Post-img" />
+                                ) : post.img ? (
+                                    <>
+                                        <video
+                                            ref={videoRef}
+                                            className="post-video"
+                                            preload="auto"
+                                        >
+                                            <source src={post.img} type="video/mp4" />
+                                        </video>
+                                    </>
+
+                                ) : null}
+
+                            </>)
+                        }
                     </div>
 
                 </div>
+
             </div>
 
             <div className="feed-container">
@@ -516,193 +680,193 @@ const Feed = ({ post }) => {
                 <div className="feed-div bg-lightDiv dark:bg-darkDiv">
 
                     <div className="feed-profile-div">
+                        <Link to={`/users/${post.uid}`} className='link d-flex align-items-center'>
                         <img src={post.photoURL} className='feed-img' alt="" />
 
                         <div className="feed-profile-name text-lightProfileName dark:text-darkProfileName">
                             {post.displayName.length > 20 ? post.displayName.slice(0, 20) : post.displayName}
-                            {/* {post.displayName} */}
                         </div>
-
-                        <div className="feed-time text-lightPostTime dark:text-darkPostTime">
-                            {/* <TimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} /> */}
-                            <PostTimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} />
-                        </div>
-
-                        <div className='feed-option-div'>
-                            <div className="feed-option-btn bg-light_0 dark:bg-darkInput">
-                                <BsThreeDotsVertical className='feed-icon text-lightOptionText dark:text-darkPostTime' onClick={() => OptionBtn(post.id)} />
-                            </div>
-                            <div className="feed-option-mainu-div dark:text-darkPostText text-lightPostText bg-light_0 dark:bg-darkInput" id={`myDropdown-${post.id}`} style={{ display: "none" }}>
-
-                                <div className='feed-option-edit ' id={`edit-${post.id}`}
-                                    onClick={() => feedOn(post.id)}>Edit</div>
-
-                                <div className='feed-option-delete '
-                                    id={`del-${post.id}`}
-                                    onClick={() => deletePost(post.id)} >Delete</div>
-
-
-
-                                <Link to={`/users/${post.uid}`} className='link'>
-                                    <div className='feed-option-view ' id={`profileView-${post.id}`}>View Profiel</div>
-                                </Link>
-
-                            </div>
-                        </div>
+                    </Link>
+                    <div className="feed-time text-lightPostTime dark:text-darkPostTime">
+                        {/* <TimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} /> */}
+                        <PostTimeAgoComponent timestamp={post.bytime && post.bytime.toDate()} />
                     </div>
 
-                    {/* Feed Text */}
-                    <div className="feed-post-text text-lightPostText dark:text-darkPostText">
-                        {post.postText}
+                    <div className='feed-option-div'>
+                        <div className="feed-option-btn bg-light_0 dark:bg-darkInput">
+                            <BsThreeDotsVertical className='feed-icon text-lightOptionText dark:text-darkPostTime' onClick={() => OptionBtn(post.id)} />
+                        </div>
+                        <div className="feed-option-mainu-div dark:text-darkPostText text-lightPostText bg-light_0 dark:bg-darkInput" id={`myDropdown-${post.id}`} style={{ display: "none" }}>
+
+                            <div className='feed-option-edit ' id={`edit-${post.id}`}
+                                onClick={() => feedOn(post.id)}>Edit</div>
+
+                            <div className='feed-option-delete '
+                                id={`del-${post.id}`}
+                                onClick={() => deletePost(post.id)} >Delete</div>
+
+
+
+                            <Link to={`/users/${post.uid}`} className='link'>
+                                <div className='feed-option-view ' id={`profileView-${post.id}`}>View Profiel</div>
+                            </Link>
+
+                        </div>
                     </div>
+                </div>
 
-                    {/* Feed Photo */}
-                    <div className="feed-post-container">
+                {/* Feed Text */}
+                <div className="feed-post-text text-lightPostText dark:text-darkPostText">
+                    {post.postText}
+                </div>
 
-                        {post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
-                            <img width={"300px"} src={post.img} alt="Uploaded" className="Feed-Post-img" />
-                        ) : post.img ? (
-                            <>
-                                <div className="video-container">
-                                    <video
-                                        ref={videoRef}
-                                        className="post-video"
-                                        preload="auto"
-                                        onClick={handleVideoBtnClick}
-                                    >
-                                        <source src={post.img} type="video/mp4" />
-                                    </video>
-                                    {!isPlaying && (
-                                        <a className="intro-banner-vdo-play-btn pinkBg" onClick={handleVideoBtnClick} target="_blank">
-                                            <div className="play-button">
-                                                <FaPlay className='play-button' />
-                                            </div>
-                                        </a>
-                                    )}
-                                </div>
+                {/* Feed Photo */}
+                <div className="feed-post-container">
 
-
-                            </>
-
-                        ) : null}
-
-
-
-                    </div>
-
-                    {/* Feed Comment */}
-
-                    <div className="feed-bottom-container">
-
-                        {/* Like */}
-                        <div className="feed-bottom-mainu">
-
-                            {liked ? (
-                                <>
-                                    <div className="feed-bottom-like-div" onClick={handleCloseRightComment}>
-                                        <BsFillHeartFill onClick={() => Heart(post.id, post.uid)} className='feed-bottom-like-heart' color='#FF0040' />
-
-                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText " onClick={() => showLike(post.id)}>
-                                            {like.length > 9 ? '9+' : like.length}
-
+                    {post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
+                        <img width={"300px"} src={post.img} alt="Uploaded" className="Feed-Post-img" />
+                    ) : post.img ? (
+                        <>
+                            <div className="video-container">
+                                <video
+                                    ref={videoRef}
+                                    className="post-video"
+                                    preload="auto"
+                                    onClick={handleVideoBtnClick}
+                                >
+                                    <source src={post.img} type="video/mp4" />
+                                </video>
+                                {!isPlaying && (
+                                    <a className="intro-banner-vdo-play-btn pinkBg" onClick={handleVideoBtnClick} target="_blank">
+                                        <div className="play-button">
+                                            <FaPlay className='play-button' />
                                         </div>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
-                                        <AiOutlineHeart onClick={() => { Heart(post.id, post.uid); handleCloseRightComment(); }}
-                                            style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
-                                        {like.length > 0 ?
-                                            <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText"
-                                                onClick={() => showLike(post.id)}>
-                                                {like.length > 9 ? '9+' : like.length}
-                                            </div>
-                                            :
-                                            ""
-                                        }
-                                    </div>
-                                </>
-                            )}
-
-
-                            {showLikedName &&
-                                <div className='See-Like-div'>
-
-                                    <div className='userliked' id={`isliked${post.id}`} >
-                                        {isliked.map((item) => {
-                                            return (
-                                                <div key={item.id}>
-                                                    <div className='mx-1' style={{ fontSize: "11px" }}>{item.name}</div>
-                                                </div>
-                                            )
-
-                                        })}
-                                    </div>
-                                </div>
-                            }
-                        </div>
-
-                        {/* Comment  */}
-                        <div className="feed-bottom-mainu">
-
-                            <div className="feed-bottom-like-div">
-                                {rightComment ?
-                                    <img src={sms} style={{ width: "26px" }} onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
-                                    :
-                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
-                                }
-                                {commentCount ?
-                                    <Link to={`/notification/${post.id}`}>
-                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText" onClick={handleCloseRightComment}>
-                                            <div>{commentCount > 99 ? '99+' : commentCount}</div>
-                                        </div>
-                                    </Link>
-                                    :
-                                    null
-                                }
+                                    </a>
+                                )}
                             </div>
-                        </div>
 
-                        {/* Share */}
-                        <div className="feed-bottom-mainu">
-                            <FaShare className='feed-bottom-icon text-lightPostIconBottom dark:text-darkPostIcon' />
-                        </div>
 
-                    </div>
+                        </>
 
-                    {rightComment &&
+                    ) : null}
 
-                        <div className='feed-right-commnet-div'>
-                            <input
-                                type="text"
-                                placeholder='write a Comment'
-                                value={getComment}
-                                onChange={(e) => setComment(e.target.value)}
-                                className='feed-right-comment-input bg-light_0 text-lightProfileName dark:bg-darkInput dark:text-darkProfileName'
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter') {
-                                        e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)
-                                        if (getComment.trim() !== '') {
-                                            HandleComment(e, post.id, post.uid);
-                                        }
-                                    }
-                                }}
-                            />
-                            <div>
-                                {getComment != "" ?
 
-                                    <BiSolidSend className='feed-right-comment-icon' color='#0080FF' onClick={(e) => HandleComment(e, post.id, post.uid)} />
-                                    :
-                                    <BiSend className='feed-right-comment-icon' color='#84878a' onClick={(e) => HandleComment(e, post.id, post.uid)} />
-
-                                }
-                            </div>
-                        </div>
-                    }
 
                 </div>
-            </div >
+
+                {/* Feed Comment */}
+
+                <div className="feed-bottom-container">
+
+                    {/* Like */}
+                    <div className="feed-bottom-mainu">
+
+                        {liked ? (
+                            <>
+                                <div className="feed-bottom-like-div" onClick={handleCloseRightComment}>
+                                    <BsFillHeartFill onClick={() => Heart(post.id, post.uid)} className='feed-bottom-like-heart' color='#FF0040' />
+
+                                    <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText " onClick={() => showLike(post.id)}>
+                                        {like.length > 9 ? '9+' : like.length}
+
+                                    </div>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
+                                    <AiOutlineHeart onClick={() => { Heart(post.id, post.uid); handleCloseRightComment(); }}
+                                        style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
+                                    {like.length > 0 ?
+                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText"
+                                            onClick={() => showLike(post.id)}>
+                                            {like.length > 9 ? '9+' : like.length}
+                                        </div>
+                                        :
+                                        ""
+                                    }
+                                </div>
+                            </>
+                        )}
+
+
+                        {showLikedName &&
+                            <div className='See-Like-div'>
+
+                                <div className='userliked' id={`isliked${post.id}`} >
+                                    {isliked.map((item) => {
+                                        return (
+                                            <div key={item.id}>
+                                                <div className='mx-1' style={{ fontSize: "11px" }}>{item.name}</div>
+                                            </div>
+                                        )
+
+                                    })}
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    {/* Comment  */}
+                    <div className="feed-bottom-mainu">
+
+                        <div className="feed-bottom-like-div">
+                            {rightComment ?
+                                <img src={sms} style={{ width: "26px" }} onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
+                                :
+                                <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
+                            }
+                            {commentCount ?
+                                <Link to={`/notification/${post.id}`}>
+                                    <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText" onClick={handleCloseRightComment}>
+                                        <div>{commentCount > 99 ? '99+' : commentCount}</div>
+                                    </div>
+                                </Link>
+                                :
+                                null
+                            }
+                        </div>
+                    </div>
+
+                    {/* Share */}
+                    <div className="feed-bottom-mainu">
+                        <FaShare className='feed-bottom-icon text-lightPostIconBottom dark:text-darkPostIcon' />
+                    </div>
+
+                </div>
+
+                {rightComment &&
+
+                    <div className='feed-right-commnet-div'>
+                        <input
+                            type="text"
+                            placeholder='write a Comment'
+                            value={getComment}
+                            onChange={(e) => setComment(e.target.value)}
+                            className='feed-right-comment-input bg-light_0 text-lightProfileName dark:bg-darkInput dark:text-darkProfileName'
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault(); // Prevent the default "Enter" behavior (e.g., form submission)
+                                    if (getComment.trim() !== '') {
+                                        HandleComment(e, post.id, post.uid);
+                                    }
+                                }
+                            }}
+                        />
+                        <div>
+                            {getComment != "" ?
+
+                                <BiSolidSend className='feed-right-comment-icon' color='#0080FF' onClick={(e) => HandleComment(e, post.id, post.uid)} />
+                                :
+                                <BiSend className='feed-right-comment-icon' color='#84878a' onClick={(e) => HandleComment(e, post.id, post.uid)} />
+
+                            }
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div >
 
 
         </>
