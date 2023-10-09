@@ -127,7 +127,6 @@
 
         .media-time {
             font-size: 12px;
-            color: aqua;
         }
 
         .media-delete-div {
@@ -136,7 +135,6 @@
 
             .photo-delete {
                 margin-left: 0.5rem;
-                color: aqua;
                 cursor: pointer;
             }
         }
@@ -151,15 +149,14 @@
                 width: 30px;
                 height: 30px;
                 // background-color: red;
-                backdrop-filter: blur(15px);
+                // backdrop-filter: blur(15px);
                 border-radius: 50%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
                 .media-close-icon {
-                    color: aqua;
                     font-size: 26px;
                     cursor: pointer;
                 }

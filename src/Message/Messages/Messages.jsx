@@ -1099,13 +1099,13 @@ const Messages = () => {
                             <div className="media-option-div">
 
                                 <div className="media-delete-div">
-                                    <div className="media-time"> {PhotoFormatTimestamp(photoTime)}</div>
-                                    <MdDelete onClick={() => DeleteMedaiOverlay(MessagePhotoid)} style={{ fontSize: "24px" }} className='photo-delete' />
+                                    <div className="media-time text-[black] dark:text-lightDiv"> {PhotoFormatTimestamp(photoTime)}</div>
+                                    <MdDelete onClick={() => DeleteMedaiOverlay(MessagePhotoid)} style={{ fontSize: "24px" }} className='photo-delete text-[black] dark:text-lightDiv' />
                                 </div>
 
                                 <div className="media-close-div">
                                     <div className="media-close-btn">
-                                        <IoMdClose onClick={() => setMessagePhoto(null)} className='media-close-icon' />
+                                        <IoMdClose onClick={() => setMessagePhoto(null)} className='media-close-icon text-[black] dark:text-lightDiv' />
                                     </div>
                                 </div>
                             </div>
@@ -1143,14 +1143,14 @@ const Messages = () => {
                             <div className="media-option-div">
 
                                 <div className="media-delete-div">
-                                    <div className="media-time"> {MessageVideoFormatTimestamp(messageVideoTime)}</div>
-                                    <MdDelete onClick={() => DeleteMedaiOverlay(videoId)} style={{ fontSize: "24px" }} className='photo-delete' />
+                                    <div className="media-time text-[black] dark:text-lightDiv"> {MessageVideoFormatTimestamp(messageVideoTime)}</div>
+                                    <MdDelete onClick={() => DeleteMedaiOverlay(videoId)} style={{ fontSize: "24px" }} className='photo-delete text-[black] dark:text-lightDiv' />
                                     {/* <MdDelete onClick={() => DeleteVideo(videoId)} style={{ fontSize: "24px" }} className='photo-delete' /> */}
                                 </div>
 
                                 <div className="media-close-div">
                                     <div className="media-close-btn">
-                                        <IoMdClose onClick={() => { SetVideoUrl(null); setViewVideoDiv(false) }} className='media-close-icon' />
+                                        <IoMdClose onClick={() => { SetVideoUrl(null); setViewVideoDiv(false) }} className='media-close-icon text-[black] dark:text-lightDiv' />
                                     </div>
                                 </div>
                             </div>
