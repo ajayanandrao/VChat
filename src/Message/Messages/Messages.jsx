@@ -583,10 +583,12 @@ const Messages = () => {
             promises.push(setDoc(docRef2, messageData2, { merge: true }));
 
             await Promise.all(promises);
+            
         } catch (error) {
             console.error("Error sending message:", error);
         }
         handleLatestSms(uid, name, recipientImg);
+        setViewMessageInput(null);
     };
 
     const handleTyping = () => {
@@ -1039,6 +1041,8 @@ const Messages = () => {
             </div >
         </>;
     }
+
+
     return (
         <Fragment>
             <div className="message-main-div bg-light_0 dark:bg-dark">
@@ -1393,8 +1397,8 @@ const Messages = () => {
                                                                                         </div>
                                                                                     </>
                                                                                 ) : (
-                                                                                    <div className='' style={{ display: "inline-flex", lineHeight: "0px" }}>
-                                                                                        <p >{message.reply}</p>
+                                                                                    <div className='text-lightPostText dark:bg-darkDiv dark:text-light_0 replay-message-div' style={{ display: "inline-flex" }}>
+                                                                                        <div className='dark:text-light_0' >{message.reply}</div>
                                                                                     </div>
                                                                                 )}
                                                                             </div>
@@ -1444,10 +1448,68 @@ const Messages = () => {
 
 
 
-                                                                        {message.message && <div className="message-content text-[white] bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName "
+                                                                        {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
                                                                             onClick={() => showReplyButton(message.id)}
                                                                             onMouseLeave={hideReplyButton}
-                                                                        >{message.message}</div>}
+                                                                        >
+                                                                            {message.message}
+
+                                                                            <br />
+                                                                            {hoveredMessageId === message.id ?
+                                                                                <div className='mt-2 d-flex align-items-center'>
+                                                                                    {isSender && hoveredMessageId === message.id && (
+                                                                                        <div className="dark:text-darkPostTime" style={{ fontSize: "12px" }}>{formatTimestamp(message && message.timestamp)}
+                                                                                        </div>
+                                                                                    )}
+
+                                                                                    {!isSender && hoveredMessageId === message.id && (
+                                                                                        <div className="dark:text-darkPostTime" style={{ fontSize: "12px" }}>{formatTimestamp(message && message.timestamp)}</div>
+                                                                                    )}
+
+
+                                                                                    <div>
+                                                                                        {isSender && hoveredMessageId === message.id && (
+                                                                                            <div>
+                                                                                                <div
+                                                                                                    className="delete-butto"
+                                                                                                    onClick={() => {
+                                                                                                        deleteMessage(message.id);
+                                                                                                    }}
+                                                                                                >
+                                                                                                    <MdDelete style={{ fontSize: "24px", marginLeft: "10px" }} />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        )}
+                                                                                    </div>
+
+                                                                                    <>
+                                                                                        {!isSender && hoveredMessageId === message.id && (
+                                                                                            <div>
+                                                                                                <div
+                                                                                                    className="reply-button"
+                                                                                                    onClick={() => {
+                                                                                                        setSelectedMessageId(message.id);
+                                                                                                        setViewMessageInput(message.message);
+                                                                                                        setViewMessageImg(message.imageUrl);
+                                                                                                        setViewReplyImgLikeUrl(message.imageUrlLike);
+                                                                                                        setViewReplyVideoUrl(message.videoUrl);
+
+                                                                                                        setViewReplyImgUrl(message.imageUrl);
+
+
+                                                                                                    }}
+                                                                                                >
+                                                                                                    <MdOutlineReply className='text-lightProfileName dark:text-darkProfileName' style={{ fontSize: "24px", marginLeft: "10px" }} />
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        )}
+                                                                                    </>
+
+                                                                                </div>
+                                                                                :
+                                                                                null
+                                                                            }
+                                                                        </div>}
 
 
                                                                     </div>
@@ -1689,6 +1751,7 @@ const Messages = () => {
 
                                 return null;
                             })}
+
 
                             {typingS.map((item) => {
                                 if (user.uid === item.id) {

@@ -17,6 +17,7 @@ import { AiFillMinusCircle, AiOutlineArrowUp } from 'react-icons/ai';
 import { motion, useAnimation } from 'framer-motion';
 import Left from './Left/Left';
 import MobileNavebar from '../MobileNavbar/MobileNavebar';
+import Audio from '../Audio';
 
 const HomePage = () => {
     const nav = useNavigate();
@@ -199,19 +200,22 @@ const HomePage = () => {
     useEffect(() => {
         const fetchFriends = async () => {
             try {
-                const friendsQuery = query(
-                    collection(db, `allFriends/${currentUser.uid}/Message`),
-                    orderBy('time', 'asc') // Reverse the order to show newest messages first
-                );
+                // Simulate a delay of 2 seconds (you can adjust the delay as needed)
+                setTimeout(async () => {
+                    const friendsQuery = query(
+                        collection(db, `allFriends/${currentUser.uid}/Message`),
+                        orderBy('time', 'asc') // Reverse the order to show newest messages first
+                    );
 
-                const unsubscribe = onSnapshot(friendsQuery, (friendsSnapshot) => {
-                    const friendsData = friendsSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-                    // Reverse the order of messages to show newest messages first
-                    setMessages(friendsData.reverse());
-                });
+                    const unsubscribe = onSnapshot(friendsQuery, (friendsSnapshot) => {
+                        const friendsData = friendsSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+                        // Reverse the order of messages to show newest messages first
+                        setMessages(friendsData.reverse());
+                    });
 
-                // Return the unsubscribe function to stop listening to updates when the component unmounts
-                return () => unsubscribe();
+                    // Return the unsubscribe function to stop listening to updates when the component unmounts
+                    return () => unsubscribe();
+                }, 800); // Delay for 2 seconds (2000 milliseconds)
             } catch (error) {
                 console.error('Error fetching friends:', error);
             }
@@ -219,6 +223,7 @@ const HomePage = () => {
 
         fetchFriends();
     }, [currentUser]);
+
 
     const HandleSmsSeen = (id) => {
         const smsRef = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); // Include the document ID here
@@ -233,6 +238,50 @@ const HomePage = () => {
                 console.error("Error marking message as seen:", error);
             });
     };
+
+
+    const [stories, setStories] = useState([]);
+
+    const StoryRef = collection(db, 'stories');
+
+    useEffect(() => {
+        const unsub = () => {
+            onSnapshot(StoryRef, (snapshot) => {
+                let newbooks = []
+                snapshot.docs.forEach((doc) => {
+                    newbooks.push({ ...doc.data(), id: doc.id })
+                });
+                setStories(newbooks);
+            })
+        };
+        return unsub();
+    }, []);
+
+
+    useEffect(() => {
+        // For each fetched post, check and delete if expired
+        stories.forEach((story) => {
+            const now = new Date();
+            const diff = now - story.timestamp.toDate();
+            const hoursPassed = diff / (1000 * 60 * 60); // Calculate hours passed
+
+            if (hoursPassed > 2) {
+                handleDeletePost(story.id);
+            }
+        });
+    }, [stories]);
+
+    const handleDeletePost = async (storyId) => {
+        try {
+            const postRef = doc(db, 'stories', storyId);
+            // Delete the post
+            await deleteDoc(postRef);
+            // Optionally, you can delete associated comments, likes, etc., if required
+        } catch (error) {
+            console.error('Error deleting post:', error);
+        }
+    };
+
 
 
     return (
@@ -292,26 +341,30 @@ const HomePage = () => {
 
                     <div className='sms-position-div'>
                         {messages.slice(0, 1).map((sms) => {
+
                             return (
                                 <div key={sms.id}>
-
-
                                     <Link to={`/users/${sms.userId}/message`} className='link' onClick={() => HandleSmsSeen(sms.id)}>
-                                        {sms.status === "unseen" ? (<div className='sms-div' style={{ width: "80px", height: "80px" }}>
-                                            <div className=" sms-user-ring-div" style={{ width: "60px", height: "60px" }}>
-                                                {sms.status === "unseen" ? <div className="sms-user-ring " style={{ width: "60px", height: "60px" }}></div> : ""}
-                                                <img src={sms.photoUrl} className='sms-user-img' alt="" style={{ width: "50px", height: "50px" }} />
+                                        {sms.status === 'unseen' ? (
+                                            <div className='sms-div' style={{ width: '80px', height: '80px' }}>
+                                                <div className='sms-user-ring-div' style={{ width: '60px', height: '60px' }}>
+
+                                                    {sms.status === 'unseen' ? (
+                                                        <div className='sms-user-ring' style={{ width: '60px', height: '60px' }}></div>
+                                                    ) : null}
+                                                    <img src={sms.photoUrl} className='sms-user-img' alt='' style={{ width: '50px', height: '50px' }} />
+                                                </div>
+                                                {sms.senderId}
                                             </div>
-                                        </div>) : null}
+                                        ) : null}
                                     </Link>
 
                                 </div>
                             );
-
                         })}
                     </div>
-
                     <StoryForm />
+                    {/* <Audio /> */}
                     <Post />
 
                     {loading ?
@@ -377,7 +430,9 @@ const HomePage = () => {
                         <>
                             {api.map((item) => {
                                 return (
-                                    <Feed post={item} key={item.id} />
+                                    <>
+                                        <Feed post={item} key={item.id} />
+                                    </>
                                 )
                             })}
                         </>
@@ -535,7 +590,7 @@ const HomePage = () => {
 
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

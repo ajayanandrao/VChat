@@ -326,7 +326,7 @@ const Message = () => {
                                                 <Link to={`/users/${sms.userId}/message`} className='link'>
                                                     <div className='sms-div'>
                                                         <div className=" sms-user-ring-div">
-                                                            {sms.status === "unseen" ? <div className="sms-user-ring"></div> : ""}
+                                                            {/* {sms.status === "unseen" ? <div className="sms-user-ring"></div> : ""} */}
                                                             <img src={sms.photoUrl} className='sms-user-img' alt="" />
 
                                                         </div>
