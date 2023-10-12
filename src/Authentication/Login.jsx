@@ -3,7 +3,7 @@ import "./NewLogin.scss"
 import { Link, useNavigate } from 'react-router-dom'
 import SignUp from './SignUp'
 import { AuthContext } from '../AuthContaxt';
-import { auth, db } from '../Firebase';
+import { auth, db, realdb } from '../Firebase';
 import { collection, doc, onSnapshot, orderBy, query, setDoc, updateDoc } from 'firebase/firestore';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Box, TextField } from '@mui/material';
@@ -12,6 +12,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import logoText from "./../Image/c2.png";
 import vlogo from "./../Image/img/logo192.png";
 import { CircularProgress } from '@mui/material';
+import { ref, set } from 'firebase/database';
 
 const Login = () => {
     const { currentUser } = useContext(AuthContext);
@@ -21,7 +22,6 @@ const Login = () => {
     const [loading, setLoading] = useState(true);
 
     const nav = useNavigate();
-
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -40,6 +40,8 @@ const Login = () => {
             }
         });
 
+
+
         return () => {
             unsubscribe(); // Cleanup the subscription when the component unmounts
         };
@@ -50,20 +52,15 @@ const Login = () => {
     const login = (e) => {
         e.preventDefault();
         setLoginLoading(true);
+
         signInWithEmailAndPassword(auth, email, password)
             .then(async (userCredential) => {
-                // Signed in 
+                // Signed in
                 const user = userCredential.user;
-
                 const PresenceRef = doc(db, "userPresece", user.uid);
-
-                await updateDoc(PresenceRef, {
-                    status: "online",
-                });
-
+                await updateDoc(PresenceRef, { status: "online" });
 
                 const PresenceRefOnline = doc(db, "OnlyOnline", user.uid);
-
                 const userData = {
                     status: 'Online',
                     uid: user.uid,
@@ -71,51 +68,51 @@ const Login = () => {
                     email: email,
                     photoUrl: user.photoURL,
                     presenceTime: new Date()
-                    // presenceTime: new Date()
                 };
-
                 await setDoc(PresenceRefOnline, userData);
 
-                // console.log(user);
-                // ...
+                // Navigate to the home page or perform other actions
+                nav("/home");
+
+
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode);
-                if (errorCode == "auth/wrong-password") {
-                    setLoginLoading(false);
-                    document.getElementById("error-alert").style.display = "flex";
-                    document.getElementById("error-alert").innerHTML = "Wrong Password";
-                }
-                if (errorCode == "auth/missing-password") {
-                    setLoginLoading(false);
-                    document.getElementById("error-alert").style.display = "flex";
-                    document.getElementById("error-alert").innerHTML = "incorrect email and password";
-                }
-                if (errorCode == "auth/user-not-found") {
-                    function alert() {
-                        setLoginLoading(false);
+                setLoginLoading(false);
+
+                // Handle different error codes and display appropriate messages
+                switch (errorCode) {
+                    case "auth/wrong-password":
+                        document.getElementById("error-alert").style.display = "flex";
+                        document.getElementById("error-alert").innerHTML = "Wrong Password";
+                        break;
+                    case "auth/missing-password":
+                        document.getElementById("error-alert").style.display = "flex";
+                        document.getElementById("error-alert").innerHTML = "Incorrect email and password";
+                        break;
+                    case "auth/user-not-found":
                         document.getElementById("error-alert").style.display = "flex";
                         document.getElementById("error-alert").innerHTML = "User not found";
-                    }
-                    alert();
-                }
-                if (errorCode == "auth/invalid-email") {
-                    setLoginLoading(false);
-                    document.getElementById("error-alert").style.display = "flex";
-                    document.getElementById("error-alert").innerHTML = "invalid email address";
-                }
-                if (errorCode == "auth/network-request-failed") {
-                    setLoginLoading(false);
-                    document.getElementById("error-alert").style.display = "flex";
-                    document.getElementById("error-alert").innerHTML = "Check your internet connection";
+                        break;
+                    case "auth/invalid-email":
+                        document.getElementById("error-alert").style.display = "flex";
+                        document.getElementById("error-alert").innerHTML = "Invalid email address";
+                        break;
+                    case "auth/network-request-failed":
+                        document.getElementById("error-alert").style.display = "flex";
+                        document.getElementById("error-alert").innerHTML = "Check your internet connection";
+                        break;
+                    default:
+                    // Handle other errors as needed
                 }
             });
 
         setEmail("");
         setPass("");
     };
+
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
@@ -142,6 +139,29 @@ const Login = () => {
         // Cleanup the timeout to prevent memory leaks when the component unmounts
         return () => clearTimeout(timeoutId);
     }, []);
+
+    document.body.addEventListener('contextmenu', function (event) {
+        event.preventDefault(); // Prevent the default context menu
+        // You can optionally display a custom message if needed
+        // alert('Right-click context menu is disabled.');
+    });
+
+
+    useEffect(() => {
+        const handleContextMenu = (event) => {
+            event.preventDefault(); // Prevent the default context menu
+            // alert('Access Denied');
+        };
+
+        document.body.addEventListener('contextmenu', handleContextMenu);
+
+        return () => {
+            document.body.removeEventListener('contextmenu', handleContextMenu);
+        };
+    }, []);
+
+
+
 
     return (
         <>

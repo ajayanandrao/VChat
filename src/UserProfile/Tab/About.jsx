@@ -159,11 +159,13 @@ const About = () => {
                                         <div className="detail-div-group">
                                             <div className="detail-item-one">
                                                 <samp className='d-item-name text-lightProfileName dark:text-darkProfileName'>School </samp>
+
                                                 {item.school ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'> {item.school}
                                                     </span>
                                                     :
-                                                    null}
+                                                    <div className="about-null-item bg-light_0 dark:bg-dark"></div>
+                                                    }
                                             </div>
 
                                             <div className="detail-item-one">
@@ -172,7 +174,7 @@ const About = () => {
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'> {item.college}
                                                     </span>
                                                     :
-                                                    null
+                                                    <div className="about-null-item bg-light_0 dark:bg-dark"></div>
                                                 }
                                             </div>
 
@@ -183,7 +185,7 @@ const About = () => {
                                                         {item.work}
                                                     </span>
                                                     :
-                                                    null
+                                                    <div className="about-null-item bg-light_0 dark:bg-dark"></div>
                                                 }
                                             </div>
 
@@ -193,7 +195,7 @@ const About = () => {
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'> {item.from}
                                                     </span>
                                                     :
-                                                    null
+                                                    <div className="about-null-item bg-light_0 dark:bg-dark"></div>
                                                 }
                                             </div>
                                         </div>

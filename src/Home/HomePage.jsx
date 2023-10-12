@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth, db } from '../Firebase';
+import { auth, db, realdb } from '../Firebase';
 import "./HomePage.scss";
 import v from "./../Image/img/logo192.png";
 import { MdAddReaction } from 'react-icons/md';
@@ -18,6 +18,7 @@ import { motion, useAnimation } from 'framer-motion';
 import Left from './Left/Left';
 import MobileNavebar from '../MobileNavbar/MobileNavebar';
 import Audio from '../Audio';
+import { off, onValue, ref } from 'firebase/database';
 
 const HomePage = () => {
     const nav = useNavigate();
@@ -282,6 +283,26 @@ const HomePage = () => {
         }
     };
 
+
+    // useEffect(() => {
+    //     const connectionRef = ref(realdb, '.info/connected');
+
+    //     const handleConnectionChange = (snapshot) => {
+    //         if (snapshot.val() === false) {
+    //             alert("Lost connection to the server. Please check your internet connection.");
+    //         } else {
+    //             alert("Back online");
+    //         }
+    //     };
+
+    //     // Set up the listener for connection changes
+    //     onValue(connectionRef, handleConnectionChange);
+
+    //     // Clean up the listener when the component unmounts
+    //     return () => {
+    //         off(connectionRef, handleConnectionChange);
+    //     };
+    // }, []);
 
 
     return (

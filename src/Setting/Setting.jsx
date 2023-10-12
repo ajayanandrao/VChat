@@ -90,6 +90,9 @@ const Setting = () => {
                     <Link to="/changePassword/">
                         <div className='change-password bg-lightDiv dark:bg-darkDiv dark:text-darkPostText text-lightPostText'>Change Profile Password</div>
                     </Link>
+                    <Link to="/feedback/">
+                        <div className='change-password bg-lightDiv dark:bg-darkDiv dark:text-darkPostText text-lightPostText'>Feedback</div>
+                    </Link>
                 </div>
 
             </div>

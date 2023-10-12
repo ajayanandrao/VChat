@@ -5,13 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 // import Flickity from 'react-flickity-component';
 import natur from "./nature.json";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc, where } from 'firebase/firestore';
-import { db } from '../Firebase';
+import { db, realdb } from '../Firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { styled, keyframes } from '@mui/system';
 import Badge from '@mui/material/Badge';
 import { AuthContext } from './../AuthContaxt';
 import { Avatar } from '@mui/material';
 import { CircularProgress, LinearProgress } from '@mui/material';
+import { off, onValue, ref } from 'firebase/database';
 
 
 const Message = () => {
@@ -282,6 +283,40 @@ const Message = () => {
             });
     };
 
+    useEffect(() => {
+        const connectionRef = ref(realdb, '.info/connected');
+
+        const handleConnectionChange = async (snapshot) => {
+            if (snapshot.val() === false) {
+                // alert("Lost connection to the server. Please check your internet connection.");
+                const PresenceRef = doc(db, "userPresece", currentUser.uid);
+
+                await updateDoc(PresenceRef, {
+                    status: "Offline",
+                });
+
+                const PresenceRefOnline = doc(db, "OnlyOnline", currentUser.uid);
+                await deleteDoc(PresenceRefOnline);
+            } else {
+                // alert("Back online");
+            }
+        };
+
+        // Set up the listener for connection changes
+        onValue(connectionRef, handleConnectionChange);
+
+        // Clean up the listener when the component unmounts
+        return () => {
+            off(connectionRef, handleConnectionChange);
+        };
+    }, []);
+
+
+
+
+
+
+
 
     return (
         <>
@@ -303,7 +338,7 @@ const Message = () => {
                                     <div className={`tablinks text-lightProfileName dark:text-darkPostText ${activeTab === 'Request' ? 'active' : ''}`} onClick={() => setActive('Request')}>
 
                                         {latestFriendRequest.timestamp > 0 && (
-                                                <div className="request-animated-circle-request me-2"></div>
+                                            <div className="request-animated-circle-request me-2"></div>
                                             // <div className="message-animated-circle" key={latestFriendRequest.id}>
                                             // </div>
                                         )}

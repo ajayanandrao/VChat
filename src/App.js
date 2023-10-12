@@ -1,5 +1,5 @@
 import './App.scss';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import ScrollToTop from './ScrollTop';
 import Login from './Authentication/Login';
 import SignUp from './Authentication/SignUp';
@@ -44,6 +44,8 @@ import CreateStorey from './Story/createStory/CreateStorey';
 import ViewStoryProps from './Story/createStory/ViewStory/ViewStoryProps';
 import HomePage from './Home/HomePage';
 import Left from './Home/Left/Left';
+import Rtime from './Rtime/Rtime';
+import Feedback from './Setting/Feedback/Feedback';
 
 function App() {
 
@@ -149,6 +151,7 @@ function App() {
   }, []);
 
 
+
   return (
     <>
       <Router basename='/VChat'>
@@ -171,8 +174,10 @@ function App() {
           null
         }
         <Routes>
+
+          
           <Route exact path="/" element={<Login />} />
-          <Route exact path="*" element={<Error404 />} />
+          <Route exact path="*" element={<Login />} />
           <Route path="signUp" element={<SignUp />} />
           <Route exact path="forgotPassword" element={<ForgotPassword />} />
 
@@ -181,6 +186,7 @@ function App() {
             // (<> <Route path="home" element={<Home />} />
             (<>
               <Route path="home" element={<HomePage />} />
+              <Route path="rtime" element={<Rtime />} />
               {/* <Route path="home" element={<Home />} />  */}
               {/* <Route path="post" element={<Post />} /> */}
 
@@ -191,6 +197,7 @@ function App() {
               <Route path='notification/:id' element={<NotificationPara />} />
 
               <Route exact path="changePassword" element={<ChangePassword />} />
+              <Route exact path="feedback" element={<Feedback />} />
 
 
               <Route path="option" element={<Option />} />

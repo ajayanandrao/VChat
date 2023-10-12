@@ -1,5 +1,6 @@
 @import "./../Mixin_New.scss";
 @import "./../Variable.scss";
+@import "./../Styles/Variable";
 
 .search-back-div {
     width: 100%;
@@ -30,6 +31,7 @@
         padding: 0 10px;
         border-radius: 30px;
         border: none;
+        box-shadow: $border-input;
     }
 }
 

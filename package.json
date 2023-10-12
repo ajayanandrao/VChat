@@ -21,6 +21,7 @@
     "firebase": "^10.2.0",
     "framer-motion": "^10.16.1",
     "image-compressor": "^2.0.3",
+    "jsonwebtoken": "^9.0.2",
     "navigate": "^0.3.6",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",

@@ -83,7 +83,7 @@ const NotificationProps = () => {
 
                 <>
 
-                    <div style={{ color: "white", textAlign: "center" }} className='text-3xl'>{notilent.length < 1 ? "Empty Notification Box" : ""}</div>
+                    <div style={{ textAlign: "center" }} className='text-3xl text-lightProfileName dark:text-darkProfileName'>{notilent.length < 1 ? "Empty Notification Box" : ""}</div>
 
                     {
                         notificationData.map((item) => {

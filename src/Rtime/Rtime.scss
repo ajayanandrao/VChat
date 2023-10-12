@@ -1,0 +1,25 @@
+.Rtime-main-container {
+    width: 100%;
+    height: 100vh;
+    background: #161616;
+    display: flex;
+    color: white;
+
+    .left {
+        width: 100%;
+        max-width: 100px;
+        background: green;
+    }
+
+    .auth-div {
+        display: flex;
+        // justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        .inutauth {
+            background: gray;
+            color: white;
+        }
+    }
+}

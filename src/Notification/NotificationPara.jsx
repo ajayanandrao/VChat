@@ -170,7 +170,7 @@ const NotificationPara = () => {
 
     if (!api) {
         return <>
-            <div className='skeleton-center'>
+            <div className='skeleton-center bg-light_0 dark:bg-dark'>
                 <CircularProgress className='circularprogress' />
             </div >
         </>;

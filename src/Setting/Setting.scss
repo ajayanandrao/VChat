@@ -56,11 +56,13 @@
 
     .setting-containt {
         width: 100%;
+        max-width: 550px;
+        margin: 0 auto;
         height: calc(100% - 50px);
         padding: 1rem;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        // align-items: center;
         margin-top: 1rem;
 
         // justify-content: center;

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import './Post.scss';
 import photo from './../Image/img/photo.png';
-import smile from './../Image/img/emoji.png';
+import smile from './../Image/img/two.png';
 import video from './../Image/img/video5.png';
 import { AuthContext } from '../AuthContaxt';
 import {

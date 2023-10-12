@@ -9,14 +9,6 @@ import { getDatabase, onValue, ref, set } from "firebase/database";
 import { firebase } from "@firebase/app";
 import "@firebase/firestore";
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBPNCxFTf6ew83aKV_PawA_1_7eIQ7VOpA",
-//   authDomain: "fir-25-12-2022.firebaseapp.com",
-//   projectId: "fir-25-12-2022",
-//   storageBucket: "fir-25-12-2022.appspot.com",
-//   messagingSenderId: "771222562534",
-//   appId: "1:771222562534:web:bc7f1087d83a7e567c3d27"
-// };
 
 const firebaseConfig = {
   apiKey: "AIzaSyD9i52Ee7zbN22xnXBTKH1iMaJI8G1N1rQ",
@@ -38,8 +30,8 @@ const auth = getAuth(app);
 const storage = getStorage(app);
 const firestore = getFirestore(app);
 const db = getFirestore(app);
-const database = getDatabase(app);
+const realdb = getDatabase(app);
 
-export { auth, db, storage, firestore, database };
+export { auth, db, storage, firestore, realdb };
 
 

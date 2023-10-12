@@ -36,7 +36,8 @@ const ProfileAbout = ({ user }) => {
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'> {item.school}
                                                     </span>
                                                     :
-                                                    null}
+                                                    <div className="about-null-item bg-light_0 dark:bg-dark"></div>
+                                                    }
                                             </div>
 
                                             <div className="detail-item-one">
@@ -45,7 +46,7 @@ const ProfileAbout = ({ user }) => {
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'> {item.college}
                                                     </span>
                                                     :
-                                                    null
+                                                    <div className="about-null-item bg-light_0 dark:bg-dark"></div>
                                                 }
                                             </div>
 
@@ -56,7 +57,7 @@ const ProfileAbout = ({ user }) => {
                                                         {item.work}
                                                     </span>
                                                     :
-                                                    null
+                                                    <div className="about-null-item bg-light_0 dark:bg-dark"></div>
                                                 }
                                             </div>
 
@@ -66,7 +67,7 @@ const ProfileAbout = ({ user }) => {
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'> {item.from}
                                                     </span>
                                                     :
-                                                    null
+                                                    <div className="about-null-item bg-light_0 dark:bg-dark"></div>
                                                 }
                                             </div>
                                         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./NewSignup.scss";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useRoutes } from 'react-router-dom';
 import { auth, db, storage } from "./../Firebase";
 import { addDoc, collection, doc, onSnapshot, serverTimestamp, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
@@ -11,7 +11,7 @@ import g from "./../Image/google.png";
 import f from "./../Image/facebook.png";
 import i from "./../Image/instagram.png";
 import user from "./../Image/user3.png";
-import vlogo from "./../Image/img/logo192.png";
+import vlogo from "./../Image/img/logo192.png"; 
 
 const SignUp = () => {
 

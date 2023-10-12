@@ -46,95 +46,97 @@ const UserFriendPage = ({ user }) => {
 
     return (
         <div>
+            {/* sdfsdfsdfsdfsdf */}
 
+            <div className="friend-search-div">
+                <h2 className='text-3xl text-lightPostText dark:text-darkPostText mb-3'>Friends</h2>
+
+                <input type="text"
+                    placeholder='Serch friends '
+                    onChange={(e) => setSearch(e.target.value)}
+                    value={search}
+                    className='friend-search bg-lightDiv text-lightProfileName dark:bg-darkDiv dark:text-darkPostText' />
+            </div>
             {friendsList.length === 0 ? (
 
-                <h5>
+                <div className='no-post-div text-4xl text-center text-lightProfileName dark:text-darkProfileName'>
                     No Friend to Display
-                </h5>
+                </div>
 
             ) : (
 
                 <>
-                    <div className="friend-search-div">
-                        <h2 className='text-3xl text-lightPostText dark:text-darkPostText mb-3'>Friends</h2>
-
-                        <input type="text"
-                            placeholder='Serch friends '
-                            onChange={(e) => setSearch(e.target.value)}
-                            value={search}
-                            className='friend-search bg-lightDiv text-lightProfileName dark:bg-darkDiv dark:text-darkPostText' />
-                    </div>
 
 
-                    {loading ? (<>
-                        <div className="friend-container-loading-div">
-                            <div className="friend-container-loading">
-                                <div className='placeholder-glow friend-while-loading-div-outer '>
-                                    <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
-                                </div>
-                                <div className='placeholder-glow friend-while-loading-div-outer '>
-                                    <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
-                                </div>
-                                <div className='placeholder-glow friend-while-loading-div-outer '>
-                                    <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
-                                </div>
-                                <div className='placeholder-glow friend-while-loading-div-outer '>
-                                    <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
-                                </div>
-                                <div className='placeholder-glow friend-while-loading-div-outer '>
-                                    <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
-                                </div>
-                                <div className='placeholder-glow friend-while-loading-div-outer '>
-                                    <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
-                                </div>
-                                <div className='placeholder-glow friend-while-loading-div-outer '>
-                                    <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
-                                </div>
-                            </div>
-                        </div>
-                    </>)
-                        :
-                        (<>
-                            <div className="Friend-grid-parent-container">
-                                <div className='friend-container'>
-                                    {api.filter((value) => {
-                                        if (search === "") {
-                                            return value;
-                                        } else if (
-                                            value.name.toLowerCase().includes(search.toLowerCase())
-                                        ) {
-                                            return value;
-                                        }
-                                    }).map((item) => {
-                                        return (
-                                            <>
-                                                {friendsList.map((friend) => {
-
-                                                    if (item.uid === friend.uid) {
-                                                        return (
-                                                            <div key={friend.userId} >
-
-                                                                <div className='w-100' style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-                                                                    <img src={item.PhotoUrl} className='friend-img' alt="" />
-                                                                    <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{item.name}</div>
-                                                                </div>
-
-                                                            </div>
-                                                        )
-                                                    }
-                                                })}
-
-
-                                            </>
-                                        )
-                                    })}
-
+                    <div>
+                        {loading ? (<>
+                            <div className="friend-container-loading-div">
+                                <div className="friend-container-loading">
+                                    <div className='placeholder-glow friend-while-loading-div-outer '>
+                                        <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
+                                    </div>
+                                    <div className='placeholder-glow friend-while-loading-div-outer '>
+                                        <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
+                                    </div>
+                                    <div className='placeholder-glow friend-while-loading-div-outer '>
+                                        <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
+                                    </div>
+                                    <div className='placeholder-glow friend-while-loading-div-outer '>
+                                        <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
+                                    </div>
+                                    <div className='placeholder-glow friend-while-loading-div-outer '>
+                                        <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
+                                    </div>
+                                    <div className='placeholder-glow friend-while-loading-div-outer '>
+                                        <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
+                                    </div>
+                                    <div className='placeholder-glow friend-while-loading-div-outer '>
+                                        <div className='friend-while-loading-div placeholder bg-[white] dark:bg-darkPostIcon'></div>
+                                    </div>
                                 </div>
                             </div>
                         </>)
-                    }
+                            :
+                            (<>
+                                <div className="Friend-grid-parent-container">
+                                    <div className='friend-container'>
+                                        {api.filter((value) => {
+                                            if (search === "") {
+                                                return value;
+                                            } else if (
+                                                value.name.toLowerCase().includes(search.toLowerCase())
+                                            ) {
+                                                return value;
+                                            }
+                                        }).map((item) => {
+                                            return (
+                                                <>
+                                                    {friendsList.map((friend) => {
 
+                                                        if (item.uid === friend.uid) {
+                                                            return (
+                                                                <div key={friend.userId} >
+
+                                                                    <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                        <img src={item.PhotoUrl} className='friend-img' alt="" />
+                                                                        <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{item.name}</div>
+                                                                    </div>
+
+                                                                </div>
+                                                            )
+                                                        }
+                                                    })}
+
+
+                                                </>
+                                            )
+                                        })}
+
+                                    </div>
+                                </div>
+                            </>)
+                        }
+                    </div>
 
                 </>
 

@@ -2,10 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import "./SearchUser.scss";
 import { MdDarkMode } from "react-icons/md"
 import { Link, useNavigate } from 'react-router-dom';
-import { db } from "./../Firebase";
+import { db, realdb } from "./../Firebase";
 import { collection, onSnapshot } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
 import { FiSearch } from "react-icons/fi";
+import { onValue, ref } from 'firebase/database';
+import { onDisconnect } from 'firebase/database';
+
 
 const SearchUser = () => {
 
@@ -30,7 +33,6 @@ const SearchUser = () => {
 
     return (
         <>
-
             <div className="search-main-container bg-light_0 dark:bg-dark">
 
                 <div className="search-back-div bg-light_0 dark:bg-dark">
