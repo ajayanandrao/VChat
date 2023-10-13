@@ -112,7 +112,7 @@ const UserMedia = ({ user }) => {
                     </div>
                     <div className='video-div'>
 
-                        <video className='UserVideo' autoPlay controls preload='auto' ref={(el) => (videoRef.current[videoId] = el)} onClick={handleVideoBtnClick} >
+                        <video className='UserVideo'  controls preload='auto' ref={(el) => (videoRef.current[videoId] = el)} onClick={handleVideoBtnClick} >
                             <source src={videoUrl} type="video/mp4" />
                         </video>
 

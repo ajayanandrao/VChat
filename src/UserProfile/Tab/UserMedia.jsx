@@ -115,21 +115,21 @@ const UserMedia = () => {
                     <div className="video-overlay-close">
                         <div className="video-overlay-time-div">
                             <div className="photo-time me-3">{formatTimestamp(time)}</div>
-                            <MdDelete style={{ fontSize: "26px" }} onClick={deleteVideo} />
+                            <MdDelete style={{ fontSize: "26px", cursor:"pointer" }} onClick={deleteVideo} />
                         </div>
                         <div className="video-overlay-close-div">
                             <div onClick={handleVideoShow}>
-                                <AiOutlineClose style={{ fontSize: "20px" }} />
+                                <AiOutlineClose style={{ fontSize: "20px",cursor:"pointer" }} />
                             </div>
                         </div>
                     </div>
                     <div className='video-div' onClick={handleVideoBtnClick}>
 
-                        <video className='UserVideo' autoPlay controls preload='auto' ref={(el) => (videoRef.current[videoId] = el)}  >
+                        <video className='UserVideo' style={{cursor:"pointer" }} onClick={handleVideoBtnClick} controls preload='auto' ref={(el) => (videoRef.current[videoId] = el)}  >
                             <source src={videoUrl} type="video/mp4" />
                         </video>
 
-                        {isPlaying ? (
+                        {/* {isPlaying ? (
                             null
                         )
                             :
@@ -138,7 +138,7 @@ const UserMedia = () => {
                                     <FaPlay className='play-btn-current-profile-video-btn' />
                                 </div>
                             )
-                        }
+                        } */}
 
                     </div>
                 </div>
