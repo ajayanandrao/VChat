@@ -23,7 +23,7 @@
         margin: 0 auto;
 
         .view-notification-time {
-            color: white;
+            // color: white;
             font-size: 14px;
         }
 
@@ -64,6 +64,7 @@
             margin: 1rem 0;
             display: flex;
             align-items: center;
+            box-shadow: $border-input;
 
             .view-tab-make-comment-input {
                 border: none;
@@ -72,6 +73,7 @@
                 padding: 0 10px;
                 height: 100%;
                 flex: 1;
+
             }
 
             .view-tab-make-comment-icon {
@@ -91,10 +93,12 @@
                 object-fit: cover;
                 object-position: center;
                 margin-right: 1rem;
+
             }
 
             .comment-api {
                 font-size: 14px;
+
             }
 
             .view-noti-post-time {
@@ -104,9 +108,12 @@
             .view-comment-delete-div {
                 cursor: pointer;
             }
+            .bg-lightDiv {
+                box-shadow: $border-input;
+            }
         }
     }
 
-
+    
 
 }

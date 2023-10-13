@@ -181,7 +181,7 @@ const NotificationPara = () => {
 
             <div className='view-notification-inner-div'>
 
-                <div className="view-notification-time">
+                <div className="view-notification-time text-lightPostText dark:text-darkPostText">
                     <TimeAgoComponent timestamp={api.bytime && api.bytime.toDate()} />
                 </div>
 
@@ -242,6 +242,7 @@ const NotificationPara = () => {
                                         <CommentTimeAgoComponent timestamp={item.commentTime && item.commentTime.toDate()} />
                                     </div>
                                 </div>
+                                
                                 <div className='view-comment-delte-container'>
                                     {currentUser && currentUser.uid == item.uid ?
                                         <div className="view-comment-delete-div text-lightPostText dark:text-darkPostText">

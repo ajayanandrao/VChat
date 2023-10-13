@@ -216,7 +216,7 @@ const HomePage = () => {
 
                     // Return the unsubscribe function to stop listening to updates when the component unmounts
                     return () => unsubscribe();
-                }, 800); // Delay for 2 seconds (2000 milliseconds)
+                }, 1000); // Delay for 2 seconds (2000 milliseconds)
             } catch (error) {
                 console.error('Error fetching friends:', error);
             }

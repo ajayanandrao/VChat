@@ -283,33 +283,33 @@ const Message = () => {
             });
     };
 
-    useEffect(() => {
-        const connectionRef = ref(realdb, '.info/connected');
+    // useEffect(() => {
+    //     const connectionRef = ref(realdb, '.info/connected');
 
-        const handleConnectionChange = async (snapshot) => {
-            if (snapshot.val() === false) {
-                // alert("Lost connection to the server. Please check your internet connection.");
-                const PresenceRef = doc(db, "userPresece", currentUser.uid);
+    //     const handleConnectionChange = async (snapshot) => {
+    //         if (snapshot.val() === false) {
+    //             // alert("Lost connection to the server. Please check your internet connection.");
+    //             const PresenceRef = doc(db, "userPresece", currentUser.uid);
 
-                await updateDoc(PresenceRef, {
-                    status: "Offline",
-                });
+    //             await updateDoc(PresenceRef, {
+    //                 status: "Offline",
+    //             });
 
-                const PresenceRefOnline = doc(db, "OnlyOnline", currentUser.uid);
-                await deleteDoc(PresenceRefOnline);
-            } else {
-                // alert("Back online");
-            }
-        };
+    //             const PresenceRefOnline = doc(db, "OnlyOnline", currentUser.uid);
+    //             await deleteDoc(PresenceRefOnline);
+    //         } else {
+    //             // alert("Back online");
+    //         }
+    //     };
 
-        // Set up the listener for connection changes
-        onValue(connectionRef, handleConnectionChange);
+    //     // Set up the listener for connection changes
+    //     onValue(connectionRef, handleConnectionChange);
 
-        // Clean up the listener when the component unmounts
-        return () => {
-            off(connectionRef, handleConnectionChange);
-        };
-    }, []);
+    //     // Clean up the listener when the component unmounts
+    //     return () => {
+    //         off(connectionRef, handleConnectionChange);
+    //     };
+    // }, []);
 
 
 

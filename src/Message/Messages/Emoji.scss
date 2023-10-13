@@ -11,21 +11,35 @@
     bottom: 0;
     left: 0;
     z-index: 2;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     flex-direction: column;
     justify-content: end;
     align-items: center;
 
+
+    .all-emoji-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        max-width: 300px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
+
     .emoji-history-div {
         display: flex;
         padding: 0.5rem 0;
         width: 100%;
-        max-width: 600px;
+        max-width: 300px;
         overflow-x: auto;
         backdrop-filter: blur(50px);
         border-radius: 10px 10px 0 0;
 
+        // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        // background: white;
         &::-webkit-scrollbar {
             display: none;
         }
@@ -49,11 +63,13 @@
 
     .emoji-div-scroll {
         width: 100%;
-        max-width: 600px;
+        max-width: 300px;
         // height: calc(100% - 130px);
         height: 100%;
         backdrop-filter: blur(50px);
 
+        // background: white;
+        // box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         @include respond-to(md) {
             max-height: 600px;
         }
@@ -86,8 +102,8 @@
             align-items: center;
 
             .message-emoji {
-                width: 45px;
-                height: 45px;
+                width: 35px;
+                height: 35px;
                 cursor: pointer;
             }
         }

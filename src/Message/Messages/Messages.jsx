@@ -583,7 +583,7 @@ const Messages = () => {
             promises.push(setDoc(docRef2, messageData2, { merge: true }));
 
             await Promise.all(promises);
-            
+
         } catch (error) {
             console.error("Error sending message:", error);
         }
@@ -1794,33 +1794,34 @@ const Messages = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="emoji-container-main" onClick={handleMessageEmoji}>
 
+                        <div className='all-emoji-wrapper'>
+                            <div className='emoji-history-div'>
+                                {historyMessage.slice(0, 10).map((hist, index) => {
+                                    if (currentUser.uid === hist.sender) {
+                                        return (
+                                            <div key={index} className='emoji-history-item'>
+                                                <div className='emoji-history-icon-div'>
+                                                    <img src={hist.imageUrlLike} className='emoji-history-icon' alt="" onClick={() => handleSendHistorayMessageEmoji(user.uid, user.userPhoto, hist.imageUrlLike)} />
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                })}
+                            </div>
 
-                        <div className='emoji-history-div'>
-                            {historyMessage.slice(0, 10).map((hist, index) => {
-                                if (currentUser.uid === hist.sender) {
+
+                            <div className="emoji-div-scroll">
+                                {emojiJson.map((item, index) => {
                                     return (
-                                        <div key={index} className='emoji-history-item'>
-                                            <div className='emoji-history-icon-div'>
-                                                <img src={hist.imageUrlLike} className='emoji-history-icon' alt="" onClick={() => handleSendHistorayMessageEmoji(user.uid, user.userPhoto, hist.imageUrlLike)} />
+                                        <div key={index}>
+                                            <div className="message-emoji-div  dark:bg-darkDiv" onClick={() => handleSendMessageEmoji(user.uid, user.userPhoto, item.url)}>
+                                                <img src={item.url} alt={`Emoji ${item.id}`} className='message-emoji' />
                                             </div>
                                         </div>
                                     )
-                                }
-                            })}
-                        </div>
+                                })}
 
-
-                        <div className="emoji-div-scroll">
-                            {emojiJson.map((item, index) => {
-                                return (
-                                    <div key={index}>
-                                        <div className="message-emoji-div  dark:bg-darkDiv" onClick={() => handleSendMessageEmoji(user.uid, user.userPhoto, item.url)}>
-                                            <img src={item.url} alt={`Emoji ${item.id}`} className='message-emoji' />
-                                        </div>
-                                    </div>
-                                )
-                            })}
-
+                            </div>
                         </div>
                     </motion.div>
                     :
