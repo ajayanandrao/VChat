@@ -1789,9 +1789,7 @@ const Messages = () => {
 
                 {messageEmoji ?
                     <motion.div
-                        transition={{ duration: 0.7 }}
-                        initial={{ opacity: 0, y: 150 }}
-                        animate={{ opacity: 1, y: 0 }}
+
                         className="emoji-container-main" onClick={handleMessageEmoji}>
 
                         <div className='all-emoji-wrapper'>
