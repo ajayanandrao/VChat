@@ -11,7 +11,15 @@ import { CircularProgress, LinearProgress } from '@mui/material';
 import { IoIosCloseCircle, IoMdClose } from 'react-icons/io';
 import imageCompression from 'image-compressor';
 import { v4, uuidv4 } from 'uuid';
-import { FaPlay } from 'react-icons/fa';
+import v1 from "./../../Image/video/videoa.mp4";
+import v1img from "./../../Image/video/videoa.png";
+import v2 from "./../../Image/video/xmq3nirr.mp4";
+import v2img from "./../../Image/video/xmq3nirr.png";
+import v3 from "./../../Image/video/wl49glts.mp4";
+import v3img from "./../../Image/video/wl49glts.png";
+import { AiOutlineClose } from 'react-icons/ai';
+import { Windows } from 'react-bootstrap-icons';
+import { MdClose } from 'react-icons/md';
 
 const ProfileOne = ({ user }) => {
     const { currentUser } = useContext(AuthContext);
@@ -234,10 +242,7 @@ const ProfileOne = ({ user }) => {
     };
 
 
-
-
     const CoverUpload = async () => {
-
         let downloadURL = '';
 
         if (cover) {
@@ -318,13 +323,10 @@ const ProfileOne = ({ user }) => {
                     );
                 }
             }
-
         }
 
         off();
     };
-
-
 
 
     const dataRef = collection(db, "users");
@@ -345,7 +347,80 @@ const ProfileOne = ({ user }) => {
         document.getElementById("ProfileOneImg").style.display = "none";
     }
 
+    const [selectMedia, setSelectMedia] = useState(false);
+    const handleSelectMedia = () => {
+        setSelectMedia(!selectMedia);
+    };
 
+
+    const CoverUploadSelected1 = async () => {
+        await setDoc(profileDataRef, {
+            // CoverName: url.name,
+            CoverPhoto: "https://wallpapercave.com/dwp1x/wp4676609.jpg",
+            VideoCover: "",
+        }, { merge: true });
+    };
+    const CoverUploadSelected2 = async () => {
+        await setDoc(profileDataRef, {
+            // CoverName: url.name,
+            CoverPhoto: "https://images.pexels.com/photos/50594/sea-bay-waterfront-beach-50594.jpeg?auto=compress&cs=tinysrgb&w=600",
+            VideoCover: "",
+        }, { merge: true });
+    };
+    const CoverUploadSelected3 = async () => {
+        await setDoc(profileDataRef, {
+            // CoverName: url.name,
+            CoverPhoto: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600",
+            VideoCover: "",
+        }, { merge: true });
+    };
+    const CoverUploadSelected4 = async () => {
+        await setDoc(profileDataRef, {
+            // CoverName: url.name,
+            CoverPhoto: "https://wallpapercave.com/wp/wp3276802.jpg",
+            VideoCover: "",
+        }, { merge: true });
+    };
+    const CoverUploadSelected5 = async () => {
+        await setDoc(profileDataRef, {
+            // CoverName: url.name,
+            CoverPhoto: "https://wallpapercave.com/dwp1x/wp12160293.jpg",
+            VideoCover: "",
+        }, { merge: true });
+    };
+    const CoverUploadSelected6 = async () => {
+        await setDoc(profileDataRef, {
+            // CoverName: url.name,
+            CoverPhoto: "https://wallpapercave.com/dwp1x/wp8973901.jpg",
+            VideoCover: "",
+        }, { merge: true });
+    };
+
+
+    const CoverUploadSelectedV1 = async () => {
+        await setDoc(profileDataRef, {
+            // CoverName: url.name,
+            CoverPhoto: "",
+            VideoCover: "https://cdn.pixabay.com/vimeo/413229662/waterfall-37088.mp4?width=1280&hash=54c84b2ca737681a766f0f1822824f6a7afa5106",
+        }, { merge: true });
+        window.location.reload();
+    };
+    const CoverUploadSelectedV2 = async () => {
+        await setDoc(profileDataRef, {
+            // CoverName: url.name,
+            CoverPhoto: "",
+            VideoCover: "https://cdn.pixabay.com/vimeo/549547533/sand-73847.mp4?width=1280&hash=306f3b58e8d2383aa9ce400a57576a72474ecaf4",
+        }, { merge: true });
+        window.location.reload();
+    };
+    const CoverUploadSelectedV3 = async () => {
+        await setDoc(profileDataRef, {
+            // CoverName: url.name,
+            CoverPhoto: "",
+            VideoCover: "https://cdn.pixabay.com/vimeo/514501835/tunnel-65495.mp4?width=1280&hash=16eb80794988b7948fc513c19c27bd6daa2982dc",
+        }, { merge: true });
+        window.location.reload();
+    };
 
     return (
         <>
@@ -372,6 +447,60 @@ const ProfileOne = ({ user }) => {
 
                         <div className='video-progress' id='p1'></div>
 
+                        {selectMedia ?
+                            <div className="profile-cover-select-media">
+                                <div className="left"></div>
+                                <div className="profile-cover-select-media-inner">
+                                    <div className="profile-media-wrapper bg-lightDiv dark:bg-darkDiv text-lightProfileName dark:text-darkProfileName">
+                                        <div className="profile-media-wrapper-close text-lightProfileName dark:text-darkProfileName ">
+                                            <div className='profile-media-wdrapper-btn' onClick={handleSelectMedia}>
+                                                <MdClose onClick={handleSelectMedia} />
+                                            </div>
+                                        </div>
+                                        <div className="profile-media-from-device-div">
+                                            <div className='profile-media-folder' onClick={() => { handleSelectMedia(); on(); }}>📂</div>
+                                            <div className="profile-media-folder-name" onClick={() => { handleSelectMedia(); on(); }}>
+                                                Select From Device
+                                            </div>
+                                        </div>
+                                        Wallpepars
+                                        <div className="profile-media-grid-center">
+                                            <div className=' profile-media-grid'>
+                                                <img className='profile-cover-media-img' onClick={CoverUploadSelected1} src="https://wallpapercave.com/dwp1x/wp4676609.jpg" alt="" />
+
+                                                <img className='profile-cover-media-img' onClick={CoverUploadSelected2} src="https://images.pexels.com/photos/50594/sea-bay-waterfront-beach-50594.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
+
+                                                <img className='profile-cover-media-img' onClick={CoverUploadSelected3} src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" />
+
+                                                <img className='profile-cover-media-img' onClick={CoverUploadSelected4} src="https://wallpapercave.com/wp/wp3276802.jpg" alt="" />
+
+                                                <img className='profile-cover-media-img' onClick={CoverUploadSelected5} src="https://wallpapercave.com/dwp1x/wp12160293.jpg" alt="" />
+
+                                                <img className='profile-cover-media-img' onClick={CoverUploadSelected6} src="https://wallpapercave.com/dwp1x/wp8973901.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                        Video
+                                        <div className="profile-media-grid-center-video">
+                                            <div className="profile-media-grid">
+                                                <div className="profile-cover-media-video" onClick={CoverUploadSelectedV1} style={{ backgroundImage: `url(${v1img})` }}>
+                                                    <video className='profile-cover-media-video-file' src={v1} autoPlay loop muted />
+                                                </div>
+
+                                                <div className="profile-cover-media-video" onClick={CoverUploadSelectedV2} style={{ backgroundImage: `url(${v2img})` }}>
+                                                    <video className='profile-cover-media-video-file' src={v2} autoPlay loop muted />
+                                                </div>
+
+                                                <div className="profile-cover-media-video" onClick={CoverUploadSelectedV3} style={{ backgroundImage: `url(${v3img})` }}>
+                                                    <video className='profile-cover-media-video-file' src={v3} autoPlay loop muted />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            :
+                            null
+                        }
 
                         <div>
                             {coverImg.map((item) => {
@@ -385,7 +514,7 @@ const ProfileOne = ({ user }) => {
                                             >
 
 
-                                                <div className="profile-cover-camera-btn-div" onClick={on}>
+                                                <div className="profile-cover-camera-btn-div" onClick={handleSelectMedia}>
                                                     <BsFillCameraFill className='profile-cover-camera-btn' />
                                                 </div>
 
@@ -413,7 +542,7 @@ const ProfileOne = ({ user }) => {
                                                                 <label htmlFor="cover-img">
 
                                                                     {cover ? null : (
-                                                                        <img className='Cover-img' style={{cursor:"pointer"}} src={cover ? URL.createObjectURL(cover) : ("https://images.unsplash.com/photo-1549247796-5d8f09e9034b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1158&q=80")} alt="" />
+                                                                        <img className='Cover-img' style={{ cursor: "pointer" }} src={cover ? URL.createObjectURL(cover) : ("https://images.unsplash.com/photo-1549247796-5d8f09e9034b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1158&q=80")} alt="" />
                                                                     )}
 
 
@@ -447,7 +576,7 @@ const ProfileOne = ({ user }) => {
 
                                                                             {item.CoverPhoto ? (
                                                                                 <img className='Cover-img' src={cover ? URL.createObjectURL(cover) : (imageUrl ? imageUrl : item.CoverPhoto)} alt="" />
-                                                                            ) : null}
+                                                                            ) : <><div className='text-4xl'>Hello</div></>}
 
 
 
@@ -457,7 +586,7 @@ const ProfileOne = ({ user }) => {
                                                                                         <source src={item && item.VideoCover} />
                                                                                     </video>
                                                                                 </div>
-                                                                            ) : null}
+                                                                            ) : <><div className='text-4xl'>Hello</div></>}
 
 
                                                                         </>)

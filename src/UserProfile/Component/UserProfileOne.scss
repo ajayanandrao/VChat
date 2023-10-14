@@ -272,3 +272,211 @@
 		}
 	}
 }
+
+.profile-cover-select-media {
+	width: 100%;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.507);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	display: flex;
+
+	.left {
+		width: 100%;
+		max-width: 100px;
+
+		@include respond-to(xs) {
+			display: none;
+		}
+	}
+
+	.profile-cover-select-media-inner {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 1rem;
+
+
+		@include respond-to(xs) {
+			padding: 0.5rem;
+		}
+
+		.profile-media-wrapper {
+			width: 100%;
+			max-width: 800px;
+			height: 600px;
+			border-radius: 10px;
+			position: relative;
+			padding: 1rem;
+			box-sizing: border-box;
+			overflow-y: scroll;
+			backdrop-filter: blur(10px);
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+			@include respond-to(xs) {
+				height:100%;
+			}
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
+
+			.profile-media-wdrapper-btn {
+				width: 40px;
+				height: 40px;
+				// background: red;
+				border-radius: 50%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+			}
+
+			.profile-media-wrapper-close {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				font-size: 24px;
+				cursor: pointer;
+			}
+
+			.profile-media-from-device-div {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 50px;
+				// padding-top: 10px;
+				// background: red;
+				margin-bottom: 20px;
+
+				.profile-media-folder {
+					height: 50px;
+					font-size: 30px;
+					margin-right: 0.5rem;
+					cursor: pointer;
+				}
+
+				.profile-media-folder-name {
+					height: 50px;
+					display: flex;
+					align-items: center;
+					cursor: pointer;
+				}
+			}
+
+			.profile-media-grid-center {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.profile-media-grid-center-video {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.profile-media-grid {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 1.5rem;
+				margin: 1rem 0;
+
+				@include respond-to(xs) {
+					grid-template-columns: repeat(2, 1fr);
+				}
+
+				.profile-cover-media-img {
+					width: 100%;
+					max-width: 150px;
+					height: 90px;
+					object-fit: cover;
+					object-position: center;
+					border-radius: 5px;
+					transition: 0.3s ease-in-out;
+					cursor: pointer;
+					box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+					// &:hover {
+					// 	transform: scale(1.4);
+					// 	@include respond-to(lg){
+					// 		transform: scale(1);
+					// 	}
+					// 	@include respond-to(md){
+					// 		transform: scale(1);
+					// 	}
+					// 	@include respond-to(sm){
+					// 		transform: scale(1);
+					// 	}
+					// 	@include respond-to(xs){
+					// 		transform: scale(1);
+					// 	}
+					// }
+				}
+
+				.profile-cover-media-video {
+					overflow: hidden;
+					width: 100%;
+					max-width: 150px;
+					height: 90px;
+					// background:blue;
+					background-repeat: no-repeat;
+					background-size: cover;
+					border-radius: 5px;
+					object-fit: cover;
+					background-position: center;
+					transition: 0.4s ease-in-out;
+					box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+					&:hover {
+						cursor: pointer;
+						transform: scale(1.4);
+
+						@include respond-to(lg) {
+							transform: scale(1);
+						}
+
+						@include respond-to(md) {
+							transform: scale(1);
+						}
+
+						@include respond-to(sm) {
+							transform: scale(1);
+						}
+
+						@include respond-to(xs) {
+							transform: scale(1);
+						}
+
+						.profile-cover-media-video-file {
+							opacity: 100%;
+						}
+					}
+
+					.profile-cover-media-video-file {
+						display: flex;
+						overflow: hidden;
+						opacity: 0%;
+						width: 220px;
+						height: 120px;
+						object-fit: cover;
+						// background: blue;
+						border-radius: 5px;
+						transition: 0.5s ease-in-out;
+						cursor: pointer;
+					}
+
+					.profile-cover-media-video-file::-webkit-media-controls {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
