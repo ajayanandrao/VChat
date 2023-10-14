@@ -5,6 +5,7 @@ import { AuthContext } from '../../AuthContaxt';
 import "./Friends.scss";
 import { Link, useNavigate } from 'react-router-dom';
 import { HiOutlineArrowSmLeft } from 'react-icons/hi';
+import { motion } from 'framer-motion';
 
 
 
@@ -116,9 +117,11 @@ const Friends = ({ user }) => {
             </div>
 
             {friendsList.length === 0 ?
-                (<div className='no-post-div text-4xl text-center text-lightProfileName dark:text-darkProfileName'>
+                (<motion.div
+                    transition={{ delay: 5 }}
+                    className='no-post-div text-4xl text-center text-lightProfileName dark:text-darkProfileName'>
                     You have no friends
-                </div>)
+                </motion.div>)
 
                 :
                 (<>

@@ -1,3 +1,4 @@
+@import "./../Styles/Mixin_New.scss";
 .loging-container {
     width: 100%;
     height: 100vh;
@@ -12,10 +13,13 @@
         width: 100%;
         max-width: 280px;
         position: absolute;
-        top: 100px;
+        top: 90px;
         display: flex;
         flex-direction: column;
 
+        @include respond-to(xs){
+            top: 40px;
+        }
 
         .brand-wrapper {
             width: 100%;
@@ -23,7 +27,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
 
             .brand-name {
                 color: #2563eb;
@@ -32,7 +36,10 @@
                 cursor: auto;
                 font-weight: 600;
             }
+
+
         }
+
 
 
         .login-form-wrapper {
@@ -41,6 +48,51 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+
+
+            .auth-link-or-div {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                max-width: 250px;
+                margin: 0.5rem 0;
+                .auth-link-left-border {
+                    // border: 1px solid black;
+                    width: 100%;
+                    height: 10px;
+                    // background: red;
+                    display: flex;
+                    justify-content: center;
+                    align-items: end;
+
+                    .left-bordr {
+                        width: 100%;
+                        border-bottom: 2px solid #999;
+                        border-radius: 30px;
+                    }
+                }
+
+                .auth-link-or {
+                    margin: 0 1rem;
+                }
+
+
+            }
+
+            .auth-link-div {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                margin: 0.5rem 0;
+                margin-bottom: 1rem;
+                .login-with {
+                    width: 28px;
+                    height: 28px;
+                    cursor: pointer;
+                    object-fit: cover;
+                }
+            }
 
             .login-inputs {
                 width: 100%;
@@ -63,7 +115,7 @@
 
             .forgot-text {
                 color: #6E6E6E;
-                margin: 1rem 0;
+                margin: 0.5rem 0;
             }
         }
 

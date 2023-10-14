@@ -10,10 +10,12 @@ import {
 	arrayUnion,
 	collection,
 	doc,
+	getDoc,
 	onSnapshot,
 	orderBy,
 	query,
 	serverTimestamp,
+	setDoc,
 	updateDoc
 } from 'firebase/firestore';
 import { db, storage } from '../Firebase';
@@ -252,6 +254,94 @@ const Post = () => {
 		icons: 'solid'
 	});
 
+	useEffect(() => {
+		const unsubscribe = async () => {
+			try {
+				const UpdateProfile = doc(db, "UpdateProfile", currentUser.uid);
+				const profileSnapshot = await getDoc(UpdateProfile);
+
+				const PresenceRef = doc(db, "userPresece", currentUser.uid);
+				const PresenceRefSnapshot = await getDoc(PresenceRef);
+
+				const PresenceRefOnline = doc(db, "OnlyOnline", currentUser.uid);
+				const OnlineRefSnapshot = await getDoc(PresenceRefOnline);
+
+				const PresenceRefPostList = doc(db, "userPostsList", currentUser.uid);
+				const PostListRefSnapshot = await getDoc(PresenceRefPostList);
+				
+
+				if (profileSnapshot.exists() &&
+					PresenceRefSnapshot.exists() &&
+					OnlineRefSnapshot.exists() &&
+					PostListRefSnapshot.exists()) {
+					// The document already exists, you can access its data
+					const existingData = profileSnapshot.data();
+					// console.log("Document exists:", existingData);
+
+					const existingPresenceData = PresenceRefSnapshot.data();
+					// console.log("Document exists:", existingPresenceData);
+
+					const existingOnlinePresenceData = OnlineRefSnapshot.data();
+					// console.log("Document exists:", existingOnlinePresenceData);
+
+					const PostListPresenceData = PostListRefSnapshot.data();
+					// console.log("Document exists:", PostListPresenceData);
+
+
+				} else {
+
+					try {
+						await setDoc(UpdateProfile, {
+							name: currentUser.displayName,
+							userPhoto: currentUser.photoURL,
+							uid: currentUser.uid,
+							bytime: serverTimestamp(),
+						});
+
+						await setDoc(PresenceRef, {
+							status: "online",
+							uid: currentUser.uid,
+							presenceName: currentUser.displayName,
+							email: currentUser.email,
+							photoUrl: currentUser.photoURL,
+							presenceTime: new Date(),
+						});
+
+						await setDoc(PresenceRefOnline, {
+							status: 'Online',
+							uid: currentUser.uid || '',
+							presenceName: currentUser.displayName || '',
+							presenceName: currentUser.displayName || '',
+							email: currentUser.email || '',
+							photoUrl: currentUser.photoURL || '',
+							presenceTime: new Date()
+							// presenceTime: new Date()
+						});
+
+						await setDoc(PresenceRefPostList, { messages: [] });
+
+
+
+					} catch (error) {
+						console.error("Error creating the document:", error);
+					}
+				}
+
+				// await setDoc(UpdateProfile, {
+				// 	name: currentUser.displayName,
+				// 	userPhoto: currentUser.photoURL,
+				// 	uid: currentUser.uid,
+				// 	bytime: serverTimestamp(),
+				// });
+
+			} catch (error) {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+			}
+		};
+		return unsubscribe;
+	}, []);
+
 	return (
 		<div>
 			<div className="post-contianer ">
@@ -259,10 +349,11 @@ const Post = () => {
 					<div className="post-padding">
 						<div className="post-profile-div">
 							<div>
-								<Link to={'/profile'}>
+								<Link to={'/profile'} >
 									<div
 										style={{ backgroundImage: `url(${currentUser && currentUser.photoURL})` }}
 										className="post-img"
+
 									>
 										<div className="post-img-dot" />
 									</div>

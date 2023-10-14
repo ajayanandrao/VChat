@@ -3,9 +3,9 @@ import "./NewLogin.scss"
 import { Link, useNavigate } from 'react-router-dom'
 import SignUp from './SignUp'
 import { AuthContext } from '../AuthContaxt';
-import { auth, db, realdb } from '../Firebase';
-import { collection, doc, onSnapshot, orderBy, query, setDoc, updateDoc } from 'firebase/firestore';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, db, provider, providerFacebook, providerGit, providerMicrosoft, realdb, storage } from '../Firebase';
+import { addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
+import { GoogleAuthProvider, GithubAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile, FacebookAuthProvider, OAuthProvider } from 'firebase/auth';
 import { Box, TextField } from '@mui/material';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 // import logo from "./../Image/img/logo192.png";
@@ -13,6 +13,10 @@ import logoText from "./../Image/c2.png";
 import vlogo from "./../Image/img/logo192.png";
 import { CircularProgress } from '@mui/material';
 import { ref, set } from 'firebase/database';
+import google from "./../Image/img/google.png";
+import git from "./../Image/img/github.png";
+import microsoft from "./../Image/img/microsoft2.png";
+import { getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 
 const Login = () => {
     const { currentUser } = useContext(AuthContext);
@@ -160,6 +164,189 @@ const Login = () => {
         };
     }, []);
 
+    const HandleGoogleAuth = async () => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const user = result.user;
+            const colRef = collection(db, "users");
+            const userQuery = query(colRef, where("uid", "==", currentUser.uid));
+            const querySnapshot = await getDocs(userQuery);
+
+            if (querySnapshot.empty) {
+                try {
+                    await addDoc(colRef, {
+                        uid: user.uid,
+                        name: user.displayName,
+                        email: user.email,
+                        PhotoUrl: user.photoURL,
+                        accessToken: user.accessToken,
+
+                        school: "",
+                        college: "",
+                        work: "",
+                        from: "",
+                        intro: "",
+                        bytime: serverTimestamp(),
+                    });
+                    console.log("New user document added:");
+
+                } catch (error) {
+                    console.error("Error adding the user document:", error);
+                }
+            } else {
+                // A document with the same UID already exists
+                console.log("User document with the same UID already exists.");
+            }
+
+            // await addDoc(colRef, {
+            //     uid: user.uid,
+            //     name: user.displayName,
+            //     email: user.email,
+            //     PhotoUrl: user.photoURL,
+            //     accessToken: user.accessToken,
+
+            //     school: "",
+            //     college: "",
+            //     work: "",
+            //     from: "",
+            //     intro: "",
+            //     bytime: serverTimestamp(),
+            // });
+
+
+        } catch (error) {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            // If the error provides additional email information:
+            const email = error.email;
+
+            // You can also get the AuthCredential type used for the error, if available.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+
+            // Handle the error (e.g., display an error message to the user).
+            console.error('Google Authentication Error:', errorCode, errorMessage);
+
+            // You can customize the error handling based on your application's needs.
+        }
+    };
+
+
+    const HandleMicrosoftAuth = async () => {
+        try {
+            const result = await signInWithPopup(auth, providerMicrosoft);
+            const credential = OAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const user = result.user;
+            console.log(user);
+            const colRef = collection(db, "users");
+            const userQuery = query(colRef, where("uid", "==", currentUser.uid));
+            const querySnapshot = await getDocs(userQuery);
+
+            if (querySnapshot.empty) {
+                try {
+                    await addDoc(colRef, {
+                        uid: user.uid,
+                        name: user.displayName,
+                        email: user.email,
+                        PhotoUrl: user.photoURL,
+                        accessToken: user.accessToken,
+                        GitHub: "GitHub",
+                        school: "",
+                        college: "",
+                        work: "",
+                        from: "",
+                        intro: "",
+                        bytime: serverTimestamp(),
+                    });
+                    console.log("New user document added:");
+
+                } catch (error) {
+                    console.error("Error adding the user document:", error);
+                }
+            } else {
+                // A document with the same UID already exists
+                console.log("User document with the same UID already exists.");
+            }
+
+
+        } catch (error) {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            // If the error provides additional email information:
+            const email = error.email;
+
+            // You can also get the AuthCredential type used for the error, if available.
+            const credential = OAuthProvider.credentialFromError(error);
+
+            // Handle the error (e.g., display an error message to the user).
+            console.error('Google Authentication Error:', errorCode, errorMessage);
+
+            // You can customize the error handling based on your application's needs.
+        }
+    };
+
+
+    const HandleGitHubAuth = async () => {
+        try {
+            const result = await signInWithPopup(auth, providerGit);
+            const credential = GithubAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const user = result.user;
+            console.log(user);
+            const colRef = collection(db, "users");
+            const userQuery = query(colRef, where("uid", "==", currentUser.uid));
+            const querySnapshot = await getDocs(userQuery);
+
+            if (querySnapshot.empty) {
+                try {
+                    await addDoc(colRef, {
+                        uid: user.uid,
+                        name: user.displayName,
+                        email: user.email,
+                        PhotoUrl: user.photoURL,
+                        accessToken: user.accessToken,
+                        GitHub: "GitHub",
+                        school: "",
+                        college: "",
+                        work: "",
+                        from: "",
+                        intro: "",
+                        bytime: serverTimestamp(),
+                    });
+                    console.log("New user document added:");
+
+                } catch (error) {
+                    console.error("Error adding the user document:", error);
+                }
+            } else {
+                // A document with the same UID already exists
+                console.log("User document with the same UID already exists.");
+            }
+
+
+        } catch (error) {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+
+            // If the error provides additional email information:
+            const email = error.email;
+
+            // You can also get the AuthCredential type used for the error, if available.
+            const credential = GithubAuthProvider.credentialFromError(error);
+
+            // Handle the error (e.g., display an error message to the user).
+            console.error('Google Authentication Error:', errorCode, errorMessage);
+
+            // You can customize the error handling based on your application's needs.
+        }
+    };
 
 
 
@@ -209,8 +396,20 @@ const Login = () => {
                                     "Log in"
                                 }
                             </button>
-
                             <Link to="/forgotPassword/" className='forgot-text'>Forgotten password?</Link>
+
+                            <div className="auth-link-or-div">
+                                <div className="auth-link-left-border"><div className="left-bordr"></div></div>
+                                <div className="auth-link-or">or</div>
+                                <div className="auth-link-left-border"><div className="left-bordr"></div></div>
+                            </div>
+
+                            <div className='auth-link-div'> 
+                                <img src={google} className='login-with' alt="" onClick={HandleGoogleAuth} />
+                                <img src={microsoft} className='login-with' style={{width:"30px", height:"30px"}} alt="" onClick={HandleMicrosoftAuth} />
+                                <img src={git} className='login-with' alt="" onClick={HandleGitHubAuth} />
+                            </div>
+
 
                             <Link to="/signUp/" className='link'>
                                 <button className="btn btn-link w-100" style={{ borderRadius: "30px" }}>Create New Account</button>

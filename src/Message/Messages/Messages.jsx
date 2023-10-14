@@ -600,6 +600,32 @@ const Messages = () => {
         }, 2000); // Adjust the timeout duration as needed
     };
 
+    // const handleKeyEnter = (event) => {
+    //     if (event.key === "Enter") {
+    //         sendMessage();
+    //     }
+    // };
+
+    const handleKeyEnter = (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent the default behavior of the Enter key (e.g., new line)
+            if (selectedMessageId) {
+                sendReply(selectedMessageId);
+                setSelectedMessageId("");
+                setViewMessageImg(null);
+                setViewMessageInput("");
+
+                setViewMessageImg(null);
+                setMessagePhoto(null);
+                setShowReplyVideoUrl(null);
+
+            } else {
+                // hideX();
+                sendMessage(user.uid, user.name, user.userPhoto);
+            }
+        }
+    };
+
 
     const deleteMessage = async (messageId) => {
         console.log(messageId);
@@ -1655,7 +1681,7 @@ const Messages = () => {
 
 
 
-                                                                {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
+                                                                {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#6453ac]  dark:bg-[#6453ac] dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkReciver"} `}
                                                                     onClick={() => showReplyButton(message.id)}
                                                                     onMouseLeave={hideReplyButton}
                                                                 >
@@ -2068,6 +2094,7 @@ const Messages = () => {
                             placeholder="Message"
                             accept=".txt, .pdf, .zip, .rar, image/*"
                             onKeyUp={handleTyping}
+                            onKeyDown={handleKeyEnter}
                             id="messageInput" // Add an ID to your input field
                             onClick={handleMessageEmojiF}
                         />

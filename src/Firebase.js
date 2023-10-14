@@ -2,6 +2,11 @@
 import { initializeApp } from "firebase/app";
 
 import { getAuth } from "firebase/auth"
+import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider } from "firebase/auth";
+import { FacebookAuthProvider } from "firebase/auth";
+import { OAuthProvider } from "firebase/auth";
+
 import { getFirestore } from "firebase/firestore"
 import { getStorage } from "firebase/storage";
 import { getDatabase, onValue, ref, set } from "firebase/database";
@@ -36,11 +41,17 @@ const app = initializeApp(firebaseConfig);
 
 
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+const providerGit = new GithubAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
+const providerMicrosoft = new OAuthProvider('microsoft.com');
+
+
 const storage = getStorage(app);
 const firestore = getFirestore(app);
 const db = getFirestore(app);
 const realdb = getDatabase(app);
 
-export { auth, db, storage, firestore, realdb };
+export { auth, provider, providerGit, providerFacebook, providerMicrosoft, db, storage, firestore, realdb };
 
 

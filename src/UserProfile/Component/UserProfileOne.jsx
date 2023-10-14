@@ -352,8 +352,6 @@ const ProfileOne = ({ user }) => {
 
             <div>
 
-
-
                 {loadingCoverData ? (
 
                     <div className='placeholder-glow loading-profile-cover-photo-div'>
@@ -415,7 +413,7 @@ const ProfileOne = ({ user }) => {
                                                                 <label htmlFor="cover-img">
 
                                                                     {cover ? null : (
-                                                                        <img className='Cover-img' src={cover ? URL.createObjectURL(cover) : ("https://images.unsplash.com/photo-1549247796-5d8f09e9034b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1158&q=80")} alt="" />
+                                                                        <img className='Cover-img' style={{cursor:"pointer"}} src={cover ? URL.createObjectURL(cover) : ("https://images.unsplash.com/photo-1549247796-5d8f09e9034b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1158&q=80")} alt="" />
                                                                     )}
 
 
@@ -427,8 +425,6 @@ const ProfileOne = ({ user }) => {
 
                                                                                 (
                                                                                     <>
-
-
 
                                                                                         <div className="cover-object-video-div">
                                                                                             <video ref={videoRef} className="cover-video-objet ">
