@@ -16,6 +16,22 @@
 		box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 		border-radius: 10px;
 		transition: 0.8s ease-in-out;
+		position: relative;
+
+		.feed-share-overlay-div{
+			width: 100%;
+			max-width: 120px;
+			height: 40px;
+			position: absolute;
+			bottom: 15px;
+			right: 50px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 5px;
+			box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+			transition: 0.8s ease-in-out;
+		}
 
 		.feed-post-text {
 			// color: black;

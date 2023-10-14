@@ -3,7 +3,7 @@ import "./Feed.scss"
 import { BsFillChatDotsFill, BsFillHeartFill, BsThreeDotsVertical } from "react-icons/bs"
 import { FaPlay, FaShare } from "react-icons/fa"
 import ReactTimeago from 'react-timeago';
-import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
+import { Timestamp, addDoc, arrayUnion, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
 import { db, storage } from '../Firebase';
 import { AuthContext } from '../AuthContaxt';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BiSend, BiSolidSend } from 'react-icons/bi';
 import sms from "./../Image/img/sms.png";
-
+import { v4, uuidv4 } from 'uuid';
 const Feed = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
 
@@ -502,6 +502,7 @@ const Feed = ({ post }) => {
     // Option
 
     function OptionBtn(id) {
+        handleShareOverlayOff();
         const x = document.getElementById(`myDropdown-${id}`);
         const profile = document.getElementById(`profileView-${id}`);
         const del = document.getElementById(`del-${id}`);
@@ -529,6 +530,12 @@ const Feed = ({ post }) => {
         dropdowns.forEach(dropdown => {
             dropdown.style.display = 'none';
         });
+
+        const share = document.querySelectorAll('.feed-share-overlay-div');
+        share.forEach(dropdown => {
+            dropdown.style.display = 'none';
+        });
+
     }
 
 
@@ -586,8 +593,143 @@ const Feed = ({ post }) => {
     const [overlayFile, setOverlayFile] = useState(null);
 
 
+    const [handleShowOverlay, setHandleShowOverlay] = useState(false);
+    const [showOverlay, setShowOverlay] = useState(false);
+    const [showOverlayId, setShowOverlayId] = useState("");
+
+    const handleShareOverlay = (id) => {
+        setHandleShowOverlay(!handleShowOverlay)
+        const dropdowns = document.querySelectorAll('.feed-option-mainu-div');
+        dropdowns.forEach(dropdown => {
+            dropdown.style.display = 'none';
+        });
+        const share = document.getElementById(`feed-share-overlay-div${id}`);
+        share.forEach(dropdown => {
+            dropdown.style.display = 'flex';
+        });
+    };
+    const handleShareOverlayOff = () => {
+        setHandleShowOverlay(false);
+    };
+    const ShareOverlay = (id) => {
+        setShowOverlayId(id);
+        setShowOverlay(!showOverlay)
+        // console.log(showOverlayId.postText)
+    };
+
+    const ShareOverlayOff = () => {
+        setShowOverlay(null);
+        setShowOverlayId("");
+    };
+
+    const Share = async (post) => {
+        const allPostsColRef = collection(db, 'AllPosts');
+        const userPostsListRef = doc(db, 'userPostsList', currentUser.uid);
+
+        await addDoc(allPostsColRef, {
+            name: post.img ? post.name : '',
+            img: post.img ? post.img : '', // Only use the downloadURL if a img was uploaded
+            uid: currentUser.uid,
+            photoURL: currentUser.photoURL,
+            displayName: currentUser.displayName,
+            postText: post.postText,
+            bytime: serverTimestamp() // Use the server timestamp here
+        });
+
+
+        await updateDoc(userPostsListRef, {
+            messages: arrayUnion({
+                id: v4(),
+                uid: currentUser.uid,
+                photoURL: currentUser.photoURL,
+                displayName: currentUser.displayName,
+                postText: post.postText,
+                img: post.img,
+                bytime: Timestamp.now()
+            })
+        });
+
+        ShareOverlayOff();
+    };
+
+
     return (
         <>
+
+            {showOverlay ?
+                <div className='feed-overlay-container '>
+
+                    <div className="feed-overlay-div bg-lightDiv dark:bg-darkDiv">
+                        <div className="feed-overlay-close-btn-div">
+                            <div className="feed-overlay-text-div">
+                                <div className='overlay-edit-postText text-lightProfileName dark:text-darkProfileName'>
+                                    {showOverlayId.postText}
+                                </div>
+                            </div>
+                            <IoMdClose className='feed-overlay-close-btn text-[black] dark:text-lightDiv' onClick={ShareOverlayOff} />
+                        </div>
+
+
+                        <div className="select-overlay-file-input" style={{ justifyContent: "end", paddingRight: "50px" }} >
+                            <div className='overlay-post-btn' style={{ cursor: "pointer" }} onClick={(e) => Share(showOverlayId)}>Share</div>
+                        </div>
+
+
+                        <div className='overlayMedia-div'>
+                            {overlayLoading && overlayLoading < 98 ?
+                                <div className="overlayLoading" id='overlayLoading'>
+                                    <div className="overlayLoading-Count">
+                                        {Math.floor(overlayLoading)}%
+                                    </div>
+                                </div>
+                                :
+                                null
+                            }
+
+                            {overlayFile ?
+                                (<>
+
+                                    {overlayFile &&
+                                        overlayFile.type.startsWith('image/') && (
+                                            <img className="Feed-Post-img" src={URL.createObjectURL(overlayFile)} alt="" />
+                                        )}
+
+                                    {overlayFile &&
+                                        overlayFile.type.startsWith('video/') && (
+                                            <video ref={videoRef} onClick={OverlayHandleVideoBtnClick} className="post-video ">
+                                                <source src={URL.createObjectURL(overlayFile)} type={overlayFile.type} />
+                                            </video>
+                                        )}
+
+                                </>)
+                                :
+                                (<>
+
+                                    {post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
+                                        <img width={"300px"} src={post.img} alt="Uploaded" className="Feed-Post-img" />
+                                    ) : post.img ? (
+                                        <>
+                                            <video
+                                                ref={videoRef}
+                                                className="post-video"
+                                                preload="auto"
+                                            >
+                                                <source src={post.img} type="video/mp4" />
+                                            </video>
+                                        </>
+
+                                    ) : null}
+
+                                </>)
+                            }
+                        </div>
+
+                    </div>
+
+                </div >
+                :
+                null
+            }
 
             <div id={`FeedOverlay-${post.id}`}
                 className='feed-overlay-container ' style={{ display: "none" }} >
@@ -618,7 +760,7 @@ const Feed = ({ post }) => {
                                 setOverlayFile(e.target.files[0]);
                             }}
                         />
-                        <div className='overlay-post-btn' onClick={(e) => done(post.id)}>Post</div>
+                        <div className='overlay-post-btn' style={{ cursor: "pointer" }} onClick={(e) => done(post.id)}>Post</div>
                     </div>
 
 
@@ -680,7 +822,7 @@ const Feed = ({ post }) => {
                 <div className="feed-div bg-lightDiv dark:bg-darkDiv">
 
                     <div className="feed-profile-div">
-                        <Link to={`${currentUser.uid === post.uid ? `/profile/` : `/users/${post.uid}` }`} className='link d-flex align-items-center'>
+                        <Link to={`${currentUser.uid === post.uid ? `/profile/` : `/users/${post.uid}`}`} className='link d-flex align-items-center'>
                             <img src={post.photoURL} className='feed-img' alt="" />
 
                             <div className="feed-profile-name text-lightProfileName dark:text-darkProfileName">
@@ -695,7 +837,7 @@ const Feed = ({ post }) => {
 
                         <div className='feed-option-div'>
                             <div className="feed-option-btn bg-light_0 dark:bg-darkInput">
-                                <BsThreeDotsVertical className='feed-icon text-lightOptionText dark:text-darkPostTime' onClick={() => OptionBtn(post.id)} />
+                                <BsThreeDotsVertical className='feed-icon text-lightOptionText dark:text-darkPostTime' onClick={() => { OptionBtn(post.id); handleShareOverlayOff(); }} />
                             </div>
                             <div className="feed-option-mainu-div dark:text-darkPostText text-lightPostText bg-light_0 dark:bg-darkInput" id={`myDropdown-${post.id}`} style={{ display: "none" }}>
 
@@ -764,10 +906,10 @@ const Feed = ({ post }) => {
 
                             {liked ? (
                                 <>
-                                    <div className="feed-bottom-like-div" onClick={handleCloseRightComment}>
+                                    <div className="feed-bottom-like-div" onClick={() => { handleCloseRightComment(); handleShareOverlayOff(); }}>
                                         <BsFillHeartFill onClick={() => Heart(post.id, post.uid)} className='feed-bottom-like-heart' color='#FF0040' />
 
-                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText " onClick={() => showLike(post.id)}>
+                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText " onClick={() => { showLike(post.id) }}>
                                             {like.length > 9 ? '9+' : like.length}
 
                                         </div>
@@ -775,8 +917,8 @@ const Feed = ({ post }) => {
                                 </>
                             ) : (
                                 <>
-                                    <div className="feed-bottom-like-div" onDoubleClick={handleCloseRightComment}>
-                                        <AiOutlineHeart onClick={() => { Heart(post.id, post.uid); handleCloseRightComment(); }}
+                                    <div className="feed-bottom-like-div" onDoubleClick={() => { handleCloseRightComment(); handleShareOverlayOff(); }}>
+                                        <AiOutlineHeart onClick={() => { Heart(post.id, post.uid); handleCloseRightComment(); handleShareOverlayOff(); }}
                                             style={{ fontSize: "28px" }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
                                         {like.length > 0 ?
                                             <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon dark:text-darkPostText"
@@ -813,13 +955,13 @@ const Feed = ({ post }) => {
 
                             <div className="feed-bottom-like-div">
                                 {rightComment ?
-                                    <img src={sms} style={{ width: "26px" }} onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart' alt="" />
+                                    <img src={sms} style={{ width: "26px" }} onClick={() => { handleRightComment(post.id); handleShareOverlayOff(); }} className='feed-bottom-like-heart' alt="" />
                                     :
-                                    <BsFillChatDotsFill onClick={() => handleRightComment(post.id)} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
+                                    <BsFillChatDotsFill onClick={() => { handleRightComment(post.id); handleShareOverlayOff(); }} className='feed-bottom-like-heart text-lightPostIconBottom dark:text-darkPostIcon' />
                                 }
                                 {commentCount ?
                                     <Link to={`/notification/${post.id}`}>
-                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText" onClick={handleCloseRightComment}>
+                                        <div className="feed-bottom-like-count bg-lightPostIconBottom text-lightPostText dark:bg-darkPostIcon  dark:text-darkPostText" onClick={() => { handleCloseRightComment(); handleShareOverlayOff(); }}>
                                             <div>{commentCount > 99 ? '99+' : commentCount}</div>
                                         </div>
                                     </Link>
@@ -830,8 +972,18 @@ const Feed = ({ post }) => {
                         </div>
 
                         {/* Share */}
+
+                        {handleShowOverlay ?
+                            <div id={`feed-share-overlay-div${post.id}`} className="feed-share-overlay-div text-lightProfileName dark:text-darkProfileName bg-light_0 dark:bg-darkInput">
+                                <span style={{ cursor: "pointer" }} onClick={() => ShareOverlay(post)}>Share to Feed</span>
+                            </div>
+                            :
+                            null
+                        }
+
                         <div className="feed-bottom-mainu">
-                            <FaShare className='feed-bottom-icon text-lightPostIconBottom dark:text-darkPostIcon' />
+                            <FaShare className='feed-bottom-icon text-lightPostIconBottom dark:text-darkPostIcon'
+                                onClick={() => handleShareOverlay(post.id)} />
                         </div>
 
                     </div>
