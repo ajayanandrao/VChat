@@ -575,18 +575,18 @@ const ProfileOne = ({ user }) => {
                                                                         (<>
 
                                                                             {item.CoverPhoto ? (
-                                                                                <img className='Cover-img' src={cover ? URL.createObjectURL(cover) : (imageUrl ? imageUrl : item.CoverPhoto)} alt="" />
-                                                                            ) : <><div className='text-4xl'>Hello</div></>}
+                                                                                <img className='Cover-img-Two' src={cover ? URL.createObjectURL(cover) : (imageUrl ? imageUrl : item.CoverPhoto)} alt="" />
+                                                                            ) : null}
 
 
 
                                                                             {item.VideoCover ? (
-                                                                                <div className="cover-object-video-div">
+                                                                                <div className="cover-object-video-div-Two">
                                                                                     <video ref={videoRef} className="cover-video-objet ">
                                                                                         <source src={item && item.VideoCover} />
                                                                                     </video>
                                                                                 </div>
-                                                                            ) : <><div className='text-4xl'>Hello</div></>}
+                                                                            ) : null}
 
 
                                                                         </>)

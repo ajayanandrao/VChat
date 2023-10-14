@@ -226,6 +226,26 @@
 
 
 
+			.cover-object-video-div-Two {
+				width: 100%;
+				height: 100%;
+				max-height: 250px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				position: absolute;
+				top: 45px;
+
+
+				.cover-video-objet {
+					width: 100%;
+					height: 100%;
+					max-height: 250px;
+					object-fit: cover;
+					object-position: center;
+				}
+			}
+
 			.cover-object-video-div {
 				width: 100%;
 				height: 100%;
@@ -261,6 +281,15 @@
 				height: 250px;
 				object-fit: cover;
 				object-position: center;
+			}
+
+			.Cover-img-Two {
+				width: 100%;
+				height: 250px;
+				object-fit: cover;
+				object-position: center;
+				position: absolute;
+				top: 45px;
 			}
 
 			.upload-btn-div {
@@ -318,7 +347,7 @@
 			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
 			@include respond-to(xs) {
-				height:100%;
+				height: 100%;
 			}
 
 			&::-webkit-scrollbar {
