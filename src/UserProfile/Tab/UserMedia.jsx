@@ -115,17 +115,17 @@ const UserMedia = () => {
                     <div className="video-overlay-close">
                         <div className="video-overlay-time-div">
                             <div className="photo-time me-3">{formatTimestamp(time)}</div>
-                            <MdDelete style={{ fontSize: "26px", cursor:"pointer" }} onClick={deleteVideo} />
+                            <MdDelete style={{ fontSize: "26px", cursor: "pointer" }} onClick={deleteVideo} />
                         </div>
                         <div className="video-overlay-close-div">
                             <div onClick={handleVideoShow}>
-                                <AiOutlineClose style={{ fontSize: "20px",cursor:"pointer" }} />
+                                <AiOutlineClose style={{ fontSize: "20px", cursor: "pointer" }} />
                             </div>
                         </div>
                     </div>
                     <div className='video-div' onClick={handleVideoBtnClick}>
 
-                        <video className='UserVideo' style={{cursor:"pointer" }} onClick={handleVideoBtnClick} controls preload='auto' ref={(el) => (videoRef.current[videoId] = el)}  >
+                        <video className='UserVideo' style={{ cursor: "pointer" }} onClick={handleVideoBtnClick} controls preload='auto' ref={(el) => (videoRef.current[videoId] = el)}  >
                             <source src={videoUrl} type="video/mp4" />
                         </video>
 
@@ -212,34 +212,36 @@ const UserMedia = () => {
                                 <div className="grid-container" >
                                     {imageMedia.map((post) => {
                                         if (currentUser.uid === post.uid)
-                                            return (
-                                                (
-                                                    <>
-                                                        {
-                                                            post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
-                                                                <img src={post.img} alt="Uploaded" className="media-img" onClick={() => handleImageShow(post.id, post.img, post.bytime)} />
-                                                            ) : post.img ? (
-                                                                <>
+                                            console.log(post)
+                                        return (
 
-                                                                    <div className="mediaVideo-background" onClick={() => handleVideoShow(post.id, post.img, post.bytime)}>
-                                                                        
-                                                                        <video className="media-video"  >
-                                                                            <source src={post.img} type="video/mp4" />
-                                                                        </video>
-                                                                        <div className="mediaVideo-btn-div">
-                                                                            <div className="mediaVideo-btn">
-                                                                                <FaPlay className='mediaVideo-icon' />
-                                                                            </div>
-                                                                        </div>
+                                            <>
+
+                                                {
+                                                    post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
+                                                        <img src={post.img} alt="Uploaded" className="media-img" onClick={() => handleImageShow(post.id, post.img, post.bytime)} />
+                                                    ) : post.img ? (
+                                                        <>
+
+                                                            <div className="mediaVideo-background" onClick={() => handleVideoShow(post.id, post.img, post.bytime)}>
+
+                                                                <video className="media-video"  >
+                                                                    <source src={post.img} type="video/mp4" />
+                                                                </video>
+                                                                <div className="mediaVideo-btn-div">
+                                                                    <div className="mediaVideo-btn">
+                                                                        <FaPlay className='mediaVideo-icon' />
                                                                     </div>
+                                                                </div>
+                                                            </div>
 
-                                                                </>
+                                                        </>
 
-                                                            ) : null
-                                                        }
-                                                    </>
-                                                )
-                                            );
+                                                    ) : null
+                                                }
+                                            </>
+                                        );
+
                                     })}
                                 </div>
                             </div>

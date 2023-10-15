@@ -259,7 +259,7 @@ const SignUp = () => {
 
                         <div id="errorPass" style={{ color: "red" }}></div>
 
-                        <button className="btn btn-primary w-100  my-3"
+                        <button className="btn btn-primary w-100  my-3 btn-shadow"
                             style={{ borderRadius: "30px", fontSize: "18px", padding: "4px 10px" }} onClick={submit} >Sign Up</button>
 
 

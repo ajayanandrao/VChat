@@ -389,7 +389,7 @@ const Login = () => {
 
                             <div className="" id="error-alert" ></div>
 
-                            <button className=" btn btn-primary w-100 my-3" style={{ borderRadius: "30px", fontSize: "18px", padding: "4px 10px" }} onClick={login} >
+                            <button className=" btn btn-primary w-100 my-3 btn-shadow" style={{ borderRadius: "30px", fontSize: "18px", padding: "4px 10px" }} onClick={login} >
                                 {loginloading ?
                                     <CircularProgress style={{ color: "white", width: "16px", height: "16px" }} />
                                     :
@@ -404,20 +404,28 @@ const Login = () => {
                                 <div className="auth-link-left-border"><div className="left-bordr"></div></div>
                             </div>
 
-                            <div className='auth-link-div'> 
-                                <img src={google} className='login-with' alt="" onClick={HandleGoogleAuth} />
-                                <img src={microsoft} className='login-with' style={{width:"30px", height:"30px"}} alt="" onClick={HandleMicrosoftAuth} />
-                                <img src={git} className='login-with' alt="" onClick={HandleGitHubAuth} />
+                            <div className='auth-link-div'>
+                                <div className='auth-link-btn btn'>
+                                    <img src={google} className='login-with' alt="" onClick={HandleGoogleAuth} />
+                                </div>
+
+                                <div className='auth-link-btn btn'>
+                                    <img src={microsoft} className='login-with' style={{ width: "30px", height: "30px" }} alt="" onClick={HandleMicrosoftAuth} />
+                                </div>
+
+                                <div className='auth-link-btn btn'>
+                                    <img src={git} className='login-with' alt="" onClick={HandleGitHubAuth} />
+                                </div>
                             </div>
 
 
                             <Link to="/signUp/" className='link'>
-                                <button className="btn btn-link w-100" style={{ borderRadius: "30px" }}>Create New Account</button>
+                                <button className="btn btn-link w-100 " style={{ borderRadius: "30px" }}>Create New Account</button>
                             </Link>
 
                         </div>
                     </div>
-                </div>
+                </div >
 
             )}
 
