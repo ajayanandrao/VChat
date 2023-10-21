@@ -405,15 +405,15 @@ const Login = () => {
                             </div>
 
                             <div className='auth-link-div'>
-                                <div className='auth-link-btn btn'>
+                                <div className=' '>
                                     <img src={google} className='login-with' alt="" onClick={HandleGoogleAuth} />
                                 </div>
 
-                                <div className='auth-link-btn btn'>
+                                <div className=' '>
                                     <img src={microsoft} className='login-with' style={{ width: "30px", height: "30px" }} alt="" onClick={HandleMicrosoftAuth} />
                                 </div>
 
-                                <div className='auth-link-btn btn'>
+                                <div className=' '>
                                     <img src={git} className='login-with' alt="" onClick={HandleGitHubAuth} />
                                 </div>
                             </div>

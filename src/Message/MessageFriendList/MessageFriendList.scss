@@ -1,0 +1,103 @@
+@import "./../../Styles/Mixin_New.scss";
+
+.message-center-friend-list-div {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    // background: #1877f2;
+    display: flex;
+    justify-content: center;
+    
+    padding: 1rem;
+    // box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 0px, rgba(0, 0, 0, 0.24) 1px 0px 0px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+
+    @include respond-to(md) {
+        max-width: 300px;
+        align-items: end;
+    }
+
+    @include respond-to(sm) {
+        max-width: 200px;
+        align-items: end;
+    }
+
+    @include respond-to(xs) {
+        width: 60px;
+        margin: 0;
+        // background: rebeccapurple;
+        justify-content: center;
+        padding: 5px;
+        margin-right: 1rem;
+        
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .message-friend-list-div {
+        width: 100%;
+        max-width: 350px;
+        // background: red;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        transition: 0.3s ease-in-out;
+
+        @include respond-to(xs) {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            padding: 0;
+        }
+
+        &:hover {
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+            transform: translateY(-7px);
+        }
+
+        .message-friendList-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            object-position: center;
+            margin-right: 1rem;
+            border-radius: 50%;
+
+            @include respond-to(xs) {
+                margin-right: 0;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .message-friend-list-name {
+            text-transform: capitalize;
+
+            @include respond-to(sm) {
+                display: none;
+            }
+
+            @include respond-to(xs) {
+                display: none;
+            }
+        }
+
+        .message-friend-list-time {
+            flex: 1;
+            font-size: 13px;
+            text-align: end;
+            display: flex;
+            width: 100%;
+            justify-content: end;
+            @include respond-to(xs) {
+                display: none;
+            }
+        }
+    }
+}

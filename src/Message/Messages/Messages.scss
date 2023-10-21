@@ -66,6 +66,7 @@
         // background: red;
         box-sizing: border-box;
         overflow-y: scroll;
+        display: flex;
 
         &::-webkit-scrollbar {
             display: none;
@@ -194,24 +195,27 @@
 
 // Center Div Styles @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+
+
+
 .message-center-container {
     display: flex;
     flex-direction: column-reverse;
     /* Reverse the order of messages */
     align-items: flex-end;
     width: 100%;
-    max-width: 700px;
+    // max-width: 900px;
     padding-left: 1rem;
     padding-right: 1rem;
-    margin: 0 auto;
+    // margin: 0 auto;
     height: 100%;
     box-sizing: border-box;
     overflow-y: scroll;
-    // background: blue;
+    // background: darkgray;
     padding-top: 1rem;
     padding-bottom: 2.3rem;
 
-    @include respond-to(xs){
+    @include respond-to(xs) {
         padding-left: 0;
         padding-right: 0;
     }
