@@ -46,6 +46,7 @@ import HomePage from './Home/HomePage';
 import Left from './Home/Left/Left';
 import Rtime from './Rtime/Rtime';
 import Feedback from './Setting/Feedback/Feedback';
+import RealWork from './Reals/RealWork';
 
 function App() {
 
@@ -175,7 +176,7 @@ function App() {
         }
         <Routes>
 
-          
+
           <Route exact path="/" element={<Login />} />
           <Route exact path="*" element={<Login />} />
           <Route path="signUp" element={<SignUp />} />
@@ -224,7 +225,8 @@ function App() {
 
               <Route path='profile' element={<CurrentUserProfileMain />} />
 
-              <Route path='/reels/' element={<ReelsProps />} /> /
+              <Route path='/reels/' element={<ReelsProps />} /> 
+              {/* <Route path='/reels/' element={<RealWork />} /> */}
               <Route path='notification' element={<NotificationProps />} />
               <Route path='notification/:id' element={<NotificationPara />} /></>)
             :

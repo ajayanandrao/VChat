@@ -7,7 +7,7 @@
     // background: #1877f2;
     display: flex;
     justify-content: center;
-    
+
     padding: 1rem;
     // box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 0px, rgba(0, 0, 0, 0.24) 1px 0px 0px;
     box-sizing: border-box;
@@ -30,7 +30,7 @@
         justify-content: center;
         padding: 5px;
         margin-right: 1rem;
-        
+        display: none;
     }
 
     &::-webkit-scrollbar {
@@ -95,6 +95,7 @@
             display: flex;
             width: 100%;
             justify-content: end;
+
             @include respond-to(xs) {
                 display: none;
             }
