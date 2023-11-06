@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/VChat/static/css/main.6ff56fe7.css",
-    "main.js": "/VChat/static/js/main.43f22a76.js",
+    "main.css": "/VChat/static/css/main.cd95ef16.css",
+    "main.js": "/VChat/static/js/main.93254601.js",
     "static/js/787.8d308a81.chunk.js": "/VChat/static/js/787.8d308a81.chunk.js",
     "static/media/mobile4.png": "/VChat/static/media/mobile4.80d1c3aba934d273d041.png",
     "static/media/videoa.mp4": "/VChat/static/media/videoa.f35de8f81779b5f1cde5.mp4",
@@ -21,20 +21,17 @@
     "static/media/loc.png": "/VChat/static/media/loc.a6a61b79a02946204757.png",
     "static/media/call.png": "/VChat/static/media/call.543fbddaab0784413822.png",
     "static/media/brif2.png": "/VChat/static/media/brif2.6ade31f5cf6b8517eac8.png",
-    "static/media/v3.png": "/VChat/static/media/v3.0efdc4adae986bf53235.png",
     "static/media/c2.png": "/VChat/static/media/c2.abe65ce8dd578e8203c5.png",
     "static/media/logo192.png": "/VChat/static/media/logo192.052f2e1cfd165966b477.png",
     "static/media/two.png": "/VChat/static/media/two.89c45307c099369334f8.png",
     "static/media/iphone.mp3": "/VChat/static/media/iphone.640a5c6349a6f83ee38b.mp3",
-    "static/media/h3.png": "/VChat/static/media/h3.fe043c66763d8d3deee7.png",
-    "static/media/home2.png": "/VChat/static/media/home2.a43422e21b389e11fa6f.png",
     "index.html": "/VChat/index.html",
-    "main.6ff56fe7.css.map": "/VChat/static/css/main.6ff56fe7.css.map",
-    "main.43f22a76.js.map": "/VChat/static/js/main.43f22a76.js.map",
+    "main.cd95ef16.css.map": "/VChat/static/css/main.cd95ef16.css.map",
+    "main.93254601.js.map": "/VChat/static/js/main.93254601.js.map",
     "787.8d308a81.chunk.js.map": "/VChat/static/js/787.8d308a81.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6ff56fe7.css",
-    "static/js/main.43f22a76.js"
+    "static/css/main.cd95ef16.css",
+    "static/js/main.93254601.js"
   ]
 }
