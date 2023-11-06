@@ -1,14 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./Wedding.scss";
-import aj from "./../Image/img/200.png"
-import file from "./../Image/img/photo.png";
 import { db, storage } from './../Firebase';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { HiOutlineArrowSmLeft } from 'react-icons/hi';
-import { useNavigate } from 'react-router-dom';
 import LeftArro from '../LeftArro';
 
 
@@ -115,7 +111,6 @@ const Wedding = () => {
 
 
     const [photo, setPhoto] = useState(null);
-    const [photoOne, setPhotoOne] = useState(null);
     const [photoTwo, setPhotoTwo] = useState(null);
 
 

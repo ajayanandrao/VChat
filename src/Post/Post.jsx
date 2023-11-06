@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import './Post.scss';
 import photo from './../Image/img/photo.png';
 import smile from './../Image/img/two.png';
-import video from './../Image/img/video5.png';
 import { AuthContext } from '../AuthContaxt';
 import {
 	Timestamp,
@@ -20,8 +19,7 @@ import {
 } from 'firebase/firestore';
 import { db, storage } from '../Firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { v4, uuidv4 } from 'uuid';
-import imageCompression from 'image-compressor';
+import { v4 } from 'uuid';
 
 import Picker from '@emoji-mart/react';
 import data from '@emoji-mart/data';
@@ -268,7 +266,7 @@ const Post = () => {
 
 				const PresenceRefPostList = doc(db, "userPostsList", currentUser.uid);
 				const PostListRefSnapshot = await getDoc(PresenceRefPostList);
-				
+
 
 				if (profileSnapshot.exists() &&
 					PresenceRefSnapshot.exists() &&

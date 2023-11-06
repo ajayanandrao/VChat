@@ -1,18 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import "./Message.scss";
-// import "./../Styles/flickity.scss";
 import { Link, useNavigate } from 'react-router-dom';
-// import Flickity from 'react-flickity-component';
-import natur from "./nature.json";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc, where } from 'firebase/firestore';
-import { db, realdb } from '../Firebase';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { db } from '../Firebase';
 import { styled, keyframes } from '@mui/system';
 import Badge from '@mui/material/Badge';
 import { AuthContext } from './../AuthContaxt';
 import { Avatar } from '@mui/material';
-import { CircularProgress, LinearProgress } from '@mui/material';
-import { off, onValue, ref } from 'firebase/database';
 
 
 const Message = () => {

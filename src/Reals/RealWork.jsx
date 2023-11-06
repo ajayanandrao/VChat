@@ -3,9 +3,14 @@ import { AuthContext } from '../AuthContaxt';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../Firebase';
 import "./RealWork.scss";
+import { useNavigate } from 'react-router-dom';
 
 const RealWork = () => {
     const [api, setApiData] = useState([]);
+    const nav = useNavigate();
+    const goBack = () => {
+        nav(-1);
+    }
     const { currentUser } = useContext(AuthContext);
     const videoRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -29,42 +34,30 @@ const RealWork = () => {
         };
     }, []);
 
-    const videoContainerRef = useRef(null);
-    const videoHeight = 200; // Height of each video (adjust to your video's actual height)
-
-    const handleScroll = () => {
-        const container = videoContainerRef.current;
-        const scrollTop = container.scrollTop;
-        const videoIndex = Math.floor(scrollTop / videoHeight);
-        const targetScrollTop = videoIndex * videoHeight;
-        container.scrollTop = targetScrollTop;
-    };
-
-    const containerStyles = {
-        overflowY: 'auto',
-        maxHeight: '600px',
-    };
-
-    const videoStyles = {
-        height: `${videoHeight}px`,
-    };
-
     return (
         <div className='realWork-main-container dark:bg-dark bg-light_0 dark:text-darkProfileName text-lightProfileName'>
             <div className="left"></div>
 
-            <div className="Reel-main-div">
+            <div id="Reel-Video-Container" >
 
-                <div className="Reel-div" style={containerStyles} onScroll={handleScroll} ref={videoContainerRef}>
-                    {api.map((video, index) => (
-                        <div key={index} className="Reel-video" style={videoStyles}>
-                            <video autoPlay loop muted>
+                {api.map((video, index) => (
+                    <div key={index} >
+                        <div className="Reel-Video-Div">
+                            <video className="Reel-Video-Div">
                                 <source src={video.img} type="video/mp4" />
                             </video>
+                            <div className="Reel-back-div">
+                                <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon"></i>
+                            </div>
+                            <div className="reel-profile-div">
+                                <img src={video.photoURL} className='reel-profile-photo' alt="" />
+                            </div>
+                            <div className='name'>{video.displayName}</div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
+
         </div>
     )
 }

@@ -155,21 +155,8 @@ const VideoItem = ({ post }) => {
                 <video ref={videoRef} className="reel-video" onClick={() => handleVideoBtnClick(post.id)}>
                     <source src={post.img} type="video/mp4" />
                 </video>
-
                 <div className="reels-back-button">
                     <i onClick={goBack} className="bi bi-arrow-left "></i>
-                </div>
-
-                <div className="reel-like-div" style={{ fontSize: "12px", display: "none" }} id={`viewLike-${post.id}`}>
-                    {isliked.map((item) => {
-                        return (
-                            <>
-                                <div className='reel-like-inner-div'>
-                                    {item.name}
-                                </div>
-                            </>
-                        )
-                    })}
                 </div>
 
                 <div className="reel-icon-up-btn ">
@@ -186,7 +173,6 @@ const VideoItem = ({ post }) => {
                 <div className="reel-icon-down-btn ">
                     <AiOutlineArrowDown className='' onClick={() => scrollToNext(post.id)} />
                 </div>
-
 
                 <div className="reel-profile-div">
                     <img src={post.photoURL} className='reel-profile-img' alt="" />
@@ -237,7 +223,6 @@ const Reals = () => {
     };
 
 
-
     const VideoData = userPhoto.map((post) => {
         return (
             <React.Fragment key={post.id}>
@@ -249,15 +234,20 @@ const Reals = () => {
     return (
         <>
 
-            {loading ? <div className='skeleton-center bg-light_0 dark:bg-dark'>
+            <div className="reel-fixed">
+                <div className="reel-scroll-div">
+                    {VideoData}
+                </div>
+            </div>
+            {/* {loading ? <div className='skeleton-center bg-light_0 dark:bg-dark'>
                 <CircularProgress className='circularprogress' />
             </div > :
                 <div className="reel-position-div dark:bg-dark bg-light_0">
                     <div className="reel-scroll-div">
-                        {VideoData}
+
                     </div>
                 </div>
-            }
+            } */}
 
         </>
     );

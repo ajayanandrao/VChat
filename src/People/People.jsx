@@ -1,12 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./People.scss";
-import { MdDarkMode } from "react-icons/md"
 import { Link, useNavigate } from 'react-router-dom';
 import { db } from "../Firebase";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { AuthContext } from "./../AuthContaxt";
-import { v4 } from 'uuid';
-import { FiSearch } from 'react-icons/fi';
 
 const People = ({ userP }) => {
 

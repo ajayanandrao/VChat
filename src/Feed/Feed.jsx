@@ -1,32 +1,25 @@
-import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import "./Feed.scss"
 import { BsFillChatDotsFill, BsFillHeartFill, BsThreeDotsVertical } from "react-icons/bs"
 import { FaPlay, FaShare } from "react-icons/fa"
-import ReactTimeago from 'react-timeago';
 import { Timestamp, addDoc, arrayUnion, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
 import { db, storage } from '../Firebase';
 import { AuthContext } from '../AuthContaxt';
 import buildFormatter from 'react-timeago/lib/formatters/buildFormatter';
 import englishStrings from 'react-timeago/lib/language-strings/en';
-import { IoMdClose, IoMdSend, IoMdShareAlt } from "react-icons/io";
-import TimeAgo from 'react-timeago';
-import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
-import Picker from '@emoji-mart/react';
+import { IoMdClose, } from "react-icons/io";
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import "./FeedOverlay.scss";
-import photo from "./../Image/img/photo.png";
-import { LinearProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BiSend, BiSolidSend } from 'react-icons/bi';
 import sms from "./../Image/img/sms.png";
-import { v4, uuidv4 } from 'uuid';
+import { v4 } from 'uuid';
 const Feed = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
 
     const videoRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [isVideoInView, setIsVideoInView] = useState(false);
-
 
     useEffect(() => {
         const handleScroll = () => {
