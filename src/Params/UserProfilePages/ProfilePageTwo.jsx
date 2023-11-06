@@ -92,11 +92,31 @@ const ProfilePageTwo = ({ user, userId }) => {
         return unsubscribe;
     }, []);
 
+    const [friendsList, setFriendsList] = useState([]);
+
+    useEffect(() => {
+        const friendsRef = collection(db, `allFriends/${user.uid}/Friends`);
+        const unsubscribe = onSnapshot(friendsRef, (snapshot) => {
+            const newFriendsList = snapshot.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id  // Add the document ID to the friend's data
+            }));
+            setFriendsList(newFriendsList);
+
+        });
+
+        return unsubscribe;
+    }, []);
+
     return (
         <>
 
             <div className="profile-name-container-main" >
                 <h3 className='profile-name-text text-2xl text-lightProfileName dark:text-darkProfileName'>{user.name}</h3>
+
+                <div style={{ fontWeight: "600" }} className='text-lightPostText dark:text-darkPostText'> {friendsList.length - 1} Friends</div>
+
+
                 {api.map((item) => {
                     if (user.uid === item.uid) {
                         return (

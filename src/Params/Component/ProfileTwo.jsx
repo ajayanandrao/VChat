@@ -98,7 +98,7 @@ const ProfileTwo = ({ user }) => {
     const [friendsList, setFriendsList] = useState([]);
 
     useEffect(() => {
-        const friendsRef = collection(db, `allFriends/${currentUser.uid}/Friends`);
+        const friendsRef = collection(db, `allFriends/${user.uid}/Friends`);
         const unsubscribe = onSnapshot(friendsRef, (snapshot) => {
             const newFriendsList = snapshot.docs.map((doc) => ({
                 ...doc.data(),
@@ -138,11 +138,16 @@ const ProfileTwo = ({ user }) => {
     }, []);
 
 
+
+
     return (
         <>
 
             <div className="profile-name-container-main">
                 <h3 className='profile-name-text text-2xl text-lightProfileName dark:text-darkProfileName'>{user.name}</h3>
+
+                <div style={{ fontWeight: "600" }} className='text-lightPostText dark:text-darkPostText'> {friendsList.length} Friends</div>
+
                 {api.map((item) => {
                     if (user.uid === item.uid) {
                         return (
@@ -193,7 +198,10 @@ const ProfileTwo = ({ user }) => {
                                                         Cancel Request
                                                     </div>
                                                 ) : isFriendRequestAccepted ? (
-                                                    <div className="friend-request-accepted">Friend Request Accepted</div>
+                                                    <Link to={`/users/${item.uid}/message`}>
+                                                        <button className='btn btn-info btn-sm'>Message</button>
+                                                    </Link>
+                                                    // <div className="friend-request-accepted">Friend Request Accepted</div>
                                                 ) : isFriend(item.uid) ? (
                                                     // <div className="friend-request-accepted">Friend</div>
                                                     <Link to={`/users/${item.uid}/message`}>

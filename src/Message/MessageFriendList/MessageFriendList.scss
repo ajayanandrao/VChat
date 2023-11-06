@@ -5,13 +5,15 @@
     max-width: 400px;
     height: 100%;
     // background: #1877f2;
+    background: white;
     display: flex;
     justify-content: center;
-
+    margin-right: 5px;
     padding: 1rem;
     // box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 0px, rgba(0, 0, 0, 0.24) 1px 0px 0px;
     box-sizing: border-box;
     overflow-y: scroll;
+    border-radius: 10px;
 
     @include respond-to(md) {
         max-width: 300px;

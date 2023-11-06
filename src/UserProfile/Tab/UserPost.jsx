@@ -558,56 +558,7 @@ const UserPost = ({ post }) => {
 
             </div>
 
-            {/* <div id={`FeedOverlay-${post.id}`}
-                className='feed-overlay-container' style={{ display: "none" }} >
-                <div className="feed-overlay-inner">
 
-                    <div className="feed-Edit-card bg-light_0 dark:bg-dark">
-                        <div className="feed-edit-inner-div">
-                            <div className='feed-close-div' >
-                                <IoMdClose style={{ fontSize: "24px" }} onClick={() => feedOff(post.id)} />
-                            </div>
-                            <div className="feed-main-card">
-                                {updating ? (<LinearProgress className='l-progress' />) : null}
-
-                                <div className='feed-main-innner'>
-                                    <div>
-                                        <input type="text"
-                                            placeholder="What's on your mind"
-                                            className='feed-edit-input bg-lightDiv dark:bg-darkInput'
-                                            onChange={(e) => setEditInput(e.target.value)}
-                                            value={editInput}
-                                            id={`editInput-${post.id}`}
-                                        />
-                                    </div>
-
-
-                                    <label htmlFor="EditImg">
-                                        <div className='feed-edit-photo-div'>
-                                            <img src={photo} s alt="" /><span className='feed-ed-photo-text'>Photo</span>
-                                        </div>
-                                    </label>
-
-                                    {EditImg && EditImg.type.startsWith('image/') && (
-                                        <img className="postImg" src={URL.createObjectURL(EditImg)} alt="" />
-                                    )}
-
-                                    <input type="file" id='EditImg'
-                                        onChange={(e) => setEditImg(e.target.files[0])}
-                                        style={{ display: "none" }} accept="image/*, video/*" />
-
-
-                                    <div className="btn-primary-custom mt-3"
-                                        onClick={(e) => done(post.id)}
-                                    >Update</div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div> */}
 
             <div className="feed-container">
 

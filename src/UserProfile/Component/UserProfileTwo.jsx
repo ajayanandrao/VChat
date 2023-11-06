@@ -5,8 +5,9 @@ import { HiPencil } from "react-icons/hi";
 import { MdClose } from 'react-icons/md';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { db } from '../../Firebase';
-import { collection, doc, getDocs, onSnapshot, query, updateDoc, where, writeBatch } from 'firebase/firestore';
+import { collection, doc, getDocs, onSnapshot, orderBy, query, updateDoc, where, writeBatch } from 'firebase/firestore';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 
 
@@ -27,8 +28,7 @@ const ProfileTwo = ({ user }) => {
         return unsubscribe;
     }, []);
 
-    // useEffect(() => {
-    // Iterate through each user's uid and construct friends references
+
     useEffect(() => {
         // Extract uid values from the api array
         const uidArray = api.map(userData => userData.uid);
@@ -80,22 +80,7 @@ const ProfileTwo = ({ user }) => {
                     batch.update(postRef, { displayName: newDisplayName });
                 });
 
-
-                // 
-                // const userNotiQuery = query(postsRef, where('userId', '==', currentUser.uid));
-                // const userNotiSnapshot = await getDocs(userPostsQuery);
-
-                // const noti = writeBatch(db);
-                // userNotiSnapshot.forEach((postDoc) => {
-                //     const postRef = doc(db, 'Notification', postDoc.id);
-                //     console.log(postRef);
-                //     noti.update(postRef, { name: userNotiQuery });
-                // });
-
-
-                await batch.commit(); // Corrected method name
-                // await noti.commit(); // Corrected method name
-
+                await batch.commit();
                 setNewDisplayName('');
                 setLoading(false);
             } catch (error) {
@@ -116,6 +101,69 @@ const ProfileTwo = ({ user }) => {
         }
     };
 
+    const [apiData, setApiData] = useState([]);
+    useEffect(() => {
+        const colRef = collection(db, 'users');
+
+        // Add a delay of 1000 milliseconds (1 second)
+        const delay = setTimeout(() => {
+            const unsubscribe = onSnapshot(colRef, (snapshot) => {
+                const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+                setApiData(newApi);
+            });
+
+            return () => {
+                // Cleanup the subscription when the component unmounts
+                unsubscribe();
+            };
+        }, 1000);
+
+        // Clear the delay if the component unmounts before the delay completes
+        return () => clearTimeout(delay);
+    }, []);
+
+    const [friendsList, setFriendsList] = useState([]);
+    useEffect(() => {
+        const friendsRef = collection(db, `allFriends/${currentUser && currentUser.uid}/Friends`);
+        const unsubscribe = onSnapshot(friendsRef, (friendsSnapshot) => {
+            const friendsData = friendsSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setFriendsList(friendsData);
+        }, (error) => {
+            console.error('Error fetching friends:', error);
+        });
+
+        return () => unsubscribe();
+    }, [currentUser && currentUser]);
+
+    const colRef = collection(db, 'AllPosts');
+    const q = query(colRef, orderBy('bytime', 'desc'));
+    const [docs, error] = useCollectionData(q, orderBy('bytime', 'desc'));
+    const [postData, setPostData] = useState([]);
+    useEffect(() => {
+        const colRef = collection(db, 'AllPosts');
+        const q = query(colRef, orderBy('bytime', 'desc'));
+
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const fetchedPosts = snapshot.docs.map((doc) => {
+                const { name, img, postText, displayName, photoURL, bytime, uid } = doc.data();
+                return { id: doc.id, name, img, postText, displayName, photoURL, bytime, uid };
+            });
+
+            setPostData(fetchedPosts);
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+
+    const userPosts = postData.filter(post => post.uid === currentUser.uid);
+    const userPostCount = userPosts.length;
+
+    console.log(`The current user has ${userPostCount} posts.`);
     return (
         <>
             {overlay ? (
@@ -151,12 +199,18 @@ const ProfileTwo = ({ user }) => {
                 </div>
             ) : ""}
             <div className="profile-name-container ">
-                <h3 className='profile-name-text text-2xl text-lightProfileName dark:text-darkProfileName'>{currentUser && currentUser.displayName}</h3>
-                <div className="profile-Edit-btn bg-lightDiv dark:bg-darkPostIcon">
-                    <HiPencil className='edit-pencil text-lightPostText dark:text-darkDiv' onClick={() => setOverlay(!overlay)} />
+
+                <div className='d-flex align-items-center'>
+                    <h3 className='profile-name-text text-2xl text-lightProfileName dark:text-darkProfileName'>{currentUser && currentUser.displayName}</h3>
+                    <div className="profile-Edit-btn bg-lightDiv dark:bg-darkPostIcon">
+                        <HiPencil className='edit-pencil text-lightPostText dark:text-darkDiv' onClick={() => setOverlay(!overlay)} />
+                    </div>
+                </div>
+
+                <div className="profile-friend-count text-lightPostIcon dark:text-darkPostTime">
+                    <span style={{ fontWeight: "600" }}> {friendsList.length} Friends</span>
                 </div>
             </div>
-
         </>
     )
 }

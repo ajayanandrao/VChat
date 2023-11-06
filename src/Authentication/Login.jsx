@@ -92,6 +92,10 @@ const Login = () => {
                         document.getElementById("error-alert").style.display = "flex";
                         document.getElementById("error-alert").innerHTML = "Wrong Password";
                         break;
+                    case "auth/invalid-login-credentials":
+                        document.getElementById("error-alert").style.display = "flex";
+                        document.getElementById("error-alert").innerHTML = "Wrong Password";
+                        break;
                     case "auth/missing-password":
                         document.getElementById("error-alert").style.display = "flex";
                         document.getElementById("error-alert").innerHTML = "Incorrect email and password";

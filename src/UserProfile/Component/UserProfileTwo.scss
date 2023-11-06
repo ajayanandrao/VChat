@@ -61,7 +61,7 @@
 
 .profile-name-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-bottom: 0.6rem;
@@ -111,4 +111,8 @@
         outline: none;
     }
 
+}
+
+.profile-friend-count{
+    padding: 5px;
 }

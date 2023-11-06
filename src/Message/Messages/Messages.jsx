@@ -1082,10 +1082,10 @@ const Messages = () => {
                             <p>Are you sure?</p>
                             <p>This will Delete messagess permanently for avery one</p>
                             <div className="are-you-sure-btn-div my-4">
-                                <button className='btn-D-custom' onClick={() => { deleteMessagesForUser(); deleteFromMessageList(); HandleAreyouSure(); HandleShowMessageOption(); }}>Delete</button>
-                                <button className='btn-info-custom'
+                                <button className='btn-dengar-custom' onClick={() => { deleteMessagesForUser(); deleteFromMessageList(); HandleAreyouSure(); HandleShowMessageOption(); }}>Delete</button>
+                                <button className='btn-primary-custom'
                                     onClick={() => { HandleAreyouSure(); HandleShowMessageOption(); }}
-                                    style={{ background: "#FAFAFA", color: "#0080FF", }}>Cancel</button>
+                                    style={{ background: "none", border: "1px solid #ccc", color: "#0080FF", }}>Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -1096,10 +1096,10 @@ const Messages = () => {
                             <p>Are you sure?</p>
                             <p>This will gonna Clear your message Box</p>
                             <div className="are-you-sure-btn-div my-4">
-                                <button className='btn-D-custom' onClick={() => { deleteMessagesForCurrentUser(); HandleAreyouSureForCurrentUser(); HandleShowMessageOption(); }}>Delete</button>
-                                <button className='btn-info-custom'
+                                <button className='btn-dengar-custom' onClick={() => { deleteMessagesForCurrentUser(); HandleAreyouSureForCurrentUser(); HandleShowMessageOption(); }}>Delete</button>
+                                <button className='btn-primary-custom'
                                     onClick={() => { HandleAreyouSureForCurrentUser(); HandleShowMessageOption(); }}
-                                    style={{ background: "#FAFAFA", color: "#0080FF" }}>Cancel</button>
+                                    style={{ background: "none", border: "1px solid #ccc", color: "#0080FF", }}>Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -1264,49 +1264,49 @@ const Messages = () => {
 
                 {/* Profile  ------------------------------------- */}
 
-                {messages.length == 0 ? null :
-                    <div className="message-top-bar bg-lightDiv  dark:bg-darkDiv">
-                        <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostText message-back-arrow "></i>
 
-                        <div className="message-profile-div">
-                            <Link to={`/users/${user.uid}`} className='message-profile-div'>
-                                <img className='message-profile-img' src={user.userPhoto} alt="" />
-                                <span className='message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
-                                {/* <button className='btn btn-sm btn-danger ms-3' onClick={deleteMessagesForUser}>Clear Chat</button> */}
-                            </Link>
-                        </div>
-                        <div>
-                            {showMessageOption ?
-                                <div className="top-message-option-btn bg-light_0 text-lightPostText dark:text-darkPostText dark:bg-darkPostIcon"
-                                    style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
-                                    onClick={HandleShowMessageOption}>
-                                    <BsThreeDots />
-                                </div>
-                                :
-                                <div className="top-message-option-btn bg-light_0 text-lightPostText dark:bg-darkPostIcon dark:bg-darkPostIcon" onClick={HandleShowMessageOption}>
-                                    <BsThreeDots />
-                                </div>
+                <div className="message-top-bar bg-lightDiv  dark:bg-darkDiv ">
+                    <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostText message-back-arrow "></i>
 
-                            }
-                            {showMessageOption ?
-                                <div className="show-message-option  bg-light_0 dark:bg-darkInput">
-                                    <p onClick={HandleAreyouSure} className='mb-3 text-lightProfileName dark:text-darkPostText'>Delete all Chat</p>
-                                    <p onClick={HandleAreyouSureForCurrentUser} className='text-lightProfileName dark:text-darkPostText'>Delete message from you</p>
-                                </div>
-                                :
-                                null
-                            }
-
-                        </div>
+                    <div className="message-profile-div">
+                        <Link to={`/users/${user.uid}`} className='message-profile-div'>
+                            <img className='message-profile-img' src={user.userPhoto} alt="" />
+                            <span className='message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
+                            {/* <button className='btn btn-sm btn-danger ms-3' onClick={deleteMessagesForUser}>Clear Chat</button> */}
+                        </Link>
                     </div>
-                }
+                    <div>
+                        {showMessageOption ?
+                            <div className="top-message-option-btn bg-light_0 text-lightPostText dark:text-darkPostText dark:bg-darkPostIcon"
+                                style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+                                onClick={HandleShowMessageOption}>
+                                <BsThreeDots />
+                            </div>
+                            :
+                            <div className="top-message-option-btn bg-light_0 text-lightPostText dark:bg-darkPostIcon dark:bg-darkPostIcon" onClick={HandleShowMessageOption}>
+                                <BsThreeDots />
+                            </div>
+
+                        }
+                        {showMessageOption ?
+                            <div className="show-message-option  bg-light_0 dark:bg-darkInput">
+                                <p onClick={HandleAreyouSure} className='mb-3 text-lightProfileName dark:text-darkPostText'>Delete all Chat</p>
+                                <p onClick={HandleAreyouSureForCurrentUser} className='text-lightProfileName dark:text-darkPostText'>Delete message from you</p>
+                            </div>
+                            :
+                            null
+                        }
+
+                    </div>
+                </div>
+
                 {/* Center div ------------------------------------- */}
 
 
 
                 <div className="message-center-div bg-lightDiv dark:bg-dark" onClick={handleMessageEmojiF}>
 
-                    <div className="message-center-friend-list-div">
+                    <div className="message-center-friend-list-div bg-light_0 dark:bg-dark">
                         <MessageFriendList />
                     </div>
 
@@ -1688,7 +1688,7 @@ const Messages = () => {
 
 
 
-                                                                {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#5858FA]  dark:bg-[#6453ac] dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkReciver"} `}
+                                                                {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#5858FA]  dark:bg-[#5858FA] dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkReciver"} `}
                                                                     onClick={() => showReplyButton(message.id)}
                                                                     onMouseLeave={hideReplyButton}
                                                                 >

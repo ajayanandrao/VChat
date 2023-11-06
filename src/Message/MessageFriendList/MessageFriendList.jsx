@@ -71,7 +71,7 @@ const MessageFriendList = () => {
                 return (
                     <div key={sms.id}>
                         <Link to={`/users/${sms.userId}/message`} onClick={() => HandleSmsSeen(sms.id)} className='link'>
-                            <div className='message-friend-list-div bg-[#5858FA] dark:bg-darkDiv text-[white] dark:text-darkProfileName'>
+                            <div className='message-friend-list-div bg-[#5858FA] dark:bg-[#5858FA] text-[white] dark:text-darkProfileName'>
                                 <div>
                                     <img src={sms.photoUrl} className='message-friendList-img' alt="" />
                                 </div>

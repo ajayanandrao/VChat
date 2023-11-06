@@ -32,8 +32,12 @@ const SearchUser = () => {
 
 
     return (
-        <>
+        <div className="d-flex">
+            <div className="left">
+                sdf
+            </div>
             <div className="search-main-container bg-light_0 dark:bg-dark">
+
 
                 <div className="search-back-div bg-light_0 dark:bg-dark">
                     <div className="leftDiv"></div>
@@ -46,7 +50,7 @@ const SearchUser = () => {
 
                 </div>
 
-                <div className=''>
+                <div className='search-user-position'>
                     {
                         api
                             .filter((value) => {
@@ -75,8 +79,6 @@ const SearchUser = () => {
                                                     <div className="Search-user-profile-name text-lightProfileName dark:text-darkProfileName">{item.name}</div>
                                                 </Link>
                                             </div>
-
-
                                         </div>
                                     );
                                 }
@@ -86,7 +88,7 @@ const SearchUser = () => {
                     }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
