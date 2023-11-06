@@ -150,41 +150,32 @@ const VideoItem = ({ post }) => {
     }
 
     return (
-        <div className="reel-video-container" id={`section2-${post.id}`}>
-            <div style={{ position: "relative", }} className="reel-outer">
-                <video ref={videoRef} className="reel-video" onClick={() => handleVideoBtnClick(post.id)}>
+        <div className="reel-container bg-light_0 dark:bg-dark" id={`section2-${post.id}`}>
+            {/* <video ref={videoRef} className="reel-video" onClick={() => handleVideoBtnClick(post.id)}> */}
+            <div className="reel-inner">
+                <video className="rvideo" onClick={() => handleVideoBtnClick(post.id)}>
                     <source src={post.img} type="video/mp4" />
                 </video>
-                <div className="reels-back-button">
+                <div className="reels-back-button text-lightProfileName dark:text-darkProfileName">
                     <i onClick={goBack} className="bi bi-arrow-left "></i>
+                </div>
+
+                <div className="reel-like-icon">
+                    {liked ? <BsFillHeartFill color='#FF0040' className='' onClick={() => HandleLike(post.id)} /> :
+                        < AiOutlineHeart className='' onClick={() => HandleLike(post.id)} />
+                    }
+                    <div className='like-count ' onClick={() => ViewLikes(post.id)}>{isliked.length}</div>
                 </div>
 
                 <div className="reel-icon-up-btn ">
                     <AiOutlineArrowUp className='' onClick={() => scrollToPreview(post.id)} />
                 </div>
-
-                <div className="reel-like-icon">
-                    <div className='like-count ' onClick={() => ViewLikes(post.id)}>{isliked.length}</div>
-                    {liked ? <BsFillHeartFill color='#FF0040' className='' onClick={() => HandleLike(post.id)} /> :
-                        < AiOutlineHeart className='' onClick={() => HandleLike(post.id)} />
-                    }
-                </div>
-
                 <div className="reel-icon-down-btn ">
                     <AiOutlineArrowDown className='' onClick={() => scrollToNext(post.id)} />
                 </div>
-
                 <div className="reel-profile-div">
                     <img src={post.photoURL} className='reel-profile-img' alt="" />
-                    <span className='reel-profile-name'>{post.displayName}</span>
                 </div>
-                {!isPlaying && (
-                    <a className="intro-banner-vdo-play-btn pinkBg" onClick={() => handleVideoBtnClick(post.id)} target="_blank">
-                        <div className="play-button">
-                            <FaPlay className="play-button" />
-                        </div>
-                    </a>
-                )}
             </div>
         </div>
     );
@@ -232,26 +223,14 @@ const Reals = () => {
     });
 
     return (
-        <>
-
-            <div className="reel-fixed">
+        <div className='d-flex bg-light_0 dark:bg-dark'>
+            <div className="reel-fixed bg-light_0 dark:bg-dark">
                 <div className="reel-scroll-div">
                     {VideoData}
                 </div>
             </div>
-            {/* {loading ? <div className='skeleton-center bg-light_0 dark:bg-dark'>
-                <CircularProgress className='circularprogress' />
-            </div > :
-                <div className="reel-position-div dark:bg-dark bg-light_0">
-                    <div className="reel-scroll-div">
-
-                    </div>
-                </div>
-            } */}
-
-        </>
+        </div>
     );
 };
 
-{/* {post.img && isVideo(post.name) && <VideoItem post={post} />} */ }
 export default Reals;

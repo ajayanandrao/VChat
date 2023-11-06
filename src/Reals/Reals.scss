@@ -1,232 +1,203 @@
 @import "./../Styles/Mixin_New.scss";
 
-.reel-video-container {
-    position: relative;
-    top: 0;
-    max-width: 576px;
-    height: calc(100vh - 1.5px);
-    z-index: 9999;
-    // background: red;
-    scroll-snap-type: both proximity;
-    // -webkit-scroll-snap-type: both proximity;
-    display: flex;
-    align-items: center;
+// .left {
+//     width: 100%;
+//     height: 100%;
+//     max-width: 100px;
+// }
 
-    .reel-icon-up-btn {
-        width: 40px;
-        height: 40px;
-        // background: red;
-        backdrop-filter: blur(10px);
+.reel-fixed {
+    width: 100%;
+    height: 100vh;
+
+    @include respond-to(xs) {
+        position: fixed;
+        top: 0;
+        z-index: 9999;
+    }
+
+    .reel-scroll-div {
+        width: 100%;
+        height: 100vh;
+        scroll-snap-type: both mandatory;
+        aspect-ratio: 1/1;
+        overflow-y: scroll;
+        white-space: nowrap;
+        -webkit-scroll-snap-type: both mandatory;
+    }
+}
+
+.reel-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: center;
+    aspect-ratio: 1/1;
+
+
+}
+
+.reel-inner {
+    width: 100%;
+    // background: red;
+    position: relative;
+
+    .reels-back-button {
         position: absolute;
+        top: 0;
+        z-index: 9999;
+        width: 100%;
+        max-width: 400px;
+        // background: red;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        top: 40%;
-        right: -3%;
-        transform: translate(-50%, -50%);
-        font-size: 24px;
-        color: aqua;
-        cursor: pointer;
+        justify-content: start;
+        padding: 0.5rem 1rem;
+        color: white;
+
+        @include respond-to(md) {
+            left: 45px;
+        }
+
+        @include respond-to(sm) {
+            left: 45px;
+        }
     }
 
     .reel-like-icon {
-        // width: 40px;
-        // height: 40px;
-        color: aqua;
         position: absolute;
-        top: 25%;
-        right: -3%;
-        transform: translate(-50%, -50%);
-        font-size: 24px;
-        // background: red;
-        backdrop-filter: blur(10px);
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        border-radius: 20px;
-        padding: 0.5rem;
+        top: 65%;
+        right: 5px;
+        z-index: 9999;
+        font-size: 22px;
+        border-radius: 50%;
+        padding: 5px;
         cursor: pointer;
+        color: white;
+
+        @include respond-to(md) {
+            right: -40px;
+        }
+
+        @include respond-to(sm) {
+            right: -40px;
+        }
 
         .like-count {
-            font-size: 16px;
-            margin-bottom: 1rem;
+            font-size: 18px;
+            margin-bottom: 5px;
+            // background: red;
+            border-radius: 50%;
+            color: white;
+        }
+    }
+
+    .reel-icon-up-btn {
+        position: absolute;
+        top: 40%;
+        right: 5px;
+        z-index: 9999;
+        font-size: 22px;
+        border-radius: 50%;
+        padding: 5px;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.349);
+        color: white;
+        backdrop-filter: blur(10px);
+
+        @include respond-to(md) {
+            display: none;
+        }
+
+        @include respond-to(sm) {
+            display: none;
+        }
+
+        @include respond-to(xs) {
+            display: none;
         }
     }
 
     .reel-icon-down-btn {
-        width: 40px;
-        height: 40px;
-        color: aqua;
         position: absolute;
-        top: 60%;
-        right: -3%;
-        transform: translate(-50%, -50%);
-        font-size: 24px;
-        // background: red;
-        backdrop-filter: blur(10px);
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        top: 50%;
+        right: 5px;
+        z-index: 9999;
+        font-size: 22px;
         border-radius: 50%;
+        padding: 5px;
         cursor: pointer;
-    }
-
-    @include respond-to(xs) {
-        height: 100vh;
-    }
-
-    .reel-outer {
-        width: 100%;
-        height: 100%;
-        scroll-snap-align: center;
-        display: inline-block;
+        background: rgba(255, 255, 255, 0.349);
+        color: white;
+        backdrop-filter: blur(10px);
 
         @include respond-to(md) {
-            height: auto;
+            display: none;
         }
 
         @include respond-to(sm) {
-            height: auto;
+            display: none;
         }
 
         @include respond-to(xs) {
-            height: auto;
+            display: none;
+        }
+    }
+
+    .reel-profile-div {
+        position: absolute;
+        top: 80%;
+        right: 5px;
+        z-index: 9999;
+        font-size: 22px;
+        padding: 0px;
+        // background: red;
+        height: 35px;
+        cursor: pointer;
+        border-radius: 50%;
+
+        @include respond-to(md) {
+            right: -40px;
+        }
+
+        @include respond-to(sm) {
+            right: -40px;
+        }
+
+        .reel-profile-img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
         }
     }
 }
 
-.reel-video {
+.rvideo {
     width: 100%;
     max-width: 400px;
-    height: 100%;
-    max-height: 800px;
+    height: 630px;
     object-fit: cover;
-    object-position: center;
     border-radius: 10px;
+
+    @include respond-to(md) {
+        height: 630px;
+        border-radius: 10px;
+        margin-left: 45px;
+    }
+
+    @include respond-to(sm) {
+        height: 630px;
+        border-radius: 10px;
+        margin-left: 45px;
+    }
 
     @include respond-to(xs) {
         height: 100vh;
-    }
-}
-
-.reel-profile-div {
-    width: 100%;
-    display: flex;
-    padding: 0.5rem;
-    align-items: center;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transform: translate(-0%, -5%);
-    color: white;
-    // background: red;
-    cursor: pointer;
-    z-index: 0;
-
-    @include respond-to(xs) {
-        bottom: 0;
-        left: 0;
-        right: 0;
-        transform: translate(-0%, -5%);
-    }
-
-
-    .reel-profile-img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-
-    .reel-profile-name {
-        margin-left: 1rem;
-        font-size: 16px;
-    }
-}
-
-.reels-back-button {
-    position: absolute;
-    top: 4%;
-    left: 7%;
-    transform: translate(-50%, -50%);
-    font-size: 18px;
-    color: white;
-    cursor: pointer;
-    z-index: 0;
-    font-size: 30px;
-
-}
-
-.play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 18px;
-    color: white;
-    cursor: pointer;
-    z-index: 0;
-    font-size: 30px;
-
-    &:hover {
-        opacity: 0.8;
-    }
-}
-
-.reel-like-div {
-    position: absolute;
-    top: 20%;
-    right: 5%;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-    z-index: 0;
-    background: rgba(0, 0, 0, 0);
-    backdrop-filter: blur(10px);
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 0.3rem;
-
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-
-    .reel-like-inner-div {
-        display: flex;
-        flex-direction: column;
-        line-height: 18px;
-        color: white;
-    }
-
-}
-
-.reel-position-div {
-    width: 100%;
-    // height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.8s ease-in-out;
-}
-
-.reel-fixed {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    z-index: 9999;
-    overflow-y: scroll;
-    box-sizing: border-box;
-    scroll-snap-type: both mandatory;
-    aspect-ratio: 1/1;
-    overflow-y: scroll;
-    white-space: nowrap;
-    -webkit-scroll-snap-type: both mandatory;
-
-    .reel-scroll-div {
-        scroll-snap-align: center;
-        aspect-ratio: 1/1;
     }
 }

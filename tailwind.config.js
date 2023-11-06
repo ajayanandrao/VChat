@@ -23,6 +23,7 @@ module.exports = {
         lightPostIcon: "#181818",  /*400*/
 
         lightNavTop: "white",
+        lightGlass: "rgba(255, 255, 255, 0.349)",
 
 
         // lightPostIconBottom: "#0f263e",  /*400*/

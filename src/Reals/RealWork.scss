@@ -20,12 +20,12 @@
     aspect-ratio: 1/1;
     overflow-y: scroll;
     white-space: nowrap;
+    -webkit-scroll-snap-type: both mandatory;
 
     &::-webkit-scrollbar {
         display: none;
     }
 
-    -webkit-scroll-snap-type: both mandatory;
 }
 
 .Reel-Video-Div {
@@ -67,8 +67,8 @@
     position: absolute;
     bottom: 0;
 }
-.Reel-Video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+// .Reel-Video {
+//     width: 100%;
+//     height: 100%;
+//     object-fit: cover;
+// }
