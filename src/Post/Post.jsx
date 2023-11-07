@@ -79,7 +79,7 @@ const Post = () => {
 			img.src = URL.createObjectURL(imageFile);
 		});
 	};
-
+	const [progress, setProgress] = React.useState(0);
 	const handleUpload = async () => {
 		setShowEmoji(false);
 		setPostText('');
@@ -100,11 +100,15 @@ const Post = () => {
 							(snapshot) => {
 								const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100);
 								if (progress < 100) {
-									document.getElementById('p1').style.display = 'block';
+
+									// document.getElementById('p1').style.display = 'block';
 								} else {
-									document.getElementById('p1').style.display = 'none';
+
+									// document.getElementById('p1').style.display = 'none';
 								}
 								console.log('Loading:', progress);
+								setProgress(progress);
+								updateProgressBar(progress);
 							},
 							(error) => {
 								console.log('Error uploading image:', error);
@@ -115,6 +119,7 @@ const Post = () => {
 									downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 									saveData(downloadURL);
 									console.log('Image uploaded successfully');
+									setProgress(0)
 								} catch (error) {
 									console.log('Error uploading image:', error);
 								}
@@ -133,11 +138,14 @@ const Post = () => {
 						(snapshot) => {
 							const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100);
 							if (progress < 100) {
-								document.getElementById('p1').style.display = 'block';
+								// document.getElementById('p1').style.display = 'block';
 							} else {
-								document.getElementById('p1').style.display = 'none';
+
+								// document.getElementById('p1').style.display = 'none';
 							}
 							console.log('Loading:', progress);
+							setProgress(progress);
+							updateProgressBar(progress);
 						},
 						(error) => {
 							console.log('Error uploading video:', error);
@@ -148,6 +156,7 @@ const Post = () => {
 								downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 								saveData(downloadURL);
 								console.log('Video uploaded successfully');
+								setProgress(0);
 							} catch (error) {
 								console.log('Error uploading video:', error);
 							}
@@ -201,6 +210,12 @@ const Post = () => {
 
 		setImg(null);
 	};
+
+	function updateProgressBar(progress) {
+		const progressBar = document.getElementById("progress-bar");
+		progressBar.style.width = progress + "%";
+		progressBar.setAttribute("aria-valuenow", progress);
+	}
 
 	const handleKey = (e) => {
 		if (e.key === 'Enter') {
@@ -340,6 +355,28 @@ const Post = () => {
 		return unsubscribe;
 	}, []);
 
+	// useEffect(() => {
+	// 	const timer = setInterval(() => {
+	// 		setProgress((oldProgress) => {
+	// 			if (oldProgress === 100) {
+	// 				return 0;
+	// 			}
+	// 			const diff = Math.random() * 10;
+	// 			return Math.min(oldProgress + diff, 100);
+	// 		});
+	// 	}, 500);
+
+	// 	return () => {
+	// 		clearInterval(timer);
+	// 	};
+	// }, []);
+
+
+	// const progressBar = document.getElementById("progress-bar");
+	// progressBar.style.width = `${progress}%`;
+	// progressBar.setAttribute("aria-valuenow", progress);
+
+	
 	return (
 		<div>
 			<div className="post-contianer ">
@@ -421,8 +458,6 @@ const Post = () => {
 							}}
 						/>
 
-
-
 						{/* <button onClick={ok}>ok</button> */}
 
 						{imgView ? (<>
@@ -469,7 +504,9 @@ const Post = () => {
 					</div>
 
 					<Box sx={{ width: '100%' }}>
-						<LinearProgress id="p1" style={{ display: 'none' }} />
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" style={{ width: `${progress}` }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
+						</div>
 					</Box>
 				</div>
 			</div>

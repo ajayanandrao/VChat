@@ -1,6 +1,19 @@
 @import "./../Styles/Mixin_New.scss";
 @import "./../Styles/Variable";
 
+.progress {
+    background: transparent;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: end;
+    border-radius: 10px;
+    background: linear-gradient(40deg,  #0095ff, #CB04FF , aqua );
+    position: relative;
+
+}
+
 .post-contianer {
     width: 100%;
     display: flex;

@@ -61,13 +61,46 @@ const ViewStory = ({ post }) => {
         return () => unsubscribe();
     }, []);
 
+    const [progress, setProgress] = React.useState(0);
+
+    function updateProgressBar(countdown) {
+        const progressBar = document.getElementById("progress-bar");
+        progressBar.style.width = countdown + "%";
+        progressBar.setAttribute("aria-valuenow", countdown);
+    }
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setProgress((oldProgress) => {
+                if (oldProgress === 100) {
+                    return 0;
+                }
+                const diff = Math.random() * 10;
+                return Math.min(oldProgress + diff, 100);
+            });
+        }, 500);
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
+
     useEffect(() => {
         const timeout = setTimeout(() => {
-            setShowContainer(false);
+            setShowContainer(false);            
         }, 20000);
 
         const countdownInterval = setInterval(() => {
             setCountdown((prevCountdown) => prevCountdown - 1);
+
+            // setProgress((oldProgress) => {
+            //     if (oldProgress === 100) {
+            //         return ;
+            //     }
+            //     const diff = Math.random() * 10;
+            //     return Math.min(oldProgress + diff, 100);
+            // });
+
         }, 1000);
 
         return () => {
@@ -76,11 +109,14 @@ const ViewStory = ({ post }) => {
         };
     }, []);
 
+    console.log(countdown)
     useEffect(() => {
         if (countdown <= 0) {
             goBack();
         }
     }, [countdown, goBack]);
+
+
 
     useEffect(() => {
         const progressIncrement = 100 / 20; // Increment value for each second
@@ -312,12 +348,15 @@ const ViewStory = ({ post }) => {
                                                 backgroundImage: `url(${story.image})`,
                                             }}
                                         >
-                                            <BorderLinearProgress
+                                            {/* <BorderLinearProgress
                                                 variant="determinate"
                                                 value={progressRef.current}
                                                 style={{ width: '100%', color: "red" }}
                                                 className="view-countdown-progress"
                                             />
+                                            <div class="progress story-pro">
+                                                <div class="progress-bar" role="progressbar" style={{ width: `${progress}%` }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
+                                            </div> */}
 
                                             <div className="view-profile-div">
                                                 <img src={user.userPhoto} className="view-profile-img" alt="" />

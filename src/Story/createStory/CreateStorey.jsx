@@ -89,6 +89,14 @@ const CreateStorey = () => {
         });
     };
 
+    const [progress, setProgress] = React.useState(0);
+
+    function updateProgressBar(progress) {
+        const progressBar = document.getElementById("progress-bar");
+        progressBar.style.width = progress + "%";
+        progressBar.setAttribute("aria-valuenow", progress);
+    }
+
     const handleAddStory = async () => {
         if (!newStoryImage) {
             alert('Please select an image.');
@@ -118,6 +126,8 @@ const CreateStorey = () => {
                 uploadTask.on('state_changed', (snapshot) => {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     console.log(`Upload progress: ${progress}%`);
+                    setProgress(progress);
+                    updateProgressBar(progress);
                 });
 
                 await uploadTask;
@@ -129,6 +139,8 @@ const CreateStorey = () => {
                     image: downloadURL,
                     timestamp: serverTimestamp(),
                 });
+
+                console.log('Image successfully uploaded');
             } else {
                 const storageRef = ref(storage, `story_images/${newStoryImage.name}`);
 
@@ -137,12 +149,11 @@ const CreateStorey = () => {
                 uploadTask.on('state_changed', (snapshot) => {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     console.log(`Upload progress: ${progress}%`);
-
+                    setProgress(progress);
+                    updateProgressBar(progress);
                     // Show/hide a progress indicator based on the progress percentage.
                     if (progress < 100) {
-                        document.getElementById("p1").style.display = "block";
                     } else {
-                        document.getElementById("p1").style.display = "none";
                     }
                 });
 
@@ -150,7 +161,6 @@ const CreateStorey = () => {
 
                 downloadURL = await getDownloadURL(storageRef);
 
-                // Add a new document to the collection with the original image.
                 await addDoc(storiesCollection, {
                     name: newStoryImage ? newStoryImage.name : '',
                     image: newStoryImage ? downloadURL : '',
@@ -159,14 +169,17 @@ const CreateStorey = () => {
                     visible: true,
                     timestamp: serverTimestamp(),
                 });
+
+                console.log('Video successfully uploaded');
+                setProgress(0);
             }
 
-            // Add the new story URL to the state.
             setStories([...stories, { image: downloadURL }]);
         } catch (error) {
             console.error('Error adding/updating story:', error);
         }
     };
+
 
 
     const deleteStory = async (storyId) => {
@@ -267,8 +280,6 @@ const CreateStorey = () => {
 
     const [storyUid, setStoryUid] = useState(null);
 
-
-
     useEffect(() => {
         const sub = () => {
             const userStory = stories.find(item => item.uid === currentUser?.uid);
@@ -309,10 +320,15 @@ const CreateStorey = () => {
         }
     }
 
+
     return (
         <div className='cteateStory-main-container bg-light_0 dark:bg-dark'>
-            <LinearProgress id="p1" style={{ display: "none" }} />
-
+            {/* <div id='p1' style={{ display: "none" }}>
+                <LinearProgress id="p1" style={{ display: "none" }} style={linearGradientStyle} />
+            </div> */}
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style={{ width: `${progress}` }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
+            </div>
 
             <div className='d-flex justify-content-center'>
                 {newStoryImage && newStoryImage.type.startsWith('image/') && (
