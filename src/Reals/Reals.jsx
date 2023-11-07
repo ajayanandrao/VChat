@@ -152,12 +152,11 @@ const VideoItem = ({ post }) => {
     const goBack = () => {
         nav(-1);
     }
-    const [isClick, setClick] = useState(false);
 
     return (
         <div className="reel-scroll-div">
             <div className="reel-mainu-div">
-                <video ref={videoRef} className="rvideo" onClick={() => handleVideoBtnClick(post.id)}>
+                <video ref={videoRef} className="rvideo" onClick={() => handleVideoBtnClick(post.id)} loop>
                     <source src={post.img} type="video/mp4" />
                 </video>
                 {!isPlaying && (

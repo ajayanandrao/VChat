@@ -11,6 +11,8 @@ import { BsFillMoonStarsFill, BsFillPeopleFill, BsFillSunFill, BsMoonStarsFill }
 import { addDoc, collection, doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
 import { MdAddReaction, MdColorLens, MdMovieFilter } from "react-icons/md";
 import v from "./../Image/img/vl.png";
+import { FaMoon } from "react-icons/fa";
+import { BiSolidSun } from "react-icons/bi";
 
 
 const MobileNavebar = () => {
@@ -118,6 +120,26 @@ const MobileNavebar = () => {
     await setDoc(userPreferencesRef, { theme: newTheme });
   };
 
+
+
+  useEffect(() => {
+    const sub = () => {
+      console.log(themIcon.map((item) => item.id));
+    }
+    return sub;
+  }, []);
+
+  const [themIcon, setThemIcon] = useState([]);
+  useEffect(() => {
+    const colRef = collection(db, 'UserPreferences');
+    const unsubscribe = onSnapshot(colRef, (snapshot) => {
+      const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setThemIcon(newApi);
+    });
+
+    return unsubscribe;
+  }, []);
+
   useEffect(() => {
     const userPreferencesRef = doc(db, 'UserPreferences', currentUser.uid);
     getDoc(userPreferencesRef)
@@ -145,7 +167,6 @@ const MobileNavebar = () => {
         id="navId"
       >
         <Link to="home/" className="mobile-nav-title" onClick={handleScrollToTop} style={{ textDecoration: "none" }}>
-          {" "}
           <div className="mobile-nav-title">
             <img src={v} className="nav-logo" alt="" />
           </div>
@@ -180,12 +201,22 @@ const MobileNavebar = () => {
           </span>
 
           <div onClick={() => { darkTheme(); toggleTheme(); }} className="mobile-nav-mainu">
-            {theme ?
 
-              <BsFillSunFill className="mobile-nav-icon  dark:text-darkPostIcon" />
-              :
-              <BsMoonStarsFill className="mobile-nav-icon text-lightPostIcon" />
-            }
+            <div className="mobile-nav-icon">
+              {themIcon.map((item) => {
+                if (item.id === currentUser.uid) {
+                  return (
+                    <>
+                      <div className=""> {item.theme === "dark" ? <BiSolidSun style={{fontSize:"30px"}} className="mobile-nav-icon  dark:text-darkPostIcon" />
+                        :
+                        <FaMoon className="mobile-nav-icon text-lightPostIcon" />
+                      }</div>
+                    </>
+                  )
+                }
+              })}
+            </div>
+
           </div>
 
 
