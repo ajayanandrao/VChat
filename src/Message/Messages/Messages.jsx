@@ -19,6 +19,7 @@ import Audio from './../../Audio';
 
 import emojiJson from "./emoji.json";
 import MessageFriendList from '../MessageFriendList/MessageFriendList';
+import Alert from '../../Alert';
 
 const Messages = () => {
     const { currentUser } = useContext(AuthContext);
@@ -104,11 +105,10 @@ const Messages = () => {
             } catch (error) {
                 console.error('Error deleting "sound" field:', error);
             }
-        }, 5000); // 5 seconds
+        }, 2000); // 5 seconds
 
         return () => clearTimeout(timer); // Clear the timeout if the component unmounts
     });
-    // Make sure to import necessary Firebase and Firestore libraries and set up the Firestore connection (e.g., db) properly.
 
 
 
@@ -600,6 +600,7 @@ const Messages = () => {
                 name: currentUser.displayName,
                 photoUrl: currentUser.photoURL,
                 status: "unseen",
+                sound: "on",
                 time: serverTimestamp(),
 
             };
@@ -609,6 +610,7 @@ const Messages = () => {
                 name: name,
                 photoUrl: recipientImg,
                 status: "unseen",
+                sound: "on",
                 time: serverTimestamp(),
             };
 
@@ -840,6 +842,7 @@ const Messages = () => {
                 sender: currentUser.uid, // Set the sender's ID
                 recipient: selectedMessage.sender, // Set the recipient's ID
                 message: messageInput, // Set the message content
+                sound: "on",
                 timestamp: serverTimestamp(), // Set the timestamp (server-side)
                 reply: replyContent,
             };
@@ -904,7 +907,7 @@ const Messages = () => {
                 recipient: uid, // Set the recipient's ID
                 recipientImg: recipientImg,
                 imageUrlLike: emojiState,
-
+                sound: "on",
                 timestamp: serverTimestamp(), // Set the timestamp (server-side)
             });
         }
@@ -919,7 +922,7 @@ const Messages = () => {
             await addDoc(HistoryMessagesRef, {
                 sender: currentUser.uid, // Set the sender's ID
                 senderImg: currentUser.photoURL,
-
+                sound: "on",
                 recipient: uid, // Set the recipient's ID
                 recipientImg: recipientImg,
                 imageUrlLike: emojiState,
@@ -929,7 +932,7 @@ const Messages = () => {
             await addDoc(messagesRef, {
                 sender: currentUser.uid, // Set the sender's ID
                 senderImg: currentUser.photoURL,
-
+                sound: "on",
                 recipient: uid, // Set the recipient's ID
                 recipientImg: recipientImg,
                 imageUrlLike: emojiState,
@@ -949,7 +952,7 @@ const Messages = () => {
             await addDoc(messagesRef, {
                 sender: currentUser.uid, // Set the sender's ID
                 senderImg: currentUser.photoURL,
-
+                sound: "on",
                 recipient: uid, // Set the recipient's ID
                 recipientImg: recipientImg,
                 imageUrlLike: "https://i.ibb.co/zJfrRMv/Thumbs-Up.png",
@@ -1079,7 +1082,6 @@ const Messages = () => {
     }
 
 
-
     const handleLatestSms = async (uid, name, photo) => {
         const latestRef = collection(db, "NewMessage");
 
@@ -1094,8 +1096,6 @@ const Messages = () => {
         await addDoc(latestRef, data);
 
     };
-
-
 
 
     if (!user) {
@@ -1593,7 +1593,8 @@ const Messages = () => {
 
                                                             {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" />
                                                                 {/* {4 + 1 == 6 ? <Audio /> : ""} */}
-                                                                {message.sound === "on" ? <Audio /> : ""}
+                                                                {/* <Alert name={"ajay"}/> */}
+                                                                {message.sound === "on" ? <Audio/> : ""}
                                                             </div>}
 
                                                             <div>

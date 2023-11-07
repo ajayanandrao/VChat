@@ -9,6 +9,8 @@ import Post from '../Post/Post';
 import StoryForm from '../Story/StoryForm';
 import { AiFillMinusCircle, AiOutlineArrowUp } from 'react-icons/ai';
 import { motion, useAnimation } from 'framer-motion';
+import Audio from './../Audio';
+import Alert from './../Alert';
 
 const HomePage = () => {
     const nav = useNavigate();
@@ -204,6 +206,31 @@ const HomePage = () => {
         fetchFriends();
     }, [currentUser]);
 
+    useEffect(() => {
+        const timer = setTimeout(async () => {
+            try {
+                // Query all documents in the specific collection
+                const messageCollection = collection(db, `allFriends/${currentUser.uid}/Message`);
+                const querySnapshot = await getDocs(messageCollection);
+
+                // Iterate through the documents and update each one to set the "sound" field to null
+                querySnapshot.forEach(async (doc) => {
+                    const docRef = doc.ref;
+                    console.log(docRef);
+                    await updateDoc(docRef, {
+                        sound: "off"
+                    });
+                });
+
+                console.log('The "sound" field in all documents of the specified collection has been set to null.');
+            } catch (error) {
+                console.error('Error updating "sound" field:', error);
+            }
+        }, 5000); // 5 seconds
+
+        return () => clearTimeout(timer); // Clear the timeout if the component unmounts
+    });
+
 
     const HandleSmsSeen = (id) => {
         const smsRef = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); // Include the document ID here
@@ -283,6 +310,14 @@ const HomePage = () => {
     //     };
     // }, []);
 
+    const log = "";
+    const [otherUid, setOtherUid] = useState([]);
+    console.log(otherUid);
+    console.log(log);
+
+    const getData = (uid) => {
+        setOtherUid(uid);
+    }
 
     return (
         <div className='homepage-main-container bg-light_0 dark:bg-dark'>
@@ -335,16 +370,15 @@ const HomePage = () => {
             {/* <MobileNavebar /> */}
 
             <div className="left-side"></div>
-
             <div className="center">
                 <div className="center-div">
 
                     <div className='sms-position-div'>
                         {messages.slice(0, 1).map((sms) => {
-
                             return (
                                 <div key={sms.id}>
-                                    <Link to={`/users/${sms.userId}/message`} className='link' onClick={() => HandleSmsSeen(sms.id)}>
+
+                                    <Link to={`/users/${sms.userId}/message`} className='link' onClick={() => { HandleSmsSeen(sms.id); getData(sms.userId); }}>
                                         {sms.status === 'unseen' ? (
                                             <div className='sms-div' style={{ width: '80px', height: '80px' }}>
                                                 <div className='sms-user-ring-div' style={{ width: '60px', height: '60px' }}>
@@ -354,7 +388,9 @@ const HomePage = () => {
                                                     ) : null}
                                                     <img src={sms.photoUrl} className='sms-user-img' alt='' style={{ width: '50px', height: '50px' }} />
                                                 </div>
-                                                {sms.senderId}
+
+                                                {/* {sms.senderId} */}
+                                                {sms.sound === "on" ? <Audio /> : ""}
                                             </div>
                                         ) : null}
                                     </Link>
@@ -365,6 +401,8 @@ const HomePage = () => {
                     </div>
                     <StoryForm />
                     {/* <Audio /> */}
+                    {/* <Alert /> */}
+
                     <Post />
 
                     {loading ?
