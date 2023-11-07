@@ -3,13 +3,12 @@ import { collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, setDoc 
 import { db } from '../Firebase';
 
 import './Reals.scss';
-import { FaPlay, FaCommentAlt } from 'react-icons/fa';
+import { FaPlay } from 'react-icons/fa';
 import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineHeart } from 'react-icons/ai';
-import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill, BsFillHeartFill } from 'react-icons/bs';
+import { BsBalloonHeart, BsBalloonHeartFill, BsFillHeartFill, BsHeart, BsHeartFill, BsHearts } from 'react-icons/bs';
 import { AuthContext } from '../AuthContaxt';
 import { useNavigate } from 'react-router-dom';
-import { CircularProgress } from '@mui/material';
-
+import Heart from "react-animated-heart";
 const VideoItem = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
     const videoRef = useRef(null);
@@ -32,29 +31,32 @@ const VideoItem = ({ post }) => {
     };
 
     useEffect(() => {
-        const handleScroll = () => {
-            const video = videoRef.current;
-            const rect = video.getBoundingClientRect();
-            const isInViewport = rect.top >= 0 && rect.bottom < window.innerHeight;
-            if (isInViewport) {
-                if (video.paused) {
-                    video.play();
-                    setIsPlaying(true);
-                }
+        const video = videoRef.current;
+
+        const handleIntersection = (entries) => {
+            const [entry] = entries;
+            if (entry.isIntersecting) {
+                video.play();
+                setIsPlaying(true);
             } else {
-                if (!video.paused) {
-                    video.pause();
-                    setIsPlaying(false);
-                }
+                video.pause();
+                setIsPlaying(false);
             }
         };
 
-        window.addEventListener('scroll', handleScroll);
+        const observer = new IntersectionObserver(handleIntersection, {
+            root: null, // The viewport
+            rootMargin: '0px', // No margin
+            threshold: 0.8, // At least 50% of the video must be in view
+        });
+
+        observer.observe(video);
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            observer.unobserve(video);
         };
     }, []);
+
 
 
     const scrollToPreview = (id) => {
@@ -66,9 +68,11 @@ const VideoItem = ({ post }) => {
         if (x.style.display == 'block') {
             x.style.display = 'none';
         }
+
     };
 
     const scrollToNext = (id) => {
+
         const element = document.getElementById(`section2-${id}`);
         if (element && element.nextElementSibling) {
             element.nextElementSibling.scrollIntoView({ behavior: 'smooth' });
@@ -77,12 +81,12 @@ const VideoItem = ({ post }) => {
         if (x.style.display == 'block') {
             x.style.display = 'none';
         }
+
     };
 
     const [liked, setLiked] = useState(false);
     const [like, setLike] = useState([]);
     const [isliked, setIsliked] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const unsubscribe = onSnapshot(
@@ -148,31 +152,34 @@ const VideoItem = ({ post }) => {
     const goBack = () => {
         nav(-1);
     }
+    const [isClick, setClick] = useState(false);
 
     return (
-        <div className="reel-container bg-light_0 dark:bg-dark" id={`section2-${post.id}`}>
-            {/* <video ref={videoRef} className="reel-video" onClick={() => handleVideoBtnClick(post.id)}> */}
-            <div className="reel-inner">
-                <video className="rvideo" onClick={() => handleVideoBtnClick(post.id)}>
+        <div className="reel-scroll-div">
+            <div className="reel-mainu-div">
+                <video ref={videoRef} className="rvideo" onClick={() => handleVideoBtnClick(post.id)}>
                     <source src={post.img} type="video/mp4" />
                 </video>
+                {!isPlaying && (
+                    <a className="intro-banner-vdo-play-btn" onClick={() => handleVideoBtnClick(post.id)} target="_blank">
+                        <div className="play-button">
+                            <FaPlay className="play-button" />
+                        </div>
+                    </a>
+                )}
+
                 <div className="reels-back-button text-lightProfileName dark:text-darkProfileName">
                     <i onClick={goBack} className="bi bi-arrow-left "></i>
                 </div>
 
                 <div className="reel-like-icon">
-                    {liked ? <BsFillHeartFill color='#FF0040' className='' onClick={() => HandleLike(post.id)} /> :
-                        < AiOutlineHeart className='' onClick={() => HandleLike(post.id)} />
+
+                    {liked ? <BsHeartFill color='#FF0040' className='' onClick={() => HandleLike(post.id)} /> :
+                        <BsHeartFill className='unlike-heart' onClick={() => HandleLike(post.id)} />
                     }
                     <div className='like-count ' onClick={() => ViewLikes(post.id)}>{isliked.length}</div>
                 </div>
 
-                <div className="reel-icon-up-btn ">
-                    <AiOutlineArrowUp className='' onClick={() => scrollToPreview(post.id)} />
-                </div>
-                <div className="reel-icon-down-btn ">
-                    <AiOutlineArrowDown className='' onClick={() => scrollToNext(post.id)} />
-                </div>
                 <div className="reel-profile-div">
                     <img src={post.photoURL} className='reel-profile-img' alt="" />
                 </div>
@@ -223,13 +230,11 @@ const Reals = () => {
     });
 
     return (
-        <div className='d-flex bg-light_0 dark:bg-dark'>
-            <div className="reel-fixed bg-light_0 dark:bg-dark">
-                <div className="reel-scroll-div">
-                    {VideoData}
-                </div>
-            </div>
-        </div>
+        <>
+            <div className="reel-container bg-light_0 dark:bg-dark">
+                {VideoData}
+            </div >
+        </>
     );
 };
 
