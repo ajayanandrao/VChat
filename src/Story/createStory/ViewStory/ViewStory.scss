@@ -48,7 +48,7 @@
         font-size: 14px;
         text-transform: capitalize;
         display: flex;
-        color: black;
+        color: white;
         cursor: pointer;
 
     }
@@ -61,7 +61,7 @@
 
         .video-view-close-btn {
             font-size: 24px;
-            color: black;
+            color: white;
             cursor: pointer;
         }
     }
@@ -115,9 +115,9 @@
 
     .view-main-container {
         width: 100%;
-        max-width: 400px;
+        max-width: 350px;
         height: 100vh;
-        max-height: 600px;
+        max-height: 550px;
         // margin: 0 auto;
         border-radius: 10px;
         background-size: cover;
@@ -131,11 +131,11 @@
         .view-profile-div {
             display: flex;
             align-items: center;
-            height: 40px;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
+            height: 50px;
+            padding: 1.5rem 1rem;
+            // background: rgba(255, 255, 255, 0.1);
             // backdrop-filter: blur(10px);
-
+            
             .view-profile-img {
                 width: 35px;
                 height: 35px;
@@ -149,7 +149,7 @@
                 margin-left: 0.5rem;
                 font-size: 16px;
                 text-transform: capitalize;
-                color: black;
+                color: white;
                 cursor: pointer;
             }
 
@@ -162,7 +162,7 @@
 
                 .view-close-btn {
                     font-size: 24px;
-                    color: black;
+                    color: white;
                     cursor: pointer;
                 }
             }
@@ -194,9 +194,9 @@
             }
 
             .view-send-icon {
-                font-size: 24px;
+                font-size: 26px;
                 color: white;
-
+                cursor: pointer;
             }
 
         }

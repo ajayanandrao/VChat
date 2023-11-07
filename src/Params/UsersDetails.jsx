@@ -41,7 +41,7 @@ const UsersDetails = () => {
             <div className='skeleton-center bg-light_0 dark:bg-dark'>
                 <CircularProgress className='circularprogress' />
         </div >
-        </>;
+        </>
     }
 return (
 

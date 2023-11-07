@@ -1,13 +1,7 @@
-import { signOut } from 'firebase/auth';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, db, realdb } from '../Firebase';
 import "./HomePage.scss";
-import v from "./../Image/img/logo192.png";
-import { MdAddReaction } from 'react-icons/md';
-import { BsFillPeopleFill, BsFillPlusCircleFill, BsFillSunFill, BsMoonStarsFill } from 'react-icons/bs';
-import { RiSearchLine } from 'react-icons/ri';
-import { RxHamburgerMenu } from 'react-icons/rx';
 import Feed from '../Feed/Feed';
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
@@ -15,24 +9,9 @@ import Post from '../Post/Post';
 import StoryForm from '../Story/StoryForm';
 import { AiFillMinusCircle, AiOutlineArrowUp } from 'react-icons/ai';
 import { motion, useAnimation } from 'framer-motion';
-import Left from './Left/Left';
-import MobileNavebar from '../MobileNavbar/MobileNavebar';
-import Audio from '../Audio';
-import { off, onValue, ref } from 'firebase/database';
 
 const HomePage = () => {
     const nav = useNavigate();
-
-    const LogOut = async () => {
-        signOut(auth)
-            .then(() => {
-                // Sign-out successful.
-            })
-            .catch((error) => {
-                // An error happened.
-            });
-        nav("/");
-    };
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -266,7 +245,7 @@ const HomePage = () => {
             const diff = now - story.timestamp.toDate();
             const hoursPassed = diff / (1000 * 60 * 60); // Calculate hours passed
 
-            if (hoursPassed > 2) {
+            if (hoursPassed > 4) {
                 handleDeletePost(story.id);
             }
         });

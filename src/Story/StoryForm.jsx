@@ -112,6 +112,7 @@ const StoryForm = () => {
                                                                                 backgroundImage:
                                                                                     `url(${story.image})`
                                                                             }}>
+                                                                                
                                                                                 <img className='story-profile-img' src={story.photoUrl} alt="" />
                                                                                 <div className='new-status-blink  animate-blinkStatus'></div>
                                                                             </div>

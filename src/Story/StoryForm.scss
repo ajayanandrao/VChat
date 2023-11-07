@@ -104,7 +104,8 @@
                 position: absolute;
                 top: 0;
                 right: 0;
-                border: 2px solid #2EFEF7;
+                // border: 2px solid #2EFEF7;
+                background: red;
             }
 
         }
@@ -125,13 +126,14 @@
             }
 
             .new-status-blink {
-                width: 30px;
-                height: 30px;
+                width: 34px;
+                height: 34px;
                 border-radius: 50%;
                 position: absolute;
                 top: 0;
                 right: 0;
-                border: 2px solid #2EFEF7;
+                // border: 2px solid #2EFEF7;
+                background: linear-gradient(300deg,#CB04FF , aqua );
             }
 
             .story-profile-img {
@@ -141,8 +143,9 @@
                 object-fit: cover;
                 object-position: center;
                 position: absolute;
-                top: 0;
-                right: 0;
+                top: 2px;
+                right: 2px;
+                z-index: 1;
             }
         }
     }

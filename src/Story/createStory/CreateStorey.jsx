@@ -323,9 +323,7 @@ const CreateStorey = () => {
 
     return (
         <div className='cteateStory-main-container bg-light_0 dark:bg-dark'>
-            {/* <div id='p1' style={{ display: "none" }}>
-                <LinearProgress id="p1" style={{ display: "none" }} style={linearGradientStyle} />
-            </div> */}
+          
             <div class="progress">
                 <div class="progress-bar" role="progressbar" style={{ width: `${progress}` }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
             </div>

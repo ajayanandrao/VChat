@@ -9,7 +9,7 @@ import { MdClose } from 'react-icons/md';
 import { AiFillHeart, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
 import { styled } from '@mui/material/styles';
 import { v4, uuidv4 } from "uuid";
-import { BiSolidSend } from "react-icons/bi"
+import { BiSend, BiSolidSend } from "react-icons/bi"
 
 const ViewStory = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
@@ -87,7 +87,7 @@ const ViewStory = ({ post }) => {
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            setShowContainer(false);            
+            setShowContainer(false);
         }, 20000);
 
         const countdownInterval = setInterval(() => {
@@ -236,9 +236,8 @@ const ViewStory = ({ post }) => {
     if (!user) {
         return (
             <>
-                <div className="skeleton-center">
-                    <CircularProgress className="circularprogress" />
-
+                <div className="skeleton-center bg-light_0 dark:bg-dark">
+                    {/* <CircularProgress className="circularprogress" /> */}
                 </div>
             </>
         );
@@ -380,9 +379,12 @@ const ViewStory = ({ post }) => {
                                                 {liked ? < AiFillHeart className="view-send-icon " style={{ color: "#FF0040" }} onClick={() => handleLike(story.id)} /> :
                                                     <AiOutlineHeart className="view-send-icon " onClick={() => handleLike(story.id)} />}
 
-                                                <AiOutlineSend className="view-send-icon"
+                                                {storyComment ? <BiSolidSend color='#0080FF' className="view-send-icon"
                                                     onClick={() => handleStoryComment(story.id)}
-                                                />
+                                                /> :
+                                                    <BiSend color='white' className="view-send-icon" />
+                                                }
+
                                             </div>
 
                                         </div>
