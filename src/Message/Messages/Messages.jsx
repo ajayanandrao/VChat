@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where, writeBatch } from 'firebase/firestore';
+import { FieldValue, addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where, writeBatch } from 'firebase/firestore';
 import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { auth, db, storage } from '../../Firebase';
@@ -15,6 +15,7 @@ import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase
 import { v4 } from 'uuid';
 import "./Emoji.scss";
 import { motion } from 'framer-motion';
+import Audio from './../../Audio';
 
 import emojiJson from "./emoji.json";
 import MessageFriendList from '../MessageFriendList/MessageFriendList';
@@ -72,6 +73,44 @@ const Messages = () => {
             return () => unsubscribe();
         }
     }, [senderId, user, id]);
+
+
+    // useEffect(() => {
+    //     const sub = async () => {
+    //         console.log(messages.map((item) => item.sound));
+    //         const messagesRef = doc(db, 'messages');
+    //         await deleteDoc(messageRef,)
+    //     };
+    //     return sub();
+    // }, []);
+
+
+    useEffect(() => {
+        const timer = setTimeout(async () => {
+            try {
+                // Query all documents in the "messages" collection
+                const messagesCollection = collection(db, 'messages');
+                const querySnapshot = await getDocs(messagesCollection);
+
+                // Iterate through the documents and update each one to set the "sound" field to null
+                querySnapshot.forEach(async (doc) => {
+                    const docRef = doc.ref;
+                    await updateDoc(docRef, {
+                        sound: "off"
+                    });
+                });
+
+                console.log('The "sound" field in all documents of the "messages" collection has been set to null.');
+            } catch (error) {
+                console.error('Error deleting "sound" field:', error);
+            }
+        }, 5000); // 5 seconds
+
+        return () => clearTimeout(timer); // Clear the timeout if the component unmounts
+    });
+    // Make sure to import necessary Firebase and Firestore libraries and set up the Firestore connection (e.g., db) properly.
+
+
 
     const [historyMessage, setHistoryMessages] = useState([]);
 
@@ -365,6 +404,7 @@ const Messages = () => {
                 senderImg: currentUser.photoURL,
                 recipient: uid,
                 recipientImg: recipientImg,
+                sound: "on",
                 timestamp: serverTimestamp(),
             };
 
@@ -511,9 +551,6 @@ const Messages = () => {
                         }
                     );
                 }
-
-
-
 
                 else if (img.type.startsWith('video/')) {
                     const storageRef = ref(storage, 'messageVideos/' + v4());
@@ -1360,10 +1397,7 @@ const Messages = () => {
                                                     className={`message-bubble ${isSender ? 'message-sender' : 'message-recipient '} ${hasImage || hasVideo || hasImageLike ? 'has-image' : '' /* Add 'has-image' class when message has an image */
                                                         }`}>
 
-
-
                                                     {isDeletedBySender ?
-
                                                         // Reciver Container
                                                         (<>
                                                             {deletedBySenderUid ?
@@ -1557,7 +1591,10 @@ const Messages = () => {
                                                         // Sender Container
                                                         (<>
 
-                                                            {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" /> </div>}
+                                                            {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" />
+                                                                {/* {4 + 1 == 6 ? <Audio /> : ""} */}
+                                                                {message.sound === "on" ? <Audio /> : ""}
+                                                            </div>}
 
                                                             <div>
 

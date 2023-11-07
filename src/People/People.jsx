@@ -188,7 +188,7 @@ const People = ({ userP }) => {
                         <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon "></i>
                         {/* <FiSearch className='text-lightPostText dark:text-darkPostIcon' fontSize={"24px"} /> */}
                         <input type="text"
-                            className='People-User-input text-lightProfileName dark:text-darkPostText'
+                            className='People-User-input bg-light_0  dark:bg-darkInput text-lightProfileName dark:text-darkPostText'
                             onChange={(e) => setSearch(e.target.value)}
                             value={search}
                             placeholder='Search friends' />

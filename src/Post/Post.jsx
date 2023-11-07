@@ -371,12 +371,6 @@ const Post = () => {
 	// 	};
 	// }, []);
 
-
-	// const progressBar = document.getElementById("progress-bar");
-	// progressBar.style.width = `${progress}%`;
-	// progressBar.setAttribute("aria-valuenow", progress);
-
-	
 	return (
 		<div>
 			<div className="post-contianer ">
