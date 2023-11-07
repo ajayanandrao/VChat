@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/VChat/static/css/main.9bcbdd28.css",
-    "main.js": "/VChat/static/js/main.f08e4576.js",
+    "main.js": "/VChat/static/js/main.47758349.js",
     "static/js/787.8d308a81.chunk.js": "/VChat/static/js/787.8d308a81.chunk.js",
     "static/media/mobile4.png": "/VChat/static/media/mobile4.80d1c3aba934d273d041.png",
     "static/media/videoa.mp4": "/VChat/static/media/videoa.f35de8f81779b5f1cde5.mp4",
@@ -22,13 +22,14 @@
     "static/media/c2.png": "/VChat/static/media/c2.abe65ce8dd578e8203c5.png",
     "static/media/logo192.png": "/VChat/static/media/logo192.052f2e1cfd165966b477.png",
     "static/media/two.png": "/VChat/static/media/two.89c45307c099369334f8.png",
+    "static/media/iphone.mp3": "/VChat/static/media/iphone.640a5c6349a6f83ee38b.mp3",
     "index.html": "/VChat/index.html",
     "main.9bcbdd28.css.map": "/VChat/static/css/main.9bcbdd28.css.map",
-    "main.f08e4576.js.map": "/VChat/static/js/main.f08e4576.js.map",
+    "main.47758349.js.map": "/VChat/static/js/main.47758349.js.map",
     "787.8d308a81.chunk.js.map": "/VChat/static/js/787.8d308a81.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9bcbdd28.css",
-    "static/js/main.f08e4576.js"
+    "static/js/main.47758349.js"
   ]
 }
