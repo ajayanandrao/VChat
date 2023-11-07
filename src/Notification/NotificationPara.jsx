@@ -173,7 +173,7 @@ const NotificationPara = () => {
             <div className='skeleton-center bg-light_0 dark:bg-dark'>
                 <CircularProgress className='circularprogress' />
             </div >
-        </>;
+        </>
     }
 
     return (
@@ -196,11 +196,11 @@ const NotificationPara = () => {
                             <source src={api.img} type="video/mp4" />
                         </video>
                         {!isPlaying && (
-                            <a className="intro-banner-vdo-play-btn-noti pinkBg" onClick={handleVideoBtnClick} target="_blank">
+                            <div className="intro-banner-vdo-play-btn-noti-Comment" onClick={handleVideoBtnClick}>
                                 <div className="play-button" >
                                     <FaPlay className='play-button' />
                                 </div>
-                            </a>
+                            </div>
                         )}
                     </div>
                 ) : null}
@@ -242,7 +242,7 @@ const NotificationPara = () => {
                                         <CommentTimeAgoComponent timestamp={item.commentTime && item.commentTime.toDate()} />
                                     </div>
                                 </div>
-                                
+
                                 <div className='view-comment-delte-container'>
                                     {currentUser && currentUser.uid == item.uid ?
                                         <div className="view-comment-delete-div text-lightPostText dark:text-darkPostText">

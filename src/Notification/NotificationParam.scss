@@ -25,6 +25,7 @@
         .view-notification-time {
             // color: white;
             font-size: 14px;
+            margin-bottom: 10px;
         }
 
         .view-Post-img {
@@ -45,6 +46,15 @@
             max-height: 500px;
             position: relative;
             margin: 0 auto;
+
+            .intro-banner-vdo-play-btn-noti-Comment {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 28px;
+                color: white;
+            }
 
             .view-notification-post-video {
                 width: 100%;
@@ -108,12 +118,13 @@
             .view-comment-delete-div {
                 cursor: pointer;
             }
+
             .bg-lightDiv {
                 box-shadow: $border-input;
             }
         }
     }
 
-    
+
 
 }
