@@ -35,7 +35,10 @@ const MessageFriendList = () => {
 
     const HandleSmsSeen = (id) => {
         const smsRef = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); // Include the document ID here
-
+        closeAllDropdowns();
+        document.getElementById(`User${id}`).style.background = "#5858FA";
+        document.getElementById(`UserName${id}`).style.color = "White";
+        document.getElementById(`UserTime${id}`).style.color = "White";
         updateDoc(smsRef, {
             status: "seen"
         })
@@ -46,6 +49,23 @@ const MessageFriendList = () => {
                 console.error("Error marking message as seen:", error);
             });
     };
+
+    function closeAllDropdowns() {
+        const UserListDiv = document.querySelectorAll('.message-friend-list-div');
+        const UserListName = document.querySelectorAll('.message-friend-list-name');
+        const UserListTime = document.querySelectorAll('.message-friend-list-time');
+
+        UserListDiv.forEach(userList => {
+            userList.style.background = '';
+        });
+        UserListName.forEach(userListName => {
+            userListName.style.color = '';
+        });
+        UserListTime.forEach(userListTime => {
+            userListTime.style.color = '';
+        });
+
+    }
 
     function PostTimeAgoComponent({ timestamp }) {
         const now = new Date();
@@ -71,12 +91,12 @@ const MessageFriendList = () => {
                 return (
                     <div key={sms.id}>
                         <Link to={`/users/${sms.userId}/message`} onClick={() => HandleSmsSeen(sms.id)} className='link'>
-                            <div className='message-friend-list-div bg-[#5858FA] dark:bg-[#5858FA] text-[white] dark:text-darkProfileName'>
+                            <div id={`User${sms.id}`} className='message-friend-list-div bg-light_0  text-lightProfileName dark:bg-dark text-[white]  dark:text-darkProfileName'>
                                 <div>
                                     <img src={sms.photoUrl} className='message-friendList-img' alt="" />
                                 </div>
-                                <div className='message-friend-list-name'>{sms.name}</div>
-                                <div className='message-friend-list-time text-[white] dark:text-darkPostTime'>
+                                <div className='message-friend-list-name' id={`UserName${sms.id}`}>{sms.name}</div>
+                                <div className='message-friend-list-time text-[white] text-lightPostTime dark:text-darkPostTime' id={`UserTime${sms.id}`}>
                                     <PostTimeAgoComponent timestamp={sms.time && sms.time.toDate()} />
                                 </div>
                             </div>

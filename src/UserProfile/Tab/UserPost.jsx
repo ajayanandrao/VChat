@@ -296,7 +296,7 @@ const UserPost = ({ post }) => {
                 uploadTask.on('state_changed',
                     (snapshot) => {
                         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        console.log(`Image Upload Progress: ${progress}%`);
+                        // console.log(`Image Upload Progress: ${progress}%`);
                         setOverlayLoading(progress);
                         if (progress > 0) {
                             document.getElementById("overlayLoading").style.display = "block";
@@ -341,7 +341,7 @@ const UserPost = ({ post }) => {
                 uploadTask.on('state_changed',
                     (snapshot) => {
                         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        console.log(`Video Upload Progress: ${progress}%`);
+                        // console.log(`Video Upload Progress: ${progress}%`);
                         setOverlayLoading(progress);
                         if (progress > 0) {
                             document.getElementById("overlayLoading").style.display = "block";

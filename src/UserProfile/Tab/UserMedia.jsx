@@ -212,7 +212,7 @@ const UserMedia = () => {
                                 <div className="grid-container" >
                                     {imageMedia.map((post) => {
                                         if (currentUser.uid === post.uid)
-                                            console.log(post)
+                                            // console.log(post)
                                         return (
 
                                             <>

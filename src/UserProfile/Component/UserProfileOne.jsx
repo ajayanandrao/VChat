@@ -119,7 +119,7 @@ const ProfileOne = ({ user }) => {
 
                     // Update OnlyOnline collection photoUrl
 
-                    console.log(user.uid);
+                    // console.log(user.uid);
                     const onlineRef = doc(db, 'OnlyOnline', user.uid);
                     await updateDoc(onlineRef, { photoUrl: downloadURL });
 
@@ -154,7 +154,7 @@ const ProfileOne = ({ user }) => {
 
                     window.location.reload();
 
-                    console.log('Profile photo updated successfully!');
+                    // console.log('Profile photo updated successfully!');
                 } catch (error) {
                     console.error('Error updating profile photo:', error);
                 }
@@ -256,7 +256,7 @@ const ProfileOne = ({ user }) => {
                     uploadTask.then(async (snapshot) => {
                         const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100);
                         if (progress == 90) { off(); }
-                        console.log("Uploaded image successfully");
+                        // console.log("Uploaded image successfully");
                         const url = await getDownloadURL(imageRef);
                         setImageUrl(url);
 
@@ -266,7 +266,7 @@ const ProfileOne = ({ user }) => {
                             VideoCover: "",
                         }, { merge: true });
 
-                        console.log("Image URL added to Firestore");
+                        // console.log("Image URL added to Firestore");
                     }).catch((error) => {
                         console.error("Error uploading image", error);
                     });
@@ -290,12 +290,12 @@ const ProfileOne = ({ user }) => {
                         (snapshot) => {
                             const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes * 100);
                             if (progress < 100) {
-                                console.log(progress)
+                                // console.log(progress)
                                 document.getElementById('p1').innerHTML = progress;
                             } else {
                                 document.getElementById('p1').style.display = 'none';
                             }
-                            console.log('Loading:', progress);
+                            // console.log('Loading:', progress);
                         },
                         (error) => {
                             console.log('Error uploading video:', error);
@@ -304,14 +304,14 @@ const ProfileOne = ({ user }) => {
                             try {
                                 await uploadTask;
                                 downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                                console.log(downloadURL);
+                                // console.log(downloadURL);
 
                                 await setDoc(profileDataRef, {
                                     CoverPhoto: "",
                                     VideoCover: downloadURL,
                                 }, { merge: true });
 
-                                console.log('Video uploaded successfully');
+                                // console.log('Video uploaded successfully');
 
                                 if (downloadURL) {
                                     window.location.reload();

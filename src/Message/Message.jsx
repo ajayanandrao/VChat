@@ -126,7 +126,7 @@ const Message = () => {
                 notificationData.postSenderUid === receiverUid
                 && (notificationData.status === 'pending' || notificationData.status === 'accepted')) {
                 await deleteDoc(notificationDoc.ref);
-                console.log('Notification deleted.');
+                // console.log('Notification deleted.');
             }
         });
 
@@ -142,7 +142,7 @@ const Message = () => {
 
             if (requestDoc.exists()) {
                 await updateDoc(requestRef, { status: 'accepted' });
-                console.log('Friend request accepted!');
+                // console.log('Friend request accepted!');
 
                 // Add sender to receiver's friends list
                 await addDoc(collection(db, `allFriends/${receiverUid}/Friends`), {
@@ -173,7 +173,7 @@ const Message = () => {
                         notificationData.postSenderUid === receiverUid
                         && (notificationData.status === 'pending' || notificationData.status === 'accepted')) {
                         await deleteDoc(notificationDoc.ref);
-                        console.log('Notification deleted.');
+                        // console.log('Notification deleted.');
                     }
                 });
 
@@ -270,7 +270,7 @@ const Message = () => {
             status: "seen"
         })
             .then(() => {
-                console.log("Message marked as seen successfully.");
+                // console.log("Message marked as seen successfully.");
             })
             .catch((error) => {
                 console.error("Error marking message as seen:", error);

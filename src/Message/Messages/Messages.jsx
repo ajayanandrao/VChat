@@ -19,7 +19,6 @@ import Audio from './../../Audio';
 
 import emojiJson from "./emoji.json";
 import MessageFriendList from '../MessageFriendList/MessageFriendList';
-import Alert from '../../Alert';
 
 const Messages = () => {
     const { currentUser } = useContext(AuthContext);
@@ -101,9 +100,9 @@ const Messages = () => {
                     });
                 });
 
-                console.log('The "sound" field in all documents of the "messages" collection has been set to null.');
+                // console.log('The "sound" field in all documents of the "messages" collection has been set to null.');
             } catch (error) {
-                console.error('Error deleting "sound" field:', error);
+                // console.error('Error deleting "sound" field:', error);
             }
         }, 2000); // 5 seconds
 
@@ -143,10 +142,10 @@ const Messages = () => {
                 if (userDocSnapshot.exists()) {
                     setUser({ id: userDocSnapshot.id, ...userDocSnapshot.data() });
                 } else {
-                    console.log('No such document!');
+                    // console.log('No such document!');
                 }
             } catch (error) {
-                console.log('Error fetching user:', error);
+                // console.log('Error fetching user:', error);
             }
         };
 
@@ -424,7 +423,7 @@ const Messages = () => {
                         'state_changed',
                         (snapshot) => {
                             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                            console.log('Upload progress: ' + progress + '%');
+                            // console.log('Upload progress: ' + progress + '%');
                             if (progress < 100) {
                                 document.getElementById("progress").style.display = "block";
                             } else {
@@ -458,7 +457,7 @@ const Messages = () => {
                         // ... (progress and error handling code)
                         (snapshot) => {
                             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                            console.log('Upload progress: ' + progress + '%');
+                            // console.log('Upload progress: ' + progress + '%');
                             if (progress < 100) {
                                 document.getElementById("progress").style.display = "block";
                             } else {
@@ -475,7 +474,7 @@ const Messages = () => {
                                 newMessage.textFileUrl = fileUrl; // You can customize the field name
                                 newMessage.txtName = img.name; // You can customize the field name
                                 await addDoc(messagesRef, newMessage);
-                                console.log("txt file added successfully");
+                                // console.log("txt file added successfully");
                             } catch (error) {
                                 console.error('Error uploading text file:', error);
                             }
@@ -493,7 +492,7 @@ const Messages = () => {
                         'state_changed',
                         (snapshot) => {
                             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                            console.log('Upload progress: ' + progress + '%');
+                            // console.log('Upload progress: ' + progress + '%');
                             if (progress < 100) {
                                 document.getElementById("progress").style.display = "block";
                             } else {
@@ -510,7 +509,7 @@ const Messages = () => {
                                 newMessage.pdfUrl = fileUrl; // You can customize the field name
                                 newMessage.pdfName = img.name; // You can customize the field name
                                 await addDoc(messagesRef, newMessage);
-                                console.log("PDF file added successfully");
+                                // console.log("PDF file added successfully");
                             } catch (error) {
                                 console.error('Error uploading PDF:', error);
                             }
@@ -527,7 +526,7 @@ const Messages = () => {
                         'state_changed',
                         (snapshot) => {
                             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                            console.log('Upload progress: ' + progress + '%');
+                            // console.log('Upload progress: ' + progress + '%');
                             if (progress < 100) {
                                 document.getElementById("progress").style.display = "block";
                             } else {
@@ -544,7 +543,7 @@ const Messages = () => {
                                 newMessage.archiveUrl = fileUrl; // You can customize the field name
                                 newMessage.archiveName = img.name; // Set the field for the file name
                                 await addDoc(messagesRef, newMessage);
-                                console.log("zip/rar file added successfully");
+                                // console.log("zip/rar file added successfully");
                             } catch (error) {
                                 console.error('Error uploading archive file:', error);
                             }
@@ -562,7 +561,7 @@ const Messages = () => {
                             const progress = Math.round(
                                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                             );
-                            console.log('Upload progress:', progress);
+                            // console.log('Upload progress:', progress);
                             setLoadingProgress(progress);
                             if (progress == 100) {
                                 setImg(null);
@@ -668,7 +667,7 @@ const Messages = () => {
 
 
     const deleteMessage = async (messageId) => {
-        console.log(messageId);
+        // console.log(messageId);
         const messageRef = doc(db, 'messages', messageId);
         await deleteDoc(messageRef);
     };
@@ -691,8 +690,8 @@ const Messages = () => {
         const Query = query(CurrentFriendRef, where('userId', '==', user && user.uid));
         // console.log(user);
         // console.log(userId);
-        console.log(user.uid);
-        console.log(currentUser.uid);
+        // console.log(user.uid);
+        // console.log(currentUser.uid);
         try {
             const querySnapshot = await getDocs(Query);
 
@@ -701,12 +700,12 @@ const Messages = () => {
 
                 try {
                     await deleteDoc(doc.ref); // Use doc.ref to get the document reference
-                    console.log('Current User Message Deleted.');
+                    // console.log('Current User Message Deleted.');
                 } catch (deleteError) {
                     console.error('Error deleting friend:', deleteError);
                 }
                 if (querySnapshot.size === 0) {
-                    console.log('Friend not found');
+                    // console.log('Friend not found');
                 }
 
             });
@@ -727,12 +726,12 @@ const Messages = () => {
 
                 try {
                     await deleteDoc(doc.ref); // Use doc.ref to get the document reference
-                    console.log('User Message Deleted.');
+                    // console.log('User Message Deleted.');
                 } catch (deleteError) {
                     console.error('Error deleting friend:', deleteError);
                 }
                 if (querySnapshot.size === 0) {
-                    console.log('Friend not found');
+                    // console.log('Friend not found');
                 }
 
             });
@@ -756,7 +755,7 @@ const Messages = () => {
             });
 
             await batch.commit();
-            console.log("User's messages deleted successfully!");
+            // console.log("User's messages deleted successfully!");
         } catch (error) {
             console.error("Error deleting user's messages:", error);
         }
@@ -786,9 +785,9 @@ const Messages = () => {
             });
 
             await batch.commit();
-            console.log("User's messages marked as deleted by sender!");
+            // console.log("User's messages marked as deleted by sender!");
         } catch (error) {
-            console.error("Error marking user's messages as deleted by sender:", error);
+            // console.error("Error marking user's messages as deleted by sender:", error);
         }
     };
 
@@ -911,8 +910,35 @@ const Messages = () => {
                 timestamp: serverTimestamp(), // Set the timestamp (server-side)
             });
         }
+        const messageData1 = {
+            userId: currentUser.uid,
+            photoUrl: currentUser.photoURL,
+            status: "unseen",
+            sound: "on",
+            time: serverTimestamp(),
+
+        };
+
+        const messageData2 = {
+            userId: uid,
+            photoUrl: recipientImg,
+            status: "unseen",
+            sound: "on",
+            time: serverTimestamp(),
+        };
+
+        const docRef1 = doc(db, `allFriends/${uid}/Message`, currentUser.uid);
+        const docRef2 = doc(db, `allFriends/${currentUser.uid}/Message`, uid);
+
+        const promises = [];
+
+        promises.push(setDoc(docRef1, messageData1, { merge: true }));
+        promises.push(setDoc(docRef2, messageData2, { merge: true }));
+
+        await Promise.all(promises);
 
     }
+
     const handleSendMessageEmoji = async (uid, recipientImg, emojiState) => {
         handleMessageEmoji();
         if (senderId) {
@@ -939,6 +965,33 @@ const Messages = () => {
 
                 timestamp: serverTimestamp(), // Set the timestamp (server-side)
             });
+
+            const messageData1 = {
+                userId: currentUser.uid,
+                photoUrl: currentUser.photoURL,
+                status: "unseen",
+                sound: "on",
+                time: serverTimestamp(),
+
+            };
+
+            const messageData2 = {
+                userId: uid,
+                photoUrl: recipientImg,
+                status: "unseen",
+                sound: "on",
+                time: serverTimestamp(),
+            };
+
+            const docRef1 = doc(db, `allFriends/${uid}/Message`, currentUser.uid);
+            const docRef2 = doc(db, `allFriends/${currentUser.uid}/Message`, uid);
+
+            const promises = [];
+
+            promises.push(setDoc(docRef1, messageData1, { merge: true }));
+            promises.push(setDoc(docRef2, messageData2, { merge: true }));
+
+            await Promise.all(promises);
         }
 
     }
@@ -965,6 +1018,7 @@ const Messages = () => {
                 name: currentUser.displayName,
                 photoUrl: currentUser.photoURL,
                 status: "unseen",
+                sound:"on",
                 time: serverTimestamp(),
             };
 
@@ -973,7 +1027,7 @@ const Messages = () => {
                 name: name,
                 photoUrl: recipientImg,
                 status: "unseen",
-
+                sound:"on",
                 time: serverTimestamp(),
             };
 
@@ -1037,7 +1091,7 @@ const Messages = () => {
         setDeleteMessagePhoto(false);
         setViewVideoDiv(false);
         setReplyVideoDiv(false);
-        console.log(id);
+        // console.log(id);
         const messageRef = doc(db, 'messages', deleteMediaId);
         await deleteDoc(messageRef);
         setDeleteMediaId(null);
@@ -1046,7 +1100,7 @@ const Messages = () => {
     // END @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     const HandleShowReplyVdieo = (id, url, time) => {
-        console.log(id);
+        // console.log(id);
         setReplyVideoId(id);
         setReplyVideoDiv(!showReplyVideoDiv)
         setShowReplyVideoUrl(url);
@@ -1592,9 +1646,7 @@ const Messages = () => {
                                                         (<>
 
                                                             {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" />
-                                                                {/* {4 + 1 == 6 ? <Audio /> : ""} */}
-                                                                {/* <Alert name={"ajay"}/> */}
-                                                                {message.sound === "on" ? <Audio/> : ""}
+                                                                {message.sound === "on" ? <Audio /> : ""}
                                                             </div>}
 
                                                             <div>

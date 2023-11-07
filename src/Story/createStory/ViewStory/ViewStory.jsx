@@ -28,10 +28,10 @@ const ViewStory = ({ post }) => {
                 if (userDocSnapshot.exists()) {
                     setUser({ id: userDocSnapshot.id, ...userDocSnapshot.data() });
                 } else {
-                    console.log('No such document!');
+                    // console.log('No such document!');
                 }
             } catch (error) {
-                console.log('Error fetching user:', error);
+                // console.log('Error fetching user:', error);
             }
         };
 
@@ -109,7 +109,7 @@ const ViewStory = ({ post }) => {
         };
     }, []);
 
-    console.log(countdown)
+    // console.log(countdown)
     useEffect(() => {
         if (countdown <= 0) {
             goBack();

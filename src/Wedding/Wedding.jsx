@@ -22,7 +22,7 @@ const Wedding = () => {
         setIsOpen(false);
     };
     const handleItemDayClick = (item) => {
-        console.log(`Selected item: ${item}`);
+        // console.log(`Selected item: ${item}`);
         setIsDay(false);
         setItemDay(item);
     };
@@ -42,7 +42,7 @@ const Wedding = () => {
     };
 
     const handleItemMonthClick = (selectedItem) => {
-        console.log(`Selected month: ${selectedItem}`);
+        // console.log(`Selected month: ${selectedItem}`);
         setIsMonth(false);
         setSelectedMonth(selectedItem);
     };
@@ -64,7 +64,7 @@ const Wedding = () => {
     };
 
     const handleItemYearClick = (selectedItem) => {
-        console.log(`Selected year: ${selectedItem}`);
+        // console.log(`Selected year: ${selectedItem}`);
         setIsYear(false);
         setSelectedYear(selectedItem);
     };
@@ -103,7 +103,7 @@ const Wedding = () => {
     };
 
     const handleItemReligionClick = (item) => {
-        console.log(`Selected item: ${item}`);
+        // console.log(`Selected item: ${item}`);
         setIsOpenReligin(false);
         setItemReligin(item);
     };
@@ -149,10 +149,10 @@ const Wedding = () => {
                         const progress = Math.round(
                             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                         );
-                        console.log("Loading:", progress);
+                        // console.log("Loading:", progress);
                     },
                     (error) => {
-                        console.log("Error uploading img:", error);
+                        // console.log("Error uploading img:", error);
                     },
                     async () => {
                         try {
@@ -160,9 +160,9 @@ const Wedding = () => {
                             downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
                             saveData(downloadURL);
 
-                            console.log('img uploaded successfully');
+                            // console.log('img uploaded successfully');
                         } catch (error) {
-                            console.log('Error uploading img:', error);
+                            // console.log('Error uploading img:', error);
                         }
                     }
                 );

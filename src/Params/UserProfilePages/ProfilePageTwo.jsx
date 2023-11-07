@@ -27,17 +27,17 @@ const ProfilePageTwo = ({ user, userId }) => {
     const deleteFriend = async () => {
         const CurrentFriendRef = collection(db, `allFriends/${currentUser.uid}/Friends`);
         // console.log(user);
-        console.log(userId);
-        console.log(user.uid);
+        // console.log(userId);
+        // console.log(user.uid);
         try {
             const CurrentUserDoc = await getDoc(doc(CurrentFriendRef, userId));
 
             if (CurrentUserDoc.exists()) {
                 await deleteDoc(doc(CurrentFriendRef, userId));
-                console.log('Friend deleted successfully');
+                // console.log('Friend deleted successfully');
                 nav(-1)
             } else {
-                console.log('Friend not found');
+                // console.log('Friend not found');
             }
 
         } catch (error) {
@@ -48,7 +48,7 @@ const ProfilePageTwo = ({ user, userId }) => {
 
         try {
             await deleteDoc(RequestRef);
-            console.log('Friend Request deleted successfully');
+            // console.log('Friend Request deleted successfully');
         } catch (error) {
             console.error('Error deleting friend request:', error);
         }
@@ -62,16 +62,16 @@ const ProfilePageTwo = ({ user, userId }) => {
             const querySnapshot = await getDocs(friendsQuery);
 
             querySnapshot.forEach(async (doc) => {
-                console.log('Found user ID:', doc.data().userId);
+                // console.log('Found user ID:', doc.data().userId);
 
                 try {
                     await deleteDoc(doc.ref); // Use doc.ref to get the document reference
-                    console.log('Friend deleted successfully');
+                    // console.log('Friend deleted successfully');
                 } catch (deleteError) {
                     console.error('Error deleting friend:', deleteError);
                 }
                 if (querySnapshot.size === 0) {
-                    console.log('Friend not found');
+                    // console.log('Friend not found');
                 }
 
             });

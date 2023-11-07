@@ -44,7 +44,7 @@ const People = ({ userP }) => {
             ...prevState,
             [id]: !prevState[id]
         }));
-        console.log(id)
+        // console.log(id)
     };
 
 
@@ -81,9 +81,9 @@ const People = ({ userP }) => {
                 mainid: newFriendRequestId,
             });
 
-            console.log('Friend request sent successfully!', id);
+            // console.log('Friend request sent successfully!', id);
         } catch (error) {
-            console.error('Error sending friend request:', error);
+            // console.error('Error sending friend request:', error);
         }
     };
 
@@ -106,8 +106,8 @@ const People = ({ userP }) => {
 
     const cancelFriendRequest = async (id, senderId, otherUserId) => {
 
-        console.log("recipientId :-", otherUserId);
-        console.log("sender :-", senderId);
+        // console.log("recipientId :-", otherUserId);
+        // console.log("sender :-", senderId);
 
         try {
             const friendRequestsRef = collection(db, 'NewFriendRequests');
@@ -117,7 +117,7 @@ const People = ({ userP }) => {
                 const request = doc.data();
                 if (request.senderId === senderId && request.receiverUid === otherUserId && request.status === 'pending') {
                     deleteDoc(doc.ref);
-                    console.log('Friend request canceled.');
+                    // console.log('Friend request canceled.');
 
 
                     const notificationRef = collection(db, 'Notification');
@@ -128,7 +128,7 @@ const People = ({ userP }) => {
                             notificationData.postSenderUid === otherUserId
                             && (notificationData.status === 'pending' || notificationData.status === 'accepted')) {
                             await deleteDoc(notificationDoc.ref);
-                            console.log('Notification deleted.');
+                            // console.log('Notification deleted.');
                         }
                     });
                 }

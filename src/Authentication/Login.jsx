@@ -83,7 +83,7 @@ const Login = () => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode);
+                // console.log(errorCode);
                 setLoginLoading(false);
 
                 // Handle different error codes and display appropriate messages
@@ -194,14 +194,14 @@ const Login = () => {
                         intro: "",
                         bytime: serverTimestamp(),
                     });
-                    console.log("New user document added:");
+                    // console.log("New user document added:");
 
                 } catch (error) {
                     console.error("Error adding the user document:", error);
                 }
             } else {
                 // A document with the same UID already exists
-                console.log("User document with the same UID already exists.");
+                // console.log("User document with the same UID already exists.");
             }
 
             // await addDoc(colRef, {
@@ -245,7 +245,7 @@ const Login = () => {
             const credential = OAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
-            console.log(user);
+            // console.log(user);
             const colRef = collection(db, "users");
             const userQuery = query(colRef, where("uid", "==", currentUser.uid));
             const querySnapshot = await getDocs(userQuery);
@@ -266,14 +266,14 @@ const Login = () => {
                         intro: "",
                         bytime: serverTimestamp(),
                     });
-                    console.log("New user document added:");
+                    // console.log("New user document added:");
 
                 } catch (error) {
                     console.error("Error adding the user document:", error);
                 }
             } else {
                 // A document with the same UID already exists
-                console.log("User document with the same UID already exists.");
+                // console.log("User document with the same UID already exists.");
             }
 
 
@@ -302,7 +302,7 @@ const Login = () => {
             const credential = GithubAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
-            console.log(user);
+            // console.log(user);
             const colRef = collection(db, "users");
             const userQuery = query(colRef, where("uid", "==", currentUser.uid));
             const querySnapshot = await getDocs(userQuery);
@@ -323,14 +323,14 @@ const Login = () => {
                         intro: "",
                         bytime: serverTimestamp(),
                     });
-                    console.log("New user document added:");
+                    // console.log("New user document added:");
 
                 } catch (error) {
-                    console.error("Error adding the user document:", error);
+                    // console.error("Error adding the user document:", error);
                 }
             } else {
                 // A document with the same UID already exists
-                console.log("User document with the same UID already exists.");
+                // console.log("User document with the same UID already exists.");
             }
 
 
@@ -346,7 +346,7 @@ const Login = () => {
             const credential = GithubAuthProvider.credentialFromError(error);
 
             // Handle the error (e.g., display an error message to the user).
-            console.error('Google Authentication Error:', errorCode, errorMessage);
+            // console.error('Google Authentication Error:', errorCode, errorMessage);
 
             // You can customize the error handling based on your application's needs.
         }

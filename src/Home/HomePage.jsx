@@ -10,7 +10,6 @@ import StoryForm from '../Story/StoryForm';
 import { AiFillMinusCircle, AiOutlineArrowUp } from 'react-icons/ai';
 import { motion, useAnimation } from 'framer-motion';
 import Audio from './../Audio';
-import Alert from './../Alert';
 
 const HomePage = () => {
     const nav = useNavigate();
@@ -110,16 +109,16 @@ const HomePage = () => {
                 mainid: newFriendRequestId,
             });
 
-            console.log('Friend request sent successfully!', id);
+            // console.log('Friend request sent successfully!', id);
         } catch (error) {
-            console.error('Error sending friend request:', error);
+            // console.error('Error sending friend request:', error);
         }
     };
 
     const cancelFriendRequest = async (id, senderId, otherUserId) => {
 
-        console.log("recipientId :-", otherUserId);
-        console.log("sender :-", senderId);
+        // console.log("recipientId :-", otherUserId);
+        // console.log("sender :-", senderId);
 
         try {
             const friendRequestsRef = collection(db, 'NewFriendRequests');
@@ -129,7 +128,7 @@ const HomePage = () => {
                 const request = doc.data();
                 if (request.senderId === senderId && request.receiverUid === otherUserId && request.status === 'pending') {
                     deleteDoc(doc.ref);
-                    console.log('Friend request canceled.');
+                    // console.log('Friend request canceled.');
 
                     const notificationRef = collection(db, 'Notification');
                     const notificationQuerySnapshot = await getDocs(notificationRef);
@@ -139,7 +138,7 @@ const HomePage = () => {
                             notificationData.postSenderUid === otherUserId
                             && (notificationData.status === 'pending' || notificationData.status === 'accepted')) {
                             await deleteDoc(notificationDoc.ref);
-                            console.log('Notification deleted.');
+                            // console.log('Notification deleted.');
                         }
                     });
                 }
@@ -149,7 +148,7 @@ const HomePage = () => {
             const notificationRef = collection(db, 'Notification');
 
         } catch (error) {
-            console.error('Error canceling friend request:', error);
+            // console.error('Error canceling friend request:', error);
         }
     };
 
@@ -216,13 +215,13 @@ const HomePage = () => {
                 // Iterate through the documents and update each one to set the "sound" field to null
                 querySnapshot.forEach(async (doc) => {
                     const docRef = doc.ref;
-                    console.log(docRef);
+                    // console.log(docRef);
                     await updateDoc(docRef, {
                         sound: "off"
                     });
                 });
 
-                console.log('The "sound" field in all documents of the specified collection has been set to null.');
+                // console.log('The "sound" field in all documents of the specified collection has been set to null.');
             } catch (error) {
                 console.error('Error updating "sound" field:', error);
             }
@@ -239,7 +238,7 @@ const HomePage = () => {
             status: "seen"
         })
             .then(() => {
-                console.log("Message marked as seen successfully.");
+                // console.log("Message marked as seen successfully.");
             })
             .catch((error) => {
                 console.error("Error marking message as seen:", error);
@@ -312,8 +311,8 @@ const HomePage = () => {
 
     const log = "";
     const [otherUid, setOtherUid] = useState([]);
-    console.log(otherUid);
-    console.log(log);
+    // console.log(otherUid);
+    // console.log(log);
 
     const getData = (uid) => {
         setOtherUid(uid);

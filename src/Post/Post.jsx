@@ -106,27 +106,27 @@ const Post = () => {
 
 									// document.getElementById('p1').style.display = 'none';
 								}
-								console.log('Loading:', progress);
+								// console.log('Loading:', progress);
 								setProgress(progress);
 								updateProgressBar(progress);
 							},
 							(error) => {
-								console.log('Error uploading image:', error);
+								// console.log('Error uploading image:', error);
 							},
 							async () => {
 								try {
 									await uploadTask;
 									downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 									saveData(downloadURL);
-									console.log('Image uploaded successfully');
+									// console.log('Image uploaded successfully');
 									setProgress(0)
 								} catch (error) {
-									console.log('Error uploading image:', error);
+									// console.log('Error uploading image:', error);
 								}
 							}
 						);
 					} catch (error) {
-						console.log('Error compressing image:', error);
+						// console.log('Error compressing image:', error);
 						return;
 					}
 				} else if (img.type.startsWith('video/')) {
@@ -143,22 +143,22 @@ const Post = () => {
 
 								// document.getElementById('p1').style.display = 'none';
 							}
-							console.log('Loading:', progress);
+							// console.log('Loading:', progress);
 							setProgress(progress);
 							updateProgressBar(progress);
 						},
 						(error) => {
-							console.log('Error uploading video:', error);
+							// console.log('Error uploading video:', error);
 						},
 						async () => {
 							try {
 								await uploadTask;
 								downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 								saveData(downloadURL);
-								console.log('Video uploaded successfully');
+								// console.log('Video uploaded successfully');
 								setProgress(0);
 							} catch (error) {
-								console.log('Error uploading video:', error);
+								// console.log('Error uploading video:', error);
 							}
 						}
 					);
@@ -167,7 +167,7 @@ const Post = () => {
 				saveData(downloadURL);
 			}
 		} else {
-			console.log('No image or text entered');
+			// console.log('No image or text entered');
 		}
 	};
 

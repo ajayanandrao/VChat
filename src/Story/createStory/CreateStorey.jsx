@@ -125,7 +125,7 @@ const CreateStorey = () => {
 
                 uploadTask.on('state_changed', (snapshot) => {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log(`Upload progress: ${progress}%`);
+                    // console.log(`Upload progress: ${progress}%`);
                     setProgress(progress);
                     updateProgressBar(progress);
                 });
@@ -140,7 +140,7 @@ const CreateStorey = () => {
                     timestamp: serverTimestamp(),
                 });
 
-                console.log('Image successfully uploaded');
+                // console.log('Image successfully uploaded');
             } else {
                 const storageRef = ref(storage, `story_images/${newStoryImage.name}`);
 
@@ -148,7 +148,7 @@ const CreateStorey = () => {
 
                 uploadTask.on('state_changed', (snapshot) => {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log(`Upload progress: ${progress}%`);
+                    // console.log(`Upload progress: ${progress}%`);
                     setProgress(progress);
                     updateProgressBar(progress);
                     // Show/hide a progress indicator based on the progress percentage.
@@ -170,7 +170,7 @@ const CreateStorey = () => {
                     timestamp: serverTimestamp(),
                 });
 
-                console.log('Video successfully uploaded');
+                // console.log('Video successfully uploaded');
                 setProgress(0);
             }
 

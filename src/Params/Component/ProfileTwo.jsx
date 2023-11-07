@@ -10,7 +10,7 @@ const ProfileTwo = ({ user }) => {
     const [dataFetched, setDataFetched] = useState(false);
 
     const sendFriendRequest = async (otherUserId, otherUserName, otherUserPhotoUrl) => {
-        console.log(user.uid)
+        // console.log(user.uid)
         try {
             const newFriendRequestDocRef = await addDoc(collection(db, 'NewFriendRequests'), {
                 senderId: currentUser.uid,
@@ -43,7 +43,7 @@ const ProfileTwo = ({ user }) => {
             });
 
             // document.getElementById(`add-${id}`).style.display = 'none';
-            console.log('Friend request sent successfully!',);
+            // console.log('Friend request sent successfully!',);
         } catch (error) {
             console.error('Error sending friend request:', error);
         }
@@ -64,8 +64,8 @@ const ProfileTwo = ({ user }) => {
 
     const cancelFriendRequest = async (senderId, otherUserId, uid) => {
 
-        console.log("recipientId :-", otherUserId);
-        console.log("sender :-", senderId);
+        // console.log("recipientId :-", otherUserId);
+        // console.log("sender :-", senderId);
 
         try {
             const friendRequestsRef = collection(db, 'NewFriendRequests');
@@ -76,7 +76,7 @@ const ProfileTwo = ({ user }) => {
                 if (request.senderId === currentUser.uid && request.receiverUid === user.uid && request.status === 'pending') {
                     deleteDoc(doc.ref);
                     // console.log('Friend request canceled.');
-                    console.log('Friend request canceled.');
+                    // console.log('Friend request canceled.');
 
                     const notificationRef = collection(db, 'Notification');
                     const notificationQuerySnapshot = await getDocs(notificationRef);
@@ -84,7 +84,7 @@ const ProfileTwo = ({ user }) => {
                         const notificationData = notificationDoc.data();
                         if (notificationData.senderId === currentUser.uid && notificationData.postSenderUid === senderId && (notificationData.status === 'pending' || notificationData.status === 'accepted')) {
                             await deleteDoc(notificationDoc.ref);
-                            console.log('Notification deleted.');
+                            // console.log('Notification deleted.');
                         }
                     });
                 }

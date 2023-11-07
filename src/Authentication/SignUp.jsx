@@ -6,11 +6,11 @@ import { addDoc, collection, doc, onSnapshot, serverTimestamp, setDoc } from 'fi
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { BsFillCameraFill } from "react-icons/bs";
-import logoText from "./../Image/c2.png";
-import g from "./../Image/google.png";
-import f from "./../Image/facebook.png";
-import i from "./../Image/instagram.png";
-import user from "./../Image/user3.png";
+// import logoText from "./../Image/c2.png";
+// import g from "./../Image/google.png";
+// import f from "./../Image/facebook.png";
+// import i from "./../Image/instagram.png";
+// import user from "./../Image/user3.png";
 import vlogo from "./../Image/img/logo192.png"; 
 
 const SignUp = () => {
@@ -183,8 +183,8 @@ const SignUp = () => {
 
                 } catch (err) {
                     alert(err.message);
-                    console.log(err.message);
-                    console.log(err.code);
+                    // console.log(err.message);
+                    // console.log(err.code);
                     if (err.code == "auth/invalid-email") {
                         document.getElementById("error").innerHTML = "Invalid email";
                         return
