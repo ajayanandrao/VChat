@@ -77,6 +77,8 @@
 
     // =======================
 
+
+
     .message-emoji-Btn-div {
         border: 1px solid #ccc;
         // background: rgba(0, 0, 0, 0.082);
@@ -99,6 +101,33 @@
         }
     }
 
+}
+
+.pdfView-Option {
+    width: 150px;
+    height: 110px;
+    padding: 5px;
+    // background: red;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 65px;
+    box-shadow: $border-input;
+
+    .pdfView-item {
+        position: relative;
+        top: -10px;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        
+    }
+    .pdfView-time{
+        font-size: 11px;
+    }
 }
 
 .message-emoji-grop-div {

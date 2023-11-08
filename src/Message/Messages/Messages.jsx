@@ -6,8 +6,8 @@ import { CircularProgress } from '@mui/material';
 import "./Messages.scss";
 import { MdClose, MdDelete, MdOutlineReply, MdSend } from 'react-icons/md';
 import { FaThumbsUp } from 'react-icons/fa';
-import { BsFillCameraFill, BsThreeDots } from 'react-icons/bs';
-import { AiOutlineLink } from 'react-icons/ai';
+import { BsFillCameraFill, BsThreeDots, BsThreeDotsVertical } from 'react-icons/bs';
+import { AiFillCloseCircle, AiOutlineLink } from 'react-icons/ai';
 import { AuthContext } from '../../AuthContaxt';
 import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io"
 import { BiSend, BiSolidFilePdf, BiSolidFileTxt, BiSolidSend } from "react-icons/bi"
@@ -19,6 +19,7 @@ import Audio from './../../Audio';
 
 import emojiJson from "./emoji.json";
 import MessageFriendList from '../MessageFriendList/MessageFriendList';
+import smile from "./../../Image/emojis/simle/two.png";
 
 const Messages = () => {
     const { currentUser } = useContext(AuthContext);
@@ -103,6 +104,32 @@ const Messages = () => {
                 // console.log('The "sound" field in all documents of the "messages" collection has been set to null.');
             } catch (error) {
                 // console.error('Error deleting "sound" field:', error);
+            }
+        }, 2000); // 5 seconds
+
+        return () => clearTimeout(timer); // Clear the timeout if the component unmounts
+    });
+
+
+    useEffect(() => {
+        const timer = setTimeout(async () => {
+            try {
+                // Query all documents in the specific collection
+                const messageCollection = collection(db, `allFriends/${currentUser.uid}/Message`);
+                const querySnapshot = await getDocs(messageCollection);
+
+                // Iterate through the documents and update each one to set the "sound" field to null
+                querySnapshot.forEach(async (doc) => {
+                    const docRef = doc.ref;
+                    // console.log(docRef);
+                    await updateDoc(docRef, {
+                        sound: "off"
+                    });
+                });
+
+                // console.log('The "sound" field in all documents of the specified collection has been set to null.');
+            } catch (error) {
+                console.error('Error updating "sound" field:', error);
             }
         }, 2000); // 5 seconds
 
@@ -392,6 +419,8 @@ const Messages = () => {
     }, [currentUser]);
 
 
+
+
     const sendMessage = async (uid, name, recipientImg) => {
         try {
             const messagesRef = collection(db, 'messages');
@@ -446,6 +475,43 @@ const Messages = () => {
                     );
                 }
 
+                // Check the type of the selected file
+                else if (img.type.startsWith('audio/')) {
+                    // Create a reference to the Firebase Storage location where you want to upload the audio file
+                    const storageRef = ref(storage, `audioFiles/${img.name}`);
+
+                    // Upload the audio file
+                    try {
+                        const uploadTask = uploadBytesResumable(storageRef, img);
+
+                        uploadTask.on('state_changed',
+                            (snapshot) => {
+                                // Handle upload progress (if needed)
+                            },
+                            (error) => {
+                                console.error('Upload error:', error);
+                                // Handle the error (e.g., display an error message)
+                            },
+                            async () => {
+                                // Upload is complete, get the download URL
+                                try {
+                                    const audioUrl = await getDownloadURL(storageRef);
+                                    newMessage.AudioFileUrl = audioUrl; // You can customize the field name
+                                    newMessage.AudioName = img.name; // You can customize the field name
+                                    await addDoc(messagesRef, newMessage);
+                                    // Now you can use the audioUrl as needed, such as storing it in a message object and sending it
+                                    // You can also update your Firestore database with this URL
+                                } catch (error) {
+                                    console.error('Error getting audio URL:', error);
+                                    // Handle the error (e.g., display an error message)
+                                }
+                            }
+                        );
+                    } catch (error) {
+                        console.error('Error uploading audio file:', error);
+                        // Handle the error (e.g., display an error message)
+                    }
+                }
 
                 else if (img.type === 'text/plain') {
                     // Handle text file upload
@@ -481,7 +547,6 @@ const Messages = () => {
                         }
                     );
                 }
-
 
                 else if (img.type === 'application/pdf') {
                     // Handle PDF file upload
@@ -638,6 +703,65 @@ const Messages = () => {
             setDoc(typingRef, { isTyping: false });
         }, 2000); // Adjust the timeout duration as needed
     };
+
+    // -----------------------------------------------------------
+    const [AudioOptionTime, setAudioOptionTime] = useState(null);
+    const AudioOption = (id) => {
+        setAudioOptionTime(id);
+        const x = document.getElementById(`audioId${id}`);
+        if (x.style.display == "none") {
+            AudioOptionCloseAll();
+            x.style.display = "flex"
+        } else {
+            x.style.display = "none";
+        }
+
+        PdfOptionCloseAll();
+    }
+
+    const AudioOptionCloseAll = () => {
+        const pdfOption = document.querySelectorAll('.audio');
+        pdfOption.forEach(dropdown => {
+            dropdown.style.display = 'none';
+        });
+    }
+
+
+    const [textOptionTime, setTextOptionTime] = useState(null);
+
+    const TextOption = (id) => {
+        setTextOptionTime(id);
+        const pdfOption = document.getElementById(`textView${id}`);
+        if (pdfOption.style.display === "none") {
+            PdfOptionCloseAll();
+            AudioOptionCloseAll();
+            pdfOption.style.display = "flex";
+        } else {
+            pdfOption.style.display = "none";
+        }
+    }
+
+
+    const [pdfOptionTime, setPdfOptionTime] = useState(null);
+
+    const PdfOption = (id) => {
+        setPdfOptionTime(id);
+        const pdfOption = document.getElementById(`pdfView${id}`);
+        if (pdfOption.style.display === "none") {
+            PdfOptionCloseAll();
+            AudioOptionCloseAll();
+            pdfOption.style.display = "flex";
+        } else {
+            pdfOption.style.display = "none";
+        }
+    }
+
+    const PdfOptionCloseAll = () => {
+        const pdfOption = document.querySelectorAll('.pdfView-Option');
+        pdfOption.forEach(dropdown => {
+            dropdown.style.display = 'none';
+        });
+    }
 
     // const handleKeyEnter = (event) => {
     //     if (event.key === "Enter") {
@@ -1018,7 +1142,7 @@ const Messages = () => {
                 name: currentUser.displayName,
                 photoUrl: currentUser.photoURL,
                 status: "unseen",
-                sound:"on",
+                sound: "on",
                 time: serverTimestamp(),
             };
 
@@ -1027,7 +1151,7 @@ const Messages = () => {
                 name: name,
                 photoUrl: recipientImg,
                 status: "unseen",
-                sound:"on",
+                sound: "on",
                 time: serverTimestamp(),
             };
 
@@ -1421,6 +1545,7 @@ const Messages = () => {
 
                                     const hasTxt = !!message.textFileUrl; // Check if message has an imageUrl
                                     const hasPdf = !!message.pdfUrl; // Check if message has an imageUrl
+                                    const hasAudio = !!message.AudioFileUrl; // Check if message has an imageUrl
 
                                     const hasVideo = !!message.videoUrl; // Check if message has an imageUrl
                                     const hasImageLike = !!message.imageUrlLike; // Check if message has an imageUrl.
@@ -1757,25 +1882,136 @@ const Messages = () => {
                                                                     </div>
                                                                 }
 
+
+
+                                                                <div id={`textView${message.id}`} style={{ display: "none" }} className={`${!isSender ? 'pdfView-Option bg-[#E6E6E6] dark:bg-darkInput text-lightProfileName dark:text-darkProfileName'
+                                                                    :
+                                                                    'pdfView-Option bg-[#E6E6E6] dark:bg-darkInput text-lightProfileName dark:text-darkProfileName'
+                                                                    }`}>
+
+                                                                    {textOptionTime == message.id ? (<div>
+
+                                                                        {isSender && textOptionTime === message.id && (
+                                                                            <div className="pdfView-time">
+                                                                                {formatTimestamp(message && message.timestamp)}
+                                                                            </div>
+                                                                        )}
+                                                                        {!isSender && textOptionTime === message.id && (
+                                                                            <div className="pdfView-time">
+                                                                                {formatTimestamp(message && message.timestamp)}
+                                                                            </div>
+                                                                        )}
+
+                                                                    </div>) : null}
+
+
+                                                                    <a href={message.textFileUrl} onClick={() => TextOption(message.id)} target='blank' className='a pdfView-item'>View</a>
+                                                                    <div onClick={() => { TextOption(message.id); deleteMessage(message.id); }} className='pdfView-item' >Delete</div>
+                                                                </div>
+
+
                                                                 {hasTxt && (
-                                                                    <div onMouseEnter={() => showEmojiDelteBtn(message.id)} onMouseLeave={() => showEmojiDelteBtn(message.id)}>
-                                                                        <a className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#6453ac] dark:bg-darkReciver dark:text-darkProfileName' : "bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.textFileUrl} download={message.txtName}>
+                                                                    <div onClick={() => TextOption(message.id)}>
+                                                                        <div className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#6453ac] dark:bg-darkDiv dark:text-darkProfileName' : "bg-light_0 text-lightProfileName dark:text-darkProfileName dark:bg-darkDiv"}`}>
                                                                             <BiSolidFileTxt className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-[white]' : 'text-lightProfileName dark:text-darkProfileName'}`} />
                                                                             <div className={`${!isSender ? 'dark:text-darkProfileName text-[white]' : 'dark:text-darkProfileName text-lightProfileName'}`}>{message.txtName}</div>
-                                                                        </a>
+                                                                        </div>
                                                                     </div>
                                                                 )}
 
+
+                                                                <div id={`pdfView${message.id}`} style={{ display: "none" }} className={`${!isSender ? 'pdfView-Option bg-[#E6E6E6] dark:bg-darkInput text-lightProfileName dark:text-darkProfileName'
+                                                                    :
+                                                                    'pdfView-Option bg-[#E6E6E6] dark:bg-darkInput text-lightProfileName dark:text-darkProfileName'
+                                                                    }`}>
+
+                                                                    {pdfOptionTime == message.id ? (<div>
+
+                                                                        {isSender && pdfOptionTime === message.id && (
+                                                                            <div className="pdfView-time">
+                                                                                {formatTimestamp(message && message.timestamp)}
+                                                                            </div>
+                                                                        )}
+                                                                        {!isSender && pdfOptionTime === message.id && (
+                                                                            <div className="pdfView-time">
+                                                                                {formatTimestamp(message && message.timestamp)}
+                                                                            </div>
+                                                                        )}
+
+                                                                    </div>) : null}
+
+
+                                                                    <a href={message.pdfUrl} onClick={() => PdfOption(message.id)} target='blank' className=' pdfView-item text-lightProfileName dark:text-darkProfileName'>View</a>
+                                                                    <div onClick={() => { PdfOption(message.id); deleteMessage(message.id); }} className='pdfView-item' >Delete</div>
+                                                                </div>
 
                                                                 {hasPdf && (
-                                                                    <div onMouseEnter={() => showEmojiDelteBtn(message.id)} onMouseLeave={() => showEmojiDelteBtn(message.id)}>
-                                                                        <a className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#6453ac] dark:bg-darkReciver dark:text-darkProfileName' : "bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"}`} href={message.pdfUrl} download={message.pdfName}>
+                                                                    <div onClick={() => PdfOption(message.id)} >
+
+                                                                        <div className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#6453ac] dark:bg-darkDiv dark:text-darkProfileName' : "bg-light_0 text-lightProfileName dark:text-darkProfileName dark:bg-darkDiv"}`}>
                                                                             <BiSolidFilePdf className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-[white]' : 'text-lightProfileName dark:text-darkProfileName'}`} />
-                                                                            <div className={`${!isSender ? 'dark:text-darkProfileName text-[white]' : 'dark:text-darkProfileName text-lightProfileName'}`}>{message.pdfName}</div>
-                                                                        </a>
+                                                                            <div className={`${!isSender ? 'dark:text-darkProfileName text-[white]' : 'dark:text-darkProfileName text-lightProfileName'}`}>{message.pdfName.slice(0, 25)}</div>
+                                                                        </div>
                                                                     </div>
                                                                 )}
 
+
+
+                                                                <div id={`AudioOptionView${message.id}`} style={{ display: "none" }} className={`${!isSender ? 'pdfView-Option bg-[#E6E6E6] dark:bg-darkInput text-lightProfileName dark:text-darkProfileName'
+                                                                    :
+                                                                    'pdfView-Option bg-[#E6E6E6] dark:bg-darkInput text-lightProfileName dark:text-darkProfileName'
+                                                                    }`}>
+
+                                                                    <a href={message.pdfUrl} onClick={() => PdfOption(message.id)} target='blank' className='a pdfView-item'>View</a>
+                                                                    <div onClick={() => { PdfOption(message.id); deleteMessage(message.id); }} className='pdfView-item' >Delete</div>
+                                                                </div>
+
+
+                                                                {hasAudio && (
+                                                                    <div >
+                                                                        <div className="audio-message-div " >
+
+
+                                                                            <div className='d-flex align-itemx-center'>
+
+
+                                                                                <div className="audio-option-btn bg-light_0 dark:bg-darkDiv text-lightProfileName dark:text-darkProfileName mb-2" onClick={() => AudioOption(message.id)}>
+                                                                                    <BsThreeDotsVertical />
+                                                                                </div>
+
+                                                                                <div className='audio mb-2 text-lightProfileName dark:text-darkProfileName' id={`audioId${message.id}`} style={{ display: "none" }}>
+                                                                                    {isSender && AudioOptionTime === message.id ?
+
+                                                                                        <div className='d-flex align-items-center'>
+                                                                                            <div style={{ fontSize: "11px" }}>
+                                                                                                {formatTimestamp(message && message.timestamp)}
+                                                                                            </div>
+                                                                                            <AiFillCloseCircle onClick={() => deleteMessage(message.id)} style={{ marginLeft: "15px", fontSize: "24px", cursor: "pointer" }} />
+                                                                                        </div>
+
+                                                                                        : null}
+                                                                                    {!isSender && AudioOptionTime === message.id ?
+
+                                                                                        <div className='d-flex align-items-center'>
+                                                                                            <div style={{ fontSize: "11px" }}>
+                                                                                                {formatTimestamp(message && message.timestamp)}
+                                                                                            </div>
+                                                                                            <AiFillCloseCircle onClick={() => deleteMessage(message.id)} style={{ marginLeft: "15px", fontSize: "24px", cursor: "pointer" }} />
+                                                                                        </div>
+
+                                                                                        : null}
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                            <audio controls  >
+                                                                                <source src={message.AudioFileUrl} type="audio/mpeg" />
+                                                                            </audio>
+                                                                            {/* {!isSender ? "sdfsdf" : ""} */}
+
+                                                                        </div>
+                                                                    </div>
+                                                                )}
 
 
                                                                 {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#5858FA]  dark:bg-[#5858FA] dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkReciver"} `}
@@ -1901,7 +2137,7 @@ const Messages = () => {
 
 
                             <div ref={messageListRef} />
-                        </div>
+                        </div >
 
                     </div>
 
@@ -2014,17 +2250,26 @@ const Messages = () => {
                                         <img src={URL.createObjectURL(img)} className="device-img-selected" alt="" />
                                     </>
                                 ) : img && img.type.startsWith("application/pdf") ?
-                                    (<div className='device-document-selected'>
+                                    (<div className='device-document-selected text-lightProfileName dark:text-darkProfileName'>
                                         <BiSolidFilePdf className='device-document-icon' />
                                         <div>
                                             {img.name}
                                         </div>
                                     </div>) : img.type === "text/plain" ? (
-                                        <div className='device-document-selected'>
+                                        <div className='device-document-selected text-lightProfileName dark:text-darkProfileName'>
                                             <BiSolidFileTxt className='device-document-icon' />
                                             <div>{img.name}</div>
                                         </div>
-                                    ) : null}
+                                    ) : img.type.startsWith('audio/') ?
+
+                                        (<div className='device-document-selected text-lightProfileName dark:text-darkProfileName'>
+                                            <i class="bi bi-file-music-fill device-document-icon"></i>
+                                        </div>)
+                                        :
+                                        null
+                                }
+
+
 
                             </div>
 
@@ -2169,15 +2414,15 @@ const Messages = () => {
                     <div className='message-bottom-inner-div bg-lightDiv dark:bg-darkDiv'>
 
 
-                        <div className='message-emoji-Btn-div text-lightPostText bg-lightDiv dark:bg-darkDiv' onClick={handleMessageEmoji}>
+                        <div className='message-emoji-Btn-div text-lightPostText bg-lightDiv dark:bg-darkDiv' onClick={()=>{handleMessageEmoji();PdfOptionCloseAll();  AudioOptionCloseAll();}}>
                             {messageEmoji ?
-                                <IoIosArrowDown className='message-emoji-btn text-aqua_0' style={{ fontSize: "18px" }} />
+                                <IoIosArrowDown className='message-emoji-btn text-aqua_0' style={{ fontSize: "20px" }} />
                                 :
-                                <IoIosArrowUp className='message-emoji-btn text-aqua_0' style={{ fontSize: "18px" }} />
+                                <IoIosArrowUp className='message-emoji-btn text-aqua_0' style={{ fontSize: "20px" }} />
                             }
                         </div>
 
-                        <label htmlFor="imgFiles" onClick={() => { setImg(null); handleMessageEmojiF(); setLoadingProgress(false); setIsPlaying(false); }}>
+                        <label htmlFor="imgFiles" onClick={() => { setImg(null); handleMessageEmojiF(); setLoadingProgress(false); setIsPlaying(false); PdfOptionCloseAll();  AudioOptionCloseAll();}}>
                             <AiOutlineLink className='message-bottom-camera text-lightPostIcon dark:text-darkPostIcon' />
                         </label>
                         <input id='imgFiles' style={{ display: "none" }} type="file" onChange={(e) => setImg(e.target.files[0])} />
@@ -2189,11 +2434,11 @@ const Messages = () => {
                             value={messageInput}
                             className="message-bottom-input text-lightProfileName bg-light_0 dark:bg-darkInput dark:text-darkProfileName"
                             placeholder="Message"
-                            accept=".txt, .pdf, .zip, .rar, image/*"
+                            accept=".txt, .pdf, .zip, .rar, image/*, audio/*"
                             onKeyUp={handleTyping}
                             onKeyDown={handleKeyEnter}
                             id="messageInput" // Add an ID to your input field
-                            onClick={handleMessageEmojiF}
+                            onClick={()=>{handleMessageEmojiF(); PdfOptionCloseAll();  AudioOptionCloseAll();}}
                         />
 
                         <div>
@@ -2240,7 +2485,7 @@ const Messages = () => {
                         </div>
 
                         <div className='message-bottom-thumb-div'>
-                            <FaThumbsUp className='message-bottom-thumb text-lightPostIcon dark:text-darkPostIcon' onClick={() => SendLike(user.uid, user.name, user.userPhoto)} />
+                            <FaThumbsUp className='message-bottom-thumb text-lightPostIcon dark:text-darkPostIcon' onClick={() => {SendLike(user.uid, user.name, user.userPhoto); PdfOptionCloseAll();  AudioOptionCloseAll();}} />
                         </div>
                     </div>
                 </div>
