@@ -207,7 +207,8 @@ const MobileNavebar = () => {
                 if (item.id === currentUser.uid) {
                   return (
                     <>
-                      <div className=""> {item.theme === "dark" ? <BiSolidSun style={{fontSize:"30px"}} className="mobile-nav-icon  dark:text-darkPostIcon" />
+                      <div className=""> {item.theme === "dark" ?
+                        <BiSolidSun style={{ fontSize: "30px" }} className="mobile-nav-icon  dark:text-darkPostIcon" />
                         :
                         <FaMoon className="mobile-nav-icon text-lightPostIcon" />
                       }</div>

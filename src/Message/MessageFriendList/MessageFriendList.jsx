@@ -34,7 +34,7 @@ const MessageFriendList = () => {
     }, [currentUser]);
 
     const HandleSmsSeen = (id) => {
-        const smsRef = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); // Include the document ID here
+        const smsRef = doc(db, `allFriends/${id}/Message/${currentUser.uid}`); // Include the document ID here
         closeAllDropdowns();
         document.getElementById(`User${id}`).style.background = "#5858FA";
         document.getElementById(`UserName${id}`).style.color = "White";

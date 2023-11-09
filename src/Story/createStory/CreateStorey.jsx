@@ -25,7 +25,7 @@ import "./CreateStory.scss"
 import { LinearProgress } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiFillHeart } from 'react-icons/ai';
-import { BsFillChatFill } from 'react-icons/bs';
+import { BsFillChatFill, BsImages } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
 
 function TimeAgoComponent({ timestamp, onDelete }) {
@@ -323,7 +323,7 @@ const CreateStorey = () => {
 
     return (
         <div className='cteateStory-main-container bg-light_0 dark:bg-dark'>
-          
+
             <div class="progress">
                 <div class="progress-bar" role="progressbar" style={{ width: `${progress}` }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
             </div>
@@ -528,9 +528,11 @@ const CreateStorey = () => {
 
                         <div className='btn-inline'>
                             <label htmlFor="Add-story" onClick={handleReset}>
-                                <div className='folder'>📂</div>
+                                <div className='folder '>
+                                    <BsImages  className='text-lightProfileName dark:text-darkProfileName'/>
+                                </div>
                             </label>
-                            <button className=' btn-primary-custom' onClick={handleAddStory}>
+                            <button className='ms-3 btn-primary-custom' onClick={handleAddStory}>
                                 Add Story
                             </button>
 

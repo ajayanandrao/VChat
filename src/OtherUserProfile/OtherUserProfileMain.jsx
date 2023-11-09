@@ -34,6 +34,8 @@ const OtherUserProfileMain = () => {
         fetchUser();
     }, [id]);
 
+    
+
     if (!user) {
         return <>
             <div className='skeleton-center bg-light_0 dark:bg-dark'>

@@ -105,7 +105,7 @@ const Messages = () => {
             } catch (error) {
                 // console.error('Error deleting "sound" field:', error);
             }
-        }, 2000); // 5 seconds
+        }, 1000); // 5 seconds
 
         return () => clearTimeout(timer); // Clear the timeout if the component unmounts
     });
@@ -131,7 +131,7 @@ const Messages = () => {
             } catch (error) {
                 console.error('Error updating "sound" field:', error);
             }
-        }, 2000); // 5 seconds
+        }, 1000); // 5 seconds
 
         return () => clearTimeout(timer); // Clear the timeout if the component unmounts
     });
@@ -665,6 +665,7 @@ const Messages = () => {
                 photoUrl: currentUser.photoURL,
                 status: "unseen",
                 sound: "on",
+                photo: "unseen",
                 time: serverTimestamp(),
 
             };
@@ -1275,6 +1276,23 @@ const Messages = () => {
 
     };
 
+    const HandleSmsSeen = (id) => {
+        const smsRef = doc(db, `allFriends/${id}/Message/${currentUser.uid}`); // Include the document ID here
+        const smsRefReciver = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); 
+        updateDoc(smsRef, {
+            status: "seen",
+        })
+        updateDoc(smsRefReciver, {
+            photo: "seen",
+        })
+            .then(() => {
+                // console.log("Message marked as seen successfully.");
+            })
+            .catch((error) => {
+                console.error("Error marking message as seen:", error);
+            });
+    };
+
 
     if (!user) {
         return <>
@@ -1771,9 +1789,8 @@ const Messages = () => {
                                                         (<>
 
                                                             {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" />
-                                                                {message.sound === "on" ? <Audio /> : ""}
+                                                                {message.sound === "on" ? <><Audio /> {HandleSmsSeen(user.uid)}</> : ""}
                                                             </div>}
-
                                                             <div>
 
 
@@ -2111,6 +2128,28 @@ const Messages = () => {
                                 return null;
                             })}
 
+                            {sendedMessage.map((item) => {
+                                if (item.userId === user.uid) {
+                                    return (
+                                        <>
+
+                                            <div className='message-seen-div text-lightPostIcon dark:text-darkPostIcon'>
+
+                                                <div className="seen-check-mark">
+
+                                                    {item.status == "seen" ? <i class="bi bi-check2-all" style={{ color: "#40FF00" }}></i>
+                                                        :
+                                                        null
+                                                    }
+
+                                                </div>
+
+                                            </div>
+                                        </>
+                                    )
+                                }
+                            })}
+
 
                             {typingS.map((item) => {
                                 if (user.uid === item.id) {
@@ -2414,7 +2453,7 @@ const Messages = () => {
                     <div className='message-bottom-inner-div bg-lightDiv dark:bg-darkDiv'>
 
 
-                        <div className='message-emoji-Btn-div text-lightPostText bg-lightDiv dark:bg-darkDiv' onClick={()=>{handleMessageEmoji();PdfOptionCloseAll();  AudioOptionCloseAll();}}>
+                        <div className='message-emoji-Btn-div text-lightPostText bg-lightDiv dark:bg-darkDiv' onClick={() => { handleMessageEmoji(); PdfOptionCloseAll(); AudioOptionCloseAll(); }}>
                             {messageEmoji ?
                                 <IoIosArrowDown className='message-emoji-btn text-aqua_0' style={{ fontSize: "20px" }} />
                                 :
@@ -2422,7 +2461,7 @@ const Messages = () => {
                             }
                         </div>
 
-                        <label htmlFor="imgFiles" onClick={() => { setImg(null); handleMessageEmojiF(); setLoadingProgress(false); setIsPlaying(false); PdfOptionCloseAll();  AudioOptionCloseAll();}}>
+                        <label htmlFor="imgFiles" onClick={() => { setImg(null); handleMessageEmojiF(); setLoadingProgress(false); setIsPlaying(false); PdfOptionCloseAll(); AudioOptionCloseAll(); }}>
                             <AiOutlineLink className='message-bottom-camera text-lightPostIcon dark:text-darkPostIcon' />
                         </label>
                         <input id='imgFiles' style={{ display: "none" }} type="file" onChange={(e) => setImg(e.target.files[0])} />
@@ -2438,7 +2477,7 @@ const Messages = () => {
                             onKeyUp={handleTyping}
                             onKeyDown={handleKeyEnter}
                             id="messageInput" // Add an ID to your input field
-                            onClick={()=>{handleMessageEmojiF(); PdfOptionCloseAll();  AudioOptionCloseAll();}}
+                            onClick={() => { handleMessageEmojiF(); PdfOptionCloseAll(); AudioOptionCloseAll(); }}
                         />
 
                         <div>
@@ -2485,7 +2524,7 @@ const Messages = () => {
                         </div>
 
                         <div className='message-bottom-thumb-div'>
-                            <FaThumbsUp className='message-bottom-thumb text-lightPostIcon dark:text-darkPostIcon' onClick={() => {SendLike(user.uid, user.name, user.userPhoto); PdfOptionCloseAll();  AudioOptionCloseAll();}} />
+                            <FaThumbsUp className='message-bottom-thumb text-lightPostIcon dark:text-darkPostIcon' onClick={() => { SendLike(user.uid, user.name, user.userPhoto); PdfOptionCloseAll(); AudioOptionCloseAll(); }} />
                         </div>
                     </div>
                 </div>

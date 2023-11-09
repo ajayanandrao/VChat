@@ -264,10 +264,15 @@ const Message = () => {
     // ========================================================
 
     const HandleSmsSeen = (id) => {
-        const smsRef = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); // Include the document ID here
+
+        const smsRef = doc(db, `allFriends/${id}/Message/${currentUser.uid}`); // Include the document ID here
+        const smsRefReciver = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); // Include the document ID here
 
         updateDoc(smsRef, {
-            status: "seen"
+            status: "seen",
+        })
+        updateDoc(smsRefReciver, {
+            photo: "seen",
         })
             .then(() => {
                 // console.log("Message marked as seen successfully.");
@@ -366,14 +371,12 @@ const Message = () => {
 
                                         return (
                                             <div key={sms.id}>
-                                                <Link to={`/users/${sms.userId}/message`} className='link'>
+                                                <Link to={`/users/${sms.userId}/message`} className='link' onClick={() => HandleSmsSeen(sms.id)}>
                                                     <div className='sms-div'>
                                                         <div className=" sms-user-ring-div">
-                                                            {/* {sms.status === "unseen" ? <div className="sms-user-ring"></div> : ""} */}
                                                             <img src={sms.photoUrl} className='sms-user-img' alt="" />
-
                                                         </div>
-                                                        <div className='sms-name' onClick={() => HandleSmsSeen(sms.id)}>{sms.name}</div>
+                                                        <div className='sms-name' >{sms.name}</div>
                                                         <PostTimeAgoComponent timestamp={sms.time && sms.time.toDate()} />
                                                     </div>
                                                 </Link>

@@ -194,6 +194,10 @@ const Login = () => {
                         intro: "",
                         bytime: serverTimestamp(),
                     });
+
+                    const userPreferencesRef = doc(db, 'UserPreferences', currentUser.uid);
+                    await setDoc(userPreferencesRef, { theme: "light" });
+
                     // console.log("New user document added:");
 
                 } catch (error) {
@@ -266,6 +270,10 @@ const Login = () => {
                         intro: "",
                         bytime: serverTimestamp(),
                     });
+
+                    const userPreferencesRef = doc(db, 'UserPreferences', currentUser.uid);
+                    await setDoc(userPreferencesRef, { theme: "light" });
+
                     // console.log("New user document added:");
 
                 } catch (error) {
@@ -306,6 +314,9 @@ const Login = () => {
             const colRef = collection(db, "users");
             const userQuery = query(colRef, where("uid", "==", currentUser.uid));
             const querySnapshot = await getDocs(userQuery);
+
+            const userPreferencesRef = doc(db, 'UserPreferences', currentUser.uid);
+            await setDoc(userPreferencesRef, { theme: "light" });
 
             if (querySnapshot.empty) {
                 try {

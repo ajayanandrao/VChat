@@ -177,6 +177,7 @@ const HomePage = () => {
     };
 
     const [messages, setMessages] = useState([]);
+    const [messagesReciver, setMessagesReciver] = useState([]);
 
     useEffect(() => {
         const fetchFriends = async () => {
@@ -225,17 +226,21 @@ const HomePage = () => {
             } catch (error) {
                 console.error('Error updating "sound" field:', error);
             }
-        }, 5000); // 5 seconds
+        }, 1000); // 5 seconds
 
         return () => clearTimeout(timer); // Clear the timeout if the component unmounts
     });
 
 
     const HandleSmsSeen = (id) => {
-        const smsRef = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); // Include the document ID here
+        const smsRef = doc(db, `allFriends/${id}/Message/${currentUser.uid}`); // Include the document ID here
+        const smsRefPhoto = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); // Include the document ID here
 
         updateDoc(smsRef, {
             status: "seen"
+        })
+        updateDoc(smsRefPhoto, {
+            photo: "seen"
         })
             .then(() => {
                 // console.log("Message marked as seen successfully.");
@@ -378,11 +383,11 @@ const HomePage = () => {
                                 <div key={sms.id}>
 
                                     <Link to={`/users/${sms.userId}/message`} className='link' onClick={() => { HandleSmsSeen(sms.id); getData(sms.userId); }}>
-                                        {sms.status === 'unseen' ? (
+                                        {sms.photo === 'unseen' ? (
                                             <div className='sms-div' style={{ width: '80px', height: '80px' }}>
                                                 <div className='sms-user-ring-div' style={{ width: '60px', height: '60px' }}>
 
-                                                    {sms.status === 'unseen' ? (
+                                                    {sms.photo === 'unseen' ? (
                                                         <div className='sms-user-ring' style={{ width: '60px', height: '60px' }}></div>
                                                     ) : null}
                                                     <img src={sms.photoUrl} className='sms-user-img' alt='' style={{ width: '50px', height: '50px' }} />

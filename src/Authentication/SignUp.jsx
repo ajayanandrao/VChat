@@ -11,7 +11,7 @@ import { BsFillCameraFill } from "react-icons/bs";
 // import f from "./../Image/facebook.png";
 // import i from "./../Image/instagram.png";
 // import user from "./../Image/user3.png";
-import vlogo from "./../Image/img/logo192.png"; 
+import vlogo from "./../Image/img/logo192.png";
 
 const SignUp = () => {
 
@@ -135,7 +135,10 @@ const SignUp = () => {
                                     email: email,
                                     photoUrl: downloadURL,
                                     presenceTime: new Date(),
-                                })
+                                });
+
+                                const userPreferencesRef = doc(db, 'UserPreferences', res.user.uid);
+                                await setDoc(userPreferencesRef, { theme: "light" });
 
                                 const PresenceRefOnline = doc(db, "OnlyOnline", res.user.uid);
 
@@ -193,6 +196,8 @@ const SignUp = () => {
             }
 
         }
+
+
 
         setImg(null);
         setName("");
