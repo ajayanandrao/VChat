@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import "./Wellcome.scss";
 import { motion } from 'framer-motion';
 import v from "./../Image/img/logo192.png";
-import { IoIosArrowForward } from 'react-icons/io';
+import { IoIosArrowForward, IoMdGitMerge } from 'react-icons/io';
 import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContaxt';
+import { FaChevronRight } from 'react-icons/fa';
 
 const Wellcome = () => {
     const { currentUser } = useContext(AuthContext);
@@ -25,14 +26,13 @@ const Wellcome = () => {
         return unsub;
     }, []);
 
-    const [showWelcome, setShowWelcome] = useState(true);
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            setShowWelcome(false);
-        }, 3500); // Set the duration (in milliseconds) after which you want to hide the element
-
-        return () => clearTimeout(timeout);
-    }, []);
+        userPhoto.map((item) => {
+            if (currentUser && currentUser.uid === item.id && item.seen == "WelcomTrue") {
+                return nav("/home");
+            }
+        });
+    });
 
     const handleWelcomeFalse = async () => {
         console.log(currentUser.uid)
@@ -47,13 +47,82 @@ const Wellcome = () => {
         nav("/home");
     };
 
+    const [wellcome, setWellcome] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setWellcome(false);
+        }, 8000);
+        return () => clearTimeout(timer);
+    }, []);
 
 
     return (
 
-        <>
+        <div className='wellcome-main-container bg-lightDiv dark:bg-dark '>
+            {/* <div className="left"></div> */}
+            <div className="wellcome-inner-div">
+                {userPhoto.map((item) => {
+                    if (currentUser && currentUser.uid === item.id) {
+                        return (
+                            <>
 
-            {
+                                {item && item.userPhoto ? (
+                                    <>
+                                        <div className="user-wrapper">
+
+
+                                            {wellcome ?
+                                                <motion.div
+                                                    transition={{ duration: 1.5, delay: 0.5 }}
+                                                    initial={{ opacity: 0, y: -100 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    className='user-name'>Welcome</motion.div>
+                                                :
+                                                (
+                                                    <>
+                                                        <motion.div
+                                                            transition={{ duration: 1.5, delay: 0.8 }}
+                                                            initial={{ opacity: 0, y: -70 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                        >
+                                                            <motion.img
+                                                                transition={{ duration: 1.5, delay: 0.8 }}
+                                                                initial={{ opacity: 0, y: -70 }}
+                                                                animate={{ opacity: 1, y: 0 }}
+                                                                src={item.userPhoto} className='user-photo' alt="" />
+                                                        </motion.div>
+
+                                                        <motion.div
+                                                            transition={{ duration: 1.5, delay: 0.8 }}
+                                                            initial={{ opacity: 0, y: 70 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            className="user-name">{item.name}</motion.div>
+                                                        <motion.div
+                                                            transition={{ duration: 1.5, delay: 2.6 }}
+                                                            initial={{ opacity: 0, }}
+                                                            animate={{ opacity: 1, }}
+                                                            className="user-home-btn" onClick={handleWelcomeFalse}>
+                                                            <FaChevronRight id='chevronR' />
+                                                        </motion.div>
+
+                                                    </>
+                                                )
+                                            }
+
+                                        </div>
+                                    </>
+                                )
+                                    :
+                                    null
+                                }
+                            </>
+                        )
+                    }
+                })}
+            </div>
+
+            {/* {
                 loading ? (<div className='welcome-loading-div'>Loaidng...</div>)
                     :
                     (<>
@@ -159,8 +228,8 @@ const Wellcome = () => {
                             }
                         })}
                     </>)
-            }
-        </>
+            } */}
+        </div >
     )
 }
 

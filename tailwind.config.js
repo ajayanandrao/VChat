@@ -12,8 +12,8 @@ module.exports = {
         blue_0: "#0000FF",  // Replace with your desired blue color
         blueBackground: "#ADD8E6",
 
-        light_0: " #F5F5F5",
-        lightDiv: "#FFFFFF",
+        light_0: "#FAFAFA",
+        lightDiv: "white",
 
         lightProfile: "#404040",
         lightProfileName: "#101010",

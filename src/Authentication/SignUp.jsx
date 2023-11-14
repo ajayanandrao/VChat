@@ -223,7 +223,7 @@ const SignUp = () => {
 
                     <div className="brand-wrapper">
                         <div>
-                            <img src={vlogo} width={"50px"} alt="" />
+                            <img src={vlogo} width={"40px"} alt="" />
                         </div>
                         <div className='brand-name'>  Chat App </div>
                     </div>

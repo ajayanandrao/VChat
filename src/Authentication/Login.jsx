@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from 'react'
 import "./NewLogin.scss"
 import { Link, useNavigate } from 'react-router-dom'
@@ -17,6 +18,10 @@ import google from "./../Image/img/google.png";
 import git from "./../Image/img/github.png";
 import microsoft from "./../Image/img/microsoft2.png";
 import { getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+import chat from "./../Image/img/chat.mp4"
+import cover from "./../Image/img/cover.mp4"
+import loginPage from "./../loginjson.json";
+import { FaChevronDown, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 const Login = () => {
     const { currentUser } = useContext(AuthContext);
@@ -208,21 +213,6 @@ const Login = () => {
                 // console.log("User document with the same UID already exists.");
             }
 
-            // await addDoc(colRef, {
-            //     uid: user.uid,
-            //     name: user.displayName,
-            //     email: user.email,
-            //     PhotoUrl: user.photoURL,
-            //     accessToken: user.accessToken,
-
-            //     school: "",
-            //     college: "",
-            //     work: "",
-            //     from: "",
-            //     intro: "",
-            //     bytime: serverTimestamp(),
-            // });
-
 
         } catch (error) {
             // Handle Errors here.
@@ -281,9 +271,7 @@ const Login = () => {
                 }
             } else {
                 // A document with the same UID already exists
-                // console.log("User document with the same UID already exists.");
             }
-
 
         } catch (error) {
             // Handle Errors here.
@@ -296,10 +284,7 @@ const Login = () => {
             // You can also get the AuthCredential type used for the error, if available.
             const credential = OAuthProvider.credentialFromError(error);
 
-            // Handle the error (e.g., display an error message to the user).
             console.error('Google Authentication Error:', errorCode, errorMessage);
-
-            // You can customize the error handling based on your application's needs.
         }
     };
 
@@ -341,7 +326,6 @@ const Login = () => {
                 }
             } else {
                 // A document with the same UID already exists
-                // console.log("User document with the same UID already exists.");
             }
 
 
@@ -349,21 +333,29 @@ const Login = () => {
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
-
-            // If the error provides additional email information:
             const email = error.email;
 
-            // You can also get the AuthCredential type used for the error, if available.
             const credential = GithubAuthProvider.credentialFromError(error);
-
-            // Handle the error (e.g., display an error message to the user).
-            // console.error('Google Authentication Error:', errorCode, errorMessage);
-
-            // You can customize the error handling based on your application's needs.
         }
     };
 
 
+    const scrollToNext = (id) => {
+        const element = document.getElementById(`section2-${id}`);
+        if (element && element.nextElementSibling) {
+            element.nextElementSibling.scrollIntoView({ behavior: 'smooth' });
+        }
+
+    };
+
+
+    const scrollToIdOne = (id) => {
+        const element = document.getElementById(`section2-1`);
+
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     return (
         <>
@@ -379,81 +371,116 @@ const Login = () => {
 
                 <div className='loging-container'>
 
+                    {/* <video className="login-video" src={chat} autoPlay muted loop /> */}
+
                     <div className="login-div">
                         <div className="login-div-inner">
 
-                            <div className="brand-wrapper">
-                                <div>
-                                    <img src={vlogo} width={"40px"} alt="" />
-                                </div>
-                                <div className='brand-name'> Chat App </div>
-                            </div>
+                            {loginPage.map((item) => {
+                                return (
+                                    <div id={`section2-${item.id}`} key={`section2-${item.id}`}>
 
-                            <div className="login-form-wrapper">
-                                <input className="login-inputs " type="email"
-                                    placeholder="Email"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    value={email}
-                                />
-                                <input className="login-inputs " type="password"
-                                    placeholder="Password"
-                                    onChange={(e) => setPass(e.target.value)}
-                                    value={password}
-                                    onKeyDown={handleKeyDown}
-                                />
+                                        <div className={`${item.id == 1 ? "login" : "loginpage"} `}>
+                                            {item.id == 1 ?
+                                                (<div id={`section2-${item.id}`}>
+                                                    <div className="brand-wrapper">
+                                                        <div className="loginpage-btn btn btn-primary" onClick={() => scrollToNext(item.id)}>
+                                                            <FaChevronRight className='loginpage-btn-icon' />
+                                                        </div>
+                                                        <div>
+                                                            <img src={vlogo} width={"40px"} alt="" />
+                                                        </div>
+                                                        <div className='brand-name'> Chat App </div>
+                                                    </div>
+
+                                                    <div className="login-form-wrapper">
+                                                        <input className="login-inputs " type="email"
+                                                            placeholder="Email"
+                                                            onChange={(e) => setEmail(e.target.value)}
+                                                            value={email}
+                                                        />
+                                                        <input className="login-inputs " type="password"
+                                                            placeholder="Password"
+                                                            onChange={(e) => setPass(e.target.value)}
+                                                            value={password}
+                                                            onKeyDown={handleKeyDown}
+                                                        />
 
 
-                                <div className="" id="error-alert" ></div>
+                                                        <div className="" id="error-alert" ></div>
 
-                                <button className=" btn btn-primary w-100 my-3 btn-shadow" style={{ borderRadius: "30px", fontSize: "18px", padding: "3px 10px" }} onClick={login} >
-                                    {loginloading ?
-                                        <CircularProgress style={{ color: "white", width: "16px", height: "16px" }} />
-                                        :
-                                        "Log in"
-                                    }
-                                </button>
-                                <Link to="/forgotPassword/" className='forgot-text'>Forgotten password?</Link>
+                                                        <button className=" btn btn-primary w-100 my-3 btn-shadow" style={{ borderRadius: "30px", fontSize: "18px", padding: "3px 10px" }} onClick={login} >
+                                                            {loginloading ?
+                                                                <CircularProgress style={{ color: "white", width: "16px", height: "16px" }} />
+                                                                :
+                                                                "Log in"
+                                                            }
+                                                        </button>
+                                                        <Link to="/forgotPassword/" className='forgot-text'>Forgotten password?</Link>
 
-                                <div className="auth-link-or-div">
-                                    <div className="auth-link-left-border"><div className="left-bordr"></div></div>
-                                    <div className="auth-link-or">or</div>
-                                    <div className="auth-link-left-border"><div className="left-bordr"></div></div>
-                                </div>
+                                                        <div className="auth-link-or-div">
+                                                            <div className="auth-link-left-border"><div className="left-bordr"></div></div>
+                                                            <div className="auth-link-or">or</div>
+                                                            <div className="auth-link-left-border"><div className="left-bordr"></div></div>
+                                                        </div>
 
-                                <div className='auth-link-div'>
-                                    <div className=' '>
-                                        <img src={google} className='login-with' alt="" onClick={HandleGoogleAuth} />
+                                                        <div className='auth-link-div'>
+                                                            <div className=' '>
+                                                                <img src={google} className='login-with' alt="" onClick={HandleGoogleAuth} />
+                                                            </div>
+
+                                                            <div className=' '>
+                                                                <img src={microsoft} className='login-with' style={{ width: "30px", height: "30px" }} alt="" onClick={HandleMicrosoftAuth} />
+                                                            </div>
+
+                                                            <div className=' '>
+                                                                <img src={git} className='login-with' alt="" onClick={HandleGitHubAuth} />
+                                                            </div>
+                                                        </div>
+
+
+                                                        <Link to="/signUp/" className='link'>
+                                                            <button className="btn btn-link w-100 " style={{ borderRadius: "30px" }}>Create New Account</button>
+                                                        </Link>
+                                                    </div>
+                                                </div>)
+                                                :
+                                                (
+                                                    <>
+                                                        <div className='login-video-div'>
+                                                            {item.id == 4 ?
+                                                                <div className="loginpage-btn btn btn-primary" onClick={() => scrollToIdOne(item.id)}>
+                                                                    <FaChevronLeft className='loginpage-btn-iconLeft' />
+                                                                </div>
+                                                                :
+                                                                <div className="loginpage-btn btn btn-primary" onClick={() => scrollToNext(item.id)}>
+                                                                    <FaChevronRight className='loginpage-btn-icon' />
+                                                                </div>
+                                                            }
+                                                            <video className='login-video' autoPlay muted loop src={item.video}></video>
+                                                        </div>
+                                                    </>
+                                                )
+                                            }
+                                        </div>
                                     </div>
-
-                                    <div className=' '>
-                                        <img src={microsoft} className='login-with' style={{ width: "30px", height: "30px" }} alt="" onClick={HandleMicrosoftAuth} />
-                                    </div>
-
-                                    <div className=' '>
-                                        <img src={git} className='login-with' alt="" onClick={HandleGitHubAuth} />
-                                    </div>
-                                </div>
+                                )
+                            })}
 
 
-                                <Link to="/signUp/" className='link'>
-                                    <button className="btn btn-link w-100 " style={{ borderRadius: "30px" }}>Create New Account</button>
-                                </Link>
-
-                            </div>
                         </div>
                     </div>
+
+                    {/* <video className="login-videotwo" src={cover} autoPlay muted loop /> */}
+
                 </div >
 
             )}
 
-            {/* {showFooter && (
-                <div className='forgott-footer-bottom'>
-                    Copyright © VChat App 2023.
-                </div>
-            )} */}
 
         </>
     )
 }
 
 export default Login
+

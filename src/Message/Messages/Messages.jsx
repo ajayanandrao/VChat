@@ -426,6 +426,9 @@ const Messages = () => {
             const messagesRef = collection(db, 'messages');
             const currentUser = auth.currentUser;
 
+            const typingRef = doc(db, 'typingStatus', currentUser && currentUser.uid);
+            setDoc(typingRef, { isTyping: false });
+
             // Prepare the new message object
             const newMessage = {
                 sender: currentUser.uid,
@@ -1278,7 +1281,7 @@ const Messages = () => {
 
     const HandleSmsSeen = (id) => {
         const smsRef = doc(db, `allFriends/${id}/Message/${currentUser.uid}`); // Include the document ID here
-        const smsRefReciver = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); 
+        const smsRefReciver = doc(db, `allFriends/${currentUser.uid}/Message/${id}`);
         updateDoc(smsRef, {
             status: "seen",
         })
@@ -2034,9 +2037,9 @@ const Messages = () => {
                                                                 {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#5858FA]  dark:bg-[#5858FA] dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkReciver"} `}
                                                                     onClick={() => showReplyButton(message.id)}
                                                                     onMouseLeave={hideReplyButton}
-                                                                    style={{width:"150px"}}
+                                                                    style={{ width: "150px" }}
                                                                 >
-                                                                    {/* {message.message} */}
+                                                                    {message.message}
 
                                                                     <br />
                                                                     {hoveredMessageId === message.id ?
@@ -2152,7 +2155,7 @@ const Messages = () => {
                             })}
 
 
-                            {/* {typingS.map((item) => {
+                            {typingS.map((item) => {
                                 if (user.uid === item.id) {
                                     return (
                                         <div style={{ color: "black" }}>
@@ -2170,7 +2173,7 @@ const Messages = () => {
                                         </div>
                                     )
                                 }
-                            })} */}
+                            })}
 
 
 
