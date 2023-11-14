@@ -1,0 +1,67 @@
+[
+    {
+        "id": 1,
+        "name": "eye clinik",
+        "location": "shivaji nagar mehakar",
+        "doctorName": "vishal deshmukh",
+        "time": "10Am to 6Pm",
+        "img": "https://images1-fabric.practo.com/practices/1163256/refracto-eye-hospitals-hyderabad-5a3276d709377.jpg",
+        "contact": "4532242244",
+        "taluka": "mehakar",
+        "dist": "buldhana",
+        "pincode": "431401",
+        "qulification":"mbbs"
+    },
+    {
+        "id": 2,
+        "name": " Hospital",
+        "location": "bastand Road  mehakar",
+        "doctorName": "vishal deshmukh",
+        "time": "10Am to 6Pm",
+        "img": "https://cdn.systematic.com/media/g0sj1tbg/hospital-building-001-global.jpg?mode=crop&width=1200&height=630&center=",
+        "contact": "4532242244",
+        "taluka": "mehakar",
+        "dist": "buldhana",
+        "pincode": "431401",
+        "qulification":"mbbs"
+    },
+    {
+        "id": 3,
+        "name": "Heart Care Hospital",
+        "location": "shivaji nagar mehakar",
+        "doctorName": "vishal deshmukh",
+        "time": "10Am to 6Pm",
+        "img": "https://www.tourmyindia.com/medical-tourism/blog/wp-content/uploads/2016/10/1464256635-756x485.jpg",
+        "contact": "4532242244",
+        "taluka": "Aurangabad",
+        "dist": "Aurangabad",
+        "pincode": "431401",
+        "qulification":"mbbs"
+    },
+    {
+        "id": 4,
+        "name": "Dental Hospital",
+        "location": "ashok nagar mehakar",
+        "doctorName": "vishal deshmukh",
+        "time": "10Am to 6Pm",
+        "img": "https://dentalclinickolkata.in/chinarpark/dental-clinic-in-chinarpark--newtownkolkata.webp",
+        "contact": "4532242244",
+        "taluka": "jintur",
+        "dist": "parbhani",
+        "pincode": "431401",
+        "qulification":"mbbs"
+    },
+    {
+        "id": 5,
+        "name": "Bone Hospital",
+        "location": "Bhim nagar mehakar",
+        "doctorName": "vishal deshmukh",
+        "time": "10Am to 6Pm",
+        "img": "https://content.jdmagicbox.com/comp/bhatinda/j7/9999px164.x164.150807174330.d4j7/catalogue/dd-bone-and-joint-hospital-veer-colony-bhatinda-arthritis-doctors-dso877t6ma.jpg?clr=#403326",
+        "contact": "4532242244",
+        "taluka": "lonar",
+        "dist": "buldhana",
+        "pincode": "431401",
+        "qulification":"mbbs"
+    }
+]

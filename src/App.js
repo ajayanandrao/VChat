@@ -47,6 +47,9 @@ import Left from './Home/Left/Left';
 import Rtime from './Rtime/Rtime';
 import Feedback from './Setting/Feedback/Feedback';
 import RealWork from './Reals/RealWork';
+import HospitalPage from './Hospital/HospitalPage';
+import AddHospitals from './Hospital/AddHospitals';
+import Vgallery from './Vgallery/Vgallery';
 
 function App() {
 
@@ -212,6 +215,10 @@ function App() {
               <Route path="WeddingList" element={<WeddingList />} />
               <Route path="AddWedding" element={<Wedding />} />
               <Route path="WeddingList/:id" element={<WeddingListDetail />} />
+
+              <Route path='gallery' element={<Vgallery />} />
+              <Route path='hospitals' element={<HospitalPage />} />
+              <Route path='add_hospitals' element={<AddHospitals />} />
 
               <Route path='users' element={<Users />} />
               <Route path='createStory' element={<CreateStorey />} />

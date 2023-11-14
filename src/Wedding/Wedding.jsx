@@ -229,19 +229,24 @@ const Wedding = () => {
 
 
     return (
-        <>
+        <div className='d-flex'>
+            <div className="left"></div>
             <div className='add-wedding-container bg-light_0 dark:bg-dark'>
-
-                <div>
+                <div className='d-flex justify-content-center'>
+                    {/* <div className="left"></div> */}
                     <div className='add-wedding-cover-img' style={{
                         backgroundImage: `url("https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg")`
                     }}>
 
                         <LeftArro />
 
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(0, 0, 0, 0.30)", width: "100%", height: "100%" }}>
-                            <h2 style={{ color: "white", textAlign: "center", marginTop: "30px" }} className='text-3xl'>Matrimony Profile <div id='l'></div> </h2>
+                        <div className="add-wedding-cover-color">
+
+                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(0, 0, 0, 0.30)", width: "100%", height: "100%" }}>
+                                <h2 style={{ color: "white", textAlign: "center", marginTop: "30px" }} className='matrimony-text'>Matrimony Profile <div id='l'></div> </h2>
+                            </div>
                         </div>
+
                     </div>
                 </div>
                 <div className='wedding-form-div' style={{ padding: "0 1rem", width: "100%" }}>
@@ -486,7 +491,7 @@ const Wedding = () => {
                     <div className="btn  btn-success my-4 w-100" style={{ fontSize: "18px" }} onClick={Save}>Save</div>
                 </div>
             </div >
-        </>
+        </div>
     )
 }
 

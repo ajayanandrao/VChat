@@ -7,6 +7,7 @@ import { signOut } from 'firebase/auth';
 import { AuthContext } from '../AuthContaxt';
 import { motion } from 'framer-motion';
 import { CircularProgress, LinearProgress } from '@mui/material';
+import { SiHelpscout } from "react-icons/si"
 
 const Option = () => {
     const { currentUser } = useContext(AuthContext);
@@ -84,17 +85,21 @@ const Option = () => {
                             </Link>
 
 
-                            <Link to="/Wedding/">
+                            <Link to="/gallery/">
+
                                 <motion.div
                                     transition={{ duration: 0.9, delay: 0.9 }}
                                     initial={{ opacity: 0, y: 50 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     className="option-mainu-div">
                                     <div className="option-mainu-icon">
-                                        <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/heart-4033153-3345796@0.png?f=webp"} style={{ width: "40px" }} className='option-image-icon' alt="" />
+                                        {/* <SiHelpscout className='text-lightProfileName dark:text-darkProfileName' style={{
+                                            fontSize: "30px"
+                                        }} /> */}
+                                        <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/gallery-8820084-7139045.png?f=webp"} style={{ width: "40px" }} className='option-image-icon' alt="" />
                                     </div>
                                     <div className="option-mainu-name text-lightPostText dark:text-darkPostText" >
-                                        Matrimony Arrange
+                                        VChat Gallery
                                     </div>
                                 </motion.div>
                             </Link>

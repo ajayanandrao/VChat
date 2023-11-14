@@ -3,16 +3,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { db } from '../Firebase';
 import { AuthContext } from '../AuthContaxt';
 import "./WeddingList.scss";
-import { FaMobile } from "react-icons/fa"
-import { MdWork } from "react-icons/md"
-import { ImLocation } from "react-icons/im"
 import { Link } from 'react-router-dom';
 import { CgClose } from 'react-icons/cg'
 import mobile from "./../Image/img/png/call.png";
 import brif from "./../Image/img/png/brif2.png";
 import loc from "./../Image/img/png/loc.png";
 import { CircularProgress } from '@mui/material';
-import { FiSearch } from "react-icons/fi"
 
 const WeddingList = () => {
 
@@ -58,14 +54,14 @@ const WeddingList = () => {
         setSearch(searchQuery);
     };
     return (
-        <div >
+        <div className='weddingList-main-container'>
+            <div className="left"></div>
             {loading ?
                 <div className='skeleton-center bg-light_0 dark:bg-dark'>
                     <CircularProgress className='circularprogress' />
                 </div >
                 :
-
-                <div className=''>
+                <div className='w-100'>
                     <div className='weddinglist-search-div'>
                         <input type="text" placeholder='Search'
                             className='weddinglist-search bg-lightDiv text-lightPostList dark:bg-darkDiv dark:text-darkPostText'
@@ -86,7 +82,7 @@ const WeddingList = () => {
                                                 <span style={{ textTransform: "capitalize" }} className='text-lightProfileName dark:text-darkProfileName'>{item.displayName}</span>
 
                                                 {canDelete && (
-                                                    <div className='weddingList-delete-div' >
+                                                    <div className='weddingList-delete-div text-lightProfileName dark:text-darkProfileName' >
                                                         <CgClose onClick={() => handleDeleteItem(item.id)} />
                                                     </div>
                                                 )}

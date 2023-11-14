@@ -392,8 +392,6 @@ const HomePage = () => {
                                                     ) : null}
                                                     <img src={sms.photoUrl} className='sms-user-img' alt='' style={{ width: '50px', height: '50px' }} />
                                                 </div>
-
-                                                {/* {sms.senderId} */}
                                                 {sms.sound === "on" ? <Audio /> : ""}
                                             </div>
                                         ) : null}
@@ -404,11 +402,7 @@ const HomePage = () => {
                         })}
                     </div>
                     <StoryForm />
-                    {/* <Audio /> */}
-                    {/* <Alert /> */}
-
                     <Post />
-
                     {loading ?
                         <>
                             <div className=' placeholder-glow '>

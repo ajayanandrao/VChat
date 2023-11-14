@@ -1,4 +1,5 @@
 @import "./../Styles/Variable";
+@import "./../Styles/Mixin_New.scss";
 
 
 .weddingListDetail-main-container {
@@ -7,7 +8,8 @@
     height: 100vh;
     box-sizing: border-box;
     overflow-y: scroll;
-    background: #0a1929;
+    background: linear-gradient(150deg, #0a84ff, #cd04ff);
+
     &::-webkit-scrollbar {
         display: none;
     }
@@ -34,7 +36,7 @@
 
 .weddinglistD-photo-div {
     width: 100%;
-    height: 600px;
+    height: 500px;
     display: flex;
     justify-content: center;
     background-size: cover;
@@ -44,6 +46,15 @@
     justify-content: center;
     align-items: center;
     // margin: 30px 0;
+    transition: 0.5s ease-in-out;
+
+    @include respond-to(Xs) {
+        height: 450px;
+    }
+
+    @include respond-to(xs) {
+        height: 500px;
+    }
 
     .blur-div {
         width: 100%;
@@ -77,6 +88,7 @@
     border-radius: 0.5rem;
     margin-bottom: 1rem;
     box-shadow: $border-input;
+    
 }
 
 .weddinglistD-name-div {
@@ -91,7 +103,7 @@
     padding: 1rem;
     padding-bottom: 100px;
     // background: linear-gradient(40deg, #0A2229, #0B3B39);
-    
+
     display: flex;
     justify-content: center;
 

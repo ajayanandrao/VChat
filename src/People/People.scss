@@ -8,8 +8,7 @@
     width: 100%;
     height: 100%;
     max-width: 100px;
-    background: red;
-
+    
     @include respond-to(xs) {
         display: none;
     }

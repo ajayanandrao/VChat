@@ -103,7 +103,6 @@
     width: 100%;
     max-width: 100px;
     height: 100%;
-    background: red;
 
     @include respond-to(xs) {
         display: none;

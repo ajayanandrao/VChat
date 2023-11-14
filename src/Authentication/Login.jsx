@@ -380,64 +380,66 @@ const Login = () => {
                 <div className='loging-container'>
 
                     <div className="login-div">
+                        <div className="login-div-inner">
 
-                        <div className="brand-wrapper">
-                            <div>
-                                <img src={vlogo} width={"50px"} alt="" />
-                            </div>
-                            <div className='brand-name'> Chat App </div>
-                        </div>
-
-                        <div className="login-form-wrapper">
-                            <input className="login-inputs " type="email"
-                                placeholder="Email"
-                                onChange={(e) => setEmail(e.target.value)}
-                                value={email}
-                            />
-                            <input className="login-inputs " type="password"
-                                placeholder="Password"
-                                onChange={(e) => setPass(e.target.value)}
-                                value={password}
-                                onKeyDown={handleKeyDown}
-                            />
-
-
-                            <div className="" id="error-alert" ></div>
-
-                            <button className=" btn btn-primary w-100 my-3 btn-shadow" style={{ borderRadius: "30px", fontSize: "18px", padding: "4px 10px" }} onClick={login} >
-                                {loginloading ?
-                                    <CircularProgress style={{ color: "white", width: "16px", height: "16px" }} />
-                                    :
-                                    "Log in"
-                                }
-                            </button>
-                            <Link to="/forgotPassword/" className='forgot-text'>Forgotten password?</Link>
-
-                            <div className="auth-link-or-div">
-                                <div className="auth-link-left-border"><div className="left-bordr"></div></div>
-                                <div className="auth-link-or">or</div>
-                                <div className="auth-link-left-border"><div className="left-bordr"></div></div>
+                            <div className="brand-wrapper">
+                                <div>
+                                    <img src={vlogo} width={"40px"} alt="" />
+                                </div>
+                                <div className='brand-name'> Chat App </div>
                             </div>
 
-                            <div className='auth-link-div'>
-                                <div className=' '>
-                                    <img src={google} className='login-with' alt="" onClick={HandleGoogleAuth} />
+                            <div className="login-form-wrapper">
+                                <input className="login-inputs " type="email"
+                                    placeholder="Email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={email}
+                                />
+                                <input className="login-inputs " type="password"
+                                    placeholder="Password"
+                                    onChange={(e) => setPass(e.target.value)}
+                                    value={password}
+                                    onKeyDown={handleKeyDown}
+                                />
+
+
+                                <div className="" id="error-alert" ></div>
+
+                                <button className=" btn btn-primary w-100 my-3 btn-shadow" style={{ borderRadius: "30px", fontSize: "18px", padding: "3px 10px" }} onClick={login} >
+                                    {loginloading ?
+                                        <CircularProgress style={{ color: "white", width: "16px", height: "16px" }} />
+                                        :
+                                        "Log in"
+                                    }
+                                </button>
+                                <Link to="/forgotPassword/" className='forgot-text'>Forgotten password?</Link>
+
+                                <div className="auth-link-or-div">
+                                    <div className="auth-link-left-border"><div className="left-bordr"></div></div>
+                                    <div className="auth-link-or">or</div>
+                                    <div className="auth-link-left-border"><div className="left-bordr"></div></div>
                                 </div>
 
-                                <div className=' '>
-                                    <img src={microsoft} className='login-with' style={{ width: "30px", height: "30px" }} alt="" onClick={HandleMicrosoftAuth} />
+                                <div className='auth-link-div'>
+                                    <div className=' '>
+                                        <img src={google} className='login-with' alt="" onClick={HandleGoogleAuth} />
+                                    </div>
+
+                                    <div className=' '>
+                                        <img src={microsoft} className='login-with' style={{ width: "30px", height: "30px" }} alt="" onClick={HandleMicrosoftAuth} />
+                                    </div>
+
+                                    <div className=' '>
+                                        <img src={git} className='login-with' alt="" onClick={HandleGitHubAuth} />
+                                    </div>
                                 </div>
 
-                                <div className=' '>
-                                    <img src={git} className='login-with' alt="" onClick={HandleGitHubAuth} />
-                                </div>
+
+                                <Link to="/signUp/" className='link'>
+                                    <button className="btn btn-link w-100 " style={{ borderRadius: "30px" }}>Create New Account</button>
+                                </Link>
+
                             </div>
-
-
-                            <Link to="/signUp/" className='link'>
-                                <button className="btn btn-link w-100 " style={{ borderRadius: "30px" }}>Create New Account</button>
-                            </Link>
-
                         </div>
                     </div>
                 </div >

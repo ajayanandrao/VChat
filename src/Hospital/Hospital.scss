@@ -1,0 +1,205 @@
+@import "./../Styles/Mixin_New.scss";
+@import "./../Styles/Variable";
+
+.hospital-main-container {
+    transition: 0.8s ease-in-out;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-y: scroll;
+
+    .leftDiv {
+        width: 100%;
+        max-width: 100px;
+        height: 100%;
+
+        @include respond-to(xs) {
+            display: none;
+        }
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .hospital-wrapper-div {
+        width: calc(100% - 100px);
+        height: 100%;
+        padding: 0 1rem;
+
+        @include respond-to(xs) {
+            width: 100%;
+        }
+    }
+
+    .hospital-search-div {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        // background: red;
+        margin-top: 1rem;
+
+        .bi-arrow-left {
+            display: none;
+
+            @include respond-to(xs) {
+                display: block;
+            }
+        }
+
+        @include respond-to(xs) {
+            justify-content: space-between;
+        }
+
+        .weddinglist-search {
+            // margin-top: 1.5rem;
+            width: 85%;
+            max-width: 567px;
+            height: 40px;
+            border-radius: 50px;
+            border: none;
+            padding-inline-start: 10px;
+            box-shadow: $border-input;
+            transition: 0.8s ease-in-out;
+
+            @include respond-to(xs) {
+                max-width: 100%;
+            }
+
+            &:focus {
+                border: none;
+                outline: none;
+            }
+        }
+    }
+
+    .hospital-wrapper {
+        width: 100%;
+        padding-bottom: 50px;
+
+        .weddingList-card-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: auto;
+            box-shadow: $border-input;
+            transition: 0.8s ease-in-out;
+            border-radius: 10px;
+
+            @include respond-to(xs) {
+                height: 100%;
+                max-width: 500px;
+                // background: red;
+            }
+
+            .weddingList-profile-div {
+                height: 100%;
+                display: flex;
+                align-items: center;
+
+                @include respond-to(xs) {
+                    flex-direction: column;
+                }
+
+                .weddingList-photo {
+                    width: 100%;
+                    height: 310px;
+                    object-fit: cover;
+                    object-position: center;
+                    border-radius: 10px;
+
+                    @include respond-to(xs) {
+                        width: 100%;
+                        height: 250px;
+                    }
+                }
+
+                .wedding-photo-div {
+                    width: 330px;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+
+                    @include respond-to(xs) {
+                        width: 100%;
+                        align-items: start;
+                    }
+                }
+
+                .weddingList-photo-load {
+                    width: 200px;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                    border-radius: 10px;
+
+                    @include respond-to(xs) {
+                        width: 100%;
+                    }
+                }
+
+                .weddingList-about-div {
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                    padding: 1rem;
+                    width: 100%;
+                    padding-left: 2rem;
+
+                    .weddingList-about-inner-div {
+                        display: flex;
+                        flex-direction: column;
+                        height: 140px;
+                        align-items: start;
+                        justify-content: end;
+                        // background: blue;
+
+                        .weddingList-about-inner-item {
+                            display: flex;
+                            align-items: center;
+                            margin-top: 1rem;
+                            text-transform: capitalize;
+                            flex-wrap: wrap;
+                            word-wrap: break-word;
+                            display: flex;
+                        }
+                    }
+
+                    .hospial-name {
+                        font-size: 24px;
+                        font-weight: 600;
+                        text-transform: capitalize;
+                    }
+
+                    .hopital-docName {
+                        font-size: 18px;
+                        font-weight: 600;
+                        text-transform: capitalize;
+                        margin: 1rem 0;
+                    }
+
+                    .hospital-item-div {
+                        display: flex;
+                        margin: 0.3rem 0;
+                        text-transform: capitalize;
+
+                        .hospital-item-category {
+                            width: 70px;
+                            font-size: 18px;
+                            font-weight: 600;
+                            margin-right: 0.5rem;
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
+}

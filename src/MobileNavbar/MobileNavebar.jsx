@@ -13,6 +13,7 @@ import { MdAddReaction, MdColorLens, MdMovieFilter } from "react-icons/md";
 import v from "./../Image/img/vl.png";
 import { FaMoon } from "react-icons/fa";
 import { BiSolidSun } from "react-icons/bi";
+import { SiHelpscout } from "react-icons/si";
 
 
 const MobileNavebar = () => {
@@ -122,13 +123,6 @@ const MobileNavebar = () => {
 
 
 
-  useEffect(() => {
-    const sub = () => {
-      console.log(themIcon.map((item) => item.id));
-    }
-    return sub;
-  }, []);
-
   const [themIcon, setThemIcon] = useState([]);
   useEffect(() => {
     const colRef = collection(db, 'UserPreferences');
@@ -168,7 +162,9 @@ const MobileNavebar = () => {
       >
         <Link to="home/" className="mobile-nav-title" onClick={handleScrollToTop} style={{ textDecoration: "none" }}>
           <div className="mobile-nav-title">
-            <img src={v} className="nav-logo" alt="" />
+            <div>
+              <img src={v} className="nav-logo" alt="" />
+            </div>
           </div>
         </Link>
 
@@ -196,6 +192,15 @@ const MobileNavebar = () => {
             <Link to="search/" className="link">
               <div>
                 <RiSearchLine className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
+              </div>
+            </Link>
+          </span>
+
+          <span className="mobile-nav-mainu">
+            <Link to="gallery/" className="link">
+              <div>
+                {/* <SiHelpscout className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" /> */}
+                <i class="bi bi-image-fill mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon"></i>
               </div>
             </Link>
           </span>

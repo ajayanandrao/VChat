@@ -1,8 +1,13 @@
 @import "./../Styles/Variable";
 @import "./../Styles/Mixin_New.scss";
 
-.wedding-main-div {
-    transition: 0.8s ease-in-out;
+.weddingList-main-container {
+    display: flex;
+
+    .left {
+        width: 100%;
+        max-width: 100px;
+    }
 }
 
 .weddinglist-search-div {
@@ -12,7 +17,6 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    // background: red;
     margin-top: 1rem;
 
     @include respond-to(xs) {
@@ -39,11 +43,7 @@
 
 
 .weddinglist-wrapper {
-    width: 100%;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-
+    padding: 0 1rem;
     .weddingList-card-container {
         width: 100%;
         max-width: 567px;

@@ -50,7 +50,8 @@ const WeddingListDetail = () => {
 
 
     return (
-        <>
+        <div className='d-flex'>
+        <div className="left"></div>
             <LeftArro />
             <div className='weddingListDetail-main-container'>
                 {photo &&
@@ -84,49 +85,49 @@ const WeddingListDetail = () => {
                 </div>
 
                 <div className='weddinglist-mainu-wapper'>
-
+                <div className="left"></div>
                     <div className='weddinglist-inner-wrapper'>
                         <div className='weddinglist-mainu-item'>
-                            <div className='weddinglist-mainu-item-name'>Religion :- </div>
+                            <div className='weddinglist-mainu-item-name'>Religion  </div>
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.region}</span>
                         </div>
                         <div className='weddinglist-mainu-item'>
-                            <div className='weddinglist-mainu-item-name'>Work :- </div>
+                            <div className='weddinglist-mainu-item-name'>Work  </div>
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.work}</span>
                         </div>
                         <div className='weddinglist-mainu-item'>
-                            <div className='weddinglist-mainu-item-name'>Qualification :- </div>
+                            <div className='weddinglist-mainu-item-name'>Qualification  </div>
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.qualification}</span>
                         </div>
                         <div className='weddinglist-mainu-item'>
-                            <div className='weddinglist-mainu-item-name'>Mobile :- </div>
+                            <div className='weddinglist-mainu-item-name'>Mobile  </div>
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.mobile}</span>
                         </div>
                         <div className='weddinglist-mainu-item'>
-                            <div className='weddinglist-mainu-item-name'>Height :- </div>
+                            <div className='weddinglist-mainu-item-name'>Height  </div>
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.height}</span>
                         </div>
                         <div className='weddinglist-mainu-item'>
-                            <div className='weddinglist-mainu-item-name'>Landmark :- </div>
+                            <div className='weddinglist-mainu-item-name'>Landmark </div>
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.landmark}</span>
                         </div>
                         <div className='weddinglist-mainu-item'>
-                            <div className='weddinglist-mainu-item-name'>Village :- </div>
+                            <div className='weddinglist-mainu-item-name'>Village  </div>
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.village}</span>
                         </div>
                         <div className='weddinglist-mainu-item'>
-                            <div className='weddinglist-mainu-item-name'>District :- </div>
+                            <div className='weddinglist-mainu-item-name'>District  </div>
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.distric}</span>
                         </div>
 
                         <div className='weddinglist-mainu-item'>
-                            <div className='weddinglist-mainu-item-name'>State :- </div>
+                            <div className='weddinglist-mainu-item-name'>State </div>
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.state}</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

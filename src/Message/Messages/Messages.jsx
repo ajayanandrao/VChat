@@ -1929,7 +1929,7 @@ const Messages = () => {
 
                                                                 {hasTxt && (
                                                                     <div onClick={() => TextOption(message.id)}>
-                                                                        <div className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#6453ac] dark:bg-darkDiv dark:text-darkProfileName' : "bg-light_0 text-lightProfileName dark:text-darkProfileName dark:bg-darkDiv"}`}>
+                                                                        <div className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#5858FA] dark:bg-darkDiv dark:text-darkProfileName' : "bg-light_0 text-lightProfileName dark:text-darkProfileName dark:bg-darkDiv"}`}>
                                                                             <BiSolidFileTxt className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-[white]' : 'text-lightProfileName dark:text-darkProfileName'}`} />
                                                                             <div className={`${!isSender ? 'dark:text-darkProfileName text-[white]' : 'dark:text-darkProfileName text-lightProfileName'}`}>{message.txtName}</div>
                                                                         </div>
@@ -1965,7 +1965,7 @@ const Messages = () => {
                                                                 {hasPdf && (
                                                                     <div onClick={() => PdfOption(message.id)} >
 
-                                                                        <div className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#6453ac] dark:bg-darkDiv dark:text-darkProfileName' : "bg-light_0 text-lightProfileName dark:text-darkProfileName dark:bg-darkDiv"}`}>
+                                                                        <div className={`a message-TxtFile-div ${!isSender ? 'text-darkProfileName bg-[#5858FA] dark:bg-darkDiv dark:text-darkProfileName' : "bg-light_0 text-lightProfileName dark:text-darkProfileName dark:bg-darkDiv"}`}>
                                                                             <BiSolidFilePdf className={`txtFile-icon ${!isSender ? 'dark:text-darkProfileName text-[white]' : 'text-lightProfileName dark:text-darkProfileName'}`} />
                                                                             <div className={`${!isSender ? 'dark:text-darkProfileName text-[white]' : 'dark:text-darkProfileName text-lightProfileName'}`}>{message.pdfName.slice(0, 25)}</div>
                                                                         </div>
@@ -2034,8 +2034,9 @@ const Messages = () => {
                                                                 {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#5858FA]  dark:bg-[#5858FA] dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkReciver"} `}
                                                                     onClick={() => showReplyButton(message.id)}
                                                                     onMouseLeave={hideReplyButton}
+                                                                    style={{width:"150px"}}
                                                                 >
-                                                                    {message.message}
+                                                                    {/* {message.message} */}
 
                                                                     <br />
                                                                     {hoveredMessageId === message.id ?
@@ -2151,7 +2152,7 @@ const Messages = () => {
                             })}
 
 
-                            {typingS.map((item) => {
+                            {/* {typingS.map((item) => {
                                 if (user.uid === item.id) {
                                     return (
                                         <div style={{ color: "black" }}>
@@ -2159,19 +2160,17 @@ const Messages = () => {
                                                 <div className="typing-indicator dark:text-darkProfileName text-lightProfileName ">
                                                     <img className='typing-img' src={user && user.userPhoto} alt="" />
 
-                                                    <div className='typing-bg bg-[#1877f2] dark:bg-darkDiv dark:text-darkProfileName'>
+                                                    <div className='typing-bg bg-[#5858FA] dark:bg-darkDiv dark:text-darkProfileName'>
                                                         <div className="dot-1 bg-light_0 dark:bg-darkProfileName"></div>
                                                         <div className="dot-2 bg-light_0 dark:bg-darkProfileName"></div>
                                                         <div className="dot-3 bg-light_0 dark:bg-darkProfileName"></div>
-                                                        {/* <div className="dot-4 bg-light_0 dark:bg-darkProfileName"></div>
-                                                        <div className="dot-5 bg-light_0 dark:bg-darkProfileName"></div> */}
                                                     </div>
                                                 </div>
                                             ) : null}
                                         </div>
                                     )
                                 }
-                            })}
+                            })} */}
 
 
 
