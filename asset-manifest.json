@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/VChat/static/css/main.63d9f95b.css",
-    "main.js": "/VChat/static/js/main.7bf1ec1e.js",
+    "main.css": "/VChat/static/css/main.952908b7.css",
+    "main.js": "/VChat/static/js/main.c097cfd8.js",
     "static/js/27.87965f17.chunk.js": "/VChat/static/js/27.87965f17.chunk.js",
     "static/media/mobile4.png": "/VChat/static/media/mobile4.80d1c3aba934d273d041.png",
     "static/media/videoa.mp4": "/VChat/static/media/videoa.f35de8f81779b5f1cde5.mp4",
@@ -25,7 +25,7 @@
     "index.html": "/VChat/index.html"
   },
   "entrypoints": [
-    "static/css/main.63d9f95b.css",
-    "static/js/main.7bf1ec1e.js"
+    "static/css/main.952908b7.css",
+    "static/js/main.c097cfd8.js"
   ]
 }
