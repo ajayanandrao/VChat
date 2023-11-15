@@ -1,8 +1,13 @@
 {
   "files": {
-    "main.css": "/VChat/static/css/main.34f71e16.css",
-    "main.js": "/VChat/static/js/main.104ff994.js",
-    "static/js/27.87965f17.chunk.js": "/VChat/static/js/27.87965f17.chunk.js",
+    "main.css": "/VChat/static/css/main.def9c9c9.css",
+    "main.js": "/VChat/static/js/main.0c9c32ff.js",
+    "static/js/511.35e32d36.chunk.js": "/VChat/static/js/511.35e32d36.chunk.js",
+    "static/js/29.1e68812f.chunk.js": "/VChat/static/js/29.1e68812f.chunk.js",
+    "static/js/727.9a696ace.chunk.js": "/VChat/static/js/727.9a696ace.chunk.js",
+    "static/js/605.38d1a53f.chunk.js": "/VChat/static/js/605.38d1a53f.chunk.js",
+    "static/js/968.2c49d1bc.chunk.js": "/VChat/static/js/968.2c49d1bc.chunk.js",
+    "static/js/27.44fd8a9f.chunk.js": "/VChat/static/js/27.44fd8a9f.chunk.js",
     "static/media/mobile4.png": "/VChat/static/media/mobile4.80d1c3aba934d273d041.png",
     "static/media/videoa.mp4": "/VChat/static/media/videoa.f35de8f81779b5f1cde5.mp4",
     "static/media/xmq3nirr.mp4": "/VChat/static/media/xmq3nirr.192642729761cbb07f3e.mp4",
@@ -27,7 +32,7 @@
     "index.html": "/VChat/index.html"
   },
   "entrypoints": [
-    "static/css/main.34f71e16.css",
-    "static/js/main.104ff994.js"
+    "static/css/main.def9c9c9.css",
+    "static/js/main.0c9c32ff.js"
   ]
 }
