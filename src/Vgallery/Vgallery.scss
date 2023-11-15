@@ -15,7 +15,10 @@
     padding: 1rem;
     box-sizing: border-box;
     overflow-y: scroll;
-
+    padding-bottom: 50px;
+    @include respond-to(xs){
+        height: calc(100vh - 50px);
+    }
     &::-webkit-scrollbar {
         display: none;
     }

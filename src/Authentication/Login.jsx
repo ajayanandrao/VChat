@@ -22,6 +22,8 @@ import chat from "./../Image/img/chat.mp4"
 import cover from "./../Image/img/cover.mp4"
 import loginPage from "./../loginjson.json";
 import { FaChevronDown, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import Spline from '@splinetool/react-spline';
+
 
 const Login = () => {
     const { currentUser } = useContext(AuthContext);
@@ -360,6 +362,7 @@ const Login = () => {
     return (
         <>
 
+
             {loading ? (
                 <div className='login-wellcome-div'>
 
@@ -370,7 +373,7 @@ const Login = () => {
 
 
                 <div className='loging-container'>
-
+                    
                     {/* <video className="login-video" src={chat} autoPlay muted loop /> */}
 
                     <div className="login-div">
@@ -470,7 +473,6 @@ const Login = () => {
 
                         </div>
                     </div>
-
                     {/* <video className="login-videotwo" src={cover} autoPlay muted loop /> */}
 
                 </div >
