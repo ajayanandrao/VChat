@@ -24,11 +24,15 @@
             // margin-bottom: 50px;
 
             .brand-name {
-                color: #2563eb;
                 margin: 0 1rem;
-                font-size: 20px;
+                font-size: 34px;
                 cursor: auto;
-                font-weight: 600;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 700;
+                background: linear-gradient(to right, #D902FF, #2F97E2);
+                background-size: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
         }
 

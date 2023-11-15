@@ -2,133 +2,31 @@
 
 .loging-container {
     width: 100%;
-    height: 100vh;
-    // background: #fafafa;
+    height: 655px;
+    // background: red;
     display: flex;
-    // flex-direction: column;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     position: relative;
+    overflow: hidden;
+    
+
+    @include respond-to(xs) {
+        height: 100vh;
+    }
 
     .login-div {
         width: 100%;
         max-width: 280px;
-        height: 540px;
         position: absolute;
-        // top: 50px;
+        top: 90px;
         display: flex;
         flex-direction: column;
-        background: linear-gradient(150deg, #0a84ff, #cd04ff);
-        // box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-        border-radius: 20px;
-        position: relative;
-        transition: 0.5s ease-in-out;
-
-        .login-div-inner {
-            width: 100%;
-            max-width: 275px;
-            height: 535px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            // padding: 40px 20px;
-            // padding: 5px;
-            display: flex;
-            overflow-x: scroll;
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
-
-            border-radius: 20px;
-            transition: 0.5s ease-in-out;
-
-            .loginpage-btn {
-                position: absolute;
-                top: 5px;
-                right: 5px;
-                // background: #2563eb;
-                // box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-                width: 60px;
-                height: 30px;
-                border-radius: 30px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 20px;
-                z-index: 9999;
-
-                .loginpage-btn-icon {
-                    color: white;
-                    animation: identifier 2s ease infinite
-                }
-
-                .loginpage-btn-iconLeft {
-                    color: white;
-                    animation: identifierLeft 2s ease infinite
-                }
-
-                @keyframes identifier {
-                    0% {
-                        transform: translateX(-5px);
-                    }
-
-                    50% {
-                        transform: translateX(10px);
-                    }
-
-                    100% {
-                        transform: translateX(-5px);
-                    }
-                }
-
-                @keyframes identifierLeft {
-                    0% {
-                        transform: translateX(5px);
-                    }
-
-                    50% {
-                        transform: translateX(-10px);
-                    }
-
-                    100% {
-                        transform: translateX(5px);
-                    }
-                }
-            }
-
-            .login {
-                width: 275px;
-                height: 100%;
-                // background: red;
-                padding: 40px 20px;
-            }
-
-            .loginpage {
-                width: 275px;
-                height: 100%;
-                // background: red;
-            }
-
-        }
+        // background: red;
+        
 
         @include respond-to(xs) {
-            // top: 40px;
-        }
-
-        .login-video-div {
-            max-width: 275px;
-            height: 535px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            .login-video {
-                width: 270px;
-                height: 100%;
-                object-fit: contain;
-            }
+            top: 100px;
         }
 
         .brand-wrapper {
@@ -137,15 +35,24 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
 
             .brand-name {
-                color: #2563eb;
+                // color: #2563eb;
                 margin: 0 1rem;
-                font-size: 20px;
+                font-size: 34px;
                 cursor: auto;
-                font-weight: 600;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 700;
+                background: linear-gradient(to right, #D902FF, #2F97E2);
+                background-size: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+
+                // color: transparent;
             }
+
+
         }
 
         .login-form-wrapper {
@@ -164,6 +71,7 @@
                 margin: 0.5rem 0;
 
                 .auth-link-left-border {
+                    // border: 1px solid black;
                     width: 100%;
                     height: 10px;
                     // background: red;
@@ -181,6 +89,9 @@
                 .auth-link-or {
                     margin: 0 1rem;
                 }
+
+
+
             }
 
             .auth-link-div {
@@ -202,14 +113,21 @@
             .login-inputs {
                 width: 100%;
                 // max-width: 250px;
-                height: 32px;
+                height: 35px;
                 border-radius: 30px;
                 padding: 0 10px;
                 border: none;
                 outline: none;
                 margin: 1rem 0;
+                // background: #424242;
+                // color: white;
+                // box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
                 box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
                 color: #151515;
+            }
+
+            .btn-shadow {
+                // box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
             }
 
             #error-alert {
@@ -223,4 +141,173 @@
         }
 
     }
+}
+
+.about-section-one {
+    width: 100%;
+    height: 655px;
+    background: #181818;
+    display: flex;
+
+    @include respond-to(xs) {
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 50px;
+        background: linear-gradient(150deg, #D902FF, #0A83FF, #D902FF);
+    }
+
+    .about-col-one {
+        flex: 1;
+        height: 100%;
+        // background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        color: white;
+
+        .about-col-one-text {
+            width: 100%;
+            max-width: 500px;
+            font-size: 50px;
+            text-transform: capitalize;
+
+            .about-col-one-send-text {
+                background: linear-gradient(150deg, aqua, #0A83FF 10%, #D902FF);
+                -webkit-background-clip: text;
+                color: transparent;
+                font-weight: 600;
+
+                @include respond-to(xs) {
+                    background: none;
+                    color: white;
+                }
+            }
+
+        }
+    }
+
+    .about-col-two {
+        flex: 1;
+        height: auto;
+        // background: blue;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include respond-to(md) {
+            align-items: center;
+        }
+
+        @include respond-to(xs) {
+            margin-top: 50px;
+        }
+
+        .about-col-two-card {
+            width: 100%;
+            max-width: 500px;
+            background: linear-gradient(150deg, #0A83FF, #D902FF);
+            height: 100%;
+            max-height: 600px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            position: relative;
+            padding: 1rem;
+
+            @include respond-to(sm) {
+                justify-content: center;
+                align-items: end;
+                padding-bottom: 50px;
+            }
+
+            @include respond-to(xs) {
+                max-width: 100%;
+                max-height: 600px;
+                justify-content: center;
+                align-items: center;
+                background: none;
+            }
+
+
+            .about-card-two-emoji {
+                position: absolute;
+                top: 150px;
+                left: 20px;
+                width: 130px;
+                height: 130px;
+                object-fit: contain;
+                transition: 0.5s ease-in-out;
+
+                @include respond-to(md) {
+                    width: 100px;
+                    height: 100px;
+                    // left: 15px;
+                }
+
+                @include respond-to(sm) {
+                    width: 90px;
+                    height: 90px;
+                    top: 0;
+                    left: 130px;
+                }
+
+                @include respond-to(xs) {
+                    width: 80px;
+                    height: 80px;
+                    top: 20px;
+                    left: 250px;
+                }
+            }
+
+            .about-col-two-card-inner {
+                max-width: 350px;
+                height: 480px;
+                border-radius: 10px;
+                overflow: hidden;
+                transition: 0.5s ease-in-out;
+
+                @include respond-to(md) {
+                    height: 380px;
+                    border-radius: 10px;
+                }
+
+                @include respond-to(sm) {
+                    height: 450px;
+                    border-radius: 10px;
+                }
+
+                @include respond-to(xs) {
+                    height: 100%;
+                    border-radius: 10px;
+                    overflow: hidden;
+                }
+
+                .about-col-two-video {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    object-position: center;
+                    border-radius: 10px;
+
+                    @include respond-to(xs) {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+
+
+        }
+    }
+}
+
+.footer-div {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
