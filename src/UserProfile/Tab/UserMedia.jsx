@@ -203,45 +203,41 @@ const UserMedia = () => {
                     </div>
                 </>)
                     :
-
-
-
                     (<>
                         <div className='media-container'>
                             <div class="photo-grid-parent-container">
                                 <div className="grid-container" >
                                     {imageMedia.map((post) => {
-                                        if (currentUser.uid === post.uid)
-                                            // console.log(post)
-                                        return (
+                                        if (currentUser.uid === post.uid) {
+                                            return (
 
-                                            <>
+                                                <>
 
-                                                {
-                                                    post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
-                                                        <img src={post.img} alt="Uploaded" className="media-img" onClick={() => handleImageShow(post.id, post.img, post.bytime)} />
-                                                    ) : post.img ? (
-                                                        <>
+                                                    {
+                                                        post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
+                                                            <img src={post.img} alt="Uploaded" className="media-img" onClick={() => handleImageShow(post.id, post.img, post.bytime)} />
+                                                        ) : post.img ? (
+                                                            <>
 
-                                                            <div className="mediaVideo-background" onClick={() => handleVideoShow(post.id, post.img, post.bytime)}>
+                                                                <div className="mediaVideo-background" onClick={() => handleVideoShow(post.id, post.img, post.bytime)}>
 
-                                                                <video className="media-video"  >
-                                                                    <source src={post.img} type="video/mp4" />
-                                                                </video>
-                                                                <div className="mediaVideo-btn-div">
-                                                                    <div className="mediaVideo-btn">
-                                                                        <FaPlay className='mediaVideo-icon' />
+                                                                    <video className="media-video"  >
+                                                                        <source src={post.img} type="video/mp4" />
+                                                                    </video>
+                                                                    <div className="mediaVideo-btn-div">
+                                                                        <div className="mediaVideo-btn">
+                                                                            <FaPlay className='mediaVideo-icon' />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
-                                                        </>
+                                                            </>
 
-                                                    ) : null
-                                                }
-                                            </>
-                                        );
-
+                                                        ) : null
+                                                    }
+                                                </>
+                                            );
+                                        }
                                     })}
                                 </div>
                             </div>
@@ -249,6 +245,8 @@ const UserMedia = () => {
                         </div>
                     </>)
             }
+
+
 
 
         </>

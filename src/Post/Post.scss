@@ -9,7 +9,7 @@
     display: flex;
     align-items: end;
     border-radius: 10px;
-    background: linear-gradient(40deg,  #0095ff, #CB04FF , aqua );
+    background: linear-gradient(40deg, #0095ff, #CB04FF, aqua);
     position: relative;
 
 }
@@ -24,6 +24,7 @@
     .post-div {
         flex-basis: 510px;
         // background: #fff;
+        // background: linear-gradient(150deg,  #0095ff, #CB04FF  );
         display: flex;
         flex-direction: column;
         color: black;
@@ -97,7 +98,7 @@
             }
 
             .post-send-text {
-                color: #2F97E2;
+                // color: #2F97E2;
                 font-size: 18px;
                 font-weight: 600;
                 cursor: pointer;
@@ -134,7 +135,17 @@
         .Selected-imageOrVideo-container {
             margin-top: 1.5rem;
             max-width: 576px;
-            max-height: 400px;
+            max-height: 400px;  
+            display: flex;
+            justify-content: center;
+
+            .Selected-imageOrVideo-div {
+                // background: red;
+                max-height: 400px;
+                border-radius: 10px;
+                display: inline-flex;
+                overflow: hidden;
+            }
 
             .postImg {
                 width: 100%;

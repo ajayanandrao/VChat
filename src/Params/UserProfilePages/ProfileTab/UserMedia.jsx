@@ -209,8 +209,6 @@ const UserMedia = ({ user }) => {
 
                     </div>
                 </>)}
-
-
         </>
     )
 }

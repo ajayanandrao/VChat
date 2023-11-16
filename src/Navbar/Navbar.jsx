@@ -157,7 +157,7 @@ const Navbar = () => {
                                     animate={{ scale: 1, opacity: 1 }}
                                     className='link-btn-shadow'
                                 >
-                                    <MdMovieFilter />
+                                    <MdMovieFilter className='text-lightProfileName dark:text-darkPostIcon'/>
                                 </motion.div>
                             </div>
                         </Link>
@@ -215,7 +215,7 @@ const Navbar = () => {
                                     initial={{ scale: 0.6, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
                                 >
-                                    <AiFillHome />
+                                    <AiFillHome className='text-lightProfileName dark:text-darkPostIcon' />
                                 </motion.div>
                             </motion.div>
 
@@ -248,7 +248,7 @@ const Navbar = () => {
                                                     )}
                                                 </>)
                                                 :
-                                                <RiMessengerFill />
+                                                <RiMessengerFill className='text-lightProfileName dark:text-darkPostIcon'/>
                                             }
                                         </div>
                                     </Link>

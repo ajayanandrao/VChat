@@ -2,7 +2,7 @@
 
 .media-container {
     padding: 0 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 50px;
 
     .photo-grid-parent-container {
         display: flex;
@@ -14,6 +14,9 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
+            width: 100%;
+            max-width: 800px;
+
 
             @include respond-to(xs) {
                 grid-template-columns: repeat(2, 1fr);
@@ -24,8 +27,8 @@
 
     .media-img {
         width: 100%;
-        max-width: 400px;
-        height: 160px;
+        max-width: 250px;
+        height: 150px;
         border-radius: 5px;
         object-fit: cover;
         object-position: center;
@@ -40,7 +43,7 @@
     .mediaVideo-background {
         position: relative;
         width: 100%;
-        max-width: 400px;
+        max-width: 250px;
         height: 150px;
         border-radius: 5px;
         /* Adjust the height as needed */
@@ -69,6 +72,7 @@
             align-items: center;
             position: relative;
             cursor: pointer;
+
             .mediaVideo-icon {
                 margin-left: 1px;
                 position: absolute;
@@ -76,7 +80,7 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 font-size: 18px;
-                color: white;   
+                color: white;
                 cursor: pointer;
             }
         }

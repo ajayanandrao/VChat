@@ -374,7 +374,7 @@ const Post = () => {
 	return (
 		<div>
 			<div className="post-contianer ">
-				<div className="post-div bg-lightDiv dark:bg-darkDiv">
+				<div className="post-div dark:bg-darkDiv bg-lightDiv dark:bg-darkDiv">
 					<div className="post-padding">
 						<div className="post-profile-div">
 							<div>
@@ -397,7 +397,7 @@ const Post = () => {
 								value={postText}
 								onKeyDown={handleKey}
 							/>
-							<div className="post-send-text " onClick={handleUpload}>
+							<div className="post-send-text text-[#2F97E2] dark:text-[white]" onClick={handleUpload}>
 								Post
 							</div>
 						</div>
@@ -406,7 +406,7 @@ const Post = () => {
 							<label htmlFor="photo" onClick={Wrapp} style={{ cursor: 'pointer' }}>
 								<div className="post-icon-div">
 									<img src={photo} className="post-icon" alt="" />
-									<div className="post-icon-text text-lightPostText dark:text-darkPostText">Photo/Video</div>
+									<div className="post-icon-text text-lightPostText dark:text-[white]">Photo/Video</div>
 								</div>
 								<input
 									type="file"
@@ -438,7 +438,7 @@ const Post = () => {
 
 							<div className="post-icon-div" onClick={() => { Emoji(); ok(); }}>
 								<img src={smile} className="post-icon" alt="" />
-								<div className="post-icon-text text-lightPostText dark:text-darkPostText">Emoji</div>
+								<div className="post-icon-text text-lightPostText dark:text-[white]">Emoji</div>
 							</div>
 						</div>
 
@@ -457,24 +457,30 @@ const Post = () => {
 						{imgView ? (<>
 
 							<div className="Selected-imageOrVideo-container">
+
 								{img &&
 									img.type.startsWith('image/') && (
-										<img className="postImg" src={URL.createObjectURL(img)} alt="" />
+										<div className='Selected-imageOrVideo-div'>
+											<img className="postImg" src={URL.createObjectURL(img)} alt="" />
+										</div>
 									)}
 
 								{img &&
 									img.type.startsWith('video/') && (
-										<div className="video-container mb-5">
-											<video ref={videoRef} onClick={handleClick} className="video ">
-												<source src={URL.createObjectURL(img)} type={img.type} />
-											</video>
-											{!isPlaying && (
-												<div className="play-button" onClick={handleClick}>
-													<FaPlay className="play-button" />
-												</div>
-											)}
+										<div className='Selected-imageOrVideo-div'>
+											<div className="video-container mb-5">
+												<video ref={videoRef} onClick={handleClick} className="video ">
+													<source src={URL.createObjectURL(img)} type={img.type} />
+												</video>
+												{!isPlaying && (
+													<div className="play-button" onClick={handleClick}>
+														<FaPlay className="play-button" />
+													</div>
+												)}
+											</div>
 										</div>
 									)}
+
 							</div>
 
 						</>) : (<>
