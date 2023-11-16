@@ -42,7 +42,6 @@ module.exports = {
 
         // -------------------------------------------------------------
 
-        // dark: "#18191a",    /*900*/
         dark: "#18191a",    /*900*/
         darkDiv: "#242526", /*800*/
 
@@ -65,7 +64,7 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-light': 'linear-gradient(150deg, #23accd, #d41583)', // Light mode gradient
-        'gradient-dark': 'linear-gradient(150deg, #0095ff, #CB04FF   )',   // Dark mode gradient
+        'gradient-dark': 'linear-gradient(150deg, #CB04FF, #0095ff   )',   // Dark mode gradient
       },
       animation: {
         'blinkStatus': 'blinkStatus 2s infinite',

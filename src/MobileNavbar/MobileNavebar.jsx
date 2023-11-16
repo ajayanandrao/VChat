@@ -160,6 +160,7 @@ const MobileNavebar = () => {
         style={{ display: "none" }}
         id="navId"
       >
+
         <Link to="home/" className="mobile-nav-title" onClick={handleScrollToTop} style={{ textDecoration: "none" }}>
           <div className="mobile-nav-title">
             <div>
@@ -232,7 +233,8 @@ const MobileNavebar = () => {
             </Link>
           </span>
         </div>
-      </div>
+        <div className="color-line dark:bg-gradient-dark"></div>
+      </div >
 
     </>
   );
