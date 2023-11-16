@@ -23,7 +23,7 @@ import cover from "./../Image/img/cover.mp4"
 import loginPage from "./../loginjson.json";
 import { FaChevronDown, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Spline from '@splinetool/react-spline';
-
+import down from "./../Image/img/4x/arrowdown.png";
 
 const Login = () => {
     const { currentUser } = useContext(AuthContext);
@@ -365,9 +365,7 @@ const Login = () => {
 
             {loading ? (
                 <div className='login-wellcome-div'>
-
-                    <div className='loaing-logo' style={{ backgroundImage: `url(${vlogo})` }} >
-                    </div>
+                    <img src={vlogo} className='loaing-logo' alt="VChat" />
                 </div>
             ) : (
 
@@ -428,17 +426,20 @@ const Login = () => {
 
 
                                 <Link to="/signUp/" className='link'>
-                                    <button className="btn btn-link w-100 " style={{ borderRadius: "30px" }}>Create New Account</button>
+                                    <button className="btn btn-link w-100 mb-4" style={{ borderRadius: "30px" }}>Create New Account</button>
                                 </Link>
                             </div>
+                            {/* <FaChevronDown className=' btn-primary arrowDown-login' /> */}
                         </div>
+                            <img src={down} className=' arrowDown-login' alt="" />
+
                     </div >
 
                     <div className="about-section-one">
 
                         <div className="about-col-one">
                             <div className="about-col-one-text">
-                                <span className='about-col-one-send-text'>  Send  Message Photo Music Video Files to your friend and family. </span>
+                                <span className='about-col-one-send-text'>  Send  Message Files Photo Music Video  to your friend and family. </span>
                             </div>
                         </div>
 
