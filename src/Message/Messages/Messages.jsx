@@ -181,7 +181,7 @@ const Messages = () => {
 
 
     const goBack = () => {
-        nav(-1);
+        nav("/message/");
     }
 
     const togglePlayPause = () => {
@@ -195,6 +195,7 @@ const Messages = () => {
             setIsPlaying(!isPlaying);
         }
     };
+
 
     const [MessagePhoto, setMessagePhoto] = useState(null);
     const [MessagePhotoid, setMessagePhotoId] = useState("");
@@ -235,18 +236,12 @@ const Messages = () => {
 
     const [isPlaying, setIsPlaying] = useState(false);
 
-
     const [viewMessageInput, setViewMessageInput] = useState("");
     const [viewMessageImg, setViewMessageImg] = useState(null);
-
-
-
     const [viewReplyVideoUrl, setViewReplyVideoUrl] = useState(null);
-
 
     const [selectedLikeMessage, setSelectedLikeMessage] = useState(false);
     const [viewReplyImgLikeUrl, setViewReplyImgLikeUrl] = useState(null);
-
 
     const [showReplyVideoUrl, setShowReplyVideoUrl] = useState(null);
     const [showReplyVideoDiv, setReplyVideoDiv] = useState(false);
@@ -277,7 +272,6 @@ const Messages = () => {
         setHoveredMessageId('');
     };
 
-
     function formatTimestamp(timestamp) {
         const date = timestamp.toDate();
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -289,9 +283,6 @@ const Messages = () => {
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
         return date.toLocaleString('en-US', options);
     }
-
-
-
 
     const compressImage = async (imageFile, maxWidth) => {
         return new Promise((resolve, reject) => {
@@ -417,8 +408,6 @@ const Messages = () => {
 
         fetchFriends();
     }, [currentUser]);
-
-
 
 
     const sendMessage = async (uid, name, recipientImg) => {
@@ -1296,6 +1285,28 @@ const Messages = () => {
             });
     };
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (videoRef.current) {
+                const video = videoRef.current;
+                const containerWidth = video.parentElement.offsetWidth;
+                const videoWidth = video.videoWidth;
+
+                // Show controls only if video width fits within the container
+                video.controls = videoWidth <= containerWidth;
+            }
+        };
+
+        // Call handleResize initially and add a resize event listener
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
 
     if (!user) {
         return <>
@@ -1378,7 +1389,9 @@ const Messages = () => {
                             </div>
 
                             <div className="media-img-div">
+
                                 <img src={MessagePhoto} className='photo-img' alt="" />
+
                             </div>
 
 
@@ -1397,8 +1410,8 @@ const Messages = () => {
                             {deleteMessagePhoto && <>
 
                                 <div className='deleteMessagePhoto-div'>
-                                    <div className="deleteMessagePhoto-div-inner">
-                                        <div>This will Delete the message for everyone.</div>
+                                    <div className="deleteMessagePhoto-div-inner bg-lightDiv text-lightPostText dark:text-darkPostText dark:bg-darkDiv">
+                                        <div className='text-lightProfileName dark:text-darkProfileName'>This will Delete the message for everyone.</div>
                                         <div className='my-4'>
                                             <button className='btn btn-sm btn-danger mx-4' onClick={DeleteVideo}>Delete</button>
                                             <button className='btn btn-sm btn-secondary mx-4' onClick={DeleteMedaiOverlay}>Cancle</button>
@@ -1423,13 +1436,12 @@ const Messages = () => {
                             </div>
 
                             <div className="media-img-div">
-                                <video ref={videoRef} controls className=" viewVideoClass" >
+
+                                <video ref={videoRef} controls style={{ background: 'transparent' }} className=" viewVideoClass" >
                                     <source src={videoUrl} />
                                 </video>
 
                             </div>
-
-
                         </div>
                     </div>
                 }
@@ -1488,7 +1500,6 @@ const Messages = () => {
                                         <img src={showReplyVideoUrl.split("Reply to: ")[1]} className='photo-img' alt="" />
                                     </div>
                                 }
-
 
                             </div>
 
@@ -1601,11 +1612,8 @@ const Messages = () => {
                                                         // Reciver Container
                                                         (<>
                                                             {deletedBySenderUid ?
-
                                                                 null
-
                                                                 :
-
                                                                 (<>
 
                                                                     {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" /> </div>}
@@ -1615,10 +1623,7 @@ const Messages = () => {
                                                                             ""
                                                                             :
                                                                             <>
-                                                                                {/* {isSender && hoveredMessageId === message.id && (
-                                                                                        <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}
-                                                                                        </div>
-                                                                                    )} */}
+
                                                                             </>
                                                                         }
 
@@ -1715,7 +1720,7 @@ const Messages = () => {
 
 
 
-                                                                        {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
+                                                                        {message.message && <div className={`message-content-text ${!isSender ? 'text-[white] bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
                                                                             onClick={() => showReplyButton(message.id)}
                                                                             onMouseLeave={hideReplyButton}
                                                                         >
@@ -1781,9 +1786,7 @@ const Messages = () => {
 
                                                                     </div>
                                                                 </>)
-
                                                             }
-
                                                         </>)
 
                                                         :
@@ -1870,7 +1873,7 @@ const Messages = () => {
                                                                     >
                                                                         <div className="message-video-container" >
 
-                                                                            <video ref={videoRef} className="video messageVideo">
+                                                                            <video ref={videoRef} className=" messageVideo">
                                                                                 <source src={message.videoUrl} />
                                                                             </video>
                                                                             <div className="message-play-button">
@@ -2037,7 +2040,6 @@ const Messages = () => {
                                                                 {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#5858FA]  dark:bg-[#5858FA] dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkReciver"} `}
                                                                     onClick={() => showReplyButton(message.id)}
                                                                     onMouseLeave={hideReplyButton}
-                                                                    style={{ width: "150px" }}
                                                                 >
                                                                     {message.message}
 
@@ -2101,29 +2103,7 @@ const Messages = () => {
                                                         </>)
                                                     }
 
-
                                                 </div>
-
-                                                {/* {!isSender && hoveredMessageId === message.id && (
-                                                    <div>
-                                                        <div
-                                                            className="reply-button"
-                                                            onClick={() => {
-                                                                setSelectedMessageId(message.id);
-                                                                setViewMessageInput(message.message);
-                                                                setViewMessageImg(message.imageUrl);
-                                                                setViewReplyImgLikeUrl(message.imageUrlLike);
-                                                                setViewReplyVideoUrl(message.videoUrl);
-
-                                                                setViewReplyImgUrl(message.imageUrl);
-
-
-                                                            }}
-                                                        >
-                                                            <MdOutlineReply className='text-lightProfileName dark:text-darkProfileName' />
-                                                        </div>
-                                                    </div>
-                                                )} */}
                                             </div >
                                         </>
                                     );

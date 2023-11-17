@@ -1,19 +1,22 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
-import { collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, setDoc } from 'firebase/firestore';
-import { db } from '../Firebase';
+import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore';
+import { auth, db, storage } from '../Firebase';
 
 import './Reals.scss';
-import { FaPlay } from 'react-icons/fa';
+import { FaPlay, FaShare } from 'react-icons/fa';
 import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineHeart } from 'react-icons/ai';
 import { BsBalloonHeart, BsBalloonHeartFill, BsFillHeartFill, BsHeart, BsHeartFill, BsHearts } from 'react-icons/bs';
 import { AuthContext } from '../AuthContaxt';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Heart from "react-animated-heart";
+import { CgClose } from "react-icons/cg";
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { v4 } from 'uuid';
+
 const VideoItem = ({ post }) => {
     const { currentUser } = useContext(AuthContext);
     const videoRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
-
 
     const handleVideoBtnClick = (id) => {
         const video = videoRef.current;
@@ -56,8 +59,6 @@ const VideoItem = ({ post }) => {
             observer.unobserve(video);
         };
     }, []);
-
-
 
     const scrollToPreview = (id) => {
         const element = document.getElementById(`section2-${id}`);
@@ -153,10 +154,137 @@ const VideoItem = ({ post }) => {
         nav(-1);
     }
 
+    const [friendsList, setFriendsList] = useState([]);
+    useEffect(() => {
+        const friendsRef = collection(db, `allFriends/${currentUser && currentUser.uid}/Friends`);
+        const unsubscribe = onSnapshot(friendsRef, (friendsSnapshot) => {
+            const friendsData = friendsSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setFriendsList(friendsData);
+        }, (error) => {
+            console.error('Error fetching friends:', error);
+        });
+
+        return () => unsubscribe();
+    }, [currentUser && currentUser]);
+
+
+    const [api, setApiData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const colRef = collection(db, 'users');
+        const delay = setTimeout(() => {
+            const unsubscribe = onSnapshot(colRef, (snapshot) => {
+                const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+                setApiData(newApi);
+                setLoading(false);
+            });
+
+            return () => {
+                unsubscribe();
+            };
+        }, 1000);
+
+        return () => clearTimeout(delay);
+    }, []);
+
+    const [isShare, setIsShare] = useState(false);
+    const HandleShare = () => {
+        setIsShare(!isShare);
+    }
+
+    const [isSelected, setIsSelected] = useState(false);
+    const [selectedUid, setSelectedUid] = useState(null);
+    const [selectedImg, setSelectedImg] = useState(null);
+    const [selectedName, setSelectedName] = useState("");
+    const [selectedVideo, setSelectedVideo] = useState(null);
+
+
+    const HandleSendReel = (item, video) => {
+        setSelectedUid(item.uid);
+        setIsSelected(!isSelected);
+        setSelectedImg(item.PhotoUrl);
+        setSelectedName(item.name);
+        setSelectedVideo(video);
+    }
+
+    const SendReelClose = () => {
+        setIsSelected(false);
+        setSelectedImg(null);
+        setSelectedName("");
+        setSelectedUid(null);
+        setSelectedVideo(null);
+        setIsShare(false);
+    }
+    const HandleSendReelClose = () => {
+        setIsSelected(!isSelected);
+        setSelectedImg(null);
+        setSelectedName("");
+        setSelectedUid(null)
+    }
+
+    const sendMessage = async (uid, name, recipientImg) => {
+        try {
+            const messagesRef = collection(db, 'messages');
+            const currentUser = auth.currentUser;
+
+            if (selectedVideo) {
+                await addDoc(messagesRef, {
+                    sender: currentUser.uid,
+                    senderImg: currentUser.photoURL,
+                    recipient: selectedUid,
+                    recipientImg: selectedImg,
+                    sound: "on",
+                    videoUrl: selectedVideo,
+                    timestamp: serverTimestamp(),
+                });
+            }
+
+            const messageData1 = {
+                userId: currentUser.uid,
+                name: currentUser.displayName,
+                photoUrl: currentUser.photoURL,
+                status: "unseen",
+                sound: "on",
+                photo: "unseen",
+                time: serverTimestamp(),
+
+            };
+
+            const messageData2 = {
+                userId: selectedUid,
+                name: selectedName,
+                photoUrl: selectedImg,
+                status: "unseen",
+                sound: "on",
+                time: serverTimestamp(),
+            };
+
+            const docRef1 = doc(db, `allFriends/${selectedUid}/Message`, currentUser.uid);
+            const docRef2 = doc(db, `allFriends/${currentUser.uid}/Message`, selectedUid);
+
+            const promises = [];
+
+            promises.push(setDoc(docRef1, messageData1, { merge: true }));
+            promises.push(setDoc(docRef2, messageData2, { merge: true }));
+
+            await Promise.all(promises);
+            HandleSendReelClose();
+            SendReelClose();
+
+
+        } catch (error) {
+            console.error("Error sending message:", error);
+        }
+    };
+
     return (
         <div className="reel-scroll-div">
             <div className="reel-mainu-div">
-                <video ref={videoRef} className="rvideo" onClick={() => handleVideoBtnClick(post.id)} loop>
+                <video ref={videoRef} className="rvideo" onClick={() => handleVideoBtnClick(post.id)} >
                     <source src={post.img} type="video/mp4" />
                 </video>
                 {!isPlaying && (
@@ -171,8 +299,11 @@ const VideoItem = ({ post }) => {
                     <i onClick={goBack} className="bi bi-arrow-left "></i>
                 </div>
 
-                <div className="reel-like-icon">
+                <div className="reel-like-share">
+                    <FaShare onClick={HandleShare} />
+                </div>
 
+                <div className="reel-like-icon">
                     {liked ? <BsHeartFill color='#FF0040' className='' onClick={() => HandleLike(post.id)} /> :
                         <BsHeartFill className='unlike-heart' onClick={() => HandleLike(post.id)} />
                     }
@@ -182,6 +313,60 @@ const VideoItem = ({ post }) => {
                 <div className="reel-profile-div">
                     <img src={post.photoURL} className='reel-profile-img' alt="" />
                 </div>
+
+                {isShare ?
+                    (<>
+                        {isSelected ?
+                            (<>
+                                <div className="selected-id">
+                                    <div className="selected-id-close-div">
+                                        <CgClose className='selected-id-close-icon' onClick={HandleSendReelClose} />
+                                    </div>
+                                    <img src={selectedImg} className='selected-img' alt="" />
+                                    <div className="selected-name">{selectedName}</div>
+                                    <button className="btn btn-primary btn-md w-25" onClick={sendMessage} style={{ fontSize: "16px", }}>Send</button>
+                                </div>
+                            </>)
+                            :
+                            (<>
+                                <div className="send-reel-div">
+                                    <div className="send-reel-close-div">
+                                        <CgClose className='send-reel-close-icon' onClick={SendReelClose} />
+                                    </div>
+                                    <div className="send-reel-grid-div">
+                                        <div className="send-reel-grid">
+                                            {api.map((item) => {
+                                                return (
+                                                    <>
+                                                        {friendsList
+
+                                                            .map((friend) => {
+
+                                                                if (item.uid === friend.uid) {
+                                                                    return (
+                                                                        <div key={friend.userId} >
+                                                                            <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center", }}>
+                                                                                <img onClick={() => HandleSendReel(item, post.img)} src={item.PhotoUrl} className='ree-friend-img' alt="" />
+                                                                                <div className='reel-friend-name text-lightProfileName dark:text-darkProfileName'>{item.name}</div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    )
+                                                                }
+                                                            })}
+                                                    </>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                </div>
+                            </>)
+                        }
+                    </>)
+                    :
+                    null
+                }
+
             </div>
         </div>
     );

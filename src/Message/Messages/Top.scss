@@ -3,28 +3,13 @@
 .message-top-bar {
     width: 100%;
     height: 50px;
-    // background-color: rgb(85, 85, 85);
-    // background-color: white;
     display: flex;
     align-items: center;
     padding: 0 1rem;
-    // box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    // box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
-    // border-bottom: 1px solid #ccc;
 
     .message-back-arrow {
         margin-right: 1rem;
-        display: none;
-
-        @include respond-to(sm) {
-            display: flex;
-            cursor: pointer;
-        }
-
-        @include respond-to(xs) {
-            display: flex;
-            cursor: pointer;
-        }
+        cursor: pointer;
     }
 
     .message-profile-div {
@@ -51,8 +36,6 @@
         // background: red;
         width: 35px;
         height: 35px;
-        // background-color: #d1d5db;
-        // color: #2E2E2E;
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -69,9 +52,6 @@
         top: 50px;
         right: 15px;
         z-index: 2;
-        // color: white;
-        // background-color: #f0f2f5;
-        // background-color: red;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -80,7 +60,8 @@
         box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         // box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
         transition: 0.5s ease-in-out;
-        p{
+
+        p {
             cursor: pointer;
         }
     }

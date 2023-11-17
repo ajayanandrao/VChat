@@ -17,6 +17,8 @@ import v2 from "./../../Image/video/xmq3nirr.mp4";
 import v2img from "./../../Image/video/xmq3nirr.png";
 import v3 from "./../../Image/video/wl49glts.mp4";
 import v3img from "./../../Image/video/wl49glts.png";
+import v44 from "./../../Image/video/tunnel.mp4";
+import v4img from "./../../Image/video/tunnel.png";
 import { AiOutlineClose } from 'react-icons/ai';
 import { Windows } from 'react-bootstrap-icons';
 import { MdClose } from 'react-icons/md';
@@ -397,6 +399,10 @@ const ProfileOne = ({ user }) => {
     };
 
 
+
+    // =========================== Video =======================
+
+
     const CoverUploadSelectedV1 = async () => {
         await setDoc(profileDataRef, {
             // CoverName: url.name,
@@ -418,6 +424,14 @@ const ProfileOne = ({ user }) => {
             // CoverName: url.name,
             CoverPhoto: "",
             VideoCover: "https://cdn.pixabay.com/vimeo/514501835/tunnel-65495.mp4?width=1280&hash=16eb80794988b7948fc513c19c27bd6daa2982dc",
+        }, { merge: true });
+        window.location.reload();
+    };
+    const CoverUploadSelectedV44 = async () => {
+        await setDoc(profileDataRef, {
+            // CoverName: url.name,
+            CoverPhoto: "",
+            VideoCover: "https://firebasestorage.googleapis.com/v0/b/hosting-c26ea.appspot.com/o/Cover%20Video%2Ftunnel.mp4?alt=media&token=f4ef5d47-b409-4861-acbf-36ff28a1588b",
         }, { merge: true });
         window.location.reload();
     };
@@ -492,6 +506,10 @@ const ProfileOne = ({ user }) => {
 
                                                 <div className="profile-cover-media-video" onClick={CoverUploadSelectedV3} style={{ backgroundImage: `url(${v3img})` }}>
                                                     <video className='profile-cover-media-video-file' src={v3} autoPlay loop muted />
+                                                </div>
+
+                                                <div className="profile-cover-media-video" onClick={CoverUploadSelectedV44} style={{ backgroundImage: `url(${v4img})` }}>
+                                                    <video className='profile-cover-media-video-file' src={v44} autoPlay loop muted />
                                                 </div>
                                             </div>
                                         </div>
