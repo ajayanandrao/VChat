@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/VChat/static/css/main.7bb1088f.css",
-    "main.js": "/VChat/static/js/main.ba3be639.js",
+    "main.css": "/VChat/static/css/main.97733cfa.css",
+    "main.js": "/VChat/static/js/main.6f6d98d1.js",
     "static/js/511.35e32d36.chunk.js": "/VChat/static/js/511.35e32d36.chunk.js",
     "static/js/29.1e68812f.chunk.js": "/VChat/static/js/29.1e68812f.chunk.js",
     "static/js/727.9a696ace.chunk.js": "/VChat/static/js/727.9a696ace.chunk.js",
@@ -10,6 +10,7 @@
     "static/js/27.44fd8a9f.chunk.js": "/VChat/static/js/27.44fd8a9f.chunk.js",
     "static/media/mobile4.png": "/VChat/static/media/mobile4.80d1c3aba934d273d041.png",
     "static/media/videoa.mp4": "/VChat/static/media/videoa.f35de8f81779b5f1cde5.mp4",
+    "static/media/tunnel.mp4": "/VChat/static/media/tunnel.d22525a14ed65c1ec6e2.mp4",
     "static/media/xmq3nirr.mp4": "/VChat/static/media/xmq3nirr.192642729761cbb07f3e.mp4",
     "static/media/sv.mp4": "/VChat/static/media/sv.98ba037f3bcb49af8fea.mp4",
     "static/media/wl49glts.mp4": "/VChat/static/media/wl49glts.548ad6accdfcfadb433b.mp4",
@@ -17,6 +18,7 @@
     "static/media/videoa.png": "/VChat/static/media/videoa.05140fa841f5b93ef159.png",
     "static/media/chat.mp4": "/VChat/static/media/chat.b5329244e3eb45edfe0f.mp4",
     "static/media/mobile2.png": "/VChat/static/media/mobile2.225ba1296882dabc1c79.png",
+    "static/media/tunnel.png": "/VChat/static/media/tunnel.2765349f03832d40d8ea.png",
     "static/media/wl49glts.png": "/VChat/static/media/wl49glts.d5fb430f2e06eb600091.png",
     "static/media/vl.png": "/VChat/static/media/vl.b9d816834a2726e6b81e.png",
     "static/media/sms.png": "/VChat/static/media/sms.c26950f1809dfd1d9e7c.png",
@@ -33,7 +35,7 @@
     "index.html": "/VChat/index.html"
   },
   "entrypoints": [
-    "static/css/main.7bb1088f.css",
-    "static/js/main.ba3be639.js"
+    "static/css/main.97733cfa.css",
+    "static/js/main.6f6d98d1.js"
   ]
 }
