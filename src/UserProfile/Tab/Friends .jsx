@@ -168,7 +168,7 @@ const Friends = ({ user }) => {
                                         }
                                     }).map((item) => {
                                         return (
-                                            <>
+                                            <div key={item.id}>
                                                 {friendsList
 
                                                     .map((friend) => {
@@ -187,7 +187,7 @@ const Friends = ({ user }) => {
                                                             )
                                                         }
                                                     })}
-                                            </>
+                                            </div>
                                         )
                                     })}
 

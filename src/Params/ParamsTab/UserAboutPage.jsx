@@ -22,7 +22,7 @@ const UserAboutPage = ({ user }) => {
             {api.map((item) => {
                 if (user.uid === item.uid) {
                     return (
-                        <>
+                        <div key={item.id}>
                             <div className='About-main-container'>
 
                                 <div className="details-wrapper bg-lightDiv dark:bg-darkDiv">
@@ -73,7 +73,7 @@ const UserAboutPage = ({ user }) => {
                                     </div>
                                 </div>
                             </div >
-                        </>
+                        </div>
                     )
                 }
             })}

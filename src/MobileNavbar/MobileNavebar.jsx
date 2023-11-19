@@ -198,10 +198,10 @@ const MobileNavebar = () => {
           </span>
 
           <span className="mobile-nav-mainu">
-            <Link to="gallery/" className="link">
+            <Link to="reels/" className="link">
               <div>
-                {/* <SiHelpscout className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" /> */}
-                <i class="bi bi-image-fill mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon"></i>
+                <MdMovieFilter className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
+                {/* <i className="bi bi-image-fill mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon"></i> */}
               </div>
             </Link>
           </span>
@@ -212,13 +212,13 @@ const MobileNavebar = () => {
               {themIcon.map((item) => {
                 if (item.id === currentUser.uid) {
                   return (
-                    <>
+                    <div key={item.id}>
                       <div className=""> {item.theme === "dark" ?
                         <BiSolidSun style={{ fontSize: "30px" }} className="mobile-nav-icon  dark:text-darkPostIcon" />
                         :
                         <FaMoon className="mobile-nav-icon text-lightPostIcon" />
                       }</div>
-                    </>
+                    </div>
                   )
                 }
               })}

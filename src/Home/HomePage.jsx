@@ -466,9 +466,9 @@ const HomePage = () => {
                         <>
                             {api.map((item) => {
                                 return (
-                                    <>
+                                    <div key={item.id}>
                                         <Feed post={item} key={item.id} />
-                                    </>
+                                    </div>
                                 )
                             })}
                         </>
@@ -620,9 +620,6 @@ const HomePage = () => {
                                     }
                                 })}
                         </>}
-
-
-
 
                 </div>
             </div>

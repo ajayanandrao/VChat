@@ -93,7 +93,7 @@ const About = () => {
             {api.map((item) => {
                 if (currentUser.uid === item.uid) {
                     return (
-                        <>
+                        <div key={item.id}>
                             {aboutIntro ?
                                 (<div className="about-overlay-container">
                                     <h1 className='text-3xl text-lightPostText dark:text-darkPostText'>Your Intro</h1>
@@ -202,7 +202,7 @@ const About = () => {
                                     </div>
                                 </div>
                             </div >
-                        </>
+                        </div>
                     )
                 }
             })}

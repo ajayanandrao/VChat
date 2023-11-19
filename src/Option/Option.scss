@@ -17,7 +17,7 @@
 	// background: rgba(255, 255, 255, 0.034);
 	backdrop-filter: blur(10px);
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-	cursor: pointer;
+	// cursor: pointer;
 	// padding: 1rem;
 
 
@@ -65,7 +65,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			margin-bottom: 3rem;
+			margin-bottom: 1rem;
 			// background: blue;
 
 			.option-profile-img {
@@ -81,9 +81,12 @@
 				text-transform: capitalize;
 				margin: 1rem 0;
 				cursor: pointer;
-				font-size: 24px;
+				font-size: 36px;
 				font-weight: 600;
 				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				background: linear-gradient(150deg, #0095ff, #CB04FF);
+				color: transparent;
+				-webkit-background-clip: text;
 			}
 		}
 
@@ -93,6 +96,7 @@
 			// background: yellow;
 			height: 60px;
 			margin: 1rem 0;
+			cursor: pointer;
 
 			.option-mainu-icon {
 				// background: red;

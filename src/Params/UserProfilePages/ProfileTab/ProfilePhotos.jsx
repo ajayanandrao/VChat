@@ -108,7 +108,7 @@ const ProfilePhotos = ({ user }) => {
     const VideoData = userPhoto.map((post) => {
         if (post.uid === user.uid) {
             return (
-                <>
+                <div key={post.id}>
                     {post.img && isVideo(post.name) && (
                         <>
                             <div className='video-container'>
@@ -120,7 +120,7 @@ const ProfilePhotos = ({ user }) => {
                         </>
                     )
                     }
-                </>
+                </div>
             )
         }
     });

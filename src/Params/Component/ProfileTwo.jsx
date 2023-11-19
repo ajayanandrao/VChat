@@ -166,11 +166,11 @@ const ProfileTwo = ({ user }) => {
                 {api.map((item) => {
                     if (user.uid === item.uid) {
                         return (
-                            <>
+                            <div key={item.id}>
                                 <div className="about-intro-div text-lightPostText dark:text-darkPostText">
                                     {item.intro}
                                 </div>
-                            </>
+                            </div>
                         )
                     }
                 })}

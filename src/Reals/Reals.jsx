@@ -337,7 +337,7 @@ const VideoItem = ({ post }) => {
                                         <div className="send-reel-grid">
                                             {api.map((item) => {
                                                 return (
-                                                    <>
+                                                    <div key={item.id}>
                                                         {friendsList
 
                                                             .map((friend) => {
@@ -354,7 +354,7 @@ const VideoItem = ({ post }) => {
                                                                     )
                                                                 }
                                                             })}
-                                                    </>
+                                                    </div>
                                                 )
                                             })}
                                         </div>

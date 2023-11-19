@@ -101,7 +101,7 @@ const ProfileFriends = ({ user }) => {
                             }).map((item) => {
                                 if (item.uid !== currentUser.uid) {
                                     return (
-                                        <>
+                                        <div key={item.id}>
                                             {friendsList
 
                                                 .map((friend) => {
@@ -123,7 +123,7 @@ const ProfileFriends = ({ user }) => {
                                                 })}
 
 
-                                        </>
+                                        </div>
                                     )
 
                                 }

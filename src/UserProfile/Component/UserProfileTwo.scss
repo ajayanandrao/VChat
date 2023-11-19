@@ -14,19 +14,24 @@
         margin-right: 8px;
     }
 
-    .update-name-overlay-close {
-        width: 50px;
-        height: 50px;
-        padding: 1rem;
+    .update-name-overlay-close-div {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.5);
         position: fixed;
         top: 10px;
         right: 8%;
-        // background: red;
         display: flex;
-        justify-content: end;
-        font-size: 24px;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
+
+        .update-name-overlay-close {
+            font-size: 24px;
+        }
     }
+
 
     .update-name-ovelay-center {
         display: flex;
@@ -113,6 +118,6 @@
 
 }
 
-.profile-friend-count{
+.profile-friend-count {
     padding: 5px;
 }

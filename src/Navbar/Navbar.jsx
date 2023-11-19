@@ -133,10 +133,10 @@ const Navbar = () => {
         <div className='navbar-main-container'>
 
             <div className='navbar-mainu-button' onClick={() => { handleBoll() }} >
-                <div class="intro-banner-vdo-play-btn pinkBg" target="_blank" onClick={handleBoll}>
-                    <span class="ripple pinkBg" onClick={handleBoll}></span>
-                    <span class="ripple pinkBg" onClick={handleBoll}></span>
-                    <span class="ripple pinkBg" onClick={handleBoll}></span>
+                <div className="intro-banner-vdo-play-btn pinkBg" target="_blank" onClick={handleBoll}>
+                    <span className="ripple pinkBg" onClick={handleBoll}></span>
+                    <span className="ripple pinkBg" onClick={handleBoll}></span>
+                    <span className="ripple pinkBg" onClick={handleBoll}></span>
                 </div>
             </div>
 
@@ -145,7 +145,7 @@ const Navbar = () => {
 
                     {view ?
                         <Link
-                            to={"/reels"} className=" navbar-mainu-link-btn c-video c-reel bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" onClick={handleBoll}>
+                            to={"/gallery"} className=" navbar-mainu-link-btn c-video c-reel bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" onClick={handleBoll}>
                             <div
                                 className="">
                                 <motion.div style={{
@@ -157,7 +157,8 @@ const Navbar = () => {
                                     animate={{ scale: 1, opacity: 1 }}
                                     className='link-btn-shadow'
                                 >
-                                    <MdMovieFilter className='text-lightProfileName dark:text-darkPostIcon'/>
+                                    {/* <MdMovieFilter className='text-lightProfileName dark:text-darkPostIcon'/> */}
+                                    <i className="bi bi-image-fill text-lightProfileName  dark:text-darkPostIcon"></i>
                                 </motion.div>
                             </div>
                         </Link>

@@ -76,22 +76,25 @@ const Setting = () => {
                 <div className="setting-containt">
 
                     <Link to="/How_to_install_app/">
-                        <div className='change-password bg-lightDiv dark:bg-darkDiv dark:text-darkPostText text-lightPostText' >
+                        <div className='change-password bg-gradient-dark  dark:text-darkPostText text-[white]' >
                             How To install VChat App in your Phone
                         </div>
                     </Link>
 
                     <Link to="/policy/">
-                        <div className='change-password bg-lightDiv dark:bg-darkDiv dark:text-darkPostText text-lightPostText' >
+                        <div className='change-password bg-gradient-dark  dark:text-darkPostText text-[white]' >
                             VChat App Policy and Terms.
                         </div>
                     </Link>
 
                     <Link to="/changePassword/">
-                        <div className='change-password bg-lightDiv dark:bg-darkDiv dark:text-darkPostText text-lightPostText'>Change Profile Password</div>
+                        <div className='change-password bg-gradient-dark  dark:text-darkPostText text-[white]'>Change Profile Password</div>
                     </Link>
+                    {/* <Link to="/deactivate/">
+                        <div className='change-password bg-gradient-dark  dark:text-darkPostText text-[white]'>DeActivate your Account</div>
+                    </Link> */}
                     <Link to="/feedback/">
-                        <div className='change-password bg-lightDiv dark:bg-darkDiv dark:text-darkPostText text-lightPostText'>Feedback</div>
+                        <div className='change-password bg-gradient-dark  dark:text-darkPostText text-[white]'>Feedback</div>
                     </Link>
                 </div>
 

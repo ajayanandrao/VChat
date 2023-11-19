@@ -163,13 +163,15 @@ const ProfileTwo = ({ user }) => {
     const userPosts = postData.filter(post => post.uid === currentUser.uid);
     const userPostCount = userPosts.length;
 
-    console.log(`The current user has ${userPostCount} posts.`);
     return (
         <>
             {overlay ? (
                 <div id='update-name-overlay-div'>
 
-                    <MdClose className='update-name-overlay-close dark:text-[white] text-darkDiv' onClick={() => setOverlay(false)} />
+                    <div className="update-name-overlay-close-div">
+
+                        <MdClose className='update-name-overlay-close dark:text-[white] text-darkDiv' onClick={() => setOverlay(false)} />
+                    </div>
 
                     <div className="update-name-ovelay-center">
                         <div className='update-name-overlay-input-div'>
@@ -179,7 +181,7 @@ const ProfileTwo = ({ user }) => {
                             <input
                                 type="text"
                                 placeholder='Name'
-                                className='update-name-overlay-Input bg-lightDiv text-lightProfileName dark:bg-darkDiv dark:text-darkProfileName'
+                                className='update-name-overlay-Input bg-lightDiv text-lightProfileName dark:bg-darkInput dark:text-darkProfileName'
                                 value={newDisplayName}
                                 onChange={(e) => setNewDisplayName(e.target.value)}
                                 onKeyDown={handleKeyDown}

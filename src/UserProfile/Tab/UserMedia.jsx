@@ -210,9 +210,7 @@ const UserMedia = () => {
                                     {imageMedia.map((post) => {
                                         if (currentUser.uid === post.uid) {
                                             return (
-
-                                                <>
-
+                                                <div key={post.id}>
                                                     {
                                                         post.img && (post.name.includes('.jpg') || post.name.includes('.png')) ? (
                                                             <img src={post.img} alt="Uploaded" className="media-img" onClick={() => handleImageShow(post.id, post.img, post.bytime)} />
@@ -235,7 +233,7 @@ const UserMedia = () => {
 
                                                         ) : null
                                                     }
-                                                </>
+                                                </div>
                                             );
                                         }
                                     })}

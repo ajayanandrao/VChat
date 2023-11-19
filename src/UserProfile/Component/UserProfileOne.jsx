@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import "./UserProfileOne.scss";
 import { useNavigate } from 'react-router-dom';
-import { BsFillCameraFill } from "react-icons/bs";
+import { BsFillCameraFill, BsImages } from "react-icons/bs";
 import { AuthContext } from "./../../AuthContaxt";
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
@@ -203,7 +203,6 @@ const ProfileOne = ({ user }) => {
     const [coverImg, setCoverImg] = useState([]);
     const [loadingCoverData, setLoadingCoverData] = useState(true);
 
-
     useEffect(() => {
         const colRef = collection(db, 'UpdateProfile');
         const unsubscribe = onSnapshot(colRef, (snapshot) => {
@@ -214,8 +213,6 @@ const ProfileOne = ({ user }) => {
 
         return unsubscribe;
     }, []);
-
-
 
     const compressImage = async (imageFile, maxWidth) => {
         return new Promise((resolve, reject) => {
@@ -472,7 +469,9 @@ const ProfileOne = ({ user }) => {
                                             </div>
                                         </div>
                                         <div className="profile-media-from-device-div">
-                                            <div className='profile-media-folder' onClick={() => { handleSelectMedia(); on(); }}>📂</div>
+                                            <div className='profile-media-folder' onClick={() => { handleSelectMedia(); on(); }}>
+                                                <BsImages />
+                                            </div>
                                             <div className="profile-media-folder-name" onClick={() => { handleSelectMedia(); on(); }}>
                                                 Select From Device
                                             </div>

@@ -36,7 +36,7 @@ import { auth, db } from './Firebase';
 import BottomNav from './MobileNavbar/BottomNav';
 import Navbar from './Navbar/Navbar';
 import Wellcome from './Home/Wellcome';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import Error404 from './Error404';
 import Install from './Setting/Install/Install';
 import { AuthContext } from './AuthContaxt';
@@ -44,12 +44,14 @@ import CreateStorey from './Story/createStory/CreateStorey';
 import ViewStoryProps from './Story/createStory/ViewStory/ViewStoryProps';
 import HomePage from './Home/HomePage';
 import Left from './Home/Left/Left';
-import Rtime from './Rtime/Rtime';
 import Feedback from './Setting/Feedback/Feedback';
 import RealWork from './Reals/RealWork';
 import HospitalPage from './Hospital/HospitalPage';
 import AddHospitals from './Hospital/AddHospitals';
 import Vgallery from './Vgallery/Vgallery';
+import HospitalDetail from './Hospital/HospitalDetails/HospitalDetail';
+import Audio from './Audio';
+import DeActivate from './Setting/DeActivate/DeActivate';
 
 function App() {
 
@@ -155,6 +157,9 @@ function App() {
   }, []);
 
 
+  // ========================================================= Audio =====================================
+
+
 
   return (
     <>
@@ -189,8 +194,9 @@ function App() {
 
             // (<> <Route path="home" element={<Home />} />
             (<>
+              
+
               <Route path="home" element={<HomePage />} />
-              <Route path="rtime" element={<Rtime />} />
               {/* <Route path="home" element={<Home />} />  */}
               {/* <Route path="post" element={<Post />} /> */}
 
@@ -207,6 +213,7 @@ function App() {
               <Route path="option" element={<Option />} />
               <Route path="setting" element={<Setting />} />
               <Route path="policy" element={<Policy />} />
+              <Route path="deactivate" element={<DeActivate />} />
               <Route path="search" element={<SearchUser />} />
               <Route path="message" element={<Message />} />
               <Route path="find_friend" element={<PeopleProps />} />
@@ -217,7 +224,10 @@ function App() {
               <Route path="WeddingList/:id" element={<WeddingListDetail />} />
 
               <Route path='gallery' element={<Vgallery />} />
+
               <Route path='hospitals' element={<HospitalPage />} />
+              <Route path='hospitalsDetail' element={<HospitalDetail />} />
+
               <Route path='add_hospitals' element={<AddHospitals />} />
 
               <Route path='users' element={<Users />} />
@@ -232,7 +242,7 @@ function App() {
 
               <Route path='profile' element={<CurrentUserProfileMain />} />
 
-              <Route path='/reels/' element={<ReelsProps />} /> 
+              <Route path='/reels/' element={<ReelsProps />} />
               {/* <Route path='/reels/' element={<RealWork />} /> */}
               <Route path='notification' element={<NotificationProps />} />
               <Route path='notification/:id' element={<NotificationPara />} /></>)

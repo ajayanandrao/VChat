@@ -181,7 +181,7 @@ const Messages = () => {
 
 
     const goBack = () => {
-        nav("/message/");
+        nav("/home/");
     }
 
     const togglePlayPause = () => {
