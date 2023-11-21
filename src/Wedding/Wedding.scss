@@ -59,6 +59,7 @@
     background: linear-gradient(130deg, aqua, #1087ff, #cd04ff 80%);
     color: white;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    z-index: 2;
 
     @include respond-to(xs) {
         right: 10px;
@@ -145,6 +146,16 @@
     .toggle-dropdown {
         position: relative;
         display: inline-block;
+    }
+
+    .sub-cast{
+        width: 100%;
+        max-width: 150px;
+        margin-left: 10px;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 1px solid #4caf50;
+        outline: none;
     }
 
     .toggle-button {

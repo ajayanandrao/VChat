@@ -44,6 +44,20 @@ const UserFriendPage = ({ user }) => {
         return () => clearTimeout(delay);
     }, []);
 
+    const newarrytwo = api.filter((item) =>
+        friendsList.some((friend) => item.uid === friend.uid)
+    );
+
+    const filteredArray = newarrytwo.filter((value) => {
+        if (search === "") {
+            return true; // Include all elements if search is empty
+        } else if (value.name.toLowerCase().includes(search.toLowerCase())) {
+            return true; // Include elements that match the search condition
+        } else {
+            return false; // Exclude elements that don't match the search condition
+        }
+    });
+
     return (
         <div>
             {/* sdfsdfsdfsdfsdf */}
@@ -100,37 +114,41 @@ const UserFriendPage = ({ user }) => {
                             (<>
                                 <div className="Friend-grid-parent-container">
                                     <div className='friend-container'>
-                                        {api.filter((value) => {
-                                            if (search === "") {
-                                                return value;
-                                            } else if (
-                                                value.name.toLowerCase().includes(search.toLowerCase())
-                                            ) {
-                                                return value;
-                                            }
-                                        }).map((item) => {
-                                            return (
-                                                <div key={item.id}>
-                                                    {friendsList.map((friend) => {
 
-                                                        if (item.uid === friend.uid) {
-                                                            return (
-                                                                <div key={friend.userId} >
+                                        {search == "" ?
+                                            (<>
+                                                {newarrytwo.map((friend) => {
+                                                    return (
+                                                        <div key={friend.uid} >
 
-                                                                    <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                                                        <img src={item.PhotoUrl} className='friend-img' alt="" />
-                                                                        <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{item.name}</div>
-                                                                    </div>
+                                                            <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                <img src={friend.PhotoUrl} className='friend-img' alt="" />
+                                                                <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{friend.name}</div>
+                                                            </div>
 
-                                                                </div>
-                                                            )
-                                                        }
-                                                    })}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </>)
+                                            :
+                                            (<>
+                                                {filteredArray.map((friend) => {
+                                                    return (
+                                                        <div key={friend.uid} >
+
+                                                            <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                <img src={friend.PhotoUrl} className='friend-img' alt="" />
+                                                                <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{friend.name}</div>
+                                                            </div>
+
+                                                        </div>
+                                                    )
+                                                })}
+                                            </>)
+                                        }
 
 
-                                                </div>
-                                            )
-                                        })}
+
 
                                     </div>
                                 </div>

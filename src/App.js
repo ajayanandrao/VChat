@@ -226,7 +226,7 @@ function App() {
               <Route path='gallery' element={<Vgallery />} />
 
               <Route path='hospitals' element={<HospitalPage />} />
-              <Route path='hospitalsDetail' element={<HospitalDetail />} />
+              <Route path='hospitalsDetail/:id' element={<HospitalDetail />} />
 
               <Route path='add_hospitals' element={<AddHospitals />} />
 

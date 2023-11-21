@@ -281,6 +281,10 @@ const VideoItem = ({ post }) => {
         }
     };
 
+    const newarrytwo = api.filter((item) =>
+        friendsList.some((friend) => item.uid === friend.uid)
+    );
+
     return (
         <div className="reel-scroll-div">
             <div className="reel-mainu-div">
@@ -335,28 +339,22 @@ const VideoItem = ({ post }) => {
                                     </div>
                                     <div className="send-reel-grid-div">
                                         <div className="send-reel-grid">
-                                            {api.map((item) => {
-                                                return (
-                                                    <div key={item.id}>
-                                                        {friendsList
 
-                                                            .map((friend) => {
+                                            {newarrytwo
+                                                .map((friend) => {
 
-                                                                if (item.uid === friend.uid) {
-                                                                    return (
-                                                                        <div key={friend.userId} >
-                                                                            <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center", }}>
-                                                                                <img onClick={() => HandleSendReel(item, post.img)} src={item.PhotoUrl} className='ree-friend-img' alt="" />
-                                                                                <div className='reel-friend-name text-lightProfileName dark:text-darkProfileName'>{item.name}</div>
-                                                                            </div>
+                                                    return (
+                                                        <div key={friend.uid} >
+                                                            <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center", }}>
+                                                                <img onClick={() => HandleSendReel(friend, post.img)} src={friend.PhotoUrl} className='ree-friend-img' alt="" />
+                                                                <div className='reel-friend-name text-lightProfileName dark:text-darkProfileName'>{friend.name}</div>
+                                                            </div>
 
-                                                                        </div>
-                                                                    )
-                                                                }
-                                                            })}
-                                                    </div>
-                                                )
-                                            })}
+                                                        </div>
+                                                    )
+
+                                                })}
+
                                         </div>
                                     </div>
                                 </div>

@@ -53,6 +53,19 @@ const WeddingList = () => {
         setFilteredWeddingList(filteredList);
         setSearch(searchQuery);
     };
+
+
+    const [api, setApiData] = useState([]);
+    useEffect(() => {
+        const colRef = collection(db, 'users');
+        const unsubscribe = onSnapshot(colRef, (snapshot) => {
+            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+            setApiData(newApi);
+        });
+
+        return unsubscribe;
+    }, []);
+
     return (
         <div className='weddingList-main-container'>
             <div className="left"></div>
@@ -70,71 +83,89 @@ const WeddingList = () => {
                         />
                     </div>
                     <div className='weddinglist-wrapper'>
-                        <div>
-                            {filteredWeddingList.map((item) => {
-                                const canDelete = currentUser && currentUser.uid === item.uid;
+
+                        {api.map((user) => {
+                            if (currentUser.uid === user.uid) {
                                 return (
-                                    <div className='my-4 w-100' key={item.id}>
+                                    <>
 
-                                        <div className="weddingList-card-container bg-lightDiv dark:bg-darkDiv">
-                                            <div className="weddingList-sender-div">
-                                                <img src={item.photoURL} className='weddingList-sender-photo' alt="" />
-                                                <span style={{ textTransform: "capitalize" }} className='text-lightProfileName dark:text-darkProfileName'>{item.displayName}</span>
+                                        <div>
+                                            {filteredWeddingList.map((item) => {
+                                                const canDelete = currentUser && currentUser.uid === item.uid;
 
-                                                {canDelete && (
-                                                    <div className='weddingList-delete-div text-lightProfileName dark:text-darkProfileName' >
-                                                        <CgClose onClick={() => handleDeleteItem(item.id)} />
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <Link to={`/WeddingList/${item.id}`}>
-                                                <div className="weddingList-profile-div">
-                                                    <div className='d-flex'>
-                                                        <img src={item.photoOne} className='weddingList-photo' alt="" />
+                                                return (
+                                                    <>
+                                                        {user.subCast === item.subCast ? (<>
 
-                                                        <div className="weddingList-about-div">
-                                                            <div className='d-flex text-lightProfileName dark:text-darkProfileName' style={{ textTransform: "capitalize", fontSize: "24px", fontWeight: "600" }}>
-                                                                <div className='me-1'>{item.first}</div>
-                                                                <div>{item.last}</div>
+                                                            <div className='my-4 w-100' key={item.id}>
+
+                                                                <div className="weddingList-card-container bg-lightDiv dark:bg-darkDiv">
+
+
+                                                                    <div className="weddingList-sender-div">
+                                                                        <img src={item.photoURL} className='weddingList-sender-photo' alt="" />
+                                                                        <span style={{ textTransform: "capitalize" }} className='text-lightProfileName dark:text-darkProfileName'>{item.displayName}</span>
+
+                                                                        {canDelete && (
+                                                                            <div className='weddingList-delete-div text-lightProfileName dark:text-darkProfileName cursor-pointer' >
+                                                                                <CgClose onClick={() => handleDeleteItem(item.id)} />
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                    <Link to={`/WeddingList/${item.id}`}>
+                                                                        <div className="weddingList-profile-div">
+                                                                            <div className='d-flex'>
+                                                                                <img src={item.photoOne} className='weddingList-photo' alt="" />
+
+                                                                                <div className="weddingList-about-div">
+                                                                                    <div className='d-flex text-lightProfileName dark:text-darkProfileName' style={{ textTransform: "capitalize", fontSize: "24px", fontWeight: "600" }}>
+                                                                                        <div className='me-1'>{item.first}</div>
+                                                                                        <div>{item.last}</div>
+                                                                                    </div>
+
+                                                                                    <div className="weddingList-about-inner-div">
+                                                                                        <div className="weddingList-about-inner-item">
+                                                                                            <div style={{ display: "flex", justifyContent: "center", width: "40px" }}>
+                                                                                                <img src={mobile} width={"35px"} style={{ marginRight: "0.5rem" }} alt="" />
+                                                                                            </div>
+                                                                                            <span className='text-lightProfileName dark:text-darkProfileName'> {item.mobile} </span>
+                                                                                        </div>
+                                                                                        <div className="weddingList-about-inner-item">
+                                                                                            <div style={{ display: "flex", justifyContent: "center", width: "40px" }}>
+                                                                                                <img src={brif} width={"33px"} style={{ marginLeft: "0.2rem", marginRight: "0.7rem" }} alt="" />
+                                                                                            </div>
+                                                                                            <span className='text-lightProfileName dark:text-darkProfileName'> {item.work} </span>
+                                                                                        </div>
+                                                                                        <div className="weddingList-about-inner-item">
+                                                                                            <div style={{ display: "flex", justifyContent: "center", width: "40px" }}>
+                                                                                                <img src={loc} width={"25px"} style={{ marginRight: "0.5rem" }} alt="" />
+                                                                                            </div>
+                                                                                            <div className='flex-1'>
+                                                                                                <span className='text-lightProfileName dark:text-darkProfileName'> {item.village} </span>
+                                                                                                <span className='ms-1 text-lightProfileName dark:text-darkProfileName'> {item.state} </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </Link>
+                                                                </div>
                                                             </div>
-
-                                                            <div className="weddingList-about-inner-div">
-                                                                <div className="weddingList-about-inner-item">
-                                                                    <div style={{ display: "flex", justifyContent: "center", width: "40px" }}>
-                                                                        <img src={mobile} width={"35px"} style={{ marginRight: "0.5rem" }} alt="" />
-                                                                        {/* <FaMobile style={{ fontSize: "24px", color: " #0080FF", marginRight: "0.5rem" }} /> */}
-                                                                    </div>
-                                                                    <span className='text-lightProfileName dark:text-darkProfileName'> {item.mobile} </span>
-                                                                </div>
-                                                                <div className="weddingList-about-inner-item">
-                                                                    <div style={{ display: "flex", justifyContent: "center", width: "40px" }}>
-                                                                        <img src={brif} width={"33px"} style={{ marginLeft: "0.2rem", marginRight: "0.7rem" }} alt="" />
-                                                                        {/* <MdWork style={{ fontSize: "24px", color: "#DF7401", marginRight: "0.5rem" }} /> */}
-                                                                    </div>
-                                                                    <span className='text-lightProfileName dark:text-darkProfileName'> {item.work} </span>
-                                                                </div>
-                                                                <div className="weddingList-about-inner-item">
-                                                                    <div style={{ display: "flex", justifyContent: "center", width: "40px" }}>
-                                                                        <img src={loc} width={"25px"} style={{ marginRight: "0.5rem" }} alt="" />
-                                                                        {/* <ImLocation style={{ fontSize: "24px", color: "#ccc", marginRight: "0.5rem" }} /> */}
-                                                                    </div>
-                                                                    <div className='flex-1'>
-                                                                        <span className='text-lightProfileName dark:text-darkProfileName'> {item.village} </span>
-                                                                        <span className='ms-1 text-lightProfileName dark:text-darkProfileName'> {item.state} </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </Link>
+                                                        </>)
+                                                            :
+                                                            null
+                                                        }
+                                                    </>
+                                                )
+                                            })}
                                         </div>
-                                    </div>
+                                    </>
                                 )
-                            })}
-                        </div>
+                            }
+                        })}
                     </div>
                 </div>
             }

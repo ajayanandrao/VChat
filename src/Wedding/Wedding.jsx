@@ -132,6 +132,7 @@ const Wedding = () => {
     const [village, setVillage] = useState("");
     const [distric, setDistric] = useState("");
     const [state, setState] = useState("");
+    const [subCast, setSubCast] = useState("");
 
 
     const Save = () => {
@@ -201,6 +202,7 @@ const Wedding = () => {
             looking: item,
             height: height,
             region: itemReligin,
+            subCast: subCast,
 
             date: itemDay,
             month: selectedMonth,
@@ -223,6 +225,7 @@ const Wedding = () => {
         setSelectedMonth("")
         setSelectedYear("")
         setLandmark("")
+        setSubCast("")
 
     };
 
@@ -316,6 +319,7 @@ const Wedding = () => {
                                 </ul>
                             )}
                         </div>
+                        <input type="text" className='sub-cast bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText' onChange={(e) => setSubCast(e.target.value)} value={subCast} placeholder='Sub Cast' />
                     </div>
 
                     <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'

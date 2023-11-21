@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./Hospital.scss";
-import Clinik from "./../clinik.json";
-import { BsTelephoneFill, BsTelephoneForwardFill } from "react-icons/bs"
-import { RiTimeFill } from "react-icons/ri"
 import { AuthContext } from '../AuthContaxt';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../Firebase';
+import { CgClose } from "react-icons/cg";
 
 const HospitalPage = () => {
     const { currentUser } = useContext(AuthContext);
@@ -27,14 +25,24 @@ const HospitalPage = () => {
         return unsubscribe;
     }, []);
 
+    const DeleteHospital = async (id) => {
+        const docRef = doc(db, "Hospital", id);
+        try {
+            if (id) {
+                await deleteDoc(docRef);
+            }
+        } catch {
+
+        }
+    }
+
     const [search, setSearch] = useState("");
-    const filteredClinik = Clinik.filter(item =>
-        item.name.toLowerCase().includes(search.toLowerCase()) ||
+    const filteredClinik = api.filter(item =>
+        item.hospitalName.toLowerCase().includes(search.toLowerCase()) ||
         item.doctorName.toLowerCase().includes(search.toLowerCase()) ||
-        item.contact.toLowerCase().includes(search.toLowerCase()) ||
         item.taluka.toLowerCase().includes(search.toLowerCase()) ||
-        item.dist.toLowerCase().includes(search.toLowerCase()) ||
-        item.location.toLowerCase().includes(search.toLowerCase())
+        item.address.toLowerCase().includes(search.toLowerCase()) ||
+        item.distic.toLowerCase().includes(search.toLowerCase())
     );
 
     return (
@@ -62,57 +70,76 @@ const HospitalPage = () => {
 
                 <div className='hospital-wrapper'>
                     <div>
-                        {api.map((item) => {
+                        {filteredClinik.map((item) => {
 
                             return (
-                                <div className='my-4 w-100' key={item.id}>
+                                <Link to={`/hospitalsDetail/${item.id}`} className='my-4 w-100' key={item.id}>
 
                                     <div className="weddingList-card-container bg-lightDiv dark:bg-darkDiv">
 
-                                        <Link to={`/WeddingList/${item.id}`} className='link'>
-                                            <div className="weddingList-profile-div">
+                                        <div className="weddingList-profile-div">
+                                            {
+                                                currentUser.uid === "qHIcUV2VcxQ11kasusyE5kFZ1713" ?
+                                                    (<>
+                                                        <div className="deleteHospital" onClick={() => DeleteHospital(item.id)}>
+                                                            <CgClose className='text-lightProfileName dark:text-darkProfileName' />
+                                                        </div>
+                                                    </>)
+                                                    :
+                                                    null
+                                            }
 
-                                                <div className="wedding-photo-div">
-                                                    {item.image ?
-                                                        <img src={item.image} className='weddingList-photo' alt="" />
-                                                        :
-                                                        <div className="weddingList-photo-load"></div>
-                                                    }
-                                                </div>
 
-                                                <div className="weddingList-about-div">
-                                                    <div className='hospial-name  text-lightProfileName dark:text-darkProfileName'>{item.hospitalName}</div>
-                                                    <div className='hopital-docName  text-lightProfileName dark:text-darkProfileName'>
-                                                        Dr.{item.doctorName}
-                                                        <div className='text-lightProfileName dark:text-darkProfileName' style={{ fontSize: "14px", textTransform: "uppercase" }}>{item.qualification}</div>
-                                                    </div>
-
-                                                    <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName">
-                                                        <div className="hospital-item-category">Contact</div>
-                                                        <div className="hospital-item text-lightPostText dark:text-darkPostText">{item.contact}</div>
-                                                    </div>
-                                                    <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName">
-                                                        <div className="hospital-item-category">Time</div>
-                                                        <div className="hospital-item text-lightPostText dark:text-darkPostText">{item.time}</div>
-                                                    </div>
-                                                    <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName ">
-                                                        <div className="hospital-item-category">Address</div>
-                                                        <div className="hospital-item lightPostText dark:text-darkPostText">{item.address}</div>
-                                                    </div>
-                                                    <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName">
-                                                        <div className="hospital-item-category">Taluka</div>
-                                                        <div className="hospital-item lightPostText dark:text-darkPostText">{item.taluka}</div>
-                                                    </div>
-                                                    <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName">
-                                                        <div className="hospital-item-category ">District</div>
-                                                        <div className="hospital-item lightPostText dark:text-darkPostText">{item.distic} {item.pincode}</div>
-                                                    </div>
-
-                                                </div>
+                                            <div className="wedding-photo-div">
+                                                {item.image ?
+                                                    <img src={item.image} className='weddingList-photo' alt="" />
+                                                    :
+                                                    <div className="weddingList-photo-load"></div>
+                                                }
                                             </div>
-                                        </Link>
+
+                                            <div className="weddingList-about-div">
+                                                <div className='hospial-name  text-lightProfileName dark:text-darkProfileName'>{item.hospitalName}</div>
+                                                <div className='hopital-docName  text-lightProfileName dark:text-darkProfileName'>
+                                                    {item.doctorName ? <>
+
+                                                        Dr.{item.doctorName}
+                                                    </>
+                                                        :
+                                                        null
+                                                    }
+                                                    <div className='text-lightProfileName dark:text-darkProfileName' style={{ fontSize: "14px", textTransform: "uppercase" }}>{item.qualification}</div>
+                                                </div>
+
+                                                <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName">
+                                                    <div className="hospital-item-category">Contact</div>
+                                                    <div className="hospital-item text-lightPostText dark:text-darkPostText">{item.contact}</div>
+                                                </div>
+                                                <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName">
+                                                    <div className="hospital-item-category">Time</div>
+                                                    <div className="hospital-item text-lightPostText dark:text-darkPostText">{item.time}</div>
+                                                </div>
+                                                <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName ">
+                                                    <div className="hospital-item-category">Address</div>
+                                                    <div className="hospital-item lightPostText dark:text-darkPostText">{item.address}</div>
+                                                </div>
+                                                <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName">
+                                                    <div className="hospital-item-category">Taluka</div>
+                                                    <div className="hospital-item lightPostText dark:text-darkPostText">{item.taluka}</div>
+                                                </div>
+                                                <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName">
+                                                    <div className="hospital-item-category ">District</div>
+                                                    <div className="hospital-item lightPostText dark:text-darkPostText">{item.distic} {item.pin}</div>
+                                                </div>
+                                                <div className="hospital-item-div text-lightProfileName dark:text-darkProfileName">
+                                                    <div className="hospital-item-category ">State</div>
+                                                    <div className="hospital-item lightPostText dark:text-darkPostText">{item.state}</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </Link>
                             )
                         })}
                     </div>

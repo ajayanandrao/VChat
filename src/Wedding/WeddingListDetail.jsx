@@ -92,6 +92,10 @@ const WeddingListDetail = () => {
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.region}</span>
                         </div>
                         <div className='weddinglist-mainu-item'>
+                            <div className='weddinglist-mainu-item-name'>Cast  </div>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.subCast}</span>
+                        </div>
+                        <div className='weddinglist-mainu-item'>
                             <div className='weddinglist-mainu-item-name'>Work  </div>
                             <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.work}</span>
                         </div>

@@ -47,6 +47,20 @@ const ProfileFriends = ({ user }) => {
         return () => clearTimeout(delay);
     }, []);
 
+    const newarrytwo = api.filter((item) =>
+        friendsList.some((friend) => item.uid === friend.uid)
+    );
+
+    const filteredArray = newarrytwo.filter((value) => {
+        if (search === "") {
+            return true; // Include all elements if search is empty
+        } else if (value.name.toLowerCase().includes(search.toLowerCase())) {
+            return true; // Include elements that match the search condition
+        } else {
+            return false; // Exclude elements that don't match the search condition
+        }
+    });
+
     return (
         <div>
             <div className='friend-search-div'>
@@ -90,44 +104,49 @@ const ProfileFriends = ({ user }) => {
                 (<>
                     <div className="Friend-grid-parent-container">
                         <div className='friend-container'>
-                            {api.filter((value) => {
-                                if (search === "") {
-                                    return value;
-                                } else if (
-                                    value.name.toLowerCase().includes(search.toLowerCase())
-                                ) {
-                                    return value;
-                                }
-                            }).map((item) => {
-                                if (item.uid !== currentUser.uid) {
-                                    return (
-                                        <div key={item.id}>
-                                            {friendsList
-
-                                                .map((friend) => {
-
-                                                    if (item.uid === friend.uid) {
-                                                        return (
-                                                            <div key={friend.userId} >
-
-                                                                <Link style={{ textDecoration: "none" }} to={`/users/${friend.userId}`}>
-                                                                    <div className='w-100' style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-                                                                        <img src={item.PhotoUrl} className='friend-img' alt="" />
-                                                                        <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{item.name}</div>
-                                                                        {/* <button onClick={() => deleteFriend(friend.id, friend.uid)} className='btn btn-info'>Delete</button> */}
-                                                                    </div>
-                                                                </Link>
-                                                            </div>
-                                                        )
-                                                    }
-                                                })}
 
 
-                                        </div>
-                                    )
+                            {search == "" ?
+                                (<>
+                                    {newarrytwo
+                                        .map((friend) => {
+                                            return (
+                                                <div key={friend.uid} >
 
-                                }
-                            })}
+                                                    <Link style={{ textDecoration: "none" }} to={`/users/${friend.uid}`}>
+                                                        <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                            <img src={friend.PhotoUrl} className='friend-img' alt="" />
+                                                            <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{friend.name}</div>
+                                                            {/* <button onClick={() => deleteFriend(friend.id, friend.uid)} className='btn btn-info'>Delete</button> */}
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            )
+
+                                        })}
+                                </>)
+                                :
+
+                                (<>
+                                    {filteredArray
+                                        .map((friend) => {
+                                            return (
+                                                <div key={friend.uid} >
+
+                                                    <Link style={{ textDecoration: "none" }} to={`/users/${friend.uid}`}>
+                                                        <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                            <img src={friend.PhotoUrl} className='friend-img' alt="" />
+                                                            <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{friend.name}</div>
+                                                            {/* <button onClick={() => deleteFriend(friend.id, friend.uid)} className='btn btn-info'>Delete</button> */}
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            )
+
+                                        })}
+                                </>)
+                            }
+
 
                         </div>
                     </div>

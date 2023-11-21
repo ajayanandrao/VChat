@@ -3,11 +3,86 @@
 
 .addHospital-main-container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     padding-bottom: 50px;
     box-sizing: border-box;
     overflow-y: scroll;
+    background: #f5f5f5;
+
+    .overlay-div {
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .overlay-card {
+            position: absolute;
+            top: 25%;
+            width: 100%;
+            max-width: 350px;
+            height: 200px;
+            background: linear-gradient(150deg, #0a84ff, #cd04ff);
+            box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
+            border-bottom: 1px solid white;
+            border-right: 1px solid white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 1rem;
+        }
+
+        .overlay-text {
+            color: white;
+            // color: rgb(20, 212, 20);
+            font-size: 26px;
+            font-weight: 600;
+            padding-bottom: 1rem;
+        }
+    }
+
+    .image-div {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 0 0.5rem;
+        padding-bottom: 20px;
+    }
+
+    .image-null {
+        width: 80px;
+        // max-width: 500px;
+        height: 80px;
+        // background: white;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        cursor: pointer;
+
+        .image-icon {
+            font-size: 40px;
+            color: black;
+        }
+    }
+
+    .image {
+        width: 100%;
+        max-width: 500px;
+        height: 250px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 10px;
+        cursor: pointer;
+    }
 
     &::-webkit-scrollbar {
         display: none;
@@ -99,9 +174,12 @@
         .addHospital-Title {
             font-size: 36px;
             text-align: center;
-            font-weight: 600;
+            font-weight: 700;
             margin: 1rem 0;
             margin-top: 45px;
+            background-image: linear-gradient(190deg, #0a84ff, #f704ff);
+            -webkit-background-clip: text;
+            color: transparent;
 
             @include respond-to(xs) {
                 font-size: 26px;
@@ -111,10 +189,11 @@
         .addHospital-div {
             width: 100%;
             height: 100%;
-            max-height: 600px;
+            max-height: 800px;
             display: flex;
             justify-content: center;
             align-items: center;
+            // background: red;
 
             @include respond-to(xs) {
                 padding: 0.5rem;
@@ -133,7 +212,7 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
                 @include respond-to(xs) {
                     padding: 0 1rem;
@@ -152,6 +231,7 @@
                         width: 150px;
                         text-transform: capitalize;
                         font-weight: 600;
+                        // color: black;
 
                         @include respond-to(xs) {
                             width: 140px;
@@ -171,6 +251,22 @@
 
                         @include respond-to(xs) {
                             max-width: 100%;
+                        }
+                    }
+
+                    .time-am {
+                        max-width: 135px;
+
+                        @include respond-to(xs) {
+                            max-width: 140px;
+                        }
+                    }
+
+                    .time-pm {
+                        max-width: 135px;
+
+                        @include respond-to(xs) {
+                            max-width: 140px;
                         }
                     }
 
