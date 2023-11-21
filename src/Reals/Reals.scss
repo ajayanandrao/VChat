@@ -31,6 +31,7 @@
 }
 
 .reel-scroll-div {
+    scrollbar-width: none;
     scroll-snap-align: center;
     aspect-ratio: 1/1;
     width: 100%;

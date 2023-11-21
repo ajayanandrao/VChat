@@ -332,7 +332,7 @@ const Message = () => {
 
     return (
         <div className='d-flex'>
-            <div className="left"></div>
+            {/* <div className="left"></div> */}
             <div className="message-wrapper bg-light_0 dark:bg-dark">
                 <div className="message-wrapper-inner">
                     <div className="wrapper-container">
