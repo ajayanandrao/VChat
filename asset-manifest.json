@@ -1,22 +1,15 @@
 {
   "files": {
-    "main.css": "/VChat/static/css/main.77da7c46.css",
-    "main.js": "/VChat/static/js/main.729f9f7f.js",
-    "static/js/511.35e32d36.chunk.js": "/VChat/static/js/511.35e32d36.chunk.js",
-    "static/js/29.1e68812f.chunk.js": "/VChat/static/js/29.1e68812f.chunk.js",
-    "static/js/727.9a696ace.chunk.js": "/VChat/static/js/727.9a696ace.chunk.js",
-    "static/js/605.38d1a53f.chunk.js": "/VChat/static/js/605.38d1a53f.chunk.js",
-    "static/js/968.2c49d1bc.chunk.js": "/VChat/static/js/968.2c49d1bc.chunk.js",
-    "static/js/27.44fd8a9f.chunk.js": "/VChat/static/js/27.44fd8a9f.chunk.js",
+    "main.css": "/VChat/static/css/main.82d325c6.css",
+    "main.js": "/VChat/static/js/main.bc9def24.js",
+    "static/js/27.87965f17.chunk.js": "/VChat/static/js/27.87965f17.chunk.js",
     "static/media/mobile4.png": "/VChat/static/media/mobile4.80d1c3aba934d273d041.png",
     "static/media/videoa.mp4": "/VChat/static/media/videoa.f35de8f81779b5f1cde5.mp4",
     "static/media/tunnel.mp4": "/VChat/static/media/tunnel.d22525a14ed65c1ec6e2.mp4",
     "static/media/xmq3nirr.mp4": "/VChat/static/media/xmq3nirr.192642729761cbb07f3e.mp4",
     "static/media/sv.mp4": "/VChat/static/media/sv.98ba037f3bcb49af8fea.mp4",
     "static/media/wl49glts.mp4": "/VChat/static/media/wl49glts.548ad6accdfcfadb433b.mp4",
-    "static/media/cover.mp4": "/VChat/static/media/cover.875c1e9f832a5a2462a2.mp4",
     "static/media/videoa.png": "/VChat/static/media/videoa.05140fa841f5b93ef159.png",
-    "static/media/chat.mp4": "/VChat/static/media/chat.b5329244e3eb45edfe0f.mp4",
     "static/media/mobile2.png": "/VChat/static/media/mobile2.225ba1296882dabc1c79.png",
     "static/media/tunnel.png": "/VChat/static/media/tunnel.2765349f03832d40d8ea.png",
     "static/media/wl49glts.png": "/VChat/static/media/wl49glts.d5fb430f2e06eb600091.png",
@@ -28,14 +21,13 @@
     "static/media/call.png": "/VChat/static/media/call.543fbddaab0784413822.png",
     "static/media/arrowdown.png": "/VChat/static/media/arrowdown.4ddfcfe9a8fcd1bd4395.png",
     "static/media/brif2.png": "/VChat/static/media/brif2.6ade31f5cf6b8517eac8.png",
-    "static/media/c2.png": "/VChat/static/media/c2.abe65ce8dd578e8203c5.png",
     "static/media/logo192.png": "/VChat/static/media/logo192.052f2e1cfd165966b477.png",
     "static/media/two.png": "/VChat/static/media/two.89c45307c099369334f8.png",
     "static/media/iphone.mp3": "/VChat/static/media/iphone.640a5c6349a6f83ee38b.mp3",
     "index.html": "/VChat/index.html"
   },
   "entrypoints": [
-    "static/css/main.77da7c46.css",
-    "static/js/main.729f9f7f.js"
+    "static/css/main.82d325c6.css",
+    "static/js/main.bc9def24.js"
   ]
 }
