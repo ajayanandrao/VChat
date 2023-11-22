@@ -1,0 +1,13 @@
+.ani-main-div {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    padding: 1rem;
+    padding-bottom: 50px;
+}

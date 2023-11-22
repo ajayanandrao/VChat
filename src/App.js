@@ -55,6 +55,7 @@ import DeActivate from './Setting/DeActivate/DeActivate';
 import Electronics from './Electronics/Electronics';
 import Laptop from './Electronics/Laptop/Laptop';
 import LaptopDetail from './Electronics/Laptop/LaptopDetail';
+import Animation from './Animation/Animation';
 
 function App() {
 
@@ -236,6 +237,8 @@ function App() {
               <Route path='electronics' element={<Electronics />} />
               <Route path='laptop' element={<Laptop />} />
               <Route path='laptopDetail' element={<LaptopDetail />} />
+
+              <Route path='animation' element={<Animation />} />
 
 
               <Route path='users' element={<Users />} />
