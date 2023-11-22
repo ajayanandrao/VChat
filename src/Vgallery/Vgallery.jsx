@@ -187,6 +187,12 @@ const Vgallery = () => {
                         }
                     })}
 
+                    <div className="gallery-card bg-lightDiv dark:bg-darkDiv" style={{ backgroundImage: `url(${"https://c0.wallpaperflare.com/preview/988/68/836/patient-nurse-human-activity.jpg"})` }}>
+                        <Link to="/electronics/" className='link' style={{ width: "100%", height: "100%" }}>
+                            <p className='gallery-card-text'>Electronics Device</p>
+                        </Link>
+                    </div>
+
                 </div>
             </div>
 

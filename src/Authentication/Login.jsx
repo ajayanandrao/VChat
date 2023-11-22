@@ -2,27 +2,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./NewLogin.scss"
 import { Link, useNavigate } from 'react-router-dom'
-import SignUp from './SignUp'
 import { AuthContext } from '../AuthContaxt';
 import { auth, db, provider, providerFacebook, providerGit, providerMicrosoft, realdb, storage } from '../Firebase';
 import { addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
 import { GoogleAuthProvider, GithubAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile, FacebookAuthProvider, OAuthProvider } from 'firebase/auth';
-import { Box, TextField } from '@mui/material';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 // import logo from "./../Image/img/logo192.png";
-import logoText from "./../Image/c2.png";
 import vlogo from "./../Image/img/logo192.png";
 import { CircularProgress } from '@mui/material';
-import { ref, set } from 'firebase/database';
 import google from "./../Image/img/google.png";
 import git from "./../Image/img/github.png";
 import microsoft from "./../Image/img/microsoft2.png";
-import { getDownloadURL, uploadBytesResumable } from 'firebase/storage';
-import chat from "./../Image/img/chat.mp4"
-import cover from "./../Image/img/cover.mp4"
-import loginPage from "./../loginjson.json";
-import { FaChevronDown, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
-import Spline from '@splinetool/react-spline';
 import down from "./../Image/img/4x/arrowdown.png";
 
 const Login = () => {
@@ -431,7 +420,7 @@ const Login = () => {
                             </div>
                             {/* <FaChevronDown className=' btn-primary arrowDown-login' /> */}
                         </div>
-                            <img src={down} className=' arrowDown-login' alt="" />
+                        <img src={down} className=' arrowDown-login' alt="" />
 
                     </div >
 
@@ -458,10 +447,11 @@ const Login = () => {
             )}
 
 
-            {/* <div class="footer-div text-center p-4" style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}>
-                <span className='me-2'>About</span> © 2022 Copyright:
-                <a class="text-reset fw-bold" href="https://mdbootstrap.com/"> VChat.co.in</a>
-            </div> */}
+            <div class="footer-div text-center p-4 bg-light_0 dark:bg-dark text-lightPostText dark:text-darkPostText" >
+                {/* <span className='me-2'>About</span> */}
+                © 2022 Copyright:
+                <a class="text-reset fw-bold" > VChat.in</a>
+            </div>
         </>
     )
 }

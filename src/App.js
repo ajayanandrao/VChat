@@ -52,6 +52,9 @@ import Vgallery from './Vgallery/Vgallery';
 import HospitalDetail from './Hospital/HospitalDetails/HospitalDetail';
 import Audio from './Audio';
 import DeActivate from './Setting/DeActivate/DeActivate';
+import Electronics from './Electronics/Electronics';
+import Laptop from './Electronics/Laptop/Laptop';
+import LaptopDetail from './Electronics/Laptop/LaptopDetail';
 
 function App() {
 
@@ -194,7 +197,7 @@ function App() {
 
             // (<> <Route path="home" element={<Home />} />
             (<>
-              
+
 
               <Route path="home" element={<HomePage />} />
               {/* <Route path="home" element={<Home />} />  */}
@@ -227,8 +230,13 @@ function App() {
 
               <Route path='hospitals' element={<HospitalPage />} />
               <Route path='hospitalsDetail/:id' element={<HospitalDetail />} />
-
               <Route path='add_hospitals' element={<AddHospitals />} />
+
+
+              <Route path='electronics' element={<Electronics />} />
+              <Route path='laptop' element={<Laptop />} />
+              <Route path='laptopDetail' element={<LaptopDetail />} />
+
 
               <Route path='users' element={<Users />} />
               <Route path='createStory' element={<CreateStorey />} />

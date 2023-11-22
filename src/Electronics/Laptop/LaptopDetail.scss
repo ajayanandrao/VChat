@@ -1,0 +1,131 @@
+@import "./../../Styles/Mixin_New.scss";
+
+.subDetail-main-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow-y: scroll;
+    box-sizing: border-box;
+
+    @include respond-to(xs) {
+        height: 100%;
+    }
+
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .subDetail-main-inner-container {
+        padding: 1rem;
+        width: 100%;
+        height: 100%;
+
+        .sub-image-div {
+            width: 100%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: 0.5s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            @include respond-to(sm) {
+                height: 450px;
+            }
+
+            @include respond-to(xs) {
+                height: 300px;
+            }
+        }
+
+        .sub-name {
+            font-size: 36px;
+            font-weight: 600;
+            text-align: center;
+            margin: 20px 0;
+            text-transform: capitalize;
+        }
+
+        .sub-detail-share-div {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: flex-end;
+            margin: 0 auto;
+            margin-bottom: 50px;
+            padding: 0 1rem;
+
+            .sub-detail-icon {
+                font-size: 24px;
+                cursor: pointer;
+                margin-left: 1rem;
+            }
+        }
+
+        .sub-detail-div {
+            width: 100%;
+            max-width: 800px;
+            height: 100%;
+            margin: 0 auto;
+            // background: red;
+
+            .sub-detail-item {
+                width: 100%;
+                display: flex;
+                // align-items: center;
+                margin-bottom: 1rem;
+                text-transform: capitalize;
+
+                .sub-detail-title {
+                    width: 100%;
+                    height: 40px;
+                    max-width: 110px;
+                    background: linear-gradient(150deg, #0095ff, #CB04FF);
+                    font-size: 18px;
+                    padding: 5px 10px;
+                    border-radius: 30px;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .sub-detail-list {
+                    width: 100%;
+                    height: auto;
+                    // background: blue;
+                    font-size: 18px;
+                    padding: 0 1rem;
+                }
+            }
+        }
+
+
+
+        .sub-detail-screen {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+            width: 100%;
+            max-width: 800px;
+            height: 100%;
+            margin: 0 auto;
+
+            @include respond-to(xs) {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .sub-detail-screen-card {
+                width: 100%;
+                height: 250px;
+                border-radius: 10px;
+
+                @include respond-to(xs) {
+                    height: 220px;
+                }
+            }
+        }
+    }
+}
