@@ -236,6 +236,17 @@
                 color: transparent;
                 font-weight: 600;
 
+                @include respond-to(xs) {
+                    color: white;
+                    background: none;
+                }
+            }
+
+            .about-cl-text-second {
+                background: linear-gradient(150deg, aqua, #0A83FF 10%, #D902FF);
+                -webkit-background-clip: text;
+                color: transparent;
+                font-weight: 600;
             }
 
         }

@@ -447,7 +447,7 @@ const Login = () => {
 
                         <div className="about-col-one">
                             <div className="about-col-one-text">
-                                <span className='about-col-one-send-text'>
+                                <span className='about-cl-text-second'>
                                     Post your thoughts
                                 </span>⛱️
                             </div>
