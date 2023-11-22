@@ -1,22 +1,26 @@
 {
   "files": {
-    "main.css": "/VChat/static/css/main.82d325c6.css",
-    "main.js": "/VChat/static/js/main.bc9def24.js",
+    "main.css": "/VChat/static/css/main.334b3f38.css",
+    "main.js": "/VChat/static/js/main.594e88bc.js",
     "static/js/27.87965f17.chunk.js": "/VChat/static/js/27.87965f17.chunk.js",
     "static/media/mobile4.png": "/VChat/static/media/mobile4.80d1c3aba934d273d041.png",
     "static/media/videoa.mp4": "/VChat/static/media/videoa.f35de8f81779b5f1cde5.mp4",
     "static/media/tunnel.mp4": "/VChat/static/media/tunnel.d22525a14ed65c1ec6e2.mp4",
     "static/media/xmq3nirr.mp4": "/VChat/static/media/xmq3nirr.192642729761cbb07f3e.mp4",
+    "static/media/post.mp4": "/VChat/static/media/post.74e840b9ce9e5136fce3.mp4",
     "static/media/sv.mp4": "/VChat/static/media/sv.98ba037f3bcb49af8fea.mp4",
     "static/media/wl49glts.mp4": "/VChat/static/media/wl49glts.548ad6accdfcfadb433b.mp4",
+    "static/media/c4.png": "/VChat/static/media/c4.87468f023b4dfe9eaf06.png",
     "static/media/videoa.png": "/VChat/static/media/videoa.05140fa841f5b93ef159.png",
     "static/media/mobile2.png": "/VChat/static/media/mobile2.225ba1296882dabc1c79.png",
+    "static/media/p.jpg": "/VChat/static/media/p.3333ba7580eb62698f73.jpg",
     "static/media/tunnel.png": "/VChat/static/media/tunnel.2765349f03832d40d8ea.png",
     "static/media/wl49glts.png": "/VChat/static/media/wl49glts.d5fb430f2e06eb600091.png",
     "static/media/vl.png": "/VChat/static/media/vl.b9d816834a2726e6b81e.png",
     "static/media/sms.png": "/VChat/static/media/sms.c26950f1809dfd1d9e7c.png",
     "static/media/xmq3nirr.png": "/VChat/static/media/xmq3nirr.5202c6694c11c53813c3.png",
     "static/media/install.mp3": "/VChat/static/media/install.45e8d8c3fc050b3f6a3a.mp3",
+    "static/media/g1.jpg": "/VChat/static/media/g1.24d81ae9e9755faf25b9.jpg",
     "static/media/loc.png": "/VChat/static/media/loc.a6a61b79a02946204757.png",
     "static/media/call.png": "/VChat/static/media/call.543fbddaab0784413822.png",
     "static/media/arrowdown.png": "/VChat/static/media/arrowdown.4ddfcfe9a8fcd1bd4395.png",
@@ -27,7 +31,7 @@
     "index.html": "/VChat/index.html"
   },
   "entrypoints": [
-    "static/css/main.82d325c6.css",
-    "static/js/main.bc9def24.js"
+    "static/css/main.334b3f38.css",
+    "static/js/main.594e88bc.js"
   ]
 }
