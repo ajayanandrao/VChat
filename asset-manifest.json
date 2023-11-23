@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/VChat/static/css/main.083130c4.css",
+    "main.css": "/VChat/static/css/main.eadb0903.css",
     "main.js": "/VChat/static/js/main.dd9bef78.js",
     "static/js/27.87965f17.chunk.js": "/VChat/static/js/27.87965f17.chunk.js",
     "static/media/mobile4.png": "/VChat/static/media/mobile4.80d1c3aba934d273d041.png",
@@ -31,7 +31,7 @@
     "index.html": "/VChat/index.html"
   },
   "entrypoints": [
-    "static/css/main.083130c4.css",
+    "static/css/main.eadb0903.css",
     "static/js/main.dd9bef78.js"
   ]
 }
