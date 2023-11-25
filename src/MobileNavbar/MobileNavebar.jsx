@@ -14,11 +14,16 @@ import v from "./../Image/img/vl.png";
 import { FaMoon } from "react-icons/fa";
 import { BiSolidSun } from "react-icons/bi";
 import { SiHelpscout } from "react-icons/si";
+import { on, off } from "./../Redux/CounterSlice";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const MobileNavebar = () => {
   const { currentUser } = useContext(AuthContext);
   const [dayTheme, setDayTheme] = useState(false);
+
+  const dispatch = useDispatch()
+
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -97,8 +102,6 @@ const MobileNavebar = () => {
   const [newTheme, setNewTheme] = useState(null);
 
 
-
-
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -120,7 +123,6 @@ const MobileNavebar = () => {
     const userPreferencesRef = doc(db, 'UserPreferences', currentUser.uid);
     await setDoc(userPreferencesRef, { theme: newTheme });
   };
-
 
 
   const [themIcon, setThemIcon] = useState([]);
@@ -153,6 +155,10 @@ const MobileNavebar = () => {
     setIsActive(!isActive);
   };
 
+  function Off() {
+    dispatch(off())
+  }
+
   return (
     <>
       <div
@@ -163,7 +169,7 @@ const MobileNavebar = () => {
 
         <Link to="home/" className="mobile-nav-title" onClick={handleScrollToTop} style={{ textDecoration: "none" }}>
           <div className="mobile-nav-title">
-            <div>
+            <div onClick={Off}>
               <img src={v} className="nav-logo" alt="" />
             </div>
           </div>
@@ -173,7 +179,7 @@ const MobileNavebar = () => {
 
           <span className="mobile-nav-mainu">
             <Link to="createStory/" className="link">
-              <div>
+              <div onClick={Off}>
                 <MdAddReaction className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
                 {/* <img src={currentUser.photoURL} className="top-navbar-story-profile-img" alt="" /> */}
               </div>
@@ -182,7 +188,7 @@ const MobileNavebar = () => {
 
           <span className="mobile-nav-mainu">
             <Link to="find_friend/" className="link">
-              <div>
+              <div onClick={Off}>
                 <BsFillPeopleFill className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
                 {/* <img src={p} width={"18px"} alt="" /> */}
               </div>
@@ -191,7 +197,7 @@ const MobileNavebar = () => {
 
           <span className="mobile-nav-mainu">
             <Link to="search/" className="link">
-              <div>
+              <div onClick={Off}>
                 <RiSearchLine className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
               </div>
             </Link>
@@ -199,7 +205,7 @@ const MobileNavebar = () => {
 
           <span className="mobile-nav-mainu">
             <Link to="reels/" className="link">
-              <div>
+              <div onClick={Off}>
                 <MdMovieFilter className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
                 {/* <i className="bi bi-image-fill mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon"></i> */}
               </div>
@@ -213,7 +219,7 @@ const MobileNavebar = () => {
                 if (item.id === currentUser.uid) {
                   return (
                     <div key={item.id}>
-                      <div className=""> {item.theme === "dark" ?
+                      <div className="" onClick={Off}> {item.theme === "dark" ?
                         <BiSolidSun style={{ fontSize: "30px" }} className="mobile-nav-icon  dark:text-darkPostIcon" />
                         :
                         <FaMoon className="mobile-nav-icon text-lightPostIcon" />
@@ -229,7 +235,9 @@ const MobileNavebar = () => {
 
           <span className="mobile-nav-mainu">
             <Link to="option/" className="link">
-              <RxHamburgerMenu className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
+              <div onClick={Off}>
+                <RxHamburgerMenu className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />
+              </div>
             </Link>
           </span>
         </div>

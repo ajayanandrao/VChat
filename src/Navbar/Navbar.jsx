@@ -10,18 +10,34 @@ import { motion, useAnimation } from 'framer-motion';
 import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { Link } from 'react-router-dom';
-
+import { on, off } from "./../Redux/CounterSlice";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Navbar = () => {
     const { currentUser } = useContext(AuthContext);
 
+    const dispatch = useDispatch()
+
+    const ReduxButton = useSelector((state) => state.counter.button)
+
     const [view, setView] = useState(false);
     const [showNavbar, setShowNavbar] = useState(true);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+
     const handleBoll = () => {
         setView(!view);
+        dispatch(on())
     };
+
+    useEffect(() => {
+        if (ReduxButton === "off") {
+            setView(false);
+        }
+    }, [ReduxButton])
+
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -120,6 +136,7 @@ const Navbar = () => {
 
     const handleCircleClick = () => {
         setShowLatestRequest(false);
+
     };
     const handleNotificationClick = async () => {
         await updateDoc(doc(db, "Notification", latestFriendNotification.id), {
@@ -139,7 +156,6 @@ const Navbar = () => {
                     <span className="ripple pinkBg" onClick={handleBoll}></span>
                 </div>
             </div>
-
             {view ?
                 <div className="circle-div">
 
@@ -249,7 +265,7 @@ const Navbar = () => {
                                                     )}
                                                 </>)
                                                 :
-                                                <RiMessengerFill className='text-lightProfileName dark:text-darkPostIcon'/>
+                                                <RiMessengerFill className='text-lightProfileName dark:text-darkPostIcon' />
                                             }
                                         </div>
                                     </Link>
@@ -280,6 +296,7 @@ const Navbar = () => {
                 :
                 null
             }
+
 
         </div >
     )
