@@ -1,15 +1,36 @@
 import React, { useContext, useState } from 'react'
 import "./Wedding.scss";
 import { db, storage } from './../Firebase';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 } from 'uuid';
 import LeftArro from '../LeftArro';
+import { useEffect } from 'react';
 
 
 
 const Wedding = () => {
+
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
+
     const { currentUser } = useContext(AuthContext);
     const [isDay, setIsDay] = useState(false);
     const [itemDay, setItemDay] = useState("");

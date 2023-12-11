@@ -33,17 +33,19 @@ const Message = () => {
     const [onlineUsers, setOnlineUsers] = useState([]);
 
     useEffect(() => {
-        const userRef = collection(db, 'OnlyOnline');
-        const unsub = () => {
-            onSnapshot(userRef, (snapshot) => {
-                let newbooks = []
-                snapshot.docs.forEach((doc) => {
-                    newbooks.push({ ...doc.data(), id: doc.id })
-                });
-                setOnlineUsers(newbooks);
-            })
-        };
-        return unsub();
+        const colRef = collection(db, 'OnlyOnline');
+
+        const orderedQuery = query(
+            collection(db, 'OnlyOnline'),
+            orderBy('presenceTime', 'desc') // Reverse the order to show newest messages first
+        );
+
+        const unsubscribe = onSnapshot(orderedQuery, (snapshot) => {
+            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+            setOnlineUsers(newApi);
+        });
+
+        return unsubscribe;
     }, []);
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -86,14 +88,7 @@ const Message = () => {
     const goBack = () => {
         nav(-1);
     }
-    function openCity(cityName) {
-        var i;
-        var x = document.getElementsByClassName("city");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        document.getElementById(cityName).style.display = "block";
-    }
+
     // Friend Request
 
     const [friendRequests, setFriendRequests] = useState([]);
@@ -301,6 +296,25 @@ const Message = () => {
         }
     }
 
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
+
     // useEffect(() => {
     //     const connectionRef = ref(realdb, '.info/connected');
 
@@ -449,7 +463,7 @@ const Message = () => {
                                             }
                                         })
                                     ) : (
-                                        <div>No users currently online.</div>
+                                    <div style={{color:"white", textAlign:"center", fontSize:"24px"}}>No users currently online.</div>
                                     )}
                                 </div>
                             </>) : ''}

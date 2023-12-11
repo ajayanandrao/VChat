@@ -320,6 +320,25 @@ const CreateStorey = () => {
         }
     }
 
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
+
 
     return (
         <div className='cteateStory-main-container bg-light_0 dark:bg-dark'>

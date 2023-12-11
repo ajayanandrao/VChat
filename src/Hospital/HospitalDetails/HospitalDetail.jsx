@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./HospitalDetail.scss";
-import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import { db } from '../../Firebase';
 import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
@@ -87,6 +87,24 @@ const HospitalDetail = () => {
         return () => clearTimeout(timer); // Clear the timeout if the component unmounts
     });
 
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     return (
         <div className='hospitalDetail-main-container bg-light_0 dark:bg-dark '>

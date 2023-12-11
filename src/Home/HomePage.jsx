@@ -10,6 +10,8 @@ import StoryForm from '../Story/StoryForm';
 import { AiFillMinusCircle, AiOutlineArrowUp } from 'react-icons/ai';
 import { motion, useAnimation } from 'framer-motion';
 import Audio from './../Audio';
+import { getDatabase, onDisconnect, onValue, push, set } from 'firebase/database';
+import { ref } from 'firebase/storage';
 
 const HomePage = () => {
     const nav = useNavigate();
@@ -17,6 +19,7 @@ const HomePage = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadingRight, setLoadingRight] = useState(true);
+
     useEffect(() => {
         const colRef = collection(db, 'users');
 
@@ -314,15 +317,31 @@ const HomePage = () => {
     //     };
     // }, []);
 
-    const log = "";
     const [otherUid, setOtherUid] = useState([]);
-    // console.log(otherUid);
-    // console.log(log);
 
     const getData = (uid) => {
         setOtherUid(uid);
     }
 
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
+    
     return (
         <div className='homepage-main-container bg-light_0 dark:bg-dark'>
             <motion.div

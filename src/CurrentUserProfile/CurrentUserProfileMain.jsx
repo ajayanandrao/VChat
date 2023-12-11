@@ -8,7 +8,7 @@ import UserProfileTwo from "./../UserProfile/Component/UserProfileTwo";
 
 import UserProfileThree from "./../UserProfile/Component/UserProfileThree";
 
-import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { AuthContext } from '../AuthContaxt';
 import LeftArro from '../LeftArro';
@@ -83,6 +83,25 @@ const CurrentUserProfileMain = () => {
 
         return () => clearTimeout(timer); // Clear the timeout if the component unmounts
     });
+
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     return (
         <div className='current-user-profile-main bg-light_0 dark:bg-dark'>

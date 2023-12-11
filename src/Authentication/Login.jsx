@@ -4,8 +4,8 @@ import "./NewLogin.scss"
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../AuthContaxt';
 import { auth, db, provider, providerFacebook, providerGit, providerMicrosoft, realdb, storage } from '../Firebase';
-import { addDoc, collection, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
-import { GoogleAuthProvider, GithubAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile, FacebookAuthProvider, OAuthProvider } from 'firebase/auth';
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
+import { GoogleAuthProvider, GithubAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile, FacebookAuthProvider, OAuthProvider, setPersistence, browserSessionPersistence, signOut } from 'firebase/auth';
 // import logo from "./../Image/img/logo192.png";
 import vlogo from "./../Image/img/logo192.png";
 import { CircularProgress } from '@mui/material';
@@ -50,14 +50,15 @@ const Login = () => {
 
     const [loginloading, setLoginLoading] = useState(false);
 
-    const login = (e) => {
+    const login = async (e) => {
         e.preventDefault();
         setLoginLoading(true);
-
         signInWithEmailAndPassword(auth, email, password)
+
             .then(async (userCredential) => {
                 // Signed in
                 const user = userCredential.user;
+                console.log(user.uid)
                 const PresenceRef = doc(db, "userPresece", user.uid);
                 await updateDoc(PresenceRef, { status: "online" });
 
@@ -68,13 +69,12 @@ const Login = () => {
                     presenceName: user.displayName,
                     email: email,
                     photoUrl: user.photoURL,
-                    presenceTime: new Date()
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
                 };
                 await setDoc(PresenceRefOnline, userData);
-
                 // Navigate to the home page or perform other actions
                 nav("/home");
-
 
             })
             .catch((error) => {
@@ -113,6 +113,81 @@ const Login = () => {
                     // Handle other errors as needed
                 }
             });
+
+        // setPersistence(auth, browserSessionPersistence)
+        //     .then(async () => {
+        //         // Existing and future Auth states are now persisted in the current
+        //         // session only. Closing the window would clear any existing state even
+        //         // if a user forgets to sign out.
+        //         // ...
+        //         // New sign-in will be persisted with session persistence.
+        //         // return signInWithEmailAndPassword(auth, email, password);
+        //         return signInWithEmailAndPassword(auth, email, password)
+
+        //             .then(async (userCredential) => {
+        //                 // Signed in
+        //                 const user = userCredential.user;
+        //                 console.log(user.uid)
+        //                 const PresenceRef = doc(db, "userPresece", user.uid);
+        //                 await updateDoc(PresenceRef, { status: "online" });
+
+        //                 const PresenceRefOnline = doc(db, "OnlyOnline", user.uid);
+        //                 const userData = {
+        //                     status: 'Online',
+        //                     uid: user.uid,
+        //                     presenceName: user.displayName,
+        //                     email: email,
+        //                     photoUrl: user.photoURL,
+        //                     presenceTime: new Date()
+        //                 };
+        //                 await setDoc(PresenceRefOnline, userData);
+        //                 // Navigate to the home page or perform other actions
+        //                 nav("/home");
+
+        //             })
+        //             .catch((error) => {
+        //                 const errorCode = error.code;
+        //                 const errorMessage = error.message;
+        //                 // console.log(errorCode);
+        //                 setLoginLoading(false);
+
+        //                 // Handle different error codes and display appropriate messages
+        //                 switch (errorCode) {
+        //                     case "auth/wrong-password":
+        //                         document.getElementById("error-alert").style.display = "flex";
+        //                         document.getElementById("error-alert").innerHTML = "Wrong Password";
+        //                         break;
+        //                     case "auth/invalid-login-credentials":
+        //                         document.getElementById("error-alert").style.display = "flex";
+        //                         document.getElementById("error-alert").innerHTML = "Wrong Password";
+        //                         break;
+        //                     case "auth/missing-password":
+        //                         document.getElementById("error-alert").style.display = "flex";
+        //                         document.getElementById("error-alert").innerHTML = "Incorrect email and password";
+        //                         break;
+        //                     case "auth/user-not-found":
+        //                         document.getElementById("error-alert").style.display = "flex";
+        //                         document.getElementById("error-alert").innerHTML = "User not found";
+        //                         break;
+        //                     case "auth/invalid-email":
+        //                         document.getElementById("error-alert").style.display = "flex";
+        //                         document.getElementById("error-alert").innerHTML = "Invalid email address";
+        //                         break;
+        //                     case "auth/network-request-failed":
+        //                         document.getElementById("error-alert").style.display = "flex";
+        //                         document.getElementById("error-alert").innerHTML = "Check your internet connection";
+        //                         break;
+        //                     default:
+        //                     // Handle other errors as needed
+        //                 }
+        //             });
+        //     })
+        //     .catch((error) => {
+        //         // Handle Errors here.
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         console.log(errorMessage)
+        //     })
 
         setEmail("");
         setPass("");

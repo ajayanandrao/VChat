@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./Vgallery.scss"
 import { Link } from 'react-router-dom'
-import { collection, doc, getDocs, onSnapshot, orderBy, query, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { AuthContext } from '../AuthContaxt';
 import Audio from '../Audio';
@@ -111,6 +111,25 @@ const Vgallery = () => {
 
         return () => clearTimeout(timer); // Clear the timeout if the component unmounts
     });
+
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     return (
         <div className='d-flex'>

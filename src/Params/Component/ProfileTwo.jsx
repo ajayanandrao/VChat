@@ -140,7 +140,7 @@ const ProfileTwo = ({ user }) => {
 
     const HandleSmsSeen = (id) => {
         const smsRef = doc(db, `allFriends/${id}/Message/${currentUser.uid}`); // Include the document ID here
-        const smsRefReciver = doc(db, `allFriends/${currentUser.uid}/Message/${id}`); 
+        const smsRefReciver = doc(db, `allFriends/${currentUser.uid}/Message/${id}`);
         updateDoc(smsRef, {
             status: "seen",
         })
@@ -186,8 +186,6 @@ const ProfileTwo = ({ user }) => {
                             );
 
                             const isFriendRequestAccepted = friendsList.find((friend) => {
-                                // console.log(friend.displayName + " :- " + friend.userId);
-                                // console.log("currentUser :- " + currentUser.uid);
 
                                 return friend.userId === currentUser.uid && friend.status === 'accepted';
                             });
@@ -213,13 +211,13 @@ const ProfileTwo = ({ user }) => {
                                                         Cancel Request
                                                     </div>
                                                 ) : isFriendRequestAccepted ? (
-                                                    <Link to={`/users/${item.uid}/message`} onClick={()=>HandleSmsSeen(item.uid)}>
+                                                    <Link to={`/users/${item.uid}/message`} onClick={() => HandleSmsSeen(item.uid)}>
                                                         <button className='btn btn-info btn-sm'>Message</button>
                                                     </Link>
                                                     // <div className="friend-request-accepted">Friend Request Accepted</div>
                                                 ) : isFriend(item.uid) ? (
                                                     // <div className="friend-request-accepted">Friend</div>
-                                                    <Link to={`/users/${item.uid}/message`} onClick={()=>HandleSmsSeen(item.uid)}>
+                                                    <Link to={`/users/${item.uid}/message`} onClick={() => HandleSmsSeen(item.uid)}>
                                                         <button className='btn btn-info btn-sm'>Message</button>
                                                     </Link>
                                                 ) : dataFetched ? (

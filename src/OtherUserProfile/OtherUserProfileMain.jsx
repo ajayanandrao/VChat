@@ -5,14 +5,17 @@ import ProfileOne from '../Params/Component/ProfileOne';
 import ProfileTwo from '../Params/Component/ProfileTwo';
 import ProfileThree from '../Params/Component/ProfileThree';
 
-import { doc, getDoc } from 'firebase/firestore';
+import { deleteDoc, doc, getDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useNavigate, useParams } from 'react-router-dom';
 import "./OtherUserProfileMain.scss";
 import LeftArro from '../LeftArro';
+import { AuthContext } from '../AuthContaxt';
+import { useContext } from 'react';
 
 
 const OtherUserProfileMain = () => {
+    const { currentUser } = useContext(AuthContext);
     const { id } = useParams();
     const [user, setUser] = useState(null);
 
@@ -34,7 +37,26 @@ const OtherUserProfileMain = () => {
         fetchUser();
     }, [id]);
 
-    
+    console.log(id);
+
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     if (!user) {
         return <>

@@ -81,10 +81,9 @@ const About = () => {
                 intro: intro,
             });
         }
-
-
         setIntro("");
         handleShowAboutIntroOverlay();
+        
     };
 
     return (

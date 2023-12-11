@@ -187,14 +187,14 @@ const Friends = ({ user }) => {
                                                                 if (friend.uid === item.uid) {
 
                                                                     return (
-                                                                        <>
+                                                                        <div key={item.id}>
                                                                             <Link style={{ textDecoration: "none" }} to={`/users/${friend.userId}/${friend.id}/profile/`}>
                                                                                 <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center", }}>
                                                                                     <img src={item.PhotoUrl} className='friend-img' alt="" />
                                                                                     <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{item.name}</div>
                                                                                 </div>
                                                                             </Link>
-                                                                        </>
+                                                                        </div>
                                                                     )
                                                                 }
                                                                 else {

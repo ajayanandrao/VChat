@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import "./StoryForm.scss";
 import { db, storage } from '../Firebase';
 import { getDownloadURL, getStorage, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
-import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from 'firebase/firestore';
 import { v4, uuidv4 } from "uuid";
 import { AuthContext } from '../AuthContaxt';
 import "./../Styles/flikity.scss";
@@ -10,6 +10,25 @@ import { Link } from 'react-router-dom';
 
 const StoryForm = () => {
     const { currentUser } = useContext(AuthContext);
+
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     const dataRef = collection(db, "users");
     const [userPhoto, setUserPhoto] = useState(null);
@@ -112,7 +131,7 @@ const StoryForm = () => {
                                                                                 backgroundImage:
                                                                                     `url(${story.image})`
                                                                             }}>
-                                                                                
+
                                                                                 <img className='story-profile-img' src={story.photoUrl} alt="" />
                                                                                 <div className='new-status-blink  animate-blinkStatus'></div>
                                                                             </div>

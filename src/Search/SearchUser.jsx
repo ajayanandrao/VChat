@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import "./SearchUser.scss";
 import { Link, useNavigate } from 'react-router-dom';
 import { db} from "./../Firebase";
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
 
 
@@ -27,11 +27,29 @@ const SearchUser = () => {
         return unsubscribe;
     }, []);
 
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
+
 
     return (
         <div className="d-flex">
             <div className="left">
-                sdf
             </div>
             <div className="search-main-container bg-light_0 dark:bg-dark">
 

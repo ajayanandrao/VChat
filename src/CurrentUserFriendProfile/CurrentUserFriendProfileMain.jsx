@@ -6,7 +6,7 @@ import ProfilePageOne from './../Params/UserProfilePages/ProfilePageOne';
 import { CircularProgress } from '@mui/material';
 import ProfilePageTwo from '../Params/UserProfilePages/ProfilePageTwo';
 import ProfilePageThree from '../Params/UserProfilePages/ProfilePageThree';
-import { collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useParams } from 'react-router-dom';
 import LeftArro from '../LeftArro';
@@ -93,6 +93,24 @@ const CurrentUserFriendProfileMain = () => {
         return () => clearTimeout(timer); // Clear the timeout if the component unmounts
     });
 
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     if (!user) {
         return <>

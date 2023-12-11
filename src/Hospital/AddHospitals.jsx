@@ -4,12 +4,15 @@ import logo from "./../Image/img/logo192.png"
 import LeftArro from '../LeftArro';
 import { useState } from 'react';
 import { db, storage } from "./../Firebase";
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { BsFillCameraFill } from "react-icons/bs"
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
+import { useEffect } from 'react';
+import { AuthContext } from '../AuthContaxt';
+import { useContext } from 'react';
 
 const AddHospitals = () => {
-
+    const { currentUser } = useContext(AuthContext);
     const [image, setImage] = useState(null);
     const [hname, setHname] = useState("");
     const [doctorName, setDoctorName] = useState("");
@@ -24,6 +27,25 @@ const AddHospitals = () => {
     const [pm, setPm] = useState("");
 
     const [overlay, setOverlay] = useState(false);
+
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     const compressImage = async (image, maxWidth) => {
         return new Promise((resolve, reject) => {

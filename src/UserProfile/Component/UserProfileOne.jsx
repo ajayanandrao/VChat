@@ -643,6 +643,7 @@ const ProfileOne = ({ user }) => {
 
                                                             <input type="button" id='profile-img' value="Select Image" style={{ display: "none" }} onClick={() => fileInput.current.click()} />
 
+
                                                             <input type="file" ref={fileInput} style={{ display: 'none' }} onChange={handleImageUpload} accept="image/*" />
                                                         </div>
                                                     </div>

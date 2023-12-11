@@ -36,7 +36,7 @@ import { auth, db } from './Firebase';
 import BottomNav from './MobileNavbar/BottomNav';
 import Navbar from './Navbar/Navbar';
 import Wellcome from './Home/Wellcome';
-import { collection, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import Error404 from './Error404';
 import Install from './Setting/Install/Install';
 import { AuthContext } from './AuthContaxt';
@@ -56,6 +56,7 @@ import Electronics from './Electronics/Electronics';
 import Laptop from './Electronics/Laptop/Laptop';
 import LaptopDetail from './Electronics/Laptop/LaptopDetail';
 import Animation from './Animation/Animation';
+import RealTime from './RealTimeDB/RealTime';
 
 function App() {
 
@@ -160,6 +161,8 @@ function App() {
     return unsub();
   }, []);
 
+  
+
 
   // ========================================================= Audio =====================================
 
@@ -214,6 +217,7 @@ function App() {
               <Route exact path="feedback" element={<Feedback />} />
 
 
+              <Route path="RealTime" element={<RealTime />} />
               <Route path="option" element={<Option />} />
               <Route path="setting" element={<Setting />} />
               <Route path="policy" element={<Policy />} />

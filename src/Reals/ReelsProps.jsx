@@ -1,4 +1,4 @@
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useContext, useEffect, useState } from 'react'
 import { db } from '../Firebase';
 import Reals from './Reals';
@@ -26,6 +26,25 @@ const ReelsProps = () => {
         };
     }, []);
 
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
+
     const newData = api.map((item) => {
         return (
             <div key={item.id}>
@@ -35,7 +54,7 @@ const ReelsProps = () => {
     });
 
     return (
-        <div style={{textAlign:"center"}}>
+        <div style={{ textAlign: "center" }}>
             {/* <h2>Working on it</h2> */}
             <Reals />
         </div>

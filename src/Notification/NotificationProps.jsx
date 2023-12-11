@@ -1,4 +1,4 @@
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { db } from '../Firebase';
 import Notification from './Notification';
@@ -27,6 +27,25 @@ const NotificationProps = () => {
     const goBack = () => {
         nav(-1);
     }
+
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
 
     const [notificationData, setNotificationData] = useState([]);
@@ -76,7 +95,7 @@ const NotificationProps = () => {
         <div className='New-Notification-Container bg-light_0 dark:bg-dark'>
 
             <div className="notification-back-div bg-light_0 dark:bg-dark ">
-                <i onClick={goBack} style={{cursor:"pointer"}} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon "></i>
+                <i onClick={goBack} style={{ cursor: "pointer" }} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon "></i>
             </div>
             <div style={{ boxSizing: "border-box", overflowY: "scroll", width: "100%", height: "100%", paddingLeft: "1rem", paddingRight: "1rem", paddingTop: "1rem", paddingBottom: "60px" }}>
 

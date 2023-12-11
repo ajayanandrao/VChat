@@ -1,17 +1,37 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./Option.scss";
 import { Link, useNavigate } from 'react-router-dom';
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { auth, db } from '../Firebase';
+import { auth, db, realdb } from '../Firebase';
 import { signOut } from 'firebase/auth';
 import { AuthContext } from '../AuthContaxt';
 import { motion } from 'framer-motion';
 import { CircularProgress, LinearProgress } from '@mui/material';
 import { SiHelpscout } from "react-icons/si"
+import { onValue, ref } from 'firebase/database';
 
 const Option = () => {
     const { currentUser } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await deleteDoc(PresenceRefOnline);
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     const LogOut = async () => {
         setLoading(true);
@@ -41,6 +61,7 @@ const Option = () => {
         nav(-1);
     }
 
+
     return (
         <>
             <div
@@ -69,7 +90,8 @@ const Option = () => {
 
                     <div className='option-item-wrapper'>
                         <motion.div>
-                            <Link to="/setting/">
+                            <Link to="/RealTime/">
+                                {/* <Link to="/setting/"> */}
                                 <motion.div
                                     transition={{ duration: 0.7, delay: 0.7 }}
                                     initial={{ opacity: 0, y: 50 }}
