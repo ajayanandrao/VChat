@@ -16,7 +16,9 @@ import { v4 } from 'uuid';
 import "./Emoji.scss";
 import { motion } from 'framer-motion';
 import Audio from './../../Audio';
-
+import { Avatar } from '@mui/material';
+import { styled, keyframes } from '@mui/system';
+import Badge from '@mui/material/Badge';
 import emojiJson from "./emoji.json";
 import MessageFriendList from '../MessageFriendList/MessageFriendList';
 import smile from "./../../Image/emojis/simle/two.png";
@@ -896,8 +898,6 @@ const Messages = () => {
             console.error("Error deleting user's messages:", error);
         }
 
-
-
     };
 
     const deleteMessagesForCurrentUser = async (userId) => {
@@ -1026,7 +1026,6 @@ const Messages = () => {
     const handleMessageEmoji = () => {
         setMessageEmoji(!messageEmoji);
     }
-
 
 
     const handleSendHistorayMessageEmoji = async (uid, recipientImg, emojiState) => {
@@ -1326,6 +1325,59 @@ const Messages = () => {
         };
     }, []);
 
+    const StyledBadge = styled(Badge)(({ theme }) => ({
+        '& .MuiBadge-badge': {
+            backgroundColor: '#44b700',
+            // border: '1px solid red',
+            color: '#44b700',
+            boxShadow: `0 0 0 2px `,
+            width: '2px',
+            height: '8px',
+            '&::after': {
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                borderRadius: '100%',
+                animation: `${rippleAnimation} 1.2s infinite ease-in-out`,
+                border: '1px solid currentColor',
+                content: '""',
+            },
+        },
+    }));
+
+    const rippleAnimation = keyframes`
+    0% {
+      transform: scale(0.2);
+      opacity: 1;
+    }
+    
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  `;
+
+    const [onlineUsers, setOnlineUsers] = useState([]);
+
+    useEffect(() => {
+        const colRef = collection(db, 'OnlyOnline');
+
+        const orderedQuery = query(
+            collection(db, 'OnlyOnline'),
+            orderBy('presenceTime', 'desc') // Reverse the order to show newest messages first
+        );
+
+        const unsubscribe = onSnapshot(orderedQuery, (snapshot) => {
+            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+            setOnlineUsers(newApi);
+        });
+
+        return unsubscribe;
+    }, []);
+
+    const ifonline = onlineUsers.find((item) => item.uid === user.uid);
 
     if (!user) {
         return <>
@@ -1334,7 +1386,6 @@ const Messages = () => {
             </div >
         </>;
     }
-
 
     return (
         <Fragment>
@@ -1536,11 +1587,26 @@ const Messages = () => {
 
                     <div className="message-profile-div">
                         <Link to={`/users/${user.uid}`} className='message-profile-div'>
-                            <img className='message-profile-img' src={user.userPhoto} alt="" />
+
+                            <div className='profile-img-avatar'>
+                                {ifonline ?
+                                    <StyledBadge
+                                        overlap="circular"
+                                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                                        variant="dot"
+                                    >
+                                        <Avatar alt="Remy Sharp" className='avt' style={{ width: "35px", height: "35px" }} src={user.userPhoto} />
+                                    </StyledBadge>
+                                    :
+                                    <img src={user.userPhoto} className='message-profile-img' alt="" />
+                                }
+                            </div>
+
                             <span className='message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
                             {/* <button className='btn btn-sm btn-danger ms-3' onClick={deleteMessagesForUser}>Clear Chat</button> */}
                         </Link>
                     </div>
+
                     <div>
                         {showMessageOption ?
                             <div className="top-message-option-btn bg-light_0 text-lightPostText dark:text-darkPostText dark:bg-darkPostIcon"
@@ -1567,8 +1633,6 @@ const Messages = () => {
                 </div>
 
                 {/* Center div ------------------------------------- */}
-
-
 
                 <div className="message-center-div bg-lightDiv dark:bg-dark" onClick={handleMessageEmojiF}>
 
@@ -2182,7 +2246,6 @@ const Messages = () => {
                     </div>
 
                 </div>
-
 
                 {/* Emoji  */}
 

@@ -4,6 +4,9 @@ import { db } from '../../Firebase';
 import { AuthContext } from '../../AuthContaxt';
 import { Link } from 'react-router-dom';
 import "./MessageFriendList.scss";
+import { Avatar } from '@mui/material';
+import { styled, keyframes } from '@mui/system';
+import Badge from '@mui/material/Badge';
 
 const MessageFriendList = () => {
     const { currentUser } = useContext(AuthContext);
@@ -84,6 +87,26 @@ const MessageFriendList = () => {
             return `${days}d ago`;
         }
     }
+
+    const [onlineUsers, setOnlineUsers] = useState([]);
+
+    useEffect(() => {
+        const colRef = collection(db, 'OnlyOnline');
+
+        const orderedQuery = query(
+            collection(db, 'OnlyOnline'),
+            orderBy('presenceTime', 'desc') // Reverse the order to show newest messages first
+        );
+
+        const unsubscribe = onSnapshot(orderedQuery, (snapshot) => {
+            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+            setOnlineUsers(newApi);
+        });
+
+        return unsubscribe;
+    }, []);
+
+
     return (
         <div className='w-100'>
             {messages.map((sms) => {
@@ -92,8 +115,20 @@ const MessageFriendList = () => {
                     <div key={sms.id}>
                         <Link to={`/users/${sms.userId}/message`} onClick={() => HandleSmsSeen(sms.id)} className='link'>
                             <div id={`User${sms.id}`} className='message-friend-list-div bg-light_0  text-lightProfileName dark:bg-darkDiv text-[white]  dark:text-darkProfileName'>
-                                <div>
+                                <div className='message-friendList-img-div'>
                                     <img src={sms.photoUrl} className='message-friendList-img' alt="" />
+                                    {onlineUsers.map((online) => {
+                                        if (online.uid === sms.userId) {
+                                            return (
+                                                <div key={online.id}>
+                                                    <div className='message-friendList-dot-div bg-lightDiv dark:bg-darkDiv'>
+                                                        <div className="message-friendList-dot"></div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                    })}
+
                                 </div>
                                 <div className='message-friend-list-name' id={`UserName${sms.id}`}>{sms.name}</div>
                                 <div className='message-friend-list-time text-[white] text-lightPostTime dark:text-darkPostTime' id={`UserTime${sms.id}`}>
