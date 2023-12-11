@@ -297,26 +297,6 @@ const HomePage = () => {
     };
 
 
-    // useEffect(() => {
-    //     const connectionRef = ref(realdb, '.info/connected');
-
-    //     const handleConnectionChange = (snapshot) => {
-    //         if (snapshot.val() === false) {
-    //             alert("Lost connection to the server. Please check your internet connection.");
-    //         } else {
-    //             alert("Back online");
-    //         }
-    //     };
-
-    //     // Set up the listener for connection changes
-    //     onValue(connectionRef, handleConnectionChange);
-
-    //     // Clean up the listener when the component unmounts
-    //     return () => {
-    //         off(connectionRef, handleConnectionChange);
-    //     };
-    // }, []);
-
     const [otherUid, setOtherUid] = useState([]);
 
     const getData = (uid) => {
@@ -329,7 +309,11 @@ const HomePage = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }

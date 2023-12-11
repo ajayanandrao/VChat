@@ -99,8 +99,9 @@ const UserPostPage = ({ post }) => {
 
 
     function PostTimeAgoComponent({ timestamp }) {
+        const postDate = new Date(timestamp);
         const now = new Date();
-        const diffInSeconds = Math.floor((now - new Date(timestamp)) / 1000);
+        const diffInSeconds = Math.floor((now - postDate) / 1000);
 
         if (diffInSeconds < 60) {
             return "just now";
@@ -112,7 +113,13 @@ const UserPostPage = ({ post }) => {
             return `${hours}h ago`;
         } else {
             const days = Math.floor(diffInSeconds / 86400);
-            return `${days}d ago`;
+
+            if (days > 10) {
+                const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                return postDate.toLocaleDateString(undefined, options);
+            } else {
+                return `${days}d ago`;
+            }
         }
     }
 

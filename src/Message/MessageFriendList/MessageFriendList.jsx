@@ -46,7 +46,7 @@ const MessageFriendList = () => {
             status: "seen"
         })
             .then(() => {
-                console.log("Message marked as seen successfully.");
+                // console.log("Message marked as seen successfully.");
             })
             .catch((error) => {
                 console.error("Error marking message as seen:", error);
@@ -71,8 +71,9 @@ const MessageFriendList = () => {
     }
 
     function PostTimeAgoComponent({ timestamp }) {
+        const postDate = new Date(timestamp);
         const now = new Date();
-        const diffInSeconds = Math.floor((now - new Date(timestamp)) / 1000);
+        const diffInSeconds = Math.floor((now - postDate) / 1000);
 
         if (diffInSeconds < 60) {
             return "just now";
@@ -84,9 +85,16 @@ const MessageFriendList = () => {
             return `${hours}h ago`;
         } else {
             const days = Math.floor(diffInSeconds / 86400);
-            return `${days}d ago`;
+
+            if (days > 10) {
+                const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                return postDate.toLocaleDateString(undefined, options);
+            } else {
+                return `${days}d ago`;
+            }
         }
     }
+
 
     const [onlineUsers, setOnlineUsers] = useState([]);
 
@@ -121,9 +129,16 @@ const MessageFriendList = () => {
                                         if (online.uid === sms.userId) {
                                             return (
                                                 <div key={online.id}>
-                                                    <div className='message-friendList-dot-div bg-lightDiv dark:bg-darkDiv'>
-                                                        <div className="message-friendList-dot"></div>
-                                                    </div>
+                                                    {online.status === "Online" ?
+                                                        (
+                                                            <div className='message-friendList-dot-div bg-lightDiv dark:bg-darkDiv'>
+                                                                <div className="message-friendList-dot"></div>
+                                                            </div>
+                                                        )
+                                                        :
+                                                        null
+                                                    }
+
                                                 </div>
                                             )
                                         }

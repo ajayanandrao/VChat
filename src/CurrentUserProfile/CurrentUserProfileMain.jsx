@@ -8,7 +8,7 @@ import UserProfileTwo from "./../UserProfile/Component/UserProfileTwo";
 
 import UserProfileThree from "./../UserProfile/Component/UserProfileThree";
 
-import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { AuthContext } from '../AuthContaxt';
 import LeftArro from '../LeftArro';
@@ -90,7 +90,11 @@ const CurrentUserProfileMain = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }

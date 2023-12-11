@@ -4,7 +4,7 @@ import logo from "./../Image/img/logo192.png"
 import LeftArro from '../LeftArro';
 import { useState } from 'react';
 import { db, storage } from "./../Firebase";
-import { addDoc, collection, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { BsFillCameraFill } from "react-icons/bs"
 import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 import { useEffect } from 'react';
@@ -34,7 +34,11 @@ const AddHospitals = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }

@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
 import React, { useContext, useEffect, useState } from 'react'
 import { db } from '../Firebase';
 import Reals from './Reals';
@@ -32,7 +32,11 @@ const ReelsProps = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }

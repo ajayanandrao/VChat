@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import "./Message.scss";
 import { Link, useNavigate } from 'react-router-dom';
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { styled, keyframes } from '@mui/system';
 import Badge from '@mui/material/Badge';
@@ -302,7 +302,11 @@ const Message = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }
@@ -314,35 +318,6 @@ const Message = () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, [currentUser.uid]);
-
-    // useEffect(() => {
-    //     const connectionRef = ref(realdb, '.info/connected');
-
-    //     const handleConnectionChange = async (snapshot) => {
-    //         if (snapshot.val() === false) {
-    //             // alert("Lost connection to the server. Please check your internet connection.");
-    //             const PresenceRef = doc(db, "userPresece", currentUser.uid);
-
-    //             await updateDoc(PresenceRef, {
-    //                 status: "Offline",
-    //             });
-
-    //             const PresenceRefOnline = doc(db, "OnlyOnline", currentUser.uid);
-    //             await deleteDoc(PresenceRefOnline);
-    //         } else {
-    //             // alert("Back online");
-    //         }
-    //     };
-
-    //     // Set up the listener for connection changes
-    //     onValue(connectionRef, handleConnectionChange);
-
-    //     // Clean up the listener when the component unmounts
-    //     return () => {
-    //         off(connectionRef, handleConnectionChange);
-    //     };
-    // }, []);
-
 
     return (
         <div className='d-flex'>
@@ -444,18 +419,23 @@ const Message = () => {
                                             if (isFriendOnline) {
                                                 return (
                                                     <div key={online.id} className="online-user-div">
-                                                        <Link to={`/users/${online.id}/message`}>
-                                                            <span>
-                                                                <StyledBadge
-                                                                    overlap="circular"
-                                                                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                                                                    variant="dot"
-                                                                >
-                                                                    <Avatar alt="Remy Sharp" className='avt' src={online.photoUrl} />
-                                                                </StyledBadge>
-                                                            </span>
-                                                            <span className="online-user-name text-lightProfileName dark:text-darkProfileName">{online.presenceName}</span>
-                                                        </Link>
+                                                        {online.status === "Online" ? (
+                                                            <Link to={`/users/${online.id}/message`}>
+                                                                <span>
+                                                                    <StyledBadge
+                                                                        overlap="circular"
+                                                                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                                                                        variant="dot"
+                                                                    >
+                                                                        <Avatar alt="Remy Sharp" className='avt' src={online.photoUrl} />
+                                                                    </StyledBadge>
+                                                                </span>
+                                                                <span className="online-user-name text-lightProfileName dark:text-darkProfileName">{online.presenceName}</span>
+                                                            </Link>
+                                                        )
+                                                            :
+                                                            null
+                                                        }
                                                     </div>
                                                 );
                                             } else {
@@ -463,7 +443,7 @@ const Message = () => {
                                             }
                                         })
                                     ) : (
-                                    <div style={{color:"white", textAlign:"center", fontSize:"24px"}}>No users currently online.</div>
+                                        <div style={{ color: "white", textAlign: "center", fontSize: "24px" }}>No users currently online.</div>
                                     )}
                                 </div>
                             </>) : ''}

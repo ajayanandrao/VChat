@@ -5,6 +5,8 @@ import mone from "./../../Image/mobile4.png";
 import mtwo from "./../../Image/mobile2.png";
 import audio from "./../../Image/install.mp3";
 import { AuthContext } from '../../AuthContaxt';
+import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { db } from '../../Firebase';
 
 const Install = () => {
 
@@ -25,6 +27,29 @@ const Install = () => {
             audioElement.pause();
         }
     }, [isPlaying]);
+
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     return (
         <div className='bg-lightDiv dark:bg-darkDiv install-vchat-container'>

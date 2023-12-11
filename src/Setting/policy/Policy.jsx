@@ -3,13 +3,41 @@ import "./policy.scss";
 import { useNavigate } from 'react-router-dom';
 import { RxDotFilled } from "react-icons/rx"
 import LeftArro from '../../LeftArro';
+import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { useEffect } from 'react';
+import { db } from '../../Firebase';
+import { AuthContext } from '../../AuthContaxt';
+import { useContext } from 'react';
 
 const Policy = () => {
-
+    const { currentUser } = useContext(AuthContext);
     const nav = useNavigate();
     const goBack = () => {
         nav(-1);
     }
+
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+
+            try {
+                // Delete the document from Firestore
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     return (
         <div className='policy-container bg-light_0 dark:bg-dark'>

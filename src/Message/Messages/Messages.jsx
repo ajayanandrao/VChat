@@ -84,7 +84,11 @@ const Messages = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }
@@ -96,15 +100,6 @@ const Messages = () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, [currentUser.uid]);
-
-    // useEffect(() => {
-    //     const sub = async () => {
-    //         console.log(messages.map((item) => item.sound));
-    //         const messagesRef = doc(db, 'messages');
-    //         await deleteDoc(messageRef,)
-    //     };
-    //     return sub();
-    // }, []);
 
 
     useEffect(() => {
@@ -1379,6 +1374,32 @@ const Messages = () => {
 
     const ifonline = onlineUsers.find((item) => item.uid === user.uid);
 
+    function PostTimeAgoComponent({ timestamp }) {
+        const postDate = new Date(timestamp);
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - postDate) / 1000);
+
+        if (diffInSeconds < 60) {
+            return "just now";
+        } else if (diffInSeconds < 3600) {
+            const minutes = Math.floor(diffInSeconds / 60);
+            return `${minutes}min ago`;
+        } else if (diffInSeconds < 86400) {
+            const hours = Math.floor(diffInSeconds / 3600);
+            return `${hours}h ago`;
+        } else {
+            const days = Math.floor(diffInSeconds / 86400);
+
+            if (days > 10) {
+                const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                return postDate.toLocaleDateString(undefined, options);
+            } else {
+                return `${days}d ago`;
+            }
+        }
+    }
+
+
     if (!user) {
         return <>
             <div className='skeleton-center bg-light_0 dark:bg-dark'>
@@ -1589,7 +1610,7 @@ const Messages = () => {
                         <Link to={`/users/${user.uid}`} className='message-profile-div'>
 
                             <div className='profile-img-avatar'>
-                                {ifonline ?
+                                {ifonline && ifonline.status === "Online" ?
                                     <StyledBadge
                                         overlap="circular"
                                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
@@ -1602,9 +1623,19 @@ const Messages = () => {
                                 }
                             </div>
 
-                            <span className='message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
+                            <span className='me-4 message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
+
+                            {ifonline.status === "Offline" ?
+                                <div className='text-lightProfileName dark:text-darkProfileName' style={{ fontSize: "13px" }}>
+                                    <PostTimeAgoComponent timestamp={ifonline.timestamp && ifonline.timestamp.toDate()} />
+                                </div>
+                                :
+                                null
+                            }
                             {/* <button className='btn btn-sm btn-danger ms-3' onClick={deleteMessagesForUser}>Clear Chat</button> */}
                         </Link>
+
+
                     </div>
 
                     <div>

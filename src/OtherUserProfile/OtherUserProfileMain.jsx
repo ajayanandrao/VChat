@@ -5,7 +5,7 @@ import ProfileOne from '../Params/Component/ProfileOne';
 import ProfileTwo from '../Params/Component/ProfileTwo';
 import ProfileThree from '../Params/Component/ProfileThree';
 
-import { deleteDoc, doc, getDoc } from 'firebase/firestore';
+import { deleteDoc, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useNavigate, useParams } from 'react-router-dom';
 import "./OtherUserProfileMain.scss";
@@ -45,7 +45,11 @@ const OtherUserProfileMain = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }

@@ -7,7 +7,7 @@ import { BiUpArrowAlt } from 'react-icons/bi';
 import { FaPlus } from 'react-icons/fa';
 import { HiOutlineArrowSmLeft } from 'react-icons/hi';
 import LeftArro from '../LeftArro';
-import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -85,7 +85,11 @@ const WeddingMain = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }

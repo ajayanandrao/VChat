@@ -19,24 +19,24 @@ const ViewStory = ({ post }) => {
         nav(-1);
     };
 
-    useEffect(() => {
-        const handleBeforeUnload = async () => {
-            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+    // useEffect(() => {
+    //     const handleBeforeUnload = async () => {
+    //         const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
 
-            try {
-                // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
-            } catch (error) {
-                console.error('Error deleting PresenceRefOnline:', error);
-            }
-        };
+    //         try {
+    //             // Delete the document from Firestore
+    //             await deleteDoc(PresenceRefOnline);
+    //         } catch (error) {
+    //             console.error('Error deleting PresenceRefOnline:', error);
+    //         }
+    //     };
 
-        window.addEventListener('beforeunload', handleBeforeUnload);
+    //     window.addEventListener('beforeunload', handleBeforeUnload);
 
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-        };
-    }, [currentUser.uid]);
+    //     return () => {
+    //         window.removeEventListener('beforeunload', handleBeforeUnload);
+    //     };
+    // }, [currentUser.uid]);
 
     const [user, setUser] = useState(null);
     useEffect(() => {

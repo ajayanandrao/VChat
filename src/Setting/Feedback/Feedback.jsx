@@ -16,6 +16,8 @@ import { db } from '../../Firebase';
 import { AuthContext } from '../../AuthContaxt';
 
 
+
+
 const Feedback = () => {
     const { currentUser } = useContext(AuthContext);
     const [feedback, setFeedback] = useState("")
@@ -59,7 +61,28 @@ const Feedback = () => {
         }
     }
 
-
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+    
+            try {
+                // Delete the document from Firestore
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+    
+        window.addEventListener('beforeunload', handleBeforeUnload);
+    
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser.uid]);
 
     return (
         <div className='feedback-main-container bg-light_0 dark:bg-dark text-lightProfileName dark:text-darkProfileName'>

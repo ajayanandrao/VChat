@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import "./Setting.scss";
 import { MdDarkMode } from "react-icons/md"
 import { Link, useNavigate } from 'react-router-dom';
-import { collection, deleteDoc, doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../Firebase';
 import { signOut } from 'firebase/auth';
 import { AuthContext } from '../AuthContaxt';
@@ -21,7 +21,11 @@ const Setting = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }

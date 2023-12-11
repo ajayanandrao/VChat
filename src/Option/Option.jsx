@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./Option.scss";
 import { Link, useNavigate } from 'react-router-dom';
-import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { auth, db, realdb } from '../Firebase';
 import { signOut } from 'firebase/auth';
 import { AuthContext } from '../AuthContaxt';
@@ -20,7 +20,11 @@ const Option = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }
@@ -42,8 +46,11 @@ const Option = () => {
         });
 
         const PresenceRefOnline = doc(db, "OnlyOnline", currentUser.uid);
-        await deleteDoc(PresenceRefOnline);
-
+        await updateDoc(PresenceRefOnline, {
+            status: 'Offline',
+            presenceTime: new Date(),
+            timestamp: serverTimestamp()
+        });
         signOut(auth)
             .then(() => {
                 setLoading(false);

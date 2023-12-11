@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import "./SearchUser.scss";
 import { Link, useNavigate } from 'react-router-dom';
 import { db} from "./../Firebase";
-import { collection, deleteDoc, doc, onSnapshot } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
 
 
@@ -33,7 +33,11 @@ const SearchUser = () => {
 
             try {
                 // Delete the document from Firestore
-                await deleteDoc(PresenceRefOnline);
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
             } catch (error) {
                 console.error('Error deleting PresenceRefOnline:', error);
             }
