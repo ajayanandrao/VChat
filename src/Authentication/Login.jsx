@@ -73,6 +73,7 @@ const Login = () => {
                     timestamp: serverTimestamp()
                 };
                 await setDoc(PresenceRefOnline, userData);
+                
                 // Navigate to the home page or perform other actions
                 nav("/home");
 

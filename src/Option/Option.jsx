@@ -90,8 +90,8 @@ const Option = () => {
 
                     <div className='option-item-wrapper'>
                         <motion.div>
-                            <Link to="/RealTime/">
-                                {/* <Link to="/setting/"> */}
+                            {/* <Link to="/RealTime/"> */}
+                            <Link to="/setting/">
                                 <motion.div
                                     transition={{ duration: 0.7, delay: 0.7 }}
                                     initial={{ opacity: 0, y: 50 }}

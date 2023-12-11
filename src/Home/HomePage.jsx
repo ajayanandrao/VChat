@@ -341,7 +341,23 @@ const HomePage = () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, [currentUser.uid]);
-    
+
+
+    useEffect(() => {
+        const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+        setDoc(PresenceRefOnline, {
+            status: 'Online',
+            uid: currentUser.uid,
+            presenceName: currentUser.displayName,
+            email: currentUser.email,
+            photoUrl: currentUser.photoURL,
+            presenceTime: new Date(),
+            timestamp: serverTimestamp()
+        });
+
+    }, [currentUser.uid]);
+
+
     return (
         <div className='homepage-main-container bg-light_0 dark:bg-dark'>
             <motion.div
