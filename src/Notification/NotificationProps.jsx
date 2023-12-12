@@ -68,27 +68,59 @@ const NotificationProps = () => {
     }, []);
 
 
-    function TimeAgoComponent({ timestamp }) {
-        const now = new Date().getTime();
-        const timeDifference = now - timestamp;
-        const seconds = Math.floor(timeDifference / 1000);
+    // function TimeAgoComponent({ timestamp }) {
+    //     const now = new Date().getTime();
+    //     const timeDifference = now - timestamp;
+    //     const seconds = Math.floor(timeDifference / 1000);
 
-        let timeAgo = '';
+    //     let timeAgo = '';
 
-        if (seconds < 60) {
-            timeAgo = `${seconds}s ago`;
-        } else if (seconds < 3600) {
-            const minutes = Math.floor(seconds / 60);
-            timeAgo = `${minutes}m ago`;
-        } else if (seconds < 86400) {
-            const hours = Math.floor(seconds / 3600);
-            timeAgo = `${hours}h ago`;
+    //     if (seconds < 60) {
+    //         timeAgo = `${seconds}s ago`;
+    //     } else if (seconds < 3600) {
+    //         const minutes = Math.floor(seconds / 60);
+    //         timeAgo = `${minutes}m ago`;
+    //     } else if (seconds < 86400) {
+    //         const hours = Math.floor(seconds / 3600);
+    //         timeAgo = `${hours}h ago`;
+    //     } else {
+    //         const days = Math.floor(seconds / 86400);
+    //         timeAgo = `${days}d ago`;
+
+    //         if (days > 10) {
+    //             const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    //             return postDate.toLocaleDateString(undefined, options);
+    //         } else {
+    //             return `${days}d ago`;
+    //         }
+    //     }
+
+    //     return <span>{timeAgo}</span>;
+    // }
+
+    function PostTimeAgoComponent({ timestamp }) {
+        const postDate = new Date(timestamp);
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - postDate) / 1000);
+
+        if (diffInSeconds < 60) {
+            return "just now";
+        } else if (diffInSeconds < 3600) {
+            const minutes = Math.floor(diffInSeconds / 60);
+            return `${minutes}min ago`;
+        } else if (diffInSeconds < 86400) {
+            const hours = Math.floor(diffInSeconds / 3600);
+            return `${hours}h ago`;
         } else {
-            const days = Math.floor(seconds / 86400);
-            timeAgo = `${days}d ago`;
-        }
+            const days = Math.floor(diffInSeconds / 86400);
 
-        return <span>{timeAgo}</span>;
+            if (days > 10) {
+                const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                return postDate.toLocaleDateString(undefined, options);
+            } else {
+                return `${days}d ago`;
+            }
+        }
     }
 
 
@@ -124,7 +156,9 @@ const NotificationProps = () => {
                                                             <div className="n-profile-name text-lightProfileName dark:text-darkProfileName">{item.name || item.senderName}</div>
 
                                                             <div style={{ display: "flex", alignItems: "center" }} className='text-lightPostTime dark:text-darkPostTime'>
-                                                                <TimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
+                                                                <div style={{ fontSize: "14px" }}>
+                                                                    <PostTimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
+                                                                </div>
                                                                 <div className='ms-3' style={{ fontWeight: "600", color: "#088A85" }} >{item.senderName ? "Friend Request" : null}</div>
 
                                                             </div>
@@ -196,7 +230,9 @@ const NotificationProps = () => {
                                                             <div className="n-profile-name text-lightProfileName dark:text-darkProfileName ">{item.name || item.senderName}</div>
 
                                                             <div style={{ display: "flex", alignItems: "center" }} className="text-lightPostTime dark:text-darkPostTime">
-                                                                <TimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
+                                                                <div style={{ fontSize: "14px" }}>
+                                                                    <PostTimeAgoComponent timestamp={item.timestamp && item.timestamp.toDate()} />
+                                                                </div>
                                                                 <div className='ms-3' style={{ fontWeight: "600", color: "#088A85" }} >{item.senderName ? "Friend Request" : null}</div>
 
                                                             </div>

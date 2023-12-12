@@ -1374,6 +1374,7 @@ const Messages = () => {
 
     const ifonline = onlineUsers.find((item) => item.uid === user.uid);
 
+
     function PostTimeAgoComponent({ timestamp }) {
         const postDate = new Date(timestamp);
         const now = new Date();
@@ -1620,12 +1621,13 @@ const Messages = () => {
                                     </StyledBadge>
                                     :
                                     <img src={user.userPhoto} className='message-profile-img' alt="" />
+
                                 }
                             </div>
 
                             <span className='me-4 message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
 
-                            {ifonline.status === "Offline" ?
+                            {ifonline && ifonline.status === "Offline" ?
                                 <div className='text-lightProfileName dark:text-darkProfileName' style={{ fontSize: "13px" }}>
                                     <PostTimeAgoComponent timestamp={ifonline.timestamp && ifonline.timestamp.toDate()} />
                                 </div>
