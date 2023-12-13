@@ -163,8 +163,6 @@ const ProfileThree = ({ user }) => {
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </>
 

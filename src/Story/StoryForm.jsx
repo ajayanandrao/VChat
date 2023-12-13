@@ -11,24 +11,28 @@ import { Link } from 'react-router-dom';
 const StoryForm = () => {
     const { currentUser } = useContext(AuthContext);
 
-    // useEffect(() => {
-    //     const handleBeforeUnload = async () => {
-    //         const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
-
-    //         try {
-    //             // Delete the document from Firestore
-    //             await deleteDoc(PresenceRefOnline);
-    //         } catch (error) {
-    //             console.error('Error deleting PresenceRefOnline:', error);
-    //         }
-    //     };
-
-    //     window.addEventListener('beforeunload', handleBeforeUnload);
-
-    //     return () => {
-    //         window.removeEventListener('beforeunload', handleBeforeUnload);
-    //     };
-    // }, [currentUser.uid]);
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+    
+            try {
+                // Delete the document from Firestore
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+    
+        window.addEventListener('beforeunload', handleBeforeUnload);
+    
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser && currentUser.uid]);
 
     const dataRef = collection(db, "users");
     const [userPhoto, setUserPhoto] = useState(null);

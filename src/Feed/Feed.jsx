@@ -822,7 +822,7 @@ const Feed = ({ post }) => {
                 <div className="feed-div bg-lightDiv dark:bg-darkDiv">
 
                     <div className="feed-profile-div">
-                        <Link to={`${currentUser.uid === post.uid ? `/profile/` : `/users/${post.uid}`}`} className='link d-flex align-items-center'>
+                        <Link to={`${currentUser.uid === post.uid ? `/profile/` : `/${post.uid}`}`} className='link d-flex align-items-center'>
                             <img src={post.photoURL} className='feed-img' alt="" />
 
                             <div className="feed-profile-name text-lightProfileName dark:text-darkProfileName">

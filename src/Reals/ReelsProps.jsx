@@ -47,7 +47,7 @@ const ReelsProps = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     const newData = api.map((item) => {
         return (

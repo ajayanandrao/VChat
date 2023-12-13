@@ -320,31 +320,35 @@ const CreateStorey = () => {
         }
     }
 
-    // useEffect(() => {
-    //     const handleBeforeUnload = async () => {
-    //         const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
-
-    //         try {
-    //             // Delete the document from Firestore
-    //             await deleteDoc(PresenceRefOnline);
-    //         } catch (error) {
-    //             console.error('Error deleting PresenceRefOnline:', error);
-    //         }
-    //     };
-
-    //     window.addEventListener('beforeunload', handleBeforeUnload);
-
-    //     return () => {
-    //         window.removeEventListener('beforeunload', handleBeforeUnload);
-    //     };
-    // }, [currentUser.uid]);
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+    
+            try {
+                // Delete the document from Firestore
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+    
+        window.addEventListener('beforeunload', handleBeforeUnload);
+    
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser && currentUser.uid]);
 
 
     return (
         <div className='cteateStory-main-container bg-light_0 dark:bg-dark'>
 
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style={{ width: `${progress}` }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
+            <div className="progress">
+                <div className="progress-bar" role="progressbar" style={{ width: `${progress}` }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="progress-bar"></div>
             </div>
 
             <div className='d-flex justify-content-center'>

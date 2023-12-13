@@ -37,7 +37,7 @@ const Policy = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     return (
         <div className='policy-container bg-light_0 dark:bg-dark'>

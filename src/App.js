@@ -161,7 +161,7 @@ function App() {
     return unsub();
   }, []);
 
-  
+
 
 
   // ========================================================= Audio =====================================
@@ -197,73 +197,65 @@ function App() {
           <Route path="signUp" element={<SignUp />} />
           <Route exact path="forgotPassword" element={<ForgotPassword />} />
 
-          {loading ?
-
-            // (<> <Route path="home" element={<Home />} />
-            (<>
 
 
-              <Route path="home" element={<HomePage />} />
-              {/* <Route path="home" element={<Home />} />  */}
-              {/* <Route path="post" element={<Post />} /> */}
+          <Route path="home" element={<Home />} />
 
-              <Route path="welcome" element={<Wellcome />} />
-              <Route path="How_to_install_app" element={<Install />} />
+          <Route path="welcome" element={<Wellcome />} />
+          <Route path="How_to_install_app" element={<Install />} />
 
-              <Route path='notification' element={<NotificationProps />} />
-              <Route path='notification/:id' element={<NotificationPara />} />
+          <Route path='notification' element={<NotificationProps />} />
+          <Route path='notification/:id' element={<NotificationPara />} />
 
-              <Route exact path="changePassword" element={<ChangePassword />} />
-              <Route exact path="feedback" element={<Feedback />} />
+          <Route exact path="changePassword" element={<ChangePassword />} />
+          <Route exact path="feedback" element={<Feedback />} />
 
 
-              <Route path="RealTime" element={<RealTime />} />
-              <Route path="option" element={<Option />} />
-              <Route path="setting" element={<Setting />} />
-              <Route path="policy" element={<Policy />} />
-              <Route path="deactivate" element={<DeActivate />} />
-              <Route path="search" element={<SearchUser />} />
-              <Route path="message" element={<Message />} />
-              <Route path="find_friend" element={<PeopleProps />} />
+          <Route path="RealTime" element={<RealTime />} />
+          <Route path="option" element={<Option />} />
+          <Route path="setting" element={<Setting />} />
+          <Route path="policy" element={<Policy />} />
+          <Route path="deactivate" element={<DeActivate />} />
+          <Route path="search" element={<SearchUser />} />
+          <Route path="message" element={<Message />} />
+          <Route path="find_friend" element={<PeopleProps />} />
 
-              <Route path="Wedding" element={<WeddingMain />} />
-              <Route path="WeddingList" element={<WeddingList />} />
-              <Route path="AddWedding" element={<Wedding />} />
-              <Route path="WeddingList/:id" element={<WeddingListDetail />} />
+          <Route path="Wedding" element={<WeddingMain />} />
+          <Route path="WeddingList" element={<WeddingList />} />
+          <Route path="AddWedding" element={<Wedding />} />
+          <Route path="WeddingList/:id" element={<WeddingListDetail />} />
 
-              <Route path='gallery' element={<Vgallery />} />
+          <Route path='gallery' element={<Vgallery />} />
 
-              <Route path='hospitals' element={<HospitalPage />} />
-              <Route path='hospitalsDetail/:id' element={<HospitalDetail />} />
-              <Route path='add_hospitals' element={<AddHospitals />} />
-
-
-              <Route path='electronics' element={<Electronics />} />
-              <Route path='laptop' element={<Laptop />} />
-              <Route path='laptopDetail' element={<LaptopDetail />} />
-
-              <Route path='animation' element={<Animation />} />
+          <Route path='hospitals' element={<HospitalPage />} />
+          <Route path='hospitalsDetail/:id' element={<HospitalDetail />} />
+          <Route path='add_hospitals' element={<AddHospitals />} />
 
 
-              <Route path='users' element={<Users />} />
-              <Route path='createStory' element={<CreateStorey />} />
-              <Route path="users/:id/story" element={<ViewStoryProps />} />
+          <Route path='electronics' element={<Electronics />} />
+          <Route path='laptop' element={<Laptop />} />
+          <Route path='laptopDetail' element={<LaptopDetail />} />
+
+          <Route path='animation' element={<Animation />} />
 
 
-              <Route path='users/:id' element={<OtherUserProfileMain />} />
-              <Route path='users/:id/message' element={<Messages />} />
+          <Route path='users' element={<Users />} />
+          <Route path='createStory' element={<CreateStorey />} />
+          <Route path="users/:id/story" element={<ViewStoryProps />} />
 
-              <Route path='users/:id/:userId/profile' element={<CurrentUserFriendProfileMain />} />
 
-              <Route path='profile' element={<CurrentUserProfileMain />} />
+          <Route path='/:id' element={<OtherUserProfileMain />} />
+          <Route path='users/:id/message' element={<Messages />} />
 
-              <Route path='/reels/' element={<ReelsProps />} />
-              {/* <Route path='/reels/' element={<RealWork />} /> */}
-              <Route path='notification' element={<NotificationProps />} />
-              <Route path='notification/:id' element={<NotificationPara />} /></>)
-            :
-            null
-          }
+          <Route path='users/:id/:userId/profile' element={<CurrentUserFriendProfileMain />} />
+
+          <Route path='profile' element={<CurrentUserProfileMain />} />
+
+          <Route path='/reels/' element={<ReelsProps />} />
+          {/* <Route path='/reels/' element={<RealWork />} /> */}
+          <Route path='notification' element={<NotificationProps />} />
+          <Route path='notification/:id' element={<NotificationPara />} />
+
         </Routes>
       </Router>
     </>

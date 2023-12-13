@@ -99,7 +99,7 @@ const Messages = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
 
     useEffect(() => {
@@ -131,7 +131,7 @@ const Messages = () => {
         const timer = setTimeout(async () => {
             try {
                 // Query all documents in the specific collection
-                const messageCollection = collection(db, `allFriends/${currentUser.uid}/Message`);
+                const messageCollection = collection(db, `allFriends/${currentUser && currentUser.uid}/Message`);
                 const querySnapshot = await getDocs(messageCollection);
 
                 // Iterate through the documents and update each one to set the "sound" field to null
@@ -406,7 +406,7 @@ const Messages = () => {
         const fetchFriends = async () => {
             try {
                 const friendsQuery = query(
-                    collection(db, `allFriends/${currentUser.uid}/Message`),
+                    collection(db, `allFriends/${currentUser && currentUser.uid}/Message`),
                     orderBy('time', 'asc')
                 );
 
@@ -423,7 +423,7 @@ const Messages = () => {
         };
 
         fetchFriends();
-    }, [currentUser]);
+    }, [currentUser && currentUser.uid]);
 
 
     const sendMessage = async (uid, name, recipientImg) => {

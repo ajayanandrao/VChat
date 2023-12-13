@@ -19,6 +19,7 @@ import Audio from '../Audio';
 const CurrentUserProfileMain = () => {
 
     const { currentUser } = useContext(AuthContext);
+
     const [api, setApiData] = useState([]);
     useEffect(() => {
         const colRef = collection(db, 'users');
@@ -105,7 +106,7 @@ const CurrentUserProfileMain = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     return (
         <div className='current-user-profile-main bg-light_0 dark:bg-dark'>

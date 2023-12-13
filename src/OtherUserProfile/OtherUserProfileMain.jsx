@@ -12,12 +12,16 @@ import "./OtherUserProfileMain.scss";
 import LeftArro from '../LeftArro';
 import { AuthContext } from '../AuthContaxt';
 import { useContext } from 'react';
-
+import { motion } from 'framer-motion';
 
 const OtherUserProfileMain = () => {
     const { currentUser } = useContext(AuthContext);
     const { id } = useParams();
     const [user, setUser] = useState(null);
+    const nav = useNavigate();
+    const goBack = () => {
+        nav("/");
+    }
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -37,7 +41,6 @@ const OtherUserProfileMain = () => {
         fetchUser();
     }, [id]);
 
-    console.log(id);
 
     useEffect(() => {
         const handleBeforeUnload = async () => {
@@ -60,12 +63,25 @@ const OtherUserProfileMain = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     if (!user) {
         return <>
-            <div className='skeleton-center bg-light_0 dark:bg-dark'>
-                <CircularProgress className='circularprogress' />
+            <div className='skeleton-center bg-light_0 dark:bg-dark text-lightProfileName dark:text-darkProfileName '>
+                {/* <CircularProgress className='circularprogress' /> */}
+
+                <motion.div
+                    transition={{ duration: 2, delay: 2 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className='d-flex' style={{ flexDirection: "column", justifyItems: "center", alignItems: "center" }}>
+                    This content isn't available right now
+                    <button className='btn btn-primary mt-4'
+                        style={{ fontSize: "16px", padding: "5px 10px" }}
+                        onClick={goBack}
+                    >Go Back</button>
+                </motion.div>
+
             </div >
         </>;
     }

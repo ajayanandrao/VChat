@@ -36,7 +36,7 @@ const Setting = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     const LogOut = async () => {
         const PresenceRef = doc(db, "userPresece", currentUser.uid);

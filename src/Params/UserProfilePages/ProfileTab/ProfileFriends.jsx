@@ -113,7 +113,7 @@ const ProfileFriends = ({ user }) => {
                                             return (
                                                 <div key={friend.uid} >
 
-                                                    <Link style={{ textDecoration: "none" }} to={`/users/${friend.uid}`}>
+                                                    <Link style={{ textDecoration: "none" }} to={`/${friend.uid === currentUser.uid ? "profile" : friend.uid}`}>
                                                         <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                                                             <img src={friend.PhotoUrl} className='friend-img' alt="" />
                                                             <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{friend.name}</div>

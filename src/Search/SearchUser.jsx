@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./SearchUser.scss";
 import { Link, useNavigate } from 'react-router-dom';
-import { db} from "./../Firebase";
+import { db } from "./../Firebase";
 import { collection, deleteDoc, doc, onSnapshot, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
 
@@ -48,7 +48,7 @@ const SearchUser = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
 
     return (
@@ -56,7 +56,6 @@ const SearchUser = () => {
             <div className="left">
             </div>
             <div className="search-main-container bg-light_0 dark:bg-dark">
-
 
                 <div className="search-back-div bg-light_0 dark:bg-dark">
                     <div className="leftDiv"></div>
@@ -94,7 +93,7 @@ const SearchUser = () => {
                                                         alt=""
                                                     />
                                                 </div>
-                                                <Link to={`/users/${item.uid}`}>
+                                                <Link to={`/${item.uid}`}>
                                                     <div className="Search-user-profile-name text-lightProfileName dark:text-darkProfileName">{item.name}</div>
                                                 </Link>
                                             </div>

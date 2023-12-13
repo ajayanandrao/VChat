@@ -302,7 +302,7 @@ const VideoItem = ({ post }) => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     return (
         <div className="reel-scroll-div">
@@ -334,7 +334,9 @@ const VideoItem = ({ post }) => {
                 </div>
 
                 <div className="reel-profile-div">
-                    <img src={post.photoURL} className='reel-profile-img' alt="" />
+                    <Link to={`${currentUser.uid === post.uid ? `/profile/` : `/${post.uid}`}`}>
+                        <img src={post.photoURL} className='reel-profile-img' alt="" />
+                    </Link>
                 </div>
 
                 {isShare ?
@@ -385,7 +387,7 @@ const VideoItem = ({ post }) => {
                 }
 
             </div>
-        </div>
+        </div >
     );
 };
 

@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
 import React, { useContext, useEffect, useState } from 'react'
 import { db } from '../Firebase';
 import { AuthContext } from '../AuthContaxt';
@@ -30,25 +30,28 @@ const WeddingList = () => {
         });
         return unsub;
     }, []);
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
 
-    // useEffect(() => {
-    //     const handleBeforeUnload = async () => {
-    //         const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+            try {
+                // Delete the document from Firestore
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
 
-    //         try {
-    //             // Delete the document from Firestore
-    //             await deleteDoc(PresenceRefOnline);
-    //         } catch (error) {
-    //             console.error('Error deleting PresenceRefOnline:', error);
-    //         }
-    //     };
+        window.addEventListener('beforeunload', handleBeforeUnload);
 
-    //     window.addEventListener('beforeunload', handleBeforeUnload);
-
-    //     return () => {
-    //         window.removeEventListener('beforeunload', handleBeforeUnload);
-    //     };
-    // }, [currentUser.uid]);
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser && currentUser.uid]);
 
     const handleDeleteItem = async (id) => {
         const dataRef = doc(db, 'WeddingDatabase', id);

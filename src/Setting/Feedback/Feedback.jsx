@@ -82,7 +82,7 @@ const Feedback = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     return (
         <div className='feedback-main-container bg-light_0 dark:bg-dark text-lightProfileName dark:text-darkProfileName'>

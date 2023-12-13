@@ -228,14 +228,16 @@ const People = ({ userP }) => {
                                         return (
                                             <div key={item.id}>
                                                 <div className="people-container">
-                                                    <Link to={`/users/${item.uid}`}>
+                                                    <Link to={`/${item.uid}`}>
                                                         <div>
                                                             <img src={item.PhotoUrl} className="people-img" alt="" />
                                                         </div>
                                                     </Link>
 
                                                     <div className="people-name-div">
-                                                        <div className="people-name text-lightProfileName dark:text-darkProfileName mb-2">{item.name}</div>
+                                                        <Link to={`/${item.uid}`}>
+                                                            <div className="people-name text-lightProfileName dark:text-darkProfileName mb-2">{item.name}</div>
+                                                        </Link>
                                                         <div className="people-btn-div">
                                                             {friendRequest ? (
                                                                 <div

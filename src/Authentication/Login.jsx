@@ -58,7 +58,7 @@ const Login = () => {
             .then(async (userCredential) => {
                 // Signed in
                 const user = userCredential.user;
-                console.log(user.uid)
+                // console.log(user.uid)
                 const PresenceRef = doc(db, "userPresece", user.uid);
                 await updateDoc(PresenceRef, { status: "online" });
 

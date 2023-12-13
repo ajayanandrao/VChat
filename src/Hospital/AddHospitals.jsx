@@ -49,7 +49,7 @@ const AddHospitals = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     const compressImage = async (image, maxWidth) => {
         return new Promise((resolve, reject) => {

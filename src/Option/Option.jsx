@@ -35,7 +35,7 @@ const Option = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     const LogOut = async () => {
         setLoading(true);

@@ -158,7 +158,7 @@ const HomePage = () => {
     const [friendsList, setFriendsList] = useState([]);
     const [dataFetched, setDataFetched] = useState(false);
     useEffect(() => {
-        const friendsRef = collection(db, `allFriends/${currentUser.uid}/Friends`);
+        const friendsRef = collection(db, `allFriends/${currentUser && currentUser.uid}/Friends`);
         const unsubscribe = onSnapshot(friendsRef, (snapshot) => {
             const newFriendsList = snapshot.docs.map((doc) => doc.data());
             setFriendsList(newFriendsList);
@@ -188,7 +188,7 @@ const HomePage = () => {
                 // Simulate a delay of 2 seconds (you can adjust the delay as needed)
                 setTimeout(async () => {
                     const friendsQuery = query(
-                        collection(db, `allFriends/${currentUser.uid}/Message`),
+                        collection(db, `allFriends/${currentUser && currentUser.uid}/Message`),
                         orderBy('time', 'asc') // Reverse the order to show newest messages first
                     );
 
@@ -305,7 +305,7 @@ const HomePage = () => {
 
     useEffect(() => {
         const handleBeforeUnload = async () => {
-            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser && currentUser.uid);
 
             try {
                 // Delete the document from Firestore
@@ -324,11 +324,11 @@ const HomePage = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
 
     useEffect(() => {
-        const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+        const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser && currentUser.uid);
         setDoc(PresenceRefOnline, {
             status: 'Online',
             uid: currentUser.uid,
@@ -339,7 +339,7 @@ const HomePage = () => {
             timestamp: serverTimestamp()
         });
 
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
 
     return (
@@ -587,12 +587,14 @@ const HomePage = () => {
                                             return (
                                                 <div key={item.id}>
                                                     <div className="right-profile-card-div bg-lightDiv dark:bg-darkDiv">
-                                                        <Link to={`/users/${item.uid}`} className="right-profile-card-img">
+                                                        <Link to={`/${item.uid}`} className="right-profile-card-img">
                                                             <div>
                                                                 <img src={item.PhotoUrl} className="right-profile-card-img" alt="" />
                                                             </div>
                                                         </Link>
-                                                        <div className="right-profile-card-name text-lightProfileName dark:text-darkProfileName mb-2">{item.name}</div>
+                                                        <Link to={`/${item.uid}`} className="link">
+                                                            <div className="right-profile-card-name text-lightProfileName dark:text-darkProfileName mb-2">{item.name}</div>
+                                                        </Link>
 
                                                         <div className="people-name-div">
                                                             <div className="people-btn-div">

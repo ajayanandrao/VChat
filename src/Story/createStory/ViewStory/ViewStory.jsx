@@ -3,7 +3,7 @@ import './ViewStory.scss';
 import { AuthContext } from '../../../AuthContaxt';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { CircularProgress, LinearProgress } from '@mui/material';
-import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, query, serverTimestamp, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
 import { db } from '../../../Firebase';
 import { MdClose } from 'react-icons/md';
 import { AiFillHeart, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
@@ -19,24 +19,28 @@ const ViewStory = ({ post }) => {
         nav(-1);
     };
 
-    // useEffect(() => {
-    //     const handleBeforeUnload = async () => {
-    //         const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
-
-    //         try {
-    //             // Delete the document from Firestore
-    //             await deleteDoc(PresenceRefOnline);
-    //         } catch (error) {
-    //             console.error('Error deleting PresenceRefOnline:', error);
-    //         }
-    //     };
-
-    //     window.addEventListener('beforeunload', handleBeforeUnload);
-
-    //     return () => {
-    //         window.removeEventListener('beforeunload', handleBeforeUnload);
-    //     };
-    // }, [currentUser.uid]);
+    useEffect(() => {
+        const handleBeforeUnload = async () => {
+            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+    
+            try {
+                // Delete the document from Firestore
+                await updateDoc(PresenceRefOnline, {
+                    status: 'Offline',
+                    presenceTime: new Date(),
+                    timestamp: serverTimestamp()
+                });
+            } catch (error) {
+                console.error('Error deleting PresenceRefOnline:', error);
+            }
+        };
+    
+        window.addEventListener('beforeunload', handleBeforeUnload);
+    
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [currentUser && currentUser.uid]);
 
     const [user, setUser] = useState(null);
     useEffect(() => {

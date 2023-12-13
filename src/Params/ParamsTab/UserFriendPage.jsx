@@ -1,10 +1,11 @@
 import { collection, onSnapshot } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { db } from '../../Firebase';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../AuthContaxt';
 
 const UserFriendPage = ({ user }) => {
-
+    const { currentUser } = useContext(AuthContext);
     const [search, setSearch] = useState("");
     const [friendsList, setFriendsList] = useState([]);
 
@@ -121,11 +122,12 @@ const UserFriendPage = ({ user }) => {
                                                     return (
                                                         <div key={friend.uid} >
 
-                                                            <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                                                <img src={friend.PhotoUrl} className='friend-img' alt="" />
-                                                                <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{friend.name}</div>
-                                                            </div>
-
+                                                            <Link style={{ textDecoration: "none" }} to={`/${friend.uid === currentUser.uid ? "profile" : friend.uid}`}>
+                                                                <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                                                    <img src={friend.PhotoUrl} className='friend-img' alt="" />
+                                                                    <div className='friend-name text-lightProfileName dark:text-darkProfileName'>{friend.name}</div>
+                                                                </div>
+                                                            </Link>
                                                         </div>
                                                     )
                                                 })}

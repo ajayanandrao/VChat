@@ -121,7 +121,7 @@ const HospitalPage = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     return (
         <div className='hospital-main-container bg-light_0 dark:bg-dark '>

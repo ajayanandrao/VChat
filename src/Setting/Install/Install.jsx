@@ -49,7 +49,7 @@ const Install = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     return (
         <div className='bg-lightDiv dark:bg-darkDiv install-vchat-container'>
@@ -60,7 +60,7 @@ const Install = () => {
 
             {isPlaying ? (
                 <div className='install-audio text-lightPostText dark:text-aqua_0'>
-                    <i class="bi bi-volume-up"></i>
+                    <i className="bi bi-volume-up"></i>
                 </div>
             ) : null}
 

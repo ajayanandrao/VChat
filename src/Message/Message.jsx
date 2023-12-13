@@ -324,7 +324,7 @@ const Message = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     return (
         <div className='d-flex'>
@@ -370,7 +370,7 @@ const Message = () => {
                                                             <img src={sms.photoUrl} className='sms-user-img' alt="" />
                                                         </div>
                                                         <div className='sms-name' >{sms.name}</div>
-                                                        <div style={{fontSize:"12px"}}>
+                                                        <div style={{ fontSize: "12px" }}>
                                                             <PostTimeAgoComponent timestamp={sms.time && sms.time.toDate()} />
                                                         </div>
                                                     </div>

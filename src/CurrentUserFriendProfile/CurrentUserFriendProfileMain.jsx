@@ -8,11 +8,11 @@ import ProfilePageTwo from '../Params/UserProfilePages/ProfilePageTwo';
 import ProfilePageThree from '../Params/UserProfilePages/ProfilePageThree';
 import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LeftArro from '../LeftArro';
 import { AuthContext } from '../AuthContaxt';
 import Audio from '../Audio';
-
+import { motion } from 'framer-motion';
 
 
 
@@ -20,6 +20,11 @@ const CurrentUserFriendProfileMain = () => {
     const { currentUser } = useContext(AuthContext);
     const { id, userId } = useParams(); // Assuming id is friend.userId and uid is friend.id
     const [user, setUser] = useState(null);
+
+    const nav = useNavigate();
+    const goBack = () => {
+        nav("/");
+    }
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -114,13 +119,25 @@ const CurrentUserFriendProfileMain = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     if (!user) {
         return <>
-            <div className='skeleton-center bg-light_0 dark:bg-dark'>
-                <CircularProgress className='circularprogress' />
-            </div>
+            <div className='skeleton-center bg-light_0 dark:bg-dark text-lightProfileName dark:text-darkProfileName '>
+                {/* <CircularProgress className='circularprogress' /> */}
+                <motion.div
+                    transition={{ duration: 2, delay: 2 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className='d-flex' style={{ flexDirection: "column", justifyItems: "center", alignItems: "center" }}>
+                    This content isn't available right now
+                    <button className='btn btn-primary mt-4'
+                        style={{ fontSize: "16px", padding: "5px 10px" }}
+                        onClick={goBack}
+                    >Go Back</button>
+                </motion.div>
+
+            </div >
         </>;
     }
     return (

@@ -100,7 +100,7 @@ const WeddingMain = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [currentUser.uid]);
+    }, [currentUser && currentUser.uid]);
 
     return (
         <div className='wedding-main-container bg-light_0 text-lightProfileName dark:bg-dark wedding-main-div' >
