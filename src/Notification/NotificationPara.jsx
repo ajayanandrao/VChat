@@ -1,15 +1,12 @@
-import { CircularProgress, Tabs } from '@mui/material';
+import { CircularProgress, } from '@mui/material';
 import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { db } from '../Firebase';
 import "./NotificationParam.scss";
 import { FaPlay } from 'react-icons/fa';
-import { BsFillChatDotsFill, BsFillHeartFill } from 'react-icons/bs';
 import ReactTimeago from 'react-timeago';
 import { CgClose } from "react-icons/cg"
-import { AiFillHeart } from 'react-icons/ai';
-import { IoMdSend } from 'react-icons/io';
 import { AuthContext } from '../AuthContaxt';
 import { BiSend, BiSolidSend } from 'react-icons/bi';
 

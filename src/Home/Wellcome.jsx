@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./Wellcome.scss";
 import { motion } from 'framer-motion';
-import v from "./../Image/img/logo192.png";
-import { IoIosArrowForward, IoMdGitMerge } from 'react-icons/io';
 import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useNavigate } from 'react-router-dom';

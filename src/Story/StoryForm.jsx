@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import "./StoryForm.scss";
-import { db, storage } from '../Firebase';
-import { getDownloadURL, getStorage, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from 'firebase/firestore';
-import { v4, uuidv4 } from "uuid";
+import { db } from '../Firebase';
+import {  collection,  doc, getDoc, onSnapshot, orderBy, query, serverTimestamp, updateDoc, where } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
 import "./../Styles/flikity.scss";
 import { Link } from 'react-router-dom';

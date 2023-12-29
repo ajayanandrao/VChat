@@ -2,15 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import "./Navbar.scss";
 import "./../MobileNavbar/MobileNavbarBottom.scss";
 import { AiFillHeart, AiFillHome } from "react-icons/ai"
-import { MdMovieFilter } from 'react-icons/md';
-import { BsMessenger } from 'react-icons/bs';
 import { RiMessengerFill } from 'react-icons/ri';
 import { AuthContext } from '../AuthContaxt';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { Link } from 'react-router-dom';
-import { on, off } from "./../Redux/CounterSlice";
+import { on } from "./../Redux/CounterSlice";
 import { useDispatch, useSelector } from 'react-redux';
 
 

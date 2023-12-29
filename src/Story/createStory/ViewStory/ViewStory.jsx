@@ -2,13 +2,12 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import './ViewStory.scss';
 import { AuthContext } from '../../../AuthContaxt';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { CircularProgress, LinearProgress } from '@mui/material';
+import { LinearProgress } from '@mui/material';
 import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
 import { db } from '../../../Firebase';
 import { MdClose } from 'react-icons/md';
 import { AiFillHeart, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
 import { styled } from '@mui/material/styles';
-import { v4, uuidv4 } from "uuid";
 import { BiSend, BiSolidSend } from "react-icons/bi"
 
 const ViewStory = ({ post }) => {

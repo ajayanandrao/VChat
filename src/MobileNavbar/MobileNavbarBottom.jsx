@@ -6,9 +6,9 @@ import { AuthContext } from "../AuthContaxt";
 
 import "./MobileNavbarBottom.scss";
 
-import { addDoc, collection, doc, onSnapshot, orderBy, query, setDoc, updateDoc } from 'firebase/firestore';
+import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase';
-import PostComponentProps from '../Notification/PostComponentProps';
+
 
 const MobileNavbarBottom = ({ post }) => {
     const { currentUser } = useContext(AuthContext);

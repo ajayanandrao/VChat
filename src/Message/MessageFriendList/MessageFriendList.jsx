@@ -4,9 +4,7 @@ import { db } from '../../Firebase';
 import { AuthContext } from '../../AuthContaxt';
 import { Link } from 'react-router-dom';
 import "./MessageFriendList.scss";
-import { Avatar } from '@mui/material';
-import { styled, keyframes } from '@mui/system';
-import Badge from '@mui/material/Badge';
+
 
 const MessageFriendList = () => {
     const { currentUser } = useContext(AuthContext);

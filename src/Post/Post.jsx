@@ -26,12 +26,11 @@ import data from '@emoji-mart/data';
 
 import { FaPlay } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { Box, LinearProgress } from '@mui/material';
+import { Box } from '@mui/material';
 
 const Post = () => {
 	const { currentUser } = useContext(AuthContext);
 	const colRef = collection(db, 'AllPosts');
-	const q = query(colRef, orderBy('bytime', 'desc'));
 
 	const [postText, setPostText] = useState('');
 	const [img, setImg] = useState(null);
@@ -44,15 +43,7 @@ const Post = () => {
 		setImgView(!imgView);
 	};
 
-	const dataRef = collection(db, 'users');
-	const [userPhoto, setUserPhoto] = useState(null);
-
-	useEffect(() => {
-		const unsub = onSnapshot(dataRef, (snapshot) => {
-			setUserPhoto(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-		});
-		return unsub;
-	}, []);
+	
 
 	const compressImage = async (imageFile, maxWidth) => {
 		return new Promise((resolve, reject) => {
@@ -288,18 +279,6 @@ const Post = () => {
 					OnlineRefSnapshot.exists() &&
 					PostListRefSnapshot.exists()) {
 					// The document already exists, you can access its data
-					const existingData = profileSnapshot.data();
-					// console.log("Document exists:", existingData);
-
-					const existingPresenceData = PresenceRefSnapshot.data();
-					// console.log("Document exists:", existingPresenceData);
-
-					const existingOnlinePresenceData = OnlineRefSnapshot.data();
-					// console.log("Document exists:", existingOnlinePresenceData);
-
-					const PostListPresenceData = PostListRefSnapshot.data();
-					// console.log("Document exists:", PostListPresenceData);
-
 
 				} else {
 

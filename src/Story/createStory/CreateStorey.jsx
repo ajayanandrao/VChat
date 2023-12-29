@@ -5,7 +5,6 @@ import {
     collection,
     deleteDoc,
     doc,
-    getDoc,
     getDocs,
     onSnapshot,
     orderBy,
@@ -14,42 +13,13 @@ import {
     updateDoc,
     where,
 } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
-import { v4 } from "uuid";
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { AuthContext } from './../../AuthContaxt';
-import ReactTimeago from 'react-timeago';
-import { FaPlay } from 'react-icons/fa';
-import v1 from "./../../Image/sv.mp4";
-// import ReactPlayer from 'react-player';
 import "./CreateStory.scss"
-import { LinearProgress } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AiFillHeart } from 'react-icons/ai';
 import { BsFillChatFill, BsImages } from 'react-icons/bs';
 import { MdDelete } from 'react-icons/md';
-
-function TimeAgoComponent({ timestamp, onDelete }) {
-    useEffect(() => {
-        const checkTimePassed = () => {
-            const now = new Date();
-            const diff = now - new Date(timestamp);
-
-            const hoursPassed = diff / (1000 * 60 * 60); // Calculate hours passed
-
-            if (hoursPassed > 2) { // Check if 2 or more hours have passed
-                onDelete();
-            }
-        };
-
-        const timer = setInterval(checkTimePassed, 1000);
-
-        return () => {
-            clearInterval(timer);
-        };
-    }, [timestamp, onDelete]);
-
-    return <ReactTimeago date={timestamp} />;
-}
 
 
 
@@ -323,7 +293,7 @@ const CreateStorey = () => {
     useEffect(() => {
         const handleBeforeUnload = async () => {
             const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
-    
+
             try {
                 // Delete the document from Firestore
                 await updateDoc(PresenceRefOnline, {
@@ -335,9 +305,9 @@ const CreateStorey = () => {
                 console.error('Error deleting PresenceRefOnline:', error);
             }
         };
-    
+
         window.addEventListener('beforeunload', handleBeforeUnload);
-    
+
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
@@ -552,7 +522,7 @@ const CreateStorey = () => {
                         <div className='btn-inline'>
                             <label htmlFor="Add-story" onClick={handleReset}>
                                 <div className='folder '>
-                                    <BsImages  className='text-lightProfileName dark:text-darkProfileName'/>
+                                    <BsImages className='text-lightProfileName dark:text-darkProfileName' />
                                 </div>
                             </label>
                             <button className='ms-3 btn-primary-custom' onClick={handleAddStory}>

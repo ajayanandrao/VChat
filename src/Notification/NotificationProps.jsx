@@ -1,7 +1,6 @@
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { collection,  doc, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { db } from '../Firebase';
-import Notification from './Notification';
 import { AuthContext } from '../AuthContaxt';
 import "./NewNotificationPage.scss";
 import { AiFillHeart } from 'react-icons/ai';

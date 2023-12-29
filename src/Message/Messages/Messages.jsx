@@ -1,17 +1,17 @@
-import { FieldValue, addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where, writeBatch } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where, writeBatch } from 'firebase/firestore';
 import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { auth, db, storage } from '../../Firebase';
 import { CircularProgress } from '@mui/material';
 import "./Messages.scss";
-import { MdClose, MdDelete, MdOutlineReply, MdSend } from 'react-icons/md';
+import { MdClose, MdDelete, MdOutlineReply, } from 'react-icons/md';
 import { FaThumbsUp } from 'react-icons/fa';
-import { BsFillCameraFill, BsThreeDots, BsThreeDotsVertical } from 'react-icons/bs';
+import { BsThreeDots, BsThreeDotsVertical } from 'react-icons/bs';
 import { AiFillCloseCircle, AiOutlineLink } from 'react-icons/ai';
 import { AuthContext } from '../../AuthContaxt';
 import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io"
 import { BiSend, BiSolidFilePdf, BiSolidFileTxt, BiSolidSend } from "react-icons/bi"
-import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 } from 'uuid';
 import "./Emoji.scss";
 import { motion } from 'framer-motion';
@@ -21,7 +21,6 @@ import { styled, keyframes } from '@mui/system';
 import Badge from '@mui/material/Badge';
 import emojiJson from "./emoji.json";
 import MessageFriendList from '../MessageFriendList/MessageFriendList';
-import smile from "./../../Image/emojis/simle/two.png";
 
 const Messages = () => {
     const { currentUser } = useContext(AuthContext);
@@ -232,14 +231,7 @@ const Messages = () => {
     //     }
     // }
 
-    const hideX = () => {
-        const x = document.getElementById("view");
-        if (x.style.display == "none") {
-            x.style.display = "flex";
-        } else {
-            x.style.display = "none";
-        }
-    }
+
 
 
     const [deleteMessagePhoto, setDeleteMessagePhoto] = useState(false);
@@ -1027,8 +1019,6 @@ const Messages = () => {
         handleMessageEmoji();
         if (senderId) {
             const messagesRef = collection(db, 'messages');
-            const HistoryMessagesRef = collection(db, 'HistoryMessages');
-
             await addDoc(messagesRef, {
                 sender: currentUser.uid, // Set the sender's ID
                 senderImg: currentUser.photoURL,
@@ -1130,7 +1120,6 @@ const Messages = () => {
     const SendLike = async (uid, name, recipientImg) => {
         if (senderId) {
             const messagesRef = collection(db, 'messages');
-            const content = replyInput || messageInput;
             // Create a new document using `addDoc` function
             await addDoc(messagesRef, {
                 sender: currentUser.uid, // Set the sender's ID
@@ -1254,7 +1243,6 @@ const Messages = () => {
     };
 
     const [viewReplyImgState, setViewReplyImgState] = useState(false);
-    const [replyImgid, setReplyImgid] = useState("");
     const [viewReplyImgUrl, setViewReplyImgUrl] = useState(null);
     const [replyImgTime, setReplyImgTime] = useState("");
 

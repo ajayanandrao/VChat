@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth, db, realdb } from '../Firebase';
+import { db, } from '../Firebase';
 import "./HomePage.scss";
 import Feed from '../Feed/Feed';
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { AuthContext } from '../AuthContaxt';
 import Post from '../Post/Post';
 import StoryForm from '../Story/StoryForm';
-import { AiFillMinusCircle, AiOutlineArrowUp } from 'react-icons/ai';
-import { motion, useAnimation } from 'framer-motion';
+import { AiOutlineArrowUp } from 'react-icons/ai';
+import { motion } from 'framer-motion';
 import Audio from './../Audio';
-import { getDatabase, onDisconnect, onValue, push, set } from 'firebase/database';
-import { ref } from 'firebase/storage';
+import FlipMove from 'react-flip-move';
 
 const HomePage = () => {
     const nav = useNavigate();
@@ -342,6 +341,15 @@ const HomePage = () => {
     }, [currentUser && currentUser.uid]);
 
 
+    const FeedData = api.map((item) => {
+        return (
+            <div key={item.id}>
+                <Feed post={item} key={item.id} />
+            </div>
+        );
+    });
+
+
     return (
         <div className='homepage-main-container bg-light_0 dark:bg-dark'>
             <motion.div
@@ -483,13 +491,10 @@ const HomePage = () => {
                         </>
                         :
                         <>
-                            {api.map((item) => {
-                                return (
-                                    <div key={item.id}>
-                                        <Feed post={item} key={item.id} />
-                                    </div>
-                                )
-                            })}
+
+                            <FlipMove>
+                                {FeedData}
+                            </FlipMove>
                         </>
                     }
 
