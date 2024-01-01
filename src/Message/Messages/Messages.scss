@@ -63,7 +63,6 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        // background: red;
         box-sizing: border-box;
         overflow-y: scroll;
         display: flex;
@@ -75,6 +74,11 @@
         padding: 0 0.5rem;
         scrollbar-width: none;
         -ms-overflow-style: none;
+
+        @include respond-to(xs) {
+            height: 100vh;
+            padding-bottom: 55px;
+        }
     }
 }
 
