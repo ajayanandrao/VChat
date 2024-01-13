@@ -21,6 +21,7 @@ import { styled, keyframes } from '@mui/system';
 import Badge from '@mui/material/Badge';
 import emojiJson from "./emoji.json";
 import MessageFriendList from '../MessageFriendList/MessageFriendList';
+import { nanoid } from '@reduxjs/toolkit';
 
 const Messages = () => {
     const { currentUser } = useContext(AuthContext);
@@ -1389,6 +1390,37 @@ const Messages = () => {
     }
 
 
+    // const CreateGroup = async () => {
+    //     const uid = nanoid();
+    //     const conRef = doc(db, `allFriends/${currentUser.uid}/Message`, uid);
+    //     const MessRef = collection(db, `allFriends/${currentUser.uid}/Friends`);
+    //     const useRef = collection(db, "users");
+    //     try {
+    //         await addDoc(MessRef, {
+    //             uid: uid,
+    //             userId:uid,
+    //             name: "group one",
+    //             bytime: serverTimestamp(),
+    //         });
+    //         await addDoc(MessRef, {
+    //             uid: uid,
+    //             userId:uid,
+    //             name: "group one",
+    //             bytime: serverTimestamp(),
+    //         });
+    //         await setDoc(conRef, {
+    //             userId: uid,
+    //             name: "group one",
+    //             time: serverTimestamp(),
+    //         });
+    //         console.log("added")
+    //     } catch (e) {
+    //         console.error("Error adding group:", e);
+    //     }
+
+    // }
+
+
     if (!user) {
         return <>
             <div className='skeleton-center bg-light_0 dark:bg-dark'>
@@ -1659,6 +1691,7 @@ const Messages = () => {
 
                     <div className="message-center-friend-list-div bg-light_0 dark:bg-dark">
                         <MessageFriendList />
+                        {/* <div className="group-div" onClick={CreateGroup}></div> */}
                     </div>
 
                     <div className="message-center-container">

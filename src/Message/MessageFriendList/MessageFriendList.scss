@@ -14,6 +14,18 @@
     box-sizing: border-box;
     overflow-y: scroll;
     border-radius: 10px;
+    position: relative;
+
+    .group-div {
+        width: 50px;
+        height: 50px;
+        background: red;
+        position: absolute;
+        bottom: 55px;
+        right: 55px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
 
     @include respond-to(md) {
         max-width: 300px;
