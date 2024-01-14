@@ -121,7 +121,7 @@ const WeddingListDetail = () => {
                         </div>
                         <div className='weddinglist-mainu-item'>
                             <div className='weddinglist-mainu-item-name'>District  </div>
-                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.distric}</span>
+                            <span className='weddinglist-mainu-item-containt' style={{ fontSize: "18px", textTransform: "capitalize" }}>{data.district}</span>
                         </div>
 
                         <div className='weddinglist-mainu-item'>

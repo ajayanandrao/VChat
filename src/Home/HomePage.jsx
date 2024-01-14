@@ -304,6 +304,7 @@ const HomePage = () => {
 
     useEffect(() => {
         const handleBeforeUnload = async () => {
+             // Update Firestore document when the browser is closed
             const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser && currentUser.uid);
 
             try {

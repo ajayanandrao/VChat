@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { db } from "../Firebase";
 import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { AuthContext } from "./../AuthContaxt";
+import { FaLocationDot } from "react-icons/fa6";
 
 const People = ({ userP }) => {
 
@@ -194,99 +195,108 @@ const People = ({ userP }) => {
                             placeholder='Search friends' />
                     </div>
 
-                    <div className="People-user-List">
-
-                        {api
-                            .filter((value) => {
-                                if (search === "") {
-                                    return value;
-                                } else if (value.name.toLowerCase().includes(search.toLowerCase())) {
-                                    return value;
-                                }
-                            })
-                            .map((item) => {
-
-                                if (item.uid !== currentUser.uid) {
-                                    const friendRequest = check.find(
-                                        (request) =>
-                                            request.senderId === currentUser.uid &&
-                                            request.receiverUid === item.uid &&
-                                            request.status === 'pending'
-                                    );
-
-                                    const isFriendRequestAccepted = friendsList.some(
-                                        (friend) =>
-                                            friend.userId === item.uid &&
-                                            friend.status === 'accepted'
-                                    );
-
-                                    if (isFriendRequestAccepted || isFriend(item.uid)) {
-                                        return null; // Skip rendering this user
+                    <div className='People-user-position'>
+                        <div className="People-user-List">
+                            {api
+                                .filter((value) => {
+                                    if (search === "") {
+                                        return value;
+                                    } else if (value.name.toLowerCase().includes(search.toLowerCase())) {
+                                        return value;
                                     }
+                                })
+                                .map((item) => {
 
-                                    if (dataFetched) {
-                                        return (
-                                            <div key={item.id}>
-                                                <div className="people-container">
-                                                    <Link to={`/${item.uid}`}>
-                                                        <div>
-                                                            <img src={item.PhotoUrl} className="people-img" alt="" />
-                                                        </div>
-                                                    </Link>
+                                    if (item.uid !== currentUser.uid) {
+                                        const friendRequest = check.find(
+                                            (request) =>
+                                                request.senderId === currentUser.uid &&
+                                                request.receiverUid === item.uid &&
+                                                request.status === 'pending'
+                                        );
 
-                                                    <div className="people-name-div">
+                                        const isFriendRequestAccepted = friendsList.some(
+                                            (friend) =>
+                                                friend.userId === item.uid &&
+                                                friend.status === 'accepted'
+                                        );
+
+                                        if (isFriendRequestAccepted || isFriend(item.uid)) {
+                                            return null; // Skip rendering this user
+                                        }
+
+                                        if (dataFetched) {
+                                            return (
+                                                <div key={item.id}>
+                                                    <div className="people-container">
                                                         <Link to={`/${item.uid}`}>
-                                                            <div className="people-name text-lightProfileName dark:text-darkProfileName mb-2">{item.name}</div>
+                                                            <div>
+                                                                <img src={item.PhotoUrl} className="people-img" alt="" />
+                                                            </div>
                                                         </Link>
-                                                        <div className="people-btn-div">
-                                                            {friendRequest ? (
-                                                                <div
-                                                                    id={`cancel-${item.id}`}
-                                                                    className="btn-dengar-custom"
-                                                                    onClick={() =>
-                                                                        cancelFriendRequest(
-                                                                            item.id,
-                                                                            currentUser.uid,
-                                                                            item.uid
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Cancel Request
+
+                                                        <div className="people-name-div">
+                                                            <Link to={`/${item.uid}`}>
+                                                                <div className="people-name text-lightProfileName dark:text-darkProfileName mb-2">
+                                                                    {item.name}
+                                                                    <div className='d-flex  align-items-center'>
+
+                                                                        <div style={{ fontSize: "14px" }} className='text-[#A4A4A4] dark:text-[#A4A4A4]'>
+                                                                            {item.district}
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            ) : isFriendRequestAccepted ? (
-                                                                <div className="friend-request-accepted">Friend Request Accepted</div>
-                                                            ) : isFriend(item.uid) ? (
-                                                                <div className="friend-request-accepted">Friend</div>
-                                                            ) : dataFetched ? (
-                                                                <div
-                                                                    id={`add-${item.id}`}
-                                                                    className="btn-primary-custom"
-                                                                    onClick={() =>
-                                                                        sendFriendRequest(
-                                                                            item.id,
-                                                                            item.uid,
-                                                                            item.name,
-                                                                            item.PhotoUrl
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    Add a friend
-                                                                </div>
-                                                            )
-                                                                :
-                                                                null
-                                                            }
+                                                            </Link>
+
+                                                            <div className="people-btn-div">
+                                                                {friendRequest ? (
+                                                                    <div
+                                                                        id={`cancel-${item.id}`}
+                                                                        className="btn-dengar-custom"
+                                                                        onClick={() =>
+                                                                            cancelFriendRequest(
+                                                                                item.id,
+                                                                                currentUser.uid,
+                                                                                item.uid
+                                                                            )
+                                                                        }
+                                                                    >
+                                                                        Cancel Request
+                                                                    </div>
+                                                                ) : isFriendRequestAccepted ? (
+                                                                    <div className="friend-request-accepted">Friend Request Accepted</div>
+                                                                ) : isFriend(item.uid) ? (
+                                                                    <div className="friend-request-accepted">Friend</div>
+                                                                ) : dataFetched ? (
+                                                                    <div
+                                                                        id={`add-${item.id}`}
+                                                                        className="btn-primary-custom"
+                                                                        onClick={() =>
+                                                                            sendFriendRequest(
+                                                                                item.id,
+                                                                                item.uid,
+                                                                                item.name,
+                                                                                item.PhotoUrl
+                                                                            )
+                                                                        }
+                                                                    >
+                                                                        Add a friend
+                                                                    </div>
+                                                                )
+                                                                    :
+                                                                    null
+                                                                }
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        );
+                                            );
+                                        }
+
                                     }
-
-                                }
-                            })}
+                                })}
+                        </div>
                     </div>
-
                     <div className="People-user-bottom">
 
                     </div>

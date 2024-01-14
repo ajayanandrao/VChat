@@ -28,7 +28,7 @@ const About = () => {
     const [college, setCollege] = useState("");
     const [work, setWork] = useState("");
     const [from, setFrom] = useState("");
-
+    const [district, setDistrict] = useState("");
 
     const handleShowAboutIntroOverlay = () => {
         setIntro("");
@@ -58,6 +58,9 @@ const About = () => {
             if (work) {
                 updatedFields.work = work;
             }
+            if (district) {
+                updatedFields.district = district;
+            }
             if (from) {
                 updatedFields.from = from;
             }
@@ -67,6 +70,7 @@ const About = () => {
             setSchool("");
             setCollege("");
             setWork("");
+            setDistrict("");
             setFrom("");
             handleShowAboutOverlay();
         } catch (error) {
@@ -83,7 +87,7 @@ const About = () => {
         }
         setIntro("");
         handleShowAboutIntroOverlay();
-        
+
     };
 
     return (
@@ -119,6 +123,8 @@ const About = () => {
                                         <input type="text" className='about-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText' placeholder='College' value={college} onChange={(e) => setCollege(e.target.value)} />
 
                                         <input type="text" className='about-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText' placeholder='Work' value={work} onChange={(e) => setWork(e.target.value)} />
+
+                                        <input type="text" className='about-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText' placeholder='District' value={district} onChange={(e) => setDistrict(e.target.value)} />
 
                                         <input type="text" className='about-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText' placeholder='From' value={from} onChange={(e) => setFrom(e.target.value)} />
 
@@ -164,7 +170,7 @@ const About = () => {
                                                     </span>
                                                     :
                                                     <div className="about-null-item bg-light_0 dark:bg-dark"></div>
-                                                    }
+                                                }
                                             </div>
 
                                             <div className="detail-item-one">
@@ -182,6 +188,16 @@ const About = () => {
                                                 {item.work ?
                                                     <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'>
                                                         {item.work}
+                                                    </span>
+                                                    :
+                                                    <div className="about-null-item bg-light_0 dark:bg-dark"></div>
+                                                }
+                                            </div>
+
+                                            <div className="detail-item-one">
+                                                <samp className='d-item-name text-lightProfileName dark:text-darkProfileName'> District </samp>
+                                                {item.district ?
+                                                    <span className='d-item-detail text-lightPostText dark:text-darkPostText bg-light_0 dark:bg-dark'> {item.district}
                                                     </span>
                                                     :
                                                     <div className="about-null-item bg-light_0 dark:bg-dark"></div>

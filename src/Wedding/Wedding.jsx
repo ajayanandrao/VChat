@@ -155,7 +155,7 @@ const Wedding = () => {
 
     const [landmark, setLandmark] = useState("");
     const [village, setVillage] = useState("");
-    const [distric, setDistric] = useState("");
+    const [district, setDistric] = useState("");
     const [state, setState] = useState("");
     const [subCast, setSubCast] = useState("");
 
@@ -218,7 +218,7 @@ const Wedding = () => {
 
             landmark: landmark,
             village: village,
-            distric: distric,
+            district: district,
             state: state,
 
             qualification: qualification,
@@ -462,7 +462,7 @@ const Wedding = () => {
                     <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='Village' onChange={(e) => setVillage(e.target.value)} value={village} />
                     <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
-                        placeholder='District' onChange={(e) => setDistric(e.target.value)} value={distric} />
+                        placeholder='District' onChange={(e) => setDistric(e.target.value)} value={district} />
                     <input type="text" className='wedding-input bg-lightDiv dark:bg-darkDiv text-lightPostText dark:text-darkPostText'
                         placeholder='State' onChange={(e) => setState(e.target.value)} value={state} />
 
