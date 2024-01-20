@@ -86,6 +86,11 @@
             left: 35px;
             padding-bottom: 40px;
 
+            @include respond-to(xs) {   
+                left: 0;
+            }
+
+
             .People-user-List {
                 padding: 1rem;
                 padding-bottom: 2rem;
