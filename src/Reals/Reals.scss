@@ -13,6 +13,10 @@
     top: 0;
     padding-left: 40px;
 
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
     @include respond-to(xs) {
         z-index: 9999;
         padding-left: 0px;
@@ -30,6 +34,50 @@
     }
 }
 
+.glass-div {
+    // background: red;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    // backdrop-filter: blur(130);
+    .glass-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(130px);
+    }
+
+    .video-glass {
+        width: 100%;
+        max-width: 400px;
+        height: 640px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        .gvideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+
+            @include respond-to(xs) {
+                border-radius: 0px;
+            }
+        }
+
+        @include respond-to(xs) {
+            height: 100vh;
+        }
+    }
+}
+
+
+
 .reel-scroll-div {
     scrollbar-width: none;
     scroll-snap-align: center;
@@ -45,6 +93,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+
 
 
     .reel-mainu-div {

@@ -305,89 +305,100 @@ const VideoItem = ({ post }) => {
     }, [currentUser && currentUser.uid]);
 
     return (
-        <div className="reel-scroll-div">
-            <div className="reel-mainu-div">
-                <video ref={videoRef} className="rvideo" onClick={() => handleVideoBtnClick(post.id)} >
+        <div className="glass-div">
+            <div className='video-glass'>
+                <video ref={videoRef} muted className="gvideo" >
                     <source src={post.img} type="video/mp4" />
                 </video>
-                {!isPlaying && (
-                    <a className="intro-banner-vdo-play-btn" onClick={() => handleVideoBtnClick(post.id)} target="_blank">
-                        <div className="play-button">
-                            <FaPlay className="play-button" />
-                        </div>
-                    </a>
-                )}
+            </div>
+            <div className="glass-container"></div>
+            
+            
+            <div className="reel-scroll-div">
+                <div className="reel-mainu-div">
+                    <video ref={videoRef} className="rvideo" onClick={() => handleVideoBtnClick(post.id)} >
+                        <source src={post.img} type="video/mp4" />
+                    </video>
+                    {!isPlaying && (
+                        <a className="intro-banner-vdo-play-btn" onClick={() => handleVideoBtnClick(post.id)} target="_blank">
+                            <div className="play-button">
+                                <FaPlay className="play-button" />
+                            </div>
+                        </a>
+                    )}
 
-                <div className="reels-back-button text-lightProfileName dark:text-darkProfileName">
-                    <i onClick={goBack} className="bi bi-arrow-left "></i>
-                </div>
+                    <div className="reels-back-button text-lightProfileName dark:text-darkProfileName">
+                        <i onClick={goBack} className="bi bi-arrow-left "></i>
+                    </div>
 
-                <div className="reel-like-share">
-                    <FaShare onClick={HandleShare} />
-                </div>
+                    <div className="reel-like-share">
+                        <FaShare onClick={HandleShare} />
+                    </div>
 
-                <div className="reel-like-icon">
-                    {liked ? <BsHeartFill color='#FF0040' className='' onClick={() => HandleLike(post.id)} /> :
-                        <BsHeartFill className='unlike-heart' onClick={() => HandleLike(post.id)} />
-                    }
-                    <div className='like-count ' onClick={() => ViewLikes(post.id)}>{isliked.length}</div>
-                </div>
+                    <div className="reel-like-icon">
+                        {liked ? <BsHeartFill color='#FF0040' className='' onClick={() => HandleLike(post.id)} /> :
+                            <BsHeartFill className='unlike-heart' onClick={() => HandleLike(post.id)} />
+                        }
+                        <div className='like-count ' onClick={() => ViewLikes(post.id)}>{isliked.length}</div>
+                    </div>
 
-                <div className="reel-profile-div">
-                    <Link to={`${currentUser.uid === post.uid ? `/profile/` : `/${post.uid}`}`}>
-                        <img src={post.photoURL} className='reel-profile-img' alt="" />
-                    </Link>
-                </div>
+                    <div className="reel-profile-div">
+                        <Link to={`${currentUser.uid === post.uid ? `/profile/` : `/${post.uid}`}`}>
+                            <img src={post.photoURL} className='reel-profile-img' alt="" />
+                        </Link>
+                    </div>
 
-                {isShare ?
-                    (<>
-                        {isSelected ?
-                            (<>
-                                <div className="selected-id">
-                                    <div className="selected-id-close-div">
-                                        <CgClose className='selected-id-close-icon' onClick={HandleSendReelClose} />
+                    {isShare ?
+                        (<>
+                            {isSelected ?
+                                (<>
+                                    <div className="selected-id">
+                                        <div className="selected-id-close-div">
+                                            <CgClose className='selected-id-close-icon' onClick={HandleSendReelClose} />
+                                        </div>
+                                        <img src={selectedImg} className='selected-img' alt="" />
+                                        <div className="selected-name">{selectedName}</div>
+                                        <button className="btn btn-primary btn-md w-25" onClick={sendMessage} style={{ fontSize: "16px", }}>Send</button>
                                     </div>
-                                    <img src={selectedImg} className='selected-img' alt="" />
-                                    <div className="selected-name">{selectedName}</div>
-                                    <button className="btn btn-primary btn-md w-25" onClick={sendMessage} style={{ fontSize: "16px", }}>Send</button>
-                                </div>
-                            </>)
-                            :
-                            (<>
-                                <div className="send-reel-div">
-                                    <div className="send-reel-close-div">
-                                        <CgClose className='send-reel-close-icon' onClick={SendReelClose} />
-                                    </div>
-                                    <div className="send-reel-grid-div">
-                                        <div className="send-reel-grid">
+                                </>)
+                                :
+                                (<>
+                                    <div className="send-reel-div">
+                                        <div className="send-reel-close-div">
+                                            <CgClose className='send-reel-close-icon' onClick={SendReelClose} />
+                                        </div>
+                                        <div className="send-reel-grid-div">
+                                            <div className="send-reel-grid">
 
-                                            {newarrytwo
-                                                .map((friend) => {
+                                                {newarrytwo
+                                                    .map((friend) => {
 
-                                                    return (
-                                                        <div key={friend.uid} >
-                                                            <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center", }}>
-                                                                <img onClick={() => HandleSendReel(friend, post.img)} src={friend.PhotoUrl} className='ree-friend-img' alt="" />
-                                                                <div className='reel-friend-name text-lightProfileName dark:text-darkProfileName'>{friend.name}</div>
+                                                        return (
+                                                            <div key={friend.uid} >
+                                                                <div className='w-100' style={{ display: "flex", flexDirection: "column", alignItems: "center", }}>
+                                                                    <img onClick={() => HandleSendReel(friend, post.img)} src={friend.PhotoUrl} className='ree-friend-img' alt="" />
+                                                                    <div className='reel-friend-name text-lightProfileName dark:text-darkProfileName'>{friend.name}</div>
+                                                                </div>
+
                                                             </div>
+                                                        )
 
-                                                        </div>
-                                                    )
+                                                    })}
 
-                                                })}
-
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </>)
-                        }
-                    </>)
-                    :
-                    null
-                }
+                                </>)
+                            }
+                        </>)
+                        :
+                        null
+                    }
 
-            </div>
-        </div >
+                </div>
+            </div >
+        </div>
+
     );
 };
 

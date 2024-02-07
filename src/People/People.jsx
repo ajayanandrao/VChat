@@ -244,7 +244,7 @@ const People = ({ userP }) => {
                                                                         <div style={{ fontSize: "14px" }} className='text-[#A4A4A4] dark:text-[#A4A4A4]'>
                                                                             {item.district}
                                                                         </div>
-                                                                    </div>
+                                                                    </div>  
                                                                 </div>
                                                             </Link>
 
