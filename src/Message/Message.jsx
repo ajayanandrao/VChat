@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import "./Message.scss";
 import { Link, useNavigate } from 'react-router-dom';
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, updateDoc, where } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { styled, keyframes } from '@mui/system';
 import Badge from '@mui/material/Badge';
@@ -33,19 +33,17 @@ const Message = () => {
     const [onlineUsers, setOnlineUsers] = useState([]);
 
     useEffect(() => {
-        const colRef = collection(db, 'OnlyOnline');
-
-        const orderedQuery = query(
-            collection(db, 'OnlyOnline'),
-            orderBy('presenceTime', 'desc') // Reverse the order to show newest messages first
-        );
-
-        const unsubscribe = onSnapshot(orderedQuery, (snapshot) => {
-            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-            setOnlineUsers(newApi);
-        });
-
-        return unsubscribe;
+        const userRef = collection(db, 'OnlyOnline');
+        const unsub = () => {
+            onSnapshot(userRef, (snapshot) => {
+                let newbooks = []
+                snapshot.docs.forEach((doc) => {
+                    newbooks.push({ ...doc.data(), id: doc.id })
+                });
+                setOnlineUsers(newbooks);
+            })
+        };
+        return unsub();
     }, []);
 
     const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -88,7 +86,14 @@ const Message = () => {
     const goBack = () => {
         nav(-1);
     }
-
+    function openCity(cityName) {
+        var i;
+        var x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        document.getElementById(cityName).style.display = "block";
+    }
     // Friend Request
 
     const [friendRequests, setFriendRequests] = useState([]);
@@ -279,9 +284,8 @@ const Message = () => {
 
 
     function PostTimeAgoComponent({ timestamp }) {
-        const postDate = new Date(timestamp);
         const now = new Date();
-        const diffInSeconds = Math.floor((now - postDate) / 1000);
+        const diffInSeconds = Math.floor((now - new Date(timestamp)) / 1000);
 
         if (diffInSeconds < 60) {
             return "just now";
@@ -293,38 +297,38 @@ const Message = () => {
             return `${hours}h ago`;
         } else {
             const days = Math.floor(diffInSeconds / 86400);
-
-            if (days > 10) {
-                const options = { day: 'numeric', month: 'short', year: 'numeric' };
-                return postDate.toLocaleDateString(undefined, options);
-            } else {
-                return `${days}d ago`;
-            }
+            return `${days}d ago`;
         }
     }
 
-    useEffect(() => {
-        const handleBeforeUnload = async () => {
-            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
+    // useEffect(() => {
+    //     const connectionRef = ref(realdb, '.info/connected');
 
-            try {
-                // Delete the document from Firestore
-                await updateDoc(PresenceRefOnline, {
-                    status: 'Offline',
-                    presenceTime: new Date(),
-                    timestamp: serverTimestamp()
-                });
-            } catch (error) {
-                console.error('Error deleting PresenceRefOnline:', error);
-            }
-        };
+    //     const handleConnectionChange = async (snapshot) => {
+    //         if (snapshot.val() === false) {
+    //             // alert("Lost connection to the server. Please check your internet connection.");
+    //             const PresenceRef = doc(db, "userPresece", currentUser.uid);
 
-        window.addEventListener('beforeunload', handleBeforeUnload);
+    //             await updateDoc(PresenceRef, {
+    //                 status: "Offline",
+    //             });
 
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-        };
-    }, [currentUser && currentUser.uid]);
+    //             const PresenceRefOnline = doc(db, "OnlyOnline", currentUser.uid);
+    //             await deleteDoc(PresenceRefOnline);
+    //         } else {
+    //             // alert("Back online");
+    //         }
+    //     };
+
+    //     // Set up the listener for connection changes
+    //     onValue(connectionRef, handleConnectionChange);
+
+    //     // Clean up the listener when the component unmounts
+    //     return () => {
+    //         off(connectionRef, handleConnectionChange);
+    //     };
+    // }, []);
+
 
     return (
         <div className='d-flex'>
@@ -351,7 +355,10 @@ const Message = () => {
                                             // <div className="message-animated-circle" key={latestFriendRequest.id}>
                                             // </div>
                                         )}
+
                                         Request
+
+
                                     </div>
                                 </div>
                             </div>
@@ -370,9 +377,7 @@ const Message = () => {
                                                             <img src={sms.photoUrl} className='sms-user-img' alt="" />
                                                         </div>
                                                         <div className='sms-name' >{sms.name}</div>
-                                                        <div style={{ fontSize: "12px" }}>
-                                                            <PostTimeAgoComponent timestamp={sms.time && sms.time.toDate()} />
-                                                        </div>
+                                                        <PostTimeAgoComponent timestamp={sms.time && sms.time.toDate()} />
                                                     </div>
                                                 </Link>
                                             </div>
@@ -428,23 +433,18 @@ const Message = () => {
                                             if (isFriendOnline) {
                                                 return (
                                                     <div key={online.id} className="online-user-div">
-                                                        {online && online.status === "Online" ? (
-                                                            <Link to={`/users/${online.id}/message`}>
-                                                                <span>
-                                                                    <StyledBadge
-                                                                        overlap="circular"
-                                                                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                                                                        variant="dot"
-                                                                    >
-                                                                        <Avatar alt="Remy Sharp" className='avt' src={online.photoUrl} />
-                                                                    </StyledBadge>
-                                                                </span>
-                                                                <span className="online-user-name text-lightProfileName dark:text-darkProfileName">{online.presenceName}</span>
-                                                            </Link>
-                                                        )
-                                                            :
-                                                            null
-                                                        }
+                                                        <Link to={`/users/${online.id}/message`}>
+                                                            <span>
+                                                                <StyledBadge
+                                                                    overlap="circular"
+                                                                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                                                                    variant="dot"
+                                                                >
+                                                                    <Avatar alt="Remy Sharp" className='avt' src={online.photoUrl} />
+                                                                </StyledBadge>
+                                                            </span>
+                                                            <span className="online-user-name text-lightProfileName dark:text-darkProfileName">{online.presenceName}</span>
+                                                        </Link>
                                                     </div>
                                                 );
                                             } else {
@@ -452,7 +452,7 @@ const Message = () => {
                                             }
                                         })
                                     ) : (
-                                        <div style={{ color: "white", textAlign: "center", fontSize: "24px" }}>No users currently online.</div>
+                                        <div>No users currently online.</div>
                                     )}
                                 </div>
                             </>) : ''}

@@ -1,27 +1,25 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where, writeBatch } from 'firebase/firestore';
+import { FieldValue, addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where, writeBatch } from 'firebase/firestore';
 import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { auth, db, storage } from '../../Firebase';
 import { CircularProgress } from '@mui/material';
 import "./Messages.scss";
-import { MdClose, MdDelete, MdOutlineReply, } from 'react-icons/md';
+import { MdClose, MdDelete, MdOutlineReply, MdSend } from 'react-icons/md';
 import { FaThumbsUp } from 'react-icons/fa';
-import { BsThreeDots, BsThreeDotsVertical } from 'react-icons/bs';
+import { BsFillCameraFill, BsThreeDots, BsThreeDotsVertical } from 'react-icons/bs';
 import { AiFillCloseCircle, AiOutlineLink } from 'react-icons/ai';
 import { AuthContext } from '../../AuthContaxt';
 import { IoIosArrowDown, IoIosArrowUp, IoMdClose } from "react-icons/io"
 import { BiSend, BiSolidFilePdf, BiSolidFileTxt, BiSolidSend } from "react-icons/bi"
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
 import { v4 } from 'uuid';
 import "./Emoji.scss";
 import { motion } from 'framer-motion';
 import Audio from './../../Audio';
-import { Avatar } from '@mui/material';
-import { styled, keyframes } from '@mui/system';
-import Badge from '@mui/material/Badge';
+
 import emojiJson from "./emoji.json";
 import MessageFriendList from '../MessageFriendList/MessageFriendList';
-import { nanoid } from '@reduxjs/toolkit';
+import smile from "./../../Image/emojis/simle/two.png";
 
 const Messages = () => {
     const { currentUser } = useContext(AuthContext);
@@ -78,28 +76,14 @@ const Messages = () => {
     }, [senderId, user, id]);
 
 
-    useEffect(() => {
-        const handleBeforeUnload = async () => {
-            const PresenceRefOnline = doc(db, 'OnlyOnline', currentUser.uid);
-
-            try {
-                // Delete the document from Firestore
-                await updateDoc(PresenceRefOnline, {
-                    status: 'Offline',
-                    presenceTime: new Date(),
-                    timestamp: serverTimestamp()
-                });
-            } catch (error) {
-                console.error('Error deleting PresenceRefOnline:', error);
-            }
-        };
-
-        window.addEventListener('beforeunload', handleBeforeUnload);
-
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-        };
-    }, [currentUser && currentUser.uid]);
+    // useEffect(() => {
+    //     const sub = async () => {
+    //         console.log(messages.map((item) => item.sound));
+    //         const messagesRef = doc(db, 'messages');
+    //         await deleteDoc(messageRef,)
+    //     };
+    //     return sub();
+    // }, []);
 
 
     useEffect(() => {
@@ -131,7 +115,7 @@ const Messages = () => {
         const timer = setTimeout(async () => {
             try {
                 // Query all documents in the specific collection
-                const messageCollection = collection(db, `allFriends/${currentUser && currentUser.uid}/Message`);
+                const messageCollection = collection(db, `allFriends/${currentUser.uid}/Message`);
                 const querySnapshot = await getDocs(messageCollection);
 
                 // Iterate through the documents and update each one to set the "sound" field to null
@@ -197,7 +181,7 @@ const Messages = () => {
 
 
     const goBack = () => {
-        nav("/home/");
+        nav(-1);
     }
 
     const togglePlayPause = () => {
@@ -211,7 +195,6 @@ const Messages = () => {
             setIsPlaying(!isPlaying);
         }
     };
-
 
     const [MessagePhoto, setMessagePhoto] = useState(null);
     const [MessagePhotoid, setMessagePhotoId] = useState("");
@@ -232,7 +215,14 @@ const Messages = () => {
     //     }
     // }
 
-
+    const hideX = () => {
+        const x = document.getElementById("view");
+        if (x.style.display == "none") {
+            x.style.display = "flex";
+        } else {
+            x.style.display = "none";
+        }
+    }
 
 
     const [deleteMessagePhoto, setDeleteMessagePhoto] = useState(false);
@@ -245,12 +235,18 @@ const Messages = () => {
 
     const [isPlaying, setIsPlaying] = useState(false);
 
+
     const [viewMessageInput, setViewMessageInput] = useState("");
     const [viewMessageImg, setViewMessageImg] = useState(null);
+
+
+
     const [viewReplyVideoUrl, setViewReplyVideoUrl] = useState(null);
+
 
     const [selectedLikeMessage, setSelectedLikeMessage] = useState(false);
     const [viewReplyImgLikeUrl, setViewReplyImgLikeUrl] = useState(null);
+
 
     const [showReplyVideoUrl, setShowReplyVideoUrl] = useState(null);
     const [showReplyVideoDiv, setReplyVideoDiv] = useState(false);
@@ -281,6 +277,7 @@ const Messages = () => {
         setHoveredMessageId('');
     };
 
+
     function formatTimestamp(timestamp) {
         const date = timestamp.toDate();
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -292,6 +289,9 @@ const Messages = () => {
         const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
         return date.toLocaleString('en-US', options);
     }
+
+
+
 
     const compressImage = async (imageFile, maxWidth) => {
         return new Promise((resolve, reject) => {
@@ -399,7 +399,7 @@ const Messages = () => {
         const fetchFriends = async () => {
             try {
                 const friendsQuery = query(
-                    collection(db, `allFriends/${currentUser && currentUser.uid}/Message`),
+                    collection(db, `allFriends/${currentUser.uid}/Message`),
                     orderBy('time', 'asc')
                 );
 
@@ -416,7 +416,9 @@ const Messages = () => {
         };
 
         fetchFriends();
-    }, [currentUser && currentUser.uid]);
+    }, [currentUser]);
+
+
 
 
     const sendMessage = async (uid, name, recipientImg) => {
@@ -886,6 +888,8 @@ const Messages = () => {
             console.error("Error deleting user's messages:", error);
         }
 
+
+
     };
 
     const deleteMessagesForCurrentUser = async (userId) => {
@@ -1016,10 +1020,13 @@ const Messages = () => {
     }
 
 
+
     const handleSendHistorayMessageEmoji = async (uid, recipientImg, emojiState) => {
         handleMessageEmoji();
         if (senderId) {
             const messagesRef = collection(db, 'messages');
+            const HistoryMessagesRef = collection(db, 'HistoryMessages');
+
             await addDoc(messagesRef, {
                 sender: currentUser.uid, // Set the sender's ID
                 senderImg: currentUser.photoURL,
@@ -1121,6 +1128,7 @@ const Messages = () => {
     const SendLike = async (uid, name, recipientImg) => {
         if (senderId) {
             const messagesRef = collection(db, 'messages');
+            const content = replyInput || messageInput;
             // Create a new document using `addDoc` function
             await addDoc(messagesRef, {
                 sender: currentUser.uid, // Set the sender's ID
@@ -1244,6 +1252,7 @@ const Messages = () => {
     };
 
     const [viewReplyImgState, setViewReplyImgState] = useState(false);
+    const [replyImgid, setReplyImgid] = useState("");
     const [viewReplyImgUrl, setViewReplyImgUrl] = useState(null);
     const [replyImgTime, setReplyImgTime] = useState("");
 
@@ -1287,139 +1296,6 @@ const Messages = () => {
             });
     };
 
-    useEffect(() => {
-        const handleResize = () => {
-            if (videoRef.current) {
-                const video = videoRef.current;
-                const containerWidth = video.parentElement.offsetWidth;
-                const videoWidth = video.videoWidth;
-
-                // Show controls only if video width fits within the container
-                video.controls = videoWidth <= containerWidth;
-            }
-        };
-
-        // Call handleResize initially and add a resize event listener
-        handleResize();
-        window.addEventListener('resize', handleResize);
-
-        // Clean up the event listener on component unmount
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    const StyledBadge = styled(Badge)(({ theme }) => ({
-        '& .MuiBadge-badge': {
-            backgroundColor: '#44b700',
-            // border: '1px solid red',
-            color: '#44b700',
-            boxShadow: `0 0 0 2px `,
-            width: '2px',
-            height: '8px',
-            '&::after': {
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                borderRadius: '100%',
-                animation: `${rippleAnimation} 1.2s infinite ease-in-out`,
-                border: '1px solid currentColor',
-                content: '""',
-            },
-        },
-    }));
-
-    const rippleAnimation = keyframes`
-    0% {
-      transform: scale(0.2);
-      opacity: 1;
-    }
-    
-    100% {
-      transform: scale(3);
-      opacity: 0;
-    }
-  `;
-
-    const [onlineUsers, setOnlineUsers] = useState([]);
-
-    useEffect(() => {
-        const colRef = collection(db, 'OnlyOnline');
-
-        const orderedQuery = query(
-            collection(db, 'OnlyOnline'),
-            orderBy('presenceTime', 'desc') // Reverse the order to show newest messages first
-        );
-
-        const unsubscribe = onSnapshot(orderedQuery, (snapshot) => {
-            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-            setOnlineUsers(newApi);
-        });
-
-        return unsubscribe;
-    }, []);
-
-    const ifonline = onlineUsers.find((item) => item.uid === user.uid);
-
-
-    function PostTimeAgoComponent({ timestamp }) {
-        const postDate = new Date(timestamp);
-        const now = new Date();
-        const diffInSeconds = Math.floor((now - postDate) / 1000);
-
-        if (diffInSeconds < 60) {
-            return "just now";
-        } else if (diffInSeconds < 3600) {
-            const minutes = Math.floor(diffInSeconds / 60);
-            return `${minutes}min ago`;
-        } else if (diffInSeconds < 86400) {
-            const hours = Math.floor(diffInSeconds / 3600);
-            return `${hours}h ago`;
-        } else {
-            const days = Math.floor(diffInSeconds / 86400);
-
-            if (days > 10) {
-                const options = { day: 'numeric', month: 'short', year: 'numeric' };
-                return postDate.toLocaleDateString(undefined, options);
-            } else {
-                return `${days}d ago`;
-            }
-        }
-    }
-
-
-    // const CreateGroup = async () => {
-    //     const uid = nanoid();
-    //     const conRef = doc(db, `allFriends/${currentUser.uid}/Message`, uid);
-    //     const MessRef = collection(db, `allFriends/${currentUser.uid}/Friends`);
-    //     const useRef = collection(db, "users");
-    //     try {
-    //         await addDoc(MessRef, {
-    //             uid: uid,
-    //             userId:uid,
-    //             name: "group one",
-    //             bytime: serverTimestamp(),
-    //         });
-    //         await addDoc(MessRef, {
-    //             uid: uid,
-    //             userId:uid,
-    //             name: "group one",
-    //             bytime: serverTimestamp(),
-    //         });
-    //         await setDoc(conRef, {
-    //             userId: uid,
-    //             name: "group one",
-    //             time: serverTimestamp(),
-    //         });
-    //         console.log("added")
-    //     } catch (e) {
-    //         console.error("Error adding group:", e);
-    //     }
-
-    // }
-
 
     if (!user) {
         return <>
@@ -1428,6 +1304,7 @@ const Messages = () => {
             </div >
         </>;
     }
+
 
     return (
         <Fragment>
@@ -1501,9 +1378,7 @@ const Messages = () => {
                             </div>
 
                             <div className="media-img-div">
-
                                 <img src={MessagePhoto} className='photo-img' alt="" />
-
                             </div>
 
 
@@ -1522,8 +1397,8 @@ const Messages = () => {
                             {deleteMessagePhoto && <>
 
                                 <div className='deleteMessagePhoto-div'>
-                                    <div className="deleteMessagePhoto-div-inner bg-lightDiv text-lightPostText dark:text-darkPostText dark:bg-darkDiv">
-                                        <div className='text-lightProfileName dark:text-darkProfileName'>This will Delete the message for everyone.</div>
+                                    <div className="deleteMessagePhoto-div-inner">
+                                        <div>This will Delete the message for everyone.</div>
                                         <div className='my-4'>
                                             <button className='btn btn-sm btn-danger mx-4' onClick={DeleteVideo}>Delete</button>
                                             <button className='btn btn-sm btn-secondary mx-4' onClick={DeleteMedaiOverlay}>Cancle</button>
@@ -1548,12 +1423,13 @@ const Messages = () => {
                             </div>
 
                             <div className="media-img-div">
-
-                                <video ref={videoRef} controls style={{ background: 'transparent' }} className=" viewVideoClass" >
+                                <video ref={videoRef} controls className=" viewVideoClass" >
                                     <source src={videoUrl} />
                                 </video>
 
                             </div>
+
+
                         </div>
                     </div>
                 }
@@ -1613,6 +1489,7 @@ const Messages = () => {
                                     </div>
                                 }
 
+
                             </div>
 
 
@@ -1629,37 +1506,11 @@ const Messages = () => {
 
                     <div className="message-profile-div">
                         <Link to={`/users/${user.uid}`} className='message-profile-div'>
-
-                            <div className='profile-img-avatar'>
-                                {ifonline && ifonline.status === "Online" ?
-                                    <StyledBadge
-                                        overlap="circular"
-                                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                                        variant="dot"
-                                    >
-                                        <Avatar alt="Remy Sharp" className='avt' style={{ width: "35px", height: "35px" }} src={user.userPhoto} />
-                                    </StyledBadge>
-                                    :
-                                    <img src={user.userPhoto} className='message-profile-img' alt="" />
-
-                                }
-                            </div>
-
-                            <span className='me-4 message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
-
-                            {ifonline && ifonline.status === "Offline" ?
-                                <div className='text-lightProfileName dark:text-darkProfileName' style={{ fontSize: "13px" }}>
-                                    <PostTimeAgoComponent timestamp={ifonline.timestamp && ifonline.timestamp.toDate()} />
-                                </div>
-                                :
-                                null
-                            }
+                            <img className='message-profile-img' src={user.userPhoto} alt="" />
+                            <span className='message-profile-name text-lightProfileName dark:text-darkProfileName'>{user.name}</span>
                             {/* <button className='btn btn-sm btn-danger ms-3' onClick={deleteMessagesForUser}>Clear Chat</button> */}
                         </Link>
-
-
                     </div>
-
                     <div>
                         {showMessageOption ?
                             <div className="top-message-option-btn bg-light_0 text-lightPostText dark:text-darkPostText dark:bg-darkPostIcon"
@@ -1687,11 +1538,12 @@ const Messages = () => {
 
                 {/* Center div ------------------------------------- */}
 
+
+
                 <div className="message-center-div bg-lightDiv dark:bg-dark" onClick={handleMessageEmojiF}>
 
                     <div className="message-center-friend-list-div bg-light_0 dark:bg-dark">
                         <MessageFriendList />
-                        {/* <div className="group-div" onClick={CreateGroup}></div> */}
                     </div>
 
                     <div className="message-center-container">
@@ -1749,8 +1601,11 @@ const Messages = () => {
                                                         // Reciver Container
                                                         (<>
                                                             {deletedBySenderUid ?
+
                                                                 null
+
                                                                 :
+
                                                                 (<>
 
                                                                     {!isSender && <div> <img className="message-img" src={user.userPhoto} alt="Sender" /> </div>}
@@ -1760,7 +1615,10 @@ const Messages = () => {
                                                                             ""
                                                                             :
                                                                             <>
-
+                                                                                {/* {isSender && hoveredMessageId === message.id && (
+                                                                                        <div className="last-conversation-time">{formatTimestamp(message && message.timestamp)}
+                                                                                        </div>
+                                                                                    )} */}
                                                                             </>
                                                                         }
 
@@ -1857,7 +1715,7 @@ const Messages = () => {
 
 
 
-                                                                        {message.message && <div className={`message-content-text ${!isSender ? 'text-[white] bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
+                                                                        {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
                                                                             onClick={() => showReplyButton(message.id)}
                                                                             onMouseLeave={hideReplyButton}
                                                                         >
@@ -1923,7 +1781,9 @@ const Messages = () => {
 
                                                                     </div>
                                                                 </>)
+
                                                             }
+
                                                         </>)
 
                                                         :
@@ -2010,7 +1870,7 @@ const Messages = () => {
                                                                     >
                                                                         <div className="message-video-container" >
 
-                                                                            <video ref={videoRef} className=" messageVideo">
+                                                                            <video ref={videoRef} className="video messageVideo">
                                                                                 <source src={message.videoUrl} />
                                                                             </video>
                                                                             <div className="message-play-button">
@@ -2177,6 +2037,7 @@ const Messages = () => {
                                                                 {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#5858FA]  dark:bg-[#5858FA] dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkReciver"} `}
                                                                     onClick={() => showReplyButton(message.id)}
                                                                     onMouseLeave={hideReplyButton}
+                                                                    style={{ width: "150px" }}
                                                                 >
                                                                     {message.message}
 
@@ -2240,7 +2101,29 @@ const Messages = () => {
                                                         </>)
                                                     }
 
+
                                                 </div>
+
+                                                {/* {!isSender && hoveredMessageId === message.id && (
+                                                    <div>
+                                                        <div
+                                                            className="reply-button"
+                                                            onClick={() => {
+                                                                setSelectedMessageId(message.id);
+                                                                setViewMessageInput(message.message);
+                                                                setViewMessageImg(message.imageUrl);
+                                                                setViewReplyImgLikeUrl(message.imageUrlLike);
+                                                                setViewReplyVideoUrl(message.videoUrl);
+
+                                                                setViewReplyImgUrl(message.imageUrl);
+
+
+                                                            }}
+                                                        >
+                                                            <MdOutlineReply className='text-lightProfileName dark:text-darkProfileName' />
+                                                        </div>
+                                                    </div>
+                                                )} */}
                                             </div >
                                         </>
                                     );
@@ -2300,6 +2183,7 @@ const Messages = () => {
                     </div>
 
                 </div>
+
 
                 {/* Emoji  */}
 

@@ -5,7 +5,6 @@ import { AuthContext } from '../../AuthContaxt';
 import { Link } from 'react-router-dom';
 import "./MessageFriendList.scss";
 
-
 const MessageFriendList = () => {
     const { currentUser } = useContext(AuthContext);
     const [messages, setMessages] = useState([]);
@@ -44,7 +43,7 @@ const MessageFriendList = () => {
             status: "seen"
         })
             .then(() => {
-                // console.log("Message marked as seen successfully.");
+                console.log("Message marked as seen successfully.");
             })
             .catch((error) => {
                 console.error("Error marking message as seen:", error);
@@ -69,9 +68,8 @@ const MessageFriendList = () => {
     }
 
     function PostTimeAgoComponent({ timestamp }) {
-        const postDate = new Date(timestamp);
         const now = new Date();
-        const diffInSeconds = Math.floor((now - postDate) / 1000);
+        const diffInSeconds = Math.floor((now - new Date(timestamp)) / 1000);
 
         if (diffInSeconds < 60) {
             return "just now";
@@ -83,36 +81,9 @@ const MessageFriendList = () => {
             return `${hours}h ago`;
         } else {
             const days = Math.floor(diffInSeconds / 86400);
-
-            if (days > 10) {
-                const options = { day: 'numeric', month: 'short', year: 'numeric' };
-                return postDate.toLocaleDateString(undefined, options);
-            } else {
-                return `${days}d ago`;
-            }
+            return `${days}d ago`;
         }
     }
-
-
-    const [onlineUsers, setOnlineUsers] = useState([]);
-
-    useEffect(() => {
-        const colRef = collection(db, 'OnlyOnline');
-
-        const orderedQuery = query(
-            collection(db, 'OnlyOnline'),
-            orderBy('presenceTime', 'desc') // Reverse the order to show newest messages first
-        );
-
-        const unsubscribe = onSnapshot(orderedQuery, (snapshot) => {
-            const newApi = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-            setOnlineUsers(newApi);
-        });
-
-        return unsubscribe;
-    }, []);
-
-
     return (
         <div className='w-100'>
             {messages.map((sms) => {
@@ -121,27 +92,8 @@ const MessageFriendList = () => {
                     <div key={sms.id}>
                         <Link to={`/users/${sms.userId}/message`} onClick={() => HandleSmsSeen(sms.id)} className='link'>
                             <div id={`User${sms.id}`} className='message-friend-list-div bg-light_0  text-lightProfileName dark:bg-darkDiv text-[white]  dark:text-darkProfileName'>
-                                <div className='message-friendList-img-div'>
+                                <div>
                                     <img src={sms.photoUrl} className='message-friendList-img' alt="" />
-                                    {onlineUsers.map((online) => {
-                                        if (online.uid === sms.userId) {
-                                            return (
-                                                <div key={online.id}>
-                                                    {online.status === "Online" ?
-                                                        (
-                                                            <div className='message-friendList-dot-div bg-lightDiv dark:bg-darkDiv'>
-                                                                <div className="message-friendList-dot"></div>
-                                                            </div>
-                                                        )
-                                                        :
-                                                        null
-                                                    }
-
-                                                </div>
-                                            )
-                                        }
-                                    })}
-
                                 </div>
                                 <div className='message-friend-list-name' id={`UserName${sms.id}`}>{sms.name}</div>
                                 <div className='message-friend-list-time text-[white] text-lightPostTime dark:text-darkPostTime' id={`UserTime${sms.id}`}>

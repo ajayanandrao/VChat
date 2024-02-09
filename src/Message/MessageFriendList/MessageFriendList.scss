@@ -14,18 +14,6 @@
     box-sizing: border-box;
     overflow-y: scroll;
     border-radius: 10px;
-    position: relative;
-
-    .group-div {
-        width: 50px;
-        height: 50px;
-        background: red;
-        position: absolute;
-        bottom: 55px;
-        right: 55px;
-        border-radius: 50%;
-        cursor: pointer;
-    }
 
     @include respond-to(md) {
         max-width: 300px;
@@ -75,49 +63,20 @@
             transform: translateY(-7px);
         }
 
-        .message-friendList-img-div {
+        .message-friendList-img {
             width: 50px;
             height: 50px;
-            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
             margin-right: 1rem;
-            position: relative;
+            border-radius: 50%;
 
-            .message-friendList-img {
-                width: 50px;
-                height: 50px;
-                object-fit: cover;
-                object-position: center;
-                border-radius: 50%;
-
-                @include respond-to(xs) {
-                    margin-right: 0;
-                    width: 40px;
-                    height: 40px;
-                }
+            @include respond-to(xs) {
+                margin-right: 0;
+                width: 40px;
+                height: 40px;
             }
-
-            .message-friendList-dot-div {
-                position: absolute;
-                bottom: -2px;
-                right: -3px;
-                border-radius: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                .message-friendList-dot {
-                    width: 12px;
-                    height: 12px;
-                    background: #44b700;
-                    border-radius: 50%;
-                    margin: 2px;
-                }
-            }
-
-
         }
-
-
 
         .message-friend-list-name {
             text-transform: capitalize;

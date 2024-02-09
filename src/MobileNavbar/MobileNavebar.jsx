@@ -177,7 +177,8 @@ const MobileNavebar = () => {
 
         <div className="mobile-item-div">
 
-          <span className="mobile-nav-mainu">
+        <span className="mobile-nav-mainu" style={{ ":hover": { backgroundColor: "red" } }}>
+
             <Link to="createStory/" className="link">
               <div onClick={Off}>
                 <MdAddReaction className="mobile-nav-icon text-lightPostIcon dark:text-darkPostIcon" />

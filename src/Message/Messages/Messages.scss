@@ -63,6 +63,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        // background: red;
         box-sizing: border-box;
         overflow-y: scroll;
         display: flex;
@@ -74,11 +75,6 @@
         padding: 0 0.5rem;
         scrollbar-width: none;
         -ms-overflow-style: none;
-
-        @include respond-to(xs) {
-            height: 100vh;
-            padding-bottom: 55px;
-        }
     }
 }
 
@@ -172,13 +168,11 @@
 
     .media-img-div {
         width: 100%;
-        max-width: 800px;
         height: calc(100vh - 120px);
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-
 
 
         .viewVideoClass {
@@ -189,19 +183,18 @@
 
         }
 
-
         .photo-img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             object-position: center;
-            border-radius: 10px;
         }
     }
 
 }
 
 // Center Div Styles @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 
 
 
@@ -232,27 +225,30 @@
         display: none;
     }
 
-
     .message-item {
         display: flex;
         align-items: flex-end;
         margin-top: 10px;
         /* Use margin-top instead of margin-bottom */
         position: relative;
-        width: 100%;
 
         &.sender {
             justify-content: flex-end;
             // background: red;
 
             .message-content {
+                // background: blue;
                 width: 100%;
-                max-width: 400px;
-                word-wrap: break-word;
+                max-width: 600px;
 
                 @include respond-to(xs) {
                     max-width: 290px;
                 }
+
+                // background: #ede9fe;
+                // background: #f0f2f5;
+                // color: #18181b;
+
             }
 
             .delete-button {
@@ -352,13 +348,14 @@
                     // background-color: #6366f1;
                     border-radius: 20px;
                     width: 100%;
-                    max-width: 400px;
-                    word-wrap: break-word;
+                    max-width: 600px;
 
                     @include respond-to(xs) {
                         max-width: 260px;
                     }
                 }
+
+
 
             }
 
@@ -367,8 +364,8 @@
             }
 
             .messageImg {
-                width: 200px;
-                height: 280px;
+                width: 100px;
+                height: 150px;
                 border-radius: 5px;
                 object-fit: cover;
                 object-position: center;
@@ -411,7 +408,6 @@
         }
 
         .message-content {
-            width: 100%;
             margin-top: 6px;
             border-radius: 20px;
             padding: 0.5rem 1rem;
@@ -488,19 +484,19 @@
 //  End 
 .message-video-container {
     position: relative;
-    width: 200px;
-    height: 280px;
-    display: inline-flex;
     cursor: pointer;
-    // background: red;
+    width: 100%;
 
     .messageVideo {
+        width: 100px;
+        max-width: 250px;
+    }
+
+    .video {
         width: 100%;
-        height: 100%;
+        max-width: 250px;
+        height: 150px;
         border-radius: 8px;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 10px;
     }
 
     .message-play-button {
@@ -512,9 +508,13 @@
         padding: 8px;
         transition: background-color 0.3s;
 
+        &:hover {
+            // background-color: rgba(0, 0, 0, 0.8);
+        }
+
         .message-play-btn-div {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background-color: rgba(0, 0, 0, 0.5);
             display: inline-flex;
@@ -526,7 +526,7 @@
 
             .message-play-btn {
                 color: #E6E6E6;
-                font-size: 40px;
+                font-size: 50px;
 
                 &:hover {
                     color: white;
