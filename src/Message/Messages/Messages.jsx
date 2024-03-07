@@ -20,6 +20,8 @@ import Audio from './../../Audio';
 import emojiJson from "./emoji.json";
 import MessageFriendList from '../MessageFriendList/MessageFriendList';
 import smile from "./../../Image/emojis/simle/two.png";
+import { FaDownload } from "react-icons/fa";
+import { saveAs } from 'file-saver'
 
 const Messages = () => {
     const { currentUser } = useContext(AuthContext);
@@ -200,7 +202,7 @@ const Messages = () => {
     const [MessagePhotoid, setMessagePhotoId] = useState("");
     const [photoTime, setPhotoTime] = useState("");
 
-    const ViewMessageImg = (id, photo, time) => {
+    const ViewMessageImg = (id, photo, time, message) => {
         setMessagePhoto(photo);
         setMessagePhotoId(id);
         setPhotoTime(time);
@@ -239,7 +241,9 @@ const Messages = () => {
     const [viewMessageInput, setViewMessageInput] = useState("");
     const [viewMessageImg, setViewMessageImg] = useState(null);
 
-
+    const ImageDownload = (imageurl) => {
+        saveAs(imageurl, 'image.jpg')
+    }
 
     const [viewReplyVideoUrl, setViewReplyVideoUrl] = useState(null);
 
@@ -1369,15 +1373,20 @@ const Messages = () => {
                                     <div className="media-time text-[black] dark:text-lightDiv"> {PhotoFormatTimestamp(photoTime)}</div>
                                     <MdDelete onClick={() => DeleteMedaiOverlay(MessagePhotoid)} style={{ fontSize: "24px" }} className='photo-delete text-[black] dark:text-lightDiv' />
                                 </div>
+                                <div className="ms-5 media-delete-div" >
+                                    {/* <a href={MessagePhoto} download="downloaded_image.jpg"> */}
+                                        <FaDownload onClick={() => ImageDownload(MessagePhoto)} style={{ fontSize: "24px" }} className='photo-delete text-[black] dark:text-lightDiv' />
+                                    {/* </a> */}
+                                </div>
 
                                 <div className="media-close-div">
                                     <div className="media-close-btn">
-                                        <IoMdClose onClick={() => setMessagePhoto(null)} className='media-close-icon text-[black] dark:text-lightDiv' />
+                                        <IoMdClose onClick={() => setMessagePhoto(null)} className=' media-close-icon text-[black] dark:text-lightDiv' />
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="media-img-div">
+                            <div className="media-img-div" >
                                 <img src={MessagePhoto} className='photo-img' alt="" />
                             </div>
 
@@ -1502,7 +1511,7 @@ const Messages = () => {
 
 
                 <div className="message-top-bar bg-lightDiv  dark:bg-darkDiv ">
-                    <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostText message-back-arrow "></i>
+                    <i onClick={goBack} style={{cursor:"pointer"}} className="bi bi-arrow-left text-lightPostText dark:text-darkPostText message-back-arrow "></i>
 
                     <div className="message-profile-div">
                         <Link to={`/users/${user.uid}`} className='message-profile-div'>
@@ -1859,7 +1868,7 @@ const Messages = () => {
                                                                         onMouseLeave={hideReplyButton}
 
                                                                     >
-                                                                        <img onClick={() => ViewMessageImg(message.id, message.imageUrl, message && message.timestamp)} src={message.imageUrl}
+                                                                        <img onClick={() => ViewMessageImg(message.id, message.imageUrl, message && message.timestamp, message)} src={message.imageUrl}
                                                                             className='messageImg' alt="Message" />
                                                                     </div>
                                                                 }
