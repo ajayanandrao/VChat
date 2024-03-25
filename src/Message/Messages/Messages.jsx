@@ -183,7 +183,7 @@ const Messages = () => {
 
 
     const goBack = () => {
-        nav(-1);
+        nav("/message/");
     }
 
     const togglePlayPause = () => {
@@ -1558,7 +1558,6 @@ const Messages = () => {
                     <div className="message-center-container">
 
                         <div style={{ width: "100%" }}>
-                            {/* width 100% for message layout */}
 
                             {messages.map((message, index) => {
                                 const isSender = message.sender === currentUser.uid;
@@ -2046,7 +2045,7 @@ const Messages = () => {
                                                                 {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#5858FA]  dark:bg-[#5858FA] dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkReciver"} `}
                                                                     onClick={() => showReplyButton(message.id)}
                                                                     onMouseLeave={hideReplyButton}
-                                                                    style={{ width: "150px" }}
+                                                                    
                                                                 >
                                                                     {message.message}
 
