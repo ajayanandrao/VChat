@@ -139,7 +139,6 @@ const Messages = () => {
     });
 
 
-
     const [historyMessage, setHistoryMessages] = useState([]);
 
     useEffect(() => {
@@ -1723,7 +1722,7 @@ const Messages = () => {
 
 
 
-                                                                        {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#6453ac]  dark:bg-darkReciver dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
+                                                                        {message.message && <div className={`message-content ${!isSender ? 'text-[white] bg-[#6453ac]  dark:bg-[#5858FA] dark:text-darkProfileName ' : " bg-[#E6E6E6] text-lightProfileName dark:text-darkProfileName dark:bg-darkSender"} `}
                                                                             onClick={() => showReplyButton(message.id)}
                                                                             onMouseLeave={hideReplyButton}
                                                                         >

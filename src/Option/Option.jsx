@@ -75,7 +75,7 @@ const Option = () => {
                 className="option-container bg-light_0 dark:bg-dark ">
 
                 <div className="option-back-div">
-                    <i onClick={goBack} className="bi bi-arrow-left text-lightPostText dark:text-darkPostIcon"></i>
+                    <i onClick={goBack} className="bi bi-arrow-left text-[#3c3c3c] dark:text-darkPostIcon"></i>
                 </div>
 
                 <div className="option-inner-div">
@@ -96,18 +96,18 @@ const Option = () => {
                     </div>
 
                     <div className='option-item-wrapper'>
-                        <motion.div>
+                        <motion.div className='option-item-wrapper-inner'>
                             {/* <Link to="/RealTime/"> */}
-                            <Link to="/setting/">
+                            <Link to="/setting/" >
                                 <motion.div
-                                    transition={{ duration: 0.7, delay: 0.7 }}
+                                    transition={{ duration: 0.9, delay: 0.7 }}
                                     initial={{ opacity: 0, y: 50 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="option-mainu-div">
+                                    className="option-mainu-div dark:bg-darkDiv">
                                     <div className="option-mainu-icon">
-                                        <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/settings-4049810-3364114.png?f=webp"} style={{ width: "40px" }} className='option-image-icon ' alt="" />
+                                        <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/settings-4049810-3364114.png?f=webp"} style={{ width: "30px" }} className='option-image-icon ' alt="" />
                                     </div>
-                                    <div className="option-mainu-name text-lightPostText dark:text-darkPostText">
+                                    <div className="option-mainu-name text-[#3c3c3c] dark:text-darkPostText">
                                         Setting
                                     </div>
                                 </motion.div>
@@ -120,14 +120,14 @@ const Option = () => {
                                     transition={{ duration: 0.9, delay: 0.9 }}
                                     initial={{ opacity: 0, y: 50 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="option-mainu-div">
+                                    className="option-mainu-div dark:bg-darkDiv">
                                     <div className="option-mainu-icon">
                                         {/* <SiHelpscout className='text-lightProfileName dark:text-darkProfileName' style={{
                                             fontSize: "30px"
                                         }} /> */}
-                                        <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/gallery-8820084-7139045.png?f=webp"} style={{ width: "40px" }} className='option-image-icon' alt="" />
+                                        <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/gallery-8820084-7139045.png?f=webp"} style={{ width: "30px" }} className='option-image-icon' alt="" />
                                     </div>
-                                    <div className="option-mainu-name text-lightPostText dark:text-darkPostText" >
+                                    <div className="option-mainu-name text-[#3c3c3c] dark:text-darkPostText" >
                                         VChat Gallery
                                     </div>
                                 </motion.div>
@@ -135,28 +135,28 @@ const Option = () => {
 
                             <Link to="/reels/">
                                 <motion.div
-                                    transition={{ duration: 1.1, delay: 1.1 }}
+                                    transition={{ duration: 0.9, delay: 1.1 }}
                                     initial={{ opacity: 0, y: 50 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="option-mainu-div">
+                                    className="option-mainu-div dark:bg-darkDiv">
                                     <div className="option-mainu-icon">
-                                        <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/cinema-reel-7642424-6185400.png?f=webp"} style={{ width: "45px" }} className='option-image-icon' alt="" />
+                                        <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/cinema-reel-7642424-6185400.png?f=webp"} style={{ width: "38px" }} className='option-image-icon' alt="" />
                                     </div>
-                                    <div className="option-mainu-name text-lightPostText dark:text-darkPostText" >
+                                    <div className="option-mainu-name text-[#3c3c3c] dark:text-darkPostText" >
                                         Reals
                                     </div>
                                 </motion.div>
                             </Link>
 
                             <motion.div
-                                transition={{ duration: 1.3, delay: 1.3 }}
+                                transition={{ duration: 0.9, delay: 1.3 }}
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="option-mainu-div">
+                                className="option-mainu-div dark:bg-darkDiv" onClick={LogOut}>
                                 <div className="option-mainu-icon">
-                                    <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/logout-8858045-7285381.png?f=webp"} style={{ width: "45px" }} alt="" />
+                                    <img src={"https://cdn3d.iconscout.com/3d/premium/thumb/logout-8858045-7285381.png?f=webp"} style={{ width: "38px" }} alt="" />
                                 </div>
-                                <div className="option-mainu-name text-lightPostText dark:text-darkPostText" onClick={LogOut}>
+                                <div className="option-mainu-name text-[#3c3c3c] dark:text-darkPostText" >
                                     {loading ? (
                                         <>
                                             <CircularProgress style={{ width: "25px", height: "25px", marginTop: "10px" }} />

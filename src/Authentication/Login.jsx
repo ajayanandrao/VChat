@@ -73,7 +73,7 @@ const Login = () => {
                     timestamp: serverTimestamp()
                 };
                 await setDoc(PresenceRefOnline, userData);
-                
+
                 // Navigate to the home page or perform other actions
                 nav("/home");
 
@@ -501,7 +501,7 @@ const Login = () => {
 
                     </div >
 
-                    <div className="about-section-one">
+                    <div className="about-section-one bg-lightDiv">
 
                         <div className="about-col-one">
                             <div className="about-col-one-text">
@@ -518,8 +518,25 @@ const Login = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="about-section-one">
 
-                    <div className="about-section-one about-col-second">
+                        <div className="about-col-one">
+                            <div className="about-col-one-text">
+                                <span className='about-col-one-send-text'>  Stay connected with Video Call </span>
+                            </div>
+                        </div>
+
+                        <div className="about-col-two">
+                            <div className="about-col-two-card">
+                                <img className='about-card-two-emoji' src="https://i.ibb.co/0YmB22g/Grinning-Face-with-Big-Eyes.png" alt="" />
+                                <div className="about-col-two-card-inner">
+                                    <video className='about-col-two-video' autoPlay muted loop src="https://firebasestorage.googleapis.com/v0/b/hosting-c26ea.appspot.com/o/login%2Fchat.mp4?alt=media&token=ae1d92c3-ce4e-4e5f-9abe-35eeba7561f6"></video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="about-section-one about-col-second bg-lightDiv">
 
                         <div className="about-col-one">
                             <div className="about-col-one-text">

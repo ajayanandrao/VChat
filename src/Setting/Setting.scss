@@ -16,11 +16,15 @@
     .setting-back-div {
         width: 100%;
         height: 50px;
-        display: none;
+        display: flex;
         align-items: center;
         // background: blue;
         padding: 0 1rem;
-        border-bottom: 1px solid #ccc;
+        // border-bottom: 1px solid #ccc;
+
+        .setting-back{
+            cursor: pointer;
+        }
 
         @include respond-to(md) {
             display: flex;

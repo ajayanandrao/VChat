@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import "./Home.scss";
-import { auth } from '../Firebase';
+import { auth, db } from '../Firebase';
 import HomePage from './HomePage';
+import { collection, onSnapshot } from 'firebase/firestore';
 // import StoryForm from '../Story/StoryForm';
 
 const Home = () => {
@@ -25,6 +26,7 @@ const Home = () => {
             unsubscribe(); // Cleanup the subscription when the component unmounts
         };
     }, []);
+
 
     return (
         <>

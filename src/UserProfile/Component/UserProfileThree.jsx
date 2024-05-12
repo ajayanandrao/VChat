@@ -189,7 +189,7 @@ const ProfileThree = ({ user }) => {
                                     </>
 
                                     : ""}
-                                {currentUserApi.length < 1 ? <div style={{ textAlign: "center" }} className='no-post-div text-4xl'>You have no posts</div> : ""}
+                                {currentUserApi.length < 1 ? <div style={{ textAlign: "center" }} className='no-post-div text-2xl'>You have no posts</div> : ""}
 
                                 {
                                     api.map((item) => {

@@ -86,7 +86,7 @@ const Setting = () => {
         <>
             <div className="setting-container bg-light_0 dark:bg-dark">
                 <div className="setting-back-div">
-                    <i onClick={goBack} className="bi text-lightPostIcon dark:text-darkPostIcon bi-arrow-left setting-back"></i>
+                    <i onClick={goBack} className="bi text-[#3c3c3c] dark:text-darkPostIcon bi-arrow-left setting-back"></i>
                 </div>
 
                 {/* <div className="setting-profile-div">

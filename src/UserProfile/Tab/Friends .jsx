@@ -136,7 +136,7 @@ const Friends = ({ user }) => {
             {friendsList.length === 0 ?
                 (<motion.div
                     transition={{ delay: 5 }}
-                    className='no-post-div text-4xl text-center text-lightProfileName dark:text-darkProfileName'>
+                    className='no-post-div text-2xl text-center text-lightProfileName dark:text-darkProfileName'>
                     You have no friends
                 </motion.div>)
 

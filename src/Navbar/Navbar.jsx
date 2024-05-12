@@ -184,8 +184,11 @@ const Navbar = () => {
                     {view ?
                         <Link
                             to={"/notification/"} className=" link-btn-shadow navbar-mainu-link-btn c-heart bg-light_0 text-lightPostIcon dark:bg-dark dark:text-darkPostIcon" onClick={() => { handleNotificationClick(); handleBoll(); }}>
-                            <div
-                                className="">
+                            <motion.div
+                                transition={{ duration: 0.3, delay: 0.1 }}
+                                initial={{ scale: 0.6, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                className="" >
                                 {latestFriendNotification.timestamp > 0 ? (
                                     <div className="" >
                                         {latestFriendNotification.isUnRead == true ?
@@ -209,7 +212,7 @@ const Navbar = () => {
 
                                     <AiFillHeart className=' text-lightProfileName dark:text-darkPostIcon' />
                                 }
-                            </div>
+                            </motion.div>
                         </Link>
                         :
                         null

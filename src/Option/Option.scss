@@ -57,6 +57,21 @@
 			display: flex;
 			justify-content: center;
 
+			.option-item-wrapper-inner {
+				width: 100%;
+				max-width: 300px;
+
+				@include respond-to(xs) {
+					max-width: 400px;
+					margin: 0 auto;
+				}
+
+				@include respond-to(sm) {
+					max-width: 400px;
+					margin: 0 auto;
+				}
+			}
+
 			@include respond-to(xs) {
 				justify-content: start;
 			}
@@ -66,7 +81,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			margin-bottom: 1rem;
+			// margin-bottom: 1rem;
 			// background: blue;
 
 			.option-profile-img {
@@ -82,7 +97,7 @@
 				text-transform: capitalize;
 				margin: 1rem 0;
 				cursor: pointer;
-				font-size: 36px;
+				font-size: 32px;
 				font-weight: 600;
 				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 				background: linear-gradient(150deg, #0095ff, #CB04FF);
@@ -94,10 +109,17 @@
 		.option-mainu-div {
 			display: flex;
 			align-items: center;
-			// background: yellow;
+			// background: red;
 			height: 60px;
 			margin: 1rem 0;
+			border-radius: 5px;
 			cursor: pointer;
+			// box-shadow: 0.5px 0.7px 1px rgba(0, 0, 0, 0.3);
+			// border: 1px solid rgba(209, 209, 209, 0.993);
+
+			// @include respond-to(xs) {
+			// 	width: 330px;
+			// }
 
 			.option-mainu-icon {
 				// background: red;
@@ -109,9 +131,9 @@
 
 			.option-mainu-name {
 				// background: blue;
-				font-size: 18px;
+				font-size: 16px;
 				font-weight: 600;
-				padding-left: 1rem;
+				padding-left: 0.5rem;
 			}
 		}
 
